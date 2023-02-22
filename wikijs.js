@@ -89,8 +89,7 @@ const _ = {
         let startPos = 0,
             endPos = concatedContent.length;
 
-        //∂ preLinkPosition+word <-> positionLink// math.min(sequenzlen, ∂)
-        //∂ positionLink+linklength <-> startPostLink//
+
         function getPosition(string, subString, index) {
             return string.split(subString, index).join(subString).length;
         }
@@ -101,27 +100,65 @@ const _ = {
             obj.links[i].startPos = startPos;
             return startPos != -1;
         })
+        //∂ preLinkPosition+word <-> positionLink// math.min(sequenzlen, ∂)
+        //∂ positionLink+linklength <-> startPostLink//
+
+        const charSequenzCnt = 32;
+
+        function shortPhrase(str, dir = -1) {
+            const strLen = Math.min(str.length, charSequenzCnt);
+            if (dir == -1) {
+                return str.substring(str.length - strLen)
+            } else {
+                return str.substring(0, strLen)
+            }
+        }
 
 
         linkKeys = linkKeys.filter((i, index) => {
 
-            const link = obj.links[i]
-            const link2 = linkKeys[index + 1] && obj.links[linkKeys[index + 1]];
+            const link = obj.links[i];
+            const linkNext = linkKeys[index + 1] && obj.links[linkKeys[index + 1]];
+            const linkPrev = linkKeys[index - 1] && obj.links[linkKeys[index - 1]];
 
-            if (!link2) {
-                endPos = concatedContent.length;
-            } else {
-               // console.log(link2.text, link2.cnt)
-                endPos = getPosition(concatedContent, link2.text, link2.cnt) ;//concatedContent.indexOf(link2.text)
+            let linkPrevStartPos = 0,
+                linkNextStartPos = concatedContent.length;
+
+
+            if (linkPrev) {
+                // console.log(linkNext.text, linkNext.cnt)
+                linkPrevStartPos = getPosition(concatedContent, linkPrev.text, linkPrev.cnt);//concatedContent.indexOf(linkNext.text)
+                linkPrevStartPos += linkPrev.text.length;
             }
+
+            let prevDeltaString = concatedContent.substring(linkPrevStartPos, link.startPos);
+            prevDeltaString = shortPhrase(prevDeltaString, -1);
+         console.log('prevDeltaString: ', prevDeltaString.length)
+
+
+            if (linkNext) {
+                linkNextStartPos = getPosition(concatedContent, linkNext.text, linkNext.cnt);//concatedContent.indexOf(linkNext.text)
+            }
+
+            const nextDeltaString = concatedContent.substring(link.startPos + link.text.length, linkNextStartPos);
+            let linkNextDelta = shortPhrase(nextDeltaString, 1);
+            console.log('prev: ', linkPrevStartPos)
+            console.log('act: ', link.text, link.startPos, link.text.length)
+            console.log('next: ', linkNextStartPos);
+            console.log(' ')
+
+            return true;
 
             if ((endPos - link.startPos) > 0) {
                 //endPos = concatedContent.length;
             }
 
-            link.endPos = endPos;
+            link.text = {
+                prev: linkPrevDelta,
+                next: linkNextDelta
+            }
 
-            console.log(link.text, 'startPos: ', link.startPos, 'endPos: ', endPos)
+            // console.log(link)
 
             return true;
         })
