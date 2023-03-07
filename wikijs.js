@@ -1,11 +1,13 @@
 const wiki = require('wikijs').default;
 const cheerio = require('cheerio');
-const CircularLinks = require('./CircularLinks')
+const CircularLinks = require('./CircularLinks');
 
 const apiData = {
     apiUrl: 'https://de.wikipedia.org/w/api.php',
     origin: null
 };
+
+
 
 const _ = {
     charSequenceCnt: 32,
@@ -14,7 +16,7 @@ const _ = {
         return wiki(apiData)
             .search(str)
             .then(async p => {
-                console.log('p', p)
+                //  console.log('p', p)
                 const results = p.results;
 
                 if (!results.length) {
@@ -22,13 +24,13 @@ const _ = {
                         return Promise.reject('string to small: "' + str + '"');
                     }
                     const str2 = str.substring(0, str.length - 1);
-                    console.log('new str: ', str2);
+                    //  console.log('new str: ', str2);
 
                     return await this.searchArticle(str2);
                 }
 
                 this.circularLinks.addLinks(results)
-                return this.circularLinks.getNext();
+                return this.circularLinks.getNext().title;
                 //  p.next && p.next().then(console.log)
             }, (err) => {
                 return 'err', err
@@ -80,7 +82,7 @@ const _ = {
 
         if (_.hasMultipleMeaning(wikijsResult)) {
             this.circularLinks.addLinks(Object.keys(wikijsResult.links));
-            return this.getArticle(this.circularLinks.getNext());
+            return this.getArticle(this.circularLinks.getNext().title);
         }
 
         const concatenatedContent = _.getContentString(wikijsResult);
@@ -110,7 +112,7 @@ const _ = {
 
                 let prevDeltaString = concatenatedContent.substring(linkPrevStartPos, link.startPos);
                 prevDeltaString = _.shortPhrase(prevDeltaString, -1);
-                link.info.prev=prevDeltaString;
+                link.info.prev = prevDeltaString;
                 wikijsResult.links[link.title].sentences.prev.push(prevDeltaString)
             }
 
@@ -120,7 +122,7 @@ const _ = {
 
             let nextDeltaString = concatenatedContent.substring(link.startPos + link.text.length, linkNextStartPos);
             nextDeltaString = _.shortPhrase(nextDeltaString, 1);
-            link.info.next=nextDeltaString;
+            link.info.next = nextDeltaString;
             wikijsResult.links[link.title].sentences.next.push(nextDeltaString)
 
 
@@ -129,16 +131,17 @@ const _ = {
             console.log('next: ', linkNextStartPos);*/
 
 
-            console.log('link.info: ',  link.info.prev, '_ '+link.text+' _', link.info.next);
+            /* console.log('link.info: ', link.info.prev, '_ ' + link.text + ' _', link.info.next);
 
-            console.log(' ', wikijsResult.links[link.title])
-            console.log(' ')
+             console.log(' ', wikijsResult.links[link.title])
+             console.log(' ')*/
         });
 
-        this.circularLinks.addLinks(  wikijsResult.links)
+        this.circularLinks.addLinks(wikijsResult.links)
     },
 
     async getArticle(title) {
+        title = encodeURI(title)
         return wiki(apiData)
             .page(title)
             .then(async page => {
@@ -173,14 +176,20 @@ const _ = {
 
                             wellSortedLinks[title] ?
                                 wellSortedLinks[title].cnt++ :
-                                wellSortedLinks[title] = {cnt: 1, urlLink, title, text,sentences:{prev:[],next:[]}};
+                                wellSortedLinks[title] = {
+                                    cnt: 1,
+                                    urlLink,
+                                    title,
+                                    text,
+                                    sentences: {prev: [], next: []}
+                                };
 
                             obj.linkOccurenceArray.push(JSON.parse(JSON.stringify(wellSortedLinks[title])));
 
                             //  console.log(index,  wellSortedLinks[title])
 
                         } else {
-                            console.log('weg: -', index, $(this).attr('href'))
+                            //  console.log('weg: -', index, $(this).attr('href'))--> images
                         }
                     }
                 });
@@ -191,20 +200,57 @@ const _ = {
                 return obj;
             }, async (err) => {
 
-                console.log('!!!!!!', err)
                 const foundWord = await _.searchArticle(title);
                 return await this.getArticle(foundWord);
             });
     },
 
-    async init(title) {
+    async init(title, lang) {
         const obj = await _.getArticle(title);
-        //await _.check(obj);
-        // const s = await _.searchArticle('dfsdf');
-        console.log(this.circularLinks)
 
-        console.log('++>', JSON.stringify(this.circularLinks, null, 2));
+        // const s = await _.searchArticle('dfsdf');
+        // console.log(this.circularLinks)
+        const nL = this.circularLinks.getNext();
+        console.log('*********', nL.title)
+        await _.getArticle(nL.title);
+        return
+
+        let stop = 0;
+
+        const b = async () => {
+
+            if (stop++ <= 10) {
+                const cLink = this.circularLinks.getNext();
+
+                if (cLink) {
+                    console.log(stop, cLink, 'size:', Object.keys(this.circularLinks.links).length)
+                    await _.getArticle(cLink.title);
+                    await b();
+                } else {
+                    console.log('no circular links rest')
+                }
+            } else {
+                console.log('**** end *****')
+            }
+
+        }
+
+        //  await b();
+
+
+        //  console.log('++>', JSON.stringify(this.circularLinks, null, 2));
     }
 }
+
+const WordStream = class {
+    constructor() {
+        this.circularLinks = new CircularLinks();
+    }
+
+}
 //_.init('Anna Maus');//a existing site
-_.init('Maus');//a existing site
+_.init('Maus', 'de');//a existing site
+
+//['elephant', 'photographie', 'phyloosivie'];
+
+

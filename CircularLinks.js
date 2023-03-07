@@ -1,6 +1,5 @@
 const util = require('util')
 
-
 const CircularLinks = class {
     constructor() {
         this.links = {};
@@ -10,22 +9,27 @@ const CircularLinks = class {
     }
 
     addUsedLink(link) {
-        const linkKey = link.link.title;
-        this.usedLinks[linkKey] ?
-            this.usedLinks[linkKey].cnt++ :
-            this.usedLinks[linkKey] = {cnt: 1};
+        const title = link.link.title;
+        this.usedLinks[title] ?
+            this.usedLinks[title].cnt++ :
+            this.usedLinks[title] = {cnt: 1};
     }
 
     addLinks(links) {
         if (util.isArray(links)) {
+            // from suggestion
             links.reduce((acc, link) => {
-
 
                 acc[link] ?
                     acc[link].cnt++ :
                     acc[link] = {
-                        cnt: 1, link: {
+                        cnt: 1,
+                        link: {
                             title: link
+                        },
+                        sentences: {
+                            prev: [],
+                            next: [],
                         }
                     };
 
@@ -34,42 +38,56 @@ const CircularLinks = class {
 
         } else {
 
-            Object.keys(links).reduce((acc, link) => {
-                const key = links[link].title
 
+            Object.keys(links).forEach((key) => {
+                const newCircLink = links[key];
 
-            /*    if(this.usedLinks[key]){
-
-                    return; //----> or map sentences
-                }*/
-
-                console.log(key, acc[key])
-                acc[key] ?
+                this.links[key] ?
                     (() => {
-                        links[link].cnt++;
-                        console.log('exist: ', link)
-                        const sentences = acc[key].sentences;
-                        link.sentences.prev = link.sentences.prev.concat(sentences.prev)
-                        link.sentences.next = link.sentences.next.concat(sentences.next)
+                        this.links[key].cnt++;
 
+                        console.log('exist.... : ', newCircLink, this.links[key])
 
+                        this.links[key].sentences.prev = this.links[key].sentences.prev.concat(newCircLink.sentences.prev)
+                        this.links[key].sentences.next = this.links[key].sentences.next.concat(newCircLink.sentences.next)
                     })() :
-
-                    (()=>{
-                        acc[key] = {cnt: 1, link: links[link]};
-
+                    (() => {
+                        secureSentences(newCircLink);
+                        console.log('newCircLink', newCircLink)
+                        this.links[key] = {cnt: 1, link: newCircLink};
 
                     })
-
-
-                return acc;
-            }, this.links);
-
-
+            });
         }
     }
 
     getNext() {
+        const firstElKey = Object.keys(this.links)[0]
+        console.log('getNext: ', firstElKey,Object.keys(this.links).length)
+        if (!firstElKey) {
+            return false;
+        }
+
+        const nextEl = JSON.parse(JSON.stringify(this.links[firstElKey]));
+        delete this.links[firstElKey];
+
+
+        if (nextEl.cnt > 1) {
+            nextEl.cnt--;
+            this.links[firstElKey] = nextEl;
+        } else {
+            this.addUsedLink(nextEl);
+        }
+
+        console.log('next circular link: ', nextEl.link.title, nextEl)
+
+        //  if(nextEl.cnt)
+
+        // console.log('- this.links[firstElKey]-------', this.links[firstElKey])
+        return nextEl.link;
+    }
+
+    getNextClassic() {
         const firstElKey = Object.keys(this.links)[0]
         const nextEl = this.links[firstElKey];
         this.addUsedLink(nextEl);
