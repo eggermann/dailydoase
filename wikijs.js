@@ -1,39 +1,6 @@
 const wiki = require('wikijs').default;
 const cheerio = require('cheerio');
-const CircularLinks = class {
-    constructor() {
-        this.links = {};
-        this.usedLinks = {};
-    }
-
-    addUsedLink(link) {
-        const linkKey = link.link;
-        this.usedLinks[linkKey] ?
-            this.usedLinks[linkKey].cnt++ :
-            this.usedLinks[linkKey] = {cnt: 1};
-    }
-
-    addLinks(links) {
-        links.reduce((acc, link) => {
-            acc[link] ?
-                acc[link].cnt++ :
-                acc[link] = {cnt: 1, link};
-
-            return acc;
-        }, this.links);
-    }
-
-    getNext() {
-        const firstElKey = Object.keys(this.links)[0]
-        const nextEl = this.links[firstElKey];
-        this.addUsedLink(nextEl);
-        console.log('next circular link: ', nextEl)
-        delete this.links[firstElKey];
-
-        return nextEl.link;
-    }
-}
-
+const CircularLinks = require('./CircularLinks')
 
 const apiData = {
     apiUrl: 'https://de.wikipedia.org/w/api.php',
@@ -41,7 +8,7 @@ const apiData = {
 };
 
 const _ = {
-    charSequenceCnt: 128,
+    charSequenceCnt: 32,
     circularLinks: new CircularLinks(),
     async searchArticle(str = 'Maus ') {
         return wiki(apiData)
@@ -79,16 +46,17 @@ const _ = {
     getPositionByIndex: (string, subString, index) => {
         return string.split(subString, index).join(subString).length;
     },
-    removeNotExistings: (concatenatedContent, obj, linkKeys) => {
-        return linkKeys.filter((i, index) => {
-            const link = obj.links[i]
+
+    removeNotInTextExistings: (concatenatedContent, links) => {
+        return links.filter(link => {
             const startPos = _.getPositionByIndex(concatenatedContent, link.text, link.cnt);//concatenatedContent.indexOf(link.text);
-            obj.links[i].startPos = startPos;
+            link.startPos = startPos;
+
             return startPos != -1;
         })
     },
+
     shortPhrase(str, dir = -1) {
-        console.log('---', str.length, _.charSequenceCnt)
         const strLen = Math.min(str.length, _.charSequenceCnt);
         let shortPhrase = '';
 
@@ -97,6 +65,7 @@ const _ = {
         } else {
             shortPhrase = str.substring(0, strLen)
         }
+
         if (shortPhrase.length >= 4) {
             const a = shortPhrase.split(' ');
             a.pop();
@@ -113,22 +82,18 @@ const _ = {
             this.circularLinks.addLinks(Object.keys(wikijsResult.links));
             return this.getArticle(this.circularLinks.getNext());
         }
-        const concatenatedContent = _.getContentString(wikijsResult);
-        let linkKeys = Object.keys(wikijsResult.links);
 
-        //console.log('check --->', wikijsResult.content, 'wikijsResult.links', wikijsResult.links, linkKeys)
-        // console.log(concatenatedContent);
+        const concatenatedContent = _.getContentString(wikijsResult);
+
+        let linkInArticle = wikijsResult.linkOccurenceArray;
+        linkInArticle = _.removeNotInTextExistings(concatenatedContent, linkInArticle);
 
         let startPos = 0,
             endPos = concatenatedContent.length;
 
-        linkKeys = _.removeNotExistings(concatenatedContent, wikijsResult, linkKeys);
-//linkOccurenceArray//todo: for i=link.cnt{ get pos, push to info sentences}
-        linkKeys = linkKeys.filter((i, index) => {
-
-            const link = wikijsResult.links[i];
-            const linkNext = linkKeys[index + 1] && wikijsResult.links[linkKeys[index + 1]];
-            const linkPrev = linkKeys[index - 1] && wikijsResult.links[linkKeys[index - 1]];
+        linkInArticle.forEach((link, index) => {
+            const linkPrev = linkInArticle[index - 1];
+            const linkNext = linkInArticle[index + 1];
 
             let linkPrevStartPos = 0,
                 linkNextStartPos = concatenatedContent.length;
@@ -138,7 +103,6 @@ const _ = {
                 next: ''
             }
 
-            //~~~
             if (linkPrev) {
                 // console.log(linkNext.text, linkNext.cnt)
                 linkPrevStartPos = _.getPositionByIndex(concatenatedContent, linkPrev.text, linkPrev.cnt);//concatenatedContent.indexOf(linkNext.text)
@@ -146,40 +110,38 @@ const _ = {
 
                 let prevDeltaString = concatenatedContent.substring(linkPrevStartPos, link.startPos);
                 prevDeltaString = _.shortPhrase(prevDeltaString, -1);
-
+                link.info.prev=prevDeltaString;
+                wikijsResult.links[link.title].sentences.prev.push(prevDeltaString)
             }
 
             if (linkNext) {
                 linkNextStartPos = _.getPositionByIndex(concatenatedContent, linkNext.text, linkNext.cnt);//concatenatedContent.indexOf(linkNext.text)
             }
 
-
-
-            // console.log('prevDeltaString: ', linkPrevStartPos, link.startPos, 'PreviewString len:', prevDeltaString)
-
             let nextDeltaString = concatenatedContent.substring(link.startPos + link.text.length, linkNextStartPos);
             nextDeltaString = _.shortPhrase(nextDeltaString, 1);
+            link.info.next=nextDeltaString;
+            wikijsResult.links[link.title].sentences.next.push(nextDeltaString)
 
 
-
-
-            console.log('prev: ', linkPrevStartPos,link.info.next)
+            /*console.log('prev: ', linkPrevStartPos, link.info.next)
             console.log('act: ', link.text, link.startPos, link.text.length)
-            console.log('next: ', linkNextStartPos);
+            console.log('next: ', linkNextStartPos);*/
+
+
+            console.log('link.info: ',  link.info.prev, '_ '+link.text+' _', link.info.next);
+
+            console.log(' ', wikijsResult.links[link.title])
             console.log(' ')
+        });
 
-
-
-            return true;
-        })
-
+        this.circularLinks.addLinks(  wikijsResult.links)
     },
 
     async getArticle(title) {
         return wiki(apiData)
             .page(title)
             .then(async page => {
-
 
                 const obj = await page
                     .chain()
@@ -189,12 +151,8 @@ const _ = {
                     //.links()
                     .request();
 
-                /*console.log(obj);
-                 process.exit();*/
-
-
                 obj.content = await page.content();
-          obj.linkOccurenceArray = [];//QUICKFIX to have a parallel order
+                obj.linkOccurenceArray = [];//QUICKFIX to have a parallel order
 
 
                 const html = await page.html()
@@ -215,10 +173,9 @@ const _ = {
 
                             wellSortedLinks[title] ?
                                 wellSortedLinks[title].cnt++ :
-                                wellSortedLinks[title] = {cnt: 1, urlLink, title, text};
+                                wellSortedLinks[title] = {cnt: 1, urlLink, title, text,sentences:{prev:[],next:[]}};
 
-                            obj.linkOccurenceArray.push(title);
-
+                            obj.linkOccurenceArray.push(JSON.parse(JSON.stringify(wellSortedLinks[title])));
 
                             //  console.log(index,  wellSortedLinks[title])
 
@@ -226,14 +183,10 @@ const _ = {
                             console.log('weg: -', index, $(this).attr('href'))
                         }
                     }
-
                 });
 
-                console.log(wellSortedLinks)
                 obj.links = wellSortedLinks;
 
-
-//console.log(obj)
                 await _.check(obj);
                 return obj;
             }, async (err) => {
@@ -249,6 +202,9 @@ const _ = {
         //await _.check(obj);
         // const s = await _.searchArticle('dfsdf');
         console.log(this.circularLinks)
+
+        console.log('++>', JSON.stringify(this.circularLinks, null, 2));
     }
 }
-_.init('Anna Maus');//a existing site
+//_.init('Anna Maus');//a existing site
+_.init('Maus');//a existing site
