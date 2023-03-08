@@ -1,39 +1,19 @@
 const axios = require('axios');
 const fs = require('fs-extra');
-const sanitize = require("sanitize-filename");
+const sanitize = require('sanitize-filename');
+const fileCounter = new (require('./helpers/incremental-call'))('./exemplar-cntr.txt');
+const imageDirCounter = new (require('./helpers/incremental-call'))('./folder-cntr.txt');
 
-const _imageDir = './images/v4';
+let _imageDir = '';
+(async () => {
+    _imageDir = './images/v-' + await imageDirCounter.increment();
+})()
 
 function createDirWhenNotExist(dir, recursive = true) {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, {recursive});
         return true
     }
-}
-
-const incrementClientCall = async () => {
-    return new Promise((resolve, reject) => {
-
-        const fPath = './exemplar-cntr.txt'
-        fs.writeFile(fPath, '1', {flag: 'wx'}, function (err) {
-            if (err) {
-                fs.readFile(fPath, 'utf-8', function (err, data) {
-                    if (data) {
-                        let dataInt = (parseInt(data));
-                        dataInt++;
-                        resolve(dataInt);
-
-                        fs.writeFile(fPath, dataInt + ' ', function (err) {
-                        })
-                    }
-
-
-                });
-            } else {
-                console.log("It's saved!");
-            }
-        })
-    });
 }
 
 
@@ -59,7 +39,8 @@ module.exports.prompt = async (prompt) => {
                 console.log('------>prompt: ', prompt);
                 createDirWhenNotExist(_imageDir);
                 const san = sanitize(prompt);//.trim().replaceAll(',,', ',')
-                const name = sanitize(prompt) + '_' + response.data.images.length + '-' + await incrementClientCall();
+                const name = prompt + '_' + response.data.images.length + '-'
+                    + await fileCounter.increment();
                 const imgPath = _imageDir + '/' + name + '.png';
 
                 fs.writeFileSync(imgPath, response.data.images[0], 'base64')
