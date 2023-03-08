@@ -1,41 +1,16 @@
 const wiki = require('wikijs').default;
 const cheerio = require('cheerio');
 const CircularLinks = require('./CircularLinks');
-
+const pTDiffusion = require('./post-to-diffusion');
 const apiData = {
     apiUrl: 'https://de.wikipedia.org/w/api.php',
     origin: null
 };
 
 
-
 const _ = {
     charSequenceCnt: 32,
-    circularLinks: new CircularLinks(),
-    async searchArticle(str = 'Maus ') {
-        return wiki(apiData)
-            .search(str)
-            .then(async p => {
-                //  console.log('p', p)
-                const results = p.results;
 
-                if (!results.length) {
-                    if (str.length == 1) {
-                        return Promise.reject('string to small: "' + str + '"');
-                    }
-                    const str2 = str.substring(0, str.length - 1);
-                    //  console.log('new str: ', str2);
-
-                    return await this.searchArticle(str2);
-                }
-
-                this.circularLinks.addLinks(results)
-                return this.circularLinks.getNext().title;
-                //  p.next && p.next().then(console.log)
-            }, (err) => {
-                return 'err', err
-            });
-    },
     hasMultipleMeaning: obj => (!obj.content.length && Object.keys(obj.links).length),
     getContentString: (obj => {
         const startString = obj.extract ? obj.extract : '';
@@ -77,6 +52,76 @@ const _ = {
         }
         return shortPhrase;
     },
+
+
+    async init(title, lang) {
+        await _.getArticle(title);
+        return;
+
+
+        // const s = await _.searchArticle('dfsdf');
+        // console.log(this.circularLinks)
+        const nL = this.circularLinks.getNext();
+        console.log('*********', nL.title)
+        await _.getArticle(nL.title);
+        return
+
+        let stop = 0;
+
+        const b = async () => {
+
+            if (stop++ <= 10) {
+                const cLink = this.circularLinks.getNext();
+
+                if (cLink) {
+                   // console.log(stop, cLink, 'size:', Object.keys(this.circularLinks.links).length)
+                    await _.getArticle(cLink.title);
+                    await b();
+                } else {
+                    console.log('no circular links rest')
+                }
+            } else {
+                console.log('**** end *****')
+            }
+
+        }
+
+        //  await b();
+
+
+        //  console.log('++>', JSON.stringify(this.circularLinks, null, 2));
+    }
+}
+
+class WordStream {
+    constructor() {
+        this.circularLinks = new CircularLinks();
+    }
+
+    async searchArticle(str = 'Maus ') {
+        return wiki(apiData)
+            .search(str)
+            .then(async p => {
+                //  console.log('p', p)
+                const results = p.results;
+
+                if (!results.length) {
+                    if (str.length == 1) {
+                        return Promise.reject('string to small: "' + str + '"');
+                    }
+                    const str2 = str.substring(0, str.length - 1);
+                    //  console.log('new str: ', str2);
+
+                    return await this.searchArticle(str2);
+                }
+
+                this.circularLinks.addLinks(results)
+                return this.circularLinks.getNext().title;
+                //  p.next && p.next().then(console.log)
+            }, (err) => {
+                return 'err', err
+            });
+    }
 
     async check(wikijsResult) {
 
@@ -138,10 +183,14 @@ const _ = {
         });
 
         this.circularLinks.addLinks(wikijsResult.links)
-    },
+//        console.log(' -->this.circularLinks.links ',     this.circularLinks.links)
+    }
 
     async getArticle(title) {
-        title = encodeURI(title)
+        title = encodeURI(title);
+        console.log('getArticle', title)
+
+
         return wiki(apiData)
             .page(title)
             .then(async page => {
@@ -156,7 +205,6 @@ const _ = {
 
                 obj.content = await page.content();
                 obj.linkOccurenceArray = [];//QUICKFIX to have a parallel order
-
 
                 const html = await page.html()
                 const $ = cheerio.load(html);
@@ -196,61 +244,79 @@ const _ = {
 
                 obj.links = wellSortedLinks;
 
-                await _.check(obj);
+                await this.check(obj);
+                // console.log( 'after check',this.circularLinks )
                 return obj;
             }, async (err) => {
 
-                const foundWord = await _.searchArticle(title);
+                const foundWord = await this.searchArticle(title);
                 return await this.getArticle(foundWord);
             });
-    },
+    }
 
-    async init(title, lang) {
-        const obj = await _.getArticle(title);
-
-        // const s = await _.searchArticle('dfsdf');
-        // console.log(this.circularLinks)
-        const nL = this.circularLinks.getNext();
-        console.log('*********', nL.title)
-        await _.getArticle(nL.title);
-        return
-
-        let stop = 0;
-
-        const b = async () => {
-
-            if (stop++ <= 10) {
-                const cLink = this.circularLinks.getNext();
-
-                if (cLink) {
-                    console.log(stop, cLink, 'size:', Object.keys(this.circularLinks.links).length)
-                    await _.getArticle(cLink.title);
-                    await b();
-                } else {
-                    console.log('no circular links rest')
-                }
-            } else {
-                console.log('**** end *****')
-            }
-
-        }
-
-        //  await b();
-
-
-        //  console.log('++>', JSON.stringify(this.circularLinks, null, 2));
+    getNext() {
+        return this.circularLinks.getNext();
     }
 }
 
-const WordStream = class {
-    constructor() {
-        this.circularLinks = new CircularLinks();
-    }
-
-}
 //_.init('Anna Maus');//a existing site
-_.init('Maus', 'de');//a existing site
+//_.init('Maus', 'de');//a existing site
 
-//['elephant', 'photographie', 'phyloosivie'];
+const a = [ 'drugs','photography', 'animal','philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
+const lang = 'en';
+apiData.apiUrl = `https://${lang}.wikipedia.org/w/api.php`;
 
+const list = a.map(async word => {
+    const wordStream = new WordStream();
+    await wordStream.getArticle(word);
+
+    return wordStream;
+});
+let stop = 0;
+const again = async (wordStream, stop) => {
+    if (stop++ <= 2) {
+        const cLink = wordStream.getNext();
+
+        if (cLink) {
+         //   console.log(stop, cLink, 'size:', Object.keys(wordStream.circularLinks.links).length)
+            await wordStream.getArticle(cLink.title);
+            await again(wordStream, stop);
+        } else {
+            console.log('no circular links rest')
+        }
+    } else {
+        console.log('**** end *****')
+    }
+
+}
+
+const getPrompt = async (wordStream) => {
+    const str = wordStream.map(i => {
+        // await again(i, 0);
+        const link = i.getNext();
+       // console.log(link)
+
+        const prev = link.sentences.prev.shift() || '';
+        const title = link.title;
+        const next = link.next;
+
+        i.getArticle(link.title);
+
+        return [prev, title, next].join(',');
+    }).join(',')
+
+    await pTDiffusion.prompt(str);
+}
+const loop = async (wordStream) => {
+    await getPrompt(wordStream);
+    setTimeout(() => {
+        loop(wordStream)
+    }, 1000);
+
+}
+Promise.all(list).then(async (wordStream) => {
+  await  loop(wordStream);
+
+
+});
 

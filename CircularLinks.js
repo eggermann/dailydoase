@@ -16,6 +16,7 @@ const CircularLinks = class {
     }
 
     addLinks(links) {
+
         if (util.isArray(links)) {
             // from suggestion
             links.reduce((acc, link) => {
@@ -38,32 +39,41 @@ const CircularLinks = class {
 
         } else {
 
-
             Object.keys(links).forEach((key) => {
                 const newCircLink = links[key];
-
+                //  console.log('EXXXXX',key)
                 this.links[key] ?
                     (() => {
                         this.links[key].cnt++;
 
+                        if (!this.links[key].sentences) {
+                            this.links[key].sentences = {
+                                prev: [],
+                                next: [],
+                            }
+                        }
+
                         console.log('exist.... : ', newCircLink, this.links[key])
+
+                        console.log('newCircLink.sentences.prev)', this.links[key].sentences.prev)
+
 
                         this.links[key].sentences.prev = this.links[key].sentences.prev.concat(newCircLink.sentences.prev)
                         this.links[key].sentences.next = this.links[key].sentences.next.concat(newCircLink.sentences.next)
                     })() :
                     (() => {
-                        secureSentences(newCircLink);
-                        console.log('newCircLink', newCircLink)
+
+                        // console.log('newCircLink', newCircLink)
                         this.links[key] = {cnt: 1, link: newCircLink};
 
-                    })
+                    })()
             });
         }
     }
 
     getNext() {
         const firstElKey = Object.keys(this.links)[0]
-        console.log('getNext: ', firstElKey,Object.keys(this.links).length)
+        console.log('getNext: ', firstElKey, Object.keys(this.links).length)
         if (!firstElKey) {
             return false;
         }
