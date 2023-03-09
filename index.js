@@ -1,10 +1,10 @@
 //_.init('Anna Maus');//a existing site
 //_.init('Maus', 'de');//a existing site
 
-const pTDiffusion = require("./post-to-diffusion");
-const WordStream = require("./WordStream");
-let stop = 0;
-const again = async (wordStream, stop) => {
+const pTDiffusion = require("./helpers/post-to-diffusion");
+const WordStream = require("./helpers/WordStream");
+
+/*let stop = 0; const again = async (wordStream, stop) => {
     if (stop++ <= 2) {
         const cLink = wordStream.getNext();
 
@@ -19,7 +19,7 @@ const again = async (wordStream, stop) => {
         console.log('**** end *****')
     }
 
-}
+}*/
 
 const _ = {
     /*this handle the form of link*/
@@ -27,20 +27,25 @@ const _ = {
         const prompt = streams.map(i => {
             // await again(i, 0);
             const link = i.getNext();
-         //  console.log(link)
+            //  console.log(link)
             const prev = link.sentences.prev.shift() || '';
             const title = link.title;
-            const next = link.next;
+            const next = link.sentences.prev.shift() || '';
 
-         //-->   i.getArticle(link.title);
+            //-->   i.getArticle(link.title);
 
             return [prev, title, next].join(' ').trim();
         }).join(' , ')
 
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
-        console.log('------>prompt: ', prompt);
-       await pTDiffusion.prompt(prompt+ ', oil painting, UHD ');
+
+await pTDiffusion.prompt(prompt + ', oil painting, UHD ');
+
+
+
+
+
     },
     async loop(streams) {
         await _.getPrompt(streams);
@@ -66,7 +71,9 @@ const _ = {
 }
 
 
-const words = [['medicine', 'en'],['disney', 'en'],['landscape', 'en'],['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
+//const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
+const words = [['medicine', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
+
 (async () => {
     await _.init(words);
 })()
