@@ -22,22 +22,25 @@ const again = async (wordStream, stop) => {
 }
 
 const _ = {
+    /*this handle the form of link*/
     async getPrompt(streams) {
-        const str = streams.map(i => {
+        const prompt = streams.map(i => {
             // await again(i, 0);
             const link = i.getNext();
-            // console.log(link)
-
+         //  console.log(link)
             const prev = link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.next;
 
-            i.getArticle(link.title);
+         //-->   i.getArticle(link.title);
 
-            return title;//[prev, title, next].join(',');
-        }).join(',')
+            return [prev, title, next].join(' ').trim();
+        }).join(' , ')
 
-        await pTDiffusion.prompt(str);
+        //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
+
+        console.log('------>prompt: ', prompt);
+       await pTDiffusion.prompt(prompt+ ', oil painting, UHD ');
     },
     async loop(streams) {
         await _.getPrompt(streams);
@@ -63,7 +66,7 @@ const _ = {
 }
 
 
-const words = [['disney', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
+const words = [['medicine', 'en'],['disney', 'en'],['landscape', 'en'],['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 (async () => {
     await _.init(words);
 })()

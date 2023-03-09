@@ -26,8 +26,8 @@ function createDirWhenNotExist(dir, recursive = true) {
 module.exports.prompt = async (prompt) => {
 
     const options = {
-        width: 400,
-        height: 360,
+        width: 512,
+        height: 512,
         steps: 10,
         prompt//: 'beinhalten beispielsweise die,Meerschweinchen , die Behandlung von'
     };
@@ -36,7 +36,7 @@ module.exports.prompt = async (prompt) => {
         axios.post('http://localhost:7860/sdapi/v1/txt2img', options)
             .then(async function (response) {
                 // handle success
-                console.log('------>prompt: ', prompt);
+
                 createDirWhenNotExist(_imageDir);
                 const san = sanitize(prompt);//.trim().replaceAll(',,', ',')
                 const name = prompt + '_' + response.data.images.length + '-'

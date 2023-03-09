@@ -9,39 +9,34 @@ const CircularLinks = class {
     }
 
     addUsedLink(link) {
-        const title = link.link.title;
+        const title = link.title;
         this.usedLinks[title] ?
             this.usedLinks[title].cnt++ :
             this.usedLinks[title] = {cnt: 1};
     }
 
-    addLinks(links) {
+    addLinks(freshLinks) {
 
-        if (util.isArray(links)) {
+        if (util.isArray(freshLinks)) {
+            process.exit();
             // from suggestion
-            links.reduce((acc, link) => {
-
-                acc[link] ?
-                    acc[link].cnt++ :
-                    acc[link] = {
+            freshLinks.forEach((link) => {
+                console.log('link *** -->',link)
+                this.links[link] ?
+                    this.links[link].cnt++ :
+                    this.links[link] = {
                         cnt: 1,
                         link: {
                             title: link
-                        },
-                        sentences: {
-                            prev: [],
-                            next: [],
                         }
                     };
-
-                return acc;
-            }, this.links);
+            });
 
         } else {
 
-            Object.keys(links).forEach((key) => {
-                const newCircLink = links[key];
-                //  console.log('EXXXXX',key)
+            Object.keys(freshLinks).forEach(key => {
+                const newCircLink = freshLinks[key];
+
                 this.links[key] ?
                     (() => {
                         this.links[key].cnt++;
@@ -53,18 +48,18 @@ const CircularLinks = class {
                             }
                         }
 
-                        console.log('exist.... : ', newCircLink, this.links[key])
 
-                        console.log('newCircLink.sentences.prev)', this.links[key].sentences.prev)
-
-
-                        this.links[key].sentences.prev = this.links[key].sentences.prev.concat(newCircLink.sentences.prev)
-                        this.links[key].sentences.next = this.links[key].sentences.next.concat(newCircLink.sentences.next)
+                        this.links[key].sentences.prev = (this.links[key].sentences.prev
+                            .concat(newCircLink.sentences.prev)).filter(i => i)
+                        this.links[key].sentences.next = (this.links[key].sentences.next
+                            .concat(newCircLink.sentences.next)).filter(i => i)
                     })() :
                     (() => {
-
+                        if(this.usedLinks[key]){
+                            return ;
+                        }
                         // console.log('newCircLink', newCircLink)
-                        this.links[key] = {cnt: 1, link: newCircLink};
+                        this.links[key] = newCircLink;
 
                     })()
             });
@@ -82,19 +77,21 @@ const CircularLinks = class {
         delete this.links[firstElKey];
 
 
-        if (nextEl.cnt > 1) {
+       if (nextEl.cnt > 1) {
             nextEl.cnt--;
             this.links[firstElKey] = nextEl;
         } else {
             this.addUsedLink(nextEl);
         }
 
-        console.log('next circular link: ', nextEl.link.title, nextEl)
+
+        console.log('++>', JSON.stringify(nextEl, null, 2));
+
 
         //  if(nextEl.cnt)
 
         // console.log('- this.links[firstElKey]-------', this.links[firstElKey])
-        return nextEl.link;
+        return nextEl;
     }
 
     getNextClassic() {
