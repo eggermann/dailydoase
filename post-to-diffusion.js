@@ -1,8 +1,8 @@
 const axios = require('axios');
 const fs = require('fs-extra');
 const sanitize = require('sanitize-filename');
-const fileCounter = new (require('./helpers/incremental-call'))('./exemplar-cntr.txt');
-const imageDirCounter = new (require('./helpers/incremental-call'))('./folder-cntr.txt');
+const fileCounter = new (require('./lib/incremental-call'))('./exemplar-cntr.txt');
+const imageDirCounter = new (require('./lib/incremental-call'))('./folder-cntr.txt');
 
 let _imageDir = '';
 (async () => {

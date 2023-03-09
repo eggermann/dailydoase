@@ -1,8 +1,18 @@
 //_.init('Anna Maus');//a existing site
 //_.init('Maus', 'de');//a existing site
 
-const pTDiffusion = require("./helpers/post-to-diffusion");
-const WordStream = require("./helpers/WordStream");
+const pTDiffusion = require("./lib/post-to-diffusion");
+const WordStream = require("./lib/WordStream");
+
+
+const words = [['medicine', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
+const _staticPrompt = ',oil painting, UHD ';//, elephant'photographie', 'phyloosivie',esoteric
+const _options = {
+    width: 512,
+    height: 512,
+    steps: 10
+};//, elephant'photographie', 'phyloosivie',esoteric
+
 
 /*let stop = 0; const again = async (wordStream, stop) => {
     if (stop++ <= 2) {
@@ -21,6 +31,7 @@ const WordStream = require("./helpers/WordStream");
 
 }*/
 
+
 const _ = {
     /*this handle the form of link*/
     async getPrompt(streams) {
@@ -30,7 +41,7 @@ const _ = {
             //  console.log(link)
             const prev = link.sentences.prev.shift() || '';
             const title = link.title;
-            const next = link.sentences.prev.shift() || '';
+            const next = link.sentences.next.shift() || '';
 
             //-->   i.getArticle(link.title);
 
@@ -40,10 +51,7 @@ const _ = {
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
 
-await pTDiffusion.prompt(prompt + ', oil painting, UHD ');
-
-
-
+        await pTDiffusion.prompt(prompt + _staticPrompt, _options);
 
 
     },
@@ -68,11 +76,10 @@ await pTDiffusion.prompt(prompt + ', oil painting, UHD ');
             return await _.loop(streams);
         });
     }
-}
+};
 
 
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
-const words = [['medicine', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
 
 (async () => {
     await _.init(words);
