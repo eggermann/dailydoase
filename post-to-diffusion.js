@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs-extra');
 const sanitize = require('sanitize-filename');
 const fileCounter = new (require('./lib/incremental-call'))('./exemplar-cntr.txt');
-const imageDirCounter = new (require('./lib/incremental-call'))('./folder-cntr.txt');
+const imageDirCounter = new (require('./lib/incremental-call'))('./XXXfolder-cntr.txt');
 
 let _imageDir = '';
 (async () => {
@@ -18,7 +18,7 @@ function createDirWhenNotExist(dir, recursive = true) {
 
 
 /*
-*  .then(({ images }) => writeFileSync('path/to/image.png', images[0], 'base64'))
+*  .then(({ images_bak }) => writeFileSync('path/to/image.png', images_bak[0], 'base64'))
 *
 * */
 //http://127.0.0.1:7860/docs#/default/img2imgapi_sdapi_v1_img2img_post

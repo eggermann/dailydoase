@@ -3,9 +3,10 @@
 
 const pTDiffusion = require("./lib/post-to-diffusion");
 const WordStream = require("./lib/WordStream");
+const server = require("./lib/server");
 
 
-const words = [['medicine', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
+const words = [['medicine', 'en'],['love', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
 const _staticPrompt = ',oil painting, UHD ';//, elephant'photographie', 'phyloosivie',esoteric
 const _options = {
     width: 512,
@@ -50,10 +51,7 @@ const _ = {
 
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
-
         await pTDiffusion.prompt(prompt + _staticPrompt, _options);
-
-
     },
     async loop(streams) {
         await _.getPrompt(streams);
@@ -82,6 +80,7 @@ const _ = {
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
 (async () => {
+    server.init(pTDiffusion);
     await _.init(words);
 })()
 

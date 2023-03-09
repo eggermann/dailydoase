@@ -1,0 +1,93 @@
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const mode = (process.env.APP_ENV && process.env.APP_ENV.indexOf('production') != -1) ? 'production' : 'development';
+module.exports = {
+    mode,
+    context: path.resolve(__dirname, ''),
+    entry: [
+        './lib/web/assets/main.js',
+        './lib/web/assets/main.scss'
+    ],
+    output: {
+        path: path.resolve(__dirname, './lib/web/dist')
+    },
+
+    plugins: [
+        new BrowserSyncPlugin({
+            // browse to http://localhost:3000/ during development,
+            // ./public directory is being served
+            host: 'localhost',
+            port: 3000,
+            server: {baseDir: ['lib/web/dist']}
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+        new HtmlWebpackPlugin({
+            template: 'lib/web/index.html'
+        })
+    ],
+    module: {
+        rules: [
+            {
+                test: /.s?css$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            url: false
+                        }
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('dart-sass'),
+                            sourceMap: true,
+                            sassOptions: {
+                                fiber: false,
+                                webpackImporter: true
+                            },
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    optimization: {
+        minimize:true,// (mode === 'production'),
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    sourceMap: false,
+                },
+                test: /\.js(\?.*)?$/i,
+            }),
+            new CssMinimizerPlugin({
+                minimizerOptions: {
+                    preset: [
+                        "default",
+                        {
+                            discardComments: {removeAll: true},
+                        },
+                    ],
+                },
+            }),
+        ],
+    }
+};
