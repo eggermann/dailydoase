@@ -31,7 +31,7 @@ const _ = {
 
             //-->   i.getArticle(link.title);
             allIn.push(prev, title/*, next*/)
-            return [prev, title, next].filter(i => i).join(' ').trim();
+            return [prev, title, next].filter(i => i.trim()).join(' ');
         }).join(' , ');
         allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
 
@@ -69,6 +69,7 @@ const _ = {
             const wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
 
             if (options.circularLinksGetNext) {
+
                 wordStream.circularLinks.getNext = options.circularLinksGetNext.bind(wordStream.circularLinks);
             }
 
