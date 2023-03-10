@@ -4,10 +4,17 @@
 const pTDiffusion = require("./lib/post-to-diffusion");
 const WordStream = require("./lib/WordStream");
 const server = require("./lib/server");
+const shuffleArray = array => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
 
-
-const words = [['medicine', 'en'],['love', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
-const _staticPrompt = ',oil painting, UHD ';//, elephant'photographie', 'phyloosivie',esoteric
+const words = [['erotic', 'en'], ['human', 'en'], ['heaven', 'en'], ['hell', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
+const _staticPrompt = ',UHD ';//, elephant'photographie', 'phyloosivie',esoteric
 const _options = {
     width: 512,
     height: 512,
@@ -35,20 +42,29 @@ const _options = {
 
 const _ = {
     /*this handle the form of link*/
+
+
+    shiftCnt: 0,
+
     async getPrompt(streams) {
-        const prompt = streams.map(i => {
+        const allIn = [];
+        let prompt = streams.map(i => {
             // await again(i, 0);
             const link = i.getNext();
             //  console.log(link)
-            const prev = link.sentences.prev.shift() || '';
+            const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
-            const next = link.sentences.next.shift() || '';
+            const next = link.sentences && link.sentences.next.shift() || '';
 
             //-->   i.getArticle(link.title);
-
+            allIn.push(prev, title, next)
             return [prev, title, next].join(' ').trim();
         }).join(' , ')
 
+
+
+        shuffleArray(allIn);
+        prompt = allIn.join(' , ');
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
         await pTDiffusion.prompt(prompt + _staticPrompt, _options);
