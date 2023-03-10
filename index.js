@@ -13,7 +13,7 @@ const shuffleArray = array => {
     }
 }
 
-const words = [['erotic', 'en'], ['human', 'en'], ['heaven', 'en'], ['hell', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
+const words = [['erotic', 'en'], ['pop', 'en'], ['animals', 'en']];//, elephant'photographie', 'phyloosivie',esoteric
 const _staticPrompt = ',UHD ';//, elephant'photographie', 'phyloosivie',esoteric
 const _options = {
     width: 512,
@@ -47,7 +47,7 @@ const _ = {
     shiftCnt: 0,
 
     async getPrompt(streams) {
-        const allIn = [];
+        let allIn = [];
         let prompt = streams.map(i => {
             // await again(i, 0);
             const link = i.getNext();
@@ -59,9 +59,13 @@ const _ = {
             //-->   i.getArticle(link.title);
             allIn.push(prev, title, next)
             return [prev, title, next].join(' ').trim();
-        }).join(' , ')
+        }).join(' , ');
+        allIn=allIn.filter(i=>i);
+        ['spot on ', 'in background '].forEach(i => {
+            const pos = Math.floor(Math.random() * allIn.length);
 
-
+            allIn[pos] = i + allIn[pos];
+        })
 
         shuffleArray(allIn);
         prompt = allIn.join(' , ');
