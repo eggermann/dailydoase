@@ -31,7 +31,7 @@ const _ = {
 
             //-->   i.getArticle(link.title);
             allIn.push(prev, title/*, next*/)
-            return [prev, title, next].filter(i => i.trim()).join(' ');
+            return [prev, title, next].filter(i => i).join(' ');
         }).join(' , ');
         allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
 
