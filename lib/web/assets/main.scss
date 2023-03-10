@@ -42,6 +42,45 @@ body {
   }
 }
 
+header {
+  color: yellow;
+  position: fixed;
+  margin-bottom: $element-spce-4;
+  position: relative;
+  left: 0;
+}
+
+aside {
+  .c-aside__menu {
+    @include spawnMaxColumn();
+    position: fixed;
+    filter: hue-rotate(-130deg);
+    width: max-content;
+    background-color: firebrick;
+    margin-top: $element-spce-4 *3;
+    width: max-content;
+    mix-blend-mode: plus-lighter;
+    top: 0;
+    bottom:0;
+    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    a {
+      mix-blend-mode: color-burn;
+
+      &[aria-current="current"] {
+        border: 5px solid yellow;
+        mix-blend-mode: difference;
+      filter:hue-rotate(45deg);
+      }
+
+      &:hover {
+        filter: drop-shadow(2px 4px 6px black);
+      }
+    }
+  }
+}
+
 main {
   @include spawnMaxColumn();
 }
@@ -53,7 +92,11 @@ main {
   justify-content: center;
   //
   &__bg {
-position: relative;
+    position: relative;
+  }
+
+  &__images {
+    border: 5px solid yellow;
   }
 
   &__content {
@@ -65,7 +108,7 @@ position: relative;
     bottom: 0;
     display: contents;
 
-    &__info{
+    &__info {
       position: absolute;
       mix-blend-mode: color-dodge;
       color: lightblue;

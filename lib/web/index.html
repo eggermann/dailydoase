@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +6,41 @@
 </head>
 <body>
 
-<main class="">
-    <div class="c-panel">
-        <img class="c-panel__bg"/>
+<header class="c-header">
+    <h1> dailyDoase </h1>
+</header>
 
+<aside class="c-aside">
+    <nav class="c-aside__menu">
+        <h2>history</h2>
+        <ul>
+            {{#menu}}
+            <li>
+                <a {{#current}} aria-current="current"
+                   {{/current}}
+                href="{{href}}">
+                {{name}}</a><small>&nbsp;{{fileCnt}}</small>
+            </li>
+            {{/menu}}
+        </ul>
+    </nav>
+</aside>
+
+<main>
+    <div class="c-panel">
+        {{#unless images}}
+        <img class="c-panel__bg"/>
+        {{/unless}}
+
+        {{#if images}}
+        <div class="c-panel__images">
+            {{#images}}
+
+            <img loading="lazy" src="/v{{href}}" alt="{{prompt}}">
+            <p class="c-panel__images__desc">{{prompt}}</p>
+            {{/images}}
+        </div>
+        {{/if}}
 
         <div class="c-panel__content">
             <div class="c-panel__content__info">
