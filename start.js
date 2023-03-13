@@ -32,10 +32,10 @@ const _ = {
             //-->   i.getArticle(link.title);
             allIn.push(prev, title/*, next*/)
             return [prev, title, next].filter(i => i).join(' ');
-        }).join(' , ');
+        }).join(' | ');
         allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
 
-        if (options.randomImageOrientations){
+        if (options.randomImageOrientations) {
             options.randomImageOrientations.forEach(i => {
                 const pos = Math.floor(Math.random() * allIn.length);
 
@@ -44,7 +44,7 @@ const _ = {
         }
 
         shuffleArray(allIn);
-      //  prompt = allIn.join(' , ');
+        //  prompt = allIn.join(' , ');
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
@@ -54,9 +54,9 @@ const _ = {
             ? await options.promptFunktion(streams, options)
             : await _.getPrompt(streams, options);
 
-        prompt += options.staticPrompt;
 
-        await pTDiffusion.prompt(prompt, options);
+      //  console.log('generated prompt', prompt);
+      await pTDiffusion.prompt(prompt, options);
 
         setTimeout(async () => {
             await _.loop(streams, options);
