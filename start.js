@@ -1,7 +1,8 @@
 //_.init('Anna Maus');//a existing site
 //_.init('Maus', 'de');//a existing site
 
-const pTDiffusion = require("./lib/post-to-diffusion");
+//const pTDiffusion = require("./lib/post-to-diffusion");
+const pTDiffusion = require("./lib/post-to-huggin");
 const WordStream = require("./lib/WordStream");
 const server = require("./lib/server");
 const shuffleArray = array => {
@@ -31,8 +32,8 @@ const _ = {
 
             //-->   i.getArticle(link.title);
             allIn.push(prev, title/*, next*/)
-            return [prev, title, next].filter(i => i).join(' ');
-        }).join(' | ');
+            return [prev, title/*, next*/].filter(i => i).join(' ');
+        }).join(',');
         allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
 
         if (options.randomImageOrientations) {
@@ -60,7 +61,7 @@ const _ = {
 
         setTimeout(async () => {
             await _.loop(streams, options);
-        }, 1000);
+        }, 2*60*1000);
 
     },
     async init(options) {

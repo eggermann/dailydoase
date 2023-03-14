@@ -8,9 +8,9 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['robotics', 'en'], ['operation', 'en'], ['horror', 'en'], ['Naturism', 'en']],
+    words: [['Red_king_crab', 'en'], ['Color_television', 'en'], ['Religion', 'en'], ['Season', 'en']],
     randomImageOrientations: ['spot on ', ' background '],
-    staticPrompt: ', Ultra HD ',
+    staticPrompt: ', 4k',
     stableDiffusionOptions: {
         width: 512,
         height: 512,

@@ -7,7 +7,7 @@
 <body>
 
 <header class="c-header">
-    <h1> dailyDoase </h1>
+    <h1> dailyDoase 🌴</h1>
 </header>
 
 <aside class="c-aside">
@@ -36,8 +36,8 @@
         <div class="c-panel__images">
             {{#images}}
 
-            <img loading="lazy" src="/v{{href}}" alt="{{prompt}}">
-            <p class="c-panel__images__desc">{{prompt}}</p>
+            <img loading="lazy" src="/v{{href}}" alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
+            <p class="c-panel__images__desc"></p>
             {{/images}}
         </div>
         {{/if}}

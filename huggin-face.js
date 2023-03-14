@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const axios = require('axios');
-
-
+//https://github.com/camenduru/stable-diffusion-webui-huggingface/tree/main/scripts
+//https://github.com/camenduru/stable-diffusion-webui-docker
 const _token = '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';
 var imageName = __dirname + '/huggin-file2.png';
 
