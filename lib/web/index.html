@@ -4,18 +4,25 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
     <title>sable diffusion </title>
 </head>
-<body>
+<body class="{{pageClass}}">
 
 <header class="c-header">
-    <h1> dailyDoase 🌴</h1>
+    <h1> <span data-aos="fade-up">daily</span><span data-aos-delay="300" data-aos="fade-up">Doase</span>
+        <span data-aos-delay="500" data-aos="fade-up">🌴</span> </h1>
 </header>
 
 <aside class="c-aside">
     <nav class="c-aside__menu">
         <h2>history</h2>
+
+        <div class="playpause">
+            <input {{^isHome}}checked{{/isHome}} type="checkbox" value="None" id="playpause" name="check" />
+            <label for="playpause" tabindex=1></label>
+        </div>
+
         <ul>
             {{#menu}}
-            <li>
+            <li data-aos="fade-up">
                 <a {{#current}} aria-current="current"
                    {{/current}}
                 href="{{href}}">
@@ -26,7 +33,9 @@
     </nav>
 </aside>
 
-<main>
+<main data-aos="fade-up">
+
+
     <div class="c-panel">
         {{#unless images}}
         <img class="c-panel__bg"/>
@@ -36,7 +45,7 @@
         <div class="c-panel__images">
             {{#images}}
 
-            <img loading="lazy" src="/v{{href}}" alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
+            <img data-mtime="{{mtime}}" data-aos="fade-up" loading="lazy" src="/v{{href}}" alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
             <p class="c-panel__images__desc"></p>
             {{/images}}
         </div>

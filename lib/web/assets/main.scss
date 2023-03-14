@@ -61,17 +61,18 @@ aside {
     width: max-content;
     mix-blend-mode: plus-lighter;
     top: 0;
-    bottom:0;
-    position:fixed;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    bottom: 0;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
     a {
       mix-blend-mode: color-burn;
 
       &[aria-current="current"] {
-        border: 5px solid yellow;
+      border: 5px solid yellow;
         mix-blend-mode: difference;
-      filter:hue-rotate(45deg);
+        filter: hue-rotate(45deg);
       }
 
       &:hover {
@@ -90,13 +91,38 @@ main {
   width: 100vw;
   display: flex;
   justify-content: center;
+
+
+  &.playing {
+    font-family: sans-serif;
+    .c-panel__images {
+
+      border: 0;
+
+    }
+
+    .c-panel__content__info {
+      transform: translateY(-6em);
+    }
+
+
+    img {
+      @extend .c-panel__bg;
+      min-width: 78vw;
+    }
+    img:not(.active) {
+      display: none;
+    }
+  }
+
   //
   &__bg {
-   // position: relative;
+    // position: relative;
   }
 
   &__images {
-    border: 5px solid yellow;
+  //  border: 5px solid yellow;
+
   }
 
   &__content {
@@ -111,7 +137,7 @@ main {
     &__info {
       position: absolute;
       mix-blend-mode: color-dodge;
-      color: lightblue;
+      color: yellow;
       bottom: 0;
       font-size: 1.5em;
       max-width: 80vw;
@@ -127,11 +153,6 @@ h1 {
   letter-spacing: .13em;
   transform: translate(0.14em, -0.5em);
   display: inline-block;
-
-  span {
-    font-size: 1rem;
-    line-height: 2em;
-  }
 }
 
 footer {
@@ -140,4 +161,39 @@ footer {
   align-items: center;
   display: flex;
   flex-flow: column;
+}
+
+.folder {
+
+}
+
+.playpause { //https://css-tricks.com/making-pure-css-playpause-button/
+//padding:0.1em 2em;
+  label {
+    display: block;
+    box-sizing: border-box;
+    width: 0;
+    height: 74px;
+
+    border-color: transparent transparent transparent #202020;
+    transition: 100ms all ease;
+    cursor: pointer;
+    border-style: double;
+    border-width: 0px 0 0px 60px;
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+
+    &:checked + label {
+      border-style: solid;
+      border-width: 37px 0 37px 60px;
+    }
+
+    &:focus + label {
+     // border-radius: 50%;
+      box-shadow: 0 0 5px lightblue;
+    }
+  }
 }

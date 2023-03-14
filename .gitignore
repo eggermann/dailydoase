@@ -49,5 +49,5 @@ Thumbs.db
 *.wmv
 
 # internal counters
-lib/exemplar-cntr.txt
+lib/get-from-stable-diffusion/exemplar-cntr.txt
 XXXfolder-cntr.txt
