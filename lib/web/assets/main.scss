@@ -42,50 +42,122 @@ body {
   }
 }
 
+header {
+
+  position: fixed;
+  margin-bottom: $element-spce-4;
+  position: relative;
+  left: 0;
+}
+
+aside {
+  .c-aside__menu {
+    @include spawnMaxColumn();
+    position: fixed;
+    filter: hue-rotate(-130deg);
+    width: max-content;
+    background-color: firebrick;
+    margin-top: $element-spce-4 *3;
+    width: max-content;
+    mix-blend-mode: plus-lighter;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    a {
+      mix-blend-mode: color-burn;
+
+      &[aria-current="current"] {
+      border: 5px solid yellow;
+        mix-blend-mode: difference;
+        filter: hue-rotate(45deg);
+      }
+
+      &:hover {
+        filter: drop-shadow(2px 4px 6px black);
+      }
+    }
+
+    .image-cntr a{
+      text-decoration: none;
+    }
+  }
+}
+
 main {
   @include spawnMaxColumn();
 }
 
 .c-panel {
-
   height: 100vh;
   width: 100vw;
-
   display: flex;
-
   justify-content: center;
+
+
+  &.playing {
+    font-family: sans-serif;
+    .c-panel__images {
+
+      border: 0;
+
+    }
+
+    .c-panel__content__info {
+      transform: translateY(-6em);
+    }
+
+
+    img {
+      @extend .c-panel__bg;
+      min-width: 78vw;
+    }
+    img:not(.active) {
+      display: none;
+    }
+  }
+
   //
   &__bg {
+    // position: relative;
+  }
+
+  &__images {
+  //  border: 5px solid yellow;
 
   }
 
   &__content {
+    position: absolute;
     //  mix-blend-mode: color-dodge;
     z-index: 2;
     filter: drop-shadow(2px 4px 6px white);
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    display: contents;
+
+    &__info {
+      position: absolute;
+      mix-blend-mode: color-dodge;
+      color: lightblue;
+      bottom: 0;
+      font-size: 1.5em;
+      max-width: 80vw;
+    }
   }
 }
 
-.c-info {
-  a {
-    line-height: $element-spce-2;
-    color: white; //rgb(0,12,30);
-  }
-}
 
 h1 {
+  color: yellow;
   font-family: sans-serif;
   font-style: italic;
   font-weight: 100;
   letter-spacing: .13em;
   transform: translate(0.14em, -0.5em);
   display: inline-block;
-
-  span {
-    font-size: 1rem;
-    line-height: 2em;
-  }
 }
 
 footer {
@@ -94,4 +166,39 @@ footer {
   align-items: center;
   display: flex;
   flex-flow: column;
+}
+
+.folder {
+
+}
+
+.playpause { //https://css-tricks.com/making-pure-css-playpause-button/
+//padding:0.1e. 2em;
+  transform: scale(.7);
+  label {
+    display: block;
+    box-sizing: border-box;
+    width: 0;
+    height: 74px;
+
+    border-color: transparent transparent transparent #202020;
+    transition: 100ms all ease;
+    cursor: pointer;
+    border-style: double;
+    border-width: 0px 0 0px 60px;
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+
+    &:checked + label {
+      border-style: solid;
+      border-width: 37px 0 37px 60px;
+    }
+
+    &:focus + label {
+      box-shadow: 0 0 5px lightblue;
+    }
+  }
 }

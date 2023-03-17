@@ -3,14 +3,14 @@ const _staticPrompt = ',UHD ';//, elephant'photographie', 'phyloosivie',esoteric
 const _options = ;//, elephant'photographie', 'phyloosivie',esoteric
 */
 
-const compositionFairyTaleAndPolitics = {
+const compo = {
     //promptFunktion:(streams, options)=>{},
     //circularLinksGetNext:()=>{
     //this is the cirular context },
-    folderVersionString: 'v2',// v-{cnt}-{folderVersionString}
-    words: [['fairytale', 'en'], ['politics', 'en'], ['vegetables', 'en']],
-    //randomImageOrientations: ['spot on ', 'in background '],
-    staticPrompt: ', UHD ',
+    folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
+    words: [['parish fair', 'en'], ['Punk', 'en'], ['Religion', 'en'], ['Medicine', 'en']],
+    randomImageOrientations: ['spot on ', ' background '],
+    staticPrompt: ', 4k',
     stableDiffusionOptions: {
         width: 512,
         height: 512,
@@ -18,4 +18,4 @@ const compositionFairyTaleAndPolitics = {
     }
 }
 
-require('./start')(compositionFairyTaleAndPolitics);
+require('./start')(compo);

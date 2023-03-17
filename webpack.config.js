@@ -15,7 +15,8 @@ module.exports = {
         './lib/web/assets/main.scss'
     ],
     output: {
-        path: path.resolve(__dirname, './lib/web/dist')
+        path: path.resolve(__dirname, './lib/web/dist'),
+        publicPath:'/'
     },
 
     plugins: [
@@ -30,7 +31,8 @@ module.exports = {
             filename: '[name].css'
         }),
         new HtmlWebpackPlugin({
-            template: 'lib/web/index.html'
+            template: 'lib/web/index.html',
+            filename: 'index-template.hbs',
         })
     ],
     module: {
