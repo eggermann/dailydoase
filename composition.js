@@ -8,8 +8,8 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['parish fair', 'en'], ['Punk', 'en'], ['Religion', 'en'], ['Medicine', 'en']],
-    randomImageOrientations: ['spot on ', ' background '],
+    words: [['Art', 'en'], ['Erotic', 'en'], ['Capitalism', 'en']],
+    randomImageOrientations: ['spot on ', ' background with '],
     staticPrompt: ', 4k',
     stableDiffusionOptions: {
         width: 512,

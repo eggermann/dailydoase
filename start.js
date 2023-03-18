@@ -14,13 +14,11 @@ const shuffleArray = array => {
 
 const _ = {
     /*this handle the form of link*/
-
-
     shiftCnt: 0,
-
-
     async getPrompt(streams, options) {
         let allIn = [];
+        let mains = ''
+
         let prompt = streams.map(i => {
             // await again(i, 0);
             const link = i.getNext();
@@ -28,23 +26,24 @@ const _ = {
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-
+            mains += (i ? ' | ' : '') + title;
             //-->   i.getArticle(link.title);
-            allIn.push(prev, title/*, next*/)
-            return [prev, title/*, next*/].filter(i => i).join(' ');
-        }).filter(i => i).join(',');
-
-        allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
+            allIn.push(prev,/* title, */next)
+            return [/*prev,*/ title, next].filter(i => i).join(' ');
+        }).filter(i => i)
+        //   .join(',');
+        // allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
 
         if (options.randomImageOrientations) {
             options.randomImageOrientations.forEach(i => {
-                const pos = Math.floor(Math.random() * allIn.length);
+                const pos = Math.floor(Math.random() * prompt.length);
 
-                allIn[pos] = i + allIn[pos];
+                prompt[pos] = prompt[pos] + ' ' + i;
             })
         }
-        shuffleArray(allIn);
 
+        prompt = prompt.join(`[${mains}] `);
+        // shuffleArray(allIn);
 
 
         //  prompt = allIn.join(' , ');
@@ -87,12 +86,9 @@ const _ = {
     }
 };
 
-
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
 module.exports = async options => {
     server.init();
     await _.init(options);
 }
-
-

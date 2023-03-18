@@ -5,3 +5,6 @@ https://buildspace.so/p/build-ai-avatars/lessons/become-a-prompt-engineer
 light color, ambrotype color ,cyanotype color,bokeh color,satellite imagery
 https://docs.google.com/document/d/1XVfmu8313A4P6HudVDJVO5fqDxtiKoGzFjhSdgH7EYc/edit
 
+
+
+uberspace web backend set /dailydoasis --http --port 4000
