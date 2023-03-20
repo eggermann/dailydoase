@@ -16,7 +16,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, './lib/web/dist'),
-        publicPath:'/'
+        publicPath:'./'
     },
 
     plugins: [

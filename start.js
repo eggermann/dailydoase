@@ -29,7 +29,7 @@ const _ = {
             mains += (i ? ' | ' : '') + title;
             //-->   i.getArticle(link.title);
             allIn.push(prev,/* title, */next)
-            return [/*prev,*/ title, next].filter(i => i).join(' ');
+            return [prev,/* title, */next].filter(i => i).join(' ');
         }).filter(i => i)
         //   .join(',');
         // allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
@@ -42,7 +42,8 @@ const _ = {
             })
         }
 
-        prompt = prompt.join(`[${mains}] `);
+     //   prompt = prompt.join(`[${mains}] `);
+        prompt = prompt.join(` `);
         // shuffleArray(allIn);
 
 
