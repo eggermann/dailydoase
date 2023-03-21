@@ -9,4 +9,4 @@ https://docs.google.com/document/d/1XVfmu8313A4P6HudVDJVO5fqDxtiKoGzFjhSdgH7EYc/
 
 uberspace web backend set /daily-doasis --http --port 4000
 
-daily-doasis
+daily-doasis  --> doase

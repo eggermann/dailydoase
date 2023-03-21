@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <title>sable diffusion </title>
+</head>
+<body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}">
+
+<header class="c-header">
+    <h1><span data-aos-anchor-placement="top-center" data-aos="fade-down">daily</span>
+        <span data-aos-anchor-placement="top-center" data-aos-delay="300" data-aos="fade-up">Doase</span>
+        <span data-aos-anchor-placement="top-center" data-aos-delay="500" data-aos="fade-down">🌴</span></h1>
+</header>
+
+<aside class="c-aside">
+    <nav class="c-aside__menu">
+        <h2>history</h2>
+        <ul>
+            {{#menu}}
+                <li>
+                    {{#current}}   <a aria-current="true" href="{{href}}">{{name}}</a>{{/current}}
+                    {{^current}}   <a href="{{href}}">{{name}}</a>{{/current}}
+
+                    {{^../isHome}}
+                        {{#current}}
+                            <div class="playpause">
+                                <input id="playpause" checked type="checkbox" value="None" id="playpause" name="check">
+                                <label for="playpause"></label>
+                            </div>
+                        {{/current}}
+                    {{/../isHome}}
+                    <small class="image-cntr"> {{fileCnt}} </small>
+                </li>
+            {{/menu}}
+        </ul>
+    </nav>
+</aside>
+
+<main>
+    <div class="c-panel">
+        {{#unless images}}
+            <img class="c-panel__bg"/>
+        {{/unless}}
+
+        {{#if images}}
+            <div class="c-panel__images">
+                {{#images}}
+
+                    <img data-mtime="{{mtime}}" loading="lazy" src="{{href}}"
+                         alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
+                    <p class="c-panel__images__desc"></p>
+                {{/images}}
+            </div>
+        {{/if}}
+
+        <div class="c-panel__content">
+            <div class="c-panel__content__info">
+
+            </div>
+        </div>
+
+    </div>
+
+    <small class="realease">
+        release 1
+    </small>
+
+</main>
+<footer>
+    <p>&#9426;&nbsp;eggermann,
+        <small>use it until down</small>
+    </p>
+
+</footer>
+</body>
+</html>

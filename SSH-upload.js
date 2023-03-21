@@ -16,7 +16,7 @@ const uploadDir = (localDir, remoteDir) => {
     const successful = []
     ssh.putDirectory(localDir, remoteDir, {
         recursive: true,
-        concurrency: 10,
+        concurrency: 1,
         // ^ WARNING: Not all servers support high concurrency
         // try a bunch of values and see what works on your server
         validate: function (itemPath) {
@@ -26,8 +26,10 @@ const uploadDir = (localDir, remoteDir) => {
         },
         tick: function (localPath, remotePath, error) {
             if (error) {
+                console.log('failed transfers',localPath)
                 failed.push(localPath)
             } else {
+                console.log('successful transfers',localPath)
                 successful.push(localPath)
             }
         }
@@ -35,6 +37,8 @@ const uploadDir = (localDir, remoteDir) => {
         console.log('the directory transfer was', status ? 'successful' : 'unsuccessful')
         console.log('failed transfers', failed.join(', '))
         console.log('successful transfers', successful.join(', '))
+
+        ssh.dispose();
     })
 }
 
@@ -48,7 +52,6 @@ ssh.connect({
     password: config.password,
 }).then((i) => {
 
-
     ssh.putFiles(fileNames).then(function () {
         console.log("The File thing is done")
     }, function (error) {
@@ -56,7 +59,7 @@ ssh.connect({
         console.log(error)
     })
 
-    const folders = ['lib', 'images'].map(name => {
-        uploadDir(__dirname + '/' + name,destinationPath + '/' + name);
+    const folders = ['lib'/*, 'images'*/].map(name => {
+   uploadDir(__dirname + '/' + name,destinationPath + '/' + name);
     });
 })

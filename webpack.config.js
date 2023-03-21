@@ -1,25 +1,32 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-
+const {EnvironmentPlugin} = require('webpack');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const mode = (process.env.APP_ENV && process.env.APP_ENV.indexOf('production') != -1) ? 'production' : 'development';
+const mode = (process.env.APP_ENV && process.env.APP_ENV.indexOf('production') != -1) ? 'production' : 'development'
+
+
 module.exports = {
     mode,
     context: path.resolve(__dirname, ''),
+
     entry: [
         './lib/web/assets/main.js',
         './lib/web/assets/main.scss'
     ],
+
     output: {
         path: path.resolve(__dirname, './lib/web/dist'),
-        publicPath:'./'
+        publicPath: mode == 'development' ? '/' : '/daily-doasis'
     },
 
     plugins: [
+        new EnvironmentPlugin({
+            NODE_ENV: mode
+        }),
         new BrowserSyncPlugin({
             // browse to http://localhost:3000/ during development,
             // ./public directory is being served
@@ -31,7 +38,7 @@ module.exports = {
             filename: '[name].css'
         }),
         new HtmlWebpackPlugin({
-            template: 'lib/web/index.html',
+            template: 'lib/web/index.hbs',
             filename: 'index-template.hbs',
         })
     ],
@@ -72,7 +79,7 @@ module.exports = {
         ]
     },
     optimization: {
-        minimize:true,// (mode === 'production'),
+        minimize: true,// (mode === 'production'),
         minimizer: [
             new TerserPlugin({
                 terserOptions: {
