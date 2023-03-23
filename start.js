@@ -2,6 +2,7 @@ const getFromStableDiffusion = require('./lib/get-from-stable-diffusion');
 const WordStream = require("./lib/WordStream");
 const server = require("./lib/server");
 
+
 let _pollingTime = null;
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -29,22 +30,23 @@ const _ = {
             mains += (i ? ' | ' : '') + title;
             //-->   i.getArticle(link.title);
             allIn.push(prev,/* title, */next)
-            return [prev,/* title, */next].filter(i => i).join(' ');
+            return [prev, title,/* next*/].filter(i => i).join(' ');
         }).filter(i => i)
         //   .join(',');
         // allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
 
         if (options.randomImageOrientations) {
-            options.randomImageOrientations.forEach(i => {
-                const pos = Math.floor(Math.random() * prompt.length);
+            options.randomImageOrientations.forEach((i,index) => {
+
+                const pos = Math.floor(Math.random() * (prompt.length-1));
 
                 prompt[pos] = prompt[pos] + ' ' + i;
             })
         }
-
+        shuffleArray(prompt);
      //   prompt = prompt.join(`[${mains}] `);
-        prompt = prompt.join(` `);
-        // shuffleArray(allIn);
+        prompt = prompt.join(`,`);
+        // shuffleArray(prompt);
 
 
         //  prompt = allIn.join(' , ');
