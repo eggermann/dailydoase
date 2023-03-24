@@ -10,13 +10,13 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['oracle', 'en'], ['plastic', 'en'], ['light', 'en'], ['queer', 'en'], ['Medicine', 'en']],
+    words: [['Love', 'en'], ['Eroticism', 'en'], ['Sex', 'en'], ['Machine', 'en'], ['Violence', 'en']],
     randomImageOrientations: ['spot on ', ' background with '],
     staticPrompt: ', highly detailed',
     stableDiffusionOptions: {
         width: 512,
         height: 512,
-        steps: 50
+        steps: 10
     }
 }
 

@@ -2,7 +2,7 @@ const getFromStableDiffusion = require('./lib/get-from-stable-diffusion');
 const WordStream = require("./lib/WordStream");
 const server = require("./lib/server");
 
-
+const chalk = require('chalk');
 let _pollingTime = null;
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -12,8 +12,27 @@ const shuffleArray = array => {
         array[j] = temp;
     }
 }
-
+const nlp = require('compromise');
 const _ = {
+    filterEmptys:arr=>arr.filter(i => i && i.length > 1),
+    getVerbs: (phrase) => {
+
+
+        //  phrase='Somebody once told me the world is gonna roll me';
+
+        // nlp('Somebody once told me the world is gonna roll me').verbs().out('array')
+        const verbs = nlp(phrase).verbs().toInfinitive().out('array');
+        // const adjectives = nlp(phrase).verbs().adverbs().out('array');
+        const adjectives = nlp(phrase).adjectives().out('array');
+        // console.log(t,  nlp(phrase).verbs().out('array');
+        console.log(chalk.blue(verbs));
+        console.log(chalk.red(adjectives));
+        return {
+            verbs:_.filterEmptys(verbs),
+            adjectives:_.filterEmptys(adjectives)
+        };
+
+    },
     /*this handle the form of link*/
     shiftCnt: 0,
     async getPrompt(streams, options) {
@@ -27,29 +46,33 @@ const _ = {
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-            mains += (i ? ' | ' : '') + title;
+
+            const verbs = _.getVerbs(next);
+
+
             //-->   i.getArticle(link.title);
-            allIn.push(prev,/* title, */next)
-            return [prev, title,/* next*/].filter(i => i).join(' ');
+            allIn.push(verbs.verbs,verbs.adjectives)
+            return _.filterEmptys([prev, title/* next*/]).join(' ');
         }).filter(i => i)
         //   .join(',');
-        // allIn = allIn.filter(i => i);// randomImageOrientations :['spot on ', 'in background ']
+        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
 
         if (options.randomImageOrientations) {
-            options.randomImageOrientations.forEach((i,index) => {
+            options.randomImageOrientations.forEach((i, index) => {
 
-                const pos = Math.floor(Math.random() * (prompt.length-1));
+                const pos = Math.floor(Math.random() * (prompt.length - 1));
 
-                prompt[pos] = prompt[pos] + ' ' + i;
+                prompt[pos] = i + ' ' + prompt[pos];
             })
         }
+
         shuffleArray(prompt);
-     //   prompt = prompt.join(`[${mains}] `);
+        //   prompt = prompt.join(`[${mains}] `);
         prompt = prompt.join(`,`);
         // shuffleArray(prompt);
 
 
-        //  prompt = allIn.join(' , ');
+        prompt += allIn.join(',');
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
@@ -59,8 +82,10 @@ const _ = {
             ? await options.promptFunktion(streams, options)
             : await _.getPrompt(streams, options);
 
+        prompt = nlp(prompt).text();
 
-        //  console.log('generated prompt', prompt);
+        console.log(chalk.yellow(prompt));
+        // ----------->
         await _.model.prompt(prompt, options);
 
         setTimeout(async () => {
@@ -95,3 +120,5 @@ module.exports = async options => {
     server.init();
     await _.init(options);
 }
+
+//const a = _.getVerbs('beautiful running rising sun of merged lives. A beautiful cron is comining over the rainbow')
