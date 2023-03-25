@@ -89,6 +89,7 @@ const _ = {
         await _.model.prompt(prompt, options);
 
         setTimeout(async () => {
+            console.log('******** again ******')
             await _.loop(streams, options);
         }, _.model.config.pollingTime);
 
@@ -108,7 +109,7 @@ const _ = {
             return wordStream;
         });
 
-        Promise.all(wordStreams).then(async (streams) => {
+        return Promise.all(wordStreams).then(async (streams) => {
             return await _.loop(streams, options);
         });
     }

@@ -1,4 +1,4 @@
-https://github.com/Phantom8015/stable-diffusion-es/blob/master/index.js
+https://github.com/Phantom8015/stable-diffusion-es/blob/master/functions.js
 https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-NVidia-GPUs
 https://buildspace.so/p/build-ai-avatars/lessons/become-a-prompt-engineer
 

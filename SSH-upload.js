@@ -26,10 +26,10 @@ const uploadDir = (localDir, remoteDir) => {
         },
         tick: function (localPath, remotePath, error) {
             if (error) {
-                console.log('failed transfers',localPath)
+                console.log('failed transfers', localPath)
                 failed.push(localPath)
             } else {
-                console.log('successful transfers',localPath)
+                console.log('successful transfers', localPath)
                 successful.push(localPath)
             }
         }
@@ -60,6 +60,7 @@ ssh.connect({
     })
 
     const folders = ['lib'/*, 'images'*/].map(name => {
-   uploadDir(__dirname + '/' + name,destinationPath + '/' + name);
+        console.log('------> ',name)
+        uploadDir(__dirname + '/' + name, destinationPath + '/' + name);
     });
 })

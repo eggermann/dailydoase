@@ -69,7 +69,7 @@ aside {
     a {
       mix-blend-mode: color-burn;
 
-      &[aria-current="current"] {
+      &[aria-current="true"] {
         border: 5px solid yellow;
         mix-blend-mode: difference;
         filter: hue-rotate(45deg);
