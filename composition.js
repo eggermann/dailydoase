@@ -5,12 +5,14 @@ const _options = ;//, elephant'photographie', 'phyloosivie',esoteric
 https://stable-diffusion-art.com/prompt-guide/
 */
 
+//----> hosting https://www.ni-sp.com/how-to-run-stable-diffusion-on-your-own-cloud-gpu-server/
+
 const compo = {
     //promptFunktion:(streams, options)=>{},
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Love', 'en'], ['Eroticism', 'en'], ['Sex', 'en'], ['Machine', 'en'], ['Violence', 'en']],
+    words: [['Human_body', 'en'], ['Sex', 'en'], ['Machine', 'en'], ['Violence', 'en']],
     randomImageOrientations: ['spot on ', ' background with '],
     staticPrompt: ', highly detailed',
     stableDiffusionOptions: {
