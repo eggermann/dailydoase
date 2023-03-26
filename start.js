@@ -66,7 +66,7 @@ const _ = {
             })
         }
 
-        shuffleArray(prompt);
+        //shuffleArray(prompt);
         //   prompt = prompt.join(`[${mains}] `);
         prompt = prompt.join(`,`);
         // shuffleArray(prompt);

@@ -43,10 +43,12 @@
         {{/unless}}
 
         {{#if images}}
-            <div class="c-panel__images">
+            <div  class="c-panel__images">
                 {{#images}}
 
-                    <img data-mtime="{{mtime}}" loading="lazy" src="{{href}}"
+                    <img height="{{json.stableDiffusionOptions.height}}" width="{{json.stableDiffusionOptions.width}}"
+                         id="image{{json.name}}" data-mtime="{{mtime}}"
+                         loading="lazy" src="{{href}}"
                          alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
                     <p class="c-panel__images__desc"></p>
                 {{/images}}
@@ -68,7 +70,7 @@
 </main>
 <footer>
     <p>&#9426;&nbsp;eggermann,
-        <small>use it until down</small>
+        <small>use it unt il down</small>
     </p>
 
 </footer>
