@@ -46,10 +46,7 @@ const _ = {
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-
             const verbs = _.getVerbs(next);
-
-
             //-->   i.getArticle(link.title);
             allIn.push(verbs.verbs,verbs.adjectives)
             return _.filterEmptys([prev, title/* next*/]).join(' ');

@@ -4,7 +4,7 @@ const configPath = process.env.HOME + '/Documents/config-data/eggman';
 const config = require(configPath);
 const destinationPath = 'Projekte/dailyDoase';
 
-const syncDir = './images';
+const syncDir = './../images';
 
 require('ssh-sync')({
         watch: true,

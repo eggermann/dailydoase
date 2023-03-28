@@ -1,0 +1,33 @@
+{
+  "folderVersionString": "v2",
+  "words": [
+    [
+      "Human_body",
+      "en"
+    ],
+    [
+      "Sex",
+      "en"
+    ],
+    [
+      "Machine",
+      "en"
+    ],
+    [
+      "Violence",
+      "en"
+    ]
+  ],
+  "randomImageOrientations": [
+    "spot on ",
+    " background with "
+  ],
+  "staticPrompt": ", highly detailed",
+  "stableDiffusionOptions": {
+    "width": 512,
+    "height": 512,
+    "steps": 10
+  },
+  "prompt": " background with  spot on  Nervous system,power is the hand axe, also called biface and Wedge (mechanical device)",
+  "totalPrompt": " background with  spot on  Nervous system,power is the hand axe, also called biface and Wedge (mechanical device), highly detailed"
+}

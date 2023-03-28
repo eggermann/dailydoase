@@ -1,0 +1,75 @@
+// sftp.js
+//
+// Use this sample code to connect to your SFTP To Go server and run some file operations using Node.js.
+//
+// 1) Paste this code into a new file (sftp.js)
+//
+// 2) Install dependencies
+//   npm install ssh2-sftp-client@^8.0.0
+//
+// 3) Run the script
+//   node sftp.js
+//
+// Compatible with Node.js >= v12
+// Using ssh2-sftp-client v8.0.0
+
+const configPath = process.env.HOME + '/Documents/config-data/eggman';
+const config = require(configPath);
+const destinationPath = 'Projekte/dailyDoase';
+const fs = require('fs');
+const path = require('path');
+const pathConfig = require('./config.json');
+const serverPath = pathConfig.serverImgPath;
+console.log(pathConfig.localImgPath)
+const localPath = path.join(__dirname, pathConfig.localImgPath);
+var promiseWaterfall = require('promise.waterfall')
+const SFTPClient = require('./SftpClient');
+
+(async () => {
+    //const parsedURL = new URL(process.env.SFTPTOGO_URL);
+    const port = 22;
+    //const {host, username, password} = parsedURL;
+    //* Open the connection
+    const client = new SFTPClient();
+    await client.connect({
+        host: config.host,
+        port,
+        username: config.user,
+        password: config.password
+    });
+
+    //* List working directory files
+
+    const localFolders = fs.readdirSync(localPath)
+    const serverFolders = await client.listFiles(serverPath);
+
+    const pSF = serverFolders.filter(folder => {
+        const name = path.basename(folder)
+        return !localFolders.includes(name);
+    }).map(async folder => {
+
+//        await client.downloadFile('Projekte/dailyDoase/images/s-98-v2/1-4212.json', './1-4212.json');
+        //      process.exit();
+
+        const name = path.basename(folder);
+        const files = await client.listFiles(path.join(serverPath, name));
+        /// console.log('***jpg/josn ****', name, files.length);
+        const pF = files.map(file => {
+            return async () => {
+                const server = path.join(serverPath, name, file);
+                const local = path.join(pathConfig.downloadedImageFolder, name, file)
+                await client.downloadFile(server, local);
+            }
+        })
+
+        return promiseWaterfall(pF)
+            .catch(console.error)
+
+
+    });
+
+    await Promise.all(pSF);
+
+    client.disconnect();
+
+})();

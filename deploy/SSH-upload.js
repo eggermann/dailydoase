@@ -44,7 +44,7 @@ const uploadDir = (localDir, remoteDir) => {
 
 let fileNames = ['composition.js', 'start.js', /*'exemplar-cntr.txt', 'folder-cntr.txt', */'package.json'];
 fileNames = fileNames.map(name => {
-    return {local: __dirname + '/' + name, remote: destinationPath + '/' + name};
+    return {local: __dirname + '/../' + name, remote: destinationPath + '/' + name};
 });
 ssh.connect({
     host: config.host,
@@ -61,6 +61,6 @@ ssh.connect({
 
     const folders = ['lib'/*, 'images'*/].map(name => {
         console.log('------> ',name)
-        uploadDir(__dirname + '/' + name, destinationPath + '/' + name);
+        uploadDir(__dirname + '/../' + name, destinationPath + '/' + name);
     });
 })
