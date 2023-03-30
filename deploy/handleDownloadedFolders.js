@@ -6,6 +6,8 @@ const {Image} = require("image-js");
 const recursive = require("recursive-readdir");
 const _ = {
     getBlackImages: async (folder) => {
+
+
         const blackImages = [];
 
         return new Promise((resolve, reject) => {
@@ -82,17 +84,17 @@ const _ = {
             }))
         }))
     },
+    pruneEmptyImages: async (pathFresh = __dirname+'/fresh-folders') => {
+        const imagesToDelete = await _.getBlackImages(pathFresh);
+
+        await _.deleteImages(imagesToDelete);
+    }
 }
 
 module.exports = {
-    isBlackImg: _.isBlackImg
+    isBlackImg: _.isBlackImg,
+    pruneEmptyImages: _.pruneEmptyImages,
 };
 
-(async () => {
-    const imagesToDelete = await _.getBlackImages('/Users/d.eggermann/semantic-api/deploy/fresh-folders/s-96-v2');
-    console.log('##', imagesToDelete);
-
-    _.deleteImages(imagesToDelete);
-})()
 
 //_.getBlackImages(pathConfig.downloadedImageFolder);

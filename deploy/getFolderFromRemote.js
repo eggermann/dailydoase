@@ -13,6 +13,13 @@
 // Compatible with Node.js >= v12
 // Using ssh2-sftp-client v8.0.0
 
+/*
+
+FOR download the images on uberspace to fresh-folder
+
+ */
+
+
 const configPath = process.env.HOME + '/Documents/config-data/eggman';
 const config = require(configPath);
 const destinationPath = 'Projekte/dailyDoase';
@@ -20,12 +27,15 @@ const fs = require('fs');
 const path = require('path');
 const pathConfig = require('./config.json');
 const serverPath = pathConfig.serverImgPath;
-console.log(pathConfig.localImgPath)
 const localPath = path.join(__dirname, pathConfig.localImgPath);
-var promiseWaterfall = require('promise.waterfall')
+const promiseWaterfall = require('promise.waterfall')
 const SFTPClient = require('./SftpClient');
+const _ = {
+    existLocalCnt: 0,
+    freshFileCnt: 0
+}
 
-(async () => {
+module.exports = async () => {
     //const parsedURL = new URL(process.env.SFTPTOGO_URL);
     const port = 22;
     //const {host, username, password} = parsedURL;
@@ -41,6 +51,7 @@ const SFTPClient = require('./SftpClient');
     //* List working directory files
 
     const localFolders = fs.readdirSync(localPath)
+    //  _.getServerFiles(serverPath);
     const serverFolders = await client.listFiles(serverPath);
 
     const pSF = serverFolders.filter(folder => {
@@ -53,23 +64,36 @@ const SFTPClient = require('./SftpClient');
 
         const name = path.basename(folder);
         const files = await client.listFiles(path.join(serverPath, name));
-        /// console.log('***jpg/josn ****', name, files.length);
+        console.log('***jpg/josn ****', name, files.length);
+        ///
+
+
         const pF = files.map(file => {
             return async () => {
                 const server = path.join(serverPath, name, file);
-                const local = path.join(pathConfig.downloadedImageFolder, name, file)
-                await client.downloadFile(server, local);
+                const local = path.join('./fresh-folders', name, file)
+                const dirname = './fresh-folders' + '/' + path.basename(path.dirname(local))
+
+                if (!fs.existsSync(dirname)) {
+                    fs.mkdirSync(dirname, {recursive: true});
+                }
+                if (fs.existsSync(local)) {
+                    _.existLocalCnt++
+                } else {
+                    _.freshFileCnt++;
+                    await client.downloadFile(server, local);
+                }
+
             }
         })
 
         return promiseWaterfall(pF)
             .catch(console.error)
-
-
     });
 
     await Promise.all(pSF);
-
+    console.log('existLocalCnt:', _.existLocalCnt,
+        'freshFileCnt:', _.freshFileCnt
+    )
     client.disconnect();
-
-})();
+};

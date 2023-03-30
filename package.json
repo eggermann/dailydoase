@@ -27,6 +27,7 @@
     "recursive-readdir": "^2.2.3",
     "request": "^2.88.2",
     "sftp-upload": "^1.0.4",
+    "temp": "^0.9.4",
     "temp-write": "^5.0.0",
     "throttle-debounce": "^5.0.0",
     "wikijs": "^6.4.1",

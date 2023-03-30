@@ -14,7 +14,7 @@ const shuffleArray = array => {
 }
 const nlp = require('compromise');
 const _ = {
-    filterEmptys:arr=>arr.filter(i => i && i.length > 1),
+    filterEmptys: arr => arr.filter(i => i && i.length > 1),
     getVerbs: (phrase) => {
 
 
@@ -28,8 +28,8 @@ const _ = {
         console.log(chalk.blue(verbs));
         console.log(chalk.red(adjectives));
         return {
-            verbs:_.filterEmptys(verbs),
-            adjectives:_.filterEmptys(adjectives)
+            verbs: _.filterEmptys(verbs),
+            adjectives: _.filterEmptys(adjectives)
         };
 
     },
@@ -39,16 +39,24 @@ const _ = {
         let allIn = [];
         let mains = ''
 
-        let prompt = streams.map(i => {
+        const meaningRotatingStreams = [];
+
+        for (let i = 0; i <= streams.length; i++) {
+            meaningRotatingStreams.push(streams[(i + _.shiftCnt) % streams.length])
+        }
+        _.shiftCnt++
+
+        let prompt = meaningRotatingStreams.map(i => {
             // await again(i, 0);
             const link = i.getNext();
             //  console.log(link)
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
+
             const verbs = _.getVerbs(next);
             //-->   i.getArticle(link.title);
-            allIn.push(verbs.verbs,verbs.adjectives)
+            allIn.push(verbs.verbs, verbs.adjectives)
             return _.filterEmptys([prev, title/* next*/]).join(' ');
         }).filter(i => i)
         //   .join(',');
@@ -68,28 +76,37 @@ const _ = {
         prompt = prompt.join(`,`);
         // shuffleArray(prompt);
 
-
         prompt += allIn.join(',');
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
-    async loop(streams, options) {
+    async loop(streams, options, oldPrompt) {
+        let prompt = '';
 
-        let prompt = options.promptFunktion
-            ? await options.promptFunktion(streams, options)
-            : await _.getPrompt(streams, options);
+        if (!oldPrompt) {
+            prompt = options.promptFunktion
+                ? await options.promptFunktion(streams, options)
+                : await _.getPrompt(streams, options);
 
-        prompt = nlp(prompt).text();
+            prompt = nlp(prompt).text();
+        } else {
+            prompt = oldPrompt
+        }
 
         console.log(chalk.yellow(prompt));
         // ----------->
-        await _.model.prompt(prompt, options);
+        const success = await _.model.prompt(prompt, options);
+
+        let keepPrompt = null;
+        if (!success) {
+            keepPrompt = prompt;
+        }
 
         setTimeout(async () => {
             console.log('******** again ******')
-            await _.loop(streams, options);
-        }, _.model.config.pollingTime);
+            await _.loop(streams, options, keepPrompt);
 
+        }, _.model.config.pollingTime);
     },
     async init(options) {
         _.model = getFromStableDiffusion.setVersion('webUi');//('huggin');
