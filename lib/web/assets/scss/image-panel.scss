@@ -13,21 +13,10 @@
       width:100vw;
       height:100vh;
       object-fit: contain;
-  //    min-width: 76vw;
-    //  height: auto;
-    }
-
-    .c-panel__content__info {
-      //transform: translateY(-6em);
-    }
-
-    img {
-      // @extend .c-panel__bg;
-      // min-width: 78vw;
     }
 
     img:not(.active) {
-      display: none;
+      display: none!important;
     }
 
 

@@ -20,7 +20,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, './lib/web/dist'),
-        publicPath: mode == 'development' ? '/' : '/daily-doasis'
+        publicPath: '/'    //->router    mode == 'development' ? '/' : '/daily-doasis'
     },
 
     plugins: [

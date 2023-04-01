@@ -97,3 +97,5 @@ module.exports = async () => {
     )
     client.disconnect();
 };
+
+module.expo_rts();
