@@ -54,13 +54,18 @@ ssh.connect({
 
     ssh.putFiles(fileNames).then(function () {
         console.log("The File thing is done")
+
+
+
+        const folders = ['lib'/*, 'images'*/].map(name => {
+            console.log('------> ',name)
+            uploadDir(__dirname + '/../' + name, destinationPath + '/' + name);
+        });
+
+
     }, function (error) {
         console.log("Something's wrong")
         console.log(error)
     })
 
-    const folders = ['lib'/*, 'images'*/].map(name => {
-        console.log('------> ',name)
-        uploadDir(__dirname + '/../' + name, destinationPath + '/' + name);
-    });
 })

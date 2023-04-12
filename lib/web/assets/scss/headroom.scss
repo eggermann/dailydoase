@@ -1,6 +1,6 @@
 .headroom {
   will-change: transform;
-  transition: transform 200ms linear;
+  transition: transform 250ms ease-in;
 }
 
 .headroom--pinned {
@@ -8,5 +8,5 @@
 }
 
 .headroom--unpinned {
-  transform: translateY(-100%);
+  transform: translateY(-120vh);
 }

@@ -12,14 +12,14 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Human_body', 'en'], ['Cake', 'en'], ['Fish', 'en'], ['Violence', 'en']],
-    randomImageOrientations: [/*'spot on ',*/ ' background '],
-    staticPrompt: ', 4k, UHD',
+    words: [['Mysticism', 'en'], ['Naturalness', 'en'], ['Medicine', 'en'], ['wiki/Wuxing_(Chinese_philosophy)', 'en']],
+    randomImageOrientations: ['spot on ', ' background '],
+   /// staticPrompt: ', 4k, UHD',
     stableDiffusionOptions: {
         width: 512,
         height: 512,
         steps: 10
     }
-}
+};
 
 require('./start')(compo);

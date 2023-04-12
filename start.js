@@ -65,9 +65,11 @@ const _ = {
         if (options.randomImageOrientations) {
             options.randomImageOrientations.forEach((i, index) => {
 
-                const pos = Math.floor(Math.random() * (prompt.length - 1));
+                const pos = Math.floor(Math.random() * (prompt.length + 1));
+                if (prompt[pos]) {
+                    prompt[pos] = i + ' ' + prompt[pos];
+                }
 
-                prompt[pos] = i + ' ' + prompt[pos];
             })
         }
 
@@ -96,7 +98,7 @@ const _ = {
         console.log(chalk.yellow(prompt));
         // ----------->
         const success = await _.model.prompt(prompt, options);
-
+        console.log('----------->sucess', success);
         let keepPrompt = null;
         if (!success) {
             keepPrompt = prompt;
