@@ -38,4 +38,4 @@ getFolderFromRemote().then(async () => {
     _.sync()
 })
 
-//_.sync()
+_.sync()

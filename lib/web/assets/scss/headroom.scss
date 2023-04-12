@@ -1,12 +1,34 @@
-.headroom {
-  will-change: transform;
-  transition: transform 250ms ease-in;
+header{
+  .headroom {
+    will-change: transform;
+    transition: transform 250ms ease-ine;
+  }
+
+  .headroom--pinned {
+    transform: translateY(0%);
+  }
+
+  .headroom--unpinned {
+    transform: translateY(-120vh);
+  }
+
 }
 
-.headroom--pinned {
-  transform: translateY(0%);
-}
+.c-aside{
 
-.headroom--unpinned {
-  transform: translateY(-120vh);
+  .headroom {
+    transition: opacity .25s ease-in;
+  }
+
+  .headroom--pinned {
+    transition: opacity .25s ease-in;
+
+    opacity:1;
+  }
+
+  .headroom--unpinned {
+    transition-delay: 4s;
+    opacity:0;
+  }
+
 }

@@ -1,20 +1,5 @@
-// sftp.js
-//
-// Use this sample code to connect to your SFTP To Go server and run some file operations using Node.js.
-//
-// 1) Paste this code into a new file (sftp.js)
-//
-// 2) Install dependencies
-//   npm install ssh2-sftp-client@^8.0.0
-//
-// 3) Run the script
-//   node sftp.js
-//
-// Compatible with Node.js >= v12
-// Using ssh2-sftp-client v8.0.0
 
 /*
-
 FOR download the images on uberspace to fresh-folder
 
  */
@@ -98,4 +83,4 @@ module.exports = async () => {
     client.disconnect();
 };
 
-module.expo_rts();
+module.exports();

@@ -1,10 +1,11 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const {EnvironmentPlugin} = require('webpack');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const mode = (process.env.APP_ENV && process.env.APP_ENV.indexOf('production') != -1) ? 'production' : 'development'
 
@@ -24,6 +25,11 @@ module.exports = {
     },
 
     plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: 'lib/web/assets/favicon_io', to: '' }
+            ],
+        }),
         new EnvironmentPlugin({
             NODE_ENV: mode
         }),
@@ -90,7 +96,7 @@ module.exports = {
             new CssMinimizerPlugin({
                 minimizerOptions: {
                     preset: [
-                        "default",
+                        'default',
                         {
                             discardComments: {removeAll: true},
                         },

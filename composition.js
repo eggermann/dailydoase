@@ -12,7 +12,7 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Mysticism', 'en'], ['Naturalness', 'en'], ['Medicine', 'en'], ['wiki/Wuxing_(Chinese_philosophy)', 'en']],
+    words: [['Mysticism', 'en'], ['Naturalness', 'en'], ['Medicine', 'en'], ['Wuxing_(Chinese_philosophy)', 'en']],
     randomImageOrientations: ['spot on ', ' background '],
    /// staticPrompt: ', 4k, UHD',
     stableDiffusionOptions: {
