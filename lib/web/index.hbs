@@ -18,35 +18,6 @@
 
 </header>
 
-<aside class="c-aside">
-    <nav class="c-aside__menu">
-        <h2>history</h2>
-        <ul>
-            {{#menu}}
-                <li>
-                    {{#current}}   <a aria-current="true" href="{{href}}">{{name}}</a>{{/current}}
-                    {{^current}}   <a href="{{href}}">{{name}}</a>{{/current}}
-
-                    {{^../isHome}}
-                        {{#current}}
-                            <div class="playpause">
-                                <input id="playpause" checked type="checkbox" value="None" id="playpause" name="check">
-                                <label for="playpause"></label>
-                            </div>
-                        {{/current}}
-                    {{/../isHome}}
-                    <small class="image-cntr"> {{fileCnt}} </small>
-                </li>
-            {{/menu}}
-        </ul>
-    </nav>
-
-    <i class="c-link-to-handmade-section">
-        <a href="" class="">
-            &nbsp; 𝒽𝒶𝓃𝒹𝓂𝒶𝒹𝑒 𝒸𝑜𝓁𝓁𝑒𝒸𝓉𝒾𝑜𝓃𝓈 &nbsp;&#127798;
-        </a>
-    </i>
-</aside>
 
 
 <!--{_{>back-to-top-button}}-->
@@ -93,6 +64,43 @@
     </small>
 
 </main>
+<aside class="c-aside">
+    <nav class="c-aside__menu">
+        <h2>history</h2>
+        <ul>
+            {{#menu}}
+                <li>
+                    {{#current}}   <a aria-current="true" href="{{href}}">{{name}}</a>{{/current}}
+                    {{^current}}   <a href="{{href}}">{{name}}</a>{{/current}}
+
+                    {{^../isHome}}
+                        {{#current}}
+                            <script>
+                                    {{#if../autoplay}} window.setTimeout(function () {
+                                        document.getElementById('playPause').click();
+                                    }, 2000); {{/if}}
+                            </script>
+
+                            <div class="playPause" onload="startAutoPlay()">
+                                <input id="playPause" checked type="checkbox">
+                                <label for="playPause"><span class="a-cessibility">toggle autoplay</span>
+                                </label>
+                            </div>
+
+                        {{/current}}
+                    {{/../isHome}}
+                    <small class="image-cntr"> {{fileCnt}} </small>
+                </li>
+            {{/menu}}
+        </ul>
+    </nav>
+
+    <i class="c-link-to-handmade-section">
+        <a href="" class="">
+            &nbsp; 𝒽𝒶𝓃𝒹𝓂𝒶𝒹𝑒 𝒸𝑜𝓁𝓁𝑒𝒸𝓉𝒾𝑜𝓃𝓈 &nbsp;&#127798;
+        </a>
+    </i>
+</aside>
 <footer>
     <p>&#9426;&nbsp;eggermann,
         <small>use it unt il down</small>
