@@ -11,14 +11,13 @@ const compo = {
     //promptFunktion:(streams, options)=>{},
     //circularLinksGetNext:()=>{
     //this is the cirular context },
-    folderVersionString: 'v2',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Mysticism', 'en'], ['Naturalness', 'en'], ['Medicine', 'en'], ['Wuxing_(Chinese_philosophy)', 'en']],
+    folderVersionString: 'midjRep',// v-{cnt}-{folderVersionString} bear beer
+    words: [['Drink', 'en'], ['Naturism', 'en'], ['Photograph', 'en'], ['Home_appliance', 'en']],
     randomImageOrientations: ['spot on ', ' background '],
-   /// staticPrompt: ', 4k, UHD',
+   // staticPrompt: ', realistic photo',
+    model:'midjourneyReplica',
     stableDiffusionOptions: {
-        width: 512,
-        height: 512,
-        steps: 10
+
     }
 };
 

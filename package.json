@@ -20,6 +20,7 @@
     "html-webpack-plugin": "^5.5.0",
     "image-js": "^0.35.3",
     "in-viewport": "^3.6.0",
+    "midjourney-client": "^1.0.8",
     "nlp": "0.0.0",
     "node-nlp-rn": "^3.5.2",
     "node-ssh": "^13.0.1",
