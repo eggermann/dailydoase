@@ -19,10 +19,8 @@
 </header>
 
 
-
 <!--{_{>back-to-top-button}}-->
 <main>
-
     <div class="c-panel">
         {{#unless images}}
             <img class="c-panel__bg"/>
@@ -36,7 +34,7 @@
                             <img height="{{json.stableDiffusionOptions.height}}"
                                  width="{{json.stableDiffusionOptions.width}}"
                                  id="image{{json.name}}" data-mtime="{{mtime}}"
-                                 loading="XXlazy" src="{{href}}"
+                                 loading="lazy" src="{{href}}"
                                  alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
                         </a>
                         <span class="c-panel__image_infos">
@@ -81,19 +79,19 @@
                                     }, 2000); {{/if}}
                             </script>
 
-                            <div class="menu-actions">
-                                <div class="playPause" onload="startAutoPlay()">
-                                    <input id="playPause" checked type="checkbox">
-                                    <label for="playPause"><span class="a-cessibility">toggle autoplay</span>
-                                    </label>
-                                </div>
-
-                                <div class="toggle-view">
-                                    <input id="toggleView" checked type="checkbox">
-                                    <label for="toggleView"><span class="a-cessibility">toggle view</span>
-                                    </label>
-                                </div>
+                        <div class="menu-actions">
+                            <div class="playPause" onload="startAutoPlay()">
+                                <input id="playPause" checked type="checkbox">
+                                <label for="playPause"><span class="a-cessibility">toggle autoplay</span>
+                                </label>
                             </div>
+
+                            <div class="toggle-view">
+                                <input id="toggleView" checked type="checkbox">
+                                <label for="toggleView"><span class="a-cessibility">toggle view</span>
+                                </label>
+                            </div>
+                        </div>
 
 
                         {{/current}}
