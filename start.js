@@ -105,13 +105,14 @@ const _ = {
         }
 
         setTimeout(async () => {
-            console.log('******** again ******')
+            console.log('******** again ******pollingTime after ',_.model.config.pollingTime)
             await _.loop(streams, options, keepPrompt);
 
         }, _.model.config.pollingTime);
     },
     async init(options) {
-        _.model = getFromStableDiffusion.setVersion('webUi');//('huggin');
+        const v=options.model?options.model:'webUi'
+        _.model = getFromStableDiffusion.setVersion(v);//'webUi');//('huggin');
 
         const wordStreams = options.words.map(async wordAndLang => {
             const wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
