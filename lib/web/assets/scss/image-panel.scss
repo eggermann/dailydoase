@@ -3,6 +3,11 @@
   display: flex;
   justify-content: center;
 
+  img {
+    flex-basis: 98%;
+
+  }
+
   &.playing {
     justify-content: inherit;
     //font-family: sans-serif;
@@ -18,7 +23,7 @@
       transition: opacity .2s ease-in-out;
 
       &.display-none {
-  display: none;
+        display: none;
       }
 
       // display: none;
