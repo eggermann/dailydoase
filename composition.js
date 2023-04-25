@@ -12,10 +12,11 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'midjRep',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Drink', 'en'], ['Naturism', 'en'], ['Photograph', 'en'], ['Home_appliance', 'en']],
-    randomImageOrientations: ['spot on ', ' background '],
+    words: [['Fighting', 'en'], ['Animal', 'en'], ['Testing', 'en']],
+   // randomImageOrientations: ['spot on ', ' background '],
    // staticPrompt: ', realistic photo',
     model:'midjourneyReplica',
+    info:'using midjourny, and stabledifusion prompts, 16 len, next-title',
     stableDiffusionOptions: {
 
     }

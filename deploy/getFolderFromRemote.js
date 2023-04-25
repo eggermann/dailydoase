@@ -39,6 +39,7 @@ module.exports = async () => {
     //  _.getServerFiles(serverPath);
     const serverFolders = await client.listFiles(serverPath);
 
+    console.log('serverFolders',serverFolders)
     const pSF = serverFolders.filter(folder => {
         const name = path.basename(folder)
         return !localFolders.includes(name);
@@ -49,6 +50,8 @@ module.exports = async () => {
 
         const name = path.basename(folder);
         const files = await client.listFiles(path.join(serverPath, name));
+
+
         console.log('***jpg/josn ****', name, files.length);
         ///
 
@@ -77,7 +80,8 @@ module.exports = async () => {
     });
 
     await Promise.all(pSF);
-    console.log('existLocalCnt:', _.existLocalCnt,
+    console.log(
+        'existLocalCnt:', _.existLocalCnt,
         'freshFileCnt:', _.freshFileCnt
     )
     client.disconnect();

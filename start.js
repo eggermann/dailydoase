@@ -57,7 +57,7 @@ const _ = {
             const verbs = _.getVerbs(next);
             //-->   i.getArticle(link.title);
             allIn.push(verbs.verbs, verbs.adjectives)
-            return _.filterEmptys([prev, title/* next*/]).join(' ');
+            return _.filterEmptys([next, title/* next*/]).join(' ');
         }).filter(i => i)
         //   .join(',');
         allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
