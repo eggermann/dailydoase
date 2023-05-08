@@ -1,4 +1,4 @@
-header{
+header {
   .headroom {
     will-change: transform;
     transition: transform 250ms ease-ine;
@@ -14,7 +14,11 @@ header{
 
 }
 
-.c-aside{
+.c-aside {
+
+  body.playing & {
+
+  }
 
   .headroom {
     transition: opacity .25s ease-in;
@@ -23,12 +27,12 @@ header{
   .headroom--pinned {
     transition: opacity .25s ease-in;
 
-    opacity:1;
+    opacity: 1;
   }
 
   .headroom--unpinned {
     transition-delay: 4s;
-    opacity:0;
+    opacity: 0;
   }
 
 }

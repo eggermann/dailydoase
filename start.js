@@ -63,14 +63,24 @@ const _ = {
         allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
 
         if (options.randomImageOrientations) {
-            options.randomImageOrientations.forEach((i, index) => {
+            prompt.forEach((i, index) => {
+
+                const pos = Math.floor(Math.random() * (prompt.length + 1) *prompt.length );
+                if (prompt[pos]) {
+                    const randomPos=Math.floor(Math.random()*options.randomImageOrientations.length);
+                    prompt[pos] = options.randomImageOrientations[randomPos]+ ' ' + prompt[pos];
+                }
+
+            })
+
+            /* options.randomImageOrientations.forEach((i, index) => {
 
                 const pos = Math.floor(Math.random() * (prompt.length + 1));
                 if (prompt[pos]) {
                     prompt[pos] = i + ' ' + prompt[pos];
                 }
 
-            })
+            })*/
         }
 
         //shuffleArray(prompt);

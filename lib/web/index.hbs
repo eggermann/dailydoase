@@ -15,9 +15,12 @@
         <span data-aos-anchor-placement="top-center" data-aos-delay="300" data-aos="fade-up">Doase</span>
         <span data-aos-anchor-placement="top-center" data-aos-delay="500" data-aos="fade-down">🌴</span>
     </h1>
-
+    <h2>
+        {{#infoJson.words}}
+            <span>{{this.[0]}}</span>
+        {{/infoJson.words}}
+    </h2>
 </header>
-
 
 
 <!--{_{>back-to-top-button}}-->
@@ -64,42 +67,49 @@
 
 
 </main>
+
 <aside class="c-aside">
+    <!--h2>history</h2-->
+
     <nav class="c-aside__menu">
-        <h2>history</h2>
         <ul>
             {{#menu}}
-                <li>
-                    {{#current}}   <a aria-current="true" href="{{href}}">{{name}}</a>{{/current}}
-                    {{^current}}   <a href="{{href}}">{{name}}</a>{{/current}}
 
-                    {{^../isHome}}
-                        {{#current}}
-                            <script>
-                                    {{#if../autoplay}} window.setTimeout(function () {
-                                        document.getElementById('playPause').click();
-                                    }, 2000); {{/if}}
-                            </script>
+                {{#current}}
+                <li class="current"> <a aria-current="true" href="{{href}}">{{name}}</a>
+                {{/current}}
 
-                            <div class="menu-actions">
-                                <div class="playPause" onload="startAutoPlay()">
-                                    <input id="playPause" checked type="checkbox">
-                                    <label for="playPause"><span class="a-cessibility">toggle autoplay</span>
-                                    </label>
-                                </div>
+                {{^current}}
+                <li> <a href="{{href}}">{{name}}</a>
+                {{/current}}
 
-                                <div class="toggle-view">
-                                    <input id="toggleView" checked type="checkbox">
-                                    <label for="toggleView"><span class="a-cessibility">toggle view</span>
-                                    </label>
-                                </div>
+                {{^../isHome}}
+                    {{#current}}
+                        <script>
+                                {{#if../autoplay}} window.setTimeout(function () {
+                                    document.getElementById('playPause').click();
+                                }, 2000); {{/if}}
+                        </script>
+
+                        <div class="menu-actions">
+                            <div class="playPause" onload="startAutoPlay()">
+                                <input id="playPause" checked type="checkbox">
+                                <label for="playPause"><span class="a-cessibility">toggle autoplay</span>
+                                </label>
                             </div>
 
+                            <div class="toggle-view">
+                                <input id="toggleView" checked type="checkbox">
+                                <label for="toggleView"><span class="a-cessibility">toggle view</span>
+                                </label>
+                            </div>
+                        </div>
 
-                        {{/current}}
-                    {{/../isHome}}
-                    <small class="image-cntr"> {{fileCnt}} </small>
-                </li>
+
+                    {{/current}}
+                {{/../isHome}}
+                <small class="image-cntr"> {{fileCnt}} </small>
+            </li>
             {{/menu}}
         </ul>
     </nav>

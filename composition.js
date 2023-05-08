@@ -6,19 +6,38 @@ https://stable-diffusion-art.com/prompt-guide/
 */
 
 //----> hosting https://www.ni-sp.com/how-to-run-stable-diffusion-on-your-own-cloud-gpu-server/
+//https://gist.github.com/thesephist/376afed2cbfce35d4b37d985abe6d0a1
+
+const st=require('./lib/get-from-stable-diffusion/options.oak.json')
+
+const allStatics=[];
+for(let i in st){
+    st[i].forEach(line=>{
+        console.log(line)
+        if(line.indexOf('XX')!=-1){
+            return;
+        }
+        const arrs = line.split(',');
+        allStatics.push(arrs)
+    })
+
+}
+
+
+
 
 const compo = {
     //promptFunktion:(streams, options)=>{},
     //circularLinksGetNext:()=>{
     //this is the cirular context },
-    folderVersionString: 'midjRep',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Fighting', 'en'], ['Animal', 'en'], ['Testing', 'en']],
-   // randomImageOrientations: ['spot on ', ' background '],
-   // staticPrompt: ', realistic photo',
-    model:'midjourneyReplica',
-    info:'using midjourny, and stabledifusion prompts, 16 len, next-title',
+    folderVersionString: 'v-',// v-{cnt}-{folderVersionString} bear beer
+    words: [['Infant', 'en'], ['Chocolate', 'en'], ['Unemployment', 'en'], ['Art', 'en']],
+    randomImageOrientations: allStatics,//,['spo-l,m t on ', ' background '],
+    //staticPrompt: ', Romanesque',
+    model: 'huggin',
+    info: 'after ,huggin.. ',
     stableDiffusionOptions: {
-
+        steps:50
     }
 };
 

@@ -59,7 +59,7 @@ body[layout="masonary"] {
 
     img {
       flex-basis: 80%;
-      max-width: min-content;
+    //  max-width: min-content;
     }
 
     &__images__desc {
@@ -160,8 +160,5 @@ body[layout="list"] {
         }
       }
     }
-
-
   }
-
 }
