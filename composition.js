@@ -31,11 +31,11 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v-',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Infant', 'en'], ['Chocolate', 'en'], ['Unemployment', 'en'], ['Art', 'en']],
+    words: [['Humanity', 'en'], ['Sugar', 'en'], ['Property', 'en'], ['Light', 'en']],
     randomImageOrientations: allStatics,//,['spo-l,m t on ', ' background '],
     //staticPrompt: ', Romanesque',
     model: 'huggin',
-    info: 'after ,huggin.. ',
+    info: 'huggin, stable 2.1 no word magic ',
     stableDiffusionOptions: {
         steps:50
     }
