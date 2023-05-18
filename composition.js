@@ -31,8 +31,8 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v-',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Humanity', 'en'], ['Sugar', 'en'], ['Property', 'en'], ['Light', 'en']],
-    randomImageOrientations: allStatics,//,['spo-l,m t on ', ' background '],
+    words: [['Humanity', 'en'], ['Sugar', 'en'], ['Violence', 'en'], ['Robotics', 'en']],
+    randomImageOrientations:[' foreground ', ' background '],// allStatics,//,['spo-l,m t on ', ' background '],
     //staticPrompt: ', Romanesque',
     model: 'huggin',
     info: 'huggin, stable 2.1 no word magic ',
