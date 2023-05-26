@@ -13,3 +13,4 @@ daily-doasis  --> doase
 
 
    #-->      https://www.mediaevent.de/tutorial/css-position-absolute-in-relative.html
+--https://docs.pinata.cloud/rate-limits for minting

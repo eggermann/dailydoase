@@ -56,12 +56,17 @@ const _ = {
 
             const verbs = _.getVerbs(next);
             //-->   i.getArticle(link.title);
-            allIn.push(verbs.verbs, verbs.adjectives)
-            return _.filterEmptys([next, title/* next*/]).join(' ');
+            let allIn2= [];
+
+            allIn2=   allIn2.concat(verbs.adjectives,verbs.verbs,title)
+         //   console.log('allIn2:   ---',allIn2)
+            return _.filterEmptys(allIn2).join(' ');
         }).filter(i => i)
         //   .join(',');
-        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
+//        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
 
+  //      console.log('---->',prompt)
+      //  process.exit();
         if (options.randomImageOrientations) {
             prompt.forEach((i, index) => {
 
@@ -86,9 +91,11 @@ const _ = {
         //shuffleArray(prompt);
         //   prompt = prompt.join(`[${mains}] `);
         prompt = prompt.join(`,`);
+
+
         // shuffleArray(prompt);
 
-        prompt += allIn.join(',');
+       // prompt += allIn.join(',');
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
@@ -105,7 +112,7 @@ const _ = {
             prompt = oldPrompt
         }
 
-        console.log(chalk.yellow(prompt));
+        console.log(prompt,chalk.yellow(prompt));
         // ----------->
         const success = await _.model.prompt(prompt, options);
         console.log('----------->sucess', success);
@@ -127,6 +134,7 @@ const _ = {
         const wordStreams = options.words.map(async wordAndLang => {
             const wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
 
+            //readin nextfunction
             if (options.circularLinksGetNext) {
                 wordStream.circularLinks.getNext =
                     options.circularLinksGetNext.bind(wordStream.circularLinks);

@@ -60,10 +60,9 @@ body {
 }
 
 header {
-
-  position: fixed;
+  z-index: 1;
   margin-bottom: $element-spce-4;
-  position: relative;
+  position: absolute;
   left: 0;
 }
 
@@ -71,6 +70,7 @@ aside {
 
   .c-aside__menu {
     @include spawnMaxColumn();
+    z-index: 22;
     position: fixed;
     filter: hue-rotate(-130deg);
     width: max-content;
@@ -147,7 +147,7 @@ h1 {
   display: inline-block;
 }
 
-h2{
+h2 {
   color: yellow;
   font-family: sans-serif;
   font-style: italic;

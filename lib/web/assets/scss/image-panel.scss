@@ -1,23 +1,31 @@
 
+.c-panel__image {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
 
 body[layout="masonary"] {
   .c-panel__images{
-    margin: 0 auto;
+    margin: 3em auto;
   }
 
   .c-panel__image {
 
+    margin-bottom: 64px;
     width: 200px;
     height: 200px;
 
+
     @media screen and (min-width: $bp-m) {
 
-      width: 14vw;
-      height: 14vw;
+      width: 24vw;
+      height: 24vw;
 
     }
 
     img {
+
       width: 100%;
       height: auto;
     }
