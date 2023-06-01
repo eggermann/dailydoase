@@ -13,7 +13,7 @@ const st = require('./lib/get-from-stable-diffusion/options.oak.json')
 const allStatics = [];
 for (let i in st) {
     st[i].forEach(line => {
-        console.log(line)
+       // console.log(line)
         if (line.indexOf('XX') != -1) {
             return;
         }
@@ -29,15 +29,17 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
     folderVersionString: 'v-',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Daydream', 'en'], ['Food', 'en'], ['Commercial', 'en']],
-    randomImageOrientations: [' background '],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: ', highly detailed',
+    //words: [['Daydream', 'en'], ['Food', 'en'], ['Commercial', 'en']],
+    words: [['Style', 'en'],[':NewsStream', {startWord:''}],['Adolescence', 'en']],
+ //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
+  //  staticPrompt: ', realistic image',
+    randomImageOrientations: [' background',' foreground'],
     model: 'webUi',
-    info: 'webUi, stable mi toli  oli',
+    info: 'webUi, stable mit news',
     stableDiffusionOptions: {
-        steps: 50,//only webui
-       // width: 1280,
-       // height: 720,
+        steps: 12,//only webui
+        // width: 1280,
+        // height: 720,
         /* self_attention:'yes',
        upscale:'yes'*/
     }

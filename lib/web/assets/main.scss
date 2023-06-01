@@ -69,6 +69,21 @@ header {
 aside {
 
   .c-aside__menu {
+
+    &.opened-menu {
+      height: min-content;
+      opacity: .4;
+
+      button {
+        position: relative;
+        //   transform: scaleX(1.5) rotate(53deg);
+      }
+
+      ul {
+        display: none;
+      }
+    }
+
     @include spawnMaxColumn();
     z-index: 22;
     position: fixed;
@@ -82,6 +97,18 @@ aside {
     &:not(:hover) {
       mix-blend-mode: plus-lighter;
     }
+
+    &__button {
+
+
+      border: 0;
+      background: transparent;
+      color: yellow;
+      position: absolute;
+      right: 0;
+      padding-left: .6em;
+    }
+
 
     top: 0;
     bottom: 0;
@@ -133,7 +160,7 @@ aside {
 }
 
 main {
-  @include spawnMaxColumn();
+  //@include spawnMaxColumn();
 }
 
 
@@ -234,4 +261,12 @@ footer {
       }
     }
   }
+}
+
+main {
+  &[style="display: none"] {
+    display: inherit !important;
+  }
+
+  //@include spawnMaxColumn();
 }

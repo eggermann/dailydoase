@@ -1,5 +1,6 @@
 const getFromStableDiffusion = require('./lib/get-from-stable-diffusion');
-const WordStream = require("./lib/WordStream");
+const WordStream = require("./lib/word-engine/WordStream");
+const NewsStream = require("./lib/word-engine/NewsStream");
 const server = require("./lib/server");
 
 const chalk = require('chalk');
@@ -13,6 +14,7 @@ const shuffleArray = array => {
     }
 }
 const nlp = require('compromise');
+const {fullFillPrompt: fullFillPrompt} = require("./lib/get-from-stable-diffusion");
 const _ = {
     filterEmptys: arr => arr.filter(i => i && i.length > 1),
     getVerbs: (phrase) => {
@@ -41,39 +43,42 @@ const _ = {
 
         const meaningRotatingStreams = [];
 
-        for (let i = 0; i <= streams.length; i++) {
+        for (let i = 0; i < streams.length; i++) {
             meaningRotatingStreams.push(streams[(i + _.shiftCnt) % streams.length])
         }
         _.shiftCnt++
 
-        let prompt = meaningRotatingStreams.map(i => {
-            // await again(i, 0);
-            const link = i.getNext();
-            //  console.log(link)
+        let prompt = meaningRotatingStreams.map(async (i,index) => {
+            console.log('STREAM-', index);
+            const link = await i.getNext();
+
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
 
             const verbs = _.getVerbs(next);
             //-->   i.getArticle(link.title);
-            let allIn2= [];
-
-            allIn2=   allIn2.concat(verbs.adjectives,verbs.verbs,title)
-         //   console.log('allIn2:   ---',allIn2)
+            let allIn2 = [];
+         //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+            allIn2 = allIn2.concat(title)
+            //   console.log('allIn2:   ---',allIn2)
             return _.filterEmptys(allIn2).join(' ');
-        }).filter(i => i)
+        })
+
+        prompt = await Promise.all(prompt)
+        ///NOT FOE ALLL   TODO  console.log(prompt)
         //   .join(',');
 //        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
 
-  //      console.log('---->',prompt)
-      //  process.exit();
+        //      console.log('---->',prompt)
+        //  process.exit();
         if (options.randomImageOrientations) {
             prompt.forEach((i, index) => {
 
-                const pos = Math.floor(Math.random() * (prompt.length + 1) *prompt.length );
+                const pos = Math.floor(Math.random() * (prompt.length + 1) * prompt.length);
                 if (prompt[pos]) {
-                    const randomPos=Math.floor(Math.random()*options.randomImageOrientations.length);
-                    prompt[pos] = options.randomImageOrientations[randomPos]+ ' ' + prompt[pos];
+                    const randomPos = Math.floor(Math.random() * options.randomImageOrientations.length);
+                    prompt[pos] = options.randomImageOrientations[randomPos] + ' ' + prompt[pos];
                 }
 
             })
@@ -95,7 +100,7 @@ const _ = {
 
         // shuffleArray(prompt);
 
-       // prompt += allIn.join(',');
+        // prompt += allIn.join(',');
         //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
@@ -108,31 +113,44 @@ const _ = {
                 : await _.getPrompt(streams, options);
 
             prompt = nlp(prompt).text();
+            console.log('org-prompt: ', chalk.red(prompt));
+
+            //prompt = await fullFillPrompt(prompt);
         } else {
             prompt = oldPrompt
         }
 
-        console.log(prompt,chalk.yellow(prompt));
+        console.log('Prompt: ', chalk.yellow(prompt));
         // ----------->
+        let keepPrompt = null;
         const success = await _.model.prompt(prompt, options);
         console.log('----------->sucess', success);
-        let keepPrompt = null;
+
         if (!success) {
             keepPrompt = prompt;
         }
 
         setTimeout(async () => {
-            console.log('******** again ******pollingTime after ',_.model.config.pollingTime)
+            console.log('******** again ******pollingTime after ', _.model.config.pollingTime)
             await _.loop(streams, options, keepPrompt);
 
         }, _.model.config.pollingTime);
     },
     async init(options) {
-        const v=options.model?options.model:'webUi'
+        const v = options.model ? options.model : 'webUi'
         _.model = getFromStableDiffusion.setVersion(v);//'webUi');//('huggin');
 
         const wordStreams = options.words.map(async wordAndLang => {
-            const wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
+            let wordStream = null;
+
+            if (wordAndLang[0][0] == ':') {
+                const options = wordAndLang[1];
+
+                wordStream = new NewsStream(options);
+            } else {
+
+                wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
+            }
 
             //readin nextfunction
             if (options.circularLinksGetNext) {
