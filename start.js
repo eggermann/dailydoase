@@ -16,6 +16,7 @@ const shuffleArray = array => {
 const nlp = require('compromise');
 const {fullFillPrompt: fullFillPrompt} = require("./lib/get-from-stable-diffusion");
 const _ = {
+    rnd_cnt: 0,
     filterEmptys: arr => arr.filter(i => i && i.length > 1),
     getVerbs: (phrase) => {
 
@@ -48,18 +49,26 @@ const _ = {
         }
         _.shiftCnt++
 
-        let prompt = meaningRotatingStreams.map(async (i,index) => {
+        let prompt = meaningRotatingStreams.map(async (i, index) => {
             console.log('STREAM-', index);
             const link = await i.getNext();
 
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
+            console.log('++++++next ', next, '+' + next + '+', new Boolean(next), typeof (next))
 
-            const verbs = _.getVerbs(next);
+
+            let verbs = '';
+            if (next != '') {
+                console.log('++++++verbs ')
+
+             // ??todo  crash  verbs = _.getVerbs(next);
+            }
+
             //-->   i.getArticle(link.title);
             let allIn2 = [];
-         //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+            //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
             allIn2 = allIn2.concat(title)
             //   console.log('allIn2:   ---',allIn2)
             return _.filterEmptys(allIn2).join(' ');
@@ -123,8 +132,8 @@ const _ = {
         console.log('Prompt: ', chalk.yellow(prompt));
         // ----------->
         let keepPrompt = null;
-        const success = await _.model.prompt(prompt, options);
-        console.log('----------->sucess', success);
+        const success =await _.model.prompt(prompt, options);// true;//
+        console.log(_.rnd_cnt++, '----------->sucess', success);
 
         if (!success) {
             keepPrompt = prompt;

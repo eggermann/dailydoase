@@ -30,19 +30,21 @@ const compo = {
     //this is the cirular context },
     folderVersionString: 'v-',// v-{cnt}-{folderVersionString} bear beer
     //words: [['Daydream', 'en'], ['Food', 'en'], ['Commercial', 'en']],
-    words: [['Style', 'en'],[':NewsStream', {startWord:''}],['Adolescence', 'en']],
+    words: [['List_of_domesticated_animals', 'en'] ,[':NewsStream', {startWord:''}],['Art', 'en']],
  //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-  //  staticPrompt: ', realistic image',
-    randomImageOrientations: [' background',' foreground'],
+  //  staticPrompt: ', realistic image',['Style', 'en'],
+ randomImageOrientations: [' background',' in the foreground '],
     model: 'webUi',
     info: 'webUi, stable mit news',
     stableDiffusionOptions: {
-        steps: 12,//only webui
+       // "sampler_name": "Heun",
+        "restore_faces":true,
+        steps: 15,//only webui
         // width: 1280,
         // height: 720,
         /* self_attention:'yes',
        upscale:'yes'*/
     }
 };
-
+process.on('warning', e => console.warn(e.stack));
 require('./start')(compo);
