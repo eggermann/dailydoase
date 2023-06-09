@@ -48,33 +48,41 @@ const _ = {
             meaningRotatingStreams.push(streams[(i + _.shiftCnt) % streams.length])
         }
         _.shiftCnt++
-
-        let prompt = meaningRotatingStreams.map(async (i, index) => {
+        console.log('-------> start word mixing <----------')
+        let prompts = meaningRotatingStreams.map(async (i, index) => {
             console.log('STREAM-', index);
+
             const link = await i.getNext();
 
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-            console.log('++++++next ', next, '+' + next + '+', new Boolean(next), typeof (next))
+            console.log('++++++next : ', next)
+            console.log('++++++title : ', title)
+            console.log('++++++prev : ', prev);
 
 
             let verbs = '';
-            if (next != '') {
-                console.log('++++++verbs ')
 
-             // ??todo  crash  verbs = _.getVerbs(next);
+            try {
+                /* if ( true && next) {
+                  console.log('++++++verbs ')
+                  // ??todo  crash  verbs = _.getVerbs(next);
+              }*/
+                verbs = _.getVerbs(next);
+            } catch (err) {
             }
 
             //-->   i.getArticle(link.title);
             let allIn2 = [];
             //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
             allIn2 = allIn2.concat(title)
-            //   console.log('allIn2:   ---',allIn2)
+// allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+            console.log('allIn2:   ---', allIn2)
             return _.filterEmptys(allIn2).join(' ');
         })
 
-        prompt = await Promise.all(prompt)
+        prompts = await Promise.all(prompts);
         ///NOT FOE ALLL   TODO  console.log(prompt)
         //   .join(',');
 //        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
@@ -82,16 +90,14 @@ const _ = {
         //      console.log('---->',prompt)
         //  process.exit();
         if (options.randomImageOrientations) {
-            prompt.forEach((i, index) => {
+            prompts.forEach((i, index) => {
 
-                const pos = Math.floor(Math.random() * (prompt.length + 1) * prompt.length);
-                if (prompt[pos]) {
+                const pos = Math.floor(Math.random() * (prompts.length + 1) * prompts.length);
+                if (prompts[pos]) {
                     const randomPos = Math.floor(Math.random() * options.randomImageOrientations.length);
-                    prompt[pos] = options.randomImageOrientations[randomPos] + ' ' + prompt[pos];
+                    prompts[pos] = options.randomImageOrientations[randomPos] + ' ' + prompts[pos];
                 }
-
             })
-
             /* options.randomImageOrientations.forEach((i, index) => {
 
                 const pos = Math.floor(Math.random() * (prompt.length + 1));
@@ -104,7 +110,7 @@ const _ = {
 
         //shuffleArray(prompt);
         //   prompt = prompt.join(`[${mains}] `);
-        prompt = prompt.join(`,`);
+        const prompt = prompts.join(`,`);
 
 
         // shuffleArray(prompt);
@@ -132,7 +138,7 @@ const _ = {
         console.log('Prompt: ', chalk.yellow(prompt));
         // ----------->
         let keepPrompt = null;
-        const success =await _.model.prompt(prompt, options);// true;//
+        const success = await _.model.prompt(prompt, options);// v
         console.log(_.rnd_cnt++, '----------->sucess', success);
 
         if (!success) {

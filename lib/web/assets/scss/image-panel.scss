@@ -1,7 +1,7 @@
-
-$delta:5em;
+$delta: 5em;
 .c-panel {
-  padding-top:$delta;
+  padding-top: $delta;
+  scroll-snap-type: y;
 
   &__image {
     display: flex;
@@ -10,7 +10,7 @@ $delta:5em;
 
   }
 
-  &__content{
+  &__content {
     position: sticky;
   }
 }
@@ -38,7 +38,7 @@ body[layout="masonary"] {
     @media screen and (min-width: $bp-l) {
 
       width: 20vw;
-      height:  20vw;
+      height: 20vw;
 
     }
 
@@ -89,8 +89,8 @@ body[layout="masonary"] {
       }
     }
 
-    img {
-      //  max-width: min-content;
+    img:not([src]) {
+      display: none;
     }
 
     &__images__desc {

@@ -24,6 +24,7 @@
     "masonry-layout": "^4.2.2",
     "midjourney": "^2.5.52",
     "midjourney-client": "^1.0.8",
+    "midjourney-discord-api": "^1.0.4",
     "newsapi": "^2.4.1",
     "nlp": "0.0.0",
     "node-nlp-rn": "^3.5.2",
