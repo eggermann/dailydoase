@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "start.js",
+  "type": "module",
   "dependencies": {
     "animated-scroll-to": "^2.3.0",
     "aos": "^2.3.4",
@@ -25,6 +26,7 @@
     "midjourney": "^2.5.52",
     "midjourney-client": "^1.0.8",
     "midjourney-discord-api": "^1.0.4",
+    "nativebird": "^1.2.11",
     "newsapi": "^2.4.1",
     "nlp": "0.0.0",
     "node-nlp-rn": "^3.5.2",
@@ -36,6 +38,7 @@
     "temp": "^0.9.4",
     "temp-write": "^5.0.0",
     "throttle-debounce": "^5.0.0",
+    "websocket": "^1.0.34",
     "wikijs": "^6.4.1",
     "wtf_wikipedia": "^10.1.3"
   },

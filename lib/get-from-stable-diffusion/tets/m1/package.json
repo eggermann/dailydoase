@@ -2,7 +2,6 @@
   "name": "m1",
   "version": "1.0.0",
   "type": "module",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "midjourney-discord-api": "^1.0.4",
+    "nativebird": "^1.2.11",
+    "progress-logger-js": "^0.5.1"
+  }
 }
