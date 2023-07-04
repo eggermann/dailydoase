@@ -1,9 +1,11 @@
 import pkg from './modulePolyfill.js';
-const {require, __dirname} = pkg;
+
+const {require} = pkg;
 
 const chalk = require('chalk');
 
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
+
 const WordStream = require("./lib/word-engine/WordStream.cjs");
 const NewsStream = require("./lib/word-engine/NewsStream.cjs");
 const server = require("./lib/server/index.cjs");
@@ -141,10 +143,7 @@ const _ = {
         console.log('Prompt: ', chalk.yellow(prompt));
 // ----------->
         let keepPrompt = null;
-
-        console.log(_.model)
-
-        const success = await _.model.prompt(prompt, options);// v
+        const success = await _.model.prompt('prompt');// v
         console.log(_.rnd_cnt++, '----------->sucess', success);
 
         if (!success) {
@@ -159,7 +158,8 @@ const _ = {
     },
     async init(options) {
         const v = options.model ? options.model : 'webUi'
-        _.model = (await getFromStableDiffusion.setVersion(v)).default;//'webUi');//('huggin');
+        _.model = await getFromStableDiffusion.setVersion(v);// ();//'webUi');//('huggin');
+
 
         const wordStreams = options.words.map(async wordAndLang => {
             let wordStream = null;

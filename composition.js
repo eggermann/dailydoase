@@ -7,6 +7,9 @@ https://stable-diffusion-art.com/prompt-guide/
 
 //----> hosting https://www.ni-sp.com/how-to-run-stable-diffusion-on-your-own-cloud-gpu-server/
 //https://gist.github.com/thesephist/376afed2cbfce35d4b37d985abe6d0a1
+
+
+
 import pkg  from './modulePolyfill.js';
 const {require,__dirname} = pkg;
 
@@ -30,7 +33,7 @@ const compo = {
     //promptFunktion:(streams, options)=>{},
     //circularLinksGetNext:()=>{
     //this is the cirular context },
-    folderVersionString: 'v-SG161222-frRedlich',// v-{cnt}-{folderVersionString} bear beer
+    folderVersionString: 'v-frRedlich',// v-{cnt}-{folderVersionString} bear beer
     words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
     //words: [[':NewsStream', {startWord: ''}]],
@@ -38,7 +41,7 @@ const compo = {
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
     staticPrompt: '',//['Style', 'en'],
     randomImageOrientations: [' background', ' in the foreground '],
-    model: 'midjourney',
+    model: 'webUi',//'midjourney',
     info: 'midjourney, fr stable mit news,SG161222/Realistic_Vision_V1.4',
     stableDiffusionOptions: {
         // "sampler_name": "Heun",
