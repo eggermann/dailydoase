@@ -8,6 +8,8 @@ import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
 
 const WordStream = require("./lib/word-engine/WordStream.cjs");
 const NewsStream = require("./lib/word-engine/NewsStream.cjs");
+
+const YPStream = require("./lib/word-engine/ypCommentsStream.cjs");
 const server = require("./lib/server/index.cjs");
 
 const shuffleArray = array => {
@@ -57,37 +59,53 @@ const _ = {
         let prompts = meaningRotatingStreams.map(async (i, index) => {
             console.log('STREAM-', index);
 
+            //todo create prompt for "word in stream eg newsstream
+
             const link = await i.getNext();
 
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-            console.log('++++++next : ', next)
-            console.log('++++++title : ', title)
-            console.log('++++++prev : ', prev);
+            console.log('++++++next : ', next,'++++++title : ', title,'++++++prev : ', prev)
+            console.log()
 
+           if(i.isYP){
+               let verbs = '';
 
-            let verbs = '';
+               try {
+                   verbs = _.getVerbs(next);
+               } catch (err) {
+               }
 
-            try {
-                if (true && next) {
-                    console.log('++++++verbs ')
-                    // ??todo  crash  verbs = _.getVerbs(next);
-                }
-                verbs = _.getVerbs(next);
-            } catch (err) {
-            }
-
-            //-->   i.getArticle(link.title);
-            let allIn2 = [];
-            //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-            allIn2 = allIn2.concat(title, prev)
+               //-->   i.getArticle(link.title);
+               let allIn2 = [];
+               //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+               allIn2 = allIn2.concat(title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-            console.log('allIn2:   ---', allIn2)
-            return _.filterEmptys(allIn2).join(' ');
+
+               return _.filterEmptys(allIn2).join(' ');
+           } else{
+               let verbs = '';
+
+               try {
+                   verbs = _.getVerbs(next);
+               } catch (err) {
+               }
+
+               //-->   i.getArticle(link.title);
+               let allIn2 = [];
+               //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+               allIn2 = allIn2.concat(title,prev)
+// allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+
+               return _.filterEmptys(allIn2).join(' ');
+           }
+
+
         })
 
         prompts = await Promise.all(prompts);
+
         ///NOT FOE ALLL   TODO  console.log(prompt)
         //   .join(',');
 //        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
@@ -143,7 +161,7 @@ const _ = {
         console.log('Prompt: ', chalk.yellow(prompt));
 // ----------->
         let keepPrompt = null;
-        const success = await _.model.prompt('prompt');// v
+        const success = await _.model.prompt(prompt);// v
         console.log(_.rnd_cnt++, '----------->sucess', success);
 
         if (!success) {
@@ -162,26 +180,32 @@ const _ = {
 
 
         const wordStreams = options.words.map(async wordAndLang => {
-            let wordStream = null;
+                    let wordStream = null;
 
-            if (wordAndLang[0][0] == ':') {
-                const options = wordAndLang[1];
+                    if (wordAndLang[0][0] == ':') {
+                        const options = wordAndLang[1];
 
-                wordStream = new NewsStream(options);
-            } else {
-
-                wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
-            }
+                        if (wordAndLang[0] == ':YP') {
+                            wordStream = new YPStream(options);
+                        } else {//news}
+                            wordStream = new NewsStream(options);
+                        }
+                    } else {
+//default wiki
+                        wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
+                    }
 
 //readin nextfunction
-            if (options.circularLinksGetNext) {
-                wordStream.circularLinks.getNext =
-                    options.circularLinksGetNext.bind(wordStream.circularLinks);
-            }
+                    if (options.circularLinksGetNext) {
+                        wordStream.circularLinks.getNext =
+                            options.circularLinksGetNext.bind(wordStream.circularLinks);
+                    }
 
-            await wordStream.start();
-            return wordStream;
-        });
+                    await wordStream.start();
+                    return wordStream;
+                }
+            )
+        ;
 
         return Promise.all(wordStreams).then(async (streams) => {
             return await _.loop(streams, options);

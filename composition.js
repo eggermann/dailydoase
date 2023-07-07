@@ -33,22 +33,29 @@ const compo = {
     //promptFunktion:(streams, options)=>{},
     //circularLinksGetNext:()=>{
     //this is the cirular context },
+
     folderVersionString: 'v-frRedlich',// v-{cnt}-{folderVersionString} bear beer
-    words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
+  //  words: [[':YP', 'en']],
+     words: [[':YP', 'en']],
+//    words: [[':YP', 'en']],,['Animal', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
+
+  //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
     //words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
     staticPrompt: '',//['Style', 'en'],
-    randomImageOrientations: [' background', ' in the foreground '],
+   // randomImageOrientations: [' background', ' in the foreground '],
+    //randomImageOrientations: [' spot on ', ' together with ', ' act as '],
+
     model: 'webUi',//'midjourney',
     info: 'midjourney, fr stable mit news,SG161222/Realistic_Vision_V1.4',
     stableDiffusionOptions: {
-        // "sampler_name": "Heun",
+       //  "sampler_name": "Heun",
         "restore_faces": true,
         steps: 14,//only webui
-        // width: 1280,
-        // height: 720,
+         width: 512,
+     height: 512,
         /* self_attention:'yes',
        upscale:'yes'*/
     }
