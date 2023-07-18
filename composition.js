@@ -9,9 +9,9 @@ https://stable-diffusion-art.com/prompt-guide/
 //https://gist.github.com/thesephist/376afed2cbfce35d4b37d985abe6d0a1
 
 
+import pkg from './modulePolyfill.js';
 
-import pkg  from './modulePolyfill.js';
-const {require,__dirname} = pkg;
+const {require, __dirname} = pkg;
 
 const st = require('./lib/get-from-stable-diffusion/options.oak.json')
 
@@ -34,31 +34,32 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
 
-    folderVersionString: 'v-frRedlich',// v-{cnt}-{folderVersionString} bear beer
-  //  words: [[':YP', 'en']],
-     words: [[':YP', 'en']],
-//    words: [[':YP', 'en']],,['Animal', 'en']
+    folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
+    //  words: [[':YP', 'en']],
+    words: [['Postage_stamp', 'en']],
+//    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
-  //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
+    //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
     //words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: '',//['Style', 'en'],
-   // randomImageOrientations: [' background', ' in the foreground '],
-  randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
-
+    staticPrompt: '  of titts, 16bit used stamp',//['Style', 'en'],
+    // randomImageOrientations: [' background', ' in the foreground '],
+   // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
+//    titts pixel  used stamp
     model: 'webUi',//'midjourney',
-    info: 'midjourney, fr stable mit news,SG161222/Realistic_Vision_V1.4',
+    info: ' of titts pixel used stamp',
+    negative_prompt:'overlapping',
     stableDiffusionOptions: {
-       //  "sampler_name": "Heun",
+        //  "sampler_name": "Heun",
         "restore_faces": true,
-        steps: 14,//only webui
-         width: 512,
-     height: 512,
+        steps: 24,//only webui
+        width: 320,
+        height: 208,
         /* self_attention:'yes',
        upscale:'yes'*/
     }
 };
 process.on('warning', e => console.warn(e.stack));
-import('./start.js').then(module=>module.default(compo));
+import('./start.js').then(module => module.default(compo));

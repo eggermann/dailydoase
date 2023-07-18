@@ -81,7 +81,7 @@ const _ = {
                let allIn2 = [];
                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
                //        allIn2 = allIn2.concat(title)
-         allIn2 = allIn2.concat(title,next)
+         allIn2 = allIn2.concat(title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                return _.filterEmptys(allIn2).join(' ');
@@ -96,7 +96,7 @@ const _ = {
                //-->   i.getArticle(link.title);
                let allIn2 = [];
                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-               allIn2 = allIn2.concat(title,prev)
+            allIn2 = allIn2.concat(title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                return _.filterEmptys(allIn2).join(' ');
@@ -162,7 +162,7 @@ const _ = {
         console.log('Prompt: ', chalk.yellow(prompt));
 // ----------->
         let keepPrompt = null;
-        const success = await _.model.prompt(prompt);// v
+        const success = await _.model.prompt(prompt,options);// v
         console.log(_.rnd_cnt++, '----------->sucess', success);
 
         if (!success) {
