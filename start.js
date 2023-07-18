@@ -80,7 +80,8 @@ const _ = {
                //-->   i.getArticle(link.title);
                let allIn2 = [];
                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-               allIn2 = allIn2.concat(title)
+               //        allIn2 = allIn2.concat(title)
+         allIn2 = allIn2.concat(title,next)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                return _.filterEmptys(allIn2).join(' ');

@@ -46,7 +46,7 @@ const compo = {
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
     staticPrompt: '',//['Style', 'en'],
    // randomImageOrientations: [' background', ' in the foreground '],
-    //randomImageOrientations: [' spot on ', ' together with ', ' act as '],
+  randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 
     model: 'webUi',//'midjourney',
     info: 'midjourney, fr stable mit news,SG161222/Realistic_Vision_V1.4',
