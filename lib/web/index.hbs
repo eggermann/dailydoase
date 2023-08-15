@@ -11,9 +11,9 @@
 <body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}">
 
 <header class="c-header">
-    <h1><span data-aos-anchor-placement="bottom-center" data-aos="fade-down">daily</span>
-        <span data-aos-anchor-placement="top-center" data-aos-delay="300" data-aos="fade-up">Doase</span>
-        <span data-aos-anchor-placement="top-center" data-aos-delay="500" data-aos="fade-down">🌴</span>
+    <h1><span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
+        <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300" data-aos="fade-up">Doase</span>
+        <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500" data-aos="fade-down">🌴</span>
     </h1>
 
     <h2>
@@ -35,7 +35,7 @@
         {{#if images}}
             <div class="c-panel__images">
                 {{#images}}
-                    <div class="c-panel__image" data-aos-anchor-placement="top-bottom" data-aosXXX="fade-in" data-aos-duration="150">
+                    <div class="c-panel__image" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
                         <a href="{{href}}/img">
                             <img height="{{json.stableDiffusionOptions.height}}"
                                  width="{{json.stableDiffusionOptions.width}}"

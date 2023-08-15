@@ -1,6 +1,6 @@
 $delta: 5em;
 .c-panel {
-  padding-top: $delta;
+
   scroll-snap-type: y;
 
   &__image {
@@ -22,7 +22,7 @@ body[layout="masonary"] {
 
   .c-panel__image {
 
-    margin-bottom: 64px;
+    margin: 1.2em .2em ;
     width: 200px;
     height: 200px;
 
@@ -58,7 +58,7 @@ body[layout="masonary"] {
     display: flex;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
+
 
     img {
       width: 100%;
@@ -163,7 +163,7 @@ body[layout="list"] {
         bottom: 0;
         font-size: 1.5em;
         max-width: 80vw;
-        opacity: .1;
+     //   opacity: .1;
 
         &:hover,
         .clicked {

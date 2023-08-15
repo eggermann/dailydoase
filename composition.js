@@ -36,7 +36,7 @@ const compo = {
 
     folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],
-    words: [['Postage_stamp', 'en']],
+    words: [['Love', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
@@ -44,12 +44,12 @@ const compo = {
     //words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: '  of titts, 16bit used stamp',//['Style', 'en'],
+    staticPrompt: ' with titts, high quality used stamp',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
     model: 'webUi',//'midjourney',
-    info: ' of titts pixel used stamp',
+    info: ' pinup pixel used stamp',
     negative_prompt:'overlapping',
     stableDiffusionOptions: {
         //  "sampler_name": "Heun",
