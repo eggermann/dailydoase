@@ -44,7 +44,7 @@ const compo = {
     //words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: ' , high quality used stamp, fullview',//['Style', 'en'],
+    staticPrompt: ' , high quality used stamp',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
