@@ -36,7 +36,7 @@ const compo = {
 
     folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],
-    words: [['Love', 'en']],
+    words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
@@ -44,7 +44,7 @@ const compo = {
     //words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: ' with titts, high quality used stamp',//['Style', 'en'],
+    staticPrompt: ' , high quality used stamp, fullview',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
@@ -55,8 +55,8 @@ const compo = {
         //  "sampler_name": "Heun",
         "restore_faces": true,
         steps: 24,//only webui
-        width: 320,
-        height: 208,
+     //   width: 320,
+     //   height: 208,
         /* self_attention:'yes',
        upscale:'yes'*/
     }

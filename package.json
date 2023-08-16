@@ -69,7 +69,7 @@
     "webpack:build": "webpack --config webpack.config.cjs",
     "webpack:watch": "webpack --config webpack.config.cjs --watch",
     "deploy": "cross-env APP_ENV=production npm-run-all webpack:build -p deploy:upload",
-    "deploy:upload": "node ./deploy/SSH-upload.js"
+    "deploy:upload": "node ./deploy/SSH-upload.cjs"
   },
   "repository": {
     "type": "git",

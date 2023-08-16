@@ -10,64 +10,67 @@
 </head>
 <body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}">
 
-<header class="c-header">
-    <h1><span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
-        <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300" data-aos="fade-up">Doase</span>
-        <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500" data-aos="fade-down">🌴</span>
-    </h1>
+<div class="WRAPPER">
+    <header class="c-header">
+        <h1><span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
+            <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300" data-aos="fade-up">Doase</span>
+            <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500" data-aos="fade-down">🌴</span>
+        </h1>
 
-    <h2>
-        {{#infoJson.words}}
-            <span>{{this.[0]}}</span>
-        {{/infoJson.words}}
-    </h2>
-</header>
+        <h2>
+            {{#infoJson.words}}
+                <span>{{this.[0]}}</span>
+            {{/infoJson.words}}
+        </h2>
+    </header>
 
 
-<!--{_{>back-to-top-button}}-->
-<main style="display: none">
+    <!--{_{>back-to-top-button}}-->
+    <main style="display: none">
 
-    <div class="c-panel" >
-        {{#unless images}}
-            <img class="c-panel__bg"/>
-        {{/unless}}
+        <div class="c-panel" >
+            {{#unless images}}
+                <img class="c-panel__bg"/>
+            {{/unless}}
 
-        {{#if images}}
-            <div class="c-panel__images">
-                {{#images}}
-                    <div class="c-panel__image" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
-                        <a href="{{href}}/img">
-                            <img height="{{json.stableDiffusionOptions.height}}"
-                                 width="{{json.stableDiffusionOptions.width}}"
-                                 id="image{{json.name}}" data-mtime="{{mtime}}"
-                                 loading="lazy" src="{{href}}"
-                                 alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
-                        </a>
-                        <span class="c-panel__image_infos">
+            {{#if images}}
+                <div class="c-panel__images">
+                    {{#images}}
+                        <div class="c-panel__image" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
+                            <a href="{{href}}/img">
+                                <img height="{{json.stableDiffusionOptions.height}}"
+                                     width="{{json.stableDiffusionOptions.width}}"
+                                     id="image{{json.name}}" data-mtime="{{mtime}}"
+                                     loading="lazy" src="{{href}}"
+                                     alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
+                            </a>
+                            <span class="c-panel__image_infos">
                         <!--a href="{{href}}/mint">mint</a-->
                         </span>
 
-                        <p class="c-panel__images__desc"></p>
-                    </div>
+                            <p class="c-panel__images__desc"></p>
+                        </div>
 
 
-                {{/images}}
-            </div>
-        {{/if}}
-    </div>
-
-    <div class="c-panel__content">
-        <small class="realease">
-            release 1
-        </small>
-
-        <div class="c-panel__content__info">
-
+                    {{/images}}
+                </div>
+            {{/if}}
         </div>
-    </div>
+
+        <div class="c-panel__content">
+            <small class="realease">
+                release 1
+            </small>
+
+            <div class="c-panel__content__info">
+
+            </div>
+        </div>
 
 
-</main>
+    </main>
+</div>
+
 
 <aside class="c-aside">
     <!--h2>history</h2-->

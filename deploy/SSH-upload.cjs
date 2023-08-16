@@ -42,7 +42,7 @@ const uploadDir = (localDir, remoteDir) => {
     })
 }
 
-let fileNames = ['composition.js', 'start.js', /*'exemplar-cntr.txt', 'folder-cntr.txt', */'package.json'];
+let fileNames = ['composition.js', 'start.js', 'modulePolyfill.js', /*'exemplar-cntr.txt', 'folder-cntr.txt', */'package.json'];
 fileNames = fileNames.map(name => {
     return {local: __dirname + '/../' + name, remote: destinationPath + '/' + name};
 });
