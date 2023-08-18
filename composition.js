@@ -48,7 +48,7 @@ const compo = {
     // randomImageOrientations: [' background', ' in the foreground '],
    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
-    model: 'webUi',//'midjourney',
+    model: 'huggin',// 'webUi',//'midjourney',
     info: ' pinup pixel used stamp',
     negative_prompt:'overlapping',
     stableDiffusionOptions: {

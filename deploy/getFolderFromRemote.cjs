@@ -14,7 +14,7 @@ const pathConfig = require('./config.json');
 const serverPath = pathConfig.serverImgPath;
 const localPath = path.join(__dirname, pathConfig.localImgPath);
 const promiseWaterfall = require('promise.waterfall')
-const SFTPClient = require('./SftpClient');
+const SFTPClient = require('./SftpClient.cjs');
 const _ = {
     existLocalCnt: 0,
     freshFileCnt: 0

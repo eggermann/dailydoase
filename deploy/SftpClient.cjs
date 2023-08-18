@@ -1,6 +1,6 @@
 const Client = require("ssh2-sftp-client");
 
-class SFTPClient {
+class SftpClient {
     constructor() {
         this.client = new Client();
     }
@@ -109,4 +109,4 @@ class SFTPClient {
 }
 
 
-module.exports = SFTPClient;
+module.exports = SftpClient;
