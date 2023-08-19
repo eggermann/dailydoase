@@ -36,7 +36,8 @@ const compo = {
 
     folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],
-    words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
+    words: [['War', 'en'],[':YP', 'en']],
+  //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
@@ -48,7 +49,7 @@ const compo = {
     // randomImageOrientations: [' background', ' in the foreground '],
    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
-    model: 'huggin',// 'webUi',//'midjourney',
+    model: 'huggin',//'huggin',// 'webUi',//'midjourney',
     info: ' pinup pixel used stamp',
     negative_prompt:'overlapping',
     stableDiffusionOptions: {
