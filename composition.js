@@ -35,8 +35,8 @@ const compo = {
     //this is the cirular context },
 
     folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
-    //  words: [[':YP', 'en']],
-    words: [['War', 'en'],[':YP', 'en']],
+    //  words: [[':YP', 'en']],['War', 'en'],
+    words: [['anatomy', 'en'],['war', 'en'],['life style', 'en']],
   //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
@@ -49,15 +49,15 @@ const compo = {
     // randomImageOrientations: [' background', ' in the foreground '],
    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
-    model: 'huggin',//'huggin',// 'webUi',//'midjourney',
+    model: 'webUi',//'huggin',// 'webUi',//'midjourney',
     info: ' pinup pixel used stamp',
     negative_prompt:'overlapping',
     stableDiffusionOptions: {
         //  "sampler_name": "Heun",
         "restore_faces": true,
         steps: 24,//only webui
-     //   width: 320,
-     //   height: 208,
+  width: 320,
+       height: 208,
         /* self_attention:'yes',
        upscale:'yes'*/
     }
