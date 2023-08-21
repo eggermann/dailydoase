@@ -1,9 +1,6 @@
 import pkg from './modulePolyfill.js';
-
 const {require} = pkg;
-
 const chalk = require('chalk');
-
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
 
 const WordStream = require("./lib/word-engine/WordStream.cjs");
@@ -11,6 +8,8 @@ const NewsStream = require("./lib/word-engine/NewsStream.cjs");
 
 const YPStream = require("./lib/word-engine/ypCommentsStream.cjs");
 const server = require("./lib/server/index.cjs");
+const onExit = require('./lib/helper/onExit.cjs');
+
 
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -47,7 +46,7 @@ const _ = {
     shiftCnt: 0,
     async getPrompt(streams, options) {
         let allIn = [];
-        let mains = ''
+        let mains = '';
 
         const meaningRotatingStreams = [];
 
@@ -66,43 +65,41 @@ const _ = {
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-            console.log('++++++next : ', next,'++++++title : ', title,'++++++prev : ', prev)
+            console.log('++++++next : ', next, '++++++title : ', title, '++++++prev : ', prev)
             console.log()
 
-           if(i.isYP){
-               let verbs = '';
+            if (i.isYP) {
+                let verbs = '';
 
-               try {
-                   verbs = _.getVerbs(next);
-               } catch (err) {
-               }
+                try {
+                    verbs = _.getVerbs(next);
+                } catch (err) {
+                }
 
-               //-->   i.getArticle(link.title);
-               let allIn2 = [];
-               //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-               //        allIn2 = allIn2.concat(title)
-         allIn2 = allIn2.concat(title)
+                //-->   i.getArticle(link.title);
+                let allIn2 = [];
+                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+                //        allIn2 = allIn2.concat(title)
+                allIn2 = allIn2.concat(title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
-               return _.filterEmptys(allIn2).join(' ');
-           } else{
-               let verbs = '';
+                return _.filterEmptys(allIn2).join(' ');
+            } else {
+                let verbs = '';
 
-               try {
-                   verbs = _.getVerbs(next);
-               } catch (err) {
-               }
+                try {
+                    verbs = _.getVerbs(next);
+                } catch (err) {
+                }
 
-               //-->   i.getArticle(link.title);
-               let allIn2 = [];
-               //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-            allIn2 = allIn2.concat(title)
+                //-->   i.getArticle(link.title);
+                let allIn2 = [];
+                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+                allIn2 = allIn2.concat(title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
-               return _.filterEmptys(allIn2).join(' ');
-           }
-
-
+                return _.filterEmptys(allIn2).join(' ');
+            }
         })
 
         prompts = await Promise.all(prompts);
@@ -159,16 +156,17 @@ const _ = {
             prompt = oldPrompt
         }
 
-        console.log('Prompt: ', chalk.yellow(prompt),_.model);
+        //  console.log('Prompt: ', chalk.yellow(prompt), _.model);
 // ----------->
         let keepPrompt = null;
 
-        const success = await _.model.prompt(prompt,options);// v
-        console.log(_.rnd_cnt++, '----------->sucess', success);
+        const success = true;//await _.model.prompt(prompt, options);// v
+        // console.log(_.rnd_cnt++, '----------->success', success);
 
         if (!success) {
             keepPrompt = prompt;
         }
+
         const wait = _.model.config.pollingTime
         setTimeout(async () => {
             console.log('******** again ******pollingTime after ', wait)
@@ -178,38 +176,41 @@ const _ = {
     },
     async init(options) {
         const v = options.model ? options.model : 'webUi'
-        _.model = await getFromStableDiffusion.setVersion(v);// ();//'webUi');//('huggin');
-
+        _.model = await getFromStableDiffusion.setVersion(v);
 
         const wordStreams = options.words.map(async wordAndLang => {
-                    let wordStream = null;
+            let wordStream = null;
 
-                    if (wordAndLang[0][0] == ':') {
-                        const options = wordAndLang[1];
+            if (wordAndLang[0][0] == ':') {
+                const options = wordAndLang[1];
 
-                        if (wordAndLang[0] == ':YP') {
-                            wordStream = new YPStream(options);
-                        } else {//news}
-                            wordStream = new NewsStream(options);
-                        }
-                    } else {
+                if (wordAndLang[0] == ':YP') {
+                    wordStream = new YPStream(options);
+                } else {//news}
+                    wordStream = new NewsStream(options);
+                }
+            } else {
 //default wiki
-                        wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
-                    }
+                wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
+            }
 
 //readin nextfunction
-                    if (options.circularLinksGetNext) {
-                        wordStream.circularLinks.getNext =
-                            options.circularLinksGetNext.bind(wordStream.circularLinks);
-                    }
+            if (options.circularLinksGetNext) {
+                wordStream.circularLinks.getNext =
+                    options.circularLinksGetNext.bind(wordStream.circularLinks);
+            }
 
-                    await wordStream.start();
-                    return wordStream;
-                }
-            )
-        ;
+            if (!wordStream.circularLinks.loadedFromCrash) {
+                await wordStream.start();
+            } else {
+                console.log(wordStream.startWord, ' global.loadedFromCrash  ', wordStream.circularLinks.loadedFromCrash)
+            }
+
+            return wordStream;
+        });
 
         return Promise.all(wordStreams).then(async (streams) => {
+            onExit(streams);
             return await _.loop(streams, options);
         });
     }
