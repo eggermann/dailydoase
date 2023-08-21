@@ -36,8 +36,8 @@ const compo = {
 
     folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['anatomy', 'en'],['war', 'en'],['life style', 'en']],
-  //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
+    words: [['anatomy', 'en'], ['war', 'en'], ['life style', 'en']],
+    //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
@@ -45,19 +45,20 @@ const compo = {
     //words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: ' , high quality used stamp',//['Style', 'en'],
+    staticPrompt: ' (value), high quality used stamp',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
-   // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
+    // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
     model: 'webUi',//'huggin',// 'webUi',//'midjourney',
     info: ' pinup pixel used stamp',
-    negative_prompt:'overlapping',
+    "negative_prompt": ' (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck'
+,
     stableDiffusionOptions: {
         //  "sampler_name": "Heun",
         "restore_faces": true,
         steps: 24,//only webui
-  width: 320,
-       height: 208,
+       // width: 320,
+       // height: 208,
         /* self_attention:'yes',
        upscale:'yes'*/
     }

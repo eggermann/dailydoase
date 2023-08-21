@@ -1,4 +1,5 @@
 import pkg from './modulePolyfill.js';
+
 const {require} = pkg;
 const chalk = require('chalk');
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
@@ -160,7 +161,7 @@ const _ = {
 // ----------->
         let keepPrompt = null;
 
-        const success = true;//await _.model.prompt(prompt, options);// v
+        const success = await _.model.prompt(prompt, options);// v
         // console.log(_.rnd_cnt++, '----------->success', success);
 
         if (!success) {
