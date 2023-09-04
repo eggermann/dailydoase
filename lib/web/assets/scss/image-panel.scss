@@ -1,7 +1,7 @@
-
-$delta:5em;
+$delta: 5em;
 .c-panel {
-  padding-top:$delta;
+
+  scroll-snap-type: y;
 
   &__image {
     display: flex;
@@ -10,7 +10,7 @@ $delta:5em;
 
   }
 
-  &__content{
+  &__content {
     position: sticky;
   }
 }
@@ -22,7 +22,7 @@ body[layout="masonary"] {
 
   .c-panel__image {
 
-    margin-bottom: 64px;
+    margin: 1.2em .2em;
     width: 200px;
     height: 200px;
 
@@ -38,7 +38,7 @@ body[layout="masonary"] {
     @media screen and (min-width: $bp-l) {
 
       width: 20vw;
-      height:  20vw;
+      height: 20vw;
 
     }
 
@@ -54,23 +54,44 @@ body[layout="masonary"] {
 
 
 .home {
+  .WRAPPERXX {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "top" "bottom";
+
+    header {
+      grid-area: top;
+    }
+
+    main {
+      grid-area: bottom;
+      height:60vh;
+    }
+
+    height: 100vh;
+  }
+
+
   .c-panel {
     display: flex;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
+    height:90vh;
+
 
     img {
       width: 100%;
       height: calc(100% - #{$delta});
       object-fit: contain;
+
+
     }
 
 
     &__content {
       z-index: 2;
       filter: drop-shadow(2px 4px 6px white);
-      bottom: 0;
+      bottom: 1.2rem;
 
 
       &__info {
@@ -89,8 +110,8 @@ body[layout="masonary"] {
       }
     }
 
-    img {
-      //  max-width: min-content;
+    img:not([src]) {
+      display: none;
     }
 
     &__images__desc {
@@ -157,13 +178,16 @@ body[layout="list"] {
       display: contents;
 
       &__info {
-        position: absolute;
+        position: fixed;
         mix-blend-mode: color-dodge;
         color: lightblue;
-        bottom: 0;
+
         font-size: 1.5em;
         max-width: 80vw;
-        opacity: .1;
+        left: 10vw;
+        top: 80vh;
+
+        //   opacity: .1;
 
         &:hover,
         .clicked {

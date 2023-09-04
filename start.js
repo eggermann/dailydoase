@@ -1,10 +1,17 @@
-const getFromStableDiffusion = require('./lib/get-from-stable-diffusion');
-const WordStream = require("./lib/word-engine/WordStream");
-const NewsStream = require("./lib/word-engine/NewsStream");
-const server = require("./lib/server");
+import pkg from './modulePolyfill.js';
 
+const {require} = pkg;
 const chalk = require('chalk');
-let _pollingTime = null;
+import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
+
+const WordStream = require("./lib/word-engine/WordStream.cjs");
+const NewsStream = require("./lib/word-engine/NewsStream.cjs");
+
+const YPStream = require("./lib/word-engine/ypCommentsStream.cjs");
+const server = require("./lib/server/index.cjs");
+const onExit = require('./lib/helper/onExit.cjs');
+
+
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -14,7 +21,7 @@ const shuffleArray = array => {
     }
 }
 const nlp = require('compromise');
-const {fullFillPrompt: fullFillPrompt} = require("./lib/get-from-stable-diffusion");
+const {fullFillPrompt: fullFillPrompt} = getFromStableDiffusion;
 const _ = {
     rnd_cnt: 0,
     filterEmptys: arr => arr.filter(i => i && i.length > 1),
@@ -36,11 +43,11 @@ const _ = {
         };
 
     },
-    /*this handle the form of link*/
+    //_*this handle the form of link_*_//
     shiftCnt: 0,
     async getPrompt(streams, options) {
         let allIn = [];
-        let mains = ''
+        let mains = '';
 
         const meaningRotatingStreams = [];
 
@@ -48,33 +55,56 @@ const _ = {
             meaningRotatingStreams.push(streams[(i + _.shiftCnt) % streams.length])
         }
         _.shiftCnt++
-
-        let prompt = meaningRotatingStreams.map(async (i, index) => {
+        console.log('-------> start word mixing <----------')
+        let prompts = meaningRotatingStreams.map(async (i, index) => {
             console.log('STREAM-', index);
+
+            //todo create prompt for "word in stream eg newsstream
+
             const link = await i.getNext();
 
             const prev = link.sentences && link.sentences.prev.shift() || '';
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
-            console.log('++++++next ', next, '+' + next + '+', new Boolean(next), typeof (next))
+            console.log('++++++next : ', next, '++++++title : ', title, '++++++prev : ', prev)
+            console.log()
 
+            if (i.isYP) {
+                let verbs = '';
 
-            let verbs = '';
-            if (next != '') {
-                console.log('++++++verbs ')
+                try {
+                    verbs = _.getVerbs(next);
+                } catch (err) {
+                }
 
-             // ??todo  crash  verbs = _.getVerbs(next);
+                //-->   i.getArticle(link.title);
+                let allIn2 = [];
+                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+                //        allIn2 = allIn2.concat(title)
+                allIn2 = allIn2.concat(title)
+// allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+
+                return _.filterEmptys(allIn2).join(' ');
+            } else {
+                let verbs = '';
+
+                try {
+                    verbs = _.getVerbs(next);
+                } catch (err) {
+                }
+
+                //-->   i.getArticle(link.title);
+                let allIn2 = [];
+                //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+                allIn2 = allIn2.concat(title)
+// allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
+
+                return _.filterEmptys(allIn2).join(' ');
             }
-
-            //-->   i.getArticle(link.title);
-            let allIn2 = [];
-            //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-            allIn2 = allIn2.concat(title)
-            //   console.log('allIn2:   ---',allIn2)
-            return _.filterEmptys(allIn2).join(' ');
         })
 
-        prompt = await Promise.all(prompt)
+        prompts = await Promise.all(prompts);
+
         ///NOT FOE ALLL   TODO  console.log(prompt)
         //   .join(',');
 //        allIn = _.filterEmptys(allIn);// randomImageOrientations :['spot on ', 'in background ']
@@ -82,16 +112,14 @@ const _ = {
         //      console.log('---->',prompt)
         //  process.exit();
         if (options.randomImageOrientations) {
-            prompt.forEach((i, index) => {
+            prompts.forEach((i, index) => {
 
-                const pos = Math.floor(Math.random() * (prompt.length + 1) * prompt.length);
-                if (prompt[pos]) {
+                const pos = Math.floor(Math.random() * (prompts.length + 1) * prompts.length);
+                if (prompts[pos]) {
                     const randomPos = Math.floor(Math.random() * options.randomImageOrientations.length);
-                    prompt[pos] = options.randomImageOrientations[randomPos] + ' ' + prompt[pos];
+                    prompts[pos] = options.randomImageOrientations[randomPos] + ' ' + prompts[pos];
                 }
-
             })
-
             /* options.randomImageOrientations.forEach((i, index) => {
 
                 const pos = Math.floor(Math.random() * (prompt.length + 1));
@@ -102,15 +130,15 @@ const _ = {
             })*/
         }
 
-        //shuffleArray(prompt);
-        //   prompt = prompt.join(`[${mains}] `);
-        prompt = prompt.join(`,`);
+//shuffleArray(prompt);
+//   prompt = prompt.join(`[${mains}] `);
+        const prompt = prompts.join(`,`);
 
 
-        // shuffleArray(prompt);
+// shuffleArray(prompt);
 
-        // prompt += allIn.join(',');
-        //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
+// prompt += allIn.join(',');
+//>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
     async loop(streams, options, oldPrompt) {
@@ -124,30 +152,32 @@ const _ = {
             prompt = nlp(prompt).text();
             console.log('org-prompt: ', chalk.red(prompt));
 
-            //prompt = await fullFillPrompt(prompt);
+//prompt = await fullFillPrompt(prompt);
         } else {
             prompt = oldPrompt
         }
 
-        console.log('Prompt: ', chalk.yellow(prompt));
-        // ----------->
+        //  console.log('Prompt: ', chalk.yellow(prompt), _.model);
+// ----------->
         let keepPrompt = null;
-        const success =await _.model.prompt(prompt, options);// true;//
-        console.log(_.rnd_cnt++, '----------->sucess', success);
+console.log('_.model',_.model)
+        const success = await _.model.prompt(prompt, options);// v
+        // console.log(_.rnd_cnt++, '----------->success', success);
 
         if (!success) {
             keepPrompt = prompt;
         }
 
+        const wait = _.model.config.pollingTime
         setTimeout(async () => {
-            console.log('******** again ******pollingTime after ', _.model.config.pollingTime)
+            console.log('******** again ******pollingTime after ', wait)
             await _.loop(streams, options, keepPrompt);
 
-        }, _.model.config.pollingTime);
+        }, wait);
     },
     async init(options) {
         const v = options.model ? options.model : 'webUi'
-        _.model = getFromStableDiffusion.setVersion(v);//'webUi');//('huggin');
+        _.model = await getFromStableDiffusion.setVersion(v);
 
         const wordStreams = options.words.map(async wordAndLang => {
             let wordStream = null;
@@ -155,23 +185,33 @@ const _ = {
             if (wordAndLang[0][0] == ':') {
                 const options = wordAndLang[1];
 
-                wordStream = new NewsStream(options);
+                if (wordAndLang[0] == ':YP') {
+                    wordStream = new YPStream(options);
+                } else {//news}
+                    wordStream = new NewsStream(options);
+                }
             } else {
-
+//default wiki
                 wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
             }
 
-            //readin nextfunction
+//readin nextfunction
             if (options.circularLinksGetNext) {
                 wordStream.circularLinks.getNext =
                     options.circularLinksGetNext.bind(wordStream.circularLinks);
             }
 
-            await wordStream.start();
+            if (!wordStream.circularLinks.loadedFromCrash) {
+                await wordStream.start();
+            } else {
+                console.log(wordStream.startWord, ' global.loadedFromCrash  ', wordStream.circularLinks.loadedFromCrash)
+            }
+
             return wordStream;
         });
 
         return Promise.all(wordStreams).then(async (streams) => {
+            onExit(streams);
             return await _.loop(streams, options);
         });
     }
@@ -179,7 +219,7 @@ const _ = {
 
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
-module.exports = async options => {
+export default async options => {
     server.init();
     await _.init(options);
 }
