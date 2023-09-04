@@ -62,8 +62,23 @@ body {
 header {
   z-index: 1;
   margin-bottom: $element-spce-4;
-  position: absolute;
+  position: sticky;
   left: 0;
+  top: 0;
+  transition: transform .2s;
+
+  &.headroom--unpinned {
+    transform: translateY(-100%);
+  }
+
+  &.headroom--pinned {
+    transform: translateY(0);
+
+    h2 {
+      margin-top: $element-spce-4;
+     // transform: translateY(2rem);
+    }
+  }
 }
 
 aside {
@@ -270,3 +285,5 @@ main {
 
   //@include spawnMaxColumn();
 }
+
+.toggle-view{display: none}

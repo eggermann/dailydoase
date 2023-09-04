@@ -8,6 +8,9 @@ const handleDownloadedFolders = require('./handleDownloadedFolders.js');
 const syncDir = './../images';
 const destinationPath = 'Projekte/dailyDoase';
 
+
+process.exit()
+
 const _={
     sync:()=>{
         console.log('start upload sync');
