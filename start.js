@@ -142,6 +142,7 @@ const _ = {
         return prompt;
     },
     async loop(streams, options, oldPrompt) {
+
         let prompt = '';
 
         if (!oldPrompt) {
@@ -160,24 +161,33 @@ const _ = {
         //  console.log('Prompt: ', chalk.yellow(prompt), _.model);
 // ----------->
         let keepPrompt = null;
-console.log('_.model',_.model)
+        console.log('_.model', _.model)
+
         const success = await _.model.prompt(prompt, options);// v
-        // console.log(_.rnd_cnt++, '----------->success', success);
+        console.log(_.rnd_cnt++, '----------->success', success);
 
         if (!success) {
             keepPrompt = prompt;
         }
 
         const wait = _.model.config.pollingTime
-        setTimeout(async () => {
-            console.log('******** again ******pollingTime after ', wait)
-            await _.loop(streams, options, keepPrompt);
 
-        }, wait);
+        if (wait) {
+            setTimeout(async () => {
+                console.log('******** again ******pollingTime after ', wait)
+                await _.loop(streams, options, keepPrompt);
+
+            }, wait);
+        }
+
     },
     async init(options) {
         const v = options.model ? options.model : 'webUi'
         _.model = await getFromStableDiffusion.setVersion(v);
+        if(!  _.model ){
+            console.error('no model ',v)
+            process.exit();
+        }
 
         const wordStreams = options.words.map(async wordAndLang => {
             let wordStream = null;
@@ -211,8 +221,18 @@ console.log('_.model',_.model)
         });
 
         return Promise.all(wordStreams).then(async (streams) => {
+
             onExit(streams);
-            return await _.loop(streams, options);
+
+            const getNext=function(streams, options){
+
+                return async()=>{
+                    await _.loop(streams, options);
+                }
+            }
+
+            server.init(getNext(streams, options))
+            await _.loop(streams, options);
         });
     }
 };
@@ -220,8 +240,9 @@ console.log('_.model',_.model)
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
 export default async options => {
-    server.init();
+
     await _.init(options);
+
 }
 
 //const a = _.getVerbs('beautiful running rising sun of merged lives. A beautiful cron is comining over the rainbow')
