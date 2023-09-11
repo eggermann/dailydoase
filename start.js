@@ -161,7 +161,6 @@ const _ = {
         //  console.log('Prompt: ', chalk.yellow(prompt), _.model);
 // ----------->
         let keepPrompt = null;
-        console.log('_.model', _.model)
 
         const success = await _.model.prompt(prompt, options);// v
         console.log(_.rnd_cnt++, '----------->success', success);
