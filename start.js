@@ -96,7 +96,7 @@ const _ = {
                 //-->   i.getArticle(link.title);
                 let allIn2 = [];
                 //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-                allIn2 = allIn2.concat(title)
+                allIn2 = allIn2.concat(next ,title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                 return _.filterEmptys(allIn2).join(' ');
@@ -132,7 +132,7 @@ const _ = {
 
 //shuffleArray(prompt);
 //   prompt = prompt.join(`[${mains}] `);
-        const prompt = prompts.join(`,`);
+        const prompt = prompts.join(` `);
 
 
 // shuffleArray(prompt);

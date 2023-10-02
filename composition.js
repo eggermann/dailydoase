@@ -34,25 +34,25 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
 
-    folderVersionString: 'dailymotoion',// v-{cnt}-{folderVersionString} bear beer
+    folderVersionString: 'midJ-futurium',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['ukraine', 'en'],['boobs', 'en']],
+    words: [['Innovation', 'en'],['Future', 'en']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],,['boobs', 'en']
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
     //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
     //words: [[':NewsStream', {startWord: ''}]],
-
+//as a scene of a successful advertising campaign
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-   // staticPrompt: ' (value), high quality used stamp',//['Style', 'en'],
+ staticPrompt:' for a contemporary commercial campaign scene',// ' (value), high quality used stamp',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
-    model: 'dailymotion',//'dailymotion',//'youtube',//'midjourney',//'webUi',//'huggin',// 'webUi',//'midjourney',
-    info: ' pinup pixel used stamp',
-    "negative_prompt": ' (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck'
-,
+    model: 'midjourney',//'dailymotion',//'youtube',//'midjourney',//'webUi',//'huggin',// 'webUi',//'midjourney',
+    info: ' futurium',
+   // "negative_prompt": ' (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck'
+
     stableDiffusionOptions: {
         //  "sampler_name": "Heun",
         "restore_faces": true,
