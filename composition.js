@@ -22,6 +22,14 @@ for (let i in st) {
         if (line.indexOf('XX') != -1) {
             return;
         }
+
+
+
+
+
+
+
+
         const arrs = line.split(',');
         allStatics.push(arrs)
     })
@@ -36,7 +44,8 @@ const compo = {
 
     folderVersionString: 'dailymotoion',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['ukraine', 'en'],['boobs', 'en']],
+    words: [['Perversion', 'en'],['Заглавная_страница', 'ru'],['الصفحة_الرئيسية', 'ar']],
+  //  words: [['Artificial_intelligence', 'en'],['Anatomy', 'en'],['Lust', 'en']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],,['boobs', 'en']
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
@@ -50,7 +59,7 @@ const compo = {
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
     model: 'dailymotion',//'dailymotion',//'youtube',//'midjourney',//'webUi',//'huggin',// 'webUi',//'midjourney',
-    info: ' pinup pixel used stamp',
+    info: "",//' pinup pixel used stamp',
     "negative_prompt": ' (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck'
 ,
     stableDiffusionOptions: {
