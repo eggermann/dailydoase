@@ -1,0 +1,10 @@
+image
+<h1>
+    für  /v/:version/:img/img
+</h1>
+
+<img height="{{json.stableDiffusionOptions.height}}"
+     width="{{json.stableDiffusionOptions.width}}"
+     id="image{{json.name}}" data-mtime="{{mtime}}"
+     loading="lazy" src="{{href}}"
+     alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
