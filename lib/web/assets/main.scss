@@ -1,28 +1,28 @@
-$bp-s: 320px;
-$bp-m: 720px;
-$bp-l: 1200px;
-
 $element-spce-2: .7rem;
 $element-spce-4: 1.6rem;
+
+@import './scss/variables/breakpoints';
+@import 'scss/mixins/mixins.breakpoints';
 
 @import 'scss/headroom';
 @import 'scss/c-back-to-top';
 @import 'scss/image-panel';
 
+
 :root {
   --max-page-width: 100%;
 
-  @media screen and (min-width: $bp-s) {
+  @include bp( sm) {
     --max-page-width: 94vw;
   }
 
-  @media screen and (min-width: $bp-m) {
+  @include bp( md) {
 
     --max-page-width: 90vw;
 
   }
 
-  @media screen and (min-width: $bp-l) {
+  @include bp( lg) {
     --max-page-width: 1380px;
   }
 }
