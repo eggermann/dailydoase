@@ -24,7 +24,6 @@
         </h2>
     </header>
 
-
     <!--{_{>back-to-top-button}}-->
     <main style="display: none">
 
@@ -34,39 +33,35 @@
             {{/unless}}
 
             {{#if images}}
-                <div class="c-panel__images">
+                <ol class="c-panel__list">
                     {{#images}}
-                        <div class="c-panel__image" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
-                            <a id="" href="{{href}}/img">
-                                <img height="{{json.stableDiffusionOptions.height}}"
-                                     width="{{json.stableDiffusionOptions.width}}"
+                        <li class="c-panel__list__item" data-aos-anchor-placement="top-bottom"
+                            data-aos-duration="150">
+
+                            <a class="c-panel__list__item__link" href="{{href}}/img">
+                                <img class="c-panel__list__item__image"
                                      id="image{{json.name}}" data-mtime="{{mtime}}"
                                      loading="lazy" src="{{href}}"
                                      alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
                             </a>
-                            <span class="c-panel__image_infos">
-                        <!--a href="{{href}}/mint">mint</a-->
+                            <span class="c-panel__images__item__infos">
+                            <!--a href="{{href}}/mint">mint</a-->
                         </span>
-
-                            <p class="c-panel__images__desc"></p>
-                        </div>
-
+                            <p class="c-panel__images__item___desc"></p>
+                        </li>
 
                     {{/images}}
-                </div>
+                </ol>
             {{/if}}
         </div>
 
-        <div class="c-panel__content">
+        <div class="c-panel__list__content">
             <small class="realease">
                 release 1
             </small>
 
-            <div class="c-panel__content__info">
-
-            </div>
+            <div class="c-panel__content__info"></div>
         </div>
-
 
     </main>
 </div>

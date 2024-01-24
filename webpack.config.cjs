@@ -43,6 +43,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css'
         }),
+        //https://yonatankra.com/how-to-use-htmlwebpackplugin-for-multiple-entries/
+
         new HtmlWebpackPlugin({
             template: 'lib/web/index.hbs',
             filename: 'index-template.hbs',
@@ -85,7 +87,7 @@ module.exports = {
         ]
     },
     optimization: {
-        minimize: true,// (mode === 'production'),
+        minimize: true,//(mode === 'production'),
         minimizer: [
             new TerserPlugin({
                 terserOptions: {
@@ -96,7 +98,7 @@ module.exports = {
             new CssMinimizerPlugin({
                 minimizerOptions: {
                     preset: [
-                        'default',
+                        "default",
                         {
                             discardComments: {removeAll: true},
                         },

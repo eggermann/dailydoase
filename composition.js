@@ -7,8 +7,8 @@ https://stable-diffusion-art.com/prompt-guide/
 
 //----> hosting https://www.ni-sp.com/how-to-run-stable-diffusion-on-your-own-cloud-gpu-server/
 //https://gist.github.com/thesephist/376afed2cbfce35d4b37d985abe6d0a1
-
-
+// video->midjourney prompt <<--
+//-->https://youtu.be/-fOIbqUoE6k?list=TLPQMDQwMTIwMjTE5zEzlnW89g&t=413
 import pkg from './modulePolyfill.js';
 
 const {require, __dirname} = pkg;
@@ -34,9 +34,9 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
 
-    folderVersionString: 'midJ-futurium',// v-{cnt}-{folderVersionString} bear beer
+    folderVersionString: 'midJ-daily-theme-junction',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['Innovation', 'en'],['Future', 'en']],
+    words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}]],// [['Fairy_tale', 'en'],['Life', 'en']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],,['boobs', 'en']
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
@@ -45,7 +45,7 @@ const compo = {
     //words: [[':NewsStream', {startWord: ''}]],
 //as a scene of a successful advertising campaign
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
- staticPrompt:' for a contemporary commercial campaign scene',// ' (value), high quality used stamp',//['Style', 'en'],
+ //-->staticPrompt:' for a contemporary commercial campaign scene',// ' (value), high quality used stamp',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp

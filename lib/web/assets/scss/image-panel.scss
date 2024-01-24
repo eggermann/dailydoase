@@ -1,57 +1,76 @@
 $delta: 5em;
-.c-panel {
 
+.c-panel {
   scroll-snap-type: y;
 
-  &__image {
+  &__list {
     display: flex;
     align-items: baseline;
     justify-content: center;
+    flex-wrap: wrap;
+    padding:0;
 
+    &__item {
+
+
+      &__link {
+
+      }
+
+      &__image {
+        width: 100%;
+        height: auto;
+
+        @include bp(md) {
+          padding:1em;
+          width: 24vw;
+        }
+
+        @include bp(xxl) {
+          width: 320px;
+        }
+      }
+    }
   }
 
   &__content {
     position: sticky;
   }
-}
 
-body[layout="masonary"] {
-  .c-panel__images {
+
+  &__images {
     margin: 3em auto;
-  }
 
-  .c-panel__image {
+    &__image {
+      margin: 1.2em .2em;
+      width: 200px;
+      height: 200px;
 
-    margin: 1.2em .2em;
-    width: 200px;
-    height: 200px;
+      @include bp( md) {
+        width: 24vw;
+        height: 24vw;
+
+      }
 
 
-    @media screen and (min-width: $bp-m) {
+      @include bp(lg) {
 
-      width: 24vw;
-      height: 24vw;
+        width: 20vw;
+        height: 20vw;
+
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
 
     }
-
-
-    @media screen and (min-width: $bp-l) {
-
-      width: 20vw;
-      height: 20vw;
-
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-
 
   }
 
 }
-
 
 .home {
   .WRAPPERXX {
@@ -65,7 +84,7 @@ body[layout="masonary"] {
 
     main {
       grid-area: bottom;
-      height:60vh;
+      height: 60vh;
     }
 
     height: 100vh;
@@ -76,7 +95,7 @@ body[layout="masonary"] {
     display: flex;
     justify-content: center;
     width: 100vw;
-    height:90vh;
+    height: 90vh;
 
 
     img {
