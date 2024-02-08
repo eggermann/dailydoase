@@ -1,0 +1,45 @@
+$xs-breakpoint: 320px !default;
+$sm-breakpoint: 460px !default;
+$sm-page-max-width: 94vw !default;
+$md-breakpoint: 768px !default;
+$md-type-scale-base: 14px !default;
+$md-type-scale-ratio: 1.5 !default;
+$md-page-max-width: 90vw !default;
+$md-element-space: 4,8,16,24,32,48,64,96,128 !default;
+$lg-breakpoint: 1024px !default;
+$lg-type-scale-base: 15px !default;
+$xl-breakpoint: 1366px !default;
+$xl-page-max-width: 1318px !default;
+$xxl-breakpoint: 1600px !default;
+$xxl-type-scale-base: 16px !default;
+$xxl-page-max-width: 1366px !default;
+
+$breakpoints: (
+        'xs': (
+                'breakpoint': $xs-breakpoint
+        ),
+        'sm': (
+                'breakpoint': $sm-breakpoint,
+                'pageMaxWidth': $sm-page-max-width
+        ),
+        'md': (
+                'breakpoint': $md-breakpoint,
+                'typeScaleBase': $md-type-scale-base,
+                'typeScaleRatio': $md-type-scale-ratio,
+                'pageMaxWidth': $md-page-max-width,
+                'elementSpace': $md-element-space
+        ),
+        'lg': (
+                'breakpoint': $lg-breakpoint,
+                'typeScaleBase': $lg-type-scale-base
+        ),
+        'xl': (
+                'breakpoint': $xl-breakpoint,
+                'pageMaxWidth': $xl-page-max-width
+        ),
+        'xxl': (
+                'breakpoint': $xxl-breakpoint,
+                'typeScaleBase': $xxl-type-scale-base,
+                'pageMaxWidth': $xxl-page-max-width
+        )
+);

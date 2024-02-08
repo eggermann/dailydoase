@@ -8,11 +8,11 @@ node_modules/
 dist/
 images/
 fresh-folders/
-dailymotion/.*
+dailymotion/
+XXX_crashed-file/
 # Compiled Java class files
 *.class
-
-
+*.aider.*
 # Compiled Python bytecode
 *.py[cod]
 
