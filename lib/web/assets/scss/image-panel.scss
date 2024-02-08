@@ -11,80 +11,70 @@ $delta: 5em;
     align-items: center;
 
     &__item {
+      transition: transform .25s ease-in-out;
+      position: relative;
+
+      &:hover,
+      &.active-image {
+        transition: transform .5s ease-in-out;
+        transition-delay: .2s;
+        transform: scale(1.2);
+        filter: drop-shadow(2px 1em 3em black);
+        z-index: 10;
+        position: relative;
+      }
+
+      &:not(.active-image) {
+
+        .c-panel__list__item__infos {
+          display: none;
+        }
+      }
+
+      &.hash-tagged {
+        width: 34vw;
+        backdrop-filter: blur(10px);
+        filter: drop-shadow(2px 1em 3em black);
+      }
+
+      @include bp(md) {
+        padding: 1em;
+        width: 24vw;
+      }
+
+      @include bp(xxl) {
+        width: 320px;
+      }
+
+      &__infos {
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        backdrop-filter: blur(10px);
+
+        a {
+          bottom: 1.2rem;
+          filter: drop-shadow(2px 4px 6px white);
+          z-index: 2;
+          mix-blend-mode: color-dodge;
+          color: lightblue;
 
 
-      &__link {
-
+        }
       }
 
       &__image {
         width: 100%;
         height: auto;
         aspect-ratio: 1/1;
-        transition: transform .25s ease-in-out;
 
-        &:hover {
-          transition: transform .5s ease-in-out;
-          transition-delay: .2s;
-          transform: scale(1.2);
-          filter: drop-shadow(2px 1em 3em black);
-          z-index: 10;
-          position: relative;
-        }
-
-        &.hash-tagged {
-          width: 34vw;
-          backdrop-filter: blur(10px);
-          filter: drop-shadow(2px 1em 3em black);
-        }
-
-        @include bp(md) {
-          padding: 1em;
-          width: 24vw;
-        }
-
-        @include bp(xxl) {
-          width: 320px;
-        }
       }
     }
   }
 
   &__content {
     position: sticky;
-  }
-
-
-  &__images {
-    margin: 3em auto;
-
-    &__image {
-      margin: 1.2em .2em;
-      width: 200px;
-      height: 200px;
-
-      @include bp(md) {
-        width: 24vw;
-        height: 24vw;
-
-      }
-
-
-      @include bp(lg) {
-
-        width: 20vw;
-        height: 20vw;
-
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-      }
-
-
-    }
-
   }
 
 }
@@ -113,11 +103,11 @@ $delta: 5em;
         bottom: 0;
         font-size: 1.5em;
         max-width: 80vw;
-        margin:auto;
+        margin: auto;
         opacity: 1;
 
         &:hover,
-        .clicked {
+        .clicked, {
           opacity: .1;
           cursor: none;
         }

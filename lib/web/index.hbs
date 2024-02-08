@@ -41,13 +41,15 @@
                         <li class="c-panel__list__item" data-aos-anchor-placement="top-bottom"
                             data-aos-duration="150">
 
-                            <a class="c-panel__list__item__link" href="{{href}}/img">
                                 <img class="c-panel__list__item__image"
                                      id="image{{json.name}}" data-mtime="{{mtime}}"
                                      loading="lazy" src="{{href}}"
-                                     alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
+                                     alt="image of {{json.prompt}}">
+
+                            <span class="c-panel__list__item__infos">
+                                     <a class="c-panel__list__item__link" href="{{href}}/img">
+                                         {{json.prompt}}
                             </a>
-                            <span class="c-panel__images__item__infos">
                             <!--a href="{{href}}/mint">mint</a-->
                         </span>
                             <p class="c-panel__images__item___desc"></p>
