@@ -2,17 +2,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
-    <title>daily Doase</title>
+    <title>DailyDoase</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 </head>
-<body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}">
+
+<body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}{{#if frame}}frame{{/if}}">
 
 <div class="WRAPPER">
     <header class="c-header">
-        <h1><span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
+        <h1 class="c-title">
+            <span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
             <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300" data-aos="fade-up">Doase</span>
             <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500" data-aos="fade-down">🌴</span>
         </h1>
@@ -30,6 +32,7 @@
         <div class="c-panel">
             {{#unless images}}
                 <img class="c-panel__bg"/>
+            <p class="c-panel__content">{{ json}}</p>
             {{/unless}}
 
             {{#if images}}
@@ -64,6 +67,11 @@
         </div>
 
     </main>
+
+    {{#if isHome}}
+        {{log menu.[1].href}}
+        <iframe loading="lazy" class="newest-folder" src="{{menu.[1].href}}?frame=true" frameborder="0"></iframe>
+    {{/if}}
 </div>
 
 
@@ -121,7 +129,10 @@
         </a>
     </i>
 </aside>
-<footer>
+
+
+
+<footer class="c-footer">
     <p>&#9426;&nbsp;eggermann,
         <small>use it unt il down</small>
         🤗 to <big> <a href="https://huggingface.co/"></a>🤗</big>
