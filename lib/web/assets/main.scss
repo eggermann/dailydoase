@@ -8,32 +8,27 @@ $element-spce-4: 1.6rem;
 @import 'scss/c-back-to-top';
 @import 'scss/image-panel';
 
-
-:root {
-  --max-page-width: 100%;
-
-  @include bp( sm) {
-    --max-page-width: 94vw;
-  }
-
-  @include bp( md) {
-
-    --max-page-width: 90vw;
-
-  }
-
-  @include bp( lg) {
-    --max-page-width: 1380px;
-  }
-}
-
-
 @mixin spawnMaxColumn() {
   max-width: var(--max-page-width);
   margin: 0 auto;
   width: 100%;
 }
 
+:root {
+  --max-page-width: 100%;
+
+  @include bp(sm) {
+    --max-page-width: 94vw;
+  }
+
+  @include bp(md) {
+    --max-page-width: 90vw;
+  }
+
+  @include bp(lg) {
+    --max-page-width: 1380px;
+  }
+}
 
 .a-cessibility {
   border: 0 !important;
@@ -48,6 +43,7 @@ $element-spce-4: 1.6rem;
 
 body {
   background-color: #000;
+  overflow-x: hidden;
 
   &.play {
     .realease {
@@ -76,14 +72,28 @@ header {
 
     h2 {
       margin-top: $element-spce-4;
-     // transform: translateY(2rem);
+      // transform: translateY(2rem);
     }
   }
 }
 
 aside {
-
   .c-aside__menu {
+    @include spawnMaxColumn();
+    background-color: firebrick;
+    bottom: 0;
+    filter: hue-rotate(-130deg);
+    margin-top: $element-spce-4 *3;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    width: max-content;
+    z-index: 22;
+
+    &:not(:hover) {
+      mix-blend-mode: plus-lighter;
+    }
 
     &.opened-menu {
       height: min-content;
@@ -99,23 +109,7 @@ aside {
       }
     }
 
-    @include spawnMaxColumn();
-    z-index: 22;
-    position: fixed;
-    filter: hue-rotate(-130deg);
-    width: max-content;
-    background-color: firebrick;
-    margin-top: $element-spce-4 *3;
-
-    width: max-content;
-
-    &:not(:hover) {
-      mix-blend-mode: plus-lighter;
-    }
-
     &__button {
-
-
       border: 0;
       background: transparent;
       color: yellow;
@@ -123,13 +117,6 @@ aside {
       right: 0;
       padding-left: .6em;
     }
-
-
-    top: 0;
-    bottom: 0;
-    position: fixed;
-    overflow-y: scroll;
-    overflow-x: hidden;
 
     ul li:last-child {
       margin-bottom: $element-spce-4*1.5;
@@ -151,8 +138,6 @@ aside {
       &:hover {
         filter: drop-shadow(2px 4px 6px black);
       }
-
-
     }
 
     .image-cntr a {
@@ -173,11 +158,6 @@ aside {
   }
 
 }
-
-main {
-  //@include spawnMaxColumn();
-}
-
 
 h1 {
   color: yellow;
@@ -200,34 +180,27 @@ h2 {
 }
 
 footer {
-  padding-top: $element-spce-4;
   @include spawnMaxColumn();
   align-items: center;
   display: flex;
   flex-flow: column;
-}
-
-.folder {
-
+  padding-top: $element-spce-4;
 }
 
 .menu-actions {
-
   .toggle-view { //https://css-tricks.com/making-pure-css-playPause-button/
-    //padding:0.1e. 2em;
     transform: scale(.7);
 
     label {
-      display: block;
-      box-sizing: border-box;
-      width: 0;
-      height: 74px;
-
       border-color: dotted dotted dotted dotted;
-      transition: 100ms all ease;
-      cursor: pointer;
       border-style: double;
       border-width: 0px 0 0px 60px;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: block;
+      height: 74px;
+      transition: 100ms all ease;
+      width: 0;
     }
 
     input[type="checkbox"] {
@@ -250,16 +223,15 @@ footer {
     transform: scale(.7);
 
     label {
-      display: block;
-      box-sizing: border-box;
-      width: 0;
-      height: 74px;
-
       border-color: transparent transparent transparent #202020;
-      transition: 100ms all ease;
-      cursor: pointer;
       border-style: double;
-      border-width: 0px 0 0px 60px;
+      border-width: 0 0 0 60px;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: block;
+      height: 74px;
+      transition: 100ms all ease;
+      width: 0;
     }
 
     input[type="checkbox"] {
@@ -282,8 +254,22 @@ main {
   &[style="display: none"] {
     display: inherit !important;
   }
-
-  //@include spawnMaxColumn();
 }
 
-.toggle-view{display: none}
+.toggle-view {
+  display: none
+}
+
+.newest-folder {
+  @include spawnMaxColumn();
+  height: 100vh;
+  margin-top: $element-spce-4;
+}
+
+.frame {
+  .c-title span:nth-child(-n+2),
+  .c-aside,
+  .c-footer {
+    display: none;
+  }
+}
