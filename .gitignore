@@ -9,6 +9,7 @@ dist/
 images/
 fresh-folders/
 dailymotion/
+youtube/
 XXX_crashed-file/
 # Compiled Java class files
 *.class
