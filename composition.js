@@ -44,7 +44,16 @@ const compo = {
 
     folderVersionString: 'dailymotoion',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['Perversion', 'en'],['Заглавная_страница', 'ru'],['الصفحة_الرئيسية', 'ar']],
+    words: [
+      ['ASMR', 'en'],['Future', 'en'],['Suger', 'en'],
+
+  /*    ['प्यार', 'hi'],
+        ['Заглавная_страница', 'ru'],
+      ['维基百科', 'zh'],
+    ['Perversion', 'en'],
+    ['Heroin', 'de'],
+    ['الصفحة_الرئيسية', 'ar']*/
+  ],
   //  words: [['Artificial_intelligence', 'en'],['Anatomy', 'en'],['Lust', 'en']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],,['boobs', 'en']
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
