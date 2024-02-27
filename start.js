@@ -51,9 +51,9 @@ const _ = {
 
         const meaningRotatingStreams = [];
 
-      for (let i = 0; i < streams.length; i++) {
-            meaningRotatingStreams.push(streams[(_.shiftCnt) % streams.length])
-       }
+      //  for (let i = 0; i < streams.length; i++) {
+            meaningRotatingStreams.push(streams[(Math.round(_.shiftCnt+(Math.random()*10))) % streams.length])
+    //    }
         _.shiftCnt++
         console.log('-------> start word mixing <----------')
         let prompts = meaningRotatingStreams.map(async (i, index) => {
