@@ -7,8 +7,8 @@ https://stable-diffusion-art.com/prompt-guide/
 
 //----> hosting https://www.ni-sp.com/how-to-run-stable-diffusion-on-your-own-cloud-gpu-server/
 //https://gist.github.com/thesephist/376afed2cbfce35d4b37d985abe6d0a1
-// video->midjourney prompt <<--
-//-->https://youtu.be/-fOIbqUoE6k?list=TLPQMDQwMTIwMjTE5zEzlnW89g&t=413
+
+
 import pkg from './modulePolyfill.js';
 
 const {require, __dirname} = pkg;
@@ -22,6 +22,14 @@ for (let i in st) {
         if (line.indexOf('XX') != -1) {
             return;
         }
+
+
+
+
+
+
+
+
         const arrs = line.split(',');
         allStatics.push(arrs)
     })
@@ -34,25 +42,35 @@ const compo = {
     //circularLinksGetNext:()=>{
     //this is the cirular context },
 
-    folderVersionString: 'midJ-daily-theme-junction',// v-{cnt}-{folderVersionString} bear beer
+    folderVersionString: 'dailymotoion',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}]],// [['Fairy_tale', 'en'],['Life', 'en']],
+    words: [
+      ['ASMR', 'en'],['Future', 'en'],['Suger', 'en'],
+
+  /*    ['प्यार', 'hi'],
+        ['Заглавная_страница', 'ru'],
+      ['维基百科', 'zh'],
+    ['Perversion', 'en'],
+    ['Heroin', 'de'],
+    ['الصفحة_الرئيسية', 'ar']*/
+  ],
+  //  words: [['Artificial_intelligence', 'en'],['Anatomy', 'en'],['Lust', 'en']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],,['boobs', 'en']
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
     //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
     //words: [[':NewsStream', {startWord: ''}]],
-//as a scene of a successful advertising campaign
+
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
- //-->staticPrompt:' for a contemporary commercial campaign scene',// ' (value), high quality used stamp',//['Style', 'en'],
+   // staticPrompt: ' (value), high quality used stamp',//['Style', 'en'],
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stamp
-    model: 'webUi',//'dailymotion',//'youtube',//'midjourney',//'webUi',//'huggin',// 'webUi',//'midjourney',
-    info: ' futurium',
-   // "negative_prompt": ' (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck'
-
+    model: 'youtube',//'dailymotion',//'youtube',//'midjourney',//'webUi',//'huggin',// 'webUi',//'midjourney',
+    info: "",//' pinup pixel used stamp',
+    "negative_prompt": ' (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck'
+,
     stableDiffusionOptions: {
         //  "sampler_name": "Heun",
         "restore_faces": true,
