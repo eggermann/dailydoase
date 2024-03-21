@@ -51,9 +51,9 @@ const _ = {
 
         const meaningRotatingStreams = [];
 
-        for (let i = 0; i < streams.length; i++) {
-            meaningRotatingStreams.push(streams[(i + _.shiftCnt) % streams.length])
-        }
+      //  for (let i = 0; i < streams.length; i++) {
+            meaningRotatingStreams.push(streams[(Math.round(_.shiftCnt+(Math.random()*10))) % streams.length])
+    //    }
         _.shiftCnt++
         console.log('-------> start word mixing <----------')
         let prompts = meaningRotatingStreams.map(async (i, index) => {
@@ -81,7 +81,7 @@ const _ = {
                 let allIn2 = [];
                 //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
                 //        allIn2 = allIn2.concat(title)
-                allIn2 = allIn2.concat(title)
+                allIn2 = allIn2.concat(title,next)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                 return _.filterEmptys(allIn2).join(' ');
