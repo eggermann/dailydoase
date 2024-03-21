@@ -50,8 +50,7 @@ const compo = {
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stampeee
-    model: 'youtube',//'huggin',// 'webUi',//'midjourney',
-    modelUrl:'https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
+    model: 'stabilityai/stable-diffusion-2-1',//'huggin',// 'webUi',//'midjourney',
     //info: ' pinup pixel used stamp',
     negative_prompt: 'phone',
     stableDiffusionOptions: {
