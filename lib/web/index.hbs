@@ -71,8 +71,7 @@
     </main>
 
     {{#if isHome}}
-        {{log menu.[1].href}}
-        <iframe loading="lazy" class="newest-folder" src="{{menu.[1].href}}?frame=true" frameborder="0"></iframe>
+        <iframe loading="lazy" class="newest-folder" src="{{menu.[1].href}}?frame=true&sort=desc" frameborder="0"></iframe>
     {{/if}}
 </div>
 
