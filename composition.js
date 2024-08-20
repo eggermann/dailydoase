@@ -36,7 +36,7 @@ const compo = {
 
     folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [ ['Nature', 'en'], ['Art', 'en'], ['Ocean', 'en'],['Mensch', 'de']],
+    words: [['Nature', 'en'] ,['Art', 'en'], ['Ocean', 'en'], ['Mensch', 'de']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
@@ -46,12 +46,14 @@ const compo = {
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
     staticPrompt: ' , internet, raw style',//' , as clown ',//, as shadow puppets ',//as vegetable toys',//['Style', 'en'],
-    prePrompt:'a mobile phone photo from twitter ot instagram',
+    prePrompt: 'a mobile phone photo on twitter ot instagram',
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stampeee
-    model: 'youtube',//'huggin',// 'webUi',//'midjourney',
-    modelUrl:'https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
+    model: 'huggin',//'youtube',//'huggin',// 'webUi',//'midjourney',
+    //modelUrl:'https://api-inference.huggingface.co/models/playgroundai/playground-v2.5-1024px-aesthetic',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
+    modelUrl: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',//stabilityai/stable-diffusion-xl-base-1.0',//'https://api-inference.huggingface.co/models/fal/AuraFlow',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
+
     //info: ' pinup pixel used stamp',
     negative_prompt: 'phone',
     stableDiffusionOptions: {
