@@ -191,6 +191,7 @@ const _ = {
         const wordStreams = options.words.map(async wordAndLang => {
             let wordStream = null;
 
+
             if (wordAndLang[0][0] == ':') {
                 const options = wordAndLang[1];
 
@@ -202,6 +203,7 @@ const _ = {
             } else {
 //default wiki
                 wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
+
             }
 
 //readin nextfunction
@@ -212,12 +214,14 @@ const _ = {
 
             if (!wordStream.circularLinks.loadedFromCrash) {
                 await wordStream.start();
+
             } else {
                 console.log(wordStream.startWord, ' global.loadedFromCrash  ', wordStream.circularLinks.loadedFromCrash)
             }
 
             return wordStream;
         });
+
 
         return Promise.all(wordStreams).then(async (streams) => {
 
@@ -230,7 +234,12 @@ const _ = {
                 }
             }
 
+
+
             server.init(getNext(streams, options))
+
+
+
             await _.loop(streams, options);
         });
     }
