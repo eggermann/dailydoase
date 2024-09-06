@@ -55,3 +55,5 @@ Thumbs.db
 # internal counters
 lib/get-from-stable-diffusion/exemplar-cntr.txt
 XXXfolder-cntr.txt
+
+.env
