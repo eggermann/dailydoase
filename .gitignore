@@ -57,3 +57,5 @@ lib/get-from-stable-diffusion/exemplar-cntr.txt
 XXXfolder-cntr.txt
 
 .env
+auto-count--collection.txt
+auto-count--exemplar.txt
