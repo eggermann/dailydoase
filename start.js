@@ -5,12 +5,42 @@ const chalk = require('chalk');
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
 
 const WordStream = require("./lib/word-engine/WordStream.cjs");
-const NewsStream = require("./lib/word-engine/NewsStream.cjs");
+const NewsStream =
+    require("./lib/word-engine/NewsStream.cjs");
 
 const YPStream = require("./lib/word-engine/ypCommentsStream.cjs");
 const server = require("./lib/server/index.cjs");
 const onExit = require('./lib/helper/onExit.cjs');
 
+
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+
+const Groq = require('groq-sdk');
+
+const groq = new Groq({
+    apiKey: process.env[process.env.GROQ_API_KEY], // This is the default and can be omitted
+});
+
+async function mixNewsWithGroq(n1, n2) {
+  //  const n1Text = n1.description, n2Text = n2.description;
+    const n1Text = JSON.stringify(n1), n2Text =JSON.stringify( n2);
+
+    const prompt = `a detailed real only prompt for a image machine mixed from -->
+    ${n1Text},${n2Text}.  pure prompt for direct use on inference,only value: the value :
+`;
+
+    const chatCompletion = await groq.chat.completions.create({
+        messages: [{role: 'user', content: prompt}],
+        model: 'mixtral-8x7b-32768',
+    });
+    const text = chatCompletion.choices[0].message.content
+
+    console.log('textfrom GROQ----->',chalk.blue( text));
+    return text
+}
 
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -46,14 +76,17 @@ const _ = {
     //_*this handle the form of link_*_//
     shiftCnt: 0,
     async getPrompt(streams, options) {
+
+
         let allIn = [];
         let mains = '';
 
         const meaningRotatingStreams = [];
 
-      //  for (let i = 0; i < streams.length; i++) {
-            meaningRotatingStreams.push(streams[(Math.round(_.shiftCnt+(Math.random()*10))) % streams.length])
-    //    }
+        for (let i = 0; i < streams.length; i++) {
+            meaningRotatingStreams.push(streams[(Math.round(_.shiftCnt + (Math.random() * 10))) % streams.length])//pickt unterschiedlichmal streams
+        }
+
         _.shiftCnt++
         console.log('-------> start word mixing <----------')
         let prompts = meaningRotatingStreams.map(async (i, index) => {
@@ -67,7 +100,6 @@ const _ = {
             const title = link.title;
             const next = link.sentences && link.sentences.next.shift() || '';
             console.log('++++++next : ', next, '++++++title : ', title, '++++++prev : ', prev)
-            console.log()
 
             if (i.isYP) {
                 let verbs = '';
@@ -81,10 +113,21 @@ const _ = {
                 let allIn2 = [];
                 //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
                 //        allIn2 = allIn2.concat(title)
-                allIn2 = allIn2.concat(title,next)
+                allIn2 = allIn2.concat(title, next)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                 return _.filterEmptys(allIn2).join(' ');
+            } else if (i.isNews) {
+
+                const n1 = link;
+                const n2 = await i.getNext();
+           //     console.log('----------',n1,n2);
+
+
+
+                n1.prompt = await mixNewsWithGroq(n1, n2)
+
+                return n1;
             } else {
                 let verbs = '';
 
@@ -96,7 +139,7 @@ const _ = {
                 //-->   i.getArticle(link.title);
                 let allIn2 = [];
                 //   allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
-                allIn2 = allIn2.concat(next ,title)
+                allIn2 = allIn2.concat(next, title)
 // allIn2 = allIn2.concat(verbs.adjectives, prev, verbs.verbs)
 
                 return _.filterEmptys(allIn2).join(' ');
@@ -183,8 +226,8 @@ const _ = {
     async init(options) {
         const v = options.model ? options.model : 'webUi'
         _.model = await getFromStableDiffusion.setVersion(v);
-        if(!  _.model ){
-            console.error('no model ',v)
+        if (!_.model) {
+            console.error('no model ', v)
             process.exit();
         }
 
@@ -227,17 +270,15 @@ const _ = {
 
             onExit(streams);
 
-            const getNext=function(streams, options){
+            const getNext = function (streams, options) {
 
-                return async()=>{
+                return async () => {
                     await _.loop(streams, options);
                 }
             }
 
 
-
             server.init(getNext(streams, options))
-
 
 
             await _.loop(streams, options);

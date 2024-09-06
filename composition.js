@@ -30,23 +30,20 @@ for (let i in st) {
 
 
 const compo = {
-    //promptFunktion:(streams, options)=>{},
-    //circularLinksGetNext:()=>{
-    //this is the cirular context },
 
-    folderVersionString: 'stamp',// v-{cnt}-{folderVersionString} bear beer
+    folderVersionString: 'flux schnell',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
-    words: [['Nature', 'en'] ,['Art', 'en'], ['Ocean', 'en'], ['Mensch', 'de']],
+    // words: [['Nature', 'en'] ,['Art', 'en'], ['Ocean', 'en'], ['Mensch', 'de']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
 
     //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
-    //words: [[':NewsStream', {startWord: ''}]],
+ words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: ' , internet, raw style',//' , as clown ',//, as shadow puppets ',//as vegetable toys',//['Style', 'en'],
-    prePrompt: 'a mobile phone photo on twitter ot instagram',
+    staticPrompt: ' internet, raw style',//' , as clown ',//, as shadow puppets ',//as vegetable toys',//['Style', 'en'],
+    prePrompt: 'on twitter ot instagram: ',
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stampeee
