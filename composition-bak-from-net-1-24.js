@@ -13,7 +13,7 @@ import pkg from './modulePolyfill.js';
 
 const {require, __dirname} = pkg;
 
-const st = require('./lib/get-from-stable-diffusion/options.oak.json')
+const st = require('./lib/get-from-stable-diffusion/trash/options.oak.json')
 
 const allStatics = [];
 for (let i in st) {
