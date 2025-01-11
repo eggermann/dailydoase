@@ -13,7 +13,7 @@ import pkg from './modulePolyfill.js';
 
 const {require, __dirname} = pkg;
 
-const st = require('./lib/get-from-stable-diffusion/options.oak.json')
+const st = require('./lib/get-from-stable-diffusion/trash/options.oak.json')
 
 const allStatics = [];
 for (let i in st) {
@@ -37,9 +37,10 @@ const compo = {
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
 //    words: [[':YP', 'en']],,['Postage_stamp', 'en']
     //words: [['Robotics', 'en'],[':NewsStream', {startWord: ''}],['Humanities', 'en']],
+    words: [['Robotics', 'en']],
 
     //  words: [['Excellence', 'en'], ['Honesty', 'en'], ['Loyalty', 'en'], ['Passion', 'en'], ['Courage', 'en']],
- words: [[':NewsStream', {startWord: ''}]],
+// words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
     staticPrompt: ' internet, raw style',//' , as clown ',//, as shadow puppets ',//as vegetable toys',//['Style', 'en'],

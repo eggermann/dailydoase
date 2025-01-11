@@ -2,17 +2,10 @@ import pkg from './modulePolyfill.js';
 
 const {require} = pkg;
 const chalk = require('chalk');
+
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
-
-const WordStream = require("./lib/word-engine/WordStream.cjs");
-const NewsStream =
-    require("./lib/word-engine/NewsStream.cjs");
-
-const YPStream = require("./lib/word-engine/ypCommentsStream.cjs");
+import wordStream from './lib/word-stream/index.js'
 const server = require("./lib/server/index.cjs");
-const onExit = require('./lib/helper/onExit.cjs');
-
-
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -231,65 +224,24 @@ const _ = {
             process.exit();
         }
 
-        const wordStreams = options.words.map(async wordAndLang => {
-            let wordStream = null;
+        const words = options.words;
+        const wordStreams= await wordStream.initStreams(words);
 
+        const getNext = function (streams, options) {
 
-            if (wordAndLang[0][0] == ':') {
-                const options = wordAndLang[1];
-
-                if (wordAndLang[0] == ':YP') {
-                    wordStream = new YPStream(options);
-                } else {//news}
-                    wordStream = new NewsStream(options);
-                }
-            } else {
-//default wiki
-                wordStream = new WordStream(wordAndLang[0], wordAndLang[1]);
-
+            return async () => {
+                await _.loop(streams, options);
             }
+        }
 
-//readin nextfunction
-            if (options.circularLinksGetNext) {
-                wordStream.circularLinks.getNext =
-                    options.circularLinksGetNext.bind(wordStream.circularLinks);
-            }
-
-            if (!wordStream.circularLinks.loadedFromCrash) {
-                await wordStream.start();
-
-            } else {
-                console.log(wordStream.startWord, ' global.loadedFromCrash  ', wordStream.circularLinks.loadedFromCrash)
-            }
-
-            return wordStream;
-        });
-
-
-        return Promise.all(wordStreams).then(async (streams) => {
-
-            onExit(streams);
-
-            const getNext = function (streams, options) {
-
-                return async () => {
-                    await _.loop(streams, options);
-                }
-            }
-
-
-            server.init(getNext(streams, options))
-
-
-            await _.loop(streams, options);
-        });
+        server.init(getNext(wordStreams, options))
+        await _.loop(wordStreams, options);
     }
 };
 
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
 export default async options => {
-
     await _.init(options);
 
 }
