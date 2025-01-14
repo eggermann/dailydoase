@@ -1,0 +1,17 @@
+{
+  "name": "midjourney-bot",
+  "version": "1.0.1",
+  "description": "A Discord bot for all your Midjourney needs!",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node deploy-commands.js",
+    "start": "node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "log": "^6.3.1",
+    "midjourney-client": "^1.0.8"
+  }
+}
