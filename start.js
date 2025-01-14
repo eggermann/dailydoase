@@ -5,6 +5,7 @@ const chalk = require('chalk');
 
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
 import wordStream from 'semantic-stream'
+
 const server = require("./lib/server/index.cjs");
 const dotenv = require('dotenv');
 
@@ -18,8 +19,8 @@ const groq = new Groq({
 });
 
 async function mixNewsWithGroq(n1, n2) {
-  //  const n1Text = n1.description, n2Text = n2.description;
-    const n1Text = JSON.stringify(n1), n2Text =JSON.stringify( n2);
+    //  const n1Text = n1.description, n2Text = n2.description;
+    const n1Text = JSON.stringify(n1), n2Text = JSON.stringify(n2);
 
     const prompt = `a detailed real only prompt for a image machine mixed from -->
     ${n1Text},${n2Text}.  pure prompt for direct use on inference,only value: the value :
@@ -31,7 +32,7 @@ async function mixNewsWithGroq(n1, n2) {
     });
     const text = chatCompletion.choices[0].message.content
 
-    console.log('textfrom GROQ----->',chalk.blue( text));
+    console.log('textfrom GROQ----->', chalk.blue(text));
     return text
 }
 
@@ -114,8 +115,7 @@ const _ = {
 
                 const n1 = link;
                 const n2 = await i.getNext();
-           //     console.log('----------',n1,n2);
-
+                //     console.log('----------',n1,n2);
 
 
                 n1.prompt = await mixNewsWithGroq(n1, n2)
@@ -177,14 +177,14 @@ const _ = {
 //>-const shuffledArr = array => array.sort(() => 0.5 - Math.random());
         return prompt;
     },
-    async loop(streams, options, oldPrompt) {
+    async loop(streams, config, oldPrompt) {
 
         let prompt = '';
 
-        if (!oldPrompt) {
-            prompt = options.promptFunktion
-                ? await options.promptFunktion(streams, options)
-                : await _.getPrompt(streams, options);
+        if (!oldPrompt) {//the last api call was an error
+            prompt = config.promptFunktion
+                ? await config.promptFunktion(streams, config)
+                : await _.getPrompt(streams, config);
 
             prompt = nlp(prompt).text();
             console.log('org-prompt: ', chalk.red(prompt));
@@ -194,39 +194,39 @@ const _ = {
             prompt = oldPrompt
         }
 
-        //  console.log('Prompt: ', chalk.yellow(prompt), _.model);
-// ----------->
+        console.log('Prompt: ', chalk.yellow(prompt), _.model);
+
         let keepPrompt = null;
 
-        const success = await _.model.prompt(prompt, options);// v
+        const success = await _.model.prompt(prompt, config.prompt);// v
+
         console.log(_.rnd_cnt++, '----------->success', success);
 
         if (!success) {
             keepPrompt = prompt;
         }
 
-        const wait = _.model.config.pollingTime
+        const wait = config.model?.pollingTime || 4000;
 
         if (wait) {
             setTimeout(async () => {
-                console.log('******** again ******pollingTime after ', wait)
-                await _.loop(streams, options, keepPrompt);
+                console.log('******** again ****** polling interval ', wait)
+                await _.loop(streams, config, keepPrompt);
 
             }, wait);
         }
 
     },
-    async init(options) {
-        const v = options.model ? options.model : 'webUi'
-        _.model = await getFromStableDiffusion.setVersion(v);
+    async init(config) {
+        _.model = await getFromStableDiffusion.setVersion(config.model);
 
         if (!_.model) {
             console.error('no model ', v)
             process.exit();
         }
 
-        const words = options.words;
-        const wordStreams= await wordStream.initStreams(words);
+        const words = config.words;
+        const wordStreams = await wordStream.initStreams(words);
 
         const getNext = function (streams, options) {
 
@@ -235,16 +235,18 @@ const _ = {
             }
         }
 
-        server.init(getNext(wordStreams, options))
-        await _.loop(wordStreams, options);
+        server.init(getNext(wordStreams, config))
+        await _.loop(wordStreams, config);
     }
 };
 
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
-export default async options => {
-    await _.init(options);
+export default async config => {
+    await _.init(config);
 
 }
 
 //const a = _.getVerbs('beautiful running rising sun of merged lives. A beautiful cron is comining over the rainbow')
+
+
