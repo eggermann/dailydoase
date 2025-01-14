@@ -11,12 +11,15 @@ async function testHuggin() {
         }
 
         const options = {
+            ...hugginConfig,
             prePrompt: 'A beautiful ',
             staticPrompt: ', 4k, high quality',
             negative_prompt: 'blurry, low quality',
             num_inference_steps: 30,
             model: 'https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0'
         };
+        
+        delete options.description;
 
         const prompt = 'landscape with mountains and a lake';
 
