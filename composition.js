@@ -30,8 +30,6 @@ for (let i in st) {
 
 
 const compo = {
-
-    folderVersionString: 'flux schnell',// v-{cnt}-{folderVersionString} bear beer
     //  words: [[':YP', 'en']],['War', 'en'],
     // words: [['Nature', 'en'] ,['Art', 'en'], ['Ocean', 'en'], ['Mensch', 'de']],
     //  words: [['War', 'en'],['Art', 'en'],['Landscape', 'en']],
@@ -43,26 +41,24 @@ const compo = {
 // words: [[':NewsStream', {startWord: ''}]],
 
     //  ['Adolescence', 'en']  randomImageOrientations: [' background'],// allStatics,//,['spo-l,m t on ', ' background '],
-    staticPrompt: ' internet, raw style',//' , as clown ',//, as shadow puppets ',//as vegetable toys',//['Style', 'en'],
-    prePrompt: 'on twitter ot instagram: ',
+
+    prompt: {
+        staticPrompt: ' internet, raw style',//' , as clown ',//, as shadow puppets ',//as vegetable toys',//['Style', 'en'],
+        prePrompt: 'on twitter ot instagram: ',
+        negative_prompt: 'phone'
+    },
     // randomImageOrientations: [' background', ' in the foreground '],
     // randomImageOrientations: [' background', ' spot on', ' together with ', ' act as '],
 //    titts pixel  used stampeee
-    model: 'huggin',//'youtube',//'huggin',// 'webUi',//'midjourney',
+    // model: 'huggin',//'youtube',//'huggin',// 'webUi',//'midjourney',
     //modelUrl:'https://api-inference.huggingface.co/models/playgroundai/playground-v2.5-1024px-aesthetic',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
-    modelUrl: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',//stabilityai/stable-diffusion-xl-base-1.0',//'https://api-inference.huggingface.co/models/fal/AuraFlow',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
-
     //info: ' pinup pixel used stamp',
-    negative_prompt: 'phone',
-    stableDiffusionOptions: {
-        //  "sampler_name": "Heun",
-        "restore_faces": true,
-        steps: 24,//only webui
-        // width: 320,
-        // height: 208,
-        /* self_attention:'yes',
-       upscale:'yes'*/
+
+    model: {
+        url: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',//stabilityai/stable-diffusion-xl-base-1.0',//'https://api-inference.huggingface.co/models/fal/AuraFlow',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
+        script: 'post-to-hugging.js',
     }
+
 };
 process.on('warning', e => console.warn(e.stack));
 import('./start.js').then(module => module.default(compo));

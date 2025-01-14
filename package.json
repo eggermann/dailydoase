@@ -9,6 +9,7 @@
     "animated-scroll-to": "^2.3.0",
     "aos": "^2.3.4",
     "axios": "^1.5.1",
+    "axios-retry": "^4.5.0",
     "browser-sync": "^2.28.3",
     "cheerio": "^1.0.0-rc.12",
     "compromise": "^14.8.2",
