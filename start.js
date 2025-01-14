@@ -4,7 +4,7 @@ const {require} = pkg;
 const chalk = require('chalk');
 
 import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
-import wordStream from './lib/word-stream/index.js'
+import wordStream from 'semantic-stream'
 const server = require("./lib/server/index.cjs");
 const dotenv = require('dotenv');
 
@@ -219,6 +219,7 @@ const _ = {
     async init(options) {
         const v = options.model ? options.model : 'webUi'
         _.model = await getFromStableDiffusion.setVersion(v);
+
         if (!_.model) {
             console.error('no model ', v)
             process.exit();
