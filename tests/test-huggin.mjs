@@ -1,4 +1,5 @@
 import getFromStableDiffusion from '../lib/get-from-stable-diffusion/index.js';
+import { config as hugginConfig } from '../lib/get-from-stable-diffusion/post-to-huggin.js';
 
 async function testHuggin() {
     try {
