@@ -3,7 +3,7 @@ import pkg from './modulePolyfill.js';
 const {require} = pkg;
 const chalk = require('chalk');
 
-import getFromStableDiffusion from './lib/get-from-stable-diffusion/index.js'
+import generator from './lib/generator/index.js'
 import wordStream from 'semantic-stream'
 
 const server = require("./lib/server/index.cjs");
@@ -45,7 +45,7 @@ const shuffleArray = array => {
     }
 }
 const nlp = require('compromise');
-const {fullFillPrompt: fullFillPrompt} = getFromStableDiffusion;
+const {fullFillPrompt: fullFillPrompt} = generator;
 const _ = {
     rnd_cnt: 0,
     filterEmptys: arr => arr.filter(i => i && i.length > 1),
@@ -194,7 +194,7 @@ const _ = {
             prompt = oldPrompt
         }
 
-        console.log('Prompt: ', chalk.yellow(prompt), _.model);
+        console.log('Prompt: ', chalk.yellow(prompt));
 
         let keepPrompt = null;
 
@@ -218,7 +218,10 @@ const _ = {
 
     },
     async init(config) {
-        _.model = await getFromStableDiffusion.setVersion(config.model);
+        _.model = await generator.setVersion(config.model);
+
+
+
 
         if (!_.model) {
             console.error('no model ', v)
