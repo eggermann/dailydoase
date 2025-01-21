@@ -218,9 +218,7 @@ const _ = {
 
     },
     async init(config) {
-        _.model = await generator.setVersion(config.model);
-
-
+        _.model = await generator.setVersion(config);
 
 
         if (!_.model) {
