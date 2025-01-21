@@ -1,0 +1,14 @@
+{
+  "prompt": "ISBN (identifier)",
+  "totalPrompt": "ISBN (identifier)",
+  "options": {
+    "words": [
+      [
+        "medicine",
+        "en"
+      ]
+    ],
+    "model": "huggin"
+  },
+  "timestamp": "2025-01-14T20:54:02.575Z"
+}
