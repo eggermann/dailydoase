@@ -13,10 +13,10 @@ import pkg from './modulePolyfill.js';
 
 const {require, __dirname} = pkg;
 
-const st = require('./lib/get-from-stable-diffusion/trash/options.oak.json')
+//const st = require('./lib/get-from-stable-diffusion/trash/options.oak.json')
 
 const allStatics = [];
-for (let i in st) {
+/*for (let i in st) {
     st[i].forEach(line => {
         // console.log(line)
         if (line.indexOf('XX') != -1) {
@@ -27,7 +27,7 @@ for (let i in st) {
     })
 
 }
-
+*/
 
 const compo = {
     //  words: [[':YP', 'en']],['War', 'en'],
@@ -54,11 +54,18 @@ const compo = {
     //modelUrl:'https://api-inference.huggingface.co/models/playgroundai/playground-v2.5-1024px-aesthetic',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
     //info: ' pinup pixel used stamp',
 
-    model: {
+    model__HugginX: {
         url: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',//stabilityai/stable-diffusion-xl-base-1.0',//'https://api-inference.huggingface.co/models/fal/AuraFlow',//https://api-inference.huggingface.co/models/ByteDance/SDXL-Lightning',
-        script: 'post-to-hugging.js',
+        scriptName: 'post-to-hugging.js',
+    },
+
+    model: {
+        scriptName: 'post-to-youtube.js',
     }
 
 };
+
+
+
 process.on('warning', e => console.warn(e.stack));
 import('./start.js').then(module => module.default(compo));
