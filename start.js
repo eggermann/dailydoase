@@ -232,12 +232,12 @@ const _ = {
         const getNext = function (streams, options) {
 
             return async () => {
-                await _.loop(streams, options);
+       //         await _.loop(streams, options);
             }
         }
 
         server.init(getNext(wordStreams, config))
-        await _.loop(wordStreams, config);
+    await _.loop(wordStreams, config);
     }
 };
 
