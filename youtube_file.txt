@@ -1,0 +1,43 @@
+{
+  "kind": "youtube#searchResult",
+  "etag": "m7ML6Xg3ey3YFOhC9fEmp_8lbtU",
+  "id": {
+    "kind": "youtube#video",
+    "videoId": "eCUewQZ_Kyk"
+  },
+  "snippet": {
+    "publishedAt": "2011-03-18T05:42:31Z",
+    "channelId": "UCB0th7OfiIEOq28WsNUGeBA",
+    "title": "Drilling down into eBook identifiers -- ISBN, ISTC, DOI etc.",
+    "description": "Zeeba TV (http://zeeba.tv) is part of the River Valley group of Companies. http://www.rivervalleytechnologies.com/",
+    "thumbnails": {
+      "default": {
+        "url": "https://i.ytimg.com/vi/eCUewQZ_Kyk/default.jpg",
+        "width": 120,
+        "height": 90
+      },
+      "medium": {
+        "url": "https://i.ytimg.com/vi/eCUewQZ_Kyk/mqdefault.jpg",
+        "width": 320,
+        "height": 180
+      },
+      "high": {
+        "url": "https://i.ytimg.com/vi/eCUewQZ_Kyk/hqdefault.jpg",
+        "width": 480,
+        "height": 360
+      }
+    },
+    "channelTitle": "River Valley",
+    "liveBroadcastContent": "none",
+    "publishTime": "2011-03-18T05:42:31Z"
+  },
+  "link": "https://www.youtube.com/watch?v=eCUewQZ_Kyk",
+  "time": 1358,
+  "duration": "PT22M38S",
+  "dimension": "2d",
+  "definition": "sd",
+  "caption": "false",
+  "licensedContent": false,
+  "contentRating": {},
+  "projection": "rectangular"
+}
