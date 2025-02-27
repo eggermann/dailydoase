@@ -219,11 +219,12 @@ const _ = {
     },
     async init(config) {
         _.model = await generator.setVersion(config);
+        console.log(config.saveItemPath)
 
 
         if (!_.model) {
-            console.error('no model ', v)
-            process.exit();
+            console.error('no model ', _.model)
+
         }
 
         const words = config.words;
@@ -232,12 +233,12 @@ const _ = {
         const getNext = function (streams, options) {
 
             return async () => {
-       //         await _.loop(streams, options);
+                //         await _.loop(streams, options);
             }
         }
 
-        server.init(getNext(wordStreams, config))
-    await _.loop(wordStreams, config);
+        server.init(getNext(wordStreams, config), config)
+        await _.loop(wordStreams, config);
     }
 };
 
