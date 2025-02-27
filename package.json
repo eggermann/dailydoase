@@ -41,7 +41,7 @@
     "recursive-readdir": "^2.2.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "semantic-stream": "^1.0.0",
+    "semantic-stream": "^2.0.1",
     "sftp-upload": "^1.0.4",
     "sharp": "^0.32.6",
     "temp": "^0.9.4",
