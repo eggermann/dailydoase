@@ -34,11 +34,10 @@ module.exports = {
             NODE_ENV: mode
         }),
         new BrowserSyncPlugin({
-            // browse to http://localhost:3000/ during development,
-            // ./public directory is being served
+            // Proxy requests to Express server
             host: 'localhost',
             port: 3000,
-            server: {baseDir: ['lib/web/dist']}
+            proxy: 'http://localhost:4000'
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css'
