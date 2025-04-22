@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <title>daily Doase</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}">
+
+<header class="c-header">
+    <h1><span data-aos-anchor-placement="top-center" data-aos="fade-down">daily</span>
+        <span data-aos-anchor-placement="top-center" data-aos-delay="300" data-aos="fade-up">Doase</span>
+        <span data-aos-anchor-placement="top-center" data-aos-delay="500" data-aos="fade-down">🌴</span>
+    </h1>
+
+</header>
+
+
+<!--{_{>back-to-top-button}}-->
+<main>
+    <div class="c-panel">
+        {{#unless images}}
+            <img class="c-panel__bg"/>
+        {{/unless}}
+
+        {{#if images}}
+            <div class="c-panel__images">
+                {{#images}}
+                    <div class="c-panel__image">
+                        <a href="{{href}}/img">
+                            <img height="{{json.stableDiffusionOptions.height}}"
+                                 width="{{json.stableDiffusionOptions.width}}"
+                                 id="image{{json.name}}" data-mtime="{{mtime}}"
+                                 loading="lazy" src="{{href}}"
+                                 alt="image of {{ json.prompt}}" title="{{ json.prompt}}">
+                        </a>
+                        <span class="c-panel__image_infos">
+                        <!--a href="{{href}}/mint">mint</a-->
+                        </span>
+
+                        <p class="c-panel__images__desc"></p>
+                    </div>
+
+
+                {{/images}}
+            </div>
+        {{/if}}
+    </div>
+
+    <div class="c-panel__content">
+        <small class="realease">
+            release 1
+        </small>
+
+        <div class="c-panel__content__info">
+
+        </div>
+    </div>
+
+
+</main>
+<aside class="c-aside">
+    <nav class="c-aside__menu">
+        <h2>history</h2>
+        <ul>
+            {{#menu}}
+                <li>
+                    {{#current}}   <a aria-current="true" href="{{href}}">{{name}}</a>{{/current}}
+                    {{^current}}   <a href="{{href}}">{{name}}</a>{{/current}}
+
+                    {{^../isHome}}
+                        {{#current}}
+                            <script>
+                                    {{#if../autoplay}} window.setTimeout(function () {
+                                        document.getElementById('playPause').click();
+                                    }, 2000); {{/if}}
+                            </script>
+
+                        <div class="menu-actions">
+                            <div class="playPause" onload="startAutoPlay()">
+                                <input id="playPause" checked type="checkbox">
+                                <label for="playPause"><span class="a-cessibility">toggle autoplay</span>
+                                </label>
+                            </div>
+
+                            <!--div class="toggle-view">
+                                <input id="toggleView" checked type="checkbox">
+                                <label for="toggleView"><span class="a-cessibility">toggle view</span>
+                                </label>
+                            </div-->
+                        </div>
+
+
+                        {{/current}}
+                    {{/../isHome}}
+                    <small class="image-cntr"> {{fileCnt}} </small>
+                </li>
+            {{/menu}}
+        </ul>
+    </nav>
+
+    <i class="c-link-to-handmade-section">
+        <a href="" class="">
+            &nbsp; 𝒽𝒶𝓃𝒹𝓂𝒶𝒹𝑒 𝒸𝑜𝓁𝓁𝑒𝒸𝓉𝒾𝑜𝓃𝓈 &nbsp;&#127798;
+        </a>
+    </i>
+</aside>
+<footer>
+    <p>&#9426;&nbsp;eggermann,
+        <small>use it unt il down</small>
+    </p>
+
+</footer>
+</body>
+</html>
