@@ -29,6 +29,48 @@ if (!fs.existsSync(localPath)) {
     fs.mkdirSync(localPath, { recursive: true })
 }
 
+const connectWithRetry = async () => {
+    const maxRetries = 3;
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            await ssh.connect(config);
+            console.log('Connected to remote server');
+            return true;
+        } catch (error) {
+            console.error(`Connection attempt ${i + 1} failed:`, error.message);
+            if (i < maxRetries - 1) {
+                console.log('Retrying in 5 seconds...');
+                await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+        }
+    }
+    return false;
+};
+
+const downloadFile = async (remoteFile, localFile, cleanFile) => {
+    const maxRetries = 3;
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            if (!ssh.isConnected()) {
+                console.log('Reconnecting to server...');
+                const connected = await connectWithRetry();
+                if (!connected) {
+                    throw new Error('Failed to reconnect');
+                }
+            }
+            await ssh.getFile(localFile, remoteFile);
+            return true;
+        } catch (error) {
+            console.error(`Download attempt ${i + 1} failed for ${cleanFile}:`, error.message);
+            if (i < maxRetries - 1) {
+                console.log('Retrying in 5 seconds...');
+                await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+        }
+    }
+    return false;
+};
+
 const downloadDir = async (remotePath, localPath) => {
     try {
         // Get list of files and their types in remote directory
@@ -38,6 +80,8 @@ const downloadDir = async (remotePath, localPath) => {
         console.log('Total files found:', files.length)
         let downloadCount = 0
         let skipCount = 0
+        let failedCount = 0
+        let lastSuccessfulFile = ''
 
         // Download each file
         for (const file of files) {
@@ -61,12 +105,18 @@ const downloadDir = async (remotePath, localPath) => {
                 }
 
                 console.log(`Downloading ${cleanFile}...`)
-                await ssh.getFile(localFile, remoteFile)
-                console.log(`Successfully downloaded ${cleanFile}`)
-                downloadCount++
+                const success = await downloadFile(remoteFile, localFile, cleanFile)
+                if (success) {
+                    console.log(`Successfully downloaded ${cleanFile}`)
+                    downloadCount++
+                    lastSuccessfulFile = cleanFile
+                } else {
+                    console.error(`Failed to download ${cleanFile} after all retries`)
+                    failedCount++
+                }
             } catch (err) {
-                console.error(`Failed to download ${file}:`, err.message)
-                // Continue with next file even if one fails
+                console.error(`Error processing ${file}:`, err.message)
+                failedCount++
                 continue
             }
         }
@@ -74,6 +124,8 @@ const downloadDir = async (remotePath, localPath) => {
         console.log(`\nDownload process completed:`)
         console.log(`- ${downloadCount} files downloaded`)
         console.log(`- ${skipCount} files skipped (already exist)`)
+        console.log(`- ${failedCount} files failed`)
+        console.log(`Last successful download: ${lastSuccessfulFile}`)
     } catch (error) {
         console.error('Download process failed:', error)
     }
