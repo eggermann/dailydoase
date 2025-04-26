@@ -22,11 +22,11 @@ $element-spce-4: 1.6rem;
   }
 
   @include bp(md) {
-    --max-page-width: 90vw;
+    --max-page-width: 100vw;
   }
 
   @include bp(lg) {
-    --max-page-width: 1380px;
+    // --max-page-width: 98vw100vw;
   }
 }
 
@@ -44,10 +44,10 @@ $element-spce-4: 1.6rem;
 body {
   background-color: #000;
   overflow-x: hidden;
+  font-family: sans-serif;
 
   &.play {
-    .realease {
-    }
+    .realease {}
 
     footer * {
       display: none;
@@ -161,7 +161,6 @@ aside {
 
 h1 {
   color: yellow;
-  font-family: sans-serif;
   font-style: italic;
   font-weight: 100;
   letter-spacing: .13em;
@@ -171,7 +170,6 @@ h1 {
 
 h2 {
   color: yellow;
-  font-family: sans-serif;
   font-style: italic;
   font-weight: 100;
   letter-spacing: .13em;
@@ -188,7 +186,8 @@ footer {
 }
 
 .menu-actions {
-  .toggle-view { //https://css-tricks.com/making-pure-css-playPause-button/
+  .toggle-view {
+    //https://css-tricks.com/making-pure-css-playPause-button/
     transform: scale(.7);
 
     label {
@@ -207,18 +206,19 @@ footer {
       position: absolute;
       left: -9999px;
 
-      &:checked + label {
+      &:checked+label {
         border-style: solid;
         border-width: 37px 0 37px 60px;
       }
 
-      &:focus + label {
+      &:focus+label {
         box-shadow: 0 0 5px lightblue;
       }
     }
   }
 
-  .playPause { //https://css-tricks.com/making-pure-css-playPause-button/
+  .playPause {
+    //https://css-tricks.com/making-pure-css-playPause-button/
     //padding:0.1e. 2em;
     transform: scale(.7);
 
@@ -238,12 +238,12 @@ footer {
       position: absolute;
       left: -9999px;
 
-      &:checked + label {
+      &:checked+label {
         border-style: solid;
         border-width: 37px 0 37px 60px;
       }
 
-      &:focus + label {
+      &:focus+label {
         box-shadow: 0 0 5px lightblue;
       }
     }
@@ -267,6 +267,7 @@ main {
 }
 
 .frame {
+
   .c-title span:nth-child(-n+2),
   .c-aside,
   .c-footer {

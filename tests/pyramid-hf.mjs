@@ -53,7 +53,9 @@ async function generateVideo(prompt, height, width, numFrames, seed) {
 }
 
 // Example usage
-const prompt = "A serene landscape with mountains and a lake."; // Adjust this prompt as needed
+const prompt = "1006,Sleuth (Australian TV channel),Translation (biology) , as vegetable toys"; // Adjust this prompt as needed
+
+//const prompt = "tests/LTX-Video-2.mjs"; // Adjust this prompt as needed
 const height = 512; // Ensure this is a multiple of 32
 const width = 768; // Ensure this is a multiple of 32
 const numFrames = 257; // Must be in the form of 8n + 1 (e.g., 257)
