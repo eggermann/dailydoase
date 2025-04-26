@@ -1,0 +1,48 @@
+@import "variables";
+@import "mixins/mixins.breakpoints";
+
+// Layout mixins
+@mixin spawnMaxColumn {
+  max-width: var(--max-page-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+// Animation mixins
+@mixin hover-grow {
+  transition: transform 0.25s ease-in-out;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+// Visibility mixins
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Media query mixins
+@mixin on-hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+// Flex layout mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}

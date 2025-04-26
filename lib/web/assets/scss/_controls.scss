@@ -1,0 +1,90 @@
+@import "variables";
+@import "mixins";
+
+// Control button base styles
+%control-button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: all $transition-fast;
+}
+
+// Menu controls container
+.menu-actions {
+  @include flex-column;
+  gap: $spacing-sm;
+
+  // Toggle view button
+  .toggle-view {
+    transform: scale(.7);
+
+    label {
+      @extend %control-button;
+      border-color: dotted;
+      border-style: double;
+      border-width: 0 0 0 60px;
+      box-sizing: border-box;
+      display: block;
+      height: 74px;
+      transition: all $transition-fast;
+      width: 0;
+    }
+
+    input[type="checkbox"] {
+      @include visually-hidden;
+
+      &:checked + label {
+        border-style: solid;
+        border-width: 37px 0 37px 60px;
+      }
+
+      &:focus + label {
+        box-shadow: 0 0 5px $color-secondary;
+      }
+    }
+  }
+
+  // Play/Pause button
+  .playPause {
+    transform: scale(.7);
+
+    label {
+      @extend %control-button;
+      border-color: transparent transparent transparent #202020;
+      border-style: double;
+      border-width: 0 0 0 60px;
+      box-sizing: border-box;
+      display: block;
+      height: 74px;
+      transition: all $transition-fast;
+      width: 0;
+    }
+
+    input[type="checkbox"] {
+      @include visually-hidden;
+
+      &:checked + label {
+        border-style: solid;
+        border-width: 37px 0 37px 60px;
+      }
+
+      &:focus + label {
+        box-shadow: 0 0 5px $color-secondary;
+      }
+    }
+  }
+}
+
+// State classes
+.active {
+  opacity: 1;
+}
+
+.display-none {
+  display: none !important;
+}
+
+// Accessibility
+.a-cessibility {
+  @include visually-hidden;
+}

@@ -1,72 +1,45 @@
-/**
- * -------------------------------------------------------------------------
- * Breakpoint mixin and alias
- * -------------------------------------------------------------------------
- */
-
-
-
-/**
- * 'breakpoint()' mixin
- *
- * @param {String|Number} $breakpoint1 - quoted, lower-case breakpoint name (e.g. 'm', 'l') or specific breakpoint size (e.g. 100px, 10vw)
- * @param {String|Number} $breakpoint2 - quoted, lower-case breakpoint name (e.g. 'm', 'l') or specific breakpoint size (e.g. 100px, 10vw)
- */
-@mixin breakpoint($breakpoint1, $breakpoint2: false) {
-  $exist: map_get($breakpoints, $breakpoint1);
-
-  @if ($breakpoint2 == false) {
-    @if (type_of($breakpoint1) != number) {
-
-      @if ($exist) {
-        @media screen and (min-width: map_get($exist, "breakpoint")) {
-          @content;
-        }
-      } @else {
-        @error '=> ERROR: BREAKPOINT NOT FOUND! <= | Your Breakpoint-Name (#{$breakpoint1}) did not match any of the values in the $breakpoints map.';
-      }
-    } @else {
-      @media screen and (min-width: $breakpoint1) {
-        @content;
-      }
+// Media Query mixins
+@mixin bp($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
     }
-
   } @else {
-    @if (type_of($breakpoint1) != number) {
-      $existMin: map_get($breakpoints, $breakpoint1);
-
-      @if ($existMin == null) {
-        @error '=> ERROR: BREAKPOINT NOT FOUND! <= | Your Breakpoint-Name (#{$breakpoint1}) did not match any of the values in the $fw-breakpoints-sizes map.';
-      }
-
-      $breakpoint1: map_get($existMin, 'breakpoint');
-    }
-
-    @if (type_of($breakpoint2) != number) {
-      $existMax: map_get($breakpoints, $breakpoint2);
-
-      @if ($existMax == null) {
-        @error '=> ERROR: BREAKPOINT NOT FOUND! <= | Your Breakpoint-Name (#{$breakpoint1}) did not match any of the values in the $breakpoints map.';
-      }
-
-      $breakpoint2: map_get($existMax, 'breakpoint');
-    }
-
-    @if ($breakpoint1 < $breakpoint2) {
-      @media screen and (min-width: $breakpoint1) and (max-width: $breakpoint2) {
-        @content;
-      }
-    } @else {
-      @error '=> ERROR: BREAKPOINT MIN-VALUE HIGHER OR EQUAL THEN MAX-VALUE <= | Your Breakpoint min value (#{$breakpoint1}) is higher or equal then your breakpoint max-value (#{$breakpoint2}).';
-    }
+    @warn 'Invalid breakpoint: #{$breakpoint}. Available breakpoints are: #{map-keys($breakpoints)}';
   }
 }
 
-/**
- * 'bp()' alias for 'breakpoint()' mixin
- */
-@mixin bp($args...) {
-  @include breakpoint($args...) {
-    @content;
+@mixin bp-max($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint) - 0.02) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}. Available breakpoints are: #{map-keys($breakpoints)}';
+  }
+}
+
+@mixin bp-between($min, $max) {
+  @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+    @media (min-width: map-get($breakpoints, $min)) and (max-width: map-get($breakpoints, $max) - 0.02) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoints: #{$min} or #{$max}. Available breakpoints are: #{map-keys($breakpoints)}';
+  }
+}
+
+// Container width mixin
+@mixin make-container() {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    @include bp($breakpoint) {
+      max-width: $container-max-width;
+    }
   }
 }
