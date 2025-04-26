@@ -1,276 +1,43 @@
-$element-spce-2: .7rem;
-$element-spce-4: 1.6rem;
+/**
+ * DailyDoase Styles
+ * Organized following the ITCSS methodology:
+ * Settings -> Tools -> Generic -> Elements -> Objects -> Components -> Utilities
+ */
 
-@import './scss/variables/breakpoints';
-@import 'scss/mixins/mixins.breakpoints';
+// Settings: Variables & Breakpoints (must be first)
+@import './scss/variables/_breakpoints';
+@import './scss/_variables';
 
-@import 'scss/headroom';
-@import 'scss/c-back-to-top';
-@import 'scss/image-panel';
+// Tools: Mixins & Functions
+@import './scss/mixins/_mixins.breakpoints';
+@import './scss/_mixins';
 
-@mixin spawnMaxColumn() {
-  max-width: var(--max-page-width);
-  margin: 0 auto;
-  width: 100%;
-}
+// Elements: Base HTML elements
+@import './scss/_typography';
 
+// Objects: Layout & Structure
+@import './scss/_layout';
+
+// Components
+@import './scss/_navigation';
+@import './scss/_controls';
+@import './scss/_image-panel';
+@import './scss/_headroom';
+@import './scss/_c-back-to-top';
+
+// Root level custom properties with breakpoint mixins
 :root {
   --max-page-width: 100%;
 
-  @include bp(sm) {
+  @include bp('sm') {
     --max-page-width: 94vw;
   }
 
-  @include bp(md) {
+  @include bp('md') {
     --max-page-width: 100vw;
   }
 
-  @include bp(lg) {
-    // --max-page-width: 98vw100vw;
-  }
-}
-
-.a-cessibility {
-  border: 0 !important;
-  clip: rect(0 0 0 0) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  width: 1px !important;
-}
-
-body {
-  background-color: #000;
-  overflow-x: hidden;
-  font-family: sans-serif;
-
-  &.play {
-    .realease {}
-
-    footer * {
-      display: none;
-    }
-  }
-}
-
-header {
-  z-index: 1;
-  margin-bottom: $element-spce-4;
-  position: sticky;
-  left: 0;
-  top: 0;
-  transition: transform .2s;
-
-  &.headroom--unpinned {
-    transform: translateY(-100%);
-  }
-
-  &.headroom--pinned {
-    transform: translateY(0);
-
-    h2 {
-      margin-top: $element-spce-4;
-      // transform: translateY(2rem);
-    }
-  }
-}
-
-aside {
-  .c-aside__menu {
-    @include spawnMaxColumn();
-    background-color: firebrick;
-    bottom: 0;
-    filter: hue-rotate(-130deg);
-    margin-top: $element-spce-4 *3;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    position: fixed;
-    top: 0;
-    width: max-content;
-    z-index: 22;
-
-    &:not(:hover) {
-      mix-blend-mode: plus-lighter;
-    }
-
-    &.opened-menu {
-      height: min-content;
-      opacity: .4;
-
-      button {
-        position: relative;
-        //   transform: scaleX(1.5) rotate(53deg);
-      }
-
-      ul {
-        display: none;
-      }
-    }
-
-    &__button {
-      border: 0;
-      background: transparent;
-      color: yellow;
-      position: absolute;
-      right: 0;
-      padding-left: .6em;
-    }
-
-    ul li:last-child {
-      margin-bottom: $element-spce-4*1.5;
-    }
-
-    a {
-      max-width: 12ch;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: inline-block;
-
-      &[aria-current="true"] {
-        border: 5px solid yellow;
-        mix-blend-mode: difference;
-        filter: hue-rotate(45deg);
-      }
-
-      &:hover {
-        filter: drop-shadow(2px 4px 6px black);
-      }
-    }
-
-    .image-cntr a {
-      text-decoration: none;
-    }
-  }
-
-  .c-link-to-handmade-section {
-    display: none;
-    opacity: .4;
-    bottom: 0;
-    position: fixed;
-    background-color: rgba(255, 255, 255, .3);
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-}
-
-h1 {
-  color: yellow;
-  font-style: italic;
-  font-weight: 100;
-  letter-spacing: .13em;
-  transform: translate(0.14em, -0.5em);
-  display: inline-block;
-}
-
-h2 {
-  color: yellow;
-  font-style: italic;
-  font-weight: 100;
-  letter-spacing: .13em;
-  transform: translate(0.14em, -0.5em);
-  display: inline-block;
-}
-
-footer {
-  @include spawnMaxColumn();
-  align-items: center;
-  display: flex;
-  flex-flow: column;
-  padding-top: $element-spce-4;
-}
-
-.menu-actions {
-  .toggle-view {
-    //https://css-tricks.com/making-pure-css-playPause-button/
-    transform: scale(.7);
-
-    label {
-      border-color: dotted dotted dotted dotted;
-      border-style: double;
-      border-width: 0px 0 0px 60px;
-      box-sizing: border-box;
-      cursor: pointer;
-      display: block;
-      height: 74px;
-      transition: 100ms all ease;
-      width: 0;
-    }
-
-    input[type="checkbox"] {
-      position: absolute;
-      left: -9999px;
-
-      &:checked+label {
-        border-style: solid;
-        border-width: 37px 0 37px 60px;
-      }
-
-      &:focus+label {
-        box-shadow: 0 0 5px lightblue;
-      }
-    }
-  }
-
-  .playPause {
-    //https://css-tricks.com/making-pure-css-playPause-button/
-    //padding:0.1e. 2em;
-    transform: scale(.7);
-
-    label {
-      border-color: transparent transparent transparent #202020;
-      border-style: double;
-      border-width: 0 0 0 60px;
-      box-sizing: border-box;
-      cursor: pointer;
-      display: block;
-      height: 74px;
-      transition: 100ms all ease;
-      width: 0;
-    }
-
-    input[type="checkbox"] {
-      position: absolute;
-      left: -9999px;
-
-      &:checked+label {
-        border-style: solid;
-        border-width: 37px 0 37px 60px;
-      }
-
-      &:focus+label {
-        box-shadow: 0 0 5px lightblue;
-      }
-    }
-  }
-}
-
-main {
-  &[style="display: none"] {
-    display: inherit !important;
-  }
-}
-
-.toggle-view {
-  display: none
-}
-
-.newest-folder {
-  @include spawnMaxColumn();
-  height: 100vh;
-  margin-top: $element-spce-4;
-}
-
-.frame {
-
-  .c-title span:nth-child(-n+2),
-  .c-aside,
-  .c-footer {
-    display: none;
+  @include bp('lg') {
+    --max-page-width: 1380px;
   }
 }

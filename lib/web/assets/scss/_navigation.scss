@@ -1,0 +1,96 @@
+@import "variables";
+@import "mixins";
+
+// Aside navigation
+.c-aside {
+  &__menu {
+    @include spawnMaxColumn;
+    @include flex-column;
+    background-color: $color-accent;
+    bottom: 0;
+    filter: hue-rotate(-130deg);
+    margin-top: $spacing-md * 3;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    width: $menu-width;
+    z-index: $z-menu;
+
+    @include on-hover {
+      &:not(:hover) {
+        mix-blend-mode: plus-lighter;
+      }
+    }
+
+    // Menu states
+    &.opened-menu {
+      height: min-content;
+      opacity: .4;
+
+      button {
+        position: relative;
+      }
+
+      ul {
+        display: none;
+      }
+    }
+
+    // Menu controls
+    &__button {
+      border: 0;
+      background: transparent;
+      color: $color-primary;
+      position: absolute;
+      right: 0;
+      padding-left: $spacing-xs;
+    }
+
+    // List styling
+    ul {
+      li:last-child {
+        margin-bottom: $spacing-md * 1.5;
+      }
+
+      a {
+        max-width: 12ch;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+
+        &[aria-current="true"] {
+          border: 5px solid $color-primary;
+          mix-blend-mode: difference;
+          filter: hue-rotate(45deg);
+        }
+
+        @include on-hover {
+          &:hover {
+            filter: drop-shadow($shadow-overlay);
+          }
+        }
+      }
+    }
+
+    .image-cntr a {
+      text-decoration: none;
+    }
+  }
+}
+
+// Handmade section link
+.c-link-to-handmade-section {
+  display: none;
+  opacity: .4;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(255, 255, 255, .3);
+
+  @include on-hover {
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

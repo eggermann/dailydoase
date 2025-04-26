@@ -21,7 +21,14 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, './lib/web/dist'),
-        publicPath: '/'    //->router    mode == 'development' ? '/' : '/daily-doasis'
+        publicPath: '/'
+    },
+
+    resolve: {
+        extensions: ['.js', '.scss'],
+        alias: {
+            '@scss': path.resolve(__dirname, 'lib/web/assets/scss')
+        }
     },
 
     plugins: [
@@ -76,9 +83,11 @@ module.exports = {
                             implementation: require('dart-sass'),
                             sourceMap: true,
                             sassOptions: {
-                                fiber: false,
-                                webpackImporter: true
-                            },
+                                includePaths: [
+                                    path.resolve(__dirname, 'lib/web/assets/scss')
+                                ],
+                                fiber: false
+                            }
                         }
                     }
                 ]
