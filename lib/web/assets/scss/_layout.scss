@@ -17,9 +17,13 @@ body {
 
 // Header
 header {
-  height:0;
+
+  .home &{
+    height:0;
+  }
+
   z-index: $z-header;
-  position: sticky;
+  position: fixed;
   left: 0;
   top: 0;
   transition: transform $transition-fast;

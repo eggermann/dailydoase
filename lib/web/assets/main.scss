@@ -36,8 +36,4 @@
   @include bp('md') {
     --max-page-width: 100vw;
   }
-
-  @include bp('lg') {
-    --max-page-width: 1380px;
-  }
 }
