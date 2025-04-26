@@ -1,7 +1,12 @@
 $delta: 5em;
 
+// This is the main image panel component 
 .c-panel {
+  text-align: center;
+  font-size: 2vh;
   scroll-snap-type: y;
+  width: 100vw;
+  height: 90vh;
 
   &__list {
     display: flex;
@@ -14,14 +19,21 @@ $delta: 5em;
       transition: transform .25s ease-in-out;
       position: relative;
 
-      &:hover,
       &.active-image {
-        transition: transform .5s ease-in-out;
-        transition-delay: .2s;
-        transform: scale(1.2);
-        filter: drop-shadow(2px 1em 3em black);
         z-index: 10;
         position: relative;
+      }
+
+      @include bp(md) {
+        &:hover,
+        &.active-image {
+          transition: transform .5s ease-in-out;
+          transition-delay: .2s;
+          transform: scale(1.2);
+          filter: drop-shadow(2px 1em 3em black);
+          z-index: 10;
+          position: relative;
+        }
       }
 
       &:not(.active-image) {
@@ -33,7 +45,7 @@ $delta: 5em;
 
       &.hash-tagged {
         width: 34vw;
-       // backdrop-filter: blur(10px);
+        // backdrop-filter: blur(10px);
         filter: drop-shadow(2px 1em 3em black);
       }
 
@@ -64,7 +76,7 @@ $delta: 5em;
         }
       }
 
-      &__image {
+      img {
         width: 100%;
         height: auto;
         aspect-ratio: 1/1;
@@ -82,7 +94,7 @@ $delta: 5em;
 .home {
   .c-panel {
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
 
     img {
       width: 100%;
@@ -90,38 +102,50 @@ $delta: 5em;
       object-fit: contain;
     }
 
-
     &__content {
       z-index: 2;
-      filter: drop-shadow(2px 4px 6px white);
-      bottom: 1.2rem;
-
+      bottom: 1.2rem;    
+      backdrop-filter: blur(10px);
+      mix-blend-mode: color-dodge;
+      margin-top: -10vh;;
 
       &__info {
         mix-blend-mode: color-dodge;
         color: lightblue;
         bottom: 0;
-        font-size: 1.5em;
+        font-size: 3vh;
         max-width: 80vw;
         margin: auto;
         opacity: 1;
+        padding: 1em 0 2em;
+
 
         &:hover,
-        .clicked, {
+        .clicked {
           opacity: .1;
           cursor: none;
         }
       }
-    }
 
-    img:not([src]) {
-      display: none;
-    }
+      &__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
 
-    &__images__desc {
-      position: absolute;
-
+        z-index: -1;
+      }
     }
+  }
+
+  img:not([src]) {
+    display: none;
+  }
+
+  &__images__desc {
+    position: absolute;
+
   }
 }
 
@@ -213,6 +237,7 @@ body[layout="list"] {
 
     &.playing:fullscreen {
       .c-panel__content__info {
+
         // opacity: 1!important;
         &:hover {
           //  opacity: .1;
