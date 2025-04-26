@@ -22,15 +22,15 @@ header {
   }
 
   .headroom {
-    transition: opacity $transition-medium;
+    will-change: transform;
+    transition: transform $transition-medium;
   }
 
   .headroom--pinned {
-    transition: opacity $transition-medium;
-    opacity: 1;
+    transform: translateX(0);
   }
 
   .headroom--unpinned {
-    opacity: 1;
+    transform: translateX(-100%);  // Slide out to the left
   }
 }
