@@ -12,7 +12,7 @@ header {
   }
 
   .headroom--unpinned {
-    transform: translateY(-120vh);
+    transform: translateY(0);
   }
 }
 
@@ -31,7 +31,6 @@ header {
   }
 
   .headroom--unpinned {
-    transition-delay: 4s;
-    opacity: 0;
+    opacity: 1;
   }
 }
