@@ -71,6 +71,7 @@
     "sanitize-filename": "^1.6.3",
     "sass-loader": "^13.2.0",
     "socket.io-client": "^4.7.1",
+    "source-map-loader": "^5.0.0",
     "ssh-sync": "^1.0.3",
     "ssh2": "^1.11.0",
     "ssh2-sftp-client": "^9.0.4",
@@ -80,11 +81,11 @@
   },
   "project": {},
   "scripts": {
-    "start": "cross-env APP_ENV=development npm-run-all webpack:build -p server webpack:watch",
+    "start": "cross-env APP_ENV=development npm-run-all -s webpack:build server webpack:watch",
     "webpack:build": "webpack --config webpack.config.cjs",
     "webpack:watch": "webpack --config webpack.config.cjs --watch",
     "server": "node lib/server/test.cjs",
-    "deploy": "cross-env APP_ENV=production npm-run-all webpack:build -p deploy:upload",
+    "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
     "deploy:upload": "node ./deploy/SSH-upload.cjs"
   },
   "repository": {

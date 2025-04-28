@@ -1,7 +1,9 @@
 @import "variables";
 @import "mixins/mixins.breakpoints";
 
+
 // Layout mixins
+
 @mixin spawnMaxColumn {
   max-width: var(--max-page-width);
   margin: 0 auto;

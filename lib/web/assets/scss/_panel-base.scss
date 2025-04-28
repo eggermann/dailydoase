@@ -15,8 +15,11 @@
     flex-wrap: wrap;
     padding: 0;
     gap: $spacing-sm;
+    align-items: baseline;
 
     &__item {
+
+
       position: relative;
       will-change: transform;
       width: 100%;
@@ -33,7 +36,7 @@
       // Responsive sizes
       @include bp(md) {
         width: 24vw;
-        padding: $spacing-sm;
+        padding: $spacing-xs;
       }
 
       @include bp(xxl) {
@@ -49,12 +52,29 @@
       // Hover effects only on medium screens and up
       @include bp(md) {
         @include on-hover {
+
           &:hover,
           &--active {
             @include hover-grow;
             filter: drop-shadow($shadow-overlay);
             z-index: $z-overlay;
           }
+        }
+      }
+
+      // Info overlay
+      &__infos {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        text-align: left;
+        width: 100%;
+
+        a {
+padding: $spacing-xs;
+          display: block;
+        
+          color: $color-secondary;
+          font-weight: 400;
         }
       }
 
@@ -72,23 +92,7 @@
           opacity: 1;
         }
 
-        a, .c-panel__list__item__link {
-          display: block;
-          text-decoration: none;
-          color: $color-text;
-          background-color: rgba(0, 0, 0, 0.7);
-          padding: $spacing-xs $spacing-sm;
-          border-radius: $border-radius;
-          backdrop-filter: blur(5px);
-          transition: all $transition-fast;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-          font-weight: bold;
-          
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.9);
-            transform: translateY(-2px);
-          }
-        }
+
       }
     }
   }

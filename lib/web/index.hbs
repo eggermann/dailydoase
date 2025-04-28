@@ -15,14 +15,27 @@
     <div class="WRAPPER">
         <header class="c-header">
             <h1 class="c-title">
+                {{#if isHome}}
                 <span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
                 <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
                     data-aos="fade-up">Doase</span>
                 <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
                     data-aos="fade-down">🌴</span>
+                {{else}}
+                <a href="/">
+                    <span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
+                    <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
+                        data-aos="fade-up">Doase</span>
+                    <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
+                        data-aos="fade-down">🌴</span>
+                </a>
+                {{/if}}
             </h1>
 
             <h2>
+                {{#if json.staticPrompt}}
+                <span>{{json.staticPrompt}}</span>
+                {{/if}}
                 {{#infoJson.words}}
                 <span>{{this.[0]}}</span>
                 {{/infoJson.words}}
@@ -76,7 +89,7 @@
             <button class="c-aside__menu__button" value="schliessen/ öffnen">x</button>
 
             <ul>
-                {{#menu}}
+          {{#menu}}
                 {{#current}}
                 <li class="current"> <a aria-current="true" href="{{src}}">{{name}}</a>
                     {{/current}}
