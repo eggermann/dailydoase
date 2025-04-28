@@ -96,4 +96,15 @@ padding: $spacing-xs;
       }
     }
   }
+
+  // Static prompt styling
+  &__list__item__infos {
+    .c-panel__images__item___static-prompt {
+      display: block;
+      filter: brightness(.5); // Even darker
+      font-size: 0.9em;
+      margin-top: 4px;
+      font-weight: 500; // Added for better visibility
+    }
+  }
 }
