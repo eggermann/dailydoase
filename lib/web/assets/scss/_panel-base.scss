@@ -1,0 +1,95 @@
+@import "variables";
+@import "mixins";
+
+// Base panel component
+.c-panel {
+  scroll-snap-type: y mandatory;
+  width: 100vw;
+  height: $header-height;
+  text-align: center;
+  font-size: $font-size-xl;
+
+  // List container
+  &__list {
+    @include flex-center;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: $spacing-sm;
+
+    &__item {
+      position: relative;
+      will-change: transform;
+      width: 100%;
+
+      // Base styles
+      img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+        display: block;
+        object-fit: contain;
+      }
+
+      // Responsive sizes
+      @include bp(md) {
+        width: 24vw;
+        padding: $spacing-sm;
+      }
+
+      @include bp(xxl) {
+        width: 320px;
+      }
+
+      // States
+      &--active {
+        z-index: $z-overlay;
+        position: relative;
+      }
+
+      // Hover effects only on medium screens and up
+      @include bp(md) {
+        @include on-hover {
+          &:hover,
+          &--active {
+            @include hover-grow;
+            filter: drop-shadow($shadow-overlay);
+            z-index: $z-overlay;
+          }
+        }
+      }
+
+      // Info overlay
+      &__info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: $spacing-sm;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+
+        .active-image & {
+          opacity: 1;
+        }
+
+        a, .c-panel__list__item__link {
+          display: block;
+          text-decoration: none;
+          color: $color-text;
+          background-color: rgba(0, 0, 0, 0.7);
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius;
+          backdrop-filter: blur(5px);
+          transition: all $transition-fast;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+          font-weight: bold;
+          
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+}
