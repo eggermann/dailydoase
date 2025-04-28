@@ -73,13 +73,20 @@
         }
 
         a, .c-panel__list__item__link {
-          @include info-text;
           display: block;
           text-decoration: none;
-    //      color: $color-text;
+          color: $color-text;
+          background-color: rgba(0, 0, 0, 0.7);
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius;
+          backdrop-filter: blur(5px);
+          transition: all $transition-fast;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+          font-weight: bold;
           
           &:hover {
-            text-decoration: underline;
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
           }
         }
       }
