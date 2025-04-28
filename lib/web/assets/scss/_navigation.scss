@@ -58,7 +58,8 @@
 
       li {
         margin-bottom: $spacing-sm;
-        
+        display: flex;
+        flex-direction: column;
         &:last-child {
           margin-bottom: $spacing-md * 1.5;
         }
