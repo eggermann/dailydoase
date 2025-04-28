@@ -12,8 +12,7 @@
   background: rgba(0, 0, 0, 0.95);
   display: none;
   outline: none;
-  tabindex: "0";
-
+  
   &::after {
     content: "ESC to close • Space to play/pause • ← → to navigate";
     position: fixed;
