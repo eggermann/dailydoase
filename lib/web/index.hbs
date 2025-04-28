@@ -23,7 +23,8 @@
                     data-aos="fade-down">🌴</span>
                 {{else}}
                 <a href="/">
-                    <span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
+                    <span data-aos-anchor-placement="bottom-center" data-aos-once='true'
+                        data-aos="fade-down">daily</span>
                     <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
                         data-aos="fade-up">Doase</span>
                     <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
@@ -57,12 +58,21 @@
 
 
                         {{> image}}
-                        <span class="c-panel__list__item__infos">
-                            <a class="c-panel__list__item__link" href="{{src}}">
-                                {{json.prompt}}
+                        <div class="c-panel__list__item__infos">
+
+                            <a class="c-panel__list__item__link" href="/v/{{src}}">
+
+
+                                <p class="c-panel__images__item___desc">
+                                    <span class="c-panel__images__item___rompt">
+                                        {{json.prompt}}
+                                    </span>
+
+                                    <span class="c-panel__images__item___static-prompt">
+                                        {{json.staticPrompt}}
+                                    </span>
                             </a>
-                        </span>
-                        <p class="c-panel__images__item___desc"></p>
+                        </div>
                     </li>
 
                     {{/images}}
@@ -89,7 +99,7 @@
             <button class="c-aside__menu__button" value="schliessen/ öffnen">x</button>
 
             <ul>
-          {{#menu}}
+                {{#menu}}
                 {{#current}}
                 <li class="current"> <a aria-current="true" href="{{src}}">{{name}}</a>
                     {{/current}}
@@ -101,11 +111,11 @@
                     {{^../isHome}}
                     {{#current}}
                     <script>
-                        {{#if ../autoplay}}
-                            window.setTimeout(function () {
-                                document.getElementById('playPause').click();
-                            }, 2000);
-                        {{/if}}
+                        { { #if../ autoplay } }
+                        window.setTimeout(function () {
+                            document.getElementById('playPause').click();
+                        }, 2000);
+                        { {/if } }
                     </script>
 
                     <div class="menu-actions">
