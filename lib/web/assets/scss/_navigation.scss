@@ -3,7 +3,9 @@
 
 // Aside navigation
 .c-aside {
-  &__menu {
+  &__menu {  
+
+
     @include spawnMaxColumn;
     @include flex-column;
     background-color: rgba(0, 0, 0, 0.85);
@@ -57,42 +59,73 @@
       padding: $spacing-sm;
 
       li {
+
         margin-bottom: $spacing-sm;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-areas:
+          "link counter"
+          "pseudo pseudo";
+        align-items: center;
+        gap: $spacing-xs;
+
         &:last-child {
           margin-bottom: $spacing-md * 1.5;
         }
-      }
 
-      a {
-        max-width: 12ch;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: inline-block;
-        color: $color-text;
-        padding: $spacing-xs;
-        border-radius: $border-radius;
-        transition: all $transition-fast;
+        a {
+          grid-area: link;
+          max-width: 12ch;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $color-text;
+          padding: $spacing-xs;
+          border-radius: $border-radius;
+          transition: all $transition-fast;
 
-        &[aria-current="true"] {
-          background-color: rgba(255, 255, 255, 0.1);
-          color: $color-primary;
-          box-shadow: 0 0 10px rgba($color-primary, 0.3);
+          &[aria-current="true"] {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: $color-primary;
+            box-shadow: 0 0 10px rgba($color-primary, 0.3);
+          }
+
+          @include on-hover {
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.05);
+              transform: translateX(5px);
+            }
+          }
         }
 
-        @include on-hover {
-          &:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-          }
+        .image-cntr {
+          grid-area: counter;
+          justify-self: start;
+          color: $color-text;
+          opacity: 0.7;
+        }
+
+        &::after {
+          grid-area: pseudo;
         }
       }
     }
 
-    .image-cntr a {
+    .image-cntr {
       text-decoration: none;
+      font-size: 0.85em;
+      padding: 2px 4px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    // Menu item with current version indicator
+    li.current {
+      a {
+        font-weight: 500;
+      }
+      .image-cntr {
+        background: rgba(255, 255, 255, 0.1);
+      }
     }
   }
 }
