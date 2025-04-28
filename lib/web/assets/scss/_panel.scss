@@ -1,0 +1,12 @@
+// Panel component - Main entry point
+// Imports all panel-related styles in a modular way
+
+@import "variables";
+@import "mixins";
+
+// Core components
+@import "panel-base";
+@import "panel-menu-actions";
+@import "panel-swiper";
+@import "panel-playing";
+@import "panel-home";
