@@ -9,10 +9,10 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const mode = (process.env.APP_ENV && process.env.APP_ENV.indexOf('production') != -1) ? 'production' : 'development'
 
-
 module.exports = {
     mode,
     context: path.resolve(__dirname, ''),
+    devtool: 'source-map',
 
     entry: [
         './lib/web/assets/main.js',
@@ -59,11 +59,18 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.s?css$/,
+                test: /\.js$/,
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
-                    },
+                        loader: 'source-map-loader'
+                    }
+                ],
+                enforce: 'pre'
+            },
+            {
+                test: /.s?css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
@@ -95,24 +102,21 @@ module.exports = {
         ]
     },
     optimization: {
-        minimize: true,//(mode === 'production'),
+        minimize: true,
         minimizer: [
             new TerserPlugin({
-                terserOptions: {
-                    sourceMap: false,
-                },
-                test: /\.js(\?.*)?$/i,
+                parallel: true,
             }),
             new CssMinimizerPlugin({
                 minimizerOptions: {
                     preset: [
-                        "default",
+                        'default',
                         {
-                            discardComments: {removeAll: true},
-                        },
-                    ],
-                },
-            }),
+                            discardComments: { removeAll: true }
+                        }
+                    ]
+                }
+            })
         ],
     }
 };

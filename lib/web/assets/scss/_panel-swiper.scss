@@ -58,6 +58,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
     
     img {
       max-width: 100%;
@@ -66,6 +67,7 @@
       height: auto;
       object-fit: contain;
     }
+
   }
 
   .swiper-button-prev,
