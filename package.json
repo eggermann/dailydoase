@@ -81,9 +81,9 @@
   },
   "project": {},
   "scripts": {
-    "start": "cross-env APP_ENV=development npm-run-all -s webpack:build server webpack:watch",
+    "start": "cross-env APP_ENV=development npm-run-all -p server webpack:watch",
     "webpack:build": "webpack --config webpack.config.cjs",
-    "webpack:watch": "webpack --config webpack.config.cjs --watch",
+    "webpack:watch": "npm run webpack:build && webpack --config webpack.config.cjs --watch",
     "server": "node lib/server/test.cjs",
     "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
     "deploy:upload": "node ./deploy/SSH-upload.cjs"
