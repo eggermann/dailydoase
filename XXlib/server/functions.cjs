@@ -1,0 +1,98 @@
+const path = require("path");
+const fs = require("fs");
+const routes = require("./index.cjs");
+const handlebars = require("handlebars");
+const { isValidPartial, isOnServer } = require("./helpers.cjs");
+
+const store = require("../store.cjs");
+const imgPath = store.imgPath;
+// Initialize the file-path cache at startup
+// Using the same imgPath as in functions.cjs
+
+
+// rest of your code ...
+// e.g. app.use('/', routes);
+
+const partialsFolder = path.join(__dirname, "./partials");
+
+fs.readdirSync(partialsFolder)
+    .filter(isValidPartial)
+    .forEach(partial => {
+        const ext = path.extname(partial);
+
+        const fileFullPath = path.join(partialsFolder, partial)
+        const data = fs.readFileSync(fileFullPath, 'utf-8')
+
+        // Store as `"filename without extension": content`.
+        handlebars.registerPartial(path.basename(partial, ext), data);
+    })
+
+const _ = {
+    getImageTemplate() {
+
+        let indexHtml = fs.readFileSync(path.join(__dirname, './../web/dist/index-template.hbs'), 'utf-8');
+
+
+        const homeTemplate = handlebars.compile(indexHtml);
+        return homeTemplate;
+    },
+    getHomeTemplate: () => {
+        let indexHtml = fs.readFileSync(path.join(__dirname, './../web/dist/index-template.hbs'), 'utf-8');
+    
+        const homeTemplate = handlebars.compile(indexHtml);
+        return homeTemplate;
+    },
+
+    /**
+     * Create a "menu" of subfolders from the store
+     */
+    createMenu(dir, actFolderName = "/") {
+        const allFolders = Object.keys(store.getCache()); // e.g. ["v-1__bak","v-2",...]
+
+        // map them to your menu structure
+        let menu = allFolders.map((folder) => {
+            // each folder has array of images in store
+            const fileCnt = store.getFolder(folder).length;
+            const current = actFolderName === folder;
+            
+            // build src (same as href)
+            let src = "/v/" + folder;
+            if (isOnServer()) {
+                // if you have some special prefix on your server, handle it here
+                // e.g.: src = "/daily-doasis" + src;
+            }
+            
+            return {
+                src,            // Use src instead of href
+                href: src,      // Keep href for backward compatibility
+                name: folder,
+                fileCnt,
+                current
+            };
+        });
+
+        // add home link at top
+        let homePath = "/";
+        if (isOnServer()) {
+            // homePath = "/daily-doasis"; // if needed
+        }
+
+        // only include folders with at least 1 file
+        menu = menu.filter((i) => i.fileCnt >= 1);
+
+        // prepend 'Home'
+        menu = [{
+            src: homePath,
+            href: homePath,
+            name: "Home",
+            current: actFolderName == "/"
+        }].concat(menu);
+
+        return menu;
+    },
+    oldDatas: null,
+    webRootPath: '/',
+    cnt: 0
+}
+
+module.exports = _;

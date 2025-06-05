@@ -1,0 +1,146 @@
+@import "variables";
+@import "mixins";
+
+// Aside navigation
+.c-aside {
+  &__menu {  
+
+
+    @include spawnMaxColumn;
+    @include flex-column;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    bottom: 0;
+    margin-top: $spacing-md * 3;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    width: $menu-width;
+    z-index: $z-menu;
+    transition: transform $transition-medium, opacity $transition-medium;
+
+    @include on-hover {
+      &:hover {
+        opacity: 1;
+      }
+      &:not(:hover) {
+        opacity: 0.8;
+      }
+    }
+
+    // Menu states
+    &.opened-menu {
+      height: min-content;
+      opacity: 0.9;
+      backdrop-filter: blur(5px);
+
+      button {
+        position: relative;
+      }
+
+      ul {
+        display: none;
+      }
+    }
+
+    // Menu controls
+    &__button {
+      border: 0;
+      background: transparent;
+      color: $color-primary;
+      position: absolute;
+      right: 0;
+      padding-left: $spacing-xs;
+    }
+
+    // List styling
+    ul {
+      padding: $spacing-sm;
+
+      li {
+
+        margin-bottom: $spacing-sm;
+        display: grid;
+        grid-template-areas:
+          "link counter"
+          "pseudo pseudo";
+        align-items: center;
+        gap: $spacing-xs;
+
+        &:last-child {
+          margin-bottom: $spacing-md * 1.5;
+        }
+
+        a {
+          grid-area: link;
+          max-width: 12ch;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $color-text;
+          padding: $spacing-xs;
+          border-radius: $border-radius;
+          transition: all $transition-fast;
+
+          &[aria-current="true"] {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: $color-primary;
+            box-shadow: 0 0 10px rgba($color-primary, 0.3);
+          }
+
+          @include on-hover {
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.05);
+              transform: translateX(5px);
+            }
+          }
+        }
+
+        .image-cntr {
+          grid-area: counter;
+          justify-self: start;
+          color: $color-text;
+          opacity: 0.7;
+        }
+
+        &::after {
+          grid-area: pseudo;
+        }
+      }
+    }
+
+    .image-cntr {
+      text-decoration: none;
+      font-size: 0.85em;
+      padding: 2px 4px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    // Menu item with current version indicator
+    li.current {
+      a {
+        font-weight: 500;
+      }
+      .image-cntr {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}
+
+// Handmade section link
+.c-link-to-handmade-section {
+  display: none;
+  opacity: .4;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(255, 255, 255, .3);
+
+  @include on-hover {
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

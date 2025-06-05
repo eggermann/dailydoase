@@ -1,0 +1,45 @@
+// Media Query mixins
+@mixin bp($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}. Available breakpoints are: #{map-keys($breakpoints)}';
+  }
+}
+
+@mixin bp-max($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint) - 0.02) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}. Available breakpoints are: #{map-keys($breakpoints)}';
+  }
+}
+
+@mixin bp-between($min, $max) {
+  @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+    @media (min-width: map-get($breakpoints, $min)) and (max-width: map-get($breakpoints, $max) - 0.02) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoints: #{$min} or #{$max}. Available breakpoints are: #{map-keys($breakpoints)}';
+  }
+}
+
+// Container width mixin
+@mixin make-container() {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    @include bp($breakpoint) {
+      max-width: $container-max-width;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "Lighting": [
+      "golden hour, warm glow",
+      "blue hour, twilight, ISO12000",
+      "midday, direct lighting, overhead sunlight",
+      "overcast, whitebox, flat lighting, diffuse",
+      "dreamlike diffuse ethereal lighting",
+      "dramatic lighting, dramatic shadows, illumination",
+      "studio lighting, professional lighting, well-lit",
+      "flash photography",
+      "low-key lighting, dimly lit",
+      "high-key lighting, neutral, flat, even, ambient light"
+    ],
+  "XXAngle & framing": [
+    "extreme close-up",
+    "close-up",
+    "medium shot, waist and torso shot",
+    "long shot, wide shot, full body",
+    "extreme long shot, extreme wide shot, from a distance",
+    "high overhead view, establishing shot, long drone shot",
+    "low angle, imposing, from below",
+    "satellite photography, bird\"s eye view, Google Maps Satellite view, (c) Planet Labs"
+  ],
+  "lens & Capture": [
+    "Fast shutter speed, 1/1000 sec shutter",
+    "Slow shutter speed, long exposure",
+    "bokeh, shallow depth of field, background blur",
+    "tilt shift photography",
+    "motion blur, fast motion capture",
+    "macro lens, macro photo, Sigma 105mm f/2.8",
+    "wide angle lens, 15mm, ultra-wide shot"
+  ],
+  "XXFilm selection": [
+    "Kodachrome",
+    "Autochrome",
+    "Polaroid scan, Instax scan",
+    "cameraphone 2007",
+    "Camera obscura, pinhole photography",
+    "double exposure, award-winning photograph",
+    "black and white, tri-x 400TX",
+    "bleach bypass",
+    "color splash",
+    "Instagram, Hipstamatic, 2015"
+  ],
+  "XXSpecific film & TV": [
+    "from TV show Friends, Season 3",
+    "from The Grand Budapest Hotel, Wes Anderson",
+    "from Blade Runner 2049",
+    "from film 'Interstellar'",
+    "from film 'The Matrix', 1999",
+    "by Simon Stålenhag"
+  ],
+  "XXArt style": [
+    "American newspaper political cartoon sketch, black and white New Yorker cartoon",
+    "woodcut painting",
+    "charcoal sketch",
+    "watercolor",
+    "acrylic on canvas",
+    "colored pencil, detailed",
+    "oil painting",
+    "airbrush",
+    "Chinese watercolor painting",
+    "vector graphics, clipart",
+    "watercolor & pen",
+    "digital painting",
+    "layered paper",
+    "low poly, unreal engine, Blender render",
+    "isometric 3D, highest quality render",
+    "Houdini 3D, Octane render, ZBrush, Blender, highest quality 3D render",
+    "claymation",
+    "still from Pixar animated short",
+    "still from film by Studio Ghibli, Hayao Miyazaki",
+    "Renaissance painting, neoclassical, Renoir",
+    "Impressionism, Monet, Van Gogh",
+    "Rococo, 1730, late Baroque",
+    "Art deco, vintage, moderne",
+    "Bauhaus, postwar midcentury style, Wassily Kandinsky",
+    "surrealist, Magritte, Salvador Dali",
+    "urban street photography",
+    "Thomas Kinkade",
+    "papercraft, origami, highly detailed"
+  ],
+  "XXVibes": [
+    "vaporwave, neon, 80s",
+    "post-apocalyptic",
+    "gothic, fantasy, lush, mystery",
+    "cybernetic, sci-fi, Matrix, glowing",
+    "steampunk, metallic, Victoriana",
+    "Memphis style, Memphis group, bold, kitch, colorful, geometric",
+    "Dieselpunk, grimy, steel, industrial",
+    "Afrofuturism, lush, solarpunk",
+    "cyberpunk, 90s, graphic",
+    "organic, lush, solarpunk, green, sustainable"
+  ],
+  "XXMood": [
+    "light, peaceful, calm, serene, soothing, relaxed, ethereal, delicate",
+    "bright, vibrant, dynamic, energetic, vivid, rich, saturated, exciting",
+    "muted, bleak, somber, melancholic, gloomy, sad, desaturated, dull, dim",
+    "dark, ominous, haunting, forboding, gloomy, stormy, sinister, shadowy, harrowing"
+  ],
+  "Scale": [
+    "grand, high-scale, monumental, imposing, manmade, superstructure, perspective",
+    "ornate, delicate, precise, opulent, elegant, fine, intricate, decorative",
+    "microscopic, tiny, invisible"
+  ]
+}
