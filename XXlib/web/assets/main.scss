@@ -1,0 +1,39 @@
+/**
+ * DailyDoase Styles
+ * Organized following the ITCSS methodology:
+ * Settings -> Tools -> Generic -> Elements -> Objects -> Components -> Utilities
+ */
+
+// Settings: Variables & Breakpoints (must be first)
+@import './scss/variables/_breakpoints';
+@import './scss/_variables';
+
+// Tools: Mixins & Functions
+@import './scss/mixins/_mixins.breakpoints';
+@import './scss/_mixins';
+
+// Elements: Base HTML elements
+@import './scss/_typography';
+
+// Objects: Layout & Structure
+@import './scss/_layout';
+
+// Components
+@import './scss/_navigation';
+@import './scss/_controls';
+@import './scss/_panel';
+@import './scss/_headroom';
+@import './scss/_c-back-to-top';
+
+// Root level custom properties with breakpoint mixins
+:root {
+  --max-page-width: 100%;
+
+  @include bp('sm') {
+    --max-page-width: 94vw;
+  }
+
+  @include bp('md') {
+    --max-page-width: 100vw;
+  }
+}

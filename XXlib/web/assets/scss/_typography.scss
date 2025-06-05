@@ -1,0 +1,80 @@
+@import "variables";
+@import "mixins";
+
+// Base typography
+body {
+  font-family: $font-family-base;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1  
+{          font-weight: 400;}
+// Headings
+h1, h2 {
+  color: $color-primary;
+  font-style: italic;
+  font-weight: 100;
+  letter-spacing: $letter-spacing-wide;
+  transform: translate(0.14em, -0.5em);
+  display: inline-block;
+}
+
+// Text mixins
+@mixin info-text {
+  mix-blend-mode: color-dodge;
+  color: $color-secondary;
+}
+
+// Accessibility helpers
+.a-cessibility {
+  @include visually-hidden;
+}
+
+// Link styling
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  @include on-hover {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Content text
+.c-panel__content {
+  &__info {
+    font-size: $font-size-lg;
+    @include info-text;
+  }
+}
+
+// Title component
+.c-title {
+  @extend h1;
+  margin-bottom: 1rem;
+}
+
+// Helper classes
+.text-center {
+  text-align: center;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-truncate {
+  @extend .text-ellipsis;
+  max-width: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}

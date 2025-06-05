@@ -1,0 +1,76 @@
+@import "variables";
+@import "mixins";
+
+// Core layout
+body {
+  margin: 0;
+  background-color: $color-background;
+  overflow-x: hidden;
+  font-family: $font-family-base;
+
+
+  &.play {
+    footer * {
+      display: none;
+    }
+  }
+}
+
+// Header
+header {
+
+  .home & {
+    height: 0;
+  }
+
+  z-index: $z-header;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: transform $transition-fast;
+
+  &.headroom--unpinned {
+    transform: translateY(-100%);
+  }
+
+  &.headroom--pinned {
+    transform: translateY(0);
+
+    h2 {
+      margin-top: $spacing-md;
+    }
+  }
+}
+
+// Main content
+main {
+  &[style="display: none"] {
+    display: inherit !important;
+  }
+}
+
+// Footer
+footer {
+  @include spawnMaxColumn;
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  padding-top: $spacing-md;
+}
+
+// Frame layout
+.frame {
+  .c-title span:nth-child(-n+2),
+ // .c-aside // ,.c-footer
+  .c-footer
+    {
+    display: none;
+  }
+}
+
+// Utility classes
+.newest-folder {
+  @include spawnMaxColumn;
+  height: 100vh;
+  margin-top: $spacing-md;
+}
