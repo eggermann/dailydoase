@@ -20,18 +20,24 @@ console.log(`Token: ${process.env.HF_API  }` );
 
   // Example prompt for generation
   const prompt = 'Cyberneticist, Operation (game), Horror fiction, Naturism, 4k';
-
-
+  
+  // Fastest FLUX options for testing
+  const fastOptions = {
+    width: 64,
+    height: 64,
+    num_inference_steps: 1
+  };
+  
   // Initialize FLUX client
   const flux = await PostToFLUX.init(config);
   console.log(flux);
-
-  // Generate image (assuming generate method exists)
+  
+  // Generate image with minimal options
   let result;
   try {
-    result = await flux.prompt(prompt);
+    result = await flux.prompt(prompt, fastOptions);
     console.log('Generation result:', result);
-
+  
     // Assert or log output
     if (result && result.imagePath && fs.existsSync(result.imagePath)) {
       console.log('Test passed: Image generated at', result.imagePath);
