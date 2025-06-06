@@ -14,7 +14,8 @@ console.log(`Token: ${process.env.HF_API  }` );
 
   // Prepare config for "dev" endpoint
   const config = {
-    fluxVariant: 'dev',
+    fluxVariant: 'schnell', // or 'dev' for the dev endpoint
+    imageDir: path.resolve(__dirname, '../images/flux-test'),
     folderName: 'FLUX-1-dev-test'
   };
 
@@ -38,13 +39,16 @@ console.log(`Token: ${process.env.HF_API  }` );
     result = await flux.prompt(prompt, fastOptions);
     console.log('Generation result:', result);
   
-    // Assert or log output
-    if (result && result.imagePath && fs.existsSync(result.imagePath)) {
-      console.log('Test passed: Image generated at', result.imagePath);
-    } else {
-      console.error('Test failed: No image generated.');
+    // Assert: imagePath is returned and file exists
+    if (!result || !result.imagePath) {
+      console.error('Test failed: No imagePath returned by FLUX generator.');
       process.exit(1);
     }
+    if (!fs.existsSync(result.imagePath)) {
+      console.error('Test failed: Image file does not exist at', result.imagePath);
+      process.exit(1);
+    }
+    console.log('Test passed: Image generated and file exists at', result.imagePath);
   } catch (err) {
     console.error('Test failed:', err);
     process.exit(1);
