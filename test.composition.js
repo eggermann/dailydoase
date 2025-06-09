@@ -17,7 +17,7 @@ import('./start.js').then(module =>
         words, model: {
             scriptName
         },
-        XXpromptFunktion: async (streams, options) => { 
+        promptFunktion: async (streams, options) => { 
             return streams;
         }
     }));
