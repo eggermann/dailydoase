@@ -4,12 +4,12 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-console.log(`Token: ${process.env.HF_API}`);
+console.log(`Token: ${process.env.HF_API  }` );
 
 (async () => {
   // Dynamically import the ES module
   const { default: PostToFLUX } = await import(
-    path.resolve(__dirname, '../lib/generator/post-to-FLUX.js')
+    path.resolve(__dirname, '../lib/generator/post-to-genSeq.js')
   );
 
   // Prepare config for "dev" endpoint
@@ -21,24 +21,24 @@ console.log(`Token: ${process.env.HF_API}`);
 
   // Example prompt for generation
   const prompt = 'Cyberneticist, Operation (game), Horror fiction, Naturism, 4k';
-
+  
   // Fastest FLUX options for testing
   const fastOptions = {
     width: 64,
     height: 64,
     num_inference_steps: 1
   };
-
+  
   // Initialize FLUX client
   const flux = await PostToFLUX.init(config);
-  //console.log(flux);
 
+  
   // Generate image with minimal options
   let result;
   try {
     result = await flux.prompt(prompt, fastOptions);
     console.log('Generation result:', result);
-
+  
     // Assert: imagePath is returned and file exists
     if (!result || !result.imagePath) {
       console.error('Test failed: No imagePath returned by FLUX generator.');
