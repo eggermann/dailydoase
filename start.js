@@ -44,8 +44,6 @@ const _ = {
 
         let prompt = '';
 
-
-console.log('config.promptCreator: ',promptCreator);
         if (!oldPrompt) {//the last api call was an error
             prompt = config.promptFunktion
                 ? await config.promptFunktion(streams, config)
@@ -60,7 +58,7 @@ console.log('config.promptCreator: ',promptCreator);
             prompt = oldPrompt
         }
 
-        console.log('Prompt: ', chalk.yellow(prompt));
+        console.log('Prompt:---> ', chalk.yellow(prompt),_.model);
 
         let keepPrompt = null;
 
