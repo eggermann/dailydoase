@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const apiKey = process.env.HUGGINGFACE_API_KEY; // Your Hugging Face API key
+const apiKey = process.env.HF_API_TOKEN; // Your Hugging Face API key
 const modelName = 'Lightricks/LTX-Video'; // Model name
 
 async function generateVideo(prompt, height, width, numFrames, seed) {
@@ -35,6 +35,8 @@ async function generateVideo(prompt, height, width, numFrames, seed) {
             console.error(`Unexpected response status: ${response.status}`);
         }
     } catch (error) {
+console.error('Error generating video:', error.message);
+
         if (error.response && error.response.data) {
             // Convert Buffer to string
             const errorData = error.response.data.toString('utf-8');

@@ -2,7 +2,7 @@ import { HfInference } from '@huggingface/inference';
 import fs from 'fs';
 import 'dotenv/config';
 
-const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
+const hf = new HfInference(process.env.HF_API_TOKEN);
 
 const prompt = "1006, Sleuth (Australian TV channel), Translation (biology), as vegetable toys";
 
