@@ -6,13 +6,13 @@ console.log(`Token: ${process.env.HF_API_TOKEN  }` );
 
 (async () => {
   // Dynamically import the ES module
-  const { default: PostToHunyuan } = await import(
-    path.resolve(__dirname, '../lib/generator/post-to-hunyuan-video.js')
+  const { default: PostToWan } = await import(
+    path.resolve(__dirname, '../lib/generator/post-to-wab-2img-video.js')
   );
 
   // Prepare config for "dev" endpoint
   const config = {
- 
+    space: 'eggman-poff/wan-api'
   };
 
   
@@ -23,7 +23,7 @@ console.log(`Token: ${process.env.HF_API_TOKEN  }` );
   };
   
   // Initialize FLUX client
-  const postToHunyuan = await PostToHunyuan.init(config);
+  const postToWan = await PostToWan.init(config);
 
   
   // Generate image with minimal options
@@ -34,7 +34,7 @@ const imgs = [
       '/Users/eggermann/Projekte/dailydoase/GENERATIONS/v_2-254-FLUX/1749243340949-flux.jpeg'
     ];
 
-    result = await postToHunyuan.prompt(imgs, fastOptions);
+    result = await postToWan.prompt(imgs, fastOptions);
     console.log('Generation result:', result);
   
     // Assert: imagePath is returned and file exists
