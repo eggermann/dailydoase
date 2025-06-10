@@ -1,55 +1,83 @@
-import huggingface_hub as hf_hub
-# Shim missing APIs removed in huggingface_hub >= 0.26.0
-if not hasattr(hf_hub, "cached_download"):
-    hf_hub.cached_download = hf_hub.hf_hub_download
-if not hasattr(hf_hub, "model_info"):
-    hf_hub.model_info = hf_hub.get_model_info
-
 import gradio as gr
 import torch
-# Determine device: use GPU if available, otherwise CPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# Choose dtype based on device
-dtype = torch.float16 if device.type == "cuda" else torch.float32
+import numpy as np
+from diffusers import AutoencoderKLWan, WanImageToVideoPipeline
+from diffusers.utils import export_to_video, load_image
+from transformers import CLIPVisionModel
+from PIL import Image
 import tempfile
-from diffusers import StableVideoDiffusionPipeline
-from diffusers.utils import export_to_video
 
-# Use the official SVD-XT img2vid-xt model
-MODEL = "stabilityai/stable-video-diffusion-img2vid-xt"
+# --- Load Model ---
+model_id = "Wan-AI/Wan2.1-FLF2V-14B-720P-Diffusers"
 
-# Load pipeline in appropriate precision on GPU or CPU
-pipe = StableVideoDiffusionPipeline.from_pretrained(
-    MODEL, torch_dtype=dtype
-).to(device)
+image_encoder = CLIPVisionModel.from_pretrained(model_id, subfolder="image_encoder", torch_dtype=torch.float32)
+vae = AutoencoderKLWan.from_pretrained(model_id, subfolder="vae", torch_dtype=torch.float32)
+pipe = WanImageToVideoPipeline.from_pretrained(
+    model_id, vae=vae, image_encoder=image_encoder, torch_dtype=torch.float16
+)
+pipe.to("cuda" if torch.cuda.is_available() else "cpu")
 
-def infer(first_image, last_image, prompt, guidance=7.5, frames=25):
-    # Generate the in-between frames
-    video = pipe(
+# --- Helper Functions ---
+def aspect_ratio_resize(image, pipe, max_area=720 * 1280):
+    aspect_ratio = image.height / image.width
+    mod_value = pipe.vae_scale_factor_spatial * pipe.transformer.config.patch_size
+    height = round(np.sqrt(max_area * aspect_ratio)) // mod_value * mod_value
+    width = round(np.sqrt(max_area / aspect_ratio)) // mod_value * mod_value
+    image = image.resize((width, height))
+    return image, height, width
+
+def center_crop_resize(image, height, width):
+    import torchvision.transforms.functional as TF
+    resize_ratio = max(width / image.width, height / image.height)
+    width = round(image.width * resize_ratio)
+    height = round(image.height * resize_ratio)
+    size = [width, height]
+    image = TF.center_crop(image, size)
+    return image, height, width
+
+# --- Gradio Inference Function ---
+def infer(first_image, last_image, prompt, guidance=5.5, frames=25):
+    # Convert to PIL
+    if not isinstance(first_image, Image.Image):
+        first_image = Image.fromarray(first_image)
+    if not isinstance(last_image, Image.Image):
+        last_image = Image.fromarray(last_image)
+
+    # Resize/crop as needed
+    first_image, height, width = aspect_ratio_resize(first_image, pipe)
+    if last_image.size != first_image.size:
+        last_image, _, _ = center_crop_resize(last_image, height, width)
+
+    # Run pipeline
+    output = pipe(
         image=first_image,
         last_image=last_image,
         prompt=prompt,
+        height=height,
+        width=width,
         guidance_scale=guidance,
-        num_frames=frames
+        num_frames=frames,
     ).frames
-    # Export to a temporary MP4 file
-    mp4_path = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False).name
-    export_to_video(video, mp4_path, fps=15)
-    return mp4_path  # Gradio will auto-encode to base64 for the API
 
-# Build a minimal Gradio interface
+    # Export to video
+    with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmp:
+        export_to_video(output, tmp.name, fps=16)
+        return tmp.name
+
+# --- Gradio Interface ---
 demo = gr.Interface(
     fn=infer,
     inputs=[
-        gr.Image(type="pil", label="Start frame"),
-        gr.Image(type="pil", label="End frame"),
-        gr.Textbox(placeholder="Prompt (optional)"),
-        gr.Slider(0, 12, 7.5, label="Guidance scale"),
-        gr.Slider(8, 48, 25, step=1, label="Num frames"),
+        gr.Image(type="pil", label="Start Frame"),
+        gr.Image(type="pil", label="End Frame"),
+        gr.Textbox(placeholder="Prompt (optional)", label="Prompt"),
+        gr.Slider(3, 12, value=5.5, step=0.1, label="Guidance Scale"),
+        gr.Slider(8, 48, value=25, step=1, label="Num Frames"),
     ],
-    outputs="video",
-    title="Eggman – 2-Frame SVD API"
+    outputs=gr.Video(label="Generated Video"),
+    title="WAN Two-Frame Video Interpolation",
+    description="Upload two images and (optionally) a prompt to create a smooth video transition."
 )
 
-# Enable the REST API
-demo.queue(default_concurrency_limit=1).launch(show_api=True)
+if __name__ == "__main__":
+    demo.launch(show_api=True)
