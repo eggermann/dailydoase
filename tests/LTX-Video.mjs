@@ -17,8 +17,17 @@ const generateAndSaveVideo = async () => {
             throw new Error('Hugging Face token not found in environment variables. Please set HF_API_TOKEN in your .env file.');
         }
 
+        console.log(`Hugging Face token loaded: ${hf_token ? 'Yes (token present)' : 'No (token absent)'}`);
+        console.log("Attempting to connect to Gradio client for Lightricks/LTX-Video...");
+
         // Connect to the Gradio client with authentication for LTX-Video
-        const client = await Client.connect("Lightricks/LTX-Video", { hf_token });
+        // Added a Promise.race to implement a timeout for the connection
+        const client = await Promise.race([
+            Client.connect("Lightricks/LTX-Video", { hf_token }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Gradio client connection timed out after 30 seconds. This might indicate network issues or the space being unresponsive.')), 30000))
+        ]);
+
+        console.log("Successfully connected to Gradio client.");
 
         // View the API to confirm available endpoints and expected parameters
         const appInfo = await client.view_api();
@@ -35,14 +44,16 @@ const generateAndSaveVideo = async () => {
         };
 
         // Define other parameters for video generation
-        const prompt = "A beautiful sunset over the mountains.";
+        // Changed prompt to a sample text as an empty prompt might cause issues
+        const prompt = "A horse running in a field.";
         const height = 512; // Height of the video
         const width = 768;  // Width of the video
         const numFrames = 30; // Number of frames in the video
         const seed = 42; // Random seed for reproducibility
 
+        console.log("Attempting to generate video...");
         // Use the client to generate a video with the given parameters
-        const result = await client.predict("/generate_video", { 
+        const result = await client.predict("/generate_video", {
             prompt: prompt,
             input_image: exampleImage, // Optional, can be removed if not using an image
             height: height,
@@ -50,25 +61,22 @@ const generateAndSaveVideo = async () => {
             num_frames: numFrames,
             seed: seed,
         });
+        console.log("Video generation prediction complete.");
+
 
         console.log('Result:', JSON.stringify(result, null, 2));
 
-        // Check if the result is successful
-        if (!result || result.type !== 'data') {
+        // Check if the result is successful and in the expected format
+        if (!result || result.type !== 'data' || !Array.isArray(result.data) || result.data.length === 0) {
             console.error('Result:', result);
-            throw new Error('Prediction request failed. The server returned an error.');
+            throw new Error('Prediction request failed or returned unexpected data format. The server returned an error.');
         }
 
         // Extract video information from the result
-        const resultDataArray = result.data;
-        if (!Array.isArray(resultDataArray) || resultDataArray.length === 0) {
-            throw new Error("No data was returned by the server.");
-        }
-
-        const videoData = resultDataArray[0]; // Access the first item in the data array
+        const videoData = result.data[0]; // Access the first item in the data array
 
         if (!videoData || !videoData.video || !videoData.video.url) {
-            throw new Error("No video URL was found in the server response.");
+            throw new Error("No video URL was found in the server response or the response structure is incorrect.");
         }
 
         const videoUrl = videoData.video.url;
@@ -78,7 +86,7 @@ const generateAndSaveVideo = async () => {
         const videoResponse = await fetch(videoUrl);
 
         if (!videoResponse.ok) {
-            throw new Error(`Failed to fetch video: ${videoResponse.statusText}`);
+            throw new Error(`Failed to fetch video from ${videoUrl}: ${videoResponse.statusText}`);
         }
 
         const videoBuffer = await videoResponse.arrayBuffer();
@@ -89,11 +97,13 @@ const generateAndSaveVideo = async () => {
             await fs.promises.writeFile(videoFileName, Buffer.from(videoBuffer));
             console.log(`Video saved as ${videoFileName}`);
         } catch (fileError) {
-            throw new Error(`Failed to save video file: ${fileError.message}`);
+            throw new Error(`Failed to save video file ${videoFileName}: ${fileError.message}`);
         }
 
     } catch (error) {
-        console.error("An error occurred:", error);
+        console.error("An error occurred:", error.message);
+        // Log the full error object for more detailed debugging
+        console.error("Full error details:", error);
     }
 };
 
