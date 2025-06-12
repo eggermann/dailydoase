@@ -31,7 +31,7 @@ import('./semantic-stream.js').then(module =>
             {
                 words,
                 model: {
-                      pollingTime: 10000,
+                      pollingTime: 1000,
                     scriptName,
                     fluxVariant: 'schnell', // or 'dev' for the dev endpoint
                     // imageDir: path.resolve(__dirname, '../images/flux-test'),
@@ -41,8 +41,8 @@ import('./semantic-stream.js').then(module =>
             },
 
             {
-                word2,
-                pollingTime: 15000,
+                words:word2,
+                pollingTime: 1500,
                 model: {
                     scriptName,
                     fluxVariant: 'dev', // schnell or 'dev' for the dev endpoint
