@@ -1,60 +1,58 @@
+/**
+ * Minimal‑config smoke test: generate the shortest possible video
+ * to make sure the new VACE‑WAN integration works end‑to‑end.
+ *
+ * ‑ numFrames: 9
+ * ‑ steps: 10
+ * ‑ tiny resolution 360×640
+ * ‑ low FPS 8
+ */
 const path = require('path');
-const fs = require('fs');
+const fs   = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 (async () => {
-  // Dynamically import the ES module
+  // Dynamically import the ES‑module wrapper
   const { default: PostToWan } = await import(
     path.resolve(__dirname, '../lib/generator/post-to-wan-2img-video.js')
   );
 
-  // Prepare config for "dev" endpoint
   const config = {
-    space: 'fffiloni/Wan2.1-VACE-1.3B',
-    folderName: 'hunYuanVideos',
-    guidance: 7.5,
-    numFrames: 49,
-    steps: 50,
-    resolution: '720x1280',
-    negativePrompt: 'Bright and saturated tones, overexposed, static, unclear details, subtitles, style, work, painting, frame, still, overall grayish, worst quality, low quality, JPEG compression artifacts, ugly, deformed, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, misshapen limbs, fused fingers, motionless frame, cluttered background, three legs, crowded background, walking backwards.',
-    shiftScale: 16,
-    sampleSteps: 25,
-    contextScale: 1,
-    guideScale: 5,
-    inferSeed: -1,
-    outputHeight: '480',
-    outputWidth: '832',
-    frameRate: '16'
+    space:       'fffiloni/Wan2.1-VACE-1.3B', // keep explicit for clarity
+    folderName:  'shortestVideos',
+    guidance:    5,
+    numFrames:   9,            // ← shortest clip we want to allow
+    steps:       10,           // quick draft quality
+    resolution:  '360x640',    // tiny portrait
+    frameRate:   '8',          // slow-ish FPS
+    // leave the rest to library defaults
   };
 
-  // Fastest FLUX options for testing
-  const fastOptions = {};
-
-  // Initialize client using singleton wrapper
   const postToWan = await PostToWan.init(config);
 
-  // Generate image with minimal options
-  let result;
+  // Re‑use two sample key‑frames from the repo for consistency
+  const imgs = [
+    '/Users/eggermann/Projekte/dailydoase/GENERATIONS/v_2-254-FLUX/1749243340776-flux.jpeg',
+    '/Users/eggermann/Projekte/dailydoase/GENERATIONS/v_2-254-FLUX/1749243340949-flux.jpeg'
+  ];
+
   try {
-    const imgs = [
-      '/Users/eggermann/Projekte/dailydoase/GENERATIONS/v_2-254-FLUX/1749243340776-flux.jpeg',
-      '/Users/eggermann/Projekte/dailydoase/GENERATIONS/v_2-254-FLUX/1749243340949-flux.jpeg'
-    ];
+    const result = await postToWan.prompt(imgs, {
+      numFrames: 9,
+      steps:     10,
+      frameRate: '8'
+    });
 
-    result = await postToWan.prompt(imgs, fastOptions);
-    console.log('Generation result:', result);
+    console.log('Shortest‑video generation result:', result);
 
-    // Assert: imagePath is returned and file exists
-    if (!result || !result.imagePath || typeof result.imagePath !== 'string' || !result.imagePath.length) {
-      throw new Error('No valid imagePath returned');
+    if (!result?.imagePath || !fs.existsSync(result.imagePath)) {
+      throw new Error('Minimalist shortest video was not created');
     }
-    if (!fs.existsSync(result.imagePath)) {
-      throw new Error('Generated imagePath does not exist: ' + result.imagePath);
-    }
-    console.log('Test passed: Valid imagePath generated and file exists.');
+
+    console.log('✅  Test passed: shortest video generated and file exists.');
     process.exit(0);
   } catch (err) {
-    console.error('Test failed:', err);
+    console.error('❌  Shortest video test failed:', err);
     process.exit(1);
   }
 })();
