@@ -37,6 +37,9 @@
                 {{#if json.staticPrompt}}
                 <span>{{json.staticPrompt}}</span>
                 {{/if}}
+
+                {{log latestImageJson}}
+
                 {{#infoJson.words}}
                 <span>{{this.[0]}}</span>
                 {{/infoJson.words}}
@@ -61,7 +64,7 @@
                         {{> image}}
                         <div class="c-panel__list__item__infos">
 
-                             <a class="c-panel__list__item__link" href="/v{{src}}">
+                            <a class="c-panel__list__item__link" href="/v{{src}}">
 
                                 <p class="c-panel__images__item___desc">
                                     <span class="c-panel__images__item___rompt">
@@ -72,7 +75,7 @@
                                         {{json.staticPrompt}}
                                     </span>
                             </a>
-                            <a class="c-panel__list__item__link" href="/v{{src}}/about">      </a>
+                            <a class="c-panel__list__item__link" href="/v{{src}}/about"> </a>
                         </div>
                     </li>
 
