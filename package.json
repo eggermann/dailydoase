@@ -1,5 +1,5 @@
 {
-  "name": "semantic-api",
+  "name": "dailydoase",
   "version": "1.0.0",
   "description": "",
   "main": "start.js",
@@ -43,7 +43,7 @@
     "recursive-readdir": "^2.2.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "semantic-stream": "^2.0.2",
+    "semantic-stream": "^3.0.0",
     "sftp-upload": "^1.0.4",
     "sharp": "^0.32.6",
     "swiper": "^11.2.6",
@@ -88,12 +88,7 @@
     "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
     "deploy:upload": "node ./deploy/SSH-upload.cjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/deggermann/semantic-api.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/deggermann/semantic-api#readme"
+  "license": "ISC"
 }
