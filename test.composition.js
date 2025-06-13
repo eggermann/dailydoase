@@ -40,7 +40,7 @@ import('./semantic-stream.js').then(module =>
                 folderName: 'FLUX-schnell-compo-test'
             },
 
-            {
+          /*  {
                 words:word2,
                 pollingTime: 45500,
                 model: {
@@ -49,7 +49,7 @@ import('./semantic-stream.js').then(module =>
 
                 },
                 folderName: 'FLUX-dev-compo-test'
-            }
+            }*/
         ]
     ));
 
