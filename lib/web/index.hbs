@@ -56,25 +56,38 @@
                 {{#if images.[1]}}
                 <ol class="c-panel__list">
                     {{#images}}
-                    <li class="c-panel__list__item" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
+                    <li class="c-panel__item" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
+
+                        <a href="/v{{src}}" class="c-panel__item__link">
+                            {{> image}}
+                        </a>
+
+                        <p class="c-panel__item__infos">
+                            <span class="c-panel__item__prompt">
+                                {{json.prompt}}
+                            </span>
+
+                            <span class="c-panel__item__static-prompt">
+                                {{json.staticPrompt}}
+                            </span>
+
+                        </p>
 
 
-                        {{> image}}
-                        <div class="c-panel__list__item__infos">
+                        <div class="c-panel__list__item__meta">
+                            <span class="c-panel__list__item__meta__date">
+                                {{#if json.metadata.mtime}}
+                                {{json.metadata.mtime}}
+                                {{else}}
+                                {{json.metadata.ctime}}
+                                {{/if}}
+                            </span>
 
-                            <a class="c-panel__list__item__link" href="/v{{src}}">
-
-                                <p class="c-panel__images__item___desc">
-                                    <span class="c-panel__images__item___rompt">
-                                        {{json.prompt}}
-                                    </span>
-
-                                    <span class="c-panel__images__item___static-prompt">
-                                        {{json.staticPrompt}}
-                                    </span>
-                            </a>
+                            <span class="c-panel__list__item__meta__folder">
+                                {{json.metadata.folderName}}
+                            </span>
                             <a class="c-panel__list__item__link" href="/v{{src}}/about"> </a>
-                        </div>
+
                     </li>
 
                     {{/images}}
@@ -86,13 +99,13 @@
                 <small class="realease">
                     release 1
                 </small>
-              
+
             </div>
         </main>
 
         {{#if isHome}}
-        <iframe loading="lazy" class="newest-folder"  src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc"
-            frameborder="0"></iframe>
+        <iframe loading="lazy" class="newest-folder"
+            src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
         {{/if}}
     </div>
 
@@ -113,11 +126,11 @@
                     {{^../isHome}}
                     {{#current}}
                     <script>
-                        { { #if../ autoplay } }
+                        {{#if ../autoplay}}
                         window.setTimeout(function () {
                             document.getElementById('playPause').click();
                         }, 2000);
-                        { {/if } }
+                        {{/if }}
                     </script>
 
                     <div class="menu-actions">

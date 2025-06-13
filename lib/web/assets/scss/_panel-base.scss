@@ -7,7 +7,7 @@
   width: 100vw;
   height: $header-height;
   text-align: center;
-  
+
 
   // List container
   &__list {
@@ -17,21 +17,12 @@
     gap: $spacing-sm;
     align-items: baseline;
 
-    &__item {
-
-
+    .c-panel__item {
       position: relative;
       will-change: transform;
       width: 100%;
 
-      // Base styles
-      img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1/1;
-        display: block;
-        object-fit: contain;
-      }
+
 
       // Responsive sizes
       @include bp(md) {
@@ -41,6 +32,14 @@
 
       @include bp(xxl) {
         width: 320px;
+      }
+
+      // Base styles
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        //object-fit: contain;
       }
 
       // States
@@ -58,22 +57,30 @@
             @include hover-grow;
             filter: drop-shadow($shadow-overlay);
             z-index: $z-overlay;
+
+
           }
         }
       }
 
+      &__link:hover~p {
+  margin-top: -.2em;
+  padding: 3em 0;
+  background-color: black;
+        text-decoration: underline;
+      }
+
       // Info overlay
       &__infos {
+        color: $color-secondary;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        text-align: left;
+        text-align: center;
         width: 100%;
 
         a {
-padding: $spacing-xs;
+          padding: $spacing-xs;
           display: block;
-        
-          color: $color-secondary;
           font-weight: 400;
         }
       }
@@ -95,16 +102,19 @@ padding: $spacing-xs;
 
       }
     }
-  }
 
-  // Static prompt styling
-  &__list__item__infos {
-    .c-panel__images__item___static-prompt {
-      display: block;
-      filter: brightness(.5); // Even darker
-      font-size: 0.9em;
-      margin-top: 4px;
-      font-weight: 500; // Added for better visibility
+
+    // Static prompt styling
+    &__infos {
+      color: $color-secondary;
+
+      .c-panel__images__item___static-prompt {
+        display: block;
+        filter: brightness(.5); // Even darker
+        font-size: 0.9em;
+        margin-top: 4px;
+        font-weight: 500; // Added for better visibility
+      }
     }
   }
 }
