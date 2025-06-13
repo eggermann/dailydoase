@@ -38,8 +38,6 @@
                 <span>{{json.staticPrompt}}</span>
                 {{/if}}
 
-                {{log latestImageJson}}
-
                 {{#infoJson.words}}
                 <span>{{this.[0]}}</span>
                 {{/infoJson.words}}
@@ -49,10 +47,10 @@
         <!--{_{>back-to-top-button}}-->
         <main style="display: none">
             <div class="c-panel">
+
                 {{#unless images.[1]}}
                 {{> image images.[0]}}
-                {{log json}}
-                <p class="c-panel__content">{{json}}</p>
+                <p class="c-panel__content"> {{images.[0].json.prompt}}</p>
                 {{/unless}}
 
                 {{#if images.[1]}}
@@ -88,12 +86,12 @@
                 <small class="realease">
                     release 1
                 </small>
-                <div class="c-panel__content__info"></div>
+              
             </div>
         </main>
 
         {{#if isHome}}
-        <iframe loading="lazy" class="newest-folder" src="{{menu.[1].src}}?frame=true&sort=desc"
+        <iframe loading="lazy" class="newest-folder"  src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc"
             frameborder="0"></iframe>
         {{/if}}
     </div>
