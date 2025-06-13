@@ -1,5 +1,5 @@
-const words = [['wildlife', 'en']];//, ['Robotics', 'en'], [':NewsStream', {startWord: ''}], ['Humanities', 'en']];
-const word2 = [['David Stern', 'de']]
+const words = [['wildlife', 'en'],['Boobs', 'en'],['Neon', 'en']];//, ['Robotics', 'en'], [':NewsStream', {startWord: ''}], ['Humanities', 'en']];
+const word2 = [['Davidstern', 'de'], ['Davidstern', 'en'], ['Davidstern', 'fr']];
 /*
 const scriptName = 'post-to-youtube.js'
 
@@ -31,7 +31,7 @@ import('./semantic-stream.js').then(module =>
             {
                 words,
                 model: {
-                      pollingTime: 1000,
+                      pollingTime: 20000,
                     scriptName,
                     fluxVariant: 'schnell', // or 'dev' for the dev endpoint
                     // imageDir: path.resolve(__dirname, '../images/flux-test'),
@@ -42,7 +42,7 @@ import('./semantic-stream.js').then(module =>
 
             {
                 words:word2,
-                pollingTime: 1500,
+                pollingTime: 45500,
                 model: {
                     scriptName,
                     fluxVariant: 'dev', // schnell or 'dev' for the dev endpoint
