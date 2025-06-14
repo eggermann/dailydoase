@@ -1,51 +1,74 @@
-// Test for lib/generator/post-to-ltx-distilled-2.js
+// Test for lib/generator/post-to-ltx-distilled.js using the "dev" endpoint
 
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-console.log(`Token: ${process.env.HF_API_TOKEN ?? process.env.HF_TOKEN}`);
+console.log(`Token: ${process.env.HF_API}`);
 
 (async () => {
   // Dynamically import the ES module
   const { default: PostToLTX } = await import(
-    path.resolve(__dirname, '../lib/generator/post-to-ltx-distilled-2.js')
+    path.resolve(__dirname, '../lib/generator/post-to-ltx-distilled.js')
   );
 
-  // Config for “distilled” endpoint
+  // Prepare config for Lightricks/ltx-video-distilled
   const config = {
-    imageDir: path.resolve(__dirname, '../images/ltx-distilled-test'),
-    folderName: 'LTX-DISTILLED-2-test'
+    folderName: 'ltxVideos-test',
+    cfg: 3.0,
+    steps: 25,
+    motionBucketId: 127,
+    fps: 6,
+    seed: Math.round(1204 * Math.random()),
+    imageDir: path.resolve(__dirname, '../images/ltx-test'),
+    height_ui: 512,
+    width_ui: 704,
+    duration_ui: 8,
+    ui_guidance_scale: 1,
+    improve_texture_flag: true,
+    negative_prompt: 'worst quality, inconsistent motion, blurry, jittery, distorted',
+    mode: 'image-to-video'
   };
 
-  // Simple prompt
-  const prompt = 'Retro robot staring at neon skyline, cinematic, 4 k';
+  // Example prompt for generation
+  const prompt = 'The creature from the image starts to move';
 
-  // Fast, very small options for CI speed
-  const fastOptions = {
-    width_ui: 128,
-    height_ui: 96,
-    num_inference_steps: 4,
-    sampler_type: 'ddim',
-    randomize_seed: false,
-    seed_ui: 123
-  };
+  // Download image from remote URL and save locally
+  const imageUrl = 'https://dailydoase.de/v/249-HF-_1_2/1-386.png/img';
+  const localImagePath = path.resolve(__dirname, '../tests/assets/remote_test_image.png');
+  const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+  const response = await fetch(imageUrl);
+  const buffer = await response.buffer();
+  fs.writeFileSync(localImagePath, buffer);
 
-  // Init client
+  // Initialize LTX client
   const ltx = await PostToLTX.init(config);
 
-  // Generate
-  let resultPath;
+  // Generate video with all relevant options
+  let result;
   try {
-    resultPath = await ltx.prompt('/Volumes/deg-late-24/dailydoase-images/3-HF-/1-6083.png', fastOptions);
-    console.log('Generated video path:', resultPath);
+    result = await ltx.prompt(localImagePath, {
+      prompt,
+      negative_prompt: config.negative_prompt,
+      height_ui: config.height_ui,
+      width_ui: config.width_ui,
+      duration_ui: config.duration_ui,
+      ui_guidance_scale: config.ui_guidance_scale,
+      improve_texture_flag: config.improve_texture_flag,
+      mode: config.mode
+    });
+    console.log('Generation result:', result);
 
-    // Assert: file exists
-    if (!resultPath || !fs.existsSync(resultPath)) {
-      console.error('Test failed: video file not found at', resultPath);
+    // Assert: imagePath is returned and file exists
+    if (!result || !result.imagePath) {
+      console.error('Test failed: No imagePath returned by FLUX generator.');
       process.exit(1);
     }
-    console.log('Test passed: video generated at', resultPath);
+    if (!fs.existsSync(result.imagePath)) {
+      console.error('Test failed: Image file does not exist at', result.imagePath);
+      process.exit(1);
+    }
+    console.log('Test passed: Image generated and file exists at', result.imagePath);
   } catch (err) {
     console.error('Test failed:', err);
     process.exit(1);
