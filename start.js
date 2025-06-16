@@ -4,7 +4,11 @@ const { require } = pkg;
 const chalk = require('chalk');
 const server = require("./lib/server/index.cjs");
 const dotenv = require('dotenv');
-const semanticStream = require('./semantic-stream.js');
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const semanticStream = require(__dirname+'/semantic-stream.js');
 
 dotenv.config();
 
@@ -22,6 +26,7 @@ const groq = new Groq({
 //const words = [['medicine', 'en'], ['disney', 'en'], ['landscape', 'en'], ['esoteric', 'en']];//['drugs', 'photography', 'animal', 'philosophy'];//, elephant'photographie', 'phyloosivie',esoteric
 
 export default async config => {
+  //  console.log(chalk.green('Starting semantic stream server...'),semanticStream);
     semanticStream.init(config);
     server.init(() => { }, config)
 }
