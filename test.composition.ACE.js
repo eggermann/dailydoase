@@ -11,11 +11,15 @@ import('./semantic-stream.js').then(module =>
                 scriptName,
                 audio_duration: 45,
                // prePrompt: 'A Chopin on synthesizer melody',
-                lyrics: '',
+               // lyrics: '',
                 infer_step: 50,
                 // imageDir can be added if needed
             },
-            folderName: 'ACE-compo-test'
+            folderName: 'ACE-compo-test',
+             promptFunktion: async (streams, options) => {
+            
+                return streams;
+            }
         }
     ])
 );

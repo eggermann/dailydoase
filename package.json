@@ -7,6 +7,7 @@
   "dependencies": {
     "@gradio/client": "^1.8.0",
     "@huggingface/inference": "^3.9.2",
+    "@huggingface/transformers": "^3.5.2",
     "animated-scroll-to": "^2.3.0",
     "aos": "^2.3.4",
     "axios": "^1.5.1",
