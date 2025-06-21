@@ -10,8 +10,8 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
   // Prepare config for ACE-Step
   const config = {
     folderName: 'aceMusic-test',
-    audio_duration: 10,
-    prompt: 'A calm piano melody',
+    audio_duration: 45,
+    prompt: 'A Chopain on synthesizer melody',
     lyrics: '',
     infer_step: 50,
     imageDir: path.resolve(__dirname, '../audio/ace-test')
