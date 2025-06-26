@@ -26,6 +26,8 @@ const _ = {
     getLoop: function (model, config) {
 
         const loop = async (streams, oldPrompt) => {
+
+
             let prompt = '';
             console.log('config.id', config.id);
 
@@ -38,7 +40,7 @@ const _ = {
 
                 //
 
-                console.log('org-prompt: ', chalk.red(model.id + prompt));
+           //     console.log('org-prompt: ', chalk.red(model.id +' '+ prompt));
 
                 //prompt = await fullFillPrompt(prompt);
             } else {
@@ -48,8 +50,12 @@ const _ = {
             // console.log('Prompt:---> ', chalk.yellow(prompt));
 
             let keepPrompt = null;
-            const success = await model.prompt(prompt, config.prompt);// v
-
+            const success = await model.prompt(prompt, config);// v
+           
+            console.log('XXX3:',success);
+ process.exit();
+            console.log('XXX4:');
+//process.exit();
             // Use config.rndIndex to select the correct counter for this stream
             const idx = Number.isInteger(config.rndIndex) ? config.rndIndex : 0;
 
@@ -87,18 +93,17 @@ export default async (configs) => {
 
     await store.initCache();
 
-
-
-
     configs.map(async config => {
         const words = config.words;
 
         const wordStreams = await wordStream.initStreams(words);
 
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
+console.log('XXX1:');
 
         const model = await generator.setVersion(config);
 
+console.log('XXX2:');
 
         await _.getLoop(model, config)(wordStreams).then(() => {
             console.log(chalk.green('Generator ended successfully'));
