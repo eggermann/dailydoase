@@ -73,7 +73,7 @@ import('./semantic-stream.js').then(module =>
                 fluxVariant: 'schnell'
             },
             promptFunktion: async (streams, options) => {
-                return streams;
+                    return streams;
             }
         }]
     )).catch(err => {
