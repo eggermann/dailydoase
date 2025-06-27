@@ -27,20 +27,19 @@ const _ = {
 
         const loop = async (streams, oldPrompt) => {
 
-
             let prompt = '';
             console.log('config.id', config.id);
 
-            
 
-            if (!oldPrompt) {//the last api call was an error
+
+            if (!oldPrompt) {//the last api call was sucessfull
                 prompt = config.promptFunktion
                     ? await config.promptFunktion(streams, config)
                     : await promptCreator.default(streams, config);
 
                 //
 
-           //     console.log('org-prompt: ', chalk.red(model.id +' '+ prompt));
+                //     console.log('org-prompt: ', chalk.red(model.id +' '+ prompt));
 
                 //prompt = await fullFillPrompt(prompt);
             } else {
@@ -51,29 +50,28 @@ const _ = {
 
             let keepPrompt = null;
             const success = await model.prompt(prompt, config);// v
-           
-            console.log('XXX3:',success);
+            console.log('success:', success);
 
 
-            
+
             // Use config.rndIndex to select the correct counter for this stream
             const idx = Number.isInteger(config.rndIndex) ? config.rndIndex : 0;
 
 
             if (!success) {
                 keepPrompt = prompt;
-                console.error(chalk.red('---> no success', config.model));
+                console.error(chalk.red('---> no success'), success);
             } else {
                 _.rnd_cnt[idx] = (_.rnd_cnt[idx] ?? 0) + 1;
-                console.log(_.rnd_cnt[idx], '---> success', success, config.model);
+              //  console.log(_.rnd_cnt[idx], '---> success', success, config.model);
 
             }
 
-            const wait = config.pollingTime || 4000;
+            const wait = config.model.pollingTime || 4000;
 
             if (wait) {
                 setTimeout(async () => {
-                    console.log('******** again ****** polling interval ', config.model, 'wait:', wait)
+                    console.log('******** again ****** polling interval ', 'wait:', wait)
                     await loop(streams, keepPrompt);
 
                 }, wait);
@@ -99,11 +97,7 @@ export default async (configs) => {
         const wordStreams = await wordStream.initStreams(words);
 
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
-console.log('XXX1:');
-
         const model = await generator.setVersion(config);
-
-console.log('XXX2:');
 
         await _.getLoop(model, config)(wordStreams).then(() => {
             console.log(chalk.green('Generator ended successfully'));
