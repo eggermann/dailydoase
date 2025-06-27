@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-console.log(`Token: ${process.env.HF_API}`);
+console.log(`Token (HF_API): ${process.env.HF_API}`);
+console.log(`Token (HF_API_TOKEN): ${process.env.HF_API_TOKEN}`);
 
 (async () => {
   // Dynamically import the ES module
