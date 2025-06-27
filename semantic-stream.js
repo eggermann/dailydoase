@@ -53,9 +53,9 @@ const _ = {
             const success = await model.prompt(prompt, config);// v
            
             console.log('XXX3:',success);
- process.exit();
-            console.log('XXX4:');
-//process.exit();
+
+
+            
             // Use config.rndIndex to select the correct counter for this stream
             const idx = Number.isInteger(config.rndIndex) ? config.rndIndex : 0;
 
