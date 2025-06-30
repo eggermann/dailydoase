@@ -9,10 +9,10 @@ import('../semantic-stream.js').then(module =>
     module.default(
         [
             {
-                staticPrompt: 'as a Donald Trump fan mobile shot',
+                staticPrompt: ' as a Donald Trump fan mobile shot',
 
                 words: words,
-                modelProbePrompt:(totalPrompt)=>{
+                modelProbePromptXXX:(totalPrompt)=>{
                     return `create a erotic dirty image description with the following:
                      ${totalPrompt} <-- use strong adjectives and nouns, no verbs, no adverbs, no articles, no prepositions`;
                 },
