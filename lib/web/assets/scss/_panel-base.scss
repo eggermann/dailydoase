@@ -64,17 +64,35 @@
       }
 
       &__link:hover~p {
-  margin-top: -.2em;
-  padding: 3em 0;
-  background-color: black;
+        margin-top: -.2em;
+        padding: 3em 0;
+        background-color: black;
         text-decoration: underline;
+      }
+
+
+      &:hover,
+      a:focus ~ p {
+        .c-panel__item__infos {
+          /* creates an anonymous flexbox */
+          -webkit-line-clamp: none;
+          /* limits **lines**, not words   */
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
       }
 
       // Info overlay
       &__infos {
         color: $color-secondary;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+
+        display: -webkit-box;
+        /* creates an anonymous flexbox */
+       //-webkit-line-clamp: 2;
+        /* limits **lines**, not words   */
+       // -webkit-box-orient: vertical;
+        overflow: hidden;
+
         text-align: center;
         width: 100%;
 
