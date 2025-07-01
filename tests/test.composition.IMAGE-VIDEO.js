@@ -3,7 +3,7 @@ const scriptName = 'post-to-Img-Video.js'
 import('../semantic-stream.js').then(module =>
     module.default(
         [{
-            staticPrompt: 'as a Donald Trump video in wild western style ',
+            staticPrompt: ' as a Donald Trump video in wild western style ',
             //     words: [['wildlife', 'en']],
             words: [['Donald Trump', 'en'], ['History', 'en'], ['Pumpkin', 'en']],
             model: {
