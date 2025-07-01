@@ -63,7 +63,7 @@ const _ = {
                 console.error(chalk.red('---> no success'), success);
             } else {
                 _.rnd_cnt[idx] = (_.rnd_cnt[idx] ?? 0) + 1;
-              //  console.log(_.rnd_cnt[idx], '---> success', success, config.model);
+                //  console.log(_.rnd_cnt[idx], '---> success', success, config.model);
 
             }
 
@@ -91,7 +91,7 @@ export default async (configs) => {
 
     await store.initCache();
 
-    configs.map(async config => {
+    configs.map(async (config, index) => {
         const words = config.words;
 
         const wordStreams = await wordStream.initStreams(words);
