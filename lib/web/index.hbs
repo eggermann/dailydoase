@@ -15,25 +15,25 @@
     <div class="WRAPPER">
         <header class="c-header">
             <h1 class="c-title">
-                {{#if isHome}}
-                <span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
-                <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
-                    data-aos="fade-up">Doase</span>
-                <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
-                    data-aos="fade-down">🌴</span>
-                {{else}}
+
+
+                {{#unless isHome}}
                 <a href="/">
+                    {{/unless}}
                     <span data-aos-anchor-placement="bottom-center" data-aos-once='true'
                         data-aos="fade-down">daily</span>
                     <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
                         data-aos="fade-up">Doase</span>
                     <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
                         data-aos="fade-down">🌴</span>
+                    {{#unless isHome}}
                 </a>
-                {{/if}}
+                {{/unless}}
+
             </h1>
 
             <h2>
+                {{log infoJson}}
                 {{#if json.staticPrompt}}
                 <span>{{json.staticPrompt}}</span>
                 {{/if}}
@@ -70,9 +70,7 @@
                             <span class="c-panel__item__static-prompt">
                                 {{json.staticPrompt}}
                             </span>
-
                         </p>
-
 
                         <div class="c-panel__list__item__meta">
                             <span class="c-panel__list__item__meta__date">
@@ -106,61 +104,11 @@
         <iframe loading="lazy" class="newest-folder"
             src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
         {{/if}}
+
+    
     </div>
 
-    <aside class="c-aside">
-        <nav class="c-aside__menu">
-            <button class="c-aside__menu__button" value="schliessen/ öffnen">x</button>
-
-            <ul>
-                {{#menu}}
-                {{#current}}
-                <li class="current"> <a aria-current="true" href="{{src}}">{{name}}</a>
-                    {{/current}}
-
-                    {{^current}}
-                <li> <a href="{{src}}">{{name}}</a>
-                    {{/current}}
-
-                    {{^../isHome}}
-                    {{#current}}
-                    <script>
-                        {{#if ../autoplay}}
-                        window.setTimeout(function () {
-                            document.getElementById('playPause').click();
-                        }, 2000);
-                        {{/if }}
-                    </script>
-
-                    <div class="menu-actions">
-                        <div class="playPause" onload="startAutoPlay()">
-                            <input id="playPause" checked type="checkbox">
-                            <label for="playPause">
-                                <span class="a-cessibility">toggle autoplay</span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-view">
-                            <input id="toggleView" checked type="checkbox">
-                            <label for="toggleView">
-                                <span class="a-cessibility">toggle view</span>
-                            </label>
-                        </div>
-                    </div>
-                    {{/current}}
-                    {{/../isHome}}
-                    <small class="image-cntr">{{fileCnt}}</small>
-                </li>
-                {{/menu}}
-            </ul>
-        </nav>
-
-        <i class="c-link-to-handmade-section">
-            <a href="" class="">
-                &nbsp; 𝒽𝒶𝓃𝒹𝓂𝒶𝒹𝑒 𝒸𝑜𝓁𝓁𝑒𝒸𝓉𝒾𝑜𝓃𝓈 &nbsp;&#127798;
-            </a>
-        </i>
-    </aside>
+    {{> main-menu}}
 
     <footer class="c-footer">
         <p>&#9426;&nbsp;eggermann,
