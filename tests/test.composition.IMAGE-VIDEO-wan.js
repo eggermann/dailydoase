@@ -1,6 +1,6 @@
 
 const word2 = [['fantasy', 'en'], ['sex', 'en'], ['art', 'en'], ['art performance', 'en']];
-const scriptName = 'post-to-Img-Video.js'
+const scriptName = 'post-to-Img-Video-wan.js'
 
 const fluxHQ = {
     fluxVariant: 'dev',       // guidance-distilled
@@ -20,21 +20,21 @@ import('../semantic-stream.js').then(module =>
                 scriptName
             },
             words: word2,
-            folderName: 'HYGH-Image-Video',
+            folderName: 'wan-Image-Video',
             staticPrompt: {
                 post: ' as animal '
             },
 
             video: {
-                folderName: 'ltxv13bDistilled',
+            //    folderName: 'ltxv13bDistilled',
                 cfg: 1.0,
                 steps: 7,
                 motionBucketId: 127,
                 fps: 30,
                 seed: Math.round(1204 * Math.random()),
                 //  imageDir: path.resolve(__dirname, '../images/ltx-test'),
-                height_ui: 1024 * 2,
-                width_ui: 576 * 2,
+                height_ui: 1024 ,
+                width_ui: 576 ,
                 downscale_factor: 0.6666666,
                 duration_ui: 15,
                 ui_guidance_scale: 1,
@@ -51,7 +51,7 @@ import('../semantic-stream.js').then(module =>
 
                 staticPrompt: {
                     pre: 'phone photo of a',
-                    post: ', contemporary art, art exhibition posted to instagram, raw style'
+                    post: ', contemporary artexhibition posted to instagram, raw style'
                 },
                 modelProbeXX: {
                     // TARGET_MODEL: 'Qwen/Qwen2.5-72B-Instruct',//--> bad'meta-llama/Llama-3.3-70B-Instruct',
