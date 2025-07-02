@@ -66,10 +66,14 @@
 
 
 
-            
+
                 <p class="c-panel__content"></p>
-            
-            
+
+
+                {{#unless images.[1]}}
+                     {{> image images.[0]}}
+                     <p class="c-panel__content"></p>
+                {{/unless}}
 
                 {{#if images.[1]}}
                 <ol class="c-panel__list">
