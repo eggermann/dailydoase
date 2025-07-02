@@ -4,8 +4,6 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-console.log(`Token (HF_API): ${process.env.HF_API}`);
-console.log(`Token (HF_API_TOKEN): ${process.env.HF_API_TOKEN}`);
 
 (async () => {
   // Dynamically import the ES module
@@ -16,16 +14,13 @@ console.log(`Token (HF_API_TOKEN): ${process.env.HF_API_TOKEN}`);
   // Prepare config for Lightricks/ltx-video-distilled
   const config = {
     folderName: 'ltxVideos-test',
-    cfg: 3.0,
-    steps: 25,
-    motionBucketId: 127,
     fps: 6,
     seed: Math.round(1204 * Math.random()),
     imageDir: path.resolve(__dirname, '../images/ltx-test'),
     height_ui: 512,
     width_ui: 704,
-    duration_ui: 8,
-    ui_guidance_scale: 1,
+    duration_ui: 9,
+    ui_guidance_scale: 7,//Controls how much the prompt influences the output. Higher values = stronger influence.
     improve_texture_flag: true,
     negative_prompt: 'worst quality, inconsistent motion, blurry, jittery, distorted',
     mode: 'image-to-video'

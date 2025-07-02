@@ -38,7 +38,7 @@ import('../semantic-stream.js').then(module =>
                 words: word2,
                 staticPrompt: {
                     pre: 'phone photo of a',
-                    post: ', contemporary art, posted to instagram, raw style'
+                    post: ', art performance, contemporary art,art exhibition posted to instagram, raw style'
                 },
                 modelProbeXX: {
                     // TARGET_MODEL: 'Qwen/Qwen2.5-72B-Instruct',//--> bad'meta-llama/Llama-3.3-70B-Instruct',
