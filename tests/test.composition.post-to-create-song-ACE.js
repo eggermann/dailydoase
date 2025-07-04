@@ -1,32 +1,30 @@
 
 
 const words = [['Davidstern', 'de'], ['Boobs', 'en'], ['Acid', 'en'], ['Movie', 'en']];//, ['Robotics', 'en'], [':NewsStream', {startWord: ''}], ['Humanities', 'en']];
-const word2 = [['photgraphy', 'en'], ['sex', 'en'], ['art', 'en']];
+const streams = [['photgraphy', 'en'], ['sex', 'en'], ['art', 'en']];
 
 
 
-const scriptName = 'post-to-ACE.js'
+//const streams = [['lofi', 'en']];//[['lofi', 'en'], ['hip‑hop', 'en'], ['beats', 'en'], ['relax', 'en']];
+
+// Fast-ish options for a CI run
+const fastOptions = {
+    audio_duration: 2,              // 2‑second clip
+    //   infer_step: 30,                 // half the default 60 (faster)
+    // request mp3 directly
+};
+
+
+const scriptName = 'post-to-create-song-ACE .js'
 import('../semantic-stream.js').then(module =>
     module.default(
         [
             {
 
-                words: word2,
-                staticPrompt: {
+                words: streams,
+                staticPromptXX: {
                     pre: 'phone photo of a',
                     post: ', art performance, contemporary art,art exhibition posted to instagram, raw style'
-                },
-                modelProbeXX: {
-                    // TARGET_MODEL: 'Qwen/Qwen2.5-72B-Instruct',//--> bad'meta-llama/Llama-3.3-70B-Instruct',
-                    prompt: (totalPrompt) => {
-                        return ` create a image description to start a movie  -->\n
-                    ,
-                     ${totalPrompt}`;
-                    },
-                    // max_new_tokens: 223,
-                    temperature: 0.4,
-                    top_p: 0.95,
-                    return_full_text: false
                 },
 
                 model:
@@ -39,10 +37,14 @@ import('../semantic-stream.js').then(module =>
                             //   num_inference_steps: 24,
                             // imageDir: path.resolve(__dirname, '../images/flux-test'),
                         },
-                        fluxModel
+
                     ),
-                folderName: 'frmt'
+                folderName: 'ace-compo-test',
+                promptFunktion: async (streams) => {
+                    return streams;
+                }
             },
+
 
             /* {
                       words:word2,
