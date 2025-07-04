@@ -4,14 +4,14 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 (async () => {
   const { default: PostToACE } = await import(
-    path.resolve(__dirname, '../lib/generator/post-to-ACE.js')
+    path.resolve(__dirname, '../lib/generator/post-to-ACE_org.js')
   );
 
   // Prepare config for ACE-Step
   const config = {
     folderName: 'aceMusic-test',
-    audio_duration: 45,
-    prompt: 'A Chopain on synthesizer melody',
+    audio_duration: 10,
+    prompt: 'A calm piano melody',
     lyrics: '',
     infer_step: 50,
     imageDir: path.resolve(__dirname, '../audio/ace-test')
