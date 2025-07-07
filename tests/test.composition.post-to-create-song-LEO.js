@@ -1,7 +1,7 @@
 
 
 const words = [['Davidstern', 'de'], ['Boobs', 'en'], ['Acid', 'en'], ['Movie', 'en']];//, ['Robotics', 'en'], [':NewsStream', {startWord: ''}], ['Humanities', 'en']];
-const streams = [['Bass', 'en'], ['Sex', 'en'], ['art', 'en'],['Beat', 'en']];
+const streams = [['Bass', 'en'], ['Sex', 'en'], ['art', 'en'], ['Beat', 'en']];
 
 
 
@@ -32,6 +32,10 @@ import('../semantic-stream.js').then(module =>
                             //   guidance_scale: 0,
                             //   num_inference_steps: 24,
                             // imageDir: path.resolve(__dirname, '../images/flux-test'),
+                            cfg_coef: 1.8,
+                            temperature: 0.5,
+                            top_k: 15
+
                         },
 
                     ),
