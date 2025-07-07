@@ -10,7 +10,7 @@ const config = {
 (async () => {
     // Initialise ACE client
     const { default: PostToACE } = await import(
-        path.resolve(__dirname, '../lib/generator/post-to-ACE copy.js')
+        path.resolve(__dirname, '../lib/generator/post-to-ACE.js')
     );
 
     const ace = await PostToACE.init(config);
