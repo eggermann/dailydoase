@@ -16,3 +16,4 @@ This file tracks the project's progress using a task list format.
 ## Next Steps
 
 *
+[2025-07-09 15:39:55] - Code for video file serving in lib/server/index.cjs updated to use metadata.fullPath fallback and improved error logging for missing video path.
