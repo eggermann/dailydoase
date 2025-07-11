@@ -48,31 +48,28 @@
         position: relative;
       }
 
-      // Hover effects only on medium screens and up
-      @include bp(md) {
-        @include on-hover {
-
-          &:hover,
-          &--active {
-            @include hover-grow;
-            filter: drop-shadow($shadow-overlay);
-            z-index: $z-overlay;
 
 
-          }
+      &__link:hover {
+        width: calc(100% + 2em);
+        margin-left: -2em;
+        transform-origin: center center;
+        margin: auto;
+        position: sticky;
+       top: 0;
+
+        &~p {
+
+
+          background-color: black;
+          text-decoration: underline;
         }
       }
 
-      &__link:hover~p {
-        margin-top: -.2em;
-        padding: 3em 0;
-        background-color: black;
-        text-decoration: underline;
-      }
 
 
       &:hover,
-      a:focus ~ p {
+      a:focus~p {
         .c-panel__item__infos {
           /* creates an anonymous flexbox */
           -webkit-line-clamp: none;
@@ -88,9 +85,9 @@
 
         display: -webkit-box;
         /* creates an anonymous flexbox */
-       //-webkit-line-clamp: 2;
+        //-webkit-line-clamp: 2;
         /* limits **lines**, not words   */
-       // -webkit-box-orient: vertical;
+        // -webkit-box-orient: vertical;
         overflow: hidden;
 
         text-align: center;
