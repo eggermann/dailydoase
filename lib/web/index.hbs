@@ -1,17 +1,4 @@
-{{#*inline "media"}}
-{{#if (eq metadata.ext ".mp4")}}
-{{> video}}
-{{else if (eq metadata.ext ".mp3")}}
-{{> audio}}
-{{else}}
-{{> image}}
-{{/if}}
-{{/inline}}
-
-
-
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -27,6 +14,11 @@
 <body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}{{#if frame}}frame{{/if}}">
 
     <div class="WRAPPER">
+            <nav class="context-menu">
+                <ul>
+                    <li><a href="#info" onclick="document.getElementById('info-section').style.display='block';return false;">Show Info</a></li>
+                </ul>
+            </nav>
         <header class="c-header">
             <h1 class="c-title">
 
@@ -61,14 +53,10 @@
         </header>
 
         <!--{_{>back-to-top-button}}-->
-        <main style="display: none">
+        <main>
             <div class="c-panel">
 
-
-
-
-                <p class="c-panel__content"></p>
-
+                <!--p class="c-panel__content"></p-->
 
                 {{#unless images.[1]}}
                       {{> media images.[0]}} 
@@ -78,10 +66,15 @@
                 {{#if images.[1]}}
                 <ol class="c-panel__list">
                     {{#images}}
+
+                         <a href="/v{{src}}" class="c-panel__item__link">
+                            {{> media}}
+                        </a>
+
+                        
                     <li class="c-panel__item" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
 
                         <a href="/v{{src}}" class="c-panel__item__link">
-
                             {{> media}}
                         </a>
 
@@ -124,8 +117,8 @@
         </main>
 
         {{#if isHome}}
-        <iframe loading="lazy" class="newest-folder"
-            src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
+        <!--iframe loading="lazy" class="newest-folder"
+            src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe--!>
         {{/if}}
 
 
@@ -142,3 +135,6 @@
 </body>
 
 </html>
+<div id="info-section" style="display:none;">
+    {{> info}}
+</div>

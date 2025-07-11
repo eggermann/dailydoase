@@ -5,24 +5,26 @@
 
         <ul>
             {{#menu}}
-             {{#current}}
-            <li class="current">
-                <a aria-current="true" href="{{src}}">{{name}}</a>
-                {{/current}}
 
-                {{^current}}
+            {{#current}}
+                <li class="current">
+                <a aria-current="true" href="{{src}}">{{name}}</a>
+            {{/current}}
+
+            {{^current}}
             <li>
-                <a href="{{src}}">{{name}}</a>
-                {{/current}}
+                 <a href="{{src}}">{{name}}</a>
+             {{/current}}
 
                 {{^../isHome}}
                 {{#current}}
+                
                 <script>
-                    { { #if../ autoplay } }
+                    {{#if ../autoplay }}
                     window.setTimeout(function () {
                         document.getElementById('playPause').click();
                     }, 2000);
-                    { {/if } }
+                    {{/if }}
                 </script>
 
                 <div class="menu-actions">
