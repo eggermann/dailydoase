@@ -1,0 +1,8 @@
+
+{{#if (eq metadata.ext ".mp4")}}
+  {{> video}}
+{{else if (eq metadata.ext ".mp3")}}
+  {{> audio}}
+{{else}}
+  {{> image}}
+{{/if}}
