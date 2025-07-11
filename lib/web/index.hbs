@@ -14,11 +14,13 @@
 <body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}{{#if frame}}frame{{/if}}">
 
     <div class="WRAPPER">
-            <nav class="context-menu">
-                <ul>
-                    <li><a href="#info" onclick="document.getElementById('info-section').style.display='block';return false;">Show Info</a></li>
-                </ul>
-            </nav>
+        <nav class="context-menu">
+            <ul>
+                <li><a href="#info"
+                        onclick="document.getElementById('info-section').style.display='block';return false;">Show
+                        Info</a></li>
+            </ul>
+        </nav>
         <header class="c-header">
             <h1 class="c-title">
 
@@ -59,24 +61,18 @@
                 <!--p class="c-panel__content"></p-->
 
                 {{#unless images.[1]}}
-                      {{> media images.[0]}} 
-                     <p class="c-panel__content"></p>
+                {{> media images.[0]}}
+                <p class="c-panel__content"></p>
                 {{/unless}}
 
                 {{#if images.[1]}}
                 <ol class="c-panel__list">
                     {{#images}}
 
-                         <a href="/v{{src}}" class="c-panel__item__link">
-                            {{> media}}
-                        </a>
 
-                        
                     <li class="c-panel__item" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
-
                         <a href="/v{{src}}" class="c-panel__item__link">
-                            {{> media}}
-                        </a>
+                            {{> media}} </a>
 
                         <p class="c-panel__item__infos">
                             <span class="c-panel__item__prompt">
@@ -101,40 +97,33 @@
                                 {{json.metadata.folderName}}
                             </span>
                             <a class="c-panel__list__item__link" href="/v{{src}}/about"> </a>
-
                     </li>
-
                     {{/images}}
                 </ol>
                 {{/if}}
             </div>
 
-            <div class="c-panel__list__content">
-                <small class="realease">
-                    release 2.0.0
-                </small>
+            <div id="info-section" style="display:none;">
+                {{> info}}
             </div>
         </main>
 
         {{#if isHome}}
-        <!--iframe loading="lazy" class="newest-folder"
-            src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe--!>
+        <iframe loading="lazy" class="newest-folder"
+            src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
         {{/if}}
-
-
     </div>
 
     {{> main-menu}}
 
     <footer class="c-footer">
         <p>&#9426;&nbsp;eggermann,
-            <small>use it unt il down</small>
-            🤗 to <big> <a href="https://huggingface.co/"></a>🤗</big>
+            🤗 <big> <a href="https://huggingface.co/"></a>🤗</big>
         </p>
+        <small class="realease">
+            release 2.0.0
+        </small>
     </footer>
 </body>
 
 </html>
-<div id="info-section" style="display:none;">
-    {{> info}}
-</div>
