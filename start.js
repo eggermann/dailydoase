@@ -1,3 +1,9 @@
+// Suppress util._extend deprecation warning
+process.removeAllListeners('warning');
+process.on('warning', (e) => {
+  if (e.name === 'DeprecationWarning' && e.message.includes('util._extend')) return;
+  process.emitWarning(e);
+});
 import pkg from './modulePolyfill.js';
 
 const { require } = pkg;
