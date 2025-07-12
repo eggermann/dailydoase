@@ -56,7 +56,7 @@
         transform-origin: center center;
         margin: auto;
         position: sticky;
-       top: 0;
+        top: 0;
 
         &~p {
 
@@ -114,10 +114,8 @@
           opacity: 1;
         }
 
-
       }
     }
-
 
     // Static prompt styling
     &__infos {
@@ -130,6 +128,45 @@
         margin-top: 4px;
         font-weight: 500; // Added for better visibility
       }
+    }
+  }
+}
+
+// Play button style for playPause with triangle and primary color border/shadow
+.menu-actions .toggle-play {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  #playPause {
+    min-height: 2.6em;
+    min-width: 2.6em;
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 3px 1px $color-primary inset;
+    background: transparent;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: brightness(.6);
+
+    &:hover {
+      filter: none
+    }
+
+    // Arrow play icon
+    &::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 0.9em solid transparent;
+      border-bottom: 0.9em solid transparent;
+      border-left: 1.3em solid $color-primary;
+      margin-left: 0.2em;
     }
   }
 }
