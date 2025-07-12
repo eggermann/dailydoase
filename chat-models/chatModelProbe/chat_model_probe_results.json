@@ -1,0 +1,38 @@
+[
+  {
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "available": true
+  },
+  {
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "available": true
+  },
+  {
+    "model": "meta-llama/Llama-3.3-70B-Instruct",
+    "available": true
+  },
+  {
+    "model": "microsoft/Phi-3-mini-4k-instruct",
+    "available": true
+  },
+  {
+    "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "available": true
+  },
+  {
+    "model": "microsoft/Phi-3.5-mini-instruct",
+    "available": true
+  },
+  {
+    "model": "Qwen/Qwen2.5-72B-Instruct",
+    "available": true
+  },
+  {
+    "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
+    "available": true
+  },
+  {
+    "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+    "available": true
+  }
+]
