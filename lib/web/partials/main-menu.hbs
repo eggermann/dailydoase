@@ -1,0 +1,57 @@
+<aside class="c-aside">
+
+    <nav class="c-aside__menu">
+        <button class="c-aside__menu__button" value="schliessen/ öffnen">x</button>
+
+        <ul>
+            {{#menu}}
+
+            {{#current}}
+                <li class="current">
+                <a aria-current="true" href="{{src}}">{{name}}</a>
+            {{/current}}
+
+            {{^current}}
+            <li>
+                 <a href="{{src}}">{{name}}</a>
+             {{/current}}
+
+                {{^../isHome}}
+                {{#current}}
+                
+                <script>
+                    {{#if ../autoplay }}
+                    window.setTimeout(function () {
+                        document.getElementById('playPause').click();
+                    }, 2000);
+                    {{/if }}
+                </script>
+
+                <div class="menu-actions">
+                    <div class="toggle-play">
+                        <button id="playPause" type="button" onclick="startAutoPlay()">
+                            <span class="a-cessibility">toggle autoplay and slide-show</span>
+                        </button>
+                    </div>
+
+                    <div class="toggle-view">
+                        <input id="toggleView" checked type="checkbox">
+                        <label for="toggleView">
+                            <span class="a-cessibility">toggle view</span>
+                        </label>
+                    </div>
+                </div>
+                {{/current}}
+                {{/../isHome}}
+                <small class="image-cntr">{{fileCnt}}</small>
+            </li>
+            {{/menu}}
+        </ul>
+    </nav>
+
+    <i class="c-link-to-handmade-section">
+        <a href="" class="">
+            &nbsp; 𝒽𝒶𝓃𝒹𝓂𝒶𝒹𝑒 𝒸𝑜𝓁𝓁𝑒𝒸𝓉𝒾𝑜𝓃𝓈 &nbsp;&#127798;
+        </a>
+    </i>
+</aside>

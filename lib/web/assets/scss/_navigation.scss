@@ -29,6 +29,13 @@
       }
     }
 
+    // Reduce spacing between menu items and add blue background
+    background-color: rgba(30, 60, 180, 0.10);
+
+    li {
+      margin-bottom: 0.3em;
+    }
+
     // Menu states
     &.opened-menu {
       height: min-content;

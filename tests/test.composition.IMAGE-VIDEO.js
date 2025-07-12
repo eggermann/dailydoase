@@ -26,6 +26,7 @@ import('../semantic-stream.js').then(module =>
             },
 
             video: {
+<<<<<<< HEAD
                 folderName: 'ltxv13bDistilled',
                 cfg: 1.0,
                 steps: 7,
@@ -44,19 +45,45 @@ import('../semantic-stream.js').then(module =>
                 negative_prompt: 'worst quality, inconsistent motion, blurry, jittery, distorted',
                 mode: 'image-to-video',
                 useImagePrompt: true,
+=======
+
+                folderName: 'ltxVideos-test',
+                cfg: 3.0,
+                steps: 30,
+                motionBucketId: 127,
+                fps:8,
+                seed: Math.round(1204 * Math.random()),
+              //  imageDir: path.resolve(__dirname, '../images/ltx-test'),
+                height_ui: 512,
+                width_ui: 704,
+                duration_ui: 8,
+                ui_guidance_scale: 6,
+                improve_texture_flag: true,
+                negative_prompt: 'worst quality, inconsistent motion, blurry, jittery, distorted',
+                mode: 'image-to-video'
+>>>>>>> genSeq
 
             },
             image: {
 
 
                 staticPrompt: {
+<<<<<<< HEAD
                     pre: 'phone photo of a',
                     post: ', contemporary art, art exhibition posted to instagram, raw style'
+=======
+                    pre: '',
+                    post: ', as a Donald Trump video in neo gothic wild western style '
+>>>>>>> genSeq
                 },
                 modelProbeXX: {
                     // TARGET_MODEL: 'Qwen/Qwen2.5-72B-Instruct',//--> bad'meta-llama/Llama-3.3-70B-Instruct',
                     prompt: (totalPrompt) => {
+<<<<<<< HEAD
                         return ` create a image description to start a movie  -->\n
+=======
+                        return ` create a film scene description from -->\n
+>>>>>>> genSeq
                     ,
                      ${totalPrompt}`;
                     },
@@ -71,7 +98,11 @@ import('../semantic-stream.js').then(module =>
             },
 
             promptFunktion: async (streams) => {
+<<<<<<< HEAD
                     return streams;
+=======
+                return streams;
+>>>>>>> genSeq
             }
         }]
     )).catch(err => {

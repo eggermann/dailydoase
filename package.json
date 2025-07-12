@@ -1,5 +1,5 @@
 {
-  "name": "semantic-api",
+  "name": "dailydoase",
   "version": "1.0.0",
   "description": "",
   "main": "start.js",
@@ -7,6 +7,7 @@
   "dependencies": {
     "@gradio/client": "^1.8.0",
     "@huggingface/inference": "^3.9.2",
+    "@huggingface/transformers": "^3.5.2",
     "animated-scroll-to": "^2.3.0",
     "aos": "^2.3.4",
     "axios": "^1.5.1",
@@ -17,9 +18,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "element-within-viewport": "^3.0.1",
+    "esm": "^3.2.25",
     "express": "^4.18.2",
     "filenamify": "^5.1.1",
     "flat-file-db": "^1.0.0",
+    "fluent-ffmpeg": "^2.1.3",
     "fs-extra": "^11.1.0",
     "groq-sdk": "^0.5.0",
     "handlebars": "^4.7.7",
@@ -43,7 +46,7 @@
     "recursive-readdir": "^2.2.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "semantic-stream": "^2.0.1",
+    "semantic-stream": "^3.0.0",
     "sftp-upload": "^1.0.4",
     "sharp": "^0.32.6",
     "swiper": "^11.2.6",
@@ -88,12 +91,7 @@
     "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
     "deploy:upload": "node ./deploy/SSH-upload.cjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/deggermann/semantic-api.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/deggermann/semantic-api#readme"
+  "license": "ISC"
 }

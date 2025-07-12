@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,30 +14,40 @@
 <body class="{{#if pageClass}}{{pageClass}} {{/if}}{{#if isHome}}home{{/if}}{{#if frame}}frame{{/if}}">
 
     <div class="WRAPPER">
+        <nav class="context-menu">
+            <ul>
+                <li><a href="#info"
+                        onclick="document.getElementById('info-section').style.display='block';return false;">Show
+                        Info</a></li>
+            </ul>
+        </nav>
         <header class="c-header">
             <h1 class="c-title">
-                {{#if isHome}}
-                <span data-aos-anchor-placement="bottom-center" data-aos-once='true' data-aos="fade-down">daily</span>
-                <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
-                    data-aos="fade-up">Doase</span>
-                <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
-                    data-aos="fade-down">🌴</span>
-                {{else}}
+
+                {{#if json.staticPrompt.pre}}
+                <span>{{json.staticPrompt.pre}}</span>
+                {{/if}}
+
+                {{#unless isHome}}
                 <a href="/">
+                    {{/unless}}
                     <span data-aos-anchor-placement="bottom-center" data-aos-once='true'
                         data-aos="fade-down">daily</span>
                     <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="300"
                         data-aos="fade-up">Doase</span>
                     <span data-aos-anchor-placement="top-center" data-aos-once='true' data-aos-delay="500"
                         data-aos="fade-down">🌴</span>
+                    {{#unless isHome}}
                 </a>
-                {{/if}}
+                {{/unless}}
+
             </h1>
 
             <h2>
-                {{#if json.staticPrompt}}
-                <span>{{json.staticPrompt}}</span>
+                {{#if json.staticPrompt.post}}
+                <span>{{json.staticPrompt.post}}</span>
                 {{/if}}
+
                 {{#infoJson.words}}
                 <span>{{this.[0]}}</span>
                 {{/infoJson.words}}
@@ -44,116 +55,74 @@
         </header>
 
         <!--{_{>back-to-top-button}}-->
-        <main style="display: none">
+        <main>
             <div class="c-panel">
+
+                <!--p class="c-panel__content"></p-->
+
                 {{#unless images.[1]}}
-                {{> image images.[0]}}
-                {{log json}}
-                <p class="c-panel__content">{{json}}</p>
+                {{> media images.[0]}}
+                <p class="c-panel__content"></p>
                 {{/unless}}
 
                 {{#if images.[1]}}
                 <ol class="c-panel__list">
                     {{#images}}
-                    <li class="c-panel__list__item" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
 
 
-                        {{> image}}
-                        <div class="c-panel__list__item__infos">
+                    <li class="c-panel__item" data-aos-anchor-placement="top-bottom" data-aos-duration="150">
+                        <a href="/v{{src}}" class="c-panel__item__link">
+                            {{> media}} </a>
 
-                             <a class="c-panel__list__item__link" href="/v{{src}}">
+                        <p class="c-panel__item__infos">
+                            <span class="c-panel__item__prompt">
+                                {{json.prompt}}
+                            </span>
 
-                                <p class="c-panel__images__item___desc">
-                                    <span class="c-panel__images__item___rompt">
-                                        {{json.prompt}}
-                                    </span>
+                            <span class="c-panel__item__static-prompt">
+                                {{json.staticPrompt}}
+                            </span>
+                        </p>
 
-                                    <span class="c-panel__images__item___static-prompt">
-                                        {{json.staticPrompt}}
-                                    </span>
-                            </a>
-                            <a class="c-panel__list__item__link" href="/v{{src}}/about">      </a>
-                        </div>
+                        <div class="c-panel__list__item__meta">
+                            <span class="c-panel__list__item__meta__date">
+                                {{#if json.metadata.mtime}}
+                                {{json.metadata.mtime}}
+                                {{else}}
+                                {{json.metadata.ctime}}
+                                {{/if}}
+                            </span>
+
+                            <span class="c-panel__list__item__meta__folder">
+                                {{json.metadata.folderName}}
+                            </span>
+                            <a class="c-panel__list__item__link" href="/v{{src}}/about"> </a>
                     </li>
-
                     {{/images}}
                 </ol>
                 {{/if}}
             </div>
 
-            <div class="c-panel__list__content">
-                <small class="realease">
-                    release 1
-                </small>
-                <div class="c-panel__content__info"></div>
+            <div id="info-section" style="display:none;">
+                {{> info}}
             </div>
         </main>
 
         {{#if isHome}}
-        <iframe loading="lazy" class="newest-folder" src="{{menu.[1].src}}?frame=true&sort=desc"
-            frameborder="0"></iframe>
+        <iframe loading="lazy" class="newest-folder"
+            src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
         {{/if}}
     </div>
 
-    <aside class="c-aside">
-        <nav class="c-aside__menu">
-            <button class="c-aside__menu__button" value="schliessen/ öffnen">x</button>
-
-            <ul>
-                {{#menu}}
-                {{#current}}
-                <li class="current"> <a aria-current="true" href="{{src}}">{{name}}</a>
-                    {{/current}}
-
-                    {{^current}}
-                <li> <a href="{{src}}">{{name}}</a>
-                    {{/current}}
-
-                    {{^../isHome}}
-                    {{#current}}
-                    <script>
-                        { { #if../ autoplay } }
-                        window.setTimeout(function () {
-                            document.getElementById('playPause').click();
-                        }, 2000);
-                        { {/if } }
-                    </script>
-
-                    <div class="menu-actions">
-                        <div class="playPause" onload="startAutoPlay()">
-                            <input id="playPause" checked type="checkbox">
-                            <label for="playPause">
-                                <span class="a-cessibility">toggle autoplay</span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-view">
-                            <input id="toggleView" checked type="checkbox">
-                            <label for="toggleView">
-                                <span class="a-cessibility">toggle view</span>
-                            </label>
-                        </div>
-                    </div>
-                    {{/current}}
-                    {{/../isHome}}
-                    <small class="image-cntr">{{fileCnt}}</small>
-                </li>
-                {{/menu}}
-            </ul>
-        </nav>
-
-        <i class="c-link-to-handmade-section">
-            <a href="" class="">
-                &nbsp; 𝒽𝒶𝓃𝒹𝓂𝒶𝒹𝑒 𝒸𝑜𝓁𝓁𝑒𝒸𝓉𝒾𝑜𝓃𝓈 &nbsp;&#127798;
-            </a>
-        </i>
-    </aside>
+    {{> main-menu}}
 
     <footer class="c-footer">
         <p>&#9426;&nbsp;eggermann,
-            <small>use it unt il down</small>
-            🤗 to <big> <a href="https://huggingface.co/"></a>🤗</big>
+            🤗 <big> <a href="https://huggingface.co/"></a>🤗</big>
         </p>
+        <small class="realease">
+            release 2.0.0
+        </small>
     </footer>
 </body>
 

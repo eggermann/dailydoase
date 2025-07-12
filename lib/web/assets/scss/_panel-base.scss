@@ -7,7 +7,7 @@
   width: 100vw;
   height: $header-height;
   text-align: center;
-  
+
 
   // List container
   &__list {
@@ -17,21 +17,12 @@
     gap: $spacing-sm;
     align-items: baseline;
 
-    &__item {
-
-
+    .c-panel__item {
       position: relative;
       will-change: transform;
       width: 100%;
 
-      // Base styles
-      img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1/1;
-        display: block;
-        object-fit: contain;
-      }
+
 
       // Responsive sizes
       @include bp(md) {
@@ -43,37 +34,68 @@
         width: 320px;
       }
 
+      // Base styles
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        //object-fit: contain;
+      }
+
       // States
       &--active {
         z-index: $z-overlay;
         position: relative;
       }
 
-      // Hover effects only on medium screens and up
-      @include bp(md) {
-        @include on-hover {
 
-          &:hover,
-          &--active {
-            @include hover-grow;
-            filter: drop-shadow($shadow-overlay);
-            z-index: $z-overlay;
-          }
+
+      &__link:hover {
+        width: calc(100% + 2em);
+        margin-left: -2em;
+        transform-origin: center center;
+        margin: auto;
+        position: sticky;
+        top: 0;
+
+        &~p {
+
+
+          background-color: black;
+          text-decoration: underline;
+        }
+      }
+
+
+
+      &:hover,
+      a:focus~p {
+        .c-panel__item__infos {
+          /* creates an anonymous flexbox */
+          -webkit-line-clamp: none;
+          /* limits **lines**, not words   */
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
 
       // Info overlay
       &__infos {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        text-align: left;
+        color: $color-secondary;
+
+        display: -webkit-box;
+        /* creates an anonymous flexbox */
+        //-webkit-line-clamp: 2;
+        /* limits **lines**, not words   */
+        // -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        text-align: center;
         width: 100%;
 
         a {
-padding: $spacing-xs;
+          padding: $spacing-xs;
           display: block;
-        
-          color: $color-secondary;
           font-weight: 400;
         }
       }
@@ -92,19 +114,59 @@ padding: $spacing-xs;
           opacity: 1;
         }
 
+      }
+    }
 
+    // Static prompt styling
+    &__infos {
+      color: $color-secondary;
+
+      .c-panel__images__item___static-prompt {
+        display: block;
+        filter: brightness(.5); // Even darker
+        font-size: 0.9em;
+        margin-top: 4px;
+        font-weight: 500; // Added for better visibility
       }
     }
   }
+}
 
-  // Static prompt styling
-  &__list__item__infos {
-    .c-panel__images__item___static-prompt {
+// Play button style for playPause with triangle and primary color border/shadow
+.menu-actions .toggle-play {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  #playPause {
+    min-height: 2.6em;
+    min-width: 2.6em;
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 3px 1px $color-primary inset;
+    background: transparent;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: brightness(.6);
+
+    &:hover {
+      filter: none
+    }
+
+    // Arrow play icon
+    &::before {
+      content: '';
       display: block;
-      filter: brightness(.5); // Even darker
-      font-size: 0.9em;
-      margin-top: 4px;
-      font-weight: 500; // Added for better visibility
+      width: 0;
+      height: 0;
+      border-top: 0.9em solid transparent;
+      border-bottom: 0.9em solid transparent;
+      border-left: 1.3em solid $color-primary;
+      margin-left: 0.2em;
     }
   }
 }
