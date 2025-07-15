@@ -32,3 +32,13 @@ jobs:
 
       - name: Run SSH upload script
         run: node deploy/SSH-upload.cjs
+
+      - name: Run npm init in dist on remote server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ~/Projekte/dailyDoase/dist
+            npm i
