@@ -1,0 +1,34 @@
+name: SSH Upload
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install node-ssh
+
+      - name: Create SSH config file
+        run: |
+          mkdir -p ~/Documents/config-data
+          echo "module.exports = {
+            host: '${{ secrets.SSH_HOST }}',
+            user: '${{ secrets.SSH_USER }}',
+            password: '${{ secrets.SSH_PASSWORD }}'
+          };" > ~/Documents/config-data/eggman
+
+      - name: Run SSH upload script
+        run: node deploy/SSH-upload.cjs
