@@ -30,40 +30,40 @@ import('../semantic-stream.js').then(module =>
                 },
                 modelProbe: {
                     // TARGET_MODEL: 'Qwen/Qwen2.5-72B-Instruct',//--> bad'meta-llama/Llama-3.3-70B-Instruct',
-                   createStyleTags: async (prompt) => {
-    /*  Use an LLM to generate up‑to‑date ACE‑Step style tags
-        from an arbitrary sentence or scene description.
+                    createStyleTags: async (prompt) => {
+                        /*  Use an LLM to generate up‑to‑date ACE‑Step style tags
+                            from an arbitrary sentence or scene description.
+                    
+                            – We instruct the model to return *only* a JSON array
+                              of lowercase tag strings (max 12 items).
+                            – No additional commentary is allowed; we trim and join
+                              the array before returning so downstream code can treat
+                              it exactly like the old “string of tags” behaviour.
+                        */
+                        const response = await openai.chat.completions.create({
+                            model: "gpt-4o-mini",
+                            response_format: { type: "json_array" },
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: "You are a music‑style tag generator for the ACE‑Step text‑to‑music model. "
+                                        + "Given any user sentence, return a JSON array (max 12 elements) of concise, "
+                                        + "comma‑worthy tags: genres, moods, instrumentation, production descriptors, "
+                                        + "tempo like “90 bpm”, or key like “c minor”. Never include commentary."
+                                },
+                                {
+                                    role: "user",
+                                    content: `Generate tags from: "${prompt}"`
+                                }
+                            ]
+                        });
 
-        – We instruct the model to return *only* a JSON array
-          of lowercase tag strings (max 12 items).
-        – No additional commentary is allowed; we trim and join
-          the array before returning so downstream code can treat
-          it exactly like the old “string of tags” behaviour.
-    */
-    const response = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        response_format: { type: "json_array" },
-        messages: [
-            {
-                role: "system",
-                content: "You are a music‑style tag generator for the ACE‑Step text‑to‑music model. "
-                       + "Given any user sentence, return a JSON array (max 12 elements) of concise, "
-                       + "comma‑worthy tags: genres, moods, instrumentation, production descriptors, "
-                       + "tempo like “90 bpm”, or key like “c minor”. Never include commentary."
-            },
-            {
-                role: "user",
-                content: `Generate tags from: "${prompt}"`
-            }
-        ]
-    });
-
-    // LLM is forced to reply with a JSON array per response_format.
-    const tagsArray = JSON.parse(response.choices[0].message.content);
-    return tagsArray.join(", ");
-},
+                        // LLM is forced to reply with a JSON array per response_format.
+                        const tagsArray = JSON.parse(response.choices[0].message.content);
+                        return tagsArray.join(", ");
+                    },
                     //       create song lyrics (song tags are ${tagPrompt}). \n
-                     createLyrics: (prompt, tagPrompt) => {
+                    createLyrics: (prompt, tagPrompt) => {
                         return `
                  
                         create a song with the following tags: ${tagPrompt}.\n
