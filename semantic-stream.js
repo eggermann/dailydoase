@@ -1,7 +1,9 @@
+//TODO move to ./Lib
 import wordStream from 'semantic-stream'
+
 import generator from './lib/generator/index.js'
 import promptCreator from './lib/prompt-creator.js';
-import pkg from './modulePolyfill.js';
+import pkg from './lib/modulePolyfill.js';
 
 import store from './lib/store.cjs';
 const { require } = pkg;
@@ -107,4 +109,3 @@ export default async (configs) => {
     });
 
 }
-
