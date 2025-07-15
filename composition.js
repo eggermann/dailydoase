@@ -9,7 +9,7 @@ https://stable-diffusion-art.com/prompt-guide/
 //https://gist.github.com/thesephist/376afed2cbfce35d4b37d985abe6d0a1
 
 
-import pkg from './modulePolyfill.js';
+import pkg from './lib/modulePolyfill.js';
 
 const {require, __dirname} = pkg;
 

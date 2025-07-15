@@ -7,7 +7,7 @@ const ssh = new NodeSSH()
 
 const configPath = process.env.HOME + '/Documents/config-data/eggman';
 const config = require(configPath);
-const destinationPath = 'Projekte/dailyDoase';
+const destinationPath = 'Projekte/dailyDoase/testDEPLOY';
 
 
 const uploadDir = (localDir, remoteDir) => {
@@ -42,10 +42,11 @@ const uploadDir = (localDir, remoteDir) => {
     })
 }
 
-let fileNames = [/*'composition.js',*/ 'start.js', 'modulePolyfill.js', /*'exemplar-cntr.txt', 'folder-cntr.txt', */'package.json'];
+let fileNames = [/*'composition.js',*/ 'start.js', /*'exemplar-cntr.txt', 'folder-cntr.txt', */'package.json'];
 fileNames = fileNames.map(name => {
     return {local: __dirname + '/../' + name, remote: destinationPath + '/' + name};
 });
+
 ssh.connect({
     host: config.host,
     username: config.user,
