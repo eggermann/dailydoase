@@ -34,7 +34,7 @@ import('../semantic-stream.js').then(module =>
                             {
                                 role: "system",
                                 content: "You are a mood tag generator for text‑to‑video model. "
-                                    + "Given any user sentence, return a JSON array (max 6 elements) of concise mood tags only. "
+                                    + "Given any user sentence, return a JSON array (max 6 elements, min 1) of concise mood tags only. eg: {moods=[]} "
                                     + "Tags should describe emotional tones or atmospheres (e.g., melancholic, euphoric, tense, serene, nostalgic, ominous). "
                                     + "Never include commentary or non-mood tags."
                             },
@@ -47,12 +47,14 @@ import('../semantic-stream.js').then(module =>
 
                     // LLM is forced to reply with a JSON array per response_format.
                     const tagsArray = JSON.parse(response.choices[0].message.content);
-console.log('tagsArray:', tagsArray);
 
                     return tagsArray.moods.join(", ");
                 },
                 //       create song lyrics (song tags are ${tagPrompt}). \n
                 createLyrics: async (prompt, tagPrompt) => {
+               //     console.log('tagPrompt:', tagPrompt);
+//console.log('prompt :', prompt);
+
                     const response = await openai.chat.completions.create({
                         model: "gpt-4o-mini",
                         messages: [
@@ -62,7 +64,7 @@ console.log('tagsArray:', tagsArray);
                                     + "Given tags and a prompt, return a JSON object with a single key 'script' containing a script for a short, funny, and visually engaging meme video. "
                                     + "Structure: [setup] ... [punchline] ... [ending] ... "
                                     + "Optionally include meme tropes, visual gags, or popular meme references. "
-                                    + "Focus on humor, visual storytelling, and internet meme culture."
+                                    + "Focus on humor, visual storytelling, and internet meme culture. But very short description"
                             },
                             {
                                 role: "user",
@@ -70,6 +72,8 @@ console.log('tagsArray:', tagsArray);
                             }
                         ]
                     });
+//console.log('response:', response.choices[0].message.content);
+
 
                     const scriptObj = JSON.parse(response.choices[0].message.content);
                     return scriptObj.script;
