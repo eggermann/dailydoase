@@ -52,6 +52,9 @@ const _ = {
 
             let keepPrompt = null;
             const success = await model.prompt(prompt, config);// v
+          
+          
+          //TODO --> somehow keep prompt when false to not repeat the same prompt eg stream get next and api calls 
             console.log('success:', success);
 
 
