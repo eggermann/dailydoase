@@ -4,12 +4,12 @@
 // Aside navigation
 .c-aside {
   mix-blend-mode: plus-lighter;
-  background-color: rgba(38, 74, 163, 0.6);
+
 
   &__menu {
     @include spawnMaxColumn;
     @include flex-column;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(38, 74, 163, 0.8);
     backdrop-filter: blur(10px);
     bottom: 0;
     margin-top: $spacing-md * 3;
@@ -31,11 +31,15 @@
       }
     }
 
-    // Reduce spacing between menu items and add blue background
-    background-color: rgba(30, 60, 180, 0.10);
-
     li {
       margin-bottom: 0.3em;
+
+      .menu-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
     }
 
     // Menu states
@@ -46,6 +50,7 @@
 
       button {
         position: relative;
+
       }
 
       ul {
@@ -55,13 +60,22 @@
 
     // Menu controls
     &__button {
+  
       border: 0;
       background: transparent;
       color: $color-primary;
-      position: absolute;
-      right: 0;
-      padding-left: $spacing-xs;
     }
+
+    &__button[data-act] {
+      border: 1px solid $color-primary;
+      cursor: pointer;
+    }
+
+    &__button[data-act] {
+      border-radius: 8px;
+      float: left;
+    }
+
 
     // List styling
     ul {
@@ -112,7 +126,7 @@
           justify-self: start;
           color: $color-text;
           opacity: 0.7;
-          
+
         }
 
         &::after {
@@ -155,4 +169,15 @@
       opacity: 1;
     }
   }
+}
+
+
+
+/* Show/hide prompts based on body attribute */
+body[data-show-prompts="false"] .c-panel__item__prompt {
+  display: none !important;
+}
+
+body[data-show-prompts="true"] .c-panel__item__prompt {
+  display: block !important;
 }
