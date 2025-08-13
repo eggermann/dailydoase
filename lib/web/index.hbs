@@ -21,6 +21,7 @@
                         Info</a></li>
             </ul>
         </nav>
+
         <header class="c-header">
             <h1 class="c-title">
 
@@ -97,6 +98,7 @@
                                 {{json.metadata.folderName}}
                             </span>
                             <a class="c-panel__list__item__link" href="/v{{src}}/about"> </a>
+                        </div>
                     </li>
                     {{/images}}
                 </ol>
@@ -113,9 +115,9 @@
             src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
         {{/if}}
     </div>
-
+{{#unless frame}}
     {{> main-menu}}
-
+{{/unless}}
     <footer class="c-footer">
         <p>&#9426;&nbsp;eggermann,
             🤗 <big> <a href="https://huggingface.co/"></a>🤗</big>

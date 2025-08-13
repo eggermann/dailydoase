@@ -1,20 +1,6 @@
 @import "variables";
 @import "mixins";
 
-header {
-  .headroom {
-    will-change: transform;
-    transition: transform $transition-medium;
-  }
-
-  .headroom--pinned {
-    transform: translateY(0);
-  }
-
-  .headroom--unpinned {
-    transform: translateY(0);
-  }
-}
 
 .c-aside {
   body.playing & {
