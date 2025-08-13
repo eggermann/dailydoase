@@ -3,8 +3,7 @@ name: SSH Upload
 on:
   workflow_dispatch:
   push:
-    branches:
-      - deploy
+    branches: [ deploy ]
 
 jobs:
   upload:
@@ -13,32 +12,65 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Show runner + repo context
+        run: |
+          echo "Node: $(node -v || true)"
+          echo "PWD:  $(pwd)"
+          echo "HOME: $HOME"
+          echo "Repo files:"
+          ls -la
+          echo "deploy dir:"
+          ls -la deploy || true
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install node-ssh
-
-      - name: Create SSH config file
+      - name: Install node deps needed by upload script
         run: |
-          mkdir -p ~/Documents/config-data
-          echo "module.exports = {
+          npm init -y >/dev/null 2>&1 || true
+          npm i node-ssh
+
+      - name: Verify upload script exists
+        run: |
+          test -f deploy/SSH-upload.cjs || { echo "❌ deploy/SSH-upload.cjs not found"; exit 1; }
+          head -n 40 deploy/SSH-upload.cjs || true
+
+      - name: Create SSH config file for Node script
+        run: |
+          mkdir -p "$HOME/Documents/config-data"
+          cat > "$HOME/Documents/config-data/eggman" <<'CFG'
+          module.exports = {
             host: '${{ secrets.SSH_HOST }}',
             user: '${{ secrets.SSH_USER }}',
             password: '${{ secrets.SSH_PASSWORD }}'
-          };" > ~/Documents/config-data/eggman
+          };
+          CFG
+          echo "Wrote $HOME/Documents/config-data/eggman"
 
-      - name: Run SSH upload script
-        run: node deploy/SSH-upload.cjs
+      - name: Run SSH upload script (with traces)
+        env:
+          NODE_OPTIONS: --trace-uncaught
+        run: |
+          set -euo pipefail
+          node deploy/SSH-upload.cjs
 
-      - name: Run npm init in dist on remote server
+      - name: Ensure remote path exists (appleboy/ssh-action)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
+          script_stop: true
           script: |
-            cd ~/Projekte/dailyDoase/dist
-            npm i
+            set -euxo pipefail
+            echo "Home on remote: $HOME"
+            ls -la ~/Projekte || true
+            APP_DIR="$HOME/Projekte/dailyDoase"
+            if [ ! -d "$APP_DIR" ] && [ -d "$HOME/Projekte/dailydoase" ]; then
+              APP_DIR="$HOME/Projekte/dailydoase"
+            fi
+            echo "Using APP_DIR=$APP_DIR"
+            mkdir -p "$APP_DIR/dist"
+            ls -la "$APP_DIR"
