@@ -7,7 +7,7 @@ const ssh = new NodeSSH()
 
 const configPath = process.env.HOME + '/Documents/config-data/eggman';
 const config = require(configPath);
-const destinationPath = 'Projekte/dailyDoase/testDEPLOY';
+const destinationPath = 'Projekte/dailyDoase'///testDEPLOY;
 
 
 const uploadDir = (localDir, remoteDir) => {
