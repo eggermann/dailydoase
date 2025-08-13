@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const {NodeSSH} = require('node-ssh')
+const { NodeSSH } = require('node-ssh')
 
 const ssh = new NodeSSH()
 
@@ -42,14 +42,16 @@ const uploadDir = (localDir, remoteDir) => {
 
 let fileNames = [
     'webpack.config.cjs',
-    /*'composition.js',*/ 
-    'start.js', 
+    /*'composition.js',*/
+    'start.js',
     /*'exemplar-cntr.txt', 
     'folder-cntr.txt', 
-    */'package.json'];
+    */
+    'package.json',
+    'modulePolyfill.js'];
 
 fileNames = fileNames.map(name => {
-    return {local: __dirname + '/../' + name, remote: destinationPath + '/' + name};
+    return { local: __dirname + '/../' + name, remote: destinationPath + '/' + name };
 });
 
 ssh.connect({
@@ -68,9 +70,9 @@ ssh.connect({
 
         // Upload candidate directories if they exist locally
         const candidates = [
-          'lib',               // always include lib
-          'dist',              // root-level dist (if webpack outputs here)
-          'lib/web/dist'       // nested dist (webpack default)
+            'lib',               // always include lib
+            'dist',              // root-level dist (if webpack outputs here)
+            'lib/web/dist'       // nested dist (webpack default)
         ];
 
         for (const name of candidates) {
@@ -86,6 +88,8 @@ ssh.connect({
         }
 
         // Done with all transfers
+        // Run npm install on remote
+        await ssh.execCommand(`cd ${destinationPath} && npm i`);
         ssh.dispose();
     })().catch((error) => {
         console.log("Something's wrong")
