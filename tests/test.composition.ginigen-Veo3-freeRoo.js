@@ -1,10 +1,9 @@
-
 import dotenv from "dotenv";
 dotenv.config();
 import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const word2 = [['God', 'en'], ['Human', 'en'], ['KI', 'en']];
+const word2 = [['kangaroo', 'en'], ['Love', 'en'], ['Code', 'en']];
 const scriptName = 'post-to-ginigen-Veo3-free.js'
 
 import('../semantic-stream.js').then(module =>
@@ -19,9 +18,9 @@ import('../semantic-stream.js').then(module =>
                 }
             },
             words: word2,
-            folderName: 'GodSportAcid',
+            folderName:  word2.map(w => w[0]).join(','),
             staticPrompt: {
-                pre: ' ',
+                pre: 'Roo Code is an open‑source AI coding agent in VS Code — it can read/write files, run terminal commands, automate browser actions, and use OpenAI‑compatible models. Here, “Roo” refers to the animal kangaroo. All text must be readable in English. ',
                 post: ' raw style',
             },
             prompts: {
@@ -33,14 +32,17 @@ import('../semantic-stream.js').then(module =>
                         messages: [
                             {
                                 role: "system",
-                                content: "You are a mood tag generator for text‑to‑video model. "
-                                    + "Given any user sentence, return a JSON array (max 6 elements, min 1) of concise mood tags only. eg: {moods=[]} "
-                                    + "Tags should describe emotional tones or atmospheres (e.g., melancholic, euphoric, tense, serene, nostalgic, ominous). "
-                                    + "Never include commentary or non-mood tags."
+                                content:
+                                    "You are a mood‑tag generator that captures the wild spirit of Roo Code. " +
+                                    "Given any user sentence, return a JSON object with a single key 'moods' (max 6, min 1) " +
+                                    "containing concise mood tags only. Example: {\"moods\": []}. " +
+                                    "Tags should describe emotional tones or atmospheres (e.g., chaotic, surreal, playful, cursed, epic, hilarious). " +
+                                    "Never include commentary or non‑mood tags."
                             },
                             {
                                 role: "user",
-                                content: `Generate mood tags from: "${prompt}"`
+                                content:
+                                    "Generate mood tags from: \"" + prompt + "\""
                             }
                         ]
                     });
@@ -60,29 +62,30 @@ import('../semantic-stream.js').then(module =>
                         messages: [
                             {
                                 role: "system",
-                                content: "You are a meme video scriptwriter for an 8-second meme generator. "
-                                    + `Given tags and a prompt return a 'tiny script' for a short, funny, and visually engaging meme video. `
-                                    + "Structure eg: [setup] ... [punchline] ... [ending] ... "
-                                    + "Optionally include meme tropes, visual gags, or popular meme references."
-                                    + "Focus on humor and vision, visual storytelling, and internet meme culture,very short description"
+                                content: [
+                                    "You are a meme‑video scriptwriter for an 8‑second meme ,  inspired by Roo Code culture.",
+                                    "Given tags and a prompt, return a tiny script in three timed parts labeled exactly as 'sec 1', 'sec 2', and 'sec 3'.",
+                                    "Use exactly this format:",
+                                    "sec 1: ...",
+                                    "sec n: ...",
+                                    "sec n: ... , ...",
+                                    "Interpret 'Roo' as the animal kangaroo (kangaroo motifs are encouraged).",
+                                    "All on‑screen text must be readable in English.",
+                                    "The vibe should feel surreal, hilarious, epic, or cursed — anything that screams Roo.",
+                                    "Optionally include meme tropes or visual gags.",
+                                    "Do not include any commentary, just the script.",
+                                    "The script should be concise, punchy, and fit within 8 seconds.",
+                                    "The script should be suitable for a Roo Code meme video.",
+                                    
+                                ].join('\n')
                             },
-                            /* content: "You are a meme scene writer. "
-                                 + `based on a Prompt you return a 'tiny script' from mood-words:  ${tagPrompt}. `
-                                 + "Structure eg: [setup] ... [punchline] ... [ending] ... "
-                                 + "Optionally include meme tropes, visual gags, or popular meme references."
-                                 + "Focus on humor and vision, visual storytelling, and interplanetare meme culture."
-                         },*/
-                            /*
-                                                            content: "You are a meme video scriptwriter for an 8-second meme generator. "
-                                    + "Given tags and a prompt, return a JSON object with a single key 'script' containing a script for a short, funny, and visually engaging meme video. "
-                                    + "Structure: [setup] ... [punchline] ... [ending] ... "
-                                    + "Optionally include meme tropes, visual gags, or popular meme references. "
-                                    + "Focus on humor, visual storytelling, and internet meme culture. But very short description"
-
-                                    */
                             {
                                 role: "user",
-                                content: `Prompt: ${prompt}`
+                                content: [
+                                    `Tags: ${tagPrompt}`,
+                                    `Prompt: ${prompt}`,
+                                
+                                ].join('\n')
                             }
                         ]
                     });
@@ -99,7 +102,7 @@ import('../semantic-stream.js').then(module =>
             },
 
             seed: Math.round(1204 * Math.random()),
-            steps: 5,//8max
+            steps: 6,//8max
             // 4:3 aspect ratio, next higher size, both dimensions multiple of 32 (e.g., 128x168)
             height: 128 * 2.25, // 128 is a multiple of 32
             width: 168 * 2.25,  // 168 is a multiple of 32, 168/128 = 4/3

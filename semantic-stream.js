@@ -1,7 +1,9 @@
+//TODO move to ./Lib
 import wordStream from 'semantic-stream'
+
 import generator from './lib/generator/index.js'
 import promptCreator from './lib/prompt-creator.js';
-import pkg from './modulePolyfill.js';
+import pkg from './lib/modulePolyfill.js';
 
 import store from './lib/store.cjs';
 const { require } = pkg;
@@ -50,6 +52,9 @@ const _ = {
 
             let keepPrompt = null;
             const success = await model.prompt(prompt, config);// v
+          
+          
+          //TODO --> somehow keep prompt when false to not repeat the same prompt eg stream get next and api calls 
             console.log('success:', success);
 
 
@@ -107,4 +112,3 @@ export default async (configs) => {
     });
 
 }
-
