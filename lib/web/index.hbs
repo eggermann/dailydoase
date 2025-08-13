@@ -115,9 +115,9 @@
             src="folder/{{images.[0].metadata.folderName}}?frame=true&sort=desc" frameborder="0"></iframe>
         {{/if}}
     </div>
-
+{{#unless frame}}
     {{> main-menu}}
-
+{{/unless}}
     <footer class="c-footer">
         <p>&#9426;&nbsp;eggermann,
             🤗 <big> <a href="https://huggingface.co/"></a>🤗</big>
