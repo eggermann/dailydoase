@@ -47,6 +47,7 @@ let fileNames = [
     /*'exemplar-cntr.txt', 
     'folder-cntr.txt', 
     */
+    'semantic-stream.js',
     'package.json',
     'modulePolyfill.js'];
 
@@ -89,7 +90,7 @@ ssh.connect({
 
         // Done with all transfers
         // Run npm install on remote
-        await ssh.execCommand(`cd ${destinationPath} && npm i`);
+        await ssh.execCommand(`cd ${destinationPath} && npm i `);
         ssh.dispose();
     })().catch((error) => {
         console.log("Something's wrong")
