@@ -27,10 +27,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install node deps needed by upload script
+      - name: Install dependencies
         run: |
-          npm init -y >/dev/null 2>&1 || true
-          npm i node-ssh
+          npm ci
+
+      - name: Build (webpack:build)
+        run: |
+          npm run webpack:build
 
       - name: Verify upload script exists
         run: |
