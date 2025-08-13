@@ -65,10 +65,9 @@
 
     // List styling
     ul {
-      padding: $spacing-sm;
+      padding: $spacing-sm 0;
 
       li {
-
         margin-bottom: $spacing-sm;
         display: grid;
         grid-template-areas:
@@ -107,10 +106,13 @@
         }
 
         .image-cntr {
+          aspect-ratio: 1;
+
           grid-area: counter;
           justify-self: start;
           color: $color-text;
           opacity: 0.7;
+          
         }
 
         &::after {
