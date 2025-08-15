@@ -1,0 +1,14 @@
+  "/Volumes/deg-late-24/dailly-doase-filesave/dailydoase-images/" \
+  eggman@volans.uberspace.de:Projekte/dailyDoase/GENERATIONS/
+
+
+  Flags explained
+	•	--partial → keeps partially transferred files instead of deleting them
+	•	--append → resumes appending to partially transferred files
+	•	If you want rsync to check checksums before resuming (slower but safer), use --append-verify instead.
+
+⸻
+
+💡 This works perfectly for large datasets — you can cut the connection anytime and just re-run the exact same command to continue.
+
+Do you want me to also add a delete flag so the remote folder is kept in perfect sync with your local copy? That would remove any remote files that no longer exist locally.
