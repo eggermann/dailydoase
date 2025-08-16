@@ -5,16 +5,16 @@ dotenv.config();
 import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-let words = [['Capitalsim', 'en'], ['Socialism', 'en'], ['Socialism', 'en'], ['Mafia', 'en']];
+let words = [['Capitalsim', 'en'], ['Alaska', 'en'], ['Socialism', 'en'], ['Mafia', 'en']];
 words = [['Capitalsim', 'en']];
-const scriptName = 'post-to-Img-Video-wan.js'
+const scriptName = 'post-to-Img-Video-Wan-2.2-5B.js'
 
 const fluxHQ = {
     fluxVariant: 'dev',       // guidance-distilled
     width: 576,
     height: 1024,
-    num_inference_steps: 30,  // 30 ≈ sweet-spot vs 50 ref
-    guidance_scale: 3.5,      // Copied from HF example
+    num_inference_steps: 20,  // 30 ≈ sweet-spot vs 50 ref
+    guidance_scale: 9,      // Copied from HF example
     negative_prompt: 'blurry, oversharpened, JPEG artefacts',
     seed: Math.round(Math.random() * 1e6)
 };
@@ -26,7 +26,7 @@ import('../semantic-stream.js').then(module =>
                 scriptName
             },
             words,
-            //folderName: 'wan-Image-Video',
+       //     folderName: 'TESTXXXXXTEST',
             prompts: {
 
                 createStyleTags: async (prompt) => {
@@ -109,7 +109,7 @@ import('../semantic-stream.js').then(module =>
             },
             image: {
                 model: fluxHQ,
-                staticPrompt: {
+                staticPromptXX: {
                     post: ', as theater performance posted to social-media',
                     pre: 'phone-photo from:'
                 },
@@ -117,28 +117,33 @@ import('../semantic-stream.js').then(module =>
                 prompts: {
                     create: async (prompt) => {
                         const _ = {
-                            createPrompt: async (prompt) => {
+                           createPrompt: async (prompt) => {
                                 const response = await openai.chat.completions.create({
-                                    model: "gpt-4o-mini",
-
+                                    model: "gpt-4o",
                                     messages: [
                                         {
                                             role: "system",
-                                            content: "You are an art film scriptwriter for the ACE‑Step text‑to‑video model. "
-                                                + "Given tags and a prompt, return a JSON object with a single key 'script' containing a script for a 12-second short art movie. "
-                                                + "Structure: [scene 1] ... [scene 2] ... [scene 3] ... [ending] ... "
-                                                + "Optionally include cinematic notations such as: [camera: close-up], [lighting: moody], [sound: ambient rain], [effect: slow motion]. "
-                                                + "Focus on visual storytelling and mood, not dialogue. Never include commentary or Sound/music."
+                                            content:
+                                                "You are a world‑class text‑to‑image prompt crafter. " +
+                                                "ALWAYS include Vladimir Putin and Donald Trump together in the same scene. " +
+                                                "Given user-provided words, write one vivid, camera-ready scene optimized for image generation " +
+                                                "(subject, setting, style, mood, lighting, composition, camera). " +
+                                                "Keep it 1–2 sentences, no lists, no dialogue, no quotes, no extra commentary."
                                         },
                                         {
                                             role: "user",
-                                            content: `Tags: ${tagPrompt}\nPrompt: ${prompt}`
+                                            content: `Create an image description using these words (must feature Vladimir Putin and Donald Trump together): ${prompt}`
                                         }
                                     ]
                                 });
 
-                                const scriptObj = JSON.parse(response.choices[0].message.content);
-                                return scriptObj.script;
+                                let promptText = response.choices[0].message.content.trim();
+                                // Ensure both names are present even if the model under-includes.
+                                if (!/Vladimir\s+Putin/i.test(promptText) || !/Donald\s+Trump/i.test(promptText)) {
+                                    const src = typeof prompt === 'string' ? prompt : JSON.stringify(prompt);
+                                    promptText = `Vladimir Putin and Donald Trump appear together in a vivid, camera-ready scene inspired by ${src}. Photorealistic, balanced composition, evocative lighting.`;
+                                }
+                                return promptText;
                             }
                         }
 
