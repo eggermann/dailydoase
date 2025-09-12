@@ -1,0 +1,17 @@
+
+create new generation approach
+task + model
+
+task {
+    
+}
+
+model
+{
+    'hf/gh/
+}
+
+
+task{
+    config
+}
