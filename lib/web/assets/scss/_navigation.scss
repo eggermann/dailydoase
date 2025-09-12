@@ -3,12 +3,13 @@
 
 // Aside navigation
 .c-aside {
-  &__menu {  
+  mix-blend-mode: plus-lighter;
 
 
+  &__menu {
     @include spawnMaxColumn;
     @include flex-column;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(38, 74, 163, 0.8);
     backdrop-filter: blur(10px);
     bottom: 0;
     margin-top: $spacing-md * 3;
@@ -24,8 +25,20 @@
       &:hover {
         opacity: 1;
       }
+
       &:not(:hover) {
         opacity: 0.8;
+      }
+    }
+
+    li {
+      margin-bottom: 0.3em;
+
+      .menu-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
       }
     }
 
@@ -37,6 +50,7 @@
 
       button {
         position: relative;
+
       }
 
       ul {
@@ -46,20 +60,28 @@
 
     // Menu controls
     &__button {
+  
       border: 0;
       background: transparent;
       color: $color-primary;
-      position: absolute;
-      right: 0;
-      padding-left: $spacing-xs;
     }
+
+    &__button[data-act] {
+      border: 1px solid $color-primary;
+      cursor: pointer;
+    }
+
+    &__button[data-act] {
+      border-radius: 8px;
+      float: left;
+    }
+
 
     // List styling
     ul {
-      padding: $spacing-sm;
+      padding: $spacing-sm 0;
 
       li {
-
         margin-bottom: $spacing-sm;
         display: grid;
         grid-template-areas:
@@ -98,10 +120,13 @@
         }
 
         .image-cntr {
+          aspect-ratio: 1;
+
           grid-area: counter;
           justify-self: start;
           color: $color-text;
           opacity: 0.7;
+
         }
 
         &::after {
@@ -123,6 +148,7 @@
       a {
         font-weight: 500;
       }
+
       .image-cntr {
         background: rgba(255, 255, 255, 0.1);
       }
@@ -143,4 +169,15 @@
       opacity: 1;
     }
   }
+}
+
+
+
+/* Show/hide prompts based on body attribute */
+body[data-show-prompts="false"] .c-panel__item__prompt {
+  display: none !important;
+}
+
+body[data-show-prompts="true"] .c-panel__item__prompt {
+  display: block !important;
 }

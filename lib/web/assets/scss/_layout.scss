@@ -24,10 +24,11 @@ header {
   }
 
   z-index: $z-header;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   transition: transform $transition-fast;
+  transform: translateY(0);
 
   &.headroom--unpinned {
     transform: translateY(-100%);
@@ -39,6 +40,34 @@ header {
     h2 {
       margin-top: $spacing-md;
     }
+  }
+
+  h1 span,
+  h2 span {
+    opacity: 0;
+    transition: opacity .5s ease-in;
+  }
+
+  &.headroom--top {
+    h1 {
+      @for $i from 1 through 3 {
+        span:nth-child(#{$i}) {
+          opacity: 1;
+          transition-delay: #{($i - 1) * 0.25}s;
+        }
+      }
+    }
+
+    h2 {
+
+      @for $i from 1 through 6 {
+        span:nth-child(#{$i}) {
+          opacity: 1;
+            transition-delay: #{($i - 1) * 0.25 + .75}s;
+        }
+      }
+    }
+
   }
 }
 
@@ -60,10 +89,10 @@ footer {
 
 // Frame layout
 .frame {
+
   .c-title span:nth-child(-n+2),
- // .c-aside // ,.c-footer
-  .c-footer
-    {
+  // .c-aside // ,.c-footer
+  .c-footer {
     display: none;
   }
 }
