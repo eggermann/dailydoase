@@ -1,0 +1,9 @@
+{
+  "endpoint": "/video-audio-mux",
+  "source_video": "1758194381202-wan22-first-last.mp4",
+  "source_audio": "1758194387418-mirelo-sfx.wav",
+  "options": {
+    "crf": 28,
+    "preset": "ultrafast"
+  }
+}

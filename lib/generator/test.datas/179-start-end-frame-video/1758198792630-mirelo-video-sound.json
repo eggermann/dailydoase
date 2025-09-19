@@ -1,0 +1,54 @@
+{
+  "mergedPath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/1758198792630-final.mp4",
+  "mireloResponse": {
+    "file": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198900578-mirelo-sfx.wav",
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198900578-mirelo-sfx.json",
+      "metadata": {
+        "endpoint": "/video-to-sfx",
+        "video_url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/934f143bc364d4219918a667cb5f723a9d0ca30ec6cecba18d372738a12e0748/tmph6dwbg2f.mp4",
+        "duration": 5.1,
+        "num_samples": 1,
+        "steps": 25,
+        "seed": -1,
+        "creativity_coef": 4.5,
+        "return_audio_only": true,
+        "timestamp": "2025-09-18T12:35:00.861Z"
+      }
+    }
+  },
+  "videoResponse": {
+    "file": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198893034-wan22-first-last.mp4",
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198893034-wan22-first-last.json",
+      "metadata": {
+        "model": "multimodalart/wan-2-2-first-last-frame",
+        "prompt": " In a dramatic film set, Vladimir Putin and Donald Trump are seated across a polished mahogany table in a dimly lit, opulent room, the rich, warm glow from a chandelier casting defined shadows that enhance the tension in the scene. The camera captures their intense expressions and direct eye contact, with Putin's light-brown/gray hair and navy suit contrasting against Trump's distinctive blond hair and blue suit, the focused composition emphasizing the gravity of their conversation amidst the cinematic ambiance. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+        "duration_seconds": 5.1,
+        "steps": 6,
+        "guidance_scale": 1,
+        "guidance_scale_2": 1,
+        "seed": 42,
+        "randomize_seed": true,
+        "url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/934f143bc364d4219918a667cb5f723a9d0ca30ec6cecba18d372738a12e0748/tmph6dwbg2f.mp4",
+        "sourceUrl": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/934f143bc364d4219918a667cb5f723a9d0ca30ec6cecba18d372738a12e0748/tmph6dwbg2f.mp4",
+        "timestamp": "2025-09-18T12:34:53.729Z"
+      }
+    }
+  },
+  "imageResponse": {
+    "image": {
+      "name": "1758198684998-end.jpeg",
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/180-FLUX/1758198684998-end.jpeg"
+    },
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/180-FLUX/1758198684998-end.json",
+      "metadata": {
+        "prompt": " In a dramatic film set, Vladimir Putin and Donald Trump are seated across a polished mahogany table in a dimly lit, opulent room, the rich, warm glow from a chandelier casting defined shadows that enhance the tension in the scene. The camera captures their intense expressions and direct eye contact, with Putin's light-brown/gray hair and navy suit contrasting against Trump's distinctive blond hair and blue suit, the focused composition emphasizing the gravity of their conversation amidst the cinematic ambiance. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+        "endpoint": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+        "timestamp": "2025-09-18T12:31:33.559Z"
+      }
+    }
+  },
+  "timestamp": "2025-09-18T12:35:01.110Z"
+}

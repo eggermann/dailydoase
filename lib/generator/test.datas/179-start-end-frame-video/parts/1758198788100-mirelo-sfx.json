@@ -1,0 +1,11 @@
+{
+  "endpoint": "/video-to-sfx",
+  "video_url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/f8db5a6a0318ac81503d8bce40ed6908f6419ac85ee1ee5822105e42e20730e0/tmpfazwz7kn.mp4",
+  "duration": 5.1,
+  "num_samples": 1,
+  "steps": 25,
+  "seed": -1,
+  "creativity_coef": 4.5,
+  "return_audio_only": true,
+  "timestamp": "2025-09-18T12:33:08.364Z"
+}

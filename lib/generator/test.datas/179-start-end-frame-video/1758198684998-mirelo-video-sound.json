@@ -1,0 +1,54 @@
+{
+  "mergedPath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/1758198684998-final.mp4",
+  "mireloResponse": {
+    "file": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198788100-mirelo-sfx.wav",
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198788100-mirelo-sfx.json",
+      "metadata": {
+        "endpoint": "/video-to-sfx",
+        "video_url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/f8db5a6a0318ac81503d8bce40ed6908f6419ac85ee1ee5822105e42e20730e0/tmpfazwz7kn.mp4",
+        "duration": 5.1,
+        "num_samples": 1,
+        "steps": 25,
+        "seed": -1,
+        "creativity_coef": 4.5,
+        "return_audio_only": true,
+        "timestamp": "2025-09-18T12:33:08.364Z"
+      }
+    }
+  },
+  "videoResponse": {
+    "file": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198781282-wan22-first-last.mp4",
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198781282-wan22-first-last.json",
+      "metadata": {
+        "model": "multimodalart/wan-2-2-first-last-frame",
+        "prompt": " In a grand and ornately decorated theater room, Vladimir Putin and Donald Trump stand side by side, intently examining a large, illuminated timeline of twentieth-century theatre projected on a majestic crimson velvet curtain backdrop. The scene captures their profiles with soft, warm stage lighting casting a gentle glow, emphasizing the intricate historical details on the timeline. The composition frames both leaders centrally, their faces filled with contemplation and curiosity, with the rich textures of the theater lending a sense of drama and gravitas to the moment. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+        "duration_seconds": 5.1,
+        "steps": 6,
+        "guidance_scale": 1,
+        "guidance_scale_2": 1,
+        "seed": 42,
+        "randomize_seed": true,
+        "url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/f8db5a6a0318ac81503d8bce40ed6908f6419ac85ee1ee5822105e42e20730e0/tmpfazwz7kn.mp4",
+        "sourceUrl": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/f8db5a6a0318ac81503d8bce40ed6908f6419ac85ee1ee5822105e42e20730e0/tmpfazwz7kn.mp4",
+        "timestamp": "2025-09-18T12:33:02.106Z"
+      }
+    }
+  },
+  "imageResponse": {
+    "image": {
+      "name": "1758198563543-end.jpeg",
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/180-FLUX/1758198563543-end.jpeg"
+    },
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/180-FLUX/1758198563543-end.json",
+      "metadata": {
+        "prompt": " In a grand and ornately decorated theater room, Vladimir Putin and Donald Trump stand side by side, intently examining a large, illuminated timeline of twentieth-century theatre projected on a majestic crimson velvet curtain backdrop. The scene captures their profiles with soft, warm stage lighting casting a gentle glow, emphasizing the intricate historical details on the timeline. The composition frames both leaders centrally, their faces filled with contemplation and curiosity, with the rich textures of the theater lending a sense of drama and gravitas to the moment. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+        "endpoint": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+        "timestamp": "2025-09-18T12:29:42.018Z"
+      }
+    }
+  },
+  "timestamp": "2025-09-18T12:33:08.628Z"
+}

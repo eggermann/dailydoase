@@ -1,0 +1,5 @@
+{
+  "prompt": " In a warmly lit, grand library adorned with towering mahogany bookshelves filled with leather-bound classics, Putin and Trump sit together at an ornate wooden desk, each perusing an open tome that captures their interest; the soft glow from an antique brass lamp casts gentle highlights on their facial features, accentuating Putin's focused expression and Trump's curious gaze, while the rich textures of their navy and blue suits contrast elegantly with the deep reds and browns of the room. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+  "endpoint": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+  "timestamp": "2025-09-18T12:33:21.059Z"
+}

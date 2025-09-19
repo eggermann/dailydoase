@@ -1,0 +1,54 @@
+{
+  "mergedPath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/1758198563543-final.mp4",
+  "mireloResponse": {
+    "file": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198680351-mirelo-sfx.wav",
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198680351-mirelo-sfx.json",
+      "metadata": {
+        "endpoint": "/video-to-sfx",
+        "video_url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/755f7964877c9b64bb903ea72bf51d450dcd37738d6238a311874b602214123c/tmpp8g80pg3.mp4",
+        "duration": 5.1,
+        "num_samples": 1,
+        "steps": 25,
+        "seed": -1,
+        "creativity_coef": 4.5,
+        "return_audio_only": true,
+        "timestamp": "2025-09-18T12:31:20.665Z"
+      }
+    }
+  },
+  "videoResponse": {
+    "file": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198665702-wan22-first-last.mp4",
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/1758198665702-wan22-first-last.json",
+      "metadata": {
+        "model": "multimodalart/wan-2-2-first-last-frame",
+        "prompt": " In a grand, ornately decorated 19th-century theater, Vladimir Putin and Donald Trump sit side by side in the plush velvet seats of the opulent balcony, overlooking the historic stage. The warm, amber glow of chandelier lighting bathes the majestic interior in a golden hue, reflecting off the polished wood and intricate molding, creating a mood of elegance and grandeur as they attentively watch actors reenact a pivotal moment in theatrical history, their expressions a blend of admiration and intrigue. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+        "duration_seconds": 5.1,
+        "steps": 6,
+        "guidance_scale": 1,
+        "guidance_scale_2": 1,
+        "seed": 42,
+        "randomize_seed": true,
+        "url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/755f7964877c9b64bb903ea72bf51d450dcd37738d6238a311874b602214123c/tmpp8g80pg3.mp4",
+        "sourceUrl": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/755f7964877c9b64bb903ea72bf51d450dcd37738d6238a311874b602214123c/tmpp8g80pg3.mp4",
+        "timestamp": "2025-09-18T12:31:06.593Z"
+      }
+    }
+  },
+  "imageResponse": {
+    "image": {
+      "name": "1758198563543.jpeg",
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/180-FLUX/1758198563543.jpeg"
+    },
+    "json": {
+      "path": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/179-start-end-frame-video/parts/180-FLUX/1758198563543.json",
+      "metadata": {
+        "prompt": " In a grand, ornately decorated 19th-century theater, Vladimir Putin and Donald Trump sit side by side in the plush velvet seats of the opulent balcony, overlooking the historic stage. The warm, amber glow of chandelier lighting bathes the majestic interior in a golden hue, reflecting off the polished wood and intricate molding, creating a mood of elegance and grandeur as they attentively watch actors reenact a pivotal moment in theatrical history, their expressions a blend of admiration and intrigue. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+        "endpoint": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+        "timestamp": "2025-09-18T12:29:32.861Z"
+      }
+    }
+  },
+  "timestamp": "2025-09-18T12:31:20.996Z"
+}

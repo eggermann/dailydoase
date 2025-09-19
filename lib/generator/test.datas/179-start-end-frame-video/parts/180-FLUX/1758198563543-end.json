@@ -1,0 +1,5 @@
+{
+  "prompt": " In a grand and ornately decorated theater room, Vladimir Putin and Donald Trump stand side by side, intently examining a large, illuminated timeline of twentieth-century theatre projected on a majestic crimson velvet curtain backdrop. The scene captures their profiles with soft, warm stage lighting casting a gentle glow, emphasizing the intricate historical details on the timeline. The composition frames both leaders centrally, their faces filled with contemplation and curiosity, with the rich textures of the theater lending a sense of drama and gravitas to the moment. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+  "endpoint": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+  "timestamp": "2025-09-18T12:29:42.018Z"
+}

@@ -1,0 +1,13 @@
+{
+  "model": "multimodalart/wan-2-2-first-last-frame",
+  "prompt": " In a dramatic film set, Vladimir Putin and Donald Trump are seated across a polished mahogany table in a dimly lit, opulent room, the rich, warm glow from a chandelier casting defined shadows that enhance the tension in the scene. The camera captures their intense expressions and direct eye contact, with Putin's light-brown/gray hair and navy suit contrasting against Trump's distinctive blond hair and blue suit, the focused composition emphasizing the gravity of their conversation amidst the cinematic ambiance. | Identity lock: Vladimir Putin, early 70s, fair skin, short receding light‑brown/gray hair, navy business suit, white dress shirt, muted solid tie (often blue), clean‑shaven, no glasses; Donald Trump, late 70s, fair skin, distinctive blond swept‑back hair, blue business suit, white dress shirt, long red tie, clean‑shaven, light tan, no glasses. ",
+  "duration_seconds": 5.1,
+  "steps": 6,
+  "guidance_scale": 1,
+  "guidance_scale_2": 1,
+  "seed": 42,
+  "randomize_seed": true,
+  "url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/934f143bc364d4219918a667cb5f723a9d0ca30ec6cecba18d372738a12e0748/tmph6dwbg2f.mp4",
+  "sourceUrl": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/934f143bc364d4219918a667cb5f723a9d0ca30ec6cecba18d372738a12e0748/tmph6dwbg2f.mp4",
+  "timestamp": "2025-09-18T12:34:53.729Z"
+}
