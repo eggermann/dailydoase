@@ -1,3 +1,4 @@
 file '/Users/eggermann/Projekte/dailydoase/lib/generator/test.datas/179-start-end-frame-video/1758198563543-final.mp4'
 file '/Users/eggermann/Projekte/dailydoase/lib/generator/test.datas/179-start-end-frame-video/1758198684998-final.mp4'
 file '/Users/eggermann/Projekte/dailydoase/lib/generator/test.datas/179-start-end-frame-video/1758198792630-final.mp4'
+file '/Users/eggermann/Projekte/dailydoase/lib/generator/test.datas/179-start-end-frame-video/joined-1758275723899.mp4'
