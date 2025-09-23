@@ -60,20 +60,37 @@
 
     // Menu controls
     &__button {
-  
-      border: 0;
-      background: transparent;
+      // sticky within the scrollable menu
+      position: sticky;
+      top: 0;
+      z-index: $z-menu + 1;
+
+      width: 100%;
+      padding: $spacing-xs $spacing-sm;
+      border: 1px solid $color-primary;
+      border-radius: 0; // remove round borders
+      // Same blue as aside background
+      background: rgba(38, 74, 163, 0.8);
       color: $color-primary;
+      backdrop-filter: blur(2px);
+      cursor: pointer;
+      float: left;
     }
 
     &__button[data-act] {
       border: 1px solid $color-primary;
+      border-radius: 0; // keep square while sticky
       cursor: pointer;
     }
 
-    &__button[data-act] {
-      border-radius: 8px;
-      float: left;
+    // less prominent when menu has scrolled (button is at sticky top)
+    &.scrolled {
+      .c-aside__menu__button {
+        opacity: 0.6;
+        // Slightly less prominent but same blue hue
+        background: rgba(38, 74, 163, 0.6);
+        box-shadow: none;
+      }
     }
 
 

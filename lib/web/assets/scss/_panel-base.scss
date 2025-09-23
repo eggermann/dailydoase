@@ -71,11 +71,11 @@
       &:hover,
       a:focus~p {
         .c-panel__item__infos {
-          /* creates an anonymous flexbox */
+          /* expand on hover, but do not re-center */
           -webkit-line-clamp: none;
-          /* limits **lines**, not words   */
           -webkit-box-orient: vertical;
           overflow: hidden;
+          text-align: left;
         }
       }
 
@@ -83,15 +83,20 @@
       &__infos {
         color: $color-secondary;
 
-        display: -webkit-box;
-        /* creates an anonymous flexbox */
-        //-webkit-line-clamp: 2;
-        /* limits **lines**, not words   */
-        // -webkit-box-orient: vertical;
+        display: -webkit-box; /* creates an anonymous flexbox */
+        -webkit-line-clamp: 2; /* limits lines when collapsed */
+        -webkit-box-orient: vertical;
         overflow: hidden;
 
-        text-align: center;
+        text-align: left; /* prevent centering on hover */
         width: 100%;
+        cursor: pointer; /* indicate click-to-expand */
+
+        &.is-expanded {
+          -webkit-line-clamp: unset;
+          display: block;
+          overflow: visible;
+        }
 
         a {
           padding: $spacing-xs;
@@ -121,12 +126,14 @@
     &__infos {
       color: $color-secondary;
 
-      .c-panel__images__item___static-prompt {
+      .c-panel__images__item___static-prompt,
+      .c-panel__item__static-prompt {
         display: block;
         filter: brightness(.5); // Even darker
         font-size: 0.9em;
         margin-top: 4px;
         font-weight: 500; // Added for better visibility
+        text-align: left; // keep left-aligned even on hover
       }
     }
   }
