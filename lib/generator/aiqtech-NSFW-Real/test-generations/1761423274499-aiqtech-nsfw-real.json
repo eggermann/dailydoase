@@ -1,0 +1,14 @@
+{
+  "model": "aiqtech/NSFW-Real",
+  "prompt": "helllo world, beautiful detailed portrait of a slutty pic as a swamm",
+  "negative_prompt": " watermark, signature, ugly, poorly drawn",
+  "seed": 0,
+  "randomize_seed": true,
+  "width": 256,
+  "height": 256,
+  "guidance_scale": 4,
+  "num_inference_steps": 8,
+  "url": "https://aiqtech-nsfw-real.hf.space/gradio_api/file=/tmp/gradio/2b0f92fa8b511f7417a581353b717c3fff555adebfe32538b9fbeabe41939ee3/image.webp",
+  "sourceUrl": "https://aiqtech-nsfw-real.hf.space/gradio_api/file=/tmp/gradio/2b0f92fa8b511f7417a581353b717c3fff555adebfe32538b9fbeabe41939ee3/image.webp",
+  "timestamp": "2025-10-25T20:14:34.629Z"
+}

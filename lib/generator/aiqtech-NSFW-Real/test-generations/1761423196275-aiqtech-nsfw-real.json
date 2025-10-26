@@ -1,0 +1,14 @@
+{
+  "model": "aiqtech/NSFW-Real",
+  "prompt": "test prompt",
+  "negative_prompt": " watermark, signature, ugly, poorly drawn",
+  "seed": 0,
+  "randomize_seed": true,
+  "width": 256,
+  "height": 256,
+  "guidance_scale": 4,
+  "num_inference_steps": 8,
+  "url": "https://aiqtech-nsfw-real.hf.space/gradio_api/file=/tmp/gradio/b68150298c812d424aae559485d90e41a3e0eab168ed478ed1cba088b8fd8204/image.webp",
+  "sourceUrl": "https://aiqtech-nsfw-real.hf.space/gradio_api/file=/tmp/gradio/b68150298c812d424aae559485d90e41a3e0eab168ed478ed1cba088b8fd8204/image.webp",
+  "timestamp": "2025-10-25T20:13:16.404Z"
+}
