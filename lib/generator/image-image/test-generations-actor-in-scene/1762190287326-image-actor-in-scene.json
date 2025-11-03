@@ -1,0 +1,12 @@
+{
+  "provider": "hf",
+  "model": "black-forest-labs/FLUX.1-Kontext-dev",
+  "prompt": "Place the actor into a moody neon-lit city rooftop scene",
+  "inputPath": "/Users/eggermann/Projekte/dailydoase/lib/generator/test.datas/A.jpeg",
+  "parameters": {
+    "guidance_scale": 2.5,
+    "num_inference_steps": 15,
+    "seed": 0
+  },
+  "timestamp": "2025-11-03T17:18:07.330Z"
+}
