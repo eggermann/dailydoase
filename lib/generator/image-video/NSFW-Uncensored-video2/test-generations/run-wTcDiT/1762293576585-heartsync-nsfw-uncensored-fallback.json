@@ -1,0 +1,15 @@
+{
+  "model": "Heartsync/NSFW-Uncensored-video2",
+  "prompt": "test prompt",
+  "height": 224,
+  "width": 224,
+  "duration_seconds": 1,
+  "sampling_steps": 2,
+  "guide_scale": 1,
+  "shift": 1,
+  "seed": 0,
+  "url": "https://heartsync-nsfw-uncensored-video2.hf.space/gradio_api/file=/tmp/gradio/a6356f318c2e05bc8677efc0c106c438ca3eb60614a456b0cad8b9c7dc06d9e4/image.webp",
+  "sourceUrl": "https://heartsync-nsfw-uncensored-video2.hf.space/gradio_api/file=/tmp/gradio/a6356f318c2e05bc8677efc0c106c438ca3eb60614a456b0cad8b9c7dc06d9e4/image.webp",
+  "fallback": true,
+  "timestamp": "2025-11-04T21:59:36.816Z"
+}
