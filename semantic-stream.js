@@ -72,7 +72,9 @@ const _ = {
 
             }
 
-            const wait = config.model.pollingTime || 4000;
+            const hasPollingTime = !!config.model
+              && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
+            const wait = hasPollingTime ? config.model.pollingTime : 4000;
 
             if (wait) {
                 setTimeout(async () => {
