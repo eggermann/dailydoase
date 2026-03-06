@@ -83,11 +83,31 @@ const _ = {
 
                 }, wait);
             }
+
+            return success;
         }
 
 
         return loop
     }
+}
+
+export const resolveLoopOutcome = ({ success, pollingTime }) => {
+    if (success === false && !pollingTime) {
+        throw new Error('Generator returned false');
+    }
+
+    if (pollingTime) {
+        return {
+            status: success === false ? 'scheduled-retry' : 'scheduled-next-run',
+            success
+        };
+    }
+
+    return {
+        status: 'completed',
+        success
+    };
 }
 
 export default async (configs) => {
@@ -106,8 +126,17 @@ export default async (configs) => {
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
         const model = await generator.setVersion(config);
 
-        await _.getLoop(model, config)(wordStreams).then(() => {
-            console.log(chalk.green('Generator ended successfully'));
+        await _.getLoop(model, config)(wordStreams).then((success) => {
+            const hasPollingTime = !!config.model
+              && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
+            const pollingTime = hasPollingTime ? config.model.pollingTime : 4000;
+            const outcome = resolveLoopOutcome({ success, pollingTime });
+
+            if (outcome.status === 'completed') {
+                console.log(chalk.green('Generator ended successfully'));
+            } else {
+                console.log(chalk.yellow(`Generator loop ${outcome.status}`));
+            }
         }).catch(err => {
             console.error(chalk.red('Error starting generator:', err));
         })

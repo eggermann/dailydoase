@@ -1,0 +1,14 @@
+{
+  "model": "Wan-AI/Wan-2.2-5B",
+  "prompt": "next scene from this camera snapshot, subtle subject motion, natural handheld movement, candid documentary realism",
+  "height": 1920,
+  "width": 1088,
+  "duration_seconds": 1,
+  "sampling_steps": 1,
+  "guide_scale": 1,
+  "shift": 1,
+  "seed": 424242,
+  "url": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/e86b5f274915037da989effc9a2bd6ece9c40fdeff7efff273bb97c48d93fe15/a445ad1fe9a20de9.mp4",
+  "sourceUrl": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/e86b5f274915037da989effc9a2bd6ece9c40fdeff7efff273bb97c48d93fe15/a445ad1fe9a20de9.mp4",
+  "timestamp": "2026-03-06T15:06:17.249Z"
+}
