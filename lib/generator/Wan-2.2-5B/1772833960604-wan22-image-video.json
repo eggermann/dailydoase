@@ -1,0 +1,14 @@
+{
+  "model": "Wan-AI/Wan-2.2-5B",
+  "prompt": "Subtle realistic motion in the existing garden scene, gentle hand movement, slight camera drift only.",
+  "height": 512,
+  "width": 512,
+  "duration_seconds": 2,
+  "sampling_steps": 10,
+  "guide_scale": 3,
+  "shift": 3,
+  "seed": 0,
+  "url": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/90c6cb172a0d102d0375d2a6835792aaa0c59af70efa0e984547d83384c4a934/dfbe021a6b65342e.mp4",
+  "sourceUrl": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/90c6cb172a0d102d0375d2a6835792aaa0c59af70efa0e984547d83384c4a934/dfbe021a6b65342e.mp4",
+  "timestamp": "2026-03-06T21:52:41.265Z"
+}

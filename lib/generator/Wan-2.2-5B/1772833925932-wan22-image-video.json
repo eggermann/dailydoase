@@ -1,0 +1,14 @@
+{
+  "model": "Wan-AI/Wan-2.2-5B",
+  "prompt": "A weathered hand gently places the small green seedling into the rich soil of the garden. As the hand withdraws, the camera slowly pans up to reveal the striking Bauhaus building rising majestically in the background, its clean lines and geometric forms bathed in warm sunlight.",
+  "height": 512,
+  "width": 512,
+  "duration_seconds": 2,
+  "sampling_steps": 10,
+  "guide_scale": 3,
+  "shift": 3,
+  "seed": 0,
+  "url": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/d8e9a97499e0704cb479baee24bf8211038eb0e676da2f10ced7b2a1d107fd4c/27f2d49b11b68384.mp4",
+  "sourceUrl": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/d8e9a97499e0704cb479baee24bf8211038eb0e676da2f10ced7b2a1d107fd4c/27f2d49b11b68384.mp4",
+  "timestamp": "2026-03-06T21:52:06.899Z"
+}

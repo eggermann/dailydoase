@@ -55,6 +55,7 @@
     "sftp-upload": "^1.0.4",
     "sharp": "^0.32.6",
     "swiper": "^11.2.6",
+    "taktmuster": "^1.2.0",
     "temp": "^0.9.4",
     "temp-write": "^5.0.0",
     "throttle-debounce": "^5.0.0",

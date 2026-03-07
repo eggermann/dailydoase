@@ -1,0 +1,14 @@
+{
+  "model": "Wan-AI/Wan-2.2-5B",
+  "prompt": "Subtle realistic motion only.",
+  "height": 512,
+  "width": 512,
+  "duration_seconds": 2,
+  "sampling_steps": 10,
+  "guide_scale": 3,
+  "shift": 3,
+  "seed": 0,
+  "url": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/d3d4a8425adaa9d5518a56ff4f20764a0240fc5a40917bf2dd2985224c0088b6/fc209d84e1ce25d8.mp4",
+  "sourceUrl": "https://wan-ai-wan-2-2-5b.hf.space/gradio_api/file=/tmp/gradio/d3d4a8425adaa9d5518a56ff4f20764a0240fc5a40917bf2dd2985224c0088b6/fc209d84e1ce25d8.mp4",
+  "timestamp": "2026-03-06T21:47:24.467Z"
+}

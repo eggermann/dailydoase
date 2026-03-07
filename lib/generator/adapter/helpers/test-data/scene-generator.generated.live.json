@@ -1,0 +1,58 @@
+{
+  "model": "gpt-4o-mini",
+  "configMode": "generated",
+  "sceneLengths": [
+    1,
+    1,
+    1
+  ],
+  "sourceCues": [
+    "takt cycle 0, beat 1, pattern 4, metric strength 3.25, waveform 1",
+    "takt cycle 0, beat 2, pattern 1, metric strength 0.6, waveform 0.238117",
+    "takt cycle 0, beat 3, pattern 2, metric strength 1.35, waveform 0.356033"
+  ],
+  "scenePlan": [
+    {
+      "index": 1,
+      "title": "Morning in the Park",
+      "beat": "Scene opens with a serene view of a park at dawn.",
+      "stillPrompt": "A peaceful park with dew on the grass and the sun rising in the background.",
+      "imageDescription": "A wide shot of a park with lush green grass, trees, and a soft orange glow from the sunrise.",
+      "storyBeat": "Establishes a calm morning atmosphere, setting the stage for the day's events.",
+      "motionCue": "Camera slowly pans across the park.",
+      "cameraCue": "Focus on the sunrise and the dew on the grass.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "freshImage": true,
+      "useCameraShot": false
+    },
+    {
+      "index": 2,
+      "title": "Children Playing",
+      "beat": "Transition to children playing in the park.",
+      "stillPrompt": "A lively scene of children playing tag under the trees.",
+      "imageDescription": "A close-up shot of children laughing and running around, with trees providing shade.",
+      "storyBeat": "Introduces the joy and energy of the park, contrasting with the previous calmness.",
+      "motionCue": "Zoom in on the children's faces as they laugh.",
+      "cameraCue": "Capture the excitement and movement of the game.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "freshImage": false,
+      "useCameraShot": false
+    },
+    {
+      "index": 3,
+      "title": "Sunset Reflection",
+      "beat": "Scene shifts to a tranquil lake reflecting the sunset.",
+      "stillPrompt": "A serene lake at sunset with vibrant colors reflecting on the water.",
+      "imageDescription": "A wide shot of a lake surrounded by trees, with the sky painted in shades of orange and purple.",
+      "storyBeat": "Concludes the day with a moment of reflection, contrasting the earlier energy.",
+      "motionCue": "Camera slowly tilts up to the sky.",
+      "cameraCue": "Highlight the colors of the sunset and their reflection on the water.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "freshImage": true,
+      "useCameraShot": false
+    }
+  ]
+}
