@@ -1,0 +1,35 @@
+{
+  "url": "http://192.168.1.2:1234",
+  "model": "mistralai/ministral-3-3b",
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/camera-snapshot/1772808930515-camera.jpg",
+  "result": {
+    "provider": "lmstudio",
+    "model": "mistralai/ministral-3-3b",
+    "outputText": "**Camera Shot Description:**\n\n- **Subject:** A bald man with a neutral expression, wearing a dark jacket over a light-colored shirt, a grey scarf draped around his neck, and a mustache.\n- **Setting:** Indoor environment—likely an art studio or workspace—with plain white walls, overhead fluorescent lighting, exposed ductwork, and a framed artwork on the wall to the left.\n\n- **Framing:**\n  - Close-up shot focusing primarily on the subject’s face.\n  - Slightly off-center composition with the subject occupying roughly two-thirds of the frame vertically (top edge near his hairline).\n\n- **Lighting:** Soft, even lighting from above and slightly to the right, casting minimal shadows on the man's face. The ambient light is diffused but still highlights facial features clearly.\n\n**Continuity for Next Shot:**\n1. Maintain the same close-up framing of the subject’s face.\n2. Keep the composition off-center with the subject occupying roughly two-thirds vertically in the frame.\n3. Preserve the indoor setting, specifically the white walls and overhead",
+    "raw": {
+      "id": "chatcmpl-szy291pl5w90tajap05eaqg",
+      "object": "chat.completion",
+      "created": 1772916693,
+      "model": "mistralai/ministral-3-3b",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "**Camera Shot Description:**\n\n- **Subject:** A bald man with a neutral expression, wearing a dark jacket over a light-colored shirt, a grey scarf draped around his neck, and a mustache.\n- **Setting:** Indoor environment—likely an art studio or workspace—with plain white walls, overhead fluorescent lighting, exposed ductwork, and a framed artwork on the wall to the left.\n\n- **Framing:**\n  - Close-up shot focusing primarily on the subject’s face.\n  - Slightly off-center composition with the subject occupying roughly two-thirds of the frame vertically (top edge near his hairline).\n\n- **Lighting:** Soft, even lighting from above and slightly to the right, casting minimal shadows on the man's face. The ambient light is diffused but still highlights facial features clearly.\n\n**Continuity for Next Shot:**\n1. Maintain the same close-up framing of the subject’s face.\n2. Keep the composition off-center with the subject occupying roughly two-thirds vertically in the frame.\n3. Preserve the indoor setting, specifically the white walls and overhead",
+            "tool_calls": []
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1096,
+        "completion_tokens": 220,
+        "total_tokens": 1316
+      },
+      "stats": {},
+      "system_fingerprint": "mistralai/ministral-3-3b"
+    }
+  }
+}

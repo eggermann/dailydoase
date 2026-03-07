@@ -1,0 +1,43 @@
+{
+  "endpoint": "http://192.168.1.2:1234/v1/chat/completions",
+  "request": {
+    "model": "mistralai/ministral-3-3b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a camera scene parser."
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Describe only the visible shot for the next camera scene."
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/jpeg;base64,anBlZy1iaW5hcnk="
+            }
+          }
+        ]
+      }
+    ],
+    "temperature": 0.4,
+    "max_tokens": 120
+  },
+  "response": {
+    "provider": "lmstudio",
+    "model": "mistralai/ministral-3-3b",
+    "outputText": "Desk scene, warm room light, frontal webcam framing.",
+    "raw": {
+      "choices": [
+        {
+          "message": {
+            "content": "Desk scene, warm room light, frontal webcam framing."
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "lmStudioUrl": "http://127.0.0.1:65534",
+  "lmStudioModel": "mistralai/ministral-3-3b",
+  "hfModel": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/camera-snapshot/1772808930515-camera.jpg",
+  "result": null,
+  "error": "Vision helper failed for all providers: [lmstudio] fetch failed | [huggingface:vision] Failed to perform inference: an HTTP error occurred when requesting the provider. | [huggingface] No Inference Provider available for model Salesforce/blip-image-captioning-large."
+}

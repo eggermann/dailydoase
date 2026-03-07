@@ -1,0 +1,6 @@
+{
+  "url": "http://127.0.0.1:65534",
+  "model": "mistralai/ministral-3-3b",
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/camera-snapshot/1772808930515-camera.jpg",
+  "error": "Vision helper failed for all providers: [lmstudio] fetch failed"
+}

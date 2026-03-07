@@ -1,0 +1,21 @@
+{
+  "lmStudioUrl": "http://127.0.0.1:65534",
+  "lmStudioModel": "mistralai/ministral-3-3b",
+  "hfSpaceId": "huggingface-projects/llama-3.2-vision-11B",
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/camera-snapshot/1772808930515-camera.jpg",
+  "result": {
+    "provider": "hfspace",
+    "model": "huggingface-projects/llama-3.2-vision-11B",
+    "outputText": "The image shows a man sitting in a room with white walls and ceiling, wearing a black hoodie with a scarf around his neck. The man is bald, has blue eyes, and is looking directly at the camera. \n\nThe room has a large painting on the back wall, a desk with a water bottle on it, and a chair behind the man. There are also some exposed pipes and fluorescent lights on the ceiling. The lighting is bright and natural, suggesting that the photo was taken during the daytime. \n\nThe man's serious expression and the overall atmosphere of the room suggest that he is in a professional or artistic setting. The consistency of the lighting and the setting for the next shot should be the same, with the same bright and natural light and the same white walls and ceiling.",
+    "raw": {
+      "type": "data",
+      "time": "2026-03-07T21:01:41.820Z",
+      "data": [
+        "The image shows a man sitting in a room with white walls and ceiling, wearing a black hoodie with a scarf around his neck. The man is bald, has blue eyes, and is looking directly at the camera. \n\nThe room has a large painting on the back wall, a desk with a water bottle on it, and a chair behind the man. There are also some exposed pipes and fluorescent lights on the ceiling. The lighting is bright and natural, suggesting that the photo was taken during the daytime. \n\nThe man's serious expression and the overall atmosphere of the room suggest that he is in a professional or artistic setting. The consistency of the lighting and the setting for the next shot should be the same, with the same bright and natural light and the same white walls and ceiling."
+      ],
+      "endpoint": "/chat",
+      "fn_index": 7
+    }
+  },
+  "error": null
+}
