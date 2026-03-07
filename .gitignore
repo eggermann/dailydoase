@@ -11,6 +11,9 @@ fresh-folders/
 dailymotion/
 youtube/
 XXX_crashed-file/
+tests/generated_music/
+tests/XXXgenerated_music/
+lib/generator/image-image/test-generations-banana-girl/
 # Compiled Java class files
 *.class
 *.aider.*
