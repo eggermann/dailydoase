@@ -14,6 +14,7 @@ XXX_crashed-file/
 tests/generated_music/
 tests/XXXgenerated_music/
 lib/generator/image-image/test-generations-banana-girl/
+lib/helper/yt-upload/tokens.json
 # Compiled Java class files
 *.class
 *.aider.*
