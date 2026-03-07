@@ -1,0 +1,59 @@
+{
+  "model": "gpt-4o-mini",
+  "configMode": "camera",
+  "sceneCount": 3,
+  "totalDurationSeconds": 3,
+  "scenePlan": [
+    {
+      "index": 1,
+      "title": "Person at Desk",
+      "beat": "A person sits at their desk, focused on their work.",
+      "stillPrompt": "A candid shot of a person working at their desk, with a slight light shift illuminating their face.",
+      "imageDescription": "A close-up of a person typing on a laptop at a cluttered desk, with books and a coffee cup nearby.",
+      "storyBeat": "This scene introduces the main character and their environment, establishing a sense of focus.",
+      "motionCue": "The camera gently sways as if the viewer is observing from a nearby position.",
+      "cameraCue": "The camera captures the person from a slightly elevated angle, creating an intimate atmosphere.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 1,
+      "videoPrompt": "A person is intently typing on their laptop at a cluttered desk, surrounded by books and a coffee cup. The camera sways gently, creating a candid feel as the light shifts to illuminate their focused expression.",
+      "singleImagePrompt": "A person is working at their desk, typing on a laptop. The scene has a slight motion as if the viewer is observing from a nearby position.",
+      "freshImage": true,
+      "useCameraShot": true
+    },
+    {
+      "index": 2,
+      "title": "Room Light Shift",
+      "beat": "The room light shifts, casting new shadows and highlighting different areas.",
+      "stillPrompt": "The same person at their desk, but now the light has changed, creating a warm glow.",
+      "imageDescription": "The desk is now illuminated by a warm light, casting long shadows and highlighting the person's concentration.",
+      "storyBeat": "This scene adds a dynamic element to the environment, emphasizing the passage of time.",
+      "motionCue": "The camera slowly zooms in on the person's face as the light shifts.",
+      "cameraCue": "The camera focuses on the person's expression, capturing the warmth of the new light.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 1,
+      "videoPrompt": "As the light shifts in the room, it casts a warm glow on the person at their desk, highlighting their focused expression. The camera slowly zooms in, capturing the intimate moment.",
+      "singleImagePrompt": "The light in the room has shifted, casting a warm glow on the person at their desk. The scene feels alive with the new light, emphasizing their concentration.",
+      "freshImage": false,
+      "useCameraShot": true
+    },
+    {
+      "index": 3,
+      "title": "Final Focus",
+      "beat": "The person takes a deep breath, refocusing on their work as the light settles.",
+      "stillPrompt": "The person takes a deep breath, visibly relaxing as they refocus on their laptop.",
+      "imageDescription": "The person is now leaning back slightly, taking a deep breath, with a relaxed expression as they look at their laptop.",
+      "storyBeat": "This scene concludes the moment, showing the character's determination and focus.",
+      "motionCue": "The camera gently pans out to capture the entire desk setup.",
+      "cameraCue": "The camera pulls back slightly to reveal the entire desk and the person in a relaxed state.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 1,
+      "videoPrompt": "The person takes a deep breath, visibly relaxing as they refocus on their laptop. The camera gently pans out, revealing the entire desk setup and the character's determination.",
+      "singleImagePrompt": "The person is leaning back slightly, taking a deep breath while looking at their laptop. The scene captures a moment of relaxation and focus.",
+      "freshImage": false,
+      "useCameraShot": true
+    }
+  ]
+}
