@@ -1,0 +1,49 @@
+{
+  "lmStudioUrl": "http://127.0.0.1:65534",
+  "lmStudioModel": "mistralai/ministral-3-3b",
+  "hfSpaceId": "huggingface-projects/space-that-does-not-exist",
+  "openAiModel": "gpt-4o-mini",
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/generator/adapter/tests/GENERATIONS/camera-snapshot/1772808930515-camera.jpg",
+  "result": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "outputText": "**Camera Shot Description:**\n\n- **Subject:** A man with a shaved head, wearing a dark scarf and a black top, sitting in a chair. He has a serious expression.\n  \n- **Setting:** An industrial-style room with white walls and exposed ceiling beams. There are abstract artworks visible in the background, along with some art supplies on a table.\n\n- **Framing:** The shot is a medium close-up, focusing on the man's upper body and face. He is centered in the frame, with some space above his head and to the sides.\n\n- **Lighting:** Natural light is coming from a window, creating a bright and slightly shadowed effect on the subject's face. The light casts a pattern on his clothing.\n\n- **Consistency for Next Shot:** Maintain the same subject, setting, and lighting conditions. The framing should remain similar, focusing on the man's upper body and face, ensuring the background elements are still visible.",
+    "raw": {
+      "id": "chatcmpl-DGtjFG1yiu0ZsL9sRmlETWS9XvKnI",
+      "object": "chat.completion",
+      "created": 1772919841,
+      "model": "gpt-4o-mini-2024-07-18",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "**Camera Shot Description:**\n\n- **Subject:** A man with a shaved head, wearing a dark scarf and a black top, sitting in a chair. He has a serious expression.\n  \n- **Setting:** An industrial-style room with white walls and exposed ceiling beams. There are abstract artworks visible in the background, along with some art supplies on a table.\n\n- **Framing:** The shot is a medium close-up, focusing on the man's upper body and face. He is centered in the frame, with some space above his head and to the sides.\n\n- **Lighting:** Natural light is coming from a window, creating a bright and slightly shadowed effect on the subject's face. The light casts a pattern on his clothing.\n\n- **Consistency for Next Shot:** Maintain the same subject, setting, and lighting conditions. The framing should remain similar, focusing on the man's upper body and face, ensuring the background elements are still visible.",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 36885,
+        "completion_tokens": 188,
+        "total_tokens": 37073,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "service_tier": "default",
+      "system_fingerprint": "fp_7b951bbbbb"
+    }
+  },
+  "error": null
+}
