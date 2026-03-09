@@ -1,0 +1,14 @@
+{
+  "model": "aiqtech/NSFW-Real",
+  "prompt": "futuristic android hero striking an action pose, high detail, photorealistic",
+  "negative_prompt": " watermark, signature, ugly, poorly drawn",
+  "seed": 801534,
+  "randomize_seed": true,
+  "width": 256,
+  "height": 256,
+  "guidance_scale": 4,
+  "num_inference_steps": 8,
+  "url": "https://aiqtech-nsfw-real.hf.space/gradio_api/file=/tmp/gradio/815ddd6bfd95fb90a472a336b0f9896b7009241c1be46fcc3f95f3d47968c9ef/image.webp",
+  "sourceUrl": "https://aiqtech-nsfw-real.hf.space/gradio_api/file=/tmp/gradio/815ddd6bfd95fb90a472a336b0f9896b7009241c1be46fcc3f95f3d47968c9ef/image.webp",
+  "timestamp": "2026-03-07T19:16:14.699Z"
+}
