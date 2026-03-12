@@ -1,0 +1,17 @@
+#!/bin/zsh
+set -euo pipefail
+
+cd "$(dirname "$0")"
+
+export RUN_LIVE_CAMERA_PROMPT_CHAIN_TESTS="1"
+export CAMERA_PROMPT_CHAIN_LOG="1"
+export CAMERA_PROMPT_CHAIN_CAPTURE="1"
+export CAMERA_PROMPT_CHAIN_TIMEOUT_MS="180000"
+export CAMERA_PROMPT_CHAIN_USE_TAKTMUSTER="1"
+export CAMERA_PROMPT_CHAIN_TAKTMUSTER_TAKT="4"
+export CAMERA_PROMPT_CHAIN_TAKTMUSTER_TYPE="balanced"
+export CAMERA_PROMPT_CHAIN_SCENE_COUNT="4"
+export CAMERA_PROMPT_CHAIN_VISION_PROVIDERS="openai"
+export CAMERA_PROMPT_CHAIN_SEMANTIC_WORDS="horror"
+
+npm test -- lib/generator/adapter/tests/camera-prompt-chain.mock-video.test.js --runInBand
