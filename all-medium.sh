@@ -3,6 +3,9 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+# This wrapper always runs in image-to-video-only mode.
+export FRESHWEB_MIDDLE_IMAGE_TO_VIDEO_ONLY=1
+
 normalize_space_id() {
   local value="${1:-}"
   value="${value#https://huggingface.co/spaces/}"
@@ -35,12 +38,12 @@ export FRESHWEB_MIDDLE_SCENE_LENGTHS="${FRESHWEB_MIDDLE_SCENE_LENGTHS:-}"
 export FRESHWEB_MIDDLE_SCENE_LENGTH_MULTIPLIER="${FRESHWEB_MIDDLE_SCENE_LENGTH_MULTIPLIER:-1}"
 
 resolve_scene_lengths_display() {
-  if [[ -n "${FRESHWEB_MIDDLE_SCENE_LENGTHS:-}" ]]; then
+  if [ -n "${FRESHWEB_MIDDLE_SCENE_LENGTHS:-}" ]; then
     printf '%s' "$FRESHWEB_MIDDLE_SCENE_LENGTHS"
     return
   fi
 
-  if [[ "${FRESHWEB_MIDDLE_USE_TAKTMUSTER_LENGTHS:-0}" != "1" ]]; then
+  if [ "${FRESHWEB_MIDDLE_USE_TAKTMUSTER_LENGTHS:-0}" != "1" ]; then
     printf '%s' ''
     return
   fi
@@ -87,5 +90,5 @@ printf '[all-medium] scene lengths: %s\n' "${SCENE_LENGTHS_DISPLAY:-}"
 printf '[all-medium] scene length multiplier: %s\n' "$FRESHWEB_MIDDLE_SCENE_LENGTH_MULTIPLIER"
 printf '[all-medium] taktmuster: %s | takt %s\n' "$FRESHWEB_MIDDLE_TAKTMUSTER_TYPE" "$FRESHWEB_MIDDLE_TAKTMUSTER_TAKT"
 printf '[all-medium] scene length bias: %s\n' "$FRESHWEB_MIDDLE_SCENE_LENGTH_BIAS"
-
-node lib/generator/adapter/MIX-again-freshweb.middle-cost-4-3.js "${@:7}"
+printf '[all-medium] image-to-video only: %s\n' "$FRESHWEB_MIDDLE_IMAGE_TO_VIDEO_ONLY"
+node lib/generator/adapter/MIX-again-freshweb.middle-cost-4-3.js "$@"

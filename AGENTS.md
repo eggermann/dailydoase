@@ -40,3 +40,7 @@
 - Secrets in `.env` (example: `OPENAI_API_KEY`, `HUGGINGFACE_API_KEY`, `GOOGLE_API_KEY`, SSH creds). Do not commit `.env`.
 - Validate external calls and handle API/timeouts; prefer retries where existing patterns use `axios-retry`.
 - Large artifacts and generated media should not be committed unless explicitly required.
+
+
+ ## CODER_SOUL
+ - the ERROR is your friend! its show where you have not understand! Most there is only one solution, and this is right. Code like that, clean precisse, pure and rare.
