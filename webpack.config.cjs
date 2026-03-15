@@ -44,7 +44,12 @@ module.exports = {
             // Proxy requests to Express server
             host: 'localhost',
             port: 3000,
-            proxy: 'http://localhost:4000'
+            proxy: 'http://localhost:4000',
+            files: [
+                'lib/server/**/*.cjs',
+                'lib/web/**/*.hbs',
+                'lib/web/dist/**/*'
+            ]
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css'

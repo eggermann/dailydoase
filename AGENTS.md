@@ -42,5 +42,5 @@
 - Large artifacts and generated media should not be committed unless explicitly required.
 
 
- ## CODER_SOUL
+ ## CODER_SOUL style-guide
  - the ERROR is your friend! its show where you have not understand! Most there is only one solution, and this is right. Code like that, clean precisse, pure and rare.

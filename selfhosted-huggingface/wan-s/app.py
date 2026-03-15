@@ -385,10 +385,28 @@ def generate_video(
     generator=generator,
   )
 
+  requested_frames = int(num_frames)
+  frames = getattr(result, 'frames', None)
+  actual_frames = len(frames[0]) if frames is not None and len(frames) > 0 else 0
+  actual_duration = (actual_frames / int(fps)) if int(fps) > 0 and actual_frames > 0 else 0
+  print(
+    '[wan-s] generated local clip',
+    json.dumps({
+      'model_id': config['model_id'],
+      'width': width,
+      'height': height,
+      'requested_frames': requested_frames,
+      'actual_frames': actual_frames,
+      'fps': int(fps),
+      'duration_seconds': round(actual_duration, 3),
+      'seed': resolved_seed,
+    })
+  )
+
   output_path = tempfile.NamedTemporaryFile(suffix='.mp4', delete=False).name
   export_to_video(result.frames[0], output_path, fps=int(fps))
   return output_path, (
-    f"Generated with `{config['model_id']}` at `{width}x{height}`, `{int(num_frames)}` frames, `{int(fps)}` fps, seed `{resolved_seed}`."
+    f"Generated with `{config['model_id']}` at `{width}x{height}`, requested `{requested_frames}` frames, got `{actual_frames}` frames at `{int(fps)}` fps (~{actual_duration:.2f}s), seed `{resolved_seed}`."
   )
 
 
