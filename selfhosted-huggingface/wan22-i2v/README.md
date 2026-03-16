@@ -1,7 +1,7 @@
 ---
 title: Wan 2.2 I2V
 emoji: 🎬
-colorFrom: cyan
+colorFrom: blue
 colorTo: gray
 sdk: gradio
 sdk_version: 5.22.0
