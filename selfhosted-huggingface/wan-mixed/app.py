@@ -268,9 +268,12 @@ def generate_single_image_video(
     generator=generator,
   )
 
-  actual_frames = len(result.frames[0]) if getattr(result, 'frames', None) else 0
+  frames = getattr(result, 'frames', None)
+  actual_frames = len(frames[0]) if frames is not None and len(frames) > 0 else 0
+  if actual_frames <= 0:
+    raise gr.Error('Wan image-video did not return any frames.')
   output_path = tempfile.NamedTemporaryFile(suffix='.mp4', delete=False).name
-  export_to_video(result.frames[0], output_path, fps=int(fps))
+  export_to_video(frames[0], output_path, fps=int(fps))
   return output_path, build_status('wan-mixed single', {
     'model_id': resolved_model_id,
     'width': width,
@@ -377,9 +380,12 @@ def generate_video(
     generator=generator,
   )
 
-  actual_frames = len(result.frames[0]) if getattr(result, 'frames', None) else 0
+  frames = getattr(result, 'frames', None)
+  actual_frames = len(frames[0]) if frames is not None and len(frames) > 0 else 0
+  if actual_frames <= 0:
+    raise gr.Error('Wan first-last did not return any frames.')
   output_path = tempfile.NamedTemporaryFile(suffix='.mp4', delete=False).name
-  export_to_video(result.frames[0], output_path, fps=int(fps))
+  export_to_video(frames[0], output_path, fps=int(fps))
   return output_path, build_status('wan-mixed first-last', {
     'model_id': resolved_model_id,
     'width': width,
