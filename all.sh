@@ -3,8 +3,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-FIRST_LAST_SPACE_URL="${WAN22_FIRST_LAST_SELF_HOSTED_URL:-https://huggingface.co/spaces/eggman-poff/wan-flf2v}"
-SINGLE_SPACE_URL="${WAN22_SINGLE_SELF_HOSTED_URL:-https://huggingface.co/spaces/eggman-poff/wan-s}"
+FIRST_LAST_SPACE_URL="${WAN22_FIRST_LAST_SELF_HOSTED_URL:-https://huggingface.co/spaces/eggman-poff/wan-mixed}"
+SINGLE_SPACE_URL="${WAN22_SINGLE_SELF_HOSTED_URL:-https://huggingface.co/spaces/eggman-poff/wan-mixed}"
 
 normalize_space_id() {
   local value="${1:-}"

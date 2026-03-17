@@ -171,7 +171,7 @@ def build_status(label, diagnostic):
 
 
 @spaces.GPU
-def generate_video_safe(
+def generate_single_image_video(
   image,
   model_id,
   prompt,
@@ -221,6 +221,56 @@ def generate_video_safe(
     'guidance': float(guidance_scale),
     'seed': resolved_seed,
   })
+
+
+def generate_video_safe(*args):
+  try:
+    # Backward-compatible wan-s style payload:
+    # image, execution_mode, model_preset, custom_model_id, resolution_profile,
+    # custom_max_area, prompt, negative_prompt, num_frames, num_inference_steps,
+    # guidance_scale, fps, seed, randomize_seed, endpoint_url, endpoint_token,
+    # endpoint_payload_template
+    if len(args) >= 17:
+      image = args[0]
+      model_preset = args[2]
+      custom_model_id = args[3]
+      resolution_profile = args[4]
+      custom_max_area = args[5]
+      prompt = args[6]
+      negative_prompt = args[7]
+      num_frames = args[8]
+      num_inference_steps = args[9]
+      guidance_scale = args[10]
+      fps = args[11]
+      seed = args[12]
+      randomize_seed = args[13]
+      model_id = (custom_model_id or DEFAULT_SINGLE_MODEL_ID).strip() or DEFAULT_SINGLE_MODEL_ID
+      if not custom_model_id and model_preset:
+        model_id = DEFAULT_SINGLE_MODEL_ID
+      return generate_single_image_video(
+        image,
+        model_id,
+        prompt,
+        negative_prompt,
+        num_frames,
+        num_inference_steps,
+        guidance_scale,
+        fps,
+        seed,
+        randomize_seed,
+        resolution_profile or 'small 480p-ish',
+        custom_max_area,
+      )
+
+    # Native wan-mixed UI / API payload.
+    if len(args) == 12:
+      return generate_single_image_video(*args)
+
+    raise gr.Error(f'Unsupported generate_video_safe input shape: {len(args)} arguments')
+  except gr.Error as exc:
+    return None, f'Error: {exc}'
+  except Exception as exc:
+    return None, f'Error: {exc}'
 
 
 @spaces.GPU
