@@ -72,10 +72,18 @@ FIRST_LAST_PRESETS = {
   'mid': {'num_frames': 49, 'fps': 16, 'steps': 24, 'guidance': 4.0, 'max_area': 832 * 480},
   'high': {'num_frames': 65, 'fps': 16, 'steps': 32, 'guidance': 5.0, 'max_area': 1280 * 720},
 }
+KEEP_BOTH_PIPELINES = os.getenv('WAN_KEEP_BOTH_PIPELINES', '0').strip().lower() in {'1', 'true', 'yes', 'on'}
 
-pipe = None
-loaded_model_id = None
-loaded_mode = None
+loaded_pipelines = {
+  'single': {
+    'pipe': None,
+    'model_id': None,
+  },
+  'first_last': {
+    'pipe': None,
+    'model_id': None,
+  },
+}
 
 
 def aspect_ratio_resize(image, max_area):
@@ -86,35 +94,37 @@ def aspect_ratio_resize(image, max_area):
   return image.resize((target_width, target_height), Image.LANCZOS), target_height, target_width
 
 
-def unload_pipeline():
-  global pipe
-  global loaded_model_id
-  global loaded_mode
-
-  if pipe is not None:
-    del pipe
-    pipe = None
-  loaded_model_id = None
-  loaded_mode = None
+def unload_pipeline(mode=None):
+  modes = [mode] if mode else list(loaded_pipelines.keys())
+  for current_mode in modes:
+    pipeline_state = loaded_pipelines[current_mode]
+    if pipeline_state['pipe'] is not None:
+      del pipeline_state['pipe']
+      pipeline_state['pipe'] = None
+    pipeline_state['model_id'] = None
   gc.collect()
   if torch.cuda.is_available():
     torch.cuda.empty_cache()
 
 
 def ensure_pipeline(model_id, mode):
-  global pipe
-  global loaded_model_id
-  global loaded_mode
+  normalized_mode = 'first_last' if mode == 'first_last' else 'single'
+  pipeline_state = loaded_pipelines[normalized_mode]
+  current_pipe = pipeline_state['pipe']
+  current_model_id = pipeline_state['model_id']
 
-  if pipe is not None and loaded_model_id == model_id and loaded_mode == mode:
-    return pipe
+  if current_pipe is not None and current_model_id == model_id:
+    return current_pipe
 
   if not torch.cuda.is_available():
     raise gr.Error(
       'No GPU is available. In your Hugging Face Space, open Settings > Hardware and switch to ZeroGPU or a paid GPU.'
     )
 
-  unload_pipeline()
+  if not KEEP_BOTH_PIPELINES:
+    unload_pipeline()
+  else:
+    unload_pipeline(normalized_mode)
 
   image_encoder = CLIPVisionModel.from_pretrained(
     model_id,
@@ -134,8 +144,8 @@ def ensure_pipeline(model_id, mode):
   )
   pipe.enable_model_cpu_offload()
   pipe.vae.enable_tiling()
-  loaded_model_id = model_id
-  loaded_mode = mode
+  pipeline_state['pipe'] = pipe
+  pipeline_state['model_id'] = model_id
   return pipe
 
 
