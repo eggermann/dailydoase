@@ -97,22 +97,30 @@ def ensure_pipeline(model_id, mode):
 
   unload_pipeline()
 
-  image_encoder = CLIPVisionModel.from_pretrained(
-    model_id,
-    subfolder='image_encoder',
-    torch_dtype=torch.float32,
-  )
-  vae = AutoencoderKLWan.from_pretrained(
-    model_id,
-    subfolder='vae',
-    torch_dtype=torch.float32,
-  )
-  pipe = WanImageToVideoPipeline.from_pretrained(
-    model_id,
-    image_encoder=image_encoder,
-    vae=vae,
-    torch_dtype=torch.bfloat16,
-  )
+  if mode == 'single':
+    # Wan 2.2 I2V Diffusers models are expected to load via the official
+    # pipeline entrypoint rather than by manually wiring older Wan 2.1 pieces.
+    pipe = WanImageToVideoPipeline.from_pretrained(
+      model_id,
+      torch_dtype=torch.bfloat16,
+    )
+  else:
+    image_encoder = CLIPVisionModel.from_pretrained(
+      model_id,
+      subfolder='image_encoder',
+      torch_dtype=torch.float32,
+    )
+    vae = AutoencoderKLWan.from_pretrained(
+      model_id,
+      subfolder='vae',
+      torch_dtype=torch.float32,
+    )
+    pipe = WanImageToVideoPipeline.from_pretrained(
+      model_id,
+      image_encoder=image_encoder,
+      vae=vae,
+      torch_dtype=torch.bfloat16,
+    )
   pipe.enable_model_cpu_offload()
   pipe.vae.enable_tiling()
   loaded_model_id = model_id

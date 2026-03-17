@@ -1,5 +1,5 @@
-accelerate>=1.0.0
-diffusers>=0.33.1
+accelerate>=1.4.0
+diffusers>=0.36.0
 ftfy>=6.2.3
 gradio>=5.22.0
 imageio>=2.37.0
@@ -9,4 +9,4 @@ requests>=2.32.0
 safetensors>=0.4.5
 sentencepiece>=0.2.0
 torch>=2.4.0
-transformers>=4.51.0
+transformers>=4.57.0
