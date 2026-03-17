@@ -13,8 +13,6 @@ export FRESHWEB_SCENE_LENGTH_MULTIPLIER="${FRESHWEB_SCENE_LENGTH_MULTIPLIER:-1.2
 export FRESHWEB_MIN_SCENE_DURATION_SECONDS="${FRESHWEB_MIN_SCENE_DURATION_SECONDS:-1.6}"
 export FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME="${FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME:-0}"
 export FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME="${FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME:-0}"
-# Keep the cheaper balanced flow on one warm single-image model by default.
-export VIDEO_MODE_PRESET="${VIDEO_MODE_PRESET:-singleImageOnly}"
 
 # Cheaper than 512x384, but with enough headroom for more stable faces and
 # smoother motion than the 320x240 min-res preset.
