@@ -38,6 +38,11 @@ RESOLUTION_PROFILES = {
   'small 480p-ish': 832 * 480,
   'balanced 720p-ish': 1280 * 720,
 }
+RESOLUTION_PROFILE_ALIASES = {
+  '480P profile': 'small 480p-ish',
+  '720P profile': 'balanced 720p-ish',
+}
+RESOLUTION_PROFILE_CHOICES = list(RESOLUTION_PROFILES.keys()) + list(RESOLUTION_PROFILE_ALIASES.keys())
 SINGLE_PRESETS = {
   'low': {'num_frames': 33, 'fps': 12, 'steps': 16, 'guidance': 4.0, 'max_area': 832 * 480},
   'mid': {'num_frames': 49, 'fps': 16, 'steps': 24, 'guidance': 5.0, 'max_area': 832 * 480},
@@ -160,6 +165,15 @@ def compute_seed(seed, randomize_seed):
   return int(torch.seed() % 1000000) if randomize_seed else int(seed)
 
 
+def normalize_resolution_profile(value):
+  normalized = str(value or '').strip()
+  if normalized in RESOLUTION_PROFILES:
+    return normalized
+  if normalized in RESOLUTION_PROFILE_ALIASES:
+    return RESOLUTION_PROFILE_ALIASES[normalized]
+  return 'small 480p-ish'
+
+
 def build_status(label, diagnostic):
   print(f'[{label}] {json.dumps(diagnostic, ensure_ascii=True)}')
   return (
@@ -189,9 +203,10 @@ def generate_single_image_video(
     raise gr.Error('Upload a start frame.')
 
   resolved_model_id = (model_id or DEFAULT_SINGLE_MODEL_ID).strip() or DEFAULT_SINGLE_MODEL_ID
+  resolved_profile = normalize_resolution_profile(resolution_profile)
   pipeline = ensure_pipeline(resolved_model_id, 'single')
   image = image.convert('RGB')
-  resolved_max_area = int(custom_max_area) if custom_max_area and int(custom_max_area) > 0 else RESOLUTION_PROFILES[resolution_profile]
+  resolved_max_area = int(custom_max_area) if custom_max_area and int(custom_max_area) > 0 else RESOLUTION_PROFILES[resolved_profile]
   image, height, width = aspect_ratio_resize(image, max_area=resolved_max_area)
   resolved_seed = compute_seed(seed, randomize_seed)
   generator = torch.Generator(device='cpu').manual_seed(resolved_seed)
@@ -366,7 +381,7 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Wan Mixed') as demo:
         with gr.Row():
           single_seed_input = gr.Slider(0, 999999, value=42, step=1, label='Seed')
           single_randomize_seed_input = gr.Checkbox(value=False, label='Randomize seed')
-        single_resolution_profile_input = gr.Radio(list(RESOLUTION_PROFILES.keys()), value='small 480p-ish', label='Resolution profile')
+        single_resolution_profile_input = gr.Radio(RESOLUTION_PROFILE_CHOICES, value='small 480p-ish', label='Resolution profile')
         single_custom_max_area_input = gr.Number(label='Custom max area (optional)', value=DEFAULT_SINGLE_MAX_AREA, precision=0)
         single_endpoint_url_input = gr.Textbox(value='', visible=False)
         single_endpoint_token_input = gr.Textbox(value='', visible=False)
