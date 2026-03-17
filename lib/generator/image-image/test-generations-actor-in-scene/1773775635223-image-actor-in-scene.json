@@ -1,0 +1,13 @@
+{
+  "provider": "hf",
+  "model": "black-forest-labs/FLUX.1-Kontext-dev",
+  "prompt": "Preserve the same person, same indoor location, same framing, and improve realism with a clean natural photo look.",
+  "inputPath": "/Users/eggermann/Projekte/dailydoase/lib/generator/test.datas/A.jpeg",
+  "parameters": {
+    "guidance_scale": 2.5,
+    "num_inference_steps": 10,
+    "seed": 0,
+    "provider": "fal-ai"
+  },
+  "timestamp": "2026-03-17T19:27:15.223Z"
+}
