@@ -30,7 +30,26 @@ from PIL import Image
 from transformers import CLIPVisionModel
 
 
-DEFAULT_SINGLE_MODEL_ID = os.getenv('WAN_SINGLE_MODEL_ID', 'Wan-AI/Wan2.2-I2V-A14B-Diffusers')
+MODEL_PRESETS = {
+  'Wan 2.1 I2V 480P (official)': {
+    'model_id': 'Wan-AI/Wan2.1-I2V-14B-480P-Diffusers',
+    'max_area': 832 * 480,
+  },
+  'Wan 2.1 I2V 720P (official)': {
+    'model_id': 'Wan-AI/Wan2.1-I2V-14B-720P-Diffusers',
+    'max_area': 1280 * 720,
+  },
+  'Wan 2.2 I2V A14B (official)': {
+    'model_id': 'Wan-AI/Wan2.2-I2V-A14B-Diffusers',
+    'max_area': 1280 * 720,
+  },
+}
+DEFAULT_SINGLE_MODEL_PRESET = os.getenv('WAN_SINGLE_MODEL_PRESET', 'Wan 2.1 I2V 480P (official)')
+DEFAULT_SINGLE_CUSTOM_MODEL_ID = os.getenv('WAN_SINGLE_MODEL_ID', '').strip()
+DEFAULT_SINGLE_MODEL_ID = MODEL_PRESETS.get(
+  DEFAULT_SINGLE_MODEL_PRESET,
+  MODEL_PRESETS['Wan 2.1 I2V 480P (official)'],
+)['model_id']
 DEFAULT_FIRST_LAST_MODEL_ID = os.getenv('WAN_FIRST_LAST_MODEL_ID', 'Wan-AI/Wan2.1-FLF2V-14B-720P-diffusers')
 DEFAULT_SINGLE_MAX_AREA = int(os.getenv('WAN_SINGLE_DEFAULT_MAX_AREA', str(832 * 480)))
 DEFAULT_FIRST_LAST_MAX_AREA = int(os.getenv('WAN_FIRST_LAST_DEFAULT_MAX_AREA', str(832 * 480)))
@@ -97,30 +116,22 @@ def ensure_pipeline(model_id, mode):
 
   unload_pipeline()
 
-  if mode == 'single':
-    # Wan 2.2 I2V Diffusers models are expected to load via the official
-    # pipeline entrypoint rather than by manually wiring older Wan 2.1 pieces.
-    pipe = WanImageToVideoPipeline.from_pretrained(
-      model_id,
-      torch_dtype=torch.bfloat16,
-    )
-  else:
-    image_encoder = CLIPVisionModel.from_pretrained(
-      model_id,
-      subfolder='image_encoder',
-      torch_dtype=torch.float32,
-    )
-    vae = AutoencoderKLWan.from_pretrained(
-      model_id,
-      subfolder='vae',
-      torch_dtype=torch.float32,
-    )
-    pipe = WanImageToVideoPipeline.from_pretrained(
-      model_id,
-      image_encoder=image_encoder,
-      vae=vae,
-      torch_dtype=torch.bfloat16,
-    )
+  image_encoder = CLIPVisionModel.from_pretrained(
+    model_id,
+    subfolder='image_encoder',
+    torch_dtype=torch.float32,
+  )
+  vae = AutoencoderKLWan.from_pretrained(
+    model_id,
+    subfolder='vae',
+    torch_dtype=torch.float32,
+  )
+  pipe = WanImageToVideoPipeline.from_pretrained(
+    model_id,
+    image_encoder=image_encoder,
+    vae=vae,
+    torch_dtype=torch.bfloat16,
+  )
   pipe.enable_model_cpu_offload()
   pipe.vae.enable_tiling()
   loaded_model_id = model_id
@@ -180,6 +191,33 @@ def normalize_resolution_profile(value):
   if normalized in RESOLUTION_PROFILE_ALIASES:
     return RESOLUTION_PROFILE_ALIASES[normalized]
   return 'small 480p-ish'
+
+
+def resolve_single_model_selection(model_preset='', custom_model_id='', resolution_profile='small 480p-ish', custom_max_area=0):
+  normalized_profile = normalize_resolution_profile(resolution_profile)
+  resolved_max_area = int(custom_max_area) if custom_max_area and int(custom_max_area) > 0 else RESOLUTION_PROFILES[normalized_profile]
+  normalized_custom_model_id = str(custom_model_id or '').strip()
+  if normalized_custom_model_id:
+    return {
+      'model_id': normalized_custom_model_id,
+      'resolution_profile': normalized_profile,
+      'max_area': resolved_max_area,
+    }
+
+  preset_name = str(model_preset or '').strip() or DEFAULT_SINGLE_MODEL_PRESET
+  preset = MODEL_PRESETS.get(preset_name)
+  if preset is None:
+    return {
+      'model_id': DEFAULT_SINGLE_CUSTOM_MODEL_ID or DEFAULT_SINGLE_MODEL_ID,
+      'resolution_profile': normalized_profile,
+      'max_area': resolved_max_area,
+    }
+
+  return {
+    'model_id': preset['model_id'],
+    'resolution_profile': normalized_profile,
+    'max_area': resolved_max_area or preset['max_area'],
+  }
 
 
 def build_status(label, diagnostic):
@@ -267,12 +305,15 @@ def generate_video_safe(*args):
       fps = args[11]
       seed = args[12]
       randomize_seed = args[13]
-      model_id = (custom_model_id or DEFAULT_SINGLE_MODEL_ID).strip() or DEFAULT_SINGLE_MODEL_ID
-      if not custom_model_id and model_preset:
-        model_id = DEFAULT_SINGLE_MODEL_ID
+      selection = resolve_single_model_selection(
+        model_preset=model_preset,
+        custom_model_id=custom_model_id,
+        resolution_profile=resolution_profile or 'small 480p-ish',
+        custom_max_area=custom_max_area,
+      )
       return generate_single_image_video(
         image,
-        model_id,
+        selection['model_id'],
         prompt,
         negative_prompt,
         num_frames,
@@ -281,8 +322,8 @@ def generate_video_safe(*args):
         fps,
         seed,
         randomize_seed,
-        resolution_profile or 'small 480p-ish',
-        custom_max_area,
+        selection['resolution_profile'],
+        selection['max_area'],
       )
 
     # Native wan-mixed UI / API payload.
@@ -368,8 +409,8 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Wan Mixed') as demo:
       with gr.Column():
         single_image_input = gr.Image(type='pil', label='Start frame')
         single_execution_mode_input = gr.Textbox(value='Local GPU', visible=False)
-        single_model_preset_input = gr.Textbox(value='Wan 2.2 I2V A14B (official)', visible=False)
-        single_model_id_input = gr.Textbox(label='Model repo ID', value=DEFAULT_SINGLE_MODEL_ID)
+        single_model_preset_input = gr.Textbox(value=DEFAULT_SINGLE_MODEL_PRESET, visible=False)
+        single_model_id_input = gr.Textbox(label='Model repo ID', value=DEFAULT_SINGLE_CUSTOM_MODEL_ID)
         single_prompt_input = gr.Textbox(
           label='Prompt',
           lines=4,
