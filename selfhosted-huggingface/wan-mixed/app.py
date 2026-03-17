@@ -344,6 +344,8 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Wan Mixed') as demo:
     with gr.Row():
       with gr.Column():
         single_image_input = gr.Image(type='pil', label='Start frame')
+        single_execution_mode_input = gr.Textbox(value='Local GPU', visible=False)
+        single_model_preset_input = gr.Textbox(value='Wan 2.2 I2V A14B (official)', visible=False)
         single_model_id_input = gr.Textbox(label='Model repo ID', value=DEFAULT_SINGLE_MODEL_ID)
         single_prompt_input = gr.Textbox(
           label='Prompt',
@@ -366,6 +368,9 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Wan Mixed') as demo:
           single_randomize_seed_input = gr.Checkbox(value=False, label='Randomize seed')
         single_resolution_profile_input = gr.Radio(list(RESOLUTION_PROFILES.keys()), value='small 480p-ish', label='Resolution profile')
         single_custom_max_area_input = gr.Number(label='Custom max area (optional)', value=DEFAULT_SINGLE_MAX_AREA, precision=0)
+        single_endpoint_url_input = gr.Textbox(value='', visible=False)
+        single_endpoint_token_input = gr.Textbox(value='', visible=False)
+        single_endpoint_payload_template_input = gr.Textbox(value='', visible=False)
         with gr.Row():
           single_low_button = gr.Button('Low')
           single_mid_button = gr.Button('Mid', variant='primary')
@@ -442,7 +447,11 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Wan Mixed') as demo:
     fn=generate_video_safe,
     inputs=[
       single_image_input,
+      single_execution_mode_input,
+      single_model_preset_input,
       single_model_id_input,
+      single_resolution_profile_input,
+      single_custom_max_area_input,
       single_prompt_input,
       single_negative_prompt_input,
       single_num_frames_input,
@@ -451,8 +460,9 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Wan Mixed') as demo:
       single_fps_input,
       single_seed_input,
       single_randomize_seed_input,
-      single_resolution_profile_input,
-      single_custom_max_area_input,
+      single_endpoint_url_input,
+      single_endpoint_token_input,
+      single_endpoint_payload_template_input,
     ],
     outputs=[single_video_output, single_status_output],
     api_name='generate_video_safe',
