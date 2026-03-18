@@ -5,14 +5,14 @@ cd "$(dirname "$0")"
 
 # Fast 4:3 preset for prompt tuning.
 # Goal: cheap, quick runs that still show whether scene planning, wordstream,
-# and camera prompts are working. Loops continuously by default; set
-# FRESHWEB_POLLING_TIME_MS=0 for a single iteration.
+# and camera prompts are working. Single iteration by default; set
+# FRESHWEB_POLLING_TIME_MS=1000 (or higher) to loop continuously.
 #
 # Override any value at runtime, for example:
 # FRESHWEB_WORDS='gallery,en | audience,en' sh lib/generator/adapter/MIX-again-freshweb.prompt-fast-4-3.sh
 
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-freshweb-prompt-fast-4-3-test}
-export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
+export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-0}
 export VIDEO_MODE_PRESET=${VIDEO_MODE_PRESET:-storyDrivenMixed}
 
 # Keep the prompt path readable and comparable across runs.

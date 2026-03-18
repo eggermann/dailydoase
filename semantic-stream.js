@@ -190,7 +190,7 @@ const _ = {
             console.log(chalk.green(`[semantic-stream] iteration ${iteration}: ${loopWords}${logSuffix}`));
             const loopResponse = formatLoopResponse(prompt);
             if (loopResponse) {
-                const responseLabel = oldPrompt ? 'retry-response' : 'response';
+                const responseLabel = oldPrompt ? 'base-retry-response' : 'base-response';
                 console.log(chalk.magentaBright(`[semantic-stream] ${responseLabel} ${iteration}:`));
                 console.log(chalk.magentaBright(loopResponse));
             }
