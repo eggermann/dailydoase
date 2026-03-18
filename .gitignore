@@ -71,6 +71,7 @@ auto-count--collection.txt
 auto-count--exemplar.txt
 folder-cntr.txt
 exemplar-cntr.txt
+generation-by-commit.txt
 
 GENERATIONS/
 data/
