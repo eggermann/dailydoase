@@ -10,6 +10,7 @@ const { require } = pkg;
 const chalk = require('chalk');
 
 const WORD_STREAM_CACHE_KEY = '__dailydoaseSemanticStreamCache';
+const SEMANTIC_STREAM_LOG_MAX_LENGTH = 1600;
 
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -116,6 +117,41 @@ const formatLoopPrompt = (prompt) => {
     return '';
 };
 
+const truncateLogValue = (value, maxLength = SEMANTIC_STREAM_LOG_MAX_LENGTH) => {
+    const normalized = String(value ?? '').trim();
+    if (!normalized) {
+        return '';
+    }
+    if (normalized.length <= maxLength) {
+        return normalized;
+    }
+    return `${normalized.slice(0, maxLength - 3).trim()}...`;
+};
+
+const formatLoopResponse = (prompt) => {
+    if (typeof prompt === 'string') {
+        return truncateLogValue(prompt.replace(/\s+/g, ' ').trim());
+    }
+
+    if (Array.isArray(prompt)) {
+        return truncateLogValue(prompt.map(toWordLabel).filter(Boolean).join(' | '));
+    }
+
+    if (prompt && typeof prompt === 'object') {
+        if (typeof prompt.prompt === 'string') {
+            return truncateLogValue(prompt.prompt.replace(/\s+/g, ' ').trim());
+        }
+
+        try {
+            return truncateLogValue(JSON.stringify(prompt, null, 2));
+        } catch (error) {
+            return truncateLogValue(String(prompt));
+        }
+    }
+
+    return truncateLogValue(String(prompt ?? ''));
+};
+
 
 const _ = {
     rnd_cnt: [], // Now an array, one counter per stream index
@@ -152,6 +188,12 @@ const _ = {
                 ? ` -> ${loopPrompt}`
                 : '';
             console.log(chalk.green(`[semantic-stream] iteration ${iteration}: ${loopWords}${logSuffix}`));
+            const loopResponse = formatLoopResponse(prompt);
+            if (loopResponse) {
+                const responseLabel = oldPrompt ? 'retry-response' : 'response';
+                console.log(chalk.magentaBright(`[semantic-stream] ${responseLabel} ${iteration}:`));
+                console.log(chalk.magentaBright(loopResponse));
+            }
 
             // console.log('Prompt:---> ', chalk.yellow(prompt));
 
