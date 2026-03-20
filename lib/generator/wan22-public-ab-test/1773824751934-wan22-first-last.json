@@ -1,0 +1,15 @@
+{
+  "model": "multimodalart/wan-2-2-first-last-frame",
+  "selfHostedHugginfaceModel": false,
+  "prompt": "Same actor: Centered figure with a serious expression. Same location: Appears to be an office or warehouse-like building (white walls. Identity lock: keep Centered figure with a serious expression as the exact same person from the source frame; do not recast, beautify, or substitute the actor. Framing lock: Keep the subject’s facial expression and angle consistent; prefer small pose, gaze, and crop changes over a new setup. Keep readable: Man in mid-to-late 40s with a bald head and beard/mustache. Beat: The cue forces a turn in the same room, visible as a body check and a changed relation. Timing: one 3.6-second transition with one clear start-to-end arc. Fit the action to a 3.6-second transition: keep one clear movement arc and one simple camera move. Continuity: Keep the subject’s facial expression and angle consistent. Motion: He turns partway, then recoils a fraction as his mouth opens and closes on a held breath. Camera: Widen just enough to catch the turn while holding the wall behind him steady behind him.",
+  "duration_seconds": 3.6,
+  "steps": 8,
+  "guidance_scale": 1,
+  "guidance_scale_2": 1,
+  "seed": 42,
+  "randomize_seed": false,
+  "end_image_path": "/Users/eggermann/Projekte/dailydoase/tests/GENERATIONS/camera-shot/1773824097741-camera.jpg",
+  "url": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/678b708f4e92656a646bbaf61a582dac8b3f7c7baaf355a89414e6abe4711098/tmprbpgfa11.mp4",
+  "sourceUrl": "https://multimodalart-wan-2-2-first-last-frame.hf.space/gradio_api/file=/tmp/gradio/678b708f4e92656a646bbaf61a582dac8b3f7c7baaf355a89414e6abe4711098/tmprbpgfa11.mp4",
+  "timestamp": "2026-03-18T09:05:53.042Z"
+}
