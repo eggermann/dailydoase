@@ -153,6 +153,13 @@ const formatLoopResponse = (prompt) => {
 };
 
 
+const resolveRetryOnFailure = (config = {}) => {
+    if (!config?.model || !Object.prototype.hasOwnProperty.call(config.model, 'retryOnFailure')) {
+        return true;
+    }
+    return Boolean(config.model.retryOnFailure);
+};
+
 const _ = {
     rnd_cnt: [], // Now an array, one counter per stream index
     async configPromptFunktion(streams) { return streams },
@@ -222,8 +229,9 @@ const _ = {
             const hasPollingTime = !!config.model
               && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
             const wait = hasPollingTime ? config.model.pollingTime : 4000;
+            const retryOnFailure = resolveRetryOnFailure(config);
 
-            if (wait) {
+            if (wait && (success !== false || retryOnFailure)) {
                 setTimeout(async () => {
                     console.log('******** again ****** polling interval ', 'wait:', wait)
                     await loop(streams, keepPrompt);
@@ -239,14 +247,21 @@ const _ = {
     }
 }
 
-export const resolveLoopOutcome = ({ success, pollingTime }) => {
+export const resolveLoopOutcome = ({ success, pollingTime, retryOnFailure = true }) => {
     if (success === false && !pollingTime) {
         throw new Error('Generator returned false');
     }
 
-    if (pollingTime) {
+    if (pollingTime && (success !== false || retryOnFailure)) {
         return {
             status: success === false ? 'scheduled-retry' : 'scheduled-next-run',
+            success
+        };
+    }
+
+    if (success === false) {
+        return {
+            status: 'failed',
             success
         };
     }
@@ -277,7 +292,8 @@ export default async (configs) => {
             const hasPollingTime = !!config.model
               && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
             const pollingTime = hasPollingTime ? config.model.pollingTime : 4000;
-            const outcome = resolveLoopOutcome({ success, pollingTime });
+            const retryOnFailure = resolveRetryOnFailure(config);
+            const outcome = resolveLoopOutcome({ success, pollingTime, retryOnFailure });
 
             if (outcome.status === 'completed') {
                 console.log(chalk.green('Generator ended successfully'));

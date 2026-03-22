@@ -14,7 +14,12 @@ describe('resolveLoopOutcome', () => {
   });
 
   test('marks a polling false result as scheduled retry', () => {
-    expect(resolveLoopOutcome({ success: false, pollingTime: 1000 }))
+    expect(resolveLoopOutcome({ success: false, pollingTime: 1000, retryOnFailure: true }))
       .toEqual({ status: 'scheduled-retry', success: false });
+  });
+
+  test('marks a polling false result as failed when retry-on-failure is disabled', () => {
+    expect(resolveLoopOutcome({ success: false, pollingTime: 1000, retryOnFailure: false }))
+      .toEqual({ status: 'failed', success: false });
   });
 });
