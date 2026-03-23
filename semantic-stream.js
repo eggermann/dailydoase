@@ -152,6 +152,19 @@ const formatLoopResponse = (prompt) => {
     return truncateLogValue(String(prompt ?? ''));
 };
 
+const consumeSemanticStreamLogResponse = (config = {}) => {
+    if (!config || typeof config !== 'object') {
+        return '';
+    }
+
+    const customResponse = config.semanticStreamLogResponse;
+    if (customResponse === undefined || customResponse === null || customResponse === '') {
+        return '';
+    }
+
+    delete config.semanticStreamLogResponse;
+    return formatLoopResponse(customResponse);
+};
 
 const resolveRetryOnFailure = (config = {}) => {
     if (!config?.model || !Object.prototype.hasOwnProperty.call(config.model, 'retryOnFailure')) {
@@ -195,7 +208,7 @@ const _ = {
                 ? ` -> ${loopPrompt}`
                 : '';
             console.log(chalk.green(`[semantic-stream] iteration ${iteration}: ${loopWords}${logSuffix}`));
-            const loopResponse = formatLoopResponse(prompt);
+            const loopResponse = consumeSemanticStreamLogResponse(config) || formatLoopResponse(prompt);
             if (loopResponse) {
                 const responseLabel = oldPrompt ? 'base-retry-response' : 'base-response';
                 console.log(chalk.magentaBright(`[semantic-stream] ${responseLabel} ${iteration}:`));
