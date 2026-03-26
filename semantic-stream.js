@@ -166,6 +166,13 @@ const consumeSemanticStreamLogResponse = (config = {}) => {
     return formatLoopResponse(customResponse);
 };
 
+const resolveRetryOnFailure = (config = {}) => {
+    if (!config?.model || !Object.prototype.hasOwnProperty.call(config.model, 'retryOnFailure')) {
+        return true;
+    }
+    return Boolean(config.model.retryOnFailure);
+};
+
 const _ = {
     rnd_cnt: [], // Now an array, one counter per stream index
     async configPromptFunktion(streams) { return streams },
