@@ -4,6 +4,9 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-freshweb-prompt-fast-wan-strict-4-3-test}
+export VIDEO_MODE_PRESET=${VIDEO_MODE_PRESET:-storyDrivenMixed}
+export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT:-2}
+export FRESHWEB_WORDS=${FRESHWEB_WORDS:-exhibition opening,en | people,en | artwork,en | point of view,en}
 
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=${FRESHWEB_SINGLE_VIDEO_MODEL_TYPE:-falImageToVideo}
 export FRESHWEB_SINGLE_VIDEO_MODEL=${FRESHWEB_SINGLE_VIDEO_MODEL:-fal-ai/wan/turbo/image-to-video}
@@ -13,8 +16,8 @@ export FRESHWEB_ALLOW_PAID_FAL_POLLING=${FRESHWEB_ALLOW_PAID_FAL_POLLING:-1}
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=${FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR:-ltxTrippy}
 export FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME=${FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME:-1}
 export FRESHWEB_OPENING_PROMPT=${FRESHWEB_OPENING_PROMPT:-freshweb webcam shot, exact same real person, same face, same hair, same beard, same glasses, same clothes, same room, same camera angle, same lighting, documentary realism, true camera orientation, not mirrored, not selfie-flipped}
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-same real person, same face, same clothes, same room geometry, same visible location, same camera height, trippy surreal pressure inside the room, only believable pose, gaze, lighting, and framing changes}
-export FRESHWEB_VISION_PROMPT=${FRESHWEB_VISION_PROMPT:-Describe only the visible shot for strict identity and location continuity. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and what must stay identical for the next shot. In Actors, describe the exact visible face, hair, beard, glasses, age, body build, clothing, and pose. In Location, describe the exact room geometry, door, window, wall art, furniture, and camera angle.}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-same real person, same face, same clothes, same room geometry, same visible location, same camera height, the moment feels like an exhibition opening inside the visible space, follow visible people as guests or viewers, infer small social stories from gaze, spacing, and reactions, let artwork or displayed surfaces bend toward each viewers point of view, only believable pose, gaze, lighting, and framing changes}
+export FRESHWEB_VISION_PROMPT=${FRESHWEB_VISION_PROMPT:-Describe only the visible shot for strict identity and location continuity. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and what must stay identical for the next shot. In Actors, describe each visible person with exact face, hair, beard, glasses, age, body build, clothing, pose, gaze direction, and who or what they seem to attend to. In Location, describe the exact room geometry, door, window, wall art, display surfaces, furniture, and sight lines. In Description, note how visible people and artwork relate in the shot without inventing anything off-screen.}
 
 export FRESHWEB_DRIFT_CORRECTION_LEVEL=${FRESHWEB_DRIFT_CORRECTION_LEVEL:-aggressive}
 export FRESHWEB_ENABLE_DRIFT_CORRECTION=${FRESHWEB_ENABLE_DRIFT_CORRECTION:-1}
@@ -28,6 +31,9 @@ export FRESHWEB_ASYNC_PERSONA_REFERENCE_UPDATES=${FRESHWEB_ASYNC_PERSONA_REFEREN
 export FRESHWEB_ASYNC_PERSONA_REFERENCE_INTERVAL=${FRESHWEB_ASYNC_PERSONA_REFERENCE_INTERVAL:-1}
 export FRESHWEB_CAMERA_REANCHOR_INTERVAL=${FRESHWEB_CAMERA_REANCHOR_INTERVAL:-1}
 export FRESHWEB_SCENE_COUNT_BIAS=${FRESHWEB_SCENE_COUNT_BIAS:-0}
+export FRESHWEB_USE_TAKTMUSTER_LENGTHS=${FRESHWEB_USE_TAKTMUSTER_LENGTHS:-1}
+export FRESHWEB_SCENE_LENGTH_TAKT=${FRESHWEB_SCENE_LENGTH_TAKT:-3}
+export FRESHWEB_SCENE_LENGTH_TAKT_TYPE=${FRESHWEB_SCENE_LENGTH_TAKT_TYPE:-balanced}
 export FRESHWEB_SCENE_LENGTH_BIAS=${FRESHWEB_SCENE_LENGTH_BIAS:-0}
 export FRESHWEB_SCENE_LENGTH_MULTIPLIER=${FRESHWEB_SCENE_LENGTH_MULTIPLIER:-1.15}
 export FRESHWEB_MIN_SCENE_DURATION_SECONDS=${FRESHWEB_MIN_SCENE_DURATION_SECONDS:-1.6}
