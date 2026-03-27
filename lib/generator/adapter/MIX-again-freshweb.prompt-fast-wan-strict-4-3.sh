@@ -4,6 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-freshweb-prompt-fast-wan-strict-4-3-test}
+export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-0}
 export VIDEO_MODE_PRESET=${VIDEO_MODE_PRESET:-storyDrivenMixed}
 export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT:-}
 export FRESHWEB_WORDS=${FRESHWEB_WORDS:-exhibition opening,en | people,en | artwork,en | point of view,en}
@@ -13,7 +14,7 @@ export FRESHWEB_SINGLE_VIDEO_MODEL=${FRESHWEB_SINGLE_VIDEO_MODEL:-fal-ai/wan/tur
 export FRESHWEB_FIRST_LAST_VIDEO_MODEL_TYPE=${FRESHWEB_FIRST_LAST_VIDEO_MODEL_TYPE:-falFirstLast}
 export FRESHWEB_FIRST_LAST_VIDEO_MODEL=${FRESHWEB_FIRST_LAST_VIDEO_MODEL:-fal-ai/wan-flf2v}
 export FRESHWEB_ALLOW_PAID_FAL_MULTI_SCENE=${FRESHWEB_ALLOW_PAID_FAL_MULTI_SCENE:-1}
-export FRESHWEB_ALLOW_PAID_FAL_POLLING=${FRESHWEB_ALLOW_PAID_FAL_POLLING:-1}
+export FRESHWEB_ALLOW_PAID_FAL_POLLING=${FRESHWEB_ALLOW_PAID_FAL_POLLING:-0}
 
 # Keep scene prompts strict and continuity-focused. The ltxTrippy flavor
 # forcibly collapses camera plans back to singleImage in later scenes.
