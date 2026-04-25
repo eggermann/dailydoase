@@ -24,9 +24,10 @@ header {
   }
 
   z-index: $z-header;
-  position: absolute;
+  position: sticky;
   left: 0;
   top: 0;
+  width: 100%;
   transition: transform $transition-fast;
   transform: translateY(0);
 
