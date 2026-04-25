@@ -1,12 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const { NodeSSH } = require('node-ssh')
+const { loadSshConfig } = require('./ssh-config.cjs');
 
 const ssh = new NodeSSH()
 
 
-const configPath = process.env.HOME + '/Documents/config-data/eggman';
-const config = require(configPath);
+const config = loadSshConfig();
 const destinationPath = 'Projekte/dailyDoase'///testDEPLOY;
 
 

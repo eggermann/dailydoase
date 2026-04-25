@@ -5,8 +5,8 @@ FOR download the images on uberspace to fresh-folder
  */
 
 
-const configPath = process.env.HOME + '/Documents/config-data/eggman';
-const config = require(configPath);
+const { loadSshConfig } = require('./ssh-config.cjs');
+const config = loadSshConfig();
 const destinationPath = 'Projekte/dailyDoase';
 const fs = require('fs');
 const path = require('path');

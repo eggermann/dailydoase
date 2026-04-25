@@ -1,7 +1,7 @@
 const path = require('path');
+const { loadSshConfig } = require('./ssh-config.cjs');
 
-const configPath = process.env.HOME + '/Documents/config-data/eggman';
-const config = require(configPath);
+const config = loadSshConfig();
 const getFolderFromRemote = require('./getFolderFromRemote');
 const handleDownloadedFolders = require('./handleDownloadedFolders.js');
 
@@ -24,8 +24,8 @@ const _={
                 },
                 remote: {
                     address: config.host,
-                    user: config.user,
-                    key: '/home/eggman/.ssh/id_rsa',
+                    user: config.user || config.username,
+                    key: config.privateKey || process.env.SSH_KEY_PATH || '/home/eggman/.ssh/id_rsa',
                     directory: path.join(destinationPath, syncDir)
                 }
             }
