@@ -48,12 +48,15 @@ let fileNames = [
     'folder-cntr.txt', 
     */
     'semantic-stream.js',
-    'package.json',
-    'modulePolyfill.js'];
+    'package.json'];
 
 fileNames = fileNames.map(name => {
     return { local: __dirname + '/../' + name, remote: destinationPath + '/' + name };
 });
+
+const extraFiles = [
+    { local: __dirname + '/../lib/modulePolyfill.js', remote: destinationPath + '/modulePolyfill.js' },
+];
 
 ssh.connect({
     host: config.host,
@@ -67,6 +70,7 @@ ssh.connect({
 
         // Upload top-level files first
         await ssh.putFiles(fileNames);
+        await ssh.putFiles(extraFiles);
         console.log("The File thing is done")
 
         // Upload candidate directories if they exist locally
