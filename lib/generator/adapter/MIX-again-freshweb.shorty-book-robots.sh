@@ -4,9 +4,9 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Robots preset:
-# - use remote reference images instead of a live webcam shot
+# - use one remote protagonist reference instead of a live webcam shot
+# - map each scene through the next remote folder image with flux-context
 # - keep the scene generator and shorty-book flow
-# - start the opening frame in flux-context mode
 # - keep output on the self-hosted wan-mixed Space
 # - add Mirelo audio after each generated video
 
@@ -19,11 +19,18 @@ unset FRESHWEB_CAMERA_IMAGE_PATH
 unset FRESHWEB_OPENING_IMAGE_PATH
 
 export FRESHWEB_CAMERA_SOURCE_LABEL=${FRESHWEB_CAMERA_SOURCE_LABEL:-source frame}
-export FRESHWEB_CAMERA_IMAGE_URLS="${FRESHWEB_CAMERA_IMAGE_URLS:-https://dailydoase.de/v/315-HF-/1-6051.png|https://dailydoase.de/v/315-HF-/1-6055.png}"
-export FRESHWEB_OPENING_PROMPT="${FRESHWEB_OPENING_PROMPT:-freshweb reference image, candid documentary still, natural light, clear subject focus}"
-export FRESHWEB_SCENE_VISUAL_DIRECTION="${FRESHWEB_SCENE_VISUAL_DIRECTION:-same protagonist reference image, same identity, same room geometry, mix the source image with the wordstream into a coherent scene, keep the subject readable, let pose, gaze, and room pressure change while the room stays grounded}"
+unset FRESHWEB_CAMERA_IMAGE_URL
+unset FRESHWEB_CAMERA_IMAGE_URLS
+unset FRESHWEB_OPENING_IMAGE_URL
+unset FRESHWEB_OPENING_IMAGE_URLS
+export FRESHWEB_PROTAGONIST_IMAGE_URL="${FRESHWEB_PROTAGONIST_IMAGE_URL:-https://dailydoase.de/v/315-HF-/1-62601.png}"
+export FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED=${FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED:-1}
+export FRESHWEB_SCENE_CONTEXT_IMAGE_START_AFTER_PROTAGONIST=${FRESHWEB_SCENE_CONTEXT_IMAGE_START_AFTER_PROTAGONIST:-1}
+export FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL="${FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL:-https://dailydoase.de/v/315-HF-/}"
+export FRESHWEB_OPENING_PROMPT="${FRESHWEB_OPENING_PROMPT:-remote protagonist reference image, candid documentary still, natural light, clear subject focus}"
+export FRESHWEB_SCENE_VISUAL_DIRECTION="${FRESHWEB_SCENE_VISUAL_DIRECTION:-use the fixed protagonist reference for identity, use the next folder image only as scene context, mix both with the wordstream into a coherent scene, keep one readable protagonist, let pose, gaze, and world pressure change while identity stays grounded}"
 
-export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-1}
+export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-0}
 export FRESHWEB_OPENING_START_MODE=${FRESHWEB_OPENING_START_MODE:-fluxContext}
 export FRESHWEB_OPENING_START_INTERVAL=${FRESHWEB_OPENING_START_INTERVAL:-1}
 export FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME=${FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME:-1}
