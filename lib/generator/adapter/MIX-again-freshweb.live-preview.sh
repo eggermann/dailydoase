@@ -10,7 +10,7 @@ terminate_existing_freshweb_runs() {
   local parent_pid="$PPID"
   local candidate_pid
 
-  for candidate_pid in $(pgrep -f 'MIX-again-freshweb|freshweb\.js|shorty-book/freshweb\.js' || true); do
+  for candidate_pid in $(pgrep -f 'MIX-again-freshweb|LiveContextOrchestrator\.js|shorty-book/LiveContextOrchestrator\.js' || true); do
     if [[ "$candidate_pid" == "$current_pid" || "$candidate_pid" == "$parent_pid" ]]; then
       continue
     fi
