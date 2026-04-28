@@ -27,6 +27,7 @@ export FRESHWEB_PROTAGONIST_IMAGE_URL="${FRESHWEB_PROTAGONIST_IMAGE_URL:-https:/
 export FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED=${FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED:-1}
 export FRESHWEB_SCENE_CONTEXT_IMAGE_START_AFTER_PROTAGONIST=${FRESHWEB_SCENE_CONTEXT_IMAGE_START_AFTER_PROTAGONIST:-1}
 export FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL="${FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL:-https://dailydoase.de/v/315-HF-/}"
+export FRESHWEB_MODE=${FRESHWEB_MODE:-reference-image-actor}
 export FRESHWEB_OPENING_PROMPT="${FRESHWEB_OPENING_PROMPT:-remote protagonist reference image, candid documentary still, natural light, clear subject focus}"
 export FRESHWEB_SCENE_VISUAL_DIRECTION="${FRESHWEB_SCENE_VISUAL_DIRECTION:-use the fixed protagonist reference for identity, use the next folder image only as scene context, mix both with the wordstream into a coherent scene, keep one readable protagonist, let pose, gaze, and world pressure change while identity stays grounded}"
 
