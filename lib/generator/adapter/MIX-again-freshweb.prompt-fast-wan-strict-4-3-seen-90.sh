@@ -1,0 +1,12 @@
+#!/bin/zsh
+set -euo pipefail
+
+cd "$(dirname "$0")"
+
+export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-freshweb-prompt-fast-wan-strict-4-3-seen-90-test}
+export FRESHWEB_WORDS=${FRESHWEB_WORDS:-exhibition opening,en | point of view,en | horror,en | fries,en}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-same real person, same face, same clothes, same room geometry, same visible location, same camera height, the moment feels like an exhibition opening inside the visible space, keep roughly ninety percent of the already visible people across the next shot whenever framing allows it, only use artworks and display surfaces that are already visible in the room, do not invent unseen artworks, allow only small believable changes in pose, gaze, blocking, lighting, and framing, let visible artwork bend toward the current viewers point of view without changing which artwork is present}
+export FRESHWEB_VISION_PROMPT=${FRESHWEB_VISION_PROMPT:-Describe only the visible shot for strict identity and location continuity. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Artworks, Description, and what must stay identical for the next shot. In Actors, describe each visible person with exact face, hair, beard, glasses, age, body build, clothing, pose, gaze direction, and who or what they seem to attend to. In Artworks, list only artworks or display surfaces that are actually visible, with their position, scale, color, and relation to the people in frame. In Location, describe the exact room geometry, door, window, wall art, display surfaces, furniture, and sight lines. In Description, note how visible people and visible artworks relate in the shot without inventing anything off-screen. For the next shot, keep about ninety percent of the currently visible people when framing allows it, and keep only artworks that are already visible now.}
+export FRESHWEB_DRIFT_CORRECTION_NEGATIVE_PROMPT=${FRESHWEB_DRIFT_CORRECTION_NEGATIVE_PROMPT:-text, letters, words, captions, subtitles, signage, readable writing, typography, logo, watermark, poster text, wall text, gallery label text, distorted text, different person, different face, different hair, different beard, different glasses, changed identity, changed outfit, changed room, changed location, new props, extra people, unseen artwork, invented artwork, swapped artwork, distorted face, blurry, low detail}
+
+exec sh "$(pwd)/MIX-again-freshweb.prompt-fast-wan-strict-4-3.sh" "$@"

@@ -15,7 +15,13 @@ export FRESHWEB_FIRST_LAST_VIDEO_MODEL=${FRESHWEB_FIRST_LAST_VIDEO_MODEL:-fal-ai
 export FRESHWEB_ALLOW_PAID_FAL_MULTI_SCENE=${FRESHWEB_ALLOW_PAID_FAL_MULTI_SCENE:-1}
 export FRESHWEB_ALLOW_PAID_FAL_POLLING=${FRESHWEB_ALLOW_PAID_FAL_POLLING:-1}
 
-export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=${FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR:-ltxTrippy}
+# Keep scene prompts strict and continuity-focused. The ltxTrippy flavor
+# forcibly collapses camera plans back to singleImage in later scenes.
+export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=${FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR:-default}
+export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-singleImage}
+export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=${FRESHWEB_LATER_CLIPS_SINGLE_IMAGE:-0}
+export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=${FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS:-0}
+export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=${FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE:-0}
 export FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME=${FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME:-1}
 export FRESHWEB_OPENING_PROMPT=${FRESHWEB_OPENING_PROMPT:-freshweb webcam shot, exact same real person, same face, same hair, same beard, same glasses, same clothes, same room, same camera angle, same lighting, documentary realism, true camera orientation, not mirrored, not selfie-flipped}
 export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-same real person, same face, same clothes, same room geometry, same visible location, same camera height, the moment feels like an exhibition opening inside the visible space, follow visible people as guests or viewers, infer small social stories from gaze, spacing, and reactions, let artwork or displayed surfaces bend toward each viewers point of view, only believable pose, gaze, lighting, and framing changes}
