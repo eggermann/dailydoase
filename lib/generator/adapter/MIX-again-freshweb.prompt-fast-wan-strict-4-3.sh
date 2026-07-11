@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-freshweb-prompt-fast-wan-strict-4-3-test}
 export VIDEO_MODE_PRESET=${VIDEO_MODE_PRESET:-storyDrivenMixed}
 export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT:-}
-export FRESHWEB_WORDS=${FRESHWEB_WORDS:-exhibition opening,en | people,en | artwork,en | point of view,en}
+export FRESHWEB_WORDS=${FRESHWEB_WORDS:-exhibition animal,en | fries,en  }
 
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=${FRESHWEB_SINGLE_VIDEO_MODEL_TYPE:-falImageToVideo}
 export FRESHWEB_SINGLE_VIDEO_MODEL=${FRESHWEB_SINGLE_VIDEO_MODEL:-fal-ai/wan/turbo/image-to-video}
