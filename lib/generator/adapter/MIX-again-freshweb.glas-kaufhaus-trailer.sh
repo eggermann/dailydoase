@@ -28,8 +28,7 @@ unset FRESHWEB_CAMERA_IMAGE_URLS
 unset FRESHWEB_OPENING_IMAGE_URL
 unset FRESHWEB_OPENING_IMAGE_URLS
 
-# Real Kaufhaus photos define fixed scene geometry. Person-containing reference
-# stays in the manifest only and is not selected as a scene source.
+# People-free Kaufhaus photos define the fixed scene geometry.
 export FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED=${FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED:-1}
 export FRESHWEB_SCENE_CONTEXT_IMAGE_PATHS="${FRESHWEB_SCENE_CONTEXT_IMAGE_PATHS:-$(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-mirrored-columns.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg}"
 unset FRESHWEB_SCENE_CONTEXT_IMAGE_URLS
