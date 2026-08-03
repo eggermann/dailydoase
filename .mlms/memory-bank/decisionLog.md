@@ -59,3 +59,11 @@ Status: Accepted
 Context: `formen_der_abweichunf_datas.json` contains the Green Monster story, visual prompt, creative rule, 22 artist practices, fictional character roles, and monster contributions. Snapshot `composition.js` only contains legacy generic Robotics composition.
 
 Decision: Build Glass Kaufhaus scene direction and scene-plan system prompt dynamically from the rich JSON. Use snapshot composition as historical reference only, not as the new story source.
+
+### D-0008: Separate Location and Protagonist References
+
+Status: Accepted
+
+Context: Five photographs document the real Kaufhaus interior where the trailer takes place. The Green Warehouse Organism image defines the protagonist, not the architecture.
+
+Decision: Rotate people-free Kaufhaus photos as local scene-context images while keeping the Green Warehouse Organism as a separate protagonist reference. Never reproduce people visible in documentary location photos. Do not use a live camera.

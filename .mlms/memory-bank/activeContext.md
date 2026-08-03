@@ -2,7 +2,7 @@
 
 ## Current Goal
 
-First poster-driven Glass Kaufhaus video: scene image, protagonist/story context, video part, concatenated saved output; no live camera.
+First poster-driven Glass Kaufhaus video: photographed Kaufhaus location, separate protagonist/story context, video parts, concatenated saved output; no live camera.
 
 ## Current Loop
 
@@ -11,7 +11,7 @@ Phase: Review
 
 ## Current Focus
 
-Review JSON-driven three-scene poster runner and external generation failures.
+Review JSON-driven three-scene poster runner with local Kaufhaus location mapping and external generation failures.
 
 ## Assumptions
 

@@ -11,6 +11,8 @@
 - Added dedicated output root `GENRATIONS-KAUFHAUF/`.
 - Added scene-planner model/request/response console logging via the existing logger.
 - Reworked trailer runner to derive monster prompt, creative rule, artist dossier, and three-scene film arc from the rich exhibition JSON.
+- Added five real Kaufhaus location photos and local scene-context path support.
+- Mapped three people-free location views across the three trailer scenes while retaining the monster as separate protagonist reference.
 - Generated and logged a three-scene plan twice.
 
 ## In Progress

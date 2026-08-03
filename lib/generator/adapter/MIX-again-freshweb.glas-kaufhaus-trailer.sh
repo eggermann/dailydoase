@@ -28,6 +28,14 @@ unset FRESHWEB_CAMERA_IMAGE_URLS
 unset FRESHWEB_OPENING_IMAGE_URL
 unset FRESHWEB_OPENING_IMAGE_URLS
 
+# Real Kaufhaus photos define fixed scene geometry. Person-containing reference
+# stays in the manifest only and is not selected as a scene source.
+export FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED=${FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED:-1}
+export FRESHWEB_SCENE_CONTEXT_IMAGE_PATHS="${FRESHWEB_SCENE_CONTEXT_IMAGE_PATHS:-$(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-mirrored-columns.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg}"
+unset FRESHWEB_SCENE_CONTEXT_IMAGE_URLS
+unset FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL
+unset FRESHWEB_SCENE_CONTEXT_IMAGE_API_URL
+
 # Ordered story anchors. Each cue must change the visible action or room pressure.
 export FRESHWEB_WORDS="${FRESHWEB_WORDS:-1983,de | Kaufhaus,de | Green Monster,en | Ware Haus,de | Fernsehen,de | Kunstausstellung,de}"
 export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT:-3}
