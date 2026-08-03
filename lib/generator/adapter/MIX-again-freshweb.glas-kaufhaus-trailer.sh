@@ -18,6 +18,7 @@ export SCENE_GENERATOR_DEBUG=${SCENE_GENERATOR_DEBUG:-1}
 export VISION_DEBUG=${VISION_DEBUG:-1}
 export WAN_DEBUG=${WAN_DEBUG:-1}
 export FAL_DEBUG=${FAL_DEBUG:-1}
+export RUNWARE_DEBUG=${RUNWARE_DEBUG:-1}
 export FLUX_DEBUG=${FLUX_DEBUG:-1}
 export MIRELO_DEBUG=${MIRELO_DEBUG:-1}
 
@@ -48,21 +49,23 @@ export FRESHWEB_SCENE_VISUAL_DIRECTION="${FRESHWEB_SCENE_VISUAL_DIRECTION:-Build
 export FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="${FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT:-Create exactly three short scene plans for a poster-driven Green Monster Ware Haus trailer. The source image is a green plant-like monster in an old industrial warehouse. The exhibition dossier names artists including Alex Tennigkeit, Nadine Deja, Matthias Hesselbacher, Ben Cottrell, Mariola Groener, Tania Elstermeyer, Dome Wood, Matthias Dornfeld, Sebastian Hammwöhner, Franziska Hufnagel, Nouchka Wolf, Stefan Kaminski, Kerstin Podbiel, Tuli Mekondjo, John Davies, Joe Neave, Catherine Lorent, Dominik Eggermann, Alex Weiss, Gabriel Vormstein, Kurt von Bley, and Charlotte Hiltmann. Use those names only as conceptual traces of a collective creature, never as extra visible people. Build a coherent 1989 BRD television trailer in an old Kaufhaus warehouse. The words 1983, Kaufhaus, Green Monster, Ware Haus, Fernsehen, and Kunstausstellung must drive visible interaction with the central monster and the room. Preserve the monster identity and location continuity; no live camera, no crowd, no readable text, no modern logos. Return the required JSON scene plan only.}"
 export FRESHWEB_VISION_PROMPT="${FRESHWEB_VISION_PROMPT:-Describe the visible Green Monster Ware Haus poster as a location and protagonist reference for a three-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat poster lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.}"
 
-# Use the branch's WAN routing experiment: zero-GPU/Space path first, paid Fal only
-# as the configured fallback. No Runware fallback in this first exhibition slice.
+# Runware is the primary and only video provider for this trailer. WAN 2.6 Flash
+# receives one start frame and returns a 720p clip without native audio.
 export FRESHWEB_SELF_HOSTED_SINGLE=${FRESHWEB_SELF_HOSTED_SINGLE:-0}
-export WAN22_SINGLE_SPACE=${WAN22_SINGLE_SPACE:-Wan-AI/Wan-2.2-5B}
-export FRESHWEB_WAN_SINGLE_FALLBACK_SPACES=${FRESHWEB_WAN_SINGLE_FALLBACK_SPACES:-multimodalart/wan2-1-fast}
-export FRESHWEB_WAN_SINGLE_USE_HF_PROVIDER_FALLBACK=${FRESHWEB_WAN_SINGLE_USE_HF_PROVIDER_FALLBACK:-1}
-export FRESHWEB_WAN_SINGLE_HF_PROVIDER=${FRESHWEB_WAN_SINGLE_HF_PROVIDER:-fal-ai}
+export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=${FRESHWEB_SINGLE_VIDEO_MODEL_TYPE:-runwareImageToVideo}
+export FRESHWEB_SINGLE_VIDEO_MODEL=${FRESHWEB_SINGLE_VIDEO_MODEL:-alibaba:wan@2.6-flash}
 export FRESHWEB_ENABLE_RUNWARE_FALLBACKS=${FRESHWEB_ENABLE_RUNWARE_FALLBACKS:-0}
+export FRESHWEB_ENABLE_PAID_FAL_FALLBACKS=${FRESHWEB_ENABLE_PAID_FAL_FALLBACKS:-0}
 
-# Generate the poster-derived opening still once; failure falls back to the saved
-# poster input. Mirelo runs on the final concat and returns the video on failure.
+# Runware FLUX Kontext generates the opening and scene-context images from the
+# photographed Kaufhaus plus the separate monster identity reference.
 export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-1}
 export FRESHWEB_OPENING_START_MODE=${FRESHWEB_OPENING_START_MODE:-fluxContext}
 export FRESHWEB_OPENING_START_INTERVAL=${FRESHWEB_OPENING_START_INTERVAL:-1}
-export FRESHWEB_OPENING_START_PROVIDER=${FRESHWEB_OPENING_START_PROVIDER:-fal-ai}
+export FRESHWEB_OPENING_START_PROVIDER=${FRESHWEB_OPENING_START_PROVIDER:-runware}
+export FRESHWEB_OPENING_START_MODEL=${FRESHWEB_OPENING_START_MODEL:-runware:106@1}
+export FRESHWEB_OPENING_START_WIDTH=${FRESHWEB_OPENING_START_WIDTH:-1184}
+export FRESHWEB_OPENING_START_HEIGHT=${FRESHWEB_OPENING_START_HEIGHT:-880}
 export FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME=${FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME:-1}
 export FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME=${FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME:-0}
 export FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME=${FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME:-1}
