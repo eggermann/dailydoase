@@ -11,7 +11,7 @@ Phase: Review
 
 ## Current Focus
 
-Review implemented three-scene poster runner and external generation failures.
+Review JSON-driven three-scene poster runner and external generation failures.
 
 ## Assumptions
 
@@ -28,4 +28,4 @@ Review implemented three-scene poster runner and external generation failures.
 
 ## Next Action
 
-Next: restore a working video backend or credentials, rerun existing three-scene runner, then verify `final.mp4`.
+Next: rerun runner with JSON-derived prompts once backend is available, then verify `final.mp4`.

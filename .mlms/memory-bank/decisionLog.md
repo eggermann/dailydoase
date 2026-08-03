@@ -51,3 +51,11 @@ Context: Exhibition debugging needs to show which model received which prompt an
 Decision: Enable scoped generator debug logging in the Glass Kaufhaus preset and log scene-planner chat request/response payloads through the existing sanitized logger.
 
 Consequence: Console output is verbose by default for this preset; sensitive keys are masked by `lib/generator/logger.js`.
+
+### D-0007: Rich Exhibition JSON Is Story Source of Truth
+
+Status: Accepted
+
+Context: `formen_der_abweichunf_datas.json` contains the Green Monster story, visual prompt, creative rule, 22 artist practices, fictional character roles, and monster contributions. Snapshot `composition.js` only contains legacy generic Robotics composition.
+
+Decision: Build Glass Kaufhaus scene direction and scene-plan system prompt dynamically from the rich JSON. Use snapshot composition as historical reference only, not as the new story source.

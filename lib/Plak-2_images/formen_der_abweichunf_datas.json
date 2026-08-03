@@ -1,0 +1,524 @@
+{
+  "project": {
+    "title": "Green Monster Ware Haus",
+    "source_exhibition": "Formen der Abweichung",
+    "format": [
+      "exhibition",
+      "sound",
+      "performance"
+    ],
+    "venue": {
+      "name": "CANK Neukölln",
+      "address": "Karl-Marx-Straße 95, 12043 Berlin",
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "dates": {
+      "vernissage": {
+        "date": "2026-09-05",
+        "start_time": "18:00"
+      },
+      "exhibition": {
+        "start_date": "2026-09-06",
+        "end_date": "2026-09-12"
+      },
+      "opening_hours": {
+        "pages_1_to_3": "18:00-21:00",
+        "page_4": "17:00-20:00",
+        "conflict_requires_confirmation": true
+      }
+    },
+    "creative_rule": "Each protagonist is a fictional figure informed by the artist's documented practice, not a literal portrait or invented biography."
+  },
+  "monster": {
+    "name": "The Green Warehouse Organism",
+    "setting": "A dark industrial art warehouse in Neukölln, Berlin",
+    "character_type": "collective exhibition protagonist",
+    "appearance": [
+      "green botanical humanoid face",
+      "large leaf-shaped ears",
+      "yellow lamp-like eyes",
+      "flowers and seed pods growing from the crown",
+      "roots, branches and electrical cables",
+      "hanging warehouse lamps",
+      "plant, animal, human and machine anatomy",
+      "hand-drawn poster texture"
+    ],
+    "story": "After the artists leave fragments of paintings, drawings, sounds, performances, objects and memories inside the warehouse, the materials connect through the electrical system and grow into a living organism.",
+    "image_prompt": "The Green Warehouse Organism standing full-body inside a rough Neukölln industrial art space. A long green botanical face, luminous yellow eyes, enormous leaf ears, flowers, roots, branches, cables and suspended lamps. Handmade colored-pencil, pastel and painted textures combined with cinematic warehouse lighting. Strange, humorous, poetic and contemporary rather than violent."
+  },
+  "artists": [
+    {
+      "name": "Alex Tennigkeit",
+      "identity_status": "verified",
+      "birth_year": 1976,
+      "birthplace": "Heilbronn, Germany",
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; she/her language used in public biographies",
+      "practice": [
+        "painting",
+        "drawing",
+        "figurative visual art"
+      ],
+      "documented_context": "Studied at the Academy of Fine Arts Karlsruhe and was a master student of Andreas Slominski.",
+      "character_title": "The Painter of Hybrid Visions",
+      "monster_contribution": "The monster's pictorial imagination, birds, faces and unstable dream identity.",
+      "character_description": "A fictional female painter whose birds, hybrid bodies and painted symbols escape from copper plates and canvases into the monster's crown.",
+      "image_prompt": "Fictional female Berlin painter in a dark warehouse studio, paint-covered hands, copper painting plates, canvases containing birds, hybrid bodies, strange faces and unstable dream landscapes. The painted creatures migrate into the green monster's crown. Not a portrait of the real artist."
+    },
+    {
+      "name": "Nadine Deja",
+      "identity_status": "partially verified",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin exhibition context",
+      "gender_or_pronouns": "woman; feminine classification appears in exhibition databases",
+      "practice": [
+        "contemporary visual art",
+        "painting"
+      ],
+      "documented_context": "Exhibited in Berlin projects including Psychologie & Abstraktion and Was bleibt, hängt ab.",
+      "character_title": "The Keeper of Suspended Images",
+      "monster_contribution": "The monster's quiet emotional chambers and painted internal spaces.",
+      "character_description": "A fictional painter arranging subtle images in suspended layers inside the organism.",
+      "image_prompt": "Fictional female contemporary painter in a Berlin project space surrounded by layered paintings, restrained colors and suspended visual fragments. The works form private chambers inside the green warehouse monster."
+    },
+    {
+      "name": "Matthias Hesselbacher",
+      "identity_status": "partially verified",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin art context",
+      "gender_or_pronouns": "he/him language used in art listings",
+      "practice": [
+        "visual art",
+        "collage",
+        "sound"
+      ],
+      "documented_context": "Documented in Berlin exhibitions and sound presentations, including an opening involving sound at argent.",
+      "character_title": "The Archivist of Fragments",
+      "monster_contribution": "The monster's collage anatomy and recorded memory.",
+      "character_description": "A fictional archivist connecting paper fragments, found images and sound recordings into the creature's nervous system.",
+      "image_prompt": "Fictional male collage and sound artist in a cluttered Berlin warehouse archive. Cut paper, photographs, tape machines and speakers connect into the monster's layered nervous system."
+    },
+    {
+      "name": "Ben Cottrell",
+      "identity_status": "verified",
+      "birth_year": 1972,
+      "birthplace": "Cornwall, England",
+      "base": "Berlin",
+      "gender_or_pronouns": "man; he/him language used in artist biographies",
+      "practice": [
+        "painting",
+        "drawing",
+        "sculpture",
+        "mixed media",
+        "site-specific installation"
+      ],
+      "documented_context": "Studied at Cheltenham School of Art and Design and has lived and worked in Berlin.",
+      "character_title": "The Shapeshifting Painter",
+      "monster_contribution": "The organism's mutable painted skin.",
+      "character_description": "A fictional painter whose abstract and organic forms continually alter the creature's body.",
+      "image_prompt": "Fictional male Berlin-based painter working on large mixed-media canvases with fluid organic and abstract forms. Painted shapes crawl from the canvas onto the monster's changing green skin."
+    },
+    {
+      "name": "Mariola Groener",
+      "identity_status": "verified",
+      "birth_year": null,
+      "birthplace": "Poland",
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; she/her language used on professional pages",
+      "practice": [
+        "collage",
+        "photography",
+        "sculpture",
+        "video",
+        "installation",
+        "performance",
+        "choreography"
+      ],
+      "documented_context": "Berlin-based interdisciplinary artist and co-founder of the performance label WILHELM GROENER.",
+      "character_title": "The Builder of Moving Habitats",
+      "monster_contribution": "The physical and choreographic environment surrounding the monster.",
+      "character_description": "A fictional interdisciplinary artist constructing a habitat in which objects, architecture and bodies continuously change position.",
+      "image_prompt": "Fictional female interdisciplinary artist constructing a moving environment from cardboard, sculpture, projected video, plants and performing bodies in a Berlin warehouse. The habitat grows around the green monster."
+    },
+    {
+      "name": "Tania Elstermeyer",
+      "identity_status": "verified",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; she/her language used by UdK-related sources",
+      "practice": [
+        "performance",
+        "acting",
+        "painting",
+        "multimedia",
+        "time-based media"
+      ],
+      "documented_context": "Performance artist, actor and UdK Berlin lecturer; studied with Thomas Zipp and Mathilde ter Heijne.",
+      "character_title": "The Voice in the Walls",
+      "monster_contribution": "The monster's breath, bodily presence and temporal pulse.",
+      "character_description": "A fictional performer whose gestures and voice animate the warehouse architecture.",
+      "image_prompt": "Fictional female performance artist inside an industrial Berlin hall. Breath, voice and body movement travel visibly through walls, cables and lamps before entering the green monster's throat."
+    },
+    {
+      "name": "Dome Wood",
+      "alternate_name": "Dominic Wood",
+      "identity_status": "verified",
+      "birth_year": 1974,
+      "birthplace": "Melbourne, Australia",
+      "base": "Brussels",
+      "berlin_connection": "Lived and worked in Berlin during an earlier period",
+      "gender_or_pronouns": "man; he/him language used in public biographies",
+      "practice": [
+        "painting",
+        "sculpture",
+        "installation",
+        "philosophical and ontological research"
+      ],
+      "documented_context": "His practice investigates reality, ontology and the implications of a fourth spatial dimension.",
+      "character_title": "The Fourth-Space Explorer",
+      "monster_contribution": "The dimensional portals within the monster.",
+      "character_description": "A fictional artist-philosopher opening geometric passages into spaces that cannot normally be seen.",
+      "image_prompt": "Fictional male artist-philosopher surrounded by paintings, sculptural meditation structures and fourth-dimensional geometry. A luminous portal opens inside the green monster's torso."
+    },
+    {
+      "name": "Matthias Dornfeld",
+      "identity_status": "verified",
+      "birth_year": 1960,
+      "birthplace": "Esslingen, Germany",
+      "base": "Berlin",
+      "gender_or_pronouns": "man; he/him language used in gallery biographies",
+      "practice": [
+        "painting",
+        "portraiture",
+        "landscape",
+        "still life",
+        "figuration",
+        "abstraction"
+      ],
+      "documented_context": "Known for direct, distorted and brightly colored paintings that move between classical genres and expressive abstraction.",
+      "character_title": "The Maker of Crooked Faces",
+      "monster_contribution": "The monster's face, ears and human-animal ambiguity.",
+      "character_description": "A fictional painter creating awkward, direct faces and creatures whose anatomy becomes the monster's expression.",
+      "image_prompt": "Fictional male painter surrounded by brightly colored, deliberately awkward portraits, animals, flowers and still lifes. Crooked painted lines shape the green monster's face and huge leaf ears."
+    },
+    {
+      "name": "Sebastian Hammwöhner",
+      "identity_status": "verified",
+      "birth_year": 1974,
+      "birthplace": "Frechen, Germany",
+      "base": "Berlin",
+      "gender_or_pronouns": "man; he/him language used in artist biographies",
+      "practice": [
+        "pastel drawing",
+        "sculpture",
+        "painting",
+        "site-specific installation"
+      ],
+      "documented_context": "His works include imagined textile fragments and symbolic imagery positioned between figuration and abstraction.",
+      "character_title": "The Symbolic Draftsman",
+      "monster_contribution": "The creature's ritual markings and textile-like organs.",
+      "character_description": "A fictional draftsman using pastel dust and imagined textile patterns to mark the monster's body.",
+      "image_prompt": "Fictional male Berlin artist drawing brilliant pastel symbols and imagined textile fragments against black paper. Patterns transfer onto sculptural organs growing from the monster."
+    },
+    {
+      "name": "Franziska Hufnagel",
+      "identity_status": "verified",
+      "birth_year": 1967,
+      "birthplace": "Berlin, Germany",
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; she/her language used in gallery biographies",
+      "practice": [
+        "painting",
+        "acrylic painting",
+        "text-based imagery",
+        "bird imagery"
+      ],
+      "documented_context": "Her bird paintings prominently feature crows and ravens with references to mythology, literature and film.",
+      "character_title": "The Raven Painter",
+      "monster_contribution": "The monster's birds, omens and literary memory.",
+      "character_description": "A fictional painter followed by ravens that carry painted words and stories through the warehouse.",
+      "image_prompt": "Fictional female Berlin painter surrounded by acrylic paintings, crows, ravens and fragments of literary text. The birds nest within the crown of the green warehouse organism."
+    },
+    {
+      "name": "Nouchka Wolf",
+      "identity_status": "verified",
+      "birth_year": 1982,
+      "birthplace": "Vienna, Austria",
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; she/her language used in gallery sources",
+      "practice": [
+        "performance",
+        "video",
+        "sculpture",
+        "collage",
+        "conceptual and body-based art"
+      ],
+      "documented_context": "Studied philosophy in Vienna and art at SVA New York and UdK Berlin.",
+      "character_title": "The Body of Resistance",
+      "monster_contribution": "The monster's physical urgency and unpredictable movement.",
+      "character_description": "A fictional performer whose body activates objects and forces the creature to move beyond its stable form.",
+      "image_prompt": "Fictional female performance artist moving among sculptures, videos and charged objects in a Berlin warehouse. Her gestures bend the monster's limbs into unexpected configurations."
+    },
+    {
+      "name": "Stefan Kaminski",
+      "identity_status": "verified visual artist",
+      "birth_year": 1969,
+      "birthplace": "Duisburg, Germany",
+      "base": [
+        "Berlin",
+        "Texas"
+      ],
+      "gender_or_pronouns": "man; he/him language used in artist biography",
+      "practice": [
+        "artistic photography",
+        "painting",
+        "collage",
+        "non-traditional supports"
+      ],
+      "documented_context": "Studied artistic photography at Folkwang in Essen. His visual-art identity is distinct from the Berlin actor born in 1974.",
+      "character_title": "The Layered Image Maker",
+      "monster_contribution": "The monster's photographic memory and layered material skin.",
+      "character_description": "A fictional visual artist pressing photographs, paint and rough industrial materials into fragmented images.",
+      "image_prompt": "Fictional male visual artist in a Berlin workshop combining photography, paint, collage and textured industrial panels. The fragments become the green monster's scarred visual skin."
+    },
+    {
+      "name": "Kerstin Podbiel",
+      "identity_status": "partially verified",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; feminine language used in institutional exhibition materials",
+      "practice": [
+        "installation",
+        "sculpture",
+        "painting",
+        "drawing"
+      ],
+      "documented_context": "Her work has been described as examining disturbances in systems and negative processes of thought.",
+      "character_title": "The Engineer of Disturbance",
+      "monster_contribution": "The creature's interrupted systems and unstable balance.",
+      "character_description": "A fictional artist constructing deceptively simple objects and images that reveal faults inside apparently stable systems.",
+      "image_prompt": "Fictional female Berlin artist surrounded by simplified drawings, sculptures, an aeroplane and a ship balanced on thin horizontal structures. Hairline fractures extend into the monster's internal system."
+    },
+    {
+      "name": "Tuli Mekondjo",
+      "identity_status": "verified",
+      "birth_year": 1982,
+      "birthplace": "Kwanza-Sul, Angola",
+      "nationality_or_context": "Namibian",
+      "base": "Windhoek, Namibia",
+      "gender_or_pronouns": "woman; she/her language used in institutional biographies",
+      "practice": [
+        "mixed media",
+        "embroidery",
+        "photo transfer",
+        "paint",
+        "resin",
+        "soil",
+        "mahangu grain",
+        "performance"
+      ],
+      "documented_context": "Her practice addresses Namibian colonial history, identity, cultural erasure, trauma, spirituality and ancestral memory.",
+      "character_title": "The Keeper of Ancestral Memory",
+      "monster_contribution": "The monster's roots and historical consciousness.",
+      "character_description": "A dignified fictional guardian whose soil, embroidery and grain provide the creature with memory and grounding.",
+      "image_prompt": "Fictional Namibian female artist working respectfully with earth, embroidery, grain, resin and archival images. Her materials form the roots beneath the green monster. Contemporary and non-exoticizing."
+    },
+    {
+      "name": "John Davies",
+      "instagram": "@goldaksound",
+      "identity_status": "confirmed by user; public biography remains limited",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin, confirmed by user",
+      "gender_or_pronouns": null,
+      "practice": [
+        "music composition",
+        "music production",
+        "painting"
+      ],
+      "documented_context": "The account identity was confirmed by the exhibition organizer in this conversation.",
+      "character_title": "The Painter of Frequencies",
+      "monster_contribution": "The monster's harmonic field and relationship between music and image.",
+      "character_description": "A fictional artist translating sounds into painted marks that pulse across the creature's ears.",
+      "image_prompt": "Gender-neutral fictional Berlin composer, producer and painter surrounded by instruments, speakers and abstract painted waveforms. The waveforms flow into the monster's leaf-shaped ears."
+    },
+    {
+      "name": "Joe Neave",
+      "identity_status": "verified",
+      "birth_year": 1974,
+      "birthplace": "East Yorkshire, England",
+      "base": "Berlin",
+      "gender_or_pronouns": "man; he/him language used in artist texts",
+      "practice": [
+        "drawing",
+        "colored pencil",
+        "watercolor",
+        "ink",
+        "pastel"
+      ],
+      "documented_context": "His narrative drawings reference advertising, comics, children's books, adventure stories and popular imagery.",
+      "character_title": "The Drawer of Fragmented Stories",
+      "monster_contribution": "The monster's narrative limbs and cultural memories.",
+      "character_description": "A fictional draftsman whose lines turn fragments of popular imagery into animated stories.",
+      "image_prompt": "Fictional male Berlin-based drawing artist working with colored pencil, watercolor, ink and pastel. Fragments of comics, advertising and adventure stories become moving limbs of the green monster."
+    },
+    {
+      "name": "Catherine Lorent",
+      "identity_status": "verified",
+      "birth_year": 1977,
+      "birthplace": "Munich, Germany",
+      "nationality_or_context": "Luxembourgish",
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; she/her language used in museum and artist biographies",
+      "practice": [
+        "painting",
+        "drawing",
+        "sculpture",
+        "installation",
+        "sound",
+        "music",
+        "performance"
+      ],
+      "documented_context": "Her practice combines visual art and music; Sonic Canvas connects space, sound, image and audience.",
+      "character_title": "The Sonic Weaver",
+      "monster_contribution": "The synthesis of the monster's image, voice, stage and sound.",
+      "character_description": "A fictional multidisciplinary artist tuning the warehouse and creature as one total artwork.",
+      "image_prompt": "Fictional female Luxembourgish-Berlin artist surrounded by drawings, paintings, sculpture, electric guitar, drums and sound equipment. She tunes the monster and warehouse as one sonic canvas."
+    },
+    {
+      "name": "Dominik Eggermann",
+      "identity_status": "partially verified",
+      "birth_year": 1978,
+      "birthplace": "Basel, Switzerland",
+      "base": "Berlin",
+      "gender_or_pronouns": "man; male classification appears in artist database",
+      "practice": [
+        "media art",
+        "audiovisual installation",
+        "sound",
+        "projection",
+        "curating"
+      ],
+      "documented_context": "Co-created the durational audiovisual installation series Maailmankaikkeus using mirrors, electronics, projectors, optics and sound.",
+      "character_title": "The Audiovisual Architect",
+      "monster_contribution": "The monster's projected vision, electronic pulse and spatial signal system.",
+      "character_description": "A fictional media artist connecting optics, projections and synthesized signals into the organism's senses.",
+      "image_prompt": "Fictional male Berlin media artist operating mirrors, optics, video projectors, analogue electronics and speakers. Luminous waveforms form the green monster's eyes and electronic pulse."
+    },
+    {
+      "name": "Alex Weiss",
+      "probable_full_name": "Alexander Weiss",
+      "probable_instagram": "@a.l.x.weiss",
+      "identity_status": "probable match",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin, based on exhibition context",
+      "gender_or_pronouns": null,
+      "practice": [
+        "painting",
+        "drawing",
+        "collage",
+        "mixed-media objects"
+      ],
+      "documented_context": "The probable artist's own site presents painting, drawing and collage using varied textural materials.",
+      "character_title": "The Constellation Maker",
+      "monster_contribution": "The monster's unstable arrangements of images, textures and objects.",
+      "character_description": "A fictional artist arranging paintings, drawings and material fragments into changing constellations.",
+      "image_prompt": "Gender-neutral fictional Berlin artist surrounded by paintings, drawings, collages and textured objects arranged as an unstable constellation. The pieces become shifting organs of the green monster."
+    },
+    {
+      "name": "Gabriel Vormstein",
+      "identity_status": "verified",
+      "birth_year": 1974,
+      "birthplace": "Konstanz, Germany",
+      "base": "Berlin",
+      "gender_or_pronouns": "man; he/him language used in gallery biographies",
+      "practice": [
+        "painting on newspaper",
+        "drawing",
+        "installation",
+        "found branches and organic material"
+      ],
+      "documented_context": "His practice examines impermanence, temporality, futility and the unstable status of artistic materials.",
+      "character_title": "The Architect of Impermanence",
+      "monster_contribution": "The monster's newspaper skin, wooden bones and awareness of decay.",
+      "character_description": "A fictional artist building a fragile body from yesterday's newspapers and fallen branches.",
+      "image_prompt": "Fictional male Berlin artist painting on old newspapers and arranging branches and organic debris into a fragile installation. The materials become the monster's temporary skin and bones."
+    },
+    {
+      "name": "Kurt von Bley",
+      "identity_status": "verified",
+      "birth_year": 1976,
+      "birthplace": "Königshütte, Poland",
+      "base": "Berlin",
+      "gender_or_pronouns": "he/him",
+      "practice": [
+        "sculpture",
+        "installation",
+        "multimedia",
+        "found objects",
+        "family photographs"
+      ],
+      "documented_context": "His work addresses identity, memory, religious imagery, trauma, exclusion and totalitarian histories.",
+      "character_title": "The Alchemist of Lost Objects",
+      "monster_contribution": "The creature's autobiographical relics and displaced memories.",
+      "character_description": "A fictional sculptor transforming domestic objects and family photographs into organs of memory.",
+      "image_prompt": "Fictional male Berlin-based multimedia artist surrounded by transformed household objects, old family photographs and religious visual fragments. The objects become memory organs inside the green monster."
+    },
+    {
+      "name": "Charlotte Hiltmann",
+      "identity_status": "partially verified",
+      "birth_year": null,
+      "birthplace": null,
+      "base": "Berlin",
+      "gender_or_pronouns": "woman; feminine classification appears in exhibition databases",
+      "practice": [
+        "contemporary visual art"
+      ],
+      "documented_context": "Associated with Fine Arts at UdK Berlin and exhibitions connected to Thomas Zipp's class. A specific individual medium is not yet documented reliably.",
+      "character_title": "The Keeper of the Unsaid",
+      "monster_contribution": "The monster's unresolved thoughts and silent visual tension.",
+      "character_description": "A fictional artist allowing unfinished symbols and images to remain suspended around the creature.",
+      "image_prompt": "Fictional female contemporary artist in a vaulted Berlin exhibition space, surrounded by unfinished images, ambiguous notes and neutral sculptural fragments. The work forms the monster's quiet unresolved consciousness."
+    }
+  ],
+  "research_summary": {
+    "verified_or_strongly_supported": [
+      "Alex Tennigkeit",
+      "Ben Cottrell",
+      "Mariola Groener",
+      "Tania Elstermeyer",
+      "Dome Wood",
+      "Matthias Dornfeld",
+      "Sebastian Hammwöhner",
+      "Franziska Hufnagel",
+      "Nouchka Wolf",
+      "Stefan Kaminski",
+      "Tuli Mekondjo",
+      "Joe Neave",
+      "Catherine Lorent",
+      "Gabriel Vormstein",
+      "Kurt von Bley"
+    ],
+    "partially_verified": [
+      "Nadine Deja",
+      "Matthias Hesselbacher",
+      "Kerstin Podbiel",
+      "Dominik Eggermann",
+      "Charlotte Hiltmann"
+    ],
+    "confirmed_by_user_but_with_limited_public_biography": [
+      "John Davies"
+    ],
+    "probable_identity_match": [
+      "Alex Weiss"
+    ],
+    "missing_birth_years_are_intentionally_null": true,
+    "gender_policy": "Gender or pronouns are included only when supported by public biographical language or explicitly confirmed. No gender is inferred from names or appearance."
+  }
+}
