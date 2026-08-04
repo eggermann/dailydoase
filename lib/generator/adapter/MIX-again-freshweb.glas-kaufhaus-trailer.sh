@@ -195,4 +195,10 @@ export FRESHWEB_MIRELO_RUNWARE_FALLBACK_MODEL=${FRESHWEB_MIRELO_RUNWARE_FALLBACK
 # Twenty-eight steps balance synchronized detail and fallback latency.
 export FRESHWEB_MIRELO_RUNWARE_FALLBACK_STEPS=${FRESHWEB_MIRELO_RUNWARE_FALLBACK_STEPS:-28}
 
+# A preset script can source these defaults, then run the middle-cost runtime
+# itself to post-process its concat output. Direct trailer use still execs here.
+if [ "${FRESHWEB_TRAILER_SOURCE_ONLY:-0}" = "1" ]; then
+  return 0 2>/dev/null || exit 0
+fi
+
 exec sh "$(pwd)/MIX-again-freshweb.middle-cost-4-3.sh" "$@"
