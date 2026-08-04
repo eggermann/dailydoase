@@ -42,10 +42,14 @@ unset FRESHWEB_SCENE_CONTEXT_IMAGE_API_URL
 # Ordered story anchors. Each cue must change the visible action or room pressure.
 export FRESHWEB_WORDS="${FRESHWEB_WORDS:-1983,de | Kaufhaus,de | Green Monster,en | Ware Haus,de | Fernsehen,de | Kunstausstellung,de}"
 # Scene count and lengths come from Taktmuster unless explicitly supplied by
-# the caller. The initial count pattern keeps one-shot trailer runs varied but
-# gives the semantic collision arc enough room to develop.
+# the caller. Scene count is always the current metric accent plus two scenes.
 export FRESHWEB_USE_TAKTMUSTER_LENGTHS=${FRESHWEB_USE_TAKTMUSTER_LENGTHS:-1}
-export FRESHWEB_SCENE_COUNT_INITIAL_PATTERN=${FRESHWEB_SCENE_COUNT_INITIAL_PATTERN:-4,5,4,6}
+unset FRESHWEB_SCENE_COUNT_INITIAL_PATTERN
+export FRESHWEB_SCENE_COUNT_TAKT_COUNT=${FRESHWEB_SCENE_COUNT_TAKT_COUNT:-2}
+export FRESHWEB_SCENE_COUNT_TAKT_ZAEHLER=${FRESHWEB_SCENE_COUNT_TAKT_ZAEHLER:-4}
+export FRESHWEB_SCENE_COUNT_TAKT_NENNER=${FRESHWEB_SCENE_COUNT_TAKT_NENNER:-4}
+export FRESHWEB_SCENE_COUNT_TAKT_TYPE=${FRESHWEB_SCENE_COUNT_TAKT_TYPE:-balanced}
+export FRESHWEB_SCENE_COUNT_BIAS=${FRESHWEB_SCENE_COUNT_BIAS:-2}
 export FRESHWEB_SCENE_LENGTH_TAKT=${FRESHWEB_SCENE_LENGTH_TAKT:-3}
 export FRESHWEB_SCENE_LENGTH_TAKT_TYPE=${FRESHWEB_SCENE_LENGTH_TAKT_TYPE:-balanced}
 export FRESHWEB_SCENE_LENGTH_MULTIPLIER=${FRESHWEB_SCENE_LENGTH_MULTIPLIER:-0.4}
