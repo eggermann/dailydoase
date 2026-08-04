@@ -13,6 +13,9 @@ export FRESHWEB_MODE=${FRESHWEB_MODE:-reference-image-actor}
 export FRESHWEB_SOURCE_CUE_MODE=${FRESHWEB_SOURCE_CUE_MODE:-collision}
 export FRESHWEB_ALLOW_PEOPLE=${FRESHWEB_ALLOW_PEOPLE:-1}
 export FRESHWEB_USE_VISION=${FRESHWEB_USE_VISION:-1}
+# Analyse each available WAN end frame before the next scene. Missing end frames
+# keep the normal location/opening fallback, so image-only tests remain valid.
+export FRESHWEB_END_FRAME_ANALYSIS=${FRESHWEB_END_FRAME_ANALYSIS:-1}
 export FRESHWEB_CAMERA_SOURCE_LABEL=${FRESHWEB_CAMERA_SOURCE_LABEL:-Green Monster Ware Haus poster}
 # Resolve default once so logs show a clean absolute output path without ../../../.
 if [ -z "${GENERATIONS_PATH:-}" ]; then
