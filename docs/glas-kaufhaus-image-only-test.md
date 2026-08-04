@@ -2,11 +2,11 @@
 
 Dieser Test erzeugt ausschließlich die geplanten Szenenbilder. WAN-Video, WAN-Sound und Mirelo werden nicht initialisiert.
 
-Der Image-only-Test verwendet vier vorbereitete, fotografische Kaufhaus-Referenzen. Jede enthält bereits genau einen isolierten Green Monster Protagonisten. Dadurch bleibt die reale Kaufhaus-Geometrie in jeder Szene dominant; Posterlayout, Künstlerporträts, Menschen und Schrift werden nicht als Bildreferenz übernommen.
+Der Image-only-Test verwendet rohe fotografische Kaufhaus-Referenzen und eine getrennte realistische Monster-Referenz. Dadurch bleibt die reale Kaufhaus-Geometrie dominant, während jede Szene eine neue Monster-Inkarnation aus ihrer Semantic-Stream-Kollision baut.
 
 ```text
-lib/Plak-2_images/monster-reference/green-monster-protagonist.png
-lib/Plak-2_images/kaufhaus-location-with-monster/
+lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png
+lib/Plak-2_images/kaufhaus-location/
 ```
 
 Alle Runden laufen im selben Node-Prozess. Dadurch bleiben dieselben Semantic-Stream-Objekte, ihre fortlaufenden `getNext`-Positionen, dieselbe Generatorinstanz und derselbe Generation-Ordner erhalten.
@@ -111,4 +111,76 @@ find /Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF \
   -type d \
   -name '*-glas-kaufhaus-shorty-book-image-only-test*' \
   -print
+```
+
+## Video-Test: zwei billige Szenen mit Concat
+
+Dieser Test ist für den ersten echten Bewegungs- und Continuity-Check. Er erzeugt genau zwei WAN-Videos und verbindet sie anschließend. Es wird keine Endcard und kein Sound erzeugt.
+
+Vom Projektordner starten:
+
+```sh
+./lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-two-video-preview.sh
+```
+
+Der feste Ablauf:
+
+```text
+Szene 1: Kaufhaus + Monster + erste Semantic-Stream-Kollision → WAN, 2 Sekunden
+Endframe: wird analysiert, falls WAN einen letzten Frame liefern konnte
+Szene 2: übernimmt diesen sichtbaren Endzustand → WAN, 2 Sekunden
+Ergebnis: beide WAN-Clips werden concateniert
+Preview: Concat wird lokal klein und stark komprimiert exportiert
+```
+
+Der Test setzt diese kostensparenden Werte:
+
+```text
+FRESHWEB_SCENE_COUNT=2
+FRESHWEB_SCENE_LENGTHS=2,2
+FRESHWEB_SINGLE_VIDEO_MAX_DURATION=2
+FRESHWEB_MIRELO_MODE=off
+FRESHWEB_WAN_AUDIO_ENABLED=0
+FRESHWEB_END_CARD_ENABLED=0
+FRESHWEB_ENABLE_DRIFT_CORRECTION=0
+FRESHWEB_END_FRAME_ANALYSIS=1
+```
+
+`FRESHWEB_END_FRAME_ANALYSIS=1` ist wichtig: Es beschreibt Pose, Monster-Silhouette, Kaufhaus-Geometrie, Licht und sichtbare Mutation des ersten WAN-Endframes. Diese Beschreibung ergänzt den Prompt von Szene 2. Falls kein Endframe vorhanden ist, läuft der Test trotzdem weiter: Szene 2 verwendet den normalen bestehenden Startframe-Fallback.
+
+WAN 2.6 Flash erzeugt bei Runware nur 720p oder 1080p. Für geringe Kosten nutzt der Test daher die kleinste WAN-Stufe, 720p, ohne Audio und mit der erlaubten Mindestlänge von zwei Sekunden. Erst nach dem Concat erzeugt FFmpeg eine kleine Kontrollkopie.
+
+Ungefähre WAN-Video-Kosten: zwei Clips × zwei Sekunden × $0.025 ohne Audio = $0.10. Ein FLUX-Kontext-Startbild und die Vision-Anfragen kommen zusätzlich hinzu.
+
+Nach Erfolg zeigt das Script zwei Pfade an:
+
+```text
+WAN concat: .../merged/<zeitstempel>-concat.mp4
+Small preview: .../merged/two-scene-preview-272x208.mp4
+```
+
+Die kleine Preview ist die schnelle Sichtkontrolle. Der WAN-Concat bleibt die bessere Datei für die Beurteilung von Bewegung, Drift und Übergang.
+
+### Video-Test variieren
+
+Andere kleine Preview-Größe:
+
+```sh
+FRESHWEB_PREVIEW_WIDTH=544 \
+FRESHWEB_PREVIEW_HEIGHT=416 \
+./lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-two-video-preview.sh
+```
+
+Endframe-Analyse ausschalten, wenn nur WAN-Bewegung geprüft werden soll:
+
+```sh
+FRESHWEB_END_FRAME_ANALYSIS=0 \
+./lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-two-video-preview.sh
+```
+
+Einen klar getrennten Generation-Ordner vergeben:
+
+```sh
+FRESHWEB_FOLDER=glas-kaufhaus-two-video-preview-a \
+./lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-two-video-preview.sh
 ```
