@@ -45,16 +45,13 @@ export FRESHWEB_PREVIEW_WIDTH=${FRESHWEB_PREVIEW_WIDTH:-272}
 export FRESHWEB_PREVIEW_HEIGHT=${FRESHWEB_PREVIEW_HEIGHT:-208}
 export FRESHWEB_PREVIEW_CRF=${FRESHWEB_PREVIEW_CRF:-35}
 
-export FRESHWEB_TRAILER_SOURCE_ONLY=1
-source "$(pwd)/MIX-again-freshweb.glas-kaufhaus-trailer.sh"
-unset FRESHWEB_TRAILER_SOURCE_ONLY
-
 echo "Two-video preview starts: 2 scenes x 2 seconds, silent WAN, no end card."
-sh "$(pwd)/MIX-again-freshweb.middle-cost-4-3.sh" "$@"
+output_folder="$(pwd)/../../../GENRATIONS-KAUFHAUF/${FRESHWEB_FOLDER}"
+node "$(pwd)/shorty-book/resume-two-video-preview-from-snapshot.mjs" "$output_folder" "$@"
 
-latest_concat=$(find "$GENERATIONS_PATH" -type f -path "*-${FRESHWEB_FOLDER}/merged/*-concat.mp4" -print | sort | tail -n 1)
+latest_concat=$(find "$output_folder/merged" -type f -name "*-concat.mp4" -print | sort | tail -n 1)
 if [ -z "$latest_concat" ]; then
-  echo "No two-scene concat found below: $GENERATIONS_PATH" >&2
+  echo "No two-scene concat found below: $output_folder" >&2
   exit 1
 fi
 
