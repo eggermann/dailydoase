@@ -2,16 +2,16 @@
 
 ## Current Goal
 
-First poster-driven Glass Kaufhaus video: photographed Kaufhaus location, separate protagonist/story context, video parts, concatenated saved output; no live camera.
+Create real Glass Kaufhaus scene images through the image-only test runner; no video and no live camera.
 
 ## Current Loop
 
-Loop: 1
-Phase: Review
+Loop: 2
+Phase: Complete
 
 ## Current Focus
 
-Review JSON-driven three-scene poster runner with local Kaufhaus location mapping and external generation failures.
+Six real Runware scene images were generated and validated in persistent folder 717.
 
 ## Assumptions
 
@@ -22,10 +22,9 @@ Review JSON-driven three-scene poster runner with local Kaufhaus location mappin
 
 ## Risks / Unknowns
 
-- API availability and generation cost: Fal balance exhausted; WAN Space config unresolved.
-- Mirelo may fail; video output must remain usable.
-- Worktree contains unrelated untracked files.
+- Visual quality: FLUX Kontext copied poster lettering and information panels more strongly than desired.
+- A future live two-round run should verify round-2 semantic advancement after Wikipedia rate limits clear.
 
 ## Next Action
 
-Next: rerun runner with JSON-derived prompts once backend is available, then verify `final.mp4`.
+Review generated scenes visually and decide whether next iteration should suppress poster typography more strongly.

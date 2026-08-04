@@ -1,6 +1,11 @@
-import { describe, expect, test } from '@jest/globals';
+import { afterEach, describe, expect, jest, test } from '@jest/globals';
 
-import { resolveLoopOutcome } from '../semantic-stream.js';
+import {
+  createSemanticStreamLoop,
+  resolveLoopOutcome,
+  resolveMaxIterations,
+  shouldScheduleNextIteration,
+} from '../semantic-stream.js';
 
 describe('resolveLoopOutcome', () => {
   test('throws when a non-polling generation returns false', () => {
@@ -21,5 +26,66 @@ describe('resolveLoopOutcome', () => {
   test('marks a polling false result as failed when retry-on-failure is disabled', () => {
     expect(resolveLoopOutcome({ success: false, pollingTime: 1000, retryOnFailure: false }))
       .toEqual({ status: 'failed', success: false });
+  });
+});
+
+describe('finite semantic-stream runs', () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  test('uses -1 as the explicit infinite iteration limit', () => {
+    expect(resolveMaxIterations({ model: { maxIterations: -1 } })).toBe(-1);
+    expect(resolveMaxIterations({ model: {} })).toBe(-1);
+  });
+
+  test('keeps the same loop alive until its finite limit is reached', () => {
+    expect(shouldScheduleNextIteration({
+      iteration: 1,
+      maxIterations: 2,
+      wait: 1000,
+      success: true,
+      retryOnFailure: false,
+    })).toBe(true);
+    expect(shouldScheduleNextIteration({
+      iteration: 2,
+      maxIterations: 2,
+      wait: 1000,
+      success: true,
+      retryOnFailure: false,
+    })).toBe(false);
+  });
+
+  test('passes the same existing word streams into every finite iteration', async () => {
+    jest.useFakeTimers();
+    const existingWordStreams = [{ currentWord: 'Raster' }];
+    const observedStreams = [];
+    const model = {
+      prompt: jest.fn().mockResolvedValue(true),
+    };
+    const config = {
+      id: 'same-stream-test',
+      words: [],
+      model: {
+        maxIterations: 2,
+        pollingTime: 10,
+        retryOnFailure: false,
+      },
+      promptFunktion: jest.fn(async (streams) => {
+        observedStreams.push(streams);
+        return `round-${observedStreams.length}`;
+      }),
+    };
+
+    const runSameStream = createSemanticStreamLoop(model, config);
+    await runSameStream(existingWordStreams);
+    await jest.advanceTimersByTimeAsync(10);
+
+    expect(observedStreams).toEqual([
+      existingWordStreams,
+      existingWordStreams,
+    ]);
+    expect(model.prompt).toHaveBeenNthCalledWith(1, 'round-1', config);
+    expect(model.prompt).toHaveBeenNthCalledWith(2, 'round-2', config);
   });
 });

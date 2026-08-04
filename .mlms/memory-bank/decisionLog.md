@@ -67,3 +67,27 @@ Status: Accepted
 Context: Four people-free 4:3 photographs document the real Kaufhaus interior where the trailer takes place. The Green Warehouse Organism image defines the protagonist, not the architecture.
 
 Decision: Rotate people-free Kaufhaus photos as local scene-context images while keeping the Green Warehouse Organism as a separate protagonist reference. Never reproduce people visible in documentary location photos. Do not use a live camera.
+
+### D-0009: Verify Images Before Video
+
+Status: Accepted
+
+Context: User needs visible generation proof before paying for or debugging WAN video generation.
+
+Decision: Run two image-only rounds through one persistent Semantic Stream. Disable WAN and Mirelo initialization, store every scene still in one shared folder, and treat decodable image files plus per-round summaries as completion evidence.
+
+### D-0010: Treat FLUX Kontext Pro as Fixed-Control Model
+
+Status: Accepted
+
+Context: Runware rejected `CFGScale`, `steps`, `negativePrompt`, and arbitrary `448×336` dimensions for `bfl:3@1`.
+
+Decision: Omit unsupported inference controls and map requested dimensions to the nearest supported FLUX Kontext Pro aspect ratio. For the Kaufhaus 4:3 test this resolves to `1184×880`.
+
+### D-0011: Precompose Protagonist Into Canonical Locations
+
+Status: Accepted
+
+Context: Supplying a full poster as secondary reference copied people, typography, and page layout. Supplying raw location plus a clean cutout still allowed FLUX Kontext to replace the Kaufhaus with a generic dark room.
+
+Decision: Maintain four canonical photographs that already combine the exact Kaufhaus view with one isolated monster. Use each combined image as the sole visual reference and apply semantic changes as localized edits only.
