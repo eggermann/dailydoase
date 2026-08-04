@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Glass Kaufhaus trailer: deterministic poster-driven run, no live camera.
-# The local Green Monster Ware Haus image is the protagonist/reference frame.
+# The local green-monster image is the protagonist/reference frame.
 
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-shorty-book-trailer-loop-001}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-0}
@@ -16,7 +16,7 @@ export FRESHWEB_USE_VISION=${FRESHWEB_USE_VISION:-1}
 # Analyse each available WAN end frame before the next scene. Missing end frames
 # keep the normal location/opening fallback, so image-only tests remain valid.
 export FRESHWEB_END_FRAME_ANALYSIS=${FRESHWEB_END_FRAME_ANALYSIS:-1}
-export FRESHWEB_CAMERA_SOURCE_LABEL=${FRESHWEB_CAMERA_SOURCE_LABEL:-Green Monster Ware Haus poster}
+export FRESHWEB_CAMERA_SOURCE_LABEL=${FRESHWEB_CAMERA_SOURCE_LABEL:-green monster reference}
 # Resolve default once so logs show a clean absolute output path without ../../../.
 if [ -z "${GENERATIONS_PATH:-}" ]; then
   GENERATIONS_PATH="$(cd "$(pwd)/../../.." && pwd)/GENRATIONS-KAUFHAUF"
@@ -79,6 +79,13 @@ export FRESHWEB_SCENE_CONTEXT_SEMANTIC_RECONSTRUCTION_PASS=${FRESHWEB_SCENE_CONT
 export FRESHWEB_END_CARD_ENABLED=${FRESHWEB_END_CARD_ENABLED:-1}
 export FRESHWEB_END_CARD_DURATION_SECONDS=${FRESHWEB_END_CARD_DURATION_SECONDS:-4}
 export FRESHWEB_END_CARD_DOSSIER_PATH=${FRESHWEB_END_CARD_DOSSIER_PATH:-$(pwd)/../../../lib/Plak-2_images/formen_der_abweichunf_datas.json}
+# Each scene boundary becomes a visible semantic collision instead of exposing
+# WAN's repeated handoff frame. A continuous forward dolly keeps the trailer's
+# overall spatial direction stable across separately generated clips.
+export FRESHWEB_COLLISION_TRANSITIONS_ENABLED=${FRESHWEB_COLLISION_TRANSITIONS_ENABLED:-1}
+export FRESHWEB_COLLISION_TRANSITION_BOUNDARY_TRIM_SECONDS=${FRESHWEB_COLLISION_TRANSITION_BOUNDARY_TRIM_SECONDS:-0.12}
+export FRESHWEB_COLLISION_TRANSITION_DURATION_SECONDS=${FRESHWEB_COLLISION_TRANSITION_DURATION_SECONDS:-0.08}
+export FRESHWEB_GLOBAL_FORWARD_DOLLY_ENABLED=${FRESHWEB_GLOBAL_FORWARD_DOLLY_ENABLED:-1}
 export FRESHWEB_SCENE_CONTEXT_IMAGE_PATHS="${FRESHWEB_SCENE_CONTEXT_IMAGE_PATHS:-$(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-mirrored-columns.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg | $(pwd)/../../../lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg}"
 unset FRESHWEB_SCENE_CONTEXT_IMAGE_URLS
 unset FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL
@@ -87,7 +94,9 @@ unset FRESHWEB_SCENE_CONTEXT_IMAGE_API_URL
 # Ordered story anchors. Each cue must change the visible action or room pressure.
 export FRESHWEB_WORDS="${FRESHWEB_WORDS:-1983,de | Kaufhaus,de | Kunstausstellung,de}"
 # Scene count and lengths come from Taktmuster unless explicitly supplied by
-# the caller. Scene count is always the current metric accent plus two scenes.
+# the caller. WAN accepts full seconds only, so this is a literal 1+ pattern:
+# no decimal scaling, no later duration padding, and every planned beat is the
+# exact duration requested from WAN.
 export FRESHWEB_USE_TAKTMUSTER_LENGTHS=${FRESHWEB_USE_TAKTMUSTER_LENGTHS:-1}
 unset FRESHWEB_SCENE_COUNT_INITIAL_PATTERN
 export FRESHWEB_SCENE_COUNT_TAKT_COUNT=${FRESHWEB_SCENE_COUNT_TAKT_COUNT:-2}
@@ -95,14 +104,17 @@ export FRESHWEB_SCENE_COUNT_TAKT_ZAEHLER=${FRESHWEB_SCENE_COUNT_TAKT_ZAEHLER:-4}
 export FRESHWEB_SCENE_COUNT_TAKT_NENNER=${FRESHWEB_SCENE_COUNT_TAKT_NENNER:-4}
 export FRESHWEB_SCENE_COUNT_TAKT_TYPE=${FRESHWEB_SCENE_COUNT_TAKT_TYPE:-balanced}
 export FRESHWEB_SCENE_COUNT_BIAS=${FRESHWEB_SCENE_COUNT_BIAS:-2}
-export FRESHWEB_SCENE_LENGTH_TAKT=${FRESHWEB_SCENE_LENGTH_TAKT:-3}
+export FRESHWEB_SCENE_LENGTH_TAKT=${FRESHWEB_SCENE_LENGTH_TAKT:-1}
 export FRESHWEB_SCENE_LENGTH_TAKT_TYPE=${FRESHWEB_SCENE_LENGTH_TAKT_TYPE:-balanced}
-export FRESHWEB_SCENE_LENGTH_MULTIPLIER=${FRESHWEB_SCENE_LENGTH_MULTIPLIER:-0.4}
-export FRESHWEB_SCENE_LENGTH_BIAS=${FRESHWEB_SCENE_LENGTH_BIAS:-1.6}
+export FRESHWEB_SCENE_LENGTH_MULTIPLIER=${FRESHWEB_SCENE_LENGTH_MULTIPLIER:-1}
+export FRESHWEB_SCENE_LENGTH_BIAS=${FRESHWEB_SCENE_LENGTH_BIAS:-1}
 export FRESHWEB_MIN_SCENE_DURATION_SECONDS=${FRESHWEB_MIN_SCENE_DURATION_SECONDS:-2}
 export FRESHWEB_SCENE_PLAN_TEMPERATURE=${FRESHWEB_SCENE_PLAN_TEMPERATURE:-0.35}
 export FRESHWEB_SCENE_PLAN_TOP_P=${FRESHWEB_SCENE_PLAN_TOP_P:-0.9}
-export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=${FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR:-wanCinematicSurreal}
+# Keep the preserved exhibition-animal/fries story behavior: this flavor tells
+# the planner that semantic words may generate strong surreal scene events. WAN
+# remains the video model; the name only selects the story-planning grammar.
+export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=${FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR:-ltxTrippy}
 
 # Let the scene planner choose how each WAN clip receives its start frame.
 # Set this to "legacy" to restore the earlier frameSource/freshImage behavior.
@@ -137,17 +149,17 @@ fi
 export FRESHWEB_OPENING_PROMPT
 
 if [ -z "${FRESHWEB_SCENE_VISUAL_DIRECTION:-}" ]; then
-  FRESHWEB_SCENE_VISUAL_DIRECTION="Build a compact BRD television trailer from 1989 inside the photographed old Kaufhaus in Germany. Use the requested scene count and give every scene a distinct dramatic function. Keep the isolated green monster as the primary protagonist and preserve its face, glowing eyes, plant-like anatomy, hanging lamps, and dark green industrial identity. Every scene must preserve the supplied Kaufhaus photograph as its visible architecture and spatial composition; never reproduce a poster, infographic, exhibition panel, border, or page layout. Compose every scene as a semantic baton collision: carry the previous fresh term forward as semantic inheritance, collide it with the current stream's fresh getNext term, and make that conflict visibly infect bodies, objects, light, behavior, or architecture without explanation. $FRESHWEB_PEOPLE_DIRECTION Scenes must be causally linked, visually concrete, strange but readable. Every image and motion prompt must specify subject, surreal event, mood, lighting, color, texture, composition, lens or framing, physical motion, and one motivated virtual camera move. No invented modern objects, subtitles, readable lettering, labels, callout lines, or typography."
+  FRESHWEB_SCENE_VISUAL_DIRECTION="Build a compact BRD television trailer from 1989 inside the photographed old Kaufhaus in Germany. Use the requested scene count and give every scene a distinct dramatic function. Keep the isolated green monster as the primary protagonist and preserve its face, glowing eyes, plant-like anatomy, hanging lamps, and dark green industrial identity. Every scene must preserve the supplied Kaufhaus photograph as its visible architecture and spatial composition; never reproduce a poster, infographic, exhibition panel, border, or page layout. Compose every scene as a semantic baton collision: carry the previous fresh term forward as semantic inheritance, collide it with the current stream's fresh getNext term, and make that conflict visibly infect bodies, objects, light, behavior, or architecture without explanation. $FRESHWEB_PEOPLE_DIRECTION Scenes must be causally linked, visually concrete, strange but readable. Every image and motion prompt must specify subject, surreal event, mood, lighting, color, texture, composition, lens or framing, physical motion, and one motivated virtual camera move. Use one global camera grammar: every camera move presses forward deeper into the Kaufhaus; never pull backward, reverse direction, or counter-pan. No invented modern objects, subtitles, readable lettering, labels, callout lines, or typography."
 fi
 export FRESHWEB_SCENE_VISUAL_DIRECTION
 
 if [ -z "${FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT:-}" ]; then
-  FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="Create the requested number of short scene plans for a Green Monster trailer grounded in photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as a composition or background. The exhibition dossier names artists including Alex Tennigkeit, Nadine Deja, Matthias Hesselbacher, Ben Cottrell, Mariola Groener, Tania Elstermeyer, Dome Wood, Matthias Dornfeld, Sebastian Hammwöhner, Franziska Hufnagel, Nouchka Wolf, Stefan Kaminski, Kerstin Podbiel, Tuli Mekondjo, John Davies, Joe Neave, Catherine Lorent, Dominik Eggermann, Alex Weiss, Gabriel Vormstein, Kurt von Bley, and Charlotte Hiltmann. Use those names only as conceptual traces of a collective creature; do not depict named artists as identifiable portraits or invent biographies. Build a coherent 1989 BRD television trailer in the supplied old Kaufhaus photographs. $FRESHWEB_PEOPLE_DIRECTION Each source cue labels a carried Anchor and a fresh getNext Collision. Keep these roles distinct: the Collision becomes the next scene's Anchor. Do not reconcile, explain, or summarize the contradiction; turn it into a precise surreal physical event. Choose startFrameStrategy from locationReanchor, driftCorrectedLastFrame, or rawLastFrame according to the visible transition and explain it briefly in startFrameReason. Every stillPrompt must be a complete FLUX image prompt containing subject, frozen action, semantic collision, photographed location, era, mood, lighting, palette, texture, composition, lens and framing. Every singleImagePrompt must be a complete WAN image-to-video prompt containing starting state, temporal transformation, subject motion, environmental motion, atmosphere, changing light, composition continuity, and one motivated virtual camera move. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only."
+  FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="Create the requested number of short scene plans for a green-monster trailer grounded in photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as a composition or background. Build a coherent 1989 BRD television trailer in the supplied old Kaufhaus photographs. $FRESHWEB_PEOPLE_DIRECTION Each source cue labels a carried Anchor and a fresh getNext Collision. Let the semantic stream compose the story: Anchor is the memory or situation the monster carries; Collision is the event that changes its intention, behavior, relationship to the room, and the next scene's consequence. Do not literalize words as compulsory props or labels, and do not reduce them to lighting or mood. Infer one specific, surprising causal scene event from their friction: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms the Kaufhaus because of the collision. The next scene must inherit that consequence, not merely repeat the words. For every scene return three linked story fields: storyCause (why this collision changes the story), monsterIntent (what the monster decides or tries to do), and roomConsequence (the visible aftermath inherited by the next scene). Those are story sentences, not a glossary or literal list of props. Every stillPrompt must capture this decisive story moment; every singleImagePrompt must show the event beginning, changing, and leaving its room consequence. All camera moves must push forward deeper into the same Kaufhaus; never pull back, reverse, or counter-pan. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only."
 fi
 export FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT
 
 if [ -z "${FRESHWEB_VISION_PROMPT:-}" ]; then
-  FRESHWEB_VISION_PROMPT="Describe the visible Green Monster Ware Haus poster as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat poster lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements."
+  FRESHWEB_VISION_PROMPT="Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements."
 fi
 export FRESHWEB_VISION_PROMPT
 
