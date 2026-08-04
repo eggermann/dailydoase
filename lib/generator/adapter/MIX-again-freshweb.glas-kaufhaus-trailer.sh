@@ -3,8 +3,18 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-# Glass Kaufhaus trailer: deterministic poster-driven run, no live camera.
-# The local green-monster image is the protagonist/reference frame.
+# GLAS-KAUFHAUS TRAILER — CONTROL PANEL
+#
+# Change this file to change the trailer. The JavaScript only executes these
+# values; it does not contain a second preset.
+#
+# 1. STORY          words, people, monster, Kaufhaus and prompt model
+# 2. RHYTHM          how many scenes and how long every scene lasts
+# 3. IMAGE / VIDEO   image size, WAN, start frames, drift repair and audio
+
+# -----------------------------------------------------------------------------
+# 1. STORY — where the trailer is saved and what it is about
+# -----------------------------------------------------------------------------
 
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-shorty-book-trailer-loop-001}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-0}
@@ -31,7 +41,7 @@ export RUNWARE_DEBUG=${RUNWARE_DEBUG:-1}
 export FLUX_DEBUG=${FLUX_DEBUG:-1}
 export MIRELO_DEBUG=${MIRELO_DEBUG:-1}
 
-# Prompt model A is the stable production default for vision and scene planning.
+# Prompt model A is the normal production model for vision and scene planning.
 export FRESHWEB_PROMPT_MODEL_A=${FRESHWEB_PROMPT_MODEL_A:-gpt-4.1-mini-2025-04-14}
 # Prompt model B is parked for a later quality comparison.
 export FRESHWEB_PROMPT_MODEL_B=${FRESHWEB_PROMPT_MODEL_B:-gpt-5-mini-2025-08-07}
@@ -59,15 +69,15 @@ export OPENAI_VISION_MODEL=${OPENAI_VISION_MODEL:-$FRESHWEB_SELECTED_PROMPT_MODE
 # Pin vision to OpenAI so hidden LM Studio, Hugging Face, or FAL fallbacks cannot change results.
 export FRESHWEB_VISION_PROVIDERS=${FRESHWEB_VISION_PROVIDERS:-openai}
 
-# The realistic monster image supplies identity and material only.
-# Every scene constructs a fresh incarnation from its Semantic Stream collision.
+# The realistic monster supplies identity and material only.
+# Semantic Stream collisions construct its new scene incarnation every time.
 export FRESHWEB_CAMERA_IMAGE_PATH=${FRESHWEB_CAMERA_IMAGE_PATH:-$(pwd)/../../../lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png}
 unset FRESHWEB_CAMERA_IMAGE_URL
 unset FRESHWEB_CAMERA_IMAGE_URLS
 unset FRESHWEB_OPENING_IMAGE_URL
 unset FRESHWEB_OPENING_IMAGE_URLS
 
-# Kaufhaus photos define the fixed scene geometry.
+# Kaufhaus photos define the fixed geometry of every scene.
 export FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED=${FRESHWEB_SCENE_CONTEXT_IMAGE_MAPPING_ENABLED:-1}
 export FRESHWEB_SCENE_CONTEXT_LOCK_ACTOR_COUNT=${FRESHWEB_SCENE_CONTEXT_LOCK_ACTOR_COUNT:-0}
 export FRESHWEB_SCENE_CONTEXT_PROTAGONIST_REFERENCE_MODE=${FRESHWEB_SCENE_CONTEXT_PROTAGONIST_REFERENCE_MODE:-image}
@@ -91,12 +101,19 @@ unset FRESHWEB_SCENE_CONTEXT_IMAGE_URLS
 unset FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL
 unset FRESHWEB_SCENE_CONTEXT_IMAGE_API_URL
 
-# Ordered story anchors. Each cue must change the visible action or room pressure.
+# Ordered story anchors. Change these three streams to change the story.
 export FRESHWEB_WORDS="${FRESHWEB_WORDS:-1983,de | Kaufhaus,de | Kunstausstellung,de}"
-# Scene count and lengths come from Taktmuster unless explicitly supplied by
-# the caller. WAN accepts full seconds only, so this is a literal 1+ pattern:
-# no decimal scaling, no later duration padding, and every planned beat is the
-# exact duration requested from WAN.
+
+# -----------------------------------------------------------------------------
+# 2. RHYTHM — scene count and duration
+# -----------------------------------------------------------------------------
+#
+# Leave these values together. The first group makes the number of scenes;
+# the second group gives their durations. WAN only accepts whole seconds.
+# The count taktmuster decides how many scenes the word stream grows into.
+# The length taktmuster decides the per-scene beat pattern.
+# WAN accepts full seconds only, so the preset stays on literal second values:
+# no decimal scaling, no hidden padding, and no later surprise stretch.
 export FRESHWEB_USE_TAKTMUSTER_LENGTHS=${FRESHWEB_USE_TAKTMUSTER_LENGTHS:-1}
 unset FRESHWEB_SCENE_COUNT_INITIAL_PATTERN
 export FRESHWEB_SCENE_COUNT_TAKT_COUNT=${FRESHWEB_SCENE_COUNT_TAKT_COUNT:-2}
@@ -115,6 +132,15 @@ export FRESHWEB_SCENE_PLAN_TOP_P=${FRESHWEB_SCENE_PLAN_TOP_P:-0.9}
 # the planner that semantic words may generate strong surreal scene events. WAN
 # remains the video model; the name only selects the story-planning grammar.
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=${FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR:-ltxTrippy}
+
+# -----------------------------------------------------------------------------
+# 3. IMAGE / VIDEO / AUDIO — visual production settings
+# -----------------------------------------------------------------------------
+#
+# Normally leave this block as-is. The useful external switches are:
+# FRESHWEB_WAN_AUDIO_ENABLED=1         WAN native sound (default: off)
+# FRESHWEB_PROMPT_MODEL_AB_TEST_ENABLED=1  compare prompt model A/B (default: off)
+# FRESHWEB_ENABLE_DRIFT_CORRECTION=0   disable selective image repair
 
 # Let the scene planner choose how each WAN clip receives its start frame.
 # Set this to "legacy" to restore the earlier frameSource/freshImage behavior.
@@ -149,12 +175,12 @@ fi
 export FRESHWEB_OPENING_PROMPT
 
 if [ -z "${FRESHWEB_SCENE_VISUAL_DIRECTION:-}" ]; then
-  FRESHWEB_SCENE_VISUAL_DIRECTION="Build a compact BRD television trailer from 1989 inside the photographed old Kaufhaus in Germany. Use the requested scene count and give every scene a distinct dramatic function. Keep the isolated green monster as the primary protagonist and preserve its face, glowing eyes, plant-like anatomy, hanging lamps, and dark green industrial identity. Every scene must preserve the supplied Kaufhaus photograph as its visible architecture and spatial composition; never reproduce a poster, infographic, exhibition panel, border, or page layout. Compose every scene as a semantic baton collision: carry the previous fresh term forward as semantic inheritance, collide it with the current stream's fresh getNext term, and make that conflict visibly infect bodies, objects, light, behavior, or architecture without explanation. $FRESHWEB_PEOPLE_DIRECTION Scenes must be causally linked, visually concrete, strange but readable. Every image and motion prompt must specify subject, surreal event, mood, lighting, color, texture, composition, lens or framing, physical motion, and one motivated virtual camera move. Use one global camera grammar: every camera move presses forward deeper into the Kaufhaus; never pull backward, reverse direction, or counter-pan. No invented modern objects, subtitles, readable lettering, labels, callout lines, or typography."
+  FRESHWEB_SCENE_VISUAL_DIRECTION="Build a compact BRD television trailer from 1989 inside the photographed old Kaufhaus in Germany. Use the requested scene count and give every scene a distinct dramatic function. Keep the isolated green monster as primary protagonist through its choices, preserving its face, glowing eyes, plant-like anatomy, hanging lamps, and dark green industrial identity whenever it is visible. It must not become a permanent large foreground mascot: vary its presence between distant figure, partial body, reflection, occluded trace, and deliberate off-screen consequence. Every scene must preserve the supplied Kaufhaus photograph as its visible architecture and spatial composition; never reproduce a poster, infographic, exhibition panel, border, or page layout. Compose every scene as a semantic baton collision: carry the previous fresh term forward as semantic inheritance, collide it with the current stream's fresh getNext term, and let the friction give the monster an intelligent new tactic with a target and a visible room consequence. $FRESHWEB_PEOPLE_DIRECTION Scenes must be causally linked, visually concrete, strange but readable. Every image and motion prompt must specify subject, surreal event, mood, lighting, color, texture, composition, lens or framing, physical motion, and one motivated virtual camera move. Change viewpoint and scale with the tactic: use architecture, objects, thresholds, reflections, or human witness when they reveal more of the room's story than a monster close-up. Use one global camera grammar: every camera move presses forward deeper into the Kaufhaus; never pull backward, reverse direction, or counter-pan. No invented modern objects, subtitles, readable lettering, labels, callout lines, or typography."
 fi
 export FRESHWEB_SCENE_VISUAL_DIRECTION
 
 if [ -z "${FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT:-}" ]; then
-  FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="Create the requested number of short scene plans for a green-monster trailer grounded in photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as a composition or background. Build a coherent 1989 BRD television trailer in the supplied old Kaufhaus photographs. $FRESHWEB_PEOPLE_DIRECTION Each source cue labels a carried Anchor and a fresh getNext Collision. Let the semantic stream compose the story: Anchor is the memory or situation the monster carries; Collision is the event that changes its intention, behavior, relationship to the room, and the next scene's consequence. Do not literalize words as compulsory props or labels, and do not reduce them to lighting or mood. Infer one specific, surprising causal scene event from their friction: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms the Kaufhaus because of the collision. The next scene must inherit that consequence, not merely repeat the words. For every scene return three linked story fields: storyCause (why this collision changes the story), monsterIntent (what the monster decides or tries to do), and roomConsequence (the visible aftermath inherited by the next scene). Those are story sentences, not a glossary or literal list of props. Every stillPrompt must capture this decisive story moment; every singleImagePrompt must show the event beginning, changing, and leaving its room consequence. All camera moves must push forward deeper into the same Kaufhaus; never pull back, reverse, or counter-pan. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only."
+  FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="Create the requested number of short scene plans for a green-monster trailer grounded in photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as a composition or background. Build a coherent 1989 BRD television trailer in the supplied old Kaufhaus photographs. $FRESHWEB_PEOPLE_DIRECTION Each source cue labels a carried Anchor and a fresh getNext Collision. Let the semantic stream compose the story: Anchor is the memory or situation the monster carries; Collision is the event that changes its intention, behavior, relationship to the room, and the next scene's consequence. Do not literalize words as compulsory props or labels, and do not reduce them to lighting or mood. Infer one specific, surprising causal scene event from their friction: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms the Kaufhaus because of the collision. The next scene must inherit that consequence, not merely repeat the words. For every scene return six linked story fields: storyCause (why this collision changes the story), monsterIntent (what the monster decides or tries to do), roomConsequence (the visible aftermath inherited by the next scene), semanticAction (the monster's clever tactic, target, and visible result), monsterPresence (how the monster is seen or deliberately left unseen), and viewpoint (the in-world vantage that best exposes the tactic). These are story sentences, not a glossary or literal list of props. The monster is protagonist by agency, never a permanent large advertising mascot; vary its scale and presence from scene to scene. Every stillPrompt must capture the decisive action with the planned monster presence and viewpoint; every singleImagePrompt must show the tactic beginning, changing, and leaving its room consequence. All camera moves must push forward deeper into the same Kaufhaus; never pull back, reverse, or counter-pan. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only."
 fi
 export FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT
 
