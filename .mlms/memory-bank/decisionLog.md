@@ -91,3 +91,39 @@ Status: Accepted
 Context: Supplying a full poster as secondary reference copied people, typography, and page layout. Supplying raw location plus a clean cutout still allowed FLUX Kontext to replace the Kaufhaus with a generic dark room.
 
 Decision: Maintain four canonical photographs that already combine the exact Kaufhaus view with one isolated monster. Use each combined image as the sole visual reference and apply semantic changes as localized edits only.
+
+### D-0012: Use Saved Semantic Cues for the Paid Two-Video Probe
+
+Status: Accepted
+
+Context: The normal Semantic Stream received Wikipedia `429` before it reached any paid media request. Folder 717 already contains an accepted, real scene plan and its original Semantic Anchor/Collision cues.
+
+Decision: The minimal two-video probe reuses the first two saved scenes from folder 717. It makes no fresh Semantic Stream request, but preserves the original `1983 → NATO-Doppelbeschluss → Betriebsform` collision chain.
+
+Consequence: The probe tests FLUX/WAN visual continuity and concat reliability, not fresh Wikipedia availability.
+
+### D-0013: Whole-Second 1+ WAN Rhythm
+
+Status: Accepted
+
+Context: Runware WAN accepts whole-second durations. Fractional scene plans required duration repair and could expose repeated final frames.
+
+Decision: Use the direct `1+` Taktmuster (`5 → 2 → 3 → 2 …`) with no fractional multiplier.
+
+### D-0014: Collision Cuts and Forward Camera Grammar
+
+Status: Accepted
+
+Context: Raw concatenation visibly duplicated chained last frames and individual WAN camera moves could conflict.
+
+Decision: Remove held boundary frames, insert a short fade-to-black collision, and apply a continuous forward dolly. Require forward-only camera movement in future scene prompts.
+
+### D-0015: Structured Semantic Cues Are Canonical
+
+Status: Accepted
+
+Context: Free-form cue strings force downstream code to recover semantic anchors and collisions with regular expressions.
+
+Decision: Consume each stream step once into a structured cue record, then derive the legacy string from that record. Pass both forms downstream.
+
+Consequences: Validation and repair use lossless structured values; legacy callers can continue consuming cue strings.

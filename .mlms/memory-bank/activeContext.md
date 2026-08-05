@@ -2,16 +2,16 @@
 
 ## Current Goal
 
-Create real Glass Kaufhaus scene images through the image-only test runner; no video and no live camera.
+Make the Semantic Stream the mandatory causal story engine from `getNext()` through final FLUX/WAN prompts and end-frame continuity.
 
 ## Current Loop
 
-Loop: 2
-Phase: Complete
+Loop: 1
+Phase: Review
 
 ## Current Focus
 
-Six real Runware scene images were generated and validated in persistent folder 717.
+Mandatory semantic story-engine code is implemented and locally verified. Live image-only run `724-semantic-story-engine-image-only-test` stopped during Semantic Stream article setup before planner or FLUX execution.
 
 ## Assumptions
 
@@ -22,9 +22,10 @@ Six real Runware scene images were generated and validated in persistent folder 
 
 ## Risks / Unknowns
 
-- Visual quality: FLUX Kontext copied poster lettering and information panels more strongly than desired.
-- A future live two-round run should verify round-2 semantic advancement after Wikipedia rate limits clear.
+- Live Semantic Stream stopped after article setup logs for `1983` and `Kaufhaus`; run 724 contains only `info.json`.
+- Full Jest has one unrelated existing failure in self-contained `camera-prompt-chain.mock-video.test.js`; touched Shorty-Book suite is green.
+- Existing unrelated `lib/generator/adapter/trailer-context/output-prompt.txt` remains untouched.
 
 ## Next Action
 
-Review generated scenes visually and decide whether next iteration should suppress poster typography more strongly.
+Retry two-round image-only integration when Semantic Stream article access is available, then run cheap two-clip continuity preview.
