@@ -586,3 +586,66 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 
 - The new prompt wording propagated into the planner and image prompts.
 - The generated output now has a more phone-shot, imperfect capture feel.
+
+## Expanded Semantic Stream Rerender
+
+### What Changed
+
+- Added `terror` and `Konsum` to the active semantic stream.
+- Re-ran the trailer with the same fixed Kaufhaus anchor and identity-only protagonist rule.
+
+### Result
+
+- New trailer output: `GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785933457523-collision-cut.mp4`.
+- Mirelo audio fallback failed again, so the trailer is silent.
+
+### Verification Result
+
+- The planner absorbed the new words and shifted scene content accordingly.
+- The output remains grounded in the location anchor and mobile-device visual style.
+
+## Scene-Focus Routing Comparison
+
+### What Changed
+
+- Added a required compact-plan focus: `location`, `objects`, `people`, `trace`, `monster`, or `mixed`.
+- Routed FLUX context references and prompt construction from that focus.
+- Removed monster identity language from environment-focused production prompts.
+
+### Result
+
+- Two separate six-scene trailers completed with multiple monster-free scenes.
+- Outputs: `744-scene-focus-routing-trailer-001` and `745-scene-focus-routing-trailer-002`.
+- Both visual cuts are valid; Mirelo's final-audio upload failed, so they remain silent.
+
+### Verification Result
+
+- Focus-routing tests, compact-plan validation tests, generator tests, and the webpack production build pass.
+- The two plan distributions include environment, object, people, trace, monster, and mixed focus states.
+
+## Two-Round Monster Continuity Trailer — Halted Run
+
+### What Changed
+
+- Started a fresh two-iteration trailer render from `Kaufhaus,de | Fleisch,de | LSD,de | people,en | terror,en | Konsum,de`.
+- Generated partial stills and WAN clips through scene 4.
+- Stopped the active renderer when the user asked to stop the iteration.
+
+### Acceptance Criteria Result
+
+- [ ] Two merged trailers exist.
+- [ ] Both iterations completed.
+- [x] The active render was stopped on request.
+
+### Verification Result
+
+- Process `36355` was terminated successfully.
+- Partial artifacts remain in `GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers`.
+
+### Issues / Gaps
+
+- No merged trailer exists for this halted run.
+
+### User Demo Notes
+
+- Resume requires a fresh render start.

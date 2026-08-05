@@ -64,6 +64,11 @@
 
 ## Next
 
+- Review the expanded trailer output and decide whether another rerender or a commit is needed.
+- Keep Mirelo video-upload correction as a separate follow-up if sound is needed.
+
+## Next
+
 - Decide whether to commit the memory-bank update for this trailer loop.
 - Keep Mirelo video-upload correction as a separate follow-up if sound is needed.
 
@@ -123,3 +128,39 @@
 - [x] The final visual trailer decodes as H.264, 448x336, 17.428571 seconds.
 - [ ] Mirelo/Runware final-audio fallback rejected its local video input; the visual cut is silent.
 - Output: `GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/merged/1785929841774-collision-cut.mp4`.
+
+## Scene-Focus Routing Comparison
+
+### Acceptance Result
+
+- [x] Compact plans require a valid `sceneFocus`; invalid plans are repaired once as a whole.
+- [x] Focus-free FLUX calls omit the monster reference; focus-visible calls retain it.
+- [x] Two fresh six-scene trailers rendered from `kaufhaus`, `fleisch`, `LSD`, `people`, `terror`, and `Konsum`.
+- [x] Both collision cuts decode as H.264, 448x336, 17.428571 seconds.
+- [ ] Audio: Mirelo again rejected the local final-video input; both visual cuts are silent.
+
+### Output
+
+- Trailer 1: `GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/merged/1785933988274-collision-cut.mp4`
+- Trailer 2: `GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/merged/1785934351648-collision-cut.mp4`
+
+## Two-Round Monster Continuity Trailer
+
+- Started a fresh two-iteration render in `GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers`.
+- Stopped the active render at the user’s request before any merged trailer was produced.
+- Partial scene assets were written through scene 4, but the run remains incomplete.
+- Hardened monster continuity: visible monster scenes always attach the canonical complete Kaufhaus-monster image; no reference means an explicit render error instead of an invented green creature.
+- Added monster-entry pipeline v2: fresh canonical FLUX is mandatory for visible monster scenes, paid providers receive a monster-free safety assertion, old unversioned preview frames cannot resume, and focused test suite passes (105 tests).
+
+## Canonical Monster Entry v2 Render Attempt
+
+- Started one fresh iteration in `GENRATIONS-KAUFHAUF/754-754-canonical-monster-entry-v2-iteration-001/` with the Semantic Stream `Kaufhaus`, `Fleisch`, `LSD`, `people`, `terror`, and `Konsum`.
+- The planner selected a monster-free location opening. The rendered opening and first WAN scene used the strict monster-free prompt with no protagonist reference.
+- The run stopped at scene 2 after a WAN provider fetch failure. No merged trailer exists; the specific failed shell and Node processes were terminated.
+
+## Taktmuster-Planned Canonical Monster Entry v2 Trailer
+
+- The scene-count contract now derives its exact `minItems` and `maxItems` directly from the active Taktmuster, so the structured planner cannot omit a Semantic Stream transition.
+- One fresh iteration completed with six Taktmuster beats from `Kaufhaus`, `Fleisch`, `LSD`, `people`, `terror`, and `Konsum`.
+- Merged silent trailer: `GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/merged/1785942452919-collision-cut.mp4` (H.264, 448x336, 17.428571s).
+- Mirelo and Runware final-audio fallback failed, so the visual trailer is intentionally silent. The one-iteration renderer processes were stopped after the merge.

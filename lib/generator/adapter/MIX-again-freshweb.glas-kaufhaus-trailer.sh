@@ -17,7 +17,12 @@ cd "$(dirname "$0")"
 # -----------------------------------------------------------------------------
 
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-shorty-book-trailer-loop-001}
-export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-0}
+# A non-zero poll interval keeps one Semantic Stream process generating the
+# next trailer from the preceding trailer's final frame.
+export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-5000}
+# Leave empty for an endless stream. Set 2, for example, to stop after two
+# complete trailer iterations in the same chained run.
+export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-}
 export VIDEO_MODE_PRESET=${VIDEO_MODE_PRESET:-singleImageOnly}
 export FRESHWEB_MODE=${FRESHWEB_MODE:-reference-image-actor}
 export FRESHWEB_SOURCE_CUE_MODE=${FRESHWEB_SOURCE_CUE_MODE:-collision}
@@ -71,9 +76,15 @@ export FRESHWEB_SCENE_PLAN_MODEL=${FRESHWEB_SCENE_PLAN_MODEL:-$FRESHWEB_PROMPT_M
 # Pin vision to OpenAI so hidden LM Studio, Hugging Face, or FAL fallbacks cannot change results.
 export FRESHWEB_VISION_PROVIDERS=${FRESHWEB_VISION_PROVIDERS:-openai}
 
-# The realistic monster supplies identity and material only.
-# Semantic Stream collisions construct its new scene incarnation every time.
+# The canonical image defines one immutable protagonist identity. Semantic Stream
+# collisions may change pose, action and interaction, never species or identity.
 export FRESHWEB_CAMERA_IMAGE_PATH=${FRESHWEB_CAMERA_IMAGE_PATH:-$(pwd)/../../../lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png}
+# Every visible-monster scene uses this complete Kaufhaus-monster reference.
+# A later WAN end frame is only fallback if this canonical asset is unavailable.
+export FRESHWEB_MONSTER_CONTINUITY_ANCHOR_PATH=${FRESHWEB_MONSTER_CONTINUITY_ANCHOR_PATH:-$(pwd)/../../../lib/Plak-2_images/kaufhaus-location-with-monster/location-central-hall-monster.png}
+# Safest identity mode: every visible monster starts from fresh FLUX with the
+# canonical original reference. WAN only animates the already visible subject.
+export FRESHWEB_MONSTER_VISIBLE_ALWAYS_FRESH=${FRESHWEB_MONSTER_VISIBLE_ALWAYS_FRESH:-1}
 unset FRESHWEB_CAMERA_IMAGE_URL
 unset FRESHWEB_CAMERA_IMAGE_URLS
 unset FRESHWEB_OPENING_IMAGE_URL
@@ -172,22 +183,22 @@ fi
 export FRESHWEB_PEOPLE_DIRECTION
 
 if [ -z "${FRESHWEB_OPENING_PROMPT:-}" ]; then
-  FRESHWEB_OPENING_PROMPT="Use the monster reference image only for the protagonist's identity, face, and body language. Let the semantic stream and the Kaufhaus context images decide the room, atmosphere, objects, and scene events. Make the result feel like realistic mobile-device footage: handheld, slightly imperfect, natural exposure shifts, autofocus breathing, mild compression, and no polished studio gloss. No readable text and no modern branding."
+  FRESHWEB_OPENING_PROMPT="Open inside the supplied real Kaufhaus as if one precise unexplained event has already begun. Let the first planned scene decide whether the monster is visible, implied or absent. Establish the location and one readable Semantic Stream change. No readable text or modern branding."
 fi
 export FRESHWEB_OPENING_PROMPT
 
 if [ -z "${FRESHWEB_SCENE_VISUAL_DIRECTION:-}" ]; then
-  FRESHWEB_SCENE_VISUAL_DIRECTION="Build a compact BRD television trailer from 1989 inside the supplied photographed Kaufhaus in Germany, but render it with the believable texture of a handheld mobile-device recording: candid framing, slight shake, autofocus breathing, natural exposure swings, and modest compression artifacts. The monster image is the identity anchor only: preserve the protagonist's face, body language, and creature continuity, but do not copy its background, palette, props, or set design into the scenes. Let the Kaufhaus photos hold the physical location while the semantic stream's fresh getNext terms decide the room emphasis, objects, atmosphere, action, and camera movement. The result must remain immediately recognizable as this Kaufhaus, never a generic warehouse, fantasy interior, or globally restyled set. The isolated monster should stay the main protagonist through its choices, but its presence may be distant, partial, reflected, occluded, or off-screen when the semantic collision calls for it. Compose every scene from its semantic baton collision: carry the previous fresh term forward, collide it with the current stream's fresh getNext term, and derive the monster's intention, physical tactic, local surreal mutation, viewpoint, subject motion, room response, and camera movement from that exact friction. Confine impossible transformations to the protagonist, semantically justified people, movable objects, light, reflections, shadows, and a local architectural detail; never dissolve or replace the whole location. $FRESHWEB_PEOPLE_DIRECTION Scenes must be causally linked, visually concrete, strange but readable. Choose one camera behavior per scene only after deciding what the collision makes the protagonist do. The camera may hold, pan, tilt, track sideways, arc, push, pull back, rise, descend, or change focus when that action best reveals the semantic event. Avoid repeating the same camera behavior in adjacent scenes and do not impose a global travel direction. Every image and motion prompt must specify subject, surreal event, mood, lighting, color, texture, composition, lens or framing, physical motion, and the motivated camera behavior. No invented modern objects, subtitles, readable lettering, labels, callout lines, or typography."
+  FRESHWEB_SCENE_VISUAL_DIRECTION="Keep the supplied Kaufhaus recognizable as the same real interior, but allow each Semantic Stream collision to change how its architecture, circulation, objects, light, reflections, people or local space behave. The monster is a recurring protagonist, not a mandatory subject. Do not show it in location, objects, people or trace-focused scenes. Preserve monster identity only when it is visible. Render it as a weathered practical sculpture physically filmed in the Kaufhaus, never as an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Keep events concrete, cinematic, strange and physically readable. No readable text or logos."
 fi
 export FRESHWEB_SCENE_VISUAL_DIRECTION
 
 if [ -z "${FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT:-}" ]; then
-  FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="Create the requested number of short scene plans for a green-monster trailer grounded in supplied photographed Kaufhaus interiors, and make the final result feel like it was filmed on a mobile device: handheld, candid, slightly shaky, imperfectly exposed, and visually honest. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, face, body language, and motion vocabulary, never as composition, background, location, or set design. Treat each Kaufhaus photograph as the physical location source. In every stillPrompt preserve its exact viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least eighty percent of the room; the location must remain immediately recognizable, not become a generic warehouse or fantasy set. $FRESHWEB_PEOPLE_DIRECTION Each source cue labels a carried Anchor and fresh getNext Collision. Let that collision compose every variable part of the scene: storyCause, monsterIntent, semanticAction, local roomConsequence, monsterPresence, viewpoint, motionCue, cameraCue, stillPrompt, and singleImagePrompt. Do not add a generic trailer action, generic warehouse atmosphere, or default camera move independent of the words. Infer one specific surprising causal event: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms something because of the collision. Keep surreal mutation local to protagonist, semantically justified people, movable objects, light, reflections, shadows, or one nearby architectural detail; never replace or dissolve the whole Kaufhaus. The next scene inherits the visible consequence, not merely the terms. The monster is protagonist by agency, never a permanent large advertising mascot; vary scale and presence. Select viewpoint and cameraCue only after semanticAction: use hold, pan, tilt, sideways track, arc, push, pullback, rise, descent, or focus shift according to what best reveals that action. Do not default to forward movement and do not repeat the same dominant camera behavior in adjacent scenes. Every stillPrompt captures the decisive action inside the recognizable location. Every singleImagePrompt shows tactic beginning, changing, and leaving its local consequence, including the chosen cameraCue. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only."
+  FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT="Create a coherent sequence of short cinematic scenes inside the supplied Kaufhaus. Each scene receives an inherited Semantic Anchor and a fresh Semantic Collision. Interpret their friction freely and turn it into one specific, surprising, filmable rule of the scene world. For every scene choose the strongest carrier of that rule: the Kaufhaus architecture or circulation, movable objects, light or reflections, people, an unexplained trace, the monster, or a combination. Do not use the monster as the automatic carrier of every collision. The monster is the recurring protagonist of the complete sequence, but it must not be visible in every scene. When sceneFocus is location, objects, people or trace, do not mention or show the monster in stillPrompt or videoPrompt. When sceneFocus is monster or mixed, use the monster only when its visible action is more expressive than an environmental interpretation. Allow the Semantic Stream to alter the Kaufhaus interior meaningfully while keeping it recognizable as the same real building. It may change local function, arrangement, illumination, reflections, circulation, geometry or behavior. Do not reduce every collision to monster mutation, roots, glowing eyes, reacting lamps or floor reflections. Each scene leaves one visible consequence that may become the following scene's starting condition. Choose the camera after choosing the physical event. Write concrete physical events, not explanations of symbolism. Return JSON only with title, semanticAnchor, semanticCollision, sceneFocus, event, monsterPresence, consequence, nextHook, stillPrompt, videoPrompt, cameraCue and startFrameStrategy."
 fi
 export FRESHWEB_CAMERA_SCENE_PLAN_SYSTEM_PROMPT
 
 if [ -z "${FRESHWEB_VISION_PROMPT:-}" ]; then
-  FRESHWEB_VISION_PROMPT="Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Favor a grounded mobile-device look: handheld, candid, lightly imperfect, and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements."
+  FRESHWEB_VISION_PROMPT="Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded mobile-device look: handheld, candid, lightly imperfect, and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements."
 fi
 export FRESHWEB_VISION_PROMPT
 
@@ -210,11 +221,11 @@ export FRESHWEB_OPENING_START_PROVIDER=${FRESHWEB_OPENING_START_PROVIDER:-runwar
 export FRESHWEB_OPENING_START_MODEL=${FRESHWEB_OPENING_START_MODEL:-bfl:3@1}
 export FRESHWEB_OPENING_START_WIDTH=${FRESHWEB_OPENING_START_WIDTH:-1184}
 export FRESHWEB_OPENING_START_HEIGHT=${FRESHWEB_OPENING_START_HEIGHT:-880}
-export FRESHWEB_OPENING_START_NEGATIVE_PROMPT="${FRESHWEB_OPENING_START_NEGATIVE_PROMPT:-broken anatomy, blur, low detail, collage, split screen, readable text, modern logo}"
+export FRESHWEB_OPENING_START_NEGATIVE_PROMPT="${FRESHWEB_OPENING_START_NEGATIVE_PROMPT:-broken anatomy, blur, low detail, collage, split screen, readable text, modern logo, illustration, comic-book art, cartoon, cel shading, glossy fantasy CGI, concept art, different monster, generic green monster, green human, green person, green humanoid, plant person, tree person, forest goblin, alternate creature, different face, different anatomy, duplicate monster, substitute protagonist}"
 # The saved monster reference is passed directly to Runware; disable the legacy Qwen/FAL persona editor.
 export FRESHWEB_USE_WEBCAM_PERSONA_REFERENCE=${FRESHWEB_USE_WEBCAM_PERSONA_REFERENCE:-0}
 export FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME=${FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME:-1}
-export FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME=${FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME:-0}
+export FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME=${FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME:-1}
 export FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME=${FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME:-1}
 # Enable selective image-to-image repair only when the planner requests it.
 export FRESHWEB_ENABLE_DRIFT_CORRECTION=${FRESHWEB_ENABLE_DRIFT_CORRECTION:-1}

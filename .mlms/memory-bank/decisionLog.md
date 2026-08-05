@@ -197,3 +197,23 @@ Context: The rerender needed to read less like polished synthetic cinema and mor
 Decision: Add handheld mobile-device realism to the trailer prompts: slight shake, natural exposure shifts, autofocus breathing, mild compression artifacts, and no studio gloss.
 
 Consequences: Future trailer runs inherit a more grounded, documentary-like visual texture while keeping the same semantic content and location anchor.
+
+### D-0022: Expand the Semantic Stream Mid-Iteration
+
+Status: Accepted
+
+Context: The user added `terror` and `Konsum/de` to the active trailer word chain after the handheld rerender.
+
+Decision: Treat `terror` as the English semantic word and `Konsum/de` as `Konsum` with German language tagging, then rerun the trailer with the same Kaufhaus anchor and protagonist-identity rule.
+
+Consequences: The scene planner shifts to rupture and consumption scenes without losing the room anchor or the mobile-device visual style.
+
+### D-0023: Route References by Scene Focus
+
+Status: Accepted
+
+Context: The active trailer route repeatedly forced monster construction into scenes whose semantic event belonged to the room, objects, people, or a trace.
+
+Decision: Require `sceneFocus` in compact plans and include the monster reference only for `monster` or `mixed` scenes, unless `monsterPresence` is explicitly absent.
+
+Consequences: Environment-focused FLUX and WAN scenes stay monster-free while monster-focused scenes retain identity continuity.
