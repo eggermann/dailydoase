@@ -177,3 +177,13 @@ Context: Repeated semantic fields and per-scene repairs made the active trailer 
 Decision: Plan all scenes once from structured cue records; validate only structure and cue identity; allow one whole-plan repair.
 
 Consequences: Production FLUX and WAN prompts consume direct planner fields with short reusable constraints.
+
+### D-0020: Keep the Location Image Fixed and the Protagonist Identity-Only
+
+Status: Accepted
+
+Context: The new trailer run needed a stable room reference while allowing semantic drift in action and atmosphere.
+
+Decision: Use the Kaufhaus image as the immutable location anchor and use the monster image only for protagonist identity and motion vocabulary. Allow drift only as continuity correction.
+
+Consequences: The semantic word stream can change the scene content without replacing the photographed room or re-designing the location.

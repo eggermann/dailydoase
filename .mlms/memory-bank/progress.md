@@ -2,6 +2,9 @@
 
 ## Done
 
+- Reframed the active goal to a new trailer run using `kaufhaus`, `fleisch`, `LSD`, and `people`.
+- Completed the new trailer render in `GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932142326-collision-cut.mp4`.
+- Kept the Kaufhaus location image as the fixed room anchor and used the protagonist image as identity only.
 - Added `semanticAnchorEnglish` and `semanticCollisionEnglish` to the strict planner schema and runtime scene plan.
 - Production FLUX prompts and provider compaction prefer English translations while cue validation keeps original source terms.
 - Image-only summaries preserve both original and translated terms.
@@ -55,12 +58,12 @@
 
 ## In Progress
 
-- Final diff review and user-controlled commit decision.
+- None.
 
 ## Next
 
-- Commit hard semantic enforcement when explicitly requested.
-- Keep Mirelo video-upload correction as a separate follow-up.
+- Decide whether to commit the memory-bank update for this trailer loop.
+- Keep Mirelo video-upload correction as a separate follow-up if sound is needed.
 
 ## Semantic English Trailer Iteration 2
 

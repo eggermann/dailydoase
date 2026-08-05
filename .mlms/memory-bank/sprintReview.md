@@ -548,3 +548,23 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 - [x] Six FLUX/WAN scene renders completed and merged into the collision-cut trailer.
 - [x] H.264 output is decodable at 448x336 for 17.428571 seconds.
 - [ ] Audio remains absent because Runware rejected Mirelo's local-video fallback input.
+
+## New Semantic Word Stream Live Render
+
+### What Changed
+
+- Ran a fresh trailer from the words `kaufhaus`, `fleisch`, `LSD`, and `people`.
+- Kept the Kaufhaus image as the fixed room anchor.
+- Kept the protagonist image as identity only.
+- Allowed drift only as continuity correction.
+
+### Result
+
+- Six scenes rendered and merged successfully.
+- Final trailer output: `GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932142326-collision-cut.mp4`.
+- Mirelo audio fallback failed again, so the delivered trailer is silent.
+
+### Verification Result
+
+- Location continuity stayed stable across the run.
+- The semantic stream controlled the action and atmosphere while the image reference preserved the room.
