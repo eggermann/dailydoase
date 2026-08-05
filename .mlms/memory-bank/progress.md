@@ -38,7 +38,7 @@
 - Mapped three people-free location views across the three trailer scenes while retaining the monster as separate protagonist reference.
 - Generated and logged a three-scene plan twice.
 - Generated six real Runware image-only scenes in persistent generation folder 717.
-- Validated all six PNGs as distinct, decodable 1184×880 RGBA images.
+- Validated all six PNGs as distinct, decodable 1184Ã880 RGBA images.
 - Saved `run-01-summary.json` with six existing output paths.
 - Added model-safe Runware payload handling for FLUX Kontext Pro fixed controls and dimensions.
 - Created a transparent monster-only identity asset without poster text, panels, or people.
@@ -46,7 +46,7 @@
 - Generated corrected Run 5: six scenes preserve the photographed Kaufhaus, contain one monster protagonist, and contain no people or poster layout.
 - Generated one real FLUX Kontext scene-1 start image and two real silent Runware WAN 2.6 Flash clips at the two-second minimum.
 - Continued scene 2 from scene 1's extracted WAN last frame; scene-prompt metadata records the exact handoff path.
-- Concatenated the clips to a verified four-second MP4 and created a 272×208 local review copy.
+- Concatenated the clips to a verified four-second MP4 and created a 272Ã208 local review copy.
 - Added a two-video snapshot-resume entry point so the cost test does not re-query Wikipedia before WAN starts.
 - Ran a fresh normal Semantic Stream iteration in generation folder `720-glas-kaufhaus-fresh-sound-iteration-1`.
 - Generated six fresh WAN scene clips with the whole-second 1+ rhythm.
@@ -104,3 +104,17 @@
 
 - Scene 2 FLUX prompt exceeded Runware's 3000-character limit, so generation reused the preceding frame. WAN rendering and the six-scene merge still completed.
 - Contact-sheet QA shows the fallback leaks a bright magenta reference background into one scene; this is the highest-priority visual correction.
+
+## Compact Pipeline Refactor
+
+- Replaced repeated semantic prompt payload with compact scene fields in active planner path.
+- Added structural cue validation, one full-plan repair, and focused tests.
+- Verification: focused tests and webpack build pass.
+
+## Compact Pipeline Live Render
+
+- [x] One GPT-5 compact whole-plan call preserved six Semantic Stream cue pairs.
+- [x] FLUX and WAN rendered six sequential clips and merged the collision cut.
+- [x] The final visual trailer decodes as H.264, 448x336, 17.428571 seconds.
+- [ ] Mirelo/Runware final-audio fallback rejected its local video input; the visual cut is silent.
+- Output: `GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/merged/1785929841774-collision-cut.mp4`.

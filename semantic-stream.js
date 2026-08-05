@@ -23,6 +23,13 @@ const shuffleArray = array => {
 
 const { fullFillPrompt: fullFillPrompt } = generator;
 
+// The semantic-stream package installs an uncaught-exception handler that
+// exits immediately. Log the original error first so production runs leave a
+// usable diagnosis instead of stopping after a model request without context.
+process.prependListener('uncaughtException', (error) => {
+    console.error('[semantic-stream] uncaught exception:', error?.stack || error);
+});
+
 const getWordStreamCache = () => {
     if (!globalThis[WORD_STREAM_CACHE_KEY]) {
         globalThis[WORD_STREAM_CACHE_KEY] = new Map();
@@ -388,7 +395,7 @@ export default async (configs) => {
 
     await store.initCache();
 
-    configs.map(async (config, index) => {
+    await Promise.all(configs.map(async (config, index) => {
         const words = config.words;
 
         const wordStreams = await getWordStreams(words);
@@ -411,6 +418,6 @@ export default async (configs) => {
         }).catch(err => {
             console.error(chalk.red('Error starting generator:', err));
         })
-    });
+    }));
 
 }

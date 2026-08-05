@@ -80,9 +80,9 @@ Decision: Run two image-only rounds through one persistent Semantic Stream. Disa
 
 Status: Accepted
 
-Context: Runware rejected `CFGScale`, `steps`, `negativePrompt`, and arbitrary `448×336` dimensions for `bfl:3@1`.
+Context: Runware rejected `CFGScale`, `steps`, `negativePrompt`, and arbitrary `448Ã336` dimensions for `bfl:3@1`.
 
-Decision: Omit unsupported inference controls and map requested dimensions to the nearest supported FLUX Kontext Pro aspect ratio. For the Kaufhaus 4:3 test this resolves to `1184×880`.
+Decision: Omit unsupported inference controls and map requested dimensions to the nearest supported FLUX Kontext Pro aspect ratio. For the Kaufhaus 4:3 test this resolves to `1184Ã880`.
 
 ### D-0011: Precompose Protagonist Into Canonical Locations
 
@@ -98,7 +98,7 @@ Status: Accepted
 
 Context: The normal Semantic Stream received Wikipedia `429` before it reached any paid media request. Folder 717 already contains an accepted, real scene plan and its original Semantic Anchor/Collision cues.
 
-Decision: The minimal two-video probe reuses the first two saved scenes from folder 717. It makes no fresh Semantic Stream request, but preserves the original `1983 → NATO-Doppelbeschluss → Betriebsform` collision chain.
+Decision: The minimal two-video probe reuses the first two saved scenes from folder 717. It makes no fresh Semantic Stream request, but preserves the original `1983 â NATO-Doppelbeschluss â Betriebsform` collision chain.
 
 Consequence: The probe tests FLUX/WAN visual continuity and concat reliability, not fresh Wikipedia availability.
 
@@ -108,7 +108,7 @@ Status: Accepted
 
 Context: Runware WAN accepts whole-second durations. Fractional scene plans required duration repair and could expose repeated final frames.
 
-Decision: Use the direct `1+` Taktmuster (`5 → 2 → 3 → 2 …`) with no fractional multiplier.
+Decision: Use the direct `1+` Taktmuster (`5 â 2 â 3 â 2 â¦`) with no fractional multiplier.
 
 ### D-0014: Collision Cuts and Forward Camera Grammar
 
@@ -167,3 +167,13 @@ Context: Semantic Stream can return German or other non-English terms, while FLU
 Decision: Preserve exact source terms in `semanticAnchor` and `semanticCollision`. Generate `semanticAnchorEnglish` and `semanticCollisionEnglish` inside the existing planner response and prefer them in production prompts.
 
 Consequences: Exact cue validation remains lossless, no extra API or stream call is added, and model-facing prompts receive English terms or English physical meaning.
+
+### D-0015: Prefer one compact whole-sequence planner
+
+Status: Accepted
+
+Context: Repeated semantic fields and per-scene repairs made the active trailer path costly and brittle.
+
+Decision: Plan all scenes once from structured cue records; validate only structure and cue identity; allow one whole-plan repair.
+
+Consequences: Production FLUX and WAN prompts consume direct planner fields with short reusable constraints.

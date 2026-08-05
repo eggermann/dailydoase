@@ -1,6 +1,6 @@
 # Sprint Review
 
-## Loop 4 Review — English Semantic Trailer
+## Loop 4 Review â English Semantic Trailer
 
 ### What Changed
 
@@ -27,7 +27,7 @@
 
 - Stop: trailer iteration and translation verification complete. Do not commit without explicit user request.
 
-## Loop 3 Review — Translate Semantic Terms for Prompts
+## Loop 3 Review â Translate Semantic Terms for Prompts
 
 ### What Changed
 
@@ -48,7 +48,7 @@
 - 108 focused tests pass.
 - Webpack, syntax checks, and `git diff --check` pass.
 
-## Loop 3 Retrospective — Translate Semantic Terms for Prompts
+## Loop 3 Retrospective â Translate Semantic Terms for Prompts
 
 ### What Worked
 
@@ -62,7 +62,7 @@
 
 - Stop: requested prompt-language behavior is implemented and green.
 
-## Loop 2 Review — Finish Hard Semantic Enforcement
+## Loop 2 Review â Finish Hard Semantic Enforcement
 
 ### What Changed
 
@@ -102,7 +102,7 @@
 - Live integration: `GENRATIONS-KAUFHAUF/729-semantic-hard-enforcement-two-rounds/`.
 - Round summaries: `parts/image-only-scenes/run-01-summary.json` and `run-02-summary.json`.
 
-## Loop 2 Retrospective — Finish Hard Semantic Enforcement
+## Loop 2 Retrospective â Finish Hard Semantic Enforcement
 
 ### What Worked
 
@@ -124,7 +124,7 @@
 
 - Stop: goal satisfied; checks and live integrations are green. Await commit permission.
 
-## Loop 1 Plan — Mandatory Semantic Story Engine
+## Loop 1 Plan â Mandatory Semantic Story Engine
 
 ### Acceptance Criteria
 
@@ -143,7 +143,7 @@
 3. Targeted repair and runtime wiring.
 4. Artifact and FLUX/WAN propagation verification.
 
-## Loop 1 Review — Mandatory Semantic Story Engine
+## Loop 1 Review â Mandatory Semantic Story Engine
 
 ### What Changed
 
@@ -183,7 +183,7 @@
 
 - Blocked run folder: `GENRATIONS-KAUFHAUF/724-semantic-story-engine-image-only-test`.
 
-## Loop 1 Retrospective — Mandatory Semantic Story Engine
+## Loop 1 Retrospective â Mandatory Semantic Story Engine
 
 ### What Worked
 
@@ -203,7 +203,7 @@
 
 - Stop: implementation and local checks are green; live integration is blocked before the changed planner path.
 
-## Loop 1 Plan — Fresh Sound Iteration
+## Loop 1 Plan â Fresh Sound Iteration
 
 ### Acceptance Criteria
 
@@ -213,7 +213,7 @@
 - [ ] A collision-cut concat and compact exhibition end card exist.
 - [ ] Mirelo makes one final sound attempt; visual output survives failure.
 
-## Loop 1 Review — Fresh Sound Iteration
+## Loop 1 Review â Fresh Sound Iteration
 
 ### What Changed
 
@@ -244,7 +244,7 @@
 
 - Fresh visual output: `GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/merged/1785854923010-collision-cut.mp4`.
 
-## Loop 1 Retrospective — Fresh Sound Iteration
+## Loop 1 Retrospective â Fresh Sound Iteration
 
 ### What Worked
 
@@ -329,7 +329,7 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 
 ### What Worked
 
-- Poster selection was clear: the 1536×1024 Green Monster Ware Haus image already contains the intended warehouse and main figure.
+- Poster selection was clear: the 1536Ã1024 Green Monster Ware Haus image already contains the intended warehouse and main figure.
 - Three-scene plan formed before the normal semantic-stream request hit Wikipedia rate limiting.
 
 ### What Was Confusing
@@ -381,7 +381,7 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 - Existing generation folder: `GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test`.
 - It contains scene plan and config, but currently no scene PNG.
 
-## Loop 3 Review — Two-Scene WAN Cost Probe
+## Loop 3 Review â Two-Scene WAN Cost Probe
 
 ### What Changed
 
@@ -396,7 +396,7 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 - [x] Each clip is exactly 2.0 seconds.
 - [x] Scene 2 starts from the actual scene-1 last-frame PNG.
 - [x] Lossless concat is exactly 4.0 seconds.
-- [x] Small 272×208 silent preview is exactly 4.0 seconds.
+- [x] Small 272Ã208 silent preview is exactly 4.0 seconds.
 - [x] No new Wikipedia request occurred during the successful media run.
 
 ### Verification Result
@@ -438,13 +438,13 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 
 - Captured each remaining structured Runware validation error.
 - Removed unsupported `steps` and `negativePrompt` for `bfl:3@1`.
-- Added supported-dimension normalization; 4:3 resolves to `1184×880`.
+- Added supported-dimension normalization; 4:3 resolves to `1184Ã880`.
 - Resumed the saved online Semantic Stream scene plan without repeating Wikipedia or OpenAI planning.
 
 ### Acceptance Criteria Result
 
 - [x] Six real scene PNGs exist in the persistent generation folder.
-- [x] Every PNG decodes at `1184×880` RGBA.
+- [x] Every PNG decodes at `1184Ã880` RGBA.
 - [x] All six files have distinct SHA-256 hashes.
 - [x] `run-01-summary.json` lists six existing outputs.
 
@@ -494,6 +494,57 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 
 ### Verification Result
 
-- Corrected Run 5 contains six decodable `1184×880` PNGs and one six-scene summary.
+- Corrected Run 5 contains six decodable `1184Ã880` PNGs and one six-scene summary.
 - Visual contact-sheet review confirms Kaufhaus architecture across all six scenes.
 - Exactly one monster protagonist is present; no people, portraits, humanoid sculptures, or poster layout remain.
+
+## Loop 5 Review
+
+### What Changed
+
+- Added compact planner schema and direct production prompts.
+- Disabled default semantic reconstruction through existing preset default and removed active per-scene semantic repair.
+
+### Acceptance Criteria Result
+
+- [x] Whole sequence plan uses structured cues.
+- [x] Structural validation and one full-plan repair only.
+- [x] FLUX/WAN use compact planner fields.
+
+### Verification Result
+
+- Focused Jest: 37 tests passed.
+- Webpack build passed.
+
+### Issues / Gaps
+
+- Full Jest found one legacy camera-plan assertion; compact normalizer fix is being verified.
+
+### User Demo Notes
+
+- No paid media run performed during this source refactor.
+
+## Loop 5 Retrospective
+
+### What Worked
+
+- Compact adapter kept old saved-plan compatibility at load boundary.
+
+### What Was Confusing
+
+- Existing memory-bank history must remain append-only.
+
+### What To Improve Next Loop
+
+- Isolate script-style integration files from Jest discovery before relying on an all-suite command.
+
+### Process Decision
+
+- Stop. Requested source refactor is complete; commit remains ask-first.
+
+## Loop 5 Live Render Review
+
+- [x] Compact planner generated one six-scene Semantic Stream sequence.
+- [x] Six FLUX/WAN scene renders completed and merged into the collision-cut trailer.
+- [x] H.264 output is decodable at 448x336 for 17.428571 seconds.
+- [ ] Audio remains absent because Runware rejected Mirelo's local-video fallback input.

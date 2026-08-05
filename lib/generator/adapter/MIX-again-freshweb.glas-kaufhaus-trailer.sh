@@ -66,6 +66,8 @@ fi
 # Use the selected model for both visual analysis and structured scene plans.
 export OPENAI_MODEL=${OPENAI_MODEL:-$FRESHWEB_SELECTED_PROMPT_MODEL}
 export OPENAI_VISION_MODEL=${OPENAI_VISION_MODEL:-$FRESHWEB_SELECTED_PROMPT_MODEL}
+# Scene planning performs whole-sequence creative work; vision remains cheaper.
+export FRESHWEB_SCENE_PLAN_MODEL=${FRESHWEB_SCENE_PLAN_MODEL:-$FRESHWEB_PROMPT_MODEL_B}
 # Pin vision to OpenAI so hidden LM Studio, Hugging Face, or FAL fallbacks cannot change results.
 export FRESHWEB_VISION_PROVIDERS=${FRESHWEB_VISION_PROVIDERS:-openai}
 
