@@ -2,7 +2,7 @@
 
 ## Current Goal
 
-Generate a new Glass Kaufhaus trailer from the semantic stream words `kaufhaus`, `fleisch`, `LSD`, and `people`. Keep the location image as the room anchor and the protagonist image as identity only.
+Generate a new Glass Kaufhaus trailer from the semantic stream words `kaufhaus`, `fleisch`, `LSD`, and `people`. Keep the location image as the room anchor and the protagonist image as identity only, with a realistic handheld mobile-device look.
 
 ## Current Loop
 
@@ -11,7 +11,7 @@ Phase: Complete
 
 ## Current Focus
 
-The fresh semantic-stream trailer run completed. Keep the monster reference image identity-only and keep the Kaufhaus reference image as the fixed location plate.
+The latest trailer rerun completed with a more realistic handheld mobile-device look. Keep the monster reference image identity-only and keep the Kaufhaus reference image as the fixed location plate.
 
 ## Assumptions
 

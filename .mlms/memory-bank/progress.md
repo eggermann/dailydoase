@@ -5,6 +5,8 @@
 - Reframed the active goal to a new trailer run using `kaufhaus`, `fleisch`, `LSD`, and `people`.
 - Completed the new trailer render in `GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932142326-collision-cut.mp4`.
 - Kept the Kaufhaus location image as the fixed room anchor and used the protagonist image as identity only.
+- Tightened the prompt layer to make the trailer feel like realistic handheld mobile-device footage.
+- Completed the rerun in `GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932760634-collision-cut.mp4`.
 - Added `semanticAnchorEnglish` and `semanticCollisionEnglish` to the strict planner schema and runtime scene plan.
 - Production FLUX prompts and provider compaction prefer English translations while cue validation keeps original source terms.
 - Image-only summaries preserve both original and translated terms.

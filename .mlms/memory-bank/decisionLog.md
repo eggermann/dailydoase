@@ -187,3 +187,13 @@ Context: The new trailer run needed a stable room reference while allowing seman
 Decision: Use the Kaufhaus image as the immutable location anchor and use the monster image only for protagonist identity and motion vocabulary. Allow drift only as continuity correction.
 
 Consequences: The semantic word stream can change the scene content without replacing the photographed room or re-designing the location.
+
+### D-0021: Add Handheld Mobile-Device Realism
+
+Status: Accepted
+
+Context: The rerender needed to read less like polished synthetic cinema and more like a candid phone recording.
+
+Decision: Add handheld mobile-device realism to the trailer prompts: slight shake, natural exposure shifts, autofocus breathing, mild compression artifacts, and no studio gloss.
+
+Consequences: Future trailer runs inherit a more grounded, documentary-like visual texture while keeping the same semantic content and location anchor.

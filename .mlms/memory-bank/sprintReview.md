@@ -568,3 +568,21 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 
 - Location continuity stayed stable across the run.
 - The semantic stream controlled the action and atmosphere while the image reference preserved the room.
+
+## Mobile-Realism Rerender
+
+### What Changed
+
+- Tightened the prompts toward handheld mobile-device realism.
+- Pushed the trailer away from polished studio gloss and toward candid phone-shot texture.
+
+### Result
+
+- New trailer output: `GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932760634-collision-cut.mp4`.
+- The silent visual trailer remained intact.
+- Mirelo audio fallback failed again on the local final video input.
+
+### Verification Result
+
+- The new prompt wording propagated into the planner and image prompts.
+- The generated output now has a more phone-shot, imperfect capture feel.
