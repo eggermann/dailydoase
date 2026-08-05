@@ -127,3 +127,43 @@ Context: Free-form cue strings force downstream code to recover semantic anchors
 Decision: Consume each stream step once into a structured cue record, then derive the legacy string from that record. Pass both forms downstream.
 
 Consequences: Validation and repair use lossless structured values; legacy callers can continue consuming cue strings.
+
+### D-0016: Validate Before Structural Normalization
+
+Status: Accepted
+
+Context: Pre-validation inheritance correction could hide a planner reset or wrong consequence ID.
+
+Decision: Validate the raw planned semantic fields first. Keep deterministic structural inheritance as an explicit utility, not an automatic mask before targeted repair.
+
+Consequences: Broken inheritance reaches the repair loop and strict collision mode aborts if it remains invalid.
+
+### D-0017: Compact Oversized FLUX Prompts by Semantic Fields
+
+Status: Accepted
+
+Context: Real image-only integration exceeded Runware's 3000-character prompt limit because causal and location prose was duplicated.
+
+Decision: When a FLUX prompt is oversized, rebuild it from each mandatory semantic field plus concise Kaufhaus and safety constraints. Do not blindly truncate the complete prompt.
+
+Consequences: Provider limits are respected while anchor, collision, inheritance, physicalization, tactic, action, agency evidence, presence, consequence, and decisive still remain explicit.
+
+### D-0018: Resume Saved Validated Plans Without New Terms
+
+Status: Accepted
+
+Context: A strict false negative stopped round 2 after its terms and plan were already saved.
+
+Decision: Let the image-only resume entry point accept an explicit validated plan path and merge partial retry summaries.
+
+Consequences: Media retries do not consume another Semantic Stream term or regenerate the plan.
+
+### D-0019: Separate Cue Identity From Prompt Language
+
+Status: Accepted
+
+Context: Semantic Stream can return German or other non-English terms, while FLUX/WAN production prompts should be English.
+
+Decision: Preserve exact source terms in `semanticAnchor` and `semanticCollision`. Generate `semanticAnchorEnglish` and `semanticCollisionEnglish` inside the existing planner response and prefer them in production prompts.
+
+Consequences: Exact cue validation remains lossless, no extra API or stream call is added, and model-facing prompts receive English terms or English physical meaning.

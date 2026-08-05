@@ -102,7 +102,7 @@ unset FRESHWEB_SCENE_CONTEXT_IMAGE_FOLDER_URL
 unset FRESHWEB_SCENE_CONTEXT_IMAGE_API_URL
 
 # Ordered story anchors. Change these three streams to change the story.
-export FRESHWEB_WORDS="${FRESHWEB_WORDS:-1983,de | Kaufhaus,de | Kunstausstellung,de}"
+export FRESHWEB_WORDS="${FRESHWEB_WORDS:-Kaufhaus,de | Berlin-Neukölln,de}"
 
 # -----------------------------------------------------------------------------
 # 2. RHYTHM — scene count and duration

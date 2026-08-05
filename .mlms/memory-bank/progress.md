@@ -2,6 +2,21 @@
 
 ## Done
 
+- Added `semanticAnchorEnglish` and `semanticCollisionEnglish` to the strict planner schema and runtime scene plan.
+- Production FLUX prompts and provider compaction prefer English translations while cue validation keeps original source terms.
+- Image-only summaries preserve both original and translated terms.
+- Added translation/schema/prompt/sanitization tests; focused total is now 108 passing tests.
+- Finished hard semantic validation with complete report booleans, flattened errors/warnings, and returned scene plan.
+- Added layered derivation, decorative-use, generic-tension, clue-source, absent-agency, unique-ID, inheritance, and prompt-propagation checks.
+- Added exported one-scene repair with immutable cue identity and no stream dependency.
+- Enabled strict semantic abort by default only in collision mode.
+- Preserved semantic fields through runtime defaults/sanitization and expanded image-only summaries.
+- Added provider-safe FLUX compaction that retains the mandatory semantic chain below 3000 characters.
+- Added explicit-plan image-only resume and plan-only two-video shell success behavior.
+- Passed 105 focused tests, webpack build, syntax checks, and `git diff --check`.
+- Replayed the validator against real six-scene folder 726 and real round-2 folder 729 successfully.
+- Completed two live image-only rounds with four decodable 1184x880 images and fresh collisions in folder 729.
+- Confirmed two-video scene 2 inherits scene 1's consequence ID/state and WAN receives all required semantic parts.
 - Added canonical structured cue records plus legacy serialization from the same records.
 - Preserved exactly one `getNext()` call per assigned scene.
 - Added mandatory semantic schema fields and semantic derivation report.
@@ -40,12 +55,34 @@
 
 ## In Progress
 
-- Runware Mirelo fallback needs a provider-compatible video upload/reference instead of the rejected inline data URL.
+- Final diff review and user-controlled commit decision.
 
 ## Next
 
-- Replace or rehost oversized Runware Mirelo video input, then regenerate final sound without rerendering scenes.
-- Cap or compact FLUX image prompts before the provider's 3000-character boundary.
+- Commit hard semantic enforcement when explicitly requested.
+- Keep Mirelo video-upload correction as a separate follow-up.
+
+## Semantic English Trailer Iteration 2
+
+### Acceptance Result
+
+- [x] Fresh Semantic Stream produced six source-language cue records.
+- [x] Validated plan preserves source terms with paired English translations.
+- [x] Production FLUX and WAN prompts replaced current-scene German semantic terms with English translations.
+- [x] Six WAN clips rendered and collision-cut trailer plus end card were saved.
+- [x] Final silent trailer decodes as H.264, 448x336, 17.428571 seconds.
+- [ ] Final audio: Mirelo and its Runware fallback rejected the local final-video input; visual trailer remains intact.
+
+### Output
+
+- Generation: `GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/`
+- Trailer: `GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/merged/1785926913747-collision-cut.mp4`
+- Validation: `GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/scene-prompts/semantic-validation-report.json`
+
+### Visual QA
+
+- End card is readable and exhibition-branded.
+- Final frame preserves recognizable Kaufhaus geometry and a distinct monster, though the creature trends illustrated rather than photoreal.
 
 ## Semantic Story Engine Iteration 2
 

@@ -33,3 +33,9 @@ Mirelo is an optional post-process. If it fails, retain video parts and continue
 `getNext once -> structured anchor/collision cue -> productive contradiction -> physical rule -> monster interpretation/intent/tactic -> visible action -> local consequence/clue/tension -> semantic + visual inheritance -> FLUX/WAN prompts -> end frame`
 
 Legacy cue strings serialize from structured records. They never become the canonical source again.
+
+## Hard Enforcement Pattern
+
+`raw planned scene -> exact cue identity -> complete derivation -> concrete physical event -> agency/tension/clue validation -> stable consequence inheritance -> actual FLUX/WAN propagation -> runtime field preservation -> strict repair or abort`
+
+Provider prompt compaction must reconstruct from named semantic fields. Never solve length limits by dropping the causal chain.

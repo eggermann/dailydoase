@@ -2,16 +2,16 @@
 
 ## Current Goal
 
-Make the Semantic Stream the mandatory causal story engine from `getNext()` through final FLUX/WAN prompts and end-frame continuity.
+Generate one fresh Glass Kaufhaus trailer video from a new Semantic Stream plan. Preserve source-language cue identity while using English translations in FLUX and WAN production prompts.
 
 ## Current Loop
 
-Loop: 1
+Loop: 4
 Phase: Review
 
 ## Current Focus
 
-Mandatory semantic story-engine code is implemented and locally verified. Live image-only run `724-semantic-story-engine-image-only-test` stopped during Semantic Stream article setup before planner or FLUX execution.
+Completed fresh collision-mode trailer iteration in `731-semantic-english-trailer-iteration-2`. The saved plan preserves six German source cue pairs and English translations. FLUX and WAN production payloads use the English terms. Six WAN clips, a collision-cut merge, and end card were produced. Audio remains optional and failed non-fatally.
 
 ## Assumptions
 
@@ -22,10 +22,10 @@ Mandatory semantic story-engine code is implemented and locally verified. Live i
 
 ## Risks / Unknowns
 
-- Live Semantic Stream stopped after article setup logs for `1983` and `Kaufhaus`; run 724 contains only `info.json`.
 - Full Jest has one unrelated existing failure in self-contained `camera-prompt-chain.mock-video.test.js`; touched Shorty-Book suite is green.
 - Existing unrelated `lib/generator/adapter/trailer-context/output-prompt.txt` remains untouched.
+- Generated integration media is intentionally untracked.
 
 ## Next Action
 
-Retry two-round image-only integration when Semantic Stream article access is available, then run cheap two-clip continuity preview.
+Keep generated media uncommitted. Review the current source diff and commit only after a new explicit user request.

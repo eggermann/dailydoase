@@ -49,6 +49,11 @@ echo "Two-video preview starts: 2 scenes x 2 seconds, silent WAN, no end card."
 output_folder="$(pwd)/../../../GENRATIONS-KAUFHAUF/${FRESHWEB_FOLDER}"
 node "$(pwd)/shorty-book/resume-two-video-preview-from-snapshot.mjs" "$output_folder" "$@"
 
+if [ "${FRESHWEB_TWO_VIDEO_PREVIEW_PLAN_ONLY:-0}" = "1" ]; then
+  echo "Two-video semantic plan check complete."
+  exit 0
+fi
+
 latest_concat=$(find "$output_folder/merged" -type f -name "*-concat.mp4" -print | sort | tail -n 1)
 if [ -z "$latest_concat" ]; then
   echo "No two-scene concat found below: $output_folder" >&2

@@ -1,5 +1,129 @@
 # Sprint Review
 
+## Loop 4 Review — English Semantic Trailer
+
+### What Changed
+
+- Hardened FLUX and WAN prompt boundaries to replace source-language anchor and collision terms with their saved English translations.
+- Kept source-language cue identity untouched in the canonical plan and validator.
+- Added regression coverage for selected FLUX prompts, selected WAN prompts, compacted FLUX prompts, and non-compacted FLUX prompts.
+
+### Acceptance Criteria Result
+
+- [x] Six fresh Semantic Stream cues are saved with exact source-language identity.
+- [x] Each plan entry has English prompt terms.
+- [x] Actual FLUX payload inspection shows `department store` and `operational mode` instead of `Kaufhaus` and `Betriebsform` for scene one.
+- [x] Six WAN clips and a collision-cut, end-card trailer exist.
+- [x] Semantic validation has zero errors for all scenes.
+- [ ] Audio is absent because Mirelo and its Runware fallback reject local final-video input.
+
+### Verification Result
+
+- 111 focused tests pass; Node syntax and `git diff --check` pass.
+- Final file is H.264, 448x336, 17.428571 seconds.
+- All six scene reports are valid; one non-blocking propagation warning remains in scene five.
+
+### Process Decision
+
+- Stop: trailer iteration and translation verification complete. Do not commit without explicit user request.
+
+## Loop 3 Review — Translate Semantic Terms for Prompts
+
+### What Changed
+
+- Added strict English translation fields beside immutable source-language cue fields.
+- Required production-facing planner prose to be English.
+- Updated FLUX prompt construction, oversized-prompt compaction, image summaries, and sanitization preservation.
+
+### Acceptance Criteria Result
+
+- [x] Original Semantic Stream words remain exact for identity validation.
+- [x] Non-English words have explicit English prompt terms.
+- [x] Production FLUX prompts prefer English terms.
+- [x] Legacy plans fall back to original terms.
+- [x] No extra `getNext()` or translation API call is introduced.
+
+### Verification Result
+
+- 108 focused tests pass.
+- Webpack, syntax checks, and `git diff --check` pass.
+
+## Loop 3 Retrospective — Translate Semantic Terms for Prompts
+
+### What Worked
+
+- Translation fits into the existing structured planner response without another provider round trip.
+
+### What To Improve Next Loop
+
+- Inspect translations in the next normal live generation artifact.
+
+### Process Decision
+
+- Stop: requested prompt-language behavior is implemented and green.
+
+## Loop 2 Review — Finish Hard Semantic Enforcement
+
+### What Changed
+
+- Extended the existing validator instead of creating a parallel path.
+- Added the complete report contract, layered textual derivation, decorative-use rejection, generic tension rejection, source-bound clues, absent-monster evidence, unique consequence IDs, and strict inheritance checks.
+- Added exported targeted scene repair with immutable cue identity.
+- Propagated visible agency into real FLUX/WAN builders and complete image-only summaries.
+- Proved runtime defaults and camera sanitization preserve every new semantic field.
+- Added collision-only strict mode, provider-safe FLUX compaction, retry-summary merging, explicit-plan image resume, and a green plan-only two-video entry point.
+
+### Acceptance Criteria Result
+
+- [x] One clearly named semantic validation function returns the complete contract.
+- [x] Derivation, tension cause, consequence IDs, clue source, and absent agency are mandatory and validated.
+- [x] Decorative semantics and atmosphere-only tension are rejected.
+- [x] Repairs are scene-local, preserve exact cues, and never call `getNext()`.
+- [x] FLUX/WAN propagation is tested against actual production builders.
+- [x] Semantic fields survive defaults, sanitization, duration adjustment, and summaries.
+- [x] Strict collision mode aborts after failed repairs.
+- [x] Two-round image-only and two-video plan integrations pass.
+
+### Verification Result
+
+- 105 focused tests pass.
+- Webpack build, Node/zsh syntax, and `git diff --check` pass.
+- Full Jest retains the unrelated existing `camera-prompt-chain.mock-video.test.js` failure and async teardown issue.
+- Folder `729-semantic-hard-enforcement-two-rounds` contains four decodable 1184x880 PNGs, two complete summaries, and a valid strict report.
+- Two-video plan check confirms scene 2 uses `Betriebsform`, inherits scene 1's ID/state, and includes all required WAN semantic parts.
+
+### Issues / Gaps
+
+- Mirelo audio fallback remains separate and unresolved.
+- Generated media remains untracked.
+
+### User Demo Notes
+
+- Live integration: `GENRATIONS-KAUFHAUF/729-semantic-hard-enforcement-two-rounds/`.
+- Round summaries: `parts/image-only-scenes/run-01-summary.json` and `run-02-summary.json`.
+
+## Loop 2 Retrospective — Finish Hard Semantic Enforcement
+
+### What Worked
+
+- Real-plan replay caught physical-verb and plural-normalization false negatives before shipping.
+- Strict mode exposed one actual repair path and prevented generic fallback.
+- Explicit saved-plan resume preserved term-consumption integrity during provider retry.
+
+### What Was Confusing
+
+- Zero polling disables the second image-only round even when run count is two.
+- Provider processes retain open handles after successful generation and need explicit terminal interruption.
+
+### What To Improve Next Loop
+
+- Add automatic retry for transient image provider `fetch failed` responses.
+- Separate provider network retries from semantic planning/repair logs.
+
+### Process Decision
+
+- Stop: goal satisfied; checks and live integrations are green. Await commit permission.
+
 ## Loop 1 Plan — Mandatory Semantic Story Engine
 
 ### Acceptance Criteria
