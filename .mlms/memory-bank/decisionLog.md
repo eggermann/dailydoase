@@ -2,6 +2,26 @@
 
 ## Decisions
 
+### D-0025: Keep the CANK Launcher Minimal
+
+Status: Accepted
+
+Context: The live CANK deploy should match the local base trailer launcher instead of layering extra provider or model overrides in a wrapper.
+
+Decision: Let `MIX-again-freshweb.glas-kaufhaus-cank-trailer.sh` set only the live folder, polling interval, max iterations, and semantic word stream, then delegate to the shared trailer launcher.
+
+Consequences: The deploy path stays aligned with local behavior, and future provider changes belong in the shared base launcher instead of the CANK wrapper.
+
+### D-0026: Fail Fast on Real Semantic-Stream Rate Limits
+
+Status: Accepted
+
+Context: The user asked for no fallback. The live remote run still hits Wikipedia `429` during semantic word lookup.
+
+Decision: Do not restore synthetic/offline semantic-stream behavior to mask a rate limit. Treat the `429` as the real failure mode and surface it directly.
+
+Consequences: Trailer generation may stall under rate limiting, but the output stays honest and the deploy matches the requested no-fallback behavior.
+
 ### D-0001: Use Memory Bank + Mini-Loop
 
 Status: Accepted
@@ -217,3 +237,23 @@ Context: The active trailer route repeatedly forced monster construction into sc
 Decision: Require `sceneFocus` in compact plans and include the monster reference only for `monster` or `mixed` scenes, unless `monsterPresence` is explicitly absent.
 
 Consequences: Environment-focused FLUX and WAN scenes stay monster-free while monster-focused scenes retain identity continuity.
+
+### D-0024: Mirror New Trailers Into CANK Newest-First
+
+Status: Accepted
+
+Context: The live page at `/v/CANK` should surface the latest generated trailer first, and the trailer generator needs a repeatable live-deploy path.
+
+Decision: Copy merged generation outputs into `lib/GENERATIONS/CANK` with descending creation order so the newest trailer gets `1-`. Add a polling sync loop plus a CANK-trailer launcher that keeps semantic stream and taktmuster iteration continuous.
+
+Consequences: New trailers can be mirrored into the live folder without manual renaming, and the live page can sort newest content first.
+
+### D-0024: Prefer `lib/GENERATIONS` on Server Bootstrap
+
+Status: Accepted
+
+Context: The live deployment already stores the current generation cache under `lib/GENERATIONS`, while a stale top-level `GENERATIONS` tree can exist on the host.
+
+Decision: Prefer `lib/GENERATIONS` before the top-level `GENERATIONS` folder when booting the server on the deployment host.
+
+Consequences: The live site refreshes from the same folder tree used by the deployed uploads, so new folders like `CANK` appear after restart.

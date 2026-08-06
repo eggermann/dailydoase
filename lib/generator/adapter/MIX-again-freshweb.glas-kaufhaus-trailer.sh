@@ -3,6 +3,16 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+REPO_ROOT="$(cd "$(pwd)/../../.." && pwd)"
+NODE_WEB_STREAM_POLYFILL="$REPO_ROOT/deploy/node-web-stream-polyfill.cjs"
+if [ -f "$NODE_WEB_STREAM_POLYFILL" ]; then
+  if [ -n "${NODE_OPTIONS:-}" ]; then
+    export NODE_OPTIONS="--require=$NODE_WEB_STREAM_POLYFILL $NODE_OPTIONS"
+  else
+    export NODE_OPTIONS="--require=$NODE_WEB_STREAM_POLYFILL"
+  fi
+fi
+
 # GLAS-KAUFHAUS TRAILER — CONTROL PANEL
 #
 # Change this file to change the trailer. The JavaScript only executes these
