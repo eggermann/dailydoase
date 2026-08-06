@@ -25,12 +25,21 @@ FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME=${FRESHWEB_LOCK_PROMPT_CONTINUI
 # Reuse the previous movie's last extracted frame when the output folder is reused.
 FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME=${FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME:-1}
 
-# Mirelo audio mode
-# finalOnly:
-#   generate one Mirelo audio track for the final concatenated movie
-# afterEachVideo:
-#   generate and mux Mirelo audio after every scene clip, then concat those clips
-FRESHWEB_MIRELO_MODE=${FRESHWEB_MIRELO_MODE:-finalOnly}
+# Mirelo audio toggle
+# 1 = keep Mirelo audio on
+# 0 = disable Mirelo entirely
+FRESHWEB_MIRELO_AUDIO_ENABLED=${FRESHWEB_MIRELO_AUDIO_ENABLED:-1}
+if [ "${FRESHWEB_MIRELO_AUDIO_ENABLED}" = "0" ]; then
+  export FRESHWEB_MIRELO_MODE=off
+  export FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED=0
+else
+  # finalOnly:
+  #   generate one Mirelo audio track for the final concatenated movie
+  # afterEachVideo:
+  #   generate and mux Mirelo audio after every scene clip, then concat those clips
+  export FRESHWEB_MIRELO_MODE=${FRESHWEB_MIRELO_MODE:-finalOnly}
+  export FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED=${FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED:-1}
+fi
 
 # Rhythm and scene planning
 FRESHWEB_USE_TAKTMUSTER_LENGTHS=${FRESHWEB_USE_TAKTMUSTER_LENGTHS:-1}
@@ -157,7 +166,9 @@ export \
   FRESHWEB_USE_VISION \
   FRESHWEB_LOCK_PROMPT_CONTINUITY_TO_OPENING_FRAME \
   FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME \
+  FRESHWEB_MIRELO_AUDIO_ENABLED \
   FRESHWEB_MIRELO_MODE \
+  FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED \
   FRESHWEB_USE_TAKTMUSTER_LENGTHS \
   FRESHWEB_SCENE_COUNT_TAKT \
   FRESHWEB_SCENE_COUNT_TAKT_TYPE \
