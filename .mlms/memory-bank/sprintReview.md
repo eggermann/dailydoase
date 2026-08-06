@@ -1,5 +1,30 @@
 # Sprint Review
 
+## Loop 7 Review — Remote No-Fallback CANK Deploy
+
+### What Changed
+
+- Reduced the CANK launcher to the shared base trailer stack plus live-folder settings.
+- Synced the cleaned launcher and deploy helpers to the remote mini.
+- Restarted the remote trailer runner so the next cycle uses the updated launcher.
+
+### Acceptance Criteria Result
+
+- [x] CANK wrapper no longer overrides image/video provider selection.
+- [x] Remote mini has the new launcher and deploy helpers.
+- [x] Remote trailer process was restarted.
+- [ ] Live semantic-stream generation is still blocked by real Wikipedia `429` responses.
+
+### Verification Result
+
+- Local `zsh -n` passed for both trailer launchers.
+- Local `node --check` passed for the new deploy helpers and the modified runtime files.
+- Remote process now shows the cleaned launcher path and the real `429` failure in the live log.
+
+### Process Decision
+
+- Stop for now: the deploy is aligned with the local no-fallback stack, and the remaining issue is real upstream rate limiting.
+
 ## Loop 4 Review â English Semantic Trailer
 
 ### What Changed
@@ -203,6 +228,60 @@
 
 - Stop: implementation and local checks are green; live integration is blocked before the changed planner path.
 
+## Loop 6 Review — CANK Trailer Deploy
+
+### What Changed
+
+- Reversed CANK copy ordering so newest generated trailers sort first in the live folder.
+- Added a continuous CANK sync loop that polls `GENRATIONS-KAUFHAUF` and refreshes `lib/GENERATIONS/CANK` when new merged outputs appear.
+- Added a CANK-trailer launcher that keeps semantic stream and taktmuster continuous with a ~14h polling interval.
+- Captured a live browser screenshot of `https://dailydoase.de/v/CANK`.
+
+### Acceptance Criteria Result
+
+- [x] CANK live folder exists and is refreshed newest-first.
+- [x] Continuous sync script exists.
+- [x] Continuous trailer launcher exists.
+- [x] Live page screenshot captured.
+- [x] Memory bank updated.
+
+### Verification Result
+
+- `zsh -n` passed for both new shell launchers.
+- `node -c` passed for `deploy/copy-merged-to-cank.cjs` and `deploy/cank-trailer-sync-loop.cjs`.
+- `node deploy/copy-merged-to-cank.cjs` refreshed `lib/GENERATIONS/CANK`.
+- Browser screenshot saved as `.mlms/cank-live-page.png`.
+
+### Issues / Gaps
+
+- The continuous generator/sync loop is prepared but not left running in this turn.
+- Live folder refresh may still need a server cache restart depending on deployment state.
+
+### User Demo Notes
+
+- Live page title: `DailyDoase`.
+- Sidebar now shows `CANK`.
+- Screenshot path: `.mlms/cank-live-page.png`.
+
+## Loop 6 Retrospective
+
+### What Worked
+
+- The existing copy script was enough to implement newest-first ordering cleanly.
+- Playwright via installed Chrome was enough to verify the live page without extra dependencies.
+
+### What Was Confusing
+
+- The first screenshot attempt failed because Playwright had no downloaded browser binary.
+
+### What To Improve Next Loop
+
+- If the live server caches folder listings, add an explicit restart or cache-bust step to the deploy script.
+
+### Process Decision
+
+- Continue. The deploy path is ready; next step is optional long-running execution on the target host.
+
 ## Loop 1 Plan â Fresh Sound Iteration
 
 ### Acceptance Criteria
@@ -218,6 +297,99 @@
 ### What Changed
 
 - Promoted collision cuts and a continuous forward dolly from the test-resume runner into the normal trailer runtime.
+
+## Loop 6 Review â Live Folder Verification
+
+### What Changed
+
+- Opened the live `https://dailydoase.de/` home view in the in-app browser and captured screenshots of the deployed page.
+- Checked the direct `/CANK` route and confirmed it returns `Cannot GET /CANK`.
+- Verified the home page DOM does not contain `CANK`, so the uploaded folder is not exposed in the live public index yet.
+
+### Acceptance Criteria Result
+
+- [x] Browser inspection ran against the deployed site.
+- [x] Screenshot of the live home view was captured.
+- [x] The CANK route was checked directly.
+- [ ] CANK is visible as the newest live folder.
+
+### Verification Result
+
+- The live page shows the current folder list and a large movie preview.
+- `/CANK` is not a live folder route.
+
+### Issues / Gaps
+
+- The deployed index is not reflecting the uploaded CANK folder.
+
+### User Demo Notes
+
+- Screenshot captured from the live home view; the page is currently serving the existing movie list, not CANK.
+
+## Loop 6 Retrospective â Live Folder Verification
+
+### What Worked
+
+- A direct route check removed ambiguity faster than guessing from the folder list.
+- Full-page screenshot after a short settle time captured the visible movie preview clearly.
+
+### What Was Confusing
+
+- The root page and direct route disagree with the expectation that CANK should already be live.
+
+### What To Improve Next Loop
+
+- If CANK must be public, wire it into the deployment index or route and verify again in the browser.
+
+### Process Decision
+
+- Stop: verification complete, but the requested CANK folder is not visible live.
+
+## Loop 7 Review â CANK Live Wiring
+
+### What Changed
+
+- Changed the server bootstrap order so the deployment host prefers `lib/GENERATIONS` over the stale top-level `GENERATIONS` tree.
+- Restarted the remote Node server so the cache rebuilt from the uploaded `lib/GENERATIONS` content.
+- Verified in the browser that `CANK` now appears in the live sidebar and that `/v/CANK` opens the folder view with the movie grid.
+
+### Acceptance Criteria Result
+
+- [x] Live site was updated to surface `CANK`.
+- [x] Browser screenshot confirms `CANK` is visible in the sidebar.
+- [x] The CANK folder route renders its movies.
+
+### Verification Result
+
+- `https://dailydoase.de/` now shows `CANK` at the top of the sidebar.
+- `https://dailydoase.de/v/CANK` renders the folder and its movie thumbnails.
+
+### Issues / Gaps
+
+- The repository still contains unrelated dirty work from earlier trailer iterations.
+
+### User Demo Notes
+
+- Screenshot captured from the live CANK folder view.
+
+## Loop 7 Retrospective â CANK Live Wiring
+
+### What Worked
+
+- Checking the remote process root exposed the cache-order bug quickly.
+- Reordering startup candidates fixed the live surface without touching the folder contents.
+
+### What Was Confusing
+
+- The host had both a stale top-level `GENERATIONS` tree and the active `lib/GENERATIONS` tree.
+
+### What To Improve Next Loop
+
+- Keep the deployment host path preference explicit so the cache does not drift again.
+
+### Process Decision
+
+- Stop: requested live wiring is complete and browser-verified.
 - Replaced fractional timing with the whole-second `1+` rhythm.
 - Removed the invented `Green Monster Ware Haus` label from prompts and the compact end card.
 

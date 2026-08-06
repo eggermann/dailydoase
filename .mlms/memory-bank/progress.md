@@ -2,6 +2,25 @@
 
 ## Done
 
+- Simplified the CANK wrapper so it only sets the live folder, polling interval, max iterations, and semantic word stream.
+- Synced the cleaned CANK launcher and deploy helpers to the remote mini.
+- Restarted the remote CANK trailer process on the mini with the updated launcher.
+
+## In Progress
+
+- The remote trailer run is now on the real semantic-stream `429` path instead of a synthetic fallback.
+
+## Next
+
+- Decide whether to keep waiting on the remote trailer cycle or lower request pressure.
+
+## Done
+
+- Wired the live server bootstrap to prefer `lib/GENERATIONS` on the deployment host.
+- Restarted the remote Node server so the cache rebuilt from `lib/GENERATIONS`.
+- Verified in the browser that `CANK` now appears in the live sidebar.
+- Verified `/v/CANK` opens the folder view with the movie grid.
+
 - Reframed the active goal to a new trailer run using `kaufhaus`, `fleisch`, `LSD`, and `people`.
 - Completed the new trailer render in `GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932142326-collision-cut.mp4`.
 - Kept the Kaufhaus location image as the fixed room anchor and used the protagonist image as identity only.
@@ -66,6 +85,24 @@
 
 - Review the expanded trailer output and decide whether another rerender or a commit is needed.
 - Keep Mirelo video-upload correction as a separate follow-up if sound is needed.
+
+## CANK Trailer Deploy
+
+## Done
+
+- Added newest-first CANK copy ordering.
+- Added `deploy/cank-trailer-sync-loop.cjs` for continuous live-folder mirroring.
+- Added `lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-cank-trailer.sh` for endless trailer generation with the Kaufhaus word stream.
+- Refreshed `lib/GENERATIONS/CANK` locally.
+- Captured a live screenshot of `https://dailydoase.de/v/CANK` as `.mlms/cank-live-page.png`.
+
+## In Progress
+
+- None.
+
+## Next
+
+- Start the long-running generator/sync loop on the deployment host when ready.
 
 ## Next
 

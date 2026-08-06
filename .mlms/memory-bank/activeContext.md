@@ -2,6 +2,82 @@
 
 ## Current Goal
 
+Deploy the local no-fallback CANK trailer stack to the remote mini and verify it runs from the cleaned launcher.
+
+## Current Loop
+
+Loop: 2
+Phase: In Progress
+
+## Current Focus
+
+The CANK wrapper now inherits the base trailer launcher instead of overriding image/video provider settings. The remote mini was synced and restarted, but the live semantic stream is still hitting the real Wikipedia `429` path.
+
+## Assumptions
+
+- The remote mini should mirror the current local launcher behavior exactly.
+- A hard `429` is preferable to a synthetic fallback because the user asked for a proper deploy with no fallback.
+
+## Risks / Unknowns
+
+- The live semantic stream may still be rate-limited under continuous runs.
+- Remote trailer processes may need another restart after file sync if the current child keeps old state.
+
+## Next Action
+
+Watch the remote log for the next trailer cycle or decide whether to reduce request pressure instead of reintroducing fallback behavior.
+
+## Current Goal
+
+Wire `CANK` into the live dailydoase.de index and verify it in the browser.
+
+## Current Loop
+
+Loop: 1
+Phase: Complete
+
+## Current Focus
+
+`CANK` now appears in the live sidebar and the folder view opens at `/v/CANK`.
+
+## Assumptions
+
+- The uploaded CANK folder may exist on disk but is not wired into the public route list.
+- The visible home view is the correct deployment surface for screenshot verification.
+
+## Next Action
+
+None.
+
+## Current Goal
+
+Build continuous CANK trailer deployment: keep semantic stream + taktmuster continuous, mirror new merged trailers into `lib/GENERATIONS/CANK`, and verify the live page screenshot.
+
+## Current Loop
+
+Loop: 1
+Phase: Complete
+
+## Current Focus
+
+New scripts exist for the CANK-trailer live loop and the CANK sync loop. Local `lib/GENERATIONS/CANK` was refreshed newest-first. Live screenshot captured from `https://dailydoase.de/v/CANK`.
+
+## Assumptions
+
+- The live server reads `lib/GENERATIONS/CANK` directly.
+- The first online trailer screenshot should verify the page, not a specific media file.
+
+## Risks / Unknowns
+
+- The server may cache folder listings and need a refresh or restart after sync.
+- Continuous generation timing must stay aligned with the existing semantic-stream loop.
+
+## Next Action
+
+Optionally start the long-running CANK trailer generator plus sync loop on the target host.
+
+## Current Goal
+
 Implement scene-focus routing and render two new Glass Kaufhaus trailers from `kaufhaus`, `fleisch`, `LSD`, `people`, `terror`, and `Konsum`.
 
 ## Current Loop

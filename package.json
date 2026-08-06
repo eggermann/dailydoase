@@ -97,7 +97,11 @@
     "webpack:watch": "npm run webpack:build && webpack --config webpack.config.cjs --watch",
     "server": "node --watch lib/server/test.cjs",
     "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
-    "deploy:upload": "node ./deploy/SSH-upload.cjs"
+    "deploy:upload": "node ./deploy/SSH-upload.cjs",
+    "copy:cank": "node ./deploy/copy-merged-to-cank.cjs",
+    "copy:cank-trailer": "node ./deploy/copy-merged-to-cank.cjs",
+    "sync:cank-trailer": "node ./deploy/cank-trailer-sync-loop.cjs",
+    "trailer:cank": "sh lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-cank-trailer.sh"
   },
   "keywords": [],
   "author": "",
