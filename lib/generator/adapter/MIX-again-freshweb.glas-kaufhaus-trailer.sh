@@ -260,10 +260,18 @@ export FRESHWEB_DRIFT_CORRECTION_MODEL=${FRESHWEB_DRIFT_CORRECTION_MODEL:-runwar
 export FRESHWEB_DRIFT_CORRECTION_USE_CAMERA_REFERENCE=${FRESHWEB_DRIFT_CORRECTION_USE_CAMERA_REFERENCE:-0}
 export FRESHWEB_LOCAL_LOCATION_DRIFT_CORRECTION_PERCENT=${FRESHWEB_LOCAL_LOCATION_DRIFT_CORRECTION_PERCENT:-35}
 export FRESHWEB_DRIFT_CONTEXT_BUFFER_ENABLED=${FRESHWEB_DRIFT_CONTEXT_BUFFER_ENABLED:-0}
-# Audio is generated once after all WAN clips have been joined.
-export FRESHWEB_MIRELO_MODE=${FRESHWEB_MIRELO_MODE:-finalOnly}
-# If the direct Mirelo request fails, retry the same synchronized SFX pass through Runware.
-export FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED=${FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED:-1}
+# Sound toggle for final trailer merge.
+# 1 = keep Mirelo audio pass on after join.
+# 0 = skip Mirelo entirely and keep trailer silent.
+export FRESHWEB_MIRELO_AUDIO_ENABLED=${FRESHWEB_MIRELO_AUDIO_ENABLED:-1}
+if [ "${FRESHWEB_MIRELO_AUDIO_ENABLED}" = "0" ]; then
+  export FRESHWEB_MIRELO_MODE=off
+  export FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED=0
+else
+  export FRESHWEB_MIRELO_MODE=${FRESHWEB_MIRELO_MODE:-finalOnly}
+  # If the direct Mirelo request fails, retry the same synchronized SFX pass through Runware.
+  export FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED=${FRESHWEB_MIRELO_RUNWARE_FALLBACK_ENABLED:-1}
+fi
 # Runware routes this fallback to Mirelo SFX 1.5 with the finished trailer as video input.
 export FRESHWEB_MIRELO_RUNWARE_FALLBACK_MODEL=${FRESHWEB_MIRELO_RUNWARE_FALLBACK_MODEL:-mirelo:1@1}
 # Twenty-eight steps balance synchronized detail and fallback latency.
