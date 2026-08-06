@@ -56,7 +56,14 @@ const isWikipediaRateLimit = (error) => {
 export const initWordStreamsSequentially = async (
     words,
     {
-        initSingleStream = (word) => wordStream.initStreams([word]),
+        // The dependency's legacy exit hooks call process.exit() for every
+        // uncaught exception. That hides the actual rendering failure and can
+        // leave a trailer iteration with no diagnosable result. This process
+        // owns lifecycle and error reporting, so streams must not register
+        // their own global exit handlers.
+        initSingleStream = (word) => wordStream.initStreams([word], {
+            registerExitHandlers: false,
+        }),
         pauseBetweenStreamsMs = 2000,
         rateLimitRetryMs = 10000,
         maxAttempts = 3,
