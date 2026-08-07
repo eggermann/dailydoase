@@ -52,4 +52,21 @@ describe('generation filesystem watcher', () => {
 
     expect(cacheManager.getCache()).not.toHaveProperty('CANK-TRAILER');
   });
+
+  test('updates a new file inside an already watched folder', async () => {
+    generationRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'dailydoase-generations-'));
+    const trailerFolder = path.join(generationRoot, 'CANK-TRAILER');
+    fs.mkdirSync(trailerFolder);
+    fs.writeFileSync(path.join(trailerFolder, '1-trailer.mp4'), 'video');
+    cacheManager.initialize(generationRoot);
+
+    fs.writeFileSync(path.join(trailerFolder, '2-trailer.mp4'), 'video');
+
+    await waitFor(() => cacheManager.getFolder('CANK-TRAILER').length === 2);
+
+    expect(cacheManager.getFolder('CANK-TRAILER').map((file) => file.file)).toEqual([
+      '1-trailer.mp4',
+      '2-trailer.mp4',
+    ]);
+  });
 });
