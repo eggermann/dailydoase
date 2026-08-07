@@ -40,30 +40,32 @@
   position: relative;
 }
 
-// Native-format masonry for mixed generations. CSS columns let each item use
-// its own media height instead of forcing every movie into a fixed preview box.
+// Native-format masonry for mixed generations. The grid places items left to
+// right first; JavaScript assigns each item the rows its real media height uses.
 .c-panel .c-panel__list {
-  display: block;
-  columns: 1;
-  column-gap: $spacing-sm;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: 8px;
+  grid-auto-flow: row dense;
+  gap: $spacing-sm;
+  align-items: start;
 }
 
 .c-panel .c-panel__list .c-panel__item {
-  display: inline-block;
+  display: block;
   width: 100% !important;
-  break-inside: avoid;
-  margin: 0 0 $spacing-sm;
+  margin: 0;
   padding: 0;
 }
 
 @include bp(md) {
   .c-panel .c-panel__list {
-    columns: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @include bp(xxl) {
   .c-panel .c-panel__list {
-    columns: 4;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

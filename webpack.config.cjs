@@ -21,7 +21,8 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, './lib/web/dist'),
-        publicPath: '/'
+        publicPath: '/',
+        filename: '[name].[contenthash:8].js'
     },
 
     resolve: {
