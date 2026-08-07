@@ -73,9 +73,18 @@ header {
 
 // Main content
 main {
+  width: 100vw;
+
   &[style="display: none"] {
     display: inherit !important;
   }
+}
+
+// Keep media at viewport width. The fixed drawer intentionally overlays it.
+.c-panel,
+.c-panel__list {
+  box-sizing: border-box;
+  width: 100vw;
 }
 
 // Footer
