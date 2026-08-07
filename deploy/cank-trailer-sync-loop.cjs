@@ -3,8 +3,10 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const repoRoot = path.resolve(__dirname, '..');
-const sourceRoot = path.join(repoRoot, 'GENRATIONS-KAUFHAUF');
-const copyScript = path.join(repoRoot, 'deploy', 'copy-merged-to-cank.cjs');
+const sourceRoot = process.env.CANK_TRAILER_SOURCE_ROOT
+  || path.join(repoRoot, 'GENRATIONS-KAUFHAUF');
+const copyScript = process.env.CANK_TRAILER_PUBLISH_SCRIPT
+  || path.join(repoRoot, 'deploy', 'copy-merged-to-cank.cjs');
 const pollMs = Number(process.env.CANK_TRAILER_SYNC_POLL_MS || 60_000);
 
 const allowedExtensions = new Set(['.mp4', '.webm', '.mov', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.json']);
