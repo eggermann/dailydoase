@@ -1,4 +1,4 @@
-<video id="video{{json.id}}" class="responsive-video" data-mtime="{{metadata.mtime}}" controls preload="none" muted playsinline loop data-src="/v{{src}}">
-    <source data-src="/v{{src}}" type="video/mp4">
+<video id="video{{json.id}}" class="responsive-video" data-mtime="{{metadata.mtime}}" controls preload="none" muted playsinline loop data-src="/v{{src}}?v={{metadata.mtime}}">
+    <source data-src="/v{{src}}?v={{metadata.mtime}}" type="video/mp4">
     Your browser does not support the video tag.
 </video>

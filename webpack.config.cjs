@@ -52,7 +52,7 @@ module.exports = {
             ]
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css'
+            filename: '[name].[contenthash:8].css'
         }),
         //https://yonatankra.com/how-to-use-htmlwebpackplugin-for-multiple-entries/
 

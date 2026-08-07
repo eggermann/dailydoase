@@ -22,19 +22,48 @@
 .c-panel__item__link,
 .c-panel__item {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
   position: relative;
 }
 
 .responsive-video {
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
   max-width: 100vw;
-  max-height: 100%;
   display: block;
-  aspect-ratio: 16/9;
+  // Keep the media's real canvas. A 9:16 trailer stays vertical, while older
+  // 4:3 and 16:9 movies keep their native shape in the masonry list.
+  aspect-ratio: auto;
   background: #000;
-  object-fit: cover;
+  object-fit: contain;
   position: relative;
+}
+
+// Native-format masonry for mixed generations. CSS columns let each item use
+// its own media height instead of forcing every movie into a fixed preview box.
+.c-panel .c-panel__list {
+  display: block;
+  columns: 1;
+  column-gap: $spacing-sm;
+}
+
+.c-panel .c-panel__list .c-panel__item {
+  display: inline-block;
+  width: 100% !important;
+  break-inside: avoid;
+  margin: 0 0 $spacing-sm;
+  padding: 0;
+}
+
+@include bp(md) {
+  .c-panel .c-panel__list {
+    columns: 3;
+  }
+}
+
+@include bp(xxl) {
+  .c-panel .c-panel__list {
+    columns: 4;
+  }
 }
