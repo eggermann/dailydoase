@@ -245,6 +245,25 @@ const resolveRetryOnFailure = (config = {}) => {
     return Boolean(config.model.retryOnFailure);
 };
 
+// Normal retries preserve the prepared prompt. Long-running renderers can
+// discard a failed iteration after provider-level retries and ask their live
+// word streams for fresh terms on the next scheduled run.
+const resolveAdvanceOnFailure = (config = {}) => Boolean(config?.model?.advanceOnFailure);
+
+const resolveFailureRecoveryIterations = (config = {}) => {
+    const configuredCount = Number(config?.model?.failureRecoveryIterations);
+    return Number.isFinite(configuredCount) && configuredCount > 0
+        ? Math.floor(configuredCount)
+        : 0;
+};
+
+const resolveFailureRecoveryDelayMs = (config = {}) => {
+    const configuredDelay = Number(config?.model?.failureRecoveryDelayMs);
+    return Number.isFinite(configuredDelay) && configuredDelay > 0
+        ? configuredDelay
+        : 1;
+};
+
 export const resolveMaxIterations = (config = {}) => {
     const configuredLimit = Number(config?.model?.maxIterations);
     if (configuredLimit === -1) {
@@ -276,6 +295,7 @@ const _ = {
 
     getLoop: function (model, config) {
         let iteration = 0;
+        let pendingFailureRecoveryIterations = 0;
 
         const loop = async (streams, oldPrompt) => {
             iteration += 1;
@@ -285,37 +305,41 @@ const _ = {
 
 
 
-            if (!oldPrompt) {//the last api call was sucessfull
-                prompt = config.promptFunktion
-                    ? await config.promptFunktion(streams, config)
-                    : await promptCreator.default(streams, config);
-
-                //
-
-                //     console.log('org-prompt: ', chalk.red(model.id +' '+ prompt));
-
-                //prompt = await fullFillPrompt(prompt);
-            } else {
-                prompt = oldPrompt
-            }
-
-            const loopWords = formatLoopWords(config, streams);
-            const loopPrompt = formatLoopPrompt(prompt);
-            const logSuffix = loopPrompt && loopPrompt !== loopWords
-                ? ` -> ${loopPrompt}`
-                : '';
-            console.log(chalk.green(`[semantic-stream] iteration ${iteration}: ${loopWords}${logSuffix}`));
-            const loopResponse = consumeSemanticStreamLogResponse(config) || formatLoopResponse(prompt);
-            if (loopResponse) {
-                const responseLabel = oldPrompt ? 'base-retry-response' : 'base-response';
-                console.log(chalk.magentaBright(`[semantic-stream] ${responseLabel} ${iteration}:`));
-                console.log(chalk.magentaBright(loopResponse));
-            }
-
-            // console.log('Prompt:---> ', chalk.yellow(prompt));
-
             let keepPrompt = null;
-            const success = await model.prompt(prompt, config);// v
+            let success = false;
+            try {
+                if (!oldPrompt) {//the last api call was sucessfull
+                    prompt = config.promptFunktion
+                        ? await config.promptFunktion(streams, config)
+                        : await promptCreator.default(streams, config);
+
+                    //
+
+                    //     console.log('org-prompt: ', chalk.red(model.id +' '+ prompt));
+
+                    //prompt = await fullFillPrompt(prompt);
+                } else {
+                    prompt = oldPrompt
+                }
+
+                const loopWords = formatLoopWords(config, streams);
+                const loopPrompt = formatLoopPrompt(prompt);
+                const logSuffix = loopPrompt && loopPrompt !== loopWords
+                    ? ` -> ${loopPrompt}`
+                    : '';
+                console.log(chalk.green(`[semantic-stream] iteration ${iteration}: ${loopWords}${logSuffix}`));
+                const loopResponse = consumeSemanticStreamLogResponse(config) || formatLoopResponse(prompt);
+                if (loopResponse) {
+                    const responseLabel = oldPrompt ? 'base-retry-response' : 'base-response';
+                    console.log(chalk.magentaBright(`[semantic-stream] ${responseLabel} ${iteration}:`));
+                    console.log(chalk.magentaBright(loopResponse));
+                }
+
+                // console.log('Prompt:---> ', chalk.yellow(prompt));
+                success = await model.prompt(prompt, config);// v
+            } catch (error) {
+                console.error('[semantic-stream] iteration crashed before completion:', error?.stack || error);
+            }
           
           
           //TODO --> somehow keep prompt when false to not repeat the same prompt eg stream get next and api calls 
@@ -327,9 +351,22 @@ const _ = {
             const idx = Number.isInteger(config.rndIndex) ? config.rndIndex : 0;
 
 
+            const advanceOnFailure = resolveAdvanceOnFailure(config);
+            const recoveryIteration = pendingFailureRecoveryIterations > 0;
+            if (recoveryIteration) {
+                pendingFailureRecoveryIterations -= 1;
+            }
             if (!success) {
-                keepPrompt = prompt;
+                keepPrompt = advanceOnFailure ? null : prompt;
                 console.error(chalk.red('---> no success'), success);
+                if (advanceOnFailure) {
+                    if (!recoveryIteration) {
+                        pendingFailureRecoveryIterations = resolveFailureRecoveryIterations(config);
+                    }
+                    console.warn(chalk.yellow(
+                        '[semantic-stream] iteration failed after provider retries; discarding it and advancing to fresh semantic terms.'
+                    ));
+                }
             } else {
                 _.rnd_cnt[idx] = (_.rnd_cnt[idx] ?? 0) + 1;
                 //  console.log(_.rnd_cnt[idx], '---> success', success, config.model);
@@ -338,7 +375,10 @@ const _ = {
 
             const hasPollingTime = !!config.model
               && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
-            const wait = hasPollingTime ? config.model.pollingTime : 4000;
+            const pollingWait = hasPollingTime ? config.model.pollingTime : 4000;
+            const wait = pendingFailureRecoveryIterations > 0
+                ? resolveFailureRecoveryDelayMs(config)
+                : pollingWait;
             const retryOnFailure = resolveRetryOnFailure(config);
             const maxIterations = resolveMaxIterations(config);
             const scheduleNextIteration = shouldScheduleNextIteration({
@@ -351,7 +391,10 @@ const _ = {
 
             if (scheduleNextIteration) {
                 setTimeout(async () => {
-                    console.log('******** again ****** polling interval ', 'wait:', wait)
+                    const nextRunLabel = pendingFailureRecoveryIterations > 0
+                        ? `failure recovery; ${pendingFailureRecoveryIterations} fresh iteration(s) still queued`
+                        : 'normal forward iteration';
+                    console.log('******** again ****** polling interval ', 'wait:', wait, nextRunLabel)
                     await loop(streams, keepPrompt);
 
                 }, wait);

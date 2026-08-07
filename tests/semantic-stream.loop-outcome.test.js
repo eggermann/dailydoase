@@ -88,4 +88,71 @@ describe('finite semantic-stream runs', () => {
     expect(model.prompt).toHaveBeenNthCalledWith(1, 'round-1', config);
     expect(model.prompt).toHaveBeenNthCalledWith(2, 'round-2', config);
   });
+
+  test('runs two fresh recovery iterations after a failure before returning to normal polling', async () => {
+    jest.useFakeTimers();
+    const existingWordStreams = [{ currentWord: 'Raster' }];
+    const model = {
+      prompt: jest.fn()
+        .mockResolvedValueOnce(false)
+        .mockResolvedValueOnce(true)
+        .mockResolvedValueOnce(true)
+        .mockResolvedValueOnce(true),
+    };
+    const config = {
+      id: 'advance-after-failure-test',
+      words: [],
+      model: {
+        maxIterations: 4,
+        pollingTime: 100,
+        retryOnFailure: true,
+        advanceOnFailure: true,
+        failureRecoveryIterations: 2,
+        failureRecoveryDelayMs: 10,
+      },
+      promptFunktion: jest.fn(async () => `round-${model.prompt.mock.calls.length + 1}`),
+    };
+
+    const runSameStream = createSemanticStreamLoop(model, config);
+    await runSameStream(existingWordStreams);
+    await jest.advanceTimersByTimeAsync(20);
+
+    expect(model.prompt).toHaveBeenNthCalledWith(1, 'round-1', config);
+    expect(model.prompt).toHaveBeenNthCalledWith(2, 'round-2', config);
+    expect(model.prompt).toHaveBeenNthCalledWith(3, 'round-3', config);
+
+    await jest.advanceTimersByTimeAsync(99);
+    expect(model.prompt).toHaveBeenCalledTimes(3);
+    await jest.advanceTimersByTimeAsync(1);
+    expect(model.prompt).toHaveBeenNthCalledWith(4, 'round-4', config);
+  });
+
+  test('keeps the stream alive when an iteration throws', async () => {
+    jest.useFakeTimers();
+    const model = {
+      prompt: jest.fn()
+        .mockRejectedValueOnce(new Error('Runware request failed'))
+        .mockResolvedValueOnce(true),
+    };
+    const config = {
+      id: 'thrown-iteration-recovery-test',
+      words: [],
+      model: {
+        maxIterations: 2,
+        pollingTime: 100,
+        retryOnFailure: true,
+        advanceOnFailure: true,
+        failureRecoveryIterations: 1,
+        failureRecoveryDelayMs: 10,
+      },
+      promptFunktion: jest.fn(async () => `round-${model.prompt.mock.calls.length + 1}`),
+    };
+
+    const runSameStream = createSemanticStreamLoop(model, config);
+    await runSameStream([{ currentWord: 'Raster' }]);
+    await jest.advanceTimersByTimeAsync(10);
+
+    expect(model.prompt).toHaveBeenNthCalledWith(1, 'round-1', config);
+    expect(model.prompt).toHaveBeenNthCalledWith(2, 'round-2', config);
+  });
 });
