@@ -1,5 +1,184 @@
 # Sprint Review
 
+## Loop 13 Review — Portrait card and new CANK words
+
+### What Changed
+
+- Added a 9:16-specific exhibition end-card layout and a focused regression test.
+- Restarted CANK from one verified process after removing one stale, orphaned renderer.
+- Replaced the live English seed stream with `Department store · Toy · Horror · Landscape · Art exhibition · Animals`.
+
+### Acceptance Criteria Result
+
+- [x] Portrait end-card renderer has dedicated proportional composition.
+- [x] Focused end-card tests pass.
+- [x] Live log confirms the six requested English words.
+- [x] Only one CANK renderer remains active after restart.
+
+### Verification Result
+
+- `end-card.test.js`: 4 tests passed.
+- `zsh -n` and diff review pending in this same loop.
+
+### Process Decision
+
+- Stop: semantic stream changed and new iteration started; no commit without user request.
+
+## Loop 13 Retrospective
+
+### What Worked
+
+- Reading the live process tree caught a stale renderer before it could make another competing trailer.
+
+### What To Improve Next Loop
+
+- Apply the Supervisor process-group setting through the host's active configuration path before the next service restart.
+
+## Loop 14 Review — Server-readable CANK end card
+
+### What Changed
+
+- Replaced the fragile embedded SVG background with server-side Sharp composition.
+- Used explicit DejaVu font properties so the host renderer keeps the intended title scale.
+- Uploaded the renderer, created a real 576×1024 proof using an actual CANK last frame, then restarted the loop with one Node child.
+
+### Acceptance Criteria Result
+
+- [x] Exhibition title and metadata are large and readable.
+- [x] Final scene remains visibly present behind the text.
+- [x] Only one CANK Node renderer is active.
+- [x] Screenshot captured from the server-rendered proof card.
+
+### Verification Result
+
+- Focused `end-card.test.js`: 4 passed.
+- Remote proof image: 576×1024 PNG, visibly reviewed.
+- `zsh -n`, `node --check`, and `git diff --check` passed before deploy.
+
+### Process Decision
+
+- Stop: requested readable-card proof and clean restart are complete. No commit without request.
+
+## Loop 12 Review — Main Push and Live Deploy
+
+### What Changed
+
+- Rebased the small CSS layout fix onto current GitHub `main` and pushed `55cee057`.
+- Deployed the built stylesheet through a targeted transfer and restarted `dailyDoase`.
+
+### Acceptance Criteria Result
+
+- [x] GitHub main contains the drawer overlay fix.
+- [x] Production has the built CSS.
+- [x] Production service responds with HTTP 200.
+- [x] Live browser screenshot verifies the intended composition.
+
+### Process Decision
+
+- Stop: push and deploy complete.
+
+## Loop 11 Review — Main Drawer Overlay
+
+### What Changed
+
+- `main`, `.c-panel`, and `.c-panel__list` now use the viewport width.
+- The fixed drawer is explicitly anchored at `left: 0`, so it overlays media rather than pushing it aside.
+
+### Acceptance Criteria Result
+
+- [x] Drawer overlays a full-width media list.
+- [x] DailyDoase title remains at the top-left.
+- [x] `main` commit exists: `dd7a0867`.
+
+### Verification Result
+
+- `npm run webpack:build` passed in the clean main worktree.
+- Local populated-folder Playwright screenshot confirmed layout.
+
+### Process Decision
+
+- Stop: committed to main. Push/deploy remains user-controlled.
+
+## Loop 10 Review — Live CANK Recovery
+
+### What Changed
+
+- Restored 335 missing historical folders into active `lib/GENERATIONS` through hard links; original remote archive was not deleted or overwritten.
+- Removed 52 exact duplicate CANK videos after SHA-256 comparison, leaving 57 unique videos.
+- Pinned CANK below Home, sorted its content by `1-`, `2-`, `3-` prefixes, and optimized cache startup to sort once per folder.
+
+### Acceptance Criteria Result
+
+- [x] CANK has no byte-identical duplicate videos.
+- [x] CANK is at the top of the folder navigation, directly below Home.
+- [x] Historical generation folders are available again.
+- [x] Remote service starts and responds with HTTP 200.
+- [x] Live screenshot captured.
+
+### Verification Result
+
+- Remote `lib/GENERATIONS` now has 358 folders; none remain missing compared with the archive.
+- Remote CANK has 57 videos and 60 visible items including supporting image files.
+- `node --check` passed for the changed server/cache files; `git diff --check` passed.
+- Live Playwright screenshot: `.playwright-cli/page-2026-08-07T09-07-33-078Z.png`.
+
+### Process Decision
+
+- Stop: recovery is deployed and verified. No commit made because permission was not requested.
+
+## Loop 9 Review — DailyDoase Home Page Repair
+
+### What Changed
+
+- Made the home hero prefer the newest playable video instead of the newest file overall.
+- Removed the home header zero-height behavior and added content offset so the fixed sidebar no longer collides with the title.
+- Built the updated web bundle, uploaded the changed runtime files to the Uberspace DailyDoase host, and restarted the `dailyDoase` service.
+
+### Acceptance Criteria Result
+
+- [x] Main movie shows on the home page.
+- [x] Title no longer overlaps the sidebar.
+- [x] Remote service restarted successfully.
+- [x] Screenshot captured after deploy.
+
+### Verification Result
+
+- `npm run webpack:build` passed.
+- `node --check lib/server/index.cjs` passed.
+- `supervisorctl restart dailyDoase` succeeded on the remote host.
+- `curl -I http://127.0.0.1:4000` returned `HTTP/1.1 200 OK`.
+- Playwright screenshot saved at `.playwright-cli/page-2026-08-07T08-49-41-404Z.png`.
+
+### Process Decision
+
+- Stop: the requested home-page fix is deployed and visually verified.
+
+## Loop 8 Review — Remote Node 22 and Local Semantic-Stream Checkout
+
+### What Changed
+
+- Repointed the remote mini to Node 22.23.2 by replacing the old `/usr/local/bin/node`, `npm`, and `npx` with a user-local install.
+- Switched this repo to the sibling `../semantic-stream` checkout at version 3.0.4.
+- Re-ran the focused semantic-stream tests locally and remotely under the same polyfill path.
+
+### Acceptance Criteria Result
+
+- [x] Remote mini now runs Node 22.23.2.
+- [x] This repo tests against the local semantic-stream checkout.
+- [x] Focused semantic-stream tests pass locally.
+- [x] Focused semantic-stream tests pass remotely.
+
+### Verification Result
+
+- Local `tests/semantic-stream.cache.test.js` passed.
+- Local `tests/semantic-stream.loop-outcome.test.js` passed.
+- Remote `tests/semantic-stream.cache.test.js` passed with the Node 22 polyfill path.
+- Remote `tests/semantic-stream.loop-outcome.test.js` passed with the Node 22 polyfill path.
+
+### Process Decision
+
+- Stop: the module/runtime upgrade is verified. Next step is only whether to commit the local dependency pin.
+
 ## Loop 7 Review — Remote No-Fallback CANK Deploy
 
 ### What Changed
@@ -821,3 +1000,73 @@ Build one deterministic poster-driven Glass Kaufhaus generation path with at lea
 ### User Demo Notes
 
 - Resume requires a fresh render start.
+
+## Live CANK-TRAILER Deployment Review
+
+- [x] Continuous Supervisor generator and sync services are live.
+- [x] The semantic stream and taktmuster flow unchanged into the server renderer.
+- [x] First actual server-generated trailer completed and published newest-first.
+- [x] Sound MP4 and standalone `Sound` WAV are live.
+- [x] Mobile verification passed: 576x1024 H.264/AAC, 18.08 seconds, HTTP 200.
+
+Recovery: a transient Runware provider 503 is retried per clip; the publisher carries the required video metadata sidecar.
+
+## Loop 1 Review — CANK Failure Recovery
+
+### What Changed
+
+- Added opt-in forward recovery controls to the semantic loop and enabled them only in the CANK launcher.
+- A failed trailer now schedules two fresh semantic attempts at one-second spacing; only then does it return to the fourteen-hour cadence.
+- Caught asynchronous prompt/provider errors within the semantic loop so they use the same recovery path.
+
+### Acceptance Criteria Result
+
+- [x] A failed iteration does not repeat its old trailer prompt.
+- [x] Two new iterations use the still-live stream before normal polling resumes.
+- [x] A thrown provider error follows the same path.
+
+### Verification Result
+
+- `NODE_OPTIONS=--experimental-vm-modules npx jest tests/semantic-stream.loop-outcome.test.js --runInBand` — 9 passed.
+- Node checks, CANK shell syntax check, and `git diff --check` pass.
+
+### Process Decision
+
+- Stop: implementation complete; deployment remains user-controlled.
+
+## Loop 1 Review — Three-Branch Batch
+
+### Acceptance Criteria Result
+
+- [x] 15 trailers completed: 5 each for Good 1, Good 2, and Good 3.
+- [x] All final movies contain AAC audio.
+- [x] All renderer processes ended after verification.
+- [x] Live folders contain 5 video files and 5 Sound assets each; public routes respond with HTTP 200.
+
+### Recovery Note
+
+- A stuck Good 3 run was replaced using the same captured preset environment and a 90-second semantic-step timeout. It completed without changing the other running branches.
+
+## Loop 2 Review — Continuous Service Recovery
+
+- [x] Semantic `getNext()` has a 90-second bound and uses the existing forward-failure path.
+- [x] `cankTrailerWatchdog` is installed and running in Supervisor on the production server.
+- [x] It uses a fifteen-hour stale threshold, so it cannot interrupt the intended fourteen-hour cadence.
+
+## Loop 3 Review — English CANK 784 Refresh
+
+### Acceptance Criteria Result
+
+- [x] Restarted the deployed generator with the requested English semantic terms.
+- [x] A fresh sound-ready mobile trailer was added to `/v/CANK-TRAILER`.
+- [x] Existing generation 783 remained published.
+- [x] Screenshot captured from the fresh direct trailer route.
+
+### Verification Result
+
+- Shell syntax check, publisher Node syntax check, and `git diff --check` passed.
+- Browser verification confirmed 784 as the first CANK-TRAILER item and loaded its public direct video route.
+
+### Retrospective
+
+- Keep publisher behavior append-only: it protects the public archive while the scheduled loop continues.

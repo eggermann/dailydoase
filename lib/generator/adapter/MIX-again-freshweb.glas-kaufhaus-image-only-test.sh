@@ -8,8 +8,8 @@ export FRESHWEB_IMAGE_ONLY_TEST_ENABLED=${FRESHWEB_IMAGE_ONLY_TEST_ENABLED:-1}
 # This validation mode isolates the monster; no humans or poster portraits.
 export FRESHWEB_ALLOW_PEOPLE=${FRESHWEB_ALLOW_PEOPLE:-0}
 export FRESHWEB_SCENE_CONTEXT_LOCK_ACTOR_COUNT=${FRESHWEB_SCENE_CONTEXT_LOCK_ACTOR_COUNT:-1}
-# Raw Kaufhaus photographs supply location only. The monster is rebuilt per scene
-# from the separate identity reference and the current Semantic Stream collision.
+# Monster-visible scenes composite the canonical protagonist into the selected
+# Kaufhaus location. Monster-free scenes omit the protagonist entirely.
 export FRESHWEB_SCENE_CONTEXT_IMAGES_INCLUDE_PROTAGONIST=${FRESHWEB_SCENE_CONTEXT_IMAGES_INCLUDE_PROTAGONIST:-0}
 # One strong pass uses location, identity, and Semantic Stream together.
 # Override with 1 only to compare the more expensive reconstruction experiment.

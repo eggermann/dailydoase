@@ -1,5 +1,87 @@
 # Progress
 
+## In Progress
+
+- Planning a new live trailer base branch from the current state.
+- Comparing the three `trailer/*` branches as cherry-pick sources.
+- Mapping the live `live/` web folder and continuous semantic-collision loop.
+
+## Done — Main Push and Live Drawer Deploy
+
+- Cherry-picked the layout commit onto current GitHub `main` as `55cee057` and pushed it.
+- Uploaded only `lib/web/dist/main.css` and `main.css.map` to production, preventing another generation-folder sync.
+- Restarted the remote service and verified `HTTP/1.1 200 OK`.
+- Live screenshot: `.playwright-cli/page-2026-08-07T09-32-58-114Z.png`.
+
+## Done — Main Drawer Overlay Layout
+
+- Committed `dd7a0867 fix: overlay drawer above full-width media` directly on `main`.
+- Restored a `100vw` media canvas beneath the fixed left drawer and explicitly anchored the drawer at the left edge.
+- Local Playwright check: `.playwright-cli/page-2026-08-07T09-15-33-036Z.png`.
+
+## Done — Live CANK Recovery
+
+- Restored the remote historical archive into `lib/GENERATIONS` by hard-linking missing folders only; the original `GENERATIONS` archive remains intact.
+- Removed 52 byte-identical duplicate CANK videos after SHA-256 verification; 57 unique videos plus supporting files remain.
+- Pinned CANK below Home and sorted CANK output by its production numeric prefixes.
+- Changed cache initialization to sort each folder once after scanning, so the restored archive can start reliably.
+- Restarted `dailyDoase`; remote HTTP returned `200 OK`.
+- Captured live verification: `.playwright-cli/page-2026-08-07T09-07-33-078Z.png`.
+
+## Done
+
+- Added a dedicated proportional end-card composition for the 576×1024 CANK trailer output.
+- Added and passed a focused portrait end-card regression test.
+- Updated the production end-card module and restarted `cankTrailer`.
+
+## In Progress
+
+- The next live CANK iteration is running with the requested semantic stream:
+  `Department store · Toy · Horror · Landscape · Art exhibition · Animals`.
+
+## Done — Readable Portrait Card Proof
+
+- Replaced SVG data-URI background loading with Sharp composition for 9:16 cards.
+- Replaced server-dependent font shorthand with explicit DejaVu font properties.
+- Verified the deployed 576×1024 card against a real CANK last-scene frame.
+- Restarted CANK with exactly one renderer child after ending the stale orphan.
+
+## Next
+
+- Review the next live trailer after its normal render completes.
+
+## Earlier Done
+
+- Fixed the home-page hero selection so the newest video, not the newest image, becomes the main movie on the landing page.
+- Added home/layout CSS so the title no longer overlaps the sidebar and the content starts to the right of the fixed menu.
+- Deployed the updated server and dist bundle to the Uberspace DailyDoase host.
+- Restarted the `dailyDoase` supervisor service and verified HTTP 200 on `127.0.0.1:4000`.
+- Captured a fresh screenshot of the fixed home page.
+
+## In Progress
+
+- None.
+
+## Next
+
+- Inspect branch-specific trailer scripts and model pins.
+- Choose the first cherry-pick slice for the live base branch.
+- Decide how the 14-hour cadence should be represented in the launcher.
+
+## Done
+
+- Upgraded the remote mini to Node 22.23.2 by repointing `/usr/local/bin/node`, `npm`, and `npx` at a user-local install.
+- Switched this repo to the local sibling `../semantic-stream` checkout at version 3.0.4.
+- Verified the focused semantic-stream tests locally and on the remote mini.
+
+## In Progress
+
+- The remote trailer loop is running again under the new Node 22 binary.
+
+## Next
+
+- Decide whether to commit the local `semantic-stream` file-link pin or keep it as a test-only change.
+
 ## Done
 
 - Simplified the CANK wrapper so it only sets the live folder, polling interval, max iterations, and semantic word stream.
@@ -95,6 +177,13 @@
 - Added `lib/generator/adapter/MIX-again-freshweb.glas-kaufhaus-cank-trailer.sh` for endless trailer generation with the Kaufhaus word stream.
 - Refreshed `lib/GENERATIONS/CANK` locally.
 - Captured a live screenshot of `https://dailydoase.de/v/CANK` as `.mlms/cank-live-page.png`.
+
+## Done — CANK Failure Recovery
+
+- Added an in-process recovery burst: a failed trailer consumes no repeated prompt, then creates two fresh semantic iterations before the fourteen-hour delay resumes.
+- Kept the same WordStream instances alive across recovery attempts.
+- Added a regression test for a returned failure and a thrown provider error.
+- Focused semantic-stream loop tests, Node syntax checks, shell syntax check, and `git diff --check` pass.
 
 ## In Progress
 
@@ -201,3 +290,25 @@
 - One fresh iteration completed with six Taktmuster beats from `Kaufhaus`, `Fleisch`, `LSD`, `people`, `terror`, and `Konsum`.
 - Merged silent trailer: `GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/merged/1785942452919-collision-cut.mp4` (H.264, 448x336, 17.428571s).
 - Mirelo and Runware final-audio fallback failed, so the visual trailer is intentionally silent. The one-iteration renderer processes were stopped after the merge.
+
+## Live CANK-TRAILER Proof
+
+- [x] Separate target `lib/GENERATIONS/CANK-TRAILER` and `Sound/` created.
+- [x] Server launcher and publisher services installed under Supervisor.
+- [x] Remote iteration 783 rendered six WAN clips, merged, generated Runware-Mirelo fallback audio, and muxed it.
+- [x] Published `1-783-glas-kaufhaus-cank-trailer-mobile-live-1786098556134-with-sound.mp4`, its JSON sidecar, and its WAV.
+- [x] Public page and direct video returned HTTP 200; ffprobe verified H.264 576x1024 + AAC, 18.08s.
+- [x] Fresh mobile screenshot captured at `.mlms/cank-trailer-live-mobile-783.png`.
+
+## Three-Branch Local Batch and Live Upload
+
+- [x] Generated and verified 15 `*-with-sound.mp4` trailers: five each from the Good 1, Good 2, and Good 3 branch presets.
+- [x] `ffprobe` verified AAC audio in every final MP4.
+- [x] Published all 15, not merely the newest item per generation, to separate live folders: `CANK-TRAILER-GOOD-1`, `CANK-TRAILER-GOOD-2`, and `CANK-TRAILER-GOOD-3`.
+- [x] Each public folder has five numbered video files and five `Sound/` files. DailyDoase restarted and its local and public routes returned HTTP 200.
+
+## CANK 784 English Live Refresh
+
+- [x] Generation 784 completed from the new English semantic stream.
+- [x] `1-784-glas-kaufhaus-cank-trailer-mobile-live-1786115449924-with-sound.mp4` was added to `/v/CANK-TRAILER` without removing 783.
+- [x] Direct live route, mobile 9:16 screenshot, sound output, and public ordering verified.

@@ -20,11 +20,11 @@ body {
 header {
 
   .home & {
-    height: 0;
+    height: auto;
   }
 
   z-index: $z-header;
-  position: sticky;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -74,9 +74,18 @@ header {
 
 // Main content
 main {
+  width: 100vw;
+
   &[style="display: none"] {
     display: inherit !important;
   }
+}
+
+// Media stays viewport-wide. The fixed drawer deliberately sits over it.
+.c-panel,
+.c-panel__list {
+  box-sizing: border-box;
+  width: 100vw;
 }
 
 // Footer

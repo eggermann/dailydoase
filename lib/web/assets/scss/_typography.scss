@@ -21,6 +21,21 @@ h1, h2 {
   display: inline-block;
 }
 
+.home {
+  .c-title,
+  h2 {
+    transform: none;
+  }
+
+  .c-title {
+    margin-bottom: 0.25rem;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
 // Text mixins
 @mixin info-text {
   mix-blend-mode: color-dodge;

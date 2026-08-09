@@ -1,6 +1,82 @@
 # Decision Log
 
+## D-0018: Give portrait trailers their own end-card composition
+
+Status: Accepted
+
+Context:
+The compact end card was designed around short landscape output and used absolute vertical coordinates. In a 576×1024 CANK trailer it left most of the frame empty.
+
+Decision:
+Use a portrait-specific SVG only when a compact trailer is taller than wide. Scale type from width and place the information across the upper half over the extracted final scene.
+
+Consequences:
+Landscape cards retain their proven composition; 9:16 cards are readable and visually present.
+
+## D-0019: Replace the live CANK stream seed words
+
+Status: Accepted
+
+Decision:
+The CANK launcher now seeds exactly: `Department store`, `Toy`, `Horror`, `Landscape`, `Art exhibition`, and `Animals`, all marked English.
+
+Consequences:
+Restarting the live runner starts a fresh semantic stream with those six terms; no existing completed trailer is changed.
+
+## D-0020: Render portrait cards by compositing the scene locally
+
+Status: Accepted
+
+Context:
+The server SVG renderer ignored embedded image data and reduced CSS font shorthand to tiny fallback text.
+
+Decision:
+For portrait cards, Sharp resizes the extracted final-scene image and composites an SVG overlay with explicit DejaVu font properties.
+
+Consequences:
+The CANK end-card is independent of the server SVG image-URI and font-shorthand behavior.
+
 ## Decisions
+
+### D-0030: Preserve Archive While Restoring Live Generation Folders
+
+Status: Accepted
+
+Context: The public CANK view had only 10 active folders after the site switched to `lib/GENERATIONS`, while the remote archive still contained 357 historical folders. CANK also contained 52 byte-identical video duplicates.
+
+Decision: Hard-link only missing archive folders into `lib/GENERATIONS`, preserving the archive in place. Remove only CANK media duplicates proven identical by SHA-256, keeping the lowest numeric prefix because `1-`, `2-`, `3-` defines newest-first publishing order.
+
+Consequences: History returns without a destructive migration or doubled storage. CANK has one copy per proven media asset, remains first below Home, and uses its numeric publication order.
+
+### D-0029: Prefer Video Hero on the DailyDoase Home Page
+
+Status: Accepted
+
+Context: The home page was selecting the newest file overall, which could be a still image and left the landing view looking broken or secondary.
+
+Decision: Select the newest playable video for the home hero when one exists, keep the image fallback for folders without video, and offset the page content so the fixed sidebar no longer overlaps the title.
+
+Consequences: The landing page now opens on the actual movie-first asset, the sidebar/title collision is removed, and the remote service shows the intended hero without changing the trailer pipeline.
+
+### D-0027: Test Against the Local Semantic-Stream Checkout
+
+Status: Accepted
+
+Context: The user updated `semantic-stream` to 3.0.4 locally before the registry version was available to the repo.
+
+Decision: Point this repo at `file:../semantic-stream` so local and remote tests run the sibling checkout directly.
+
+Consequences: The repo can validate the new module immediately, but the pin is now a local-path dependency instead of a published npm release.
+
+### D-0028: Upgrade the Remote Mini to Node 22.23.2
+
+Status: Accepted
+
+Context: The remote mini was still on Node 16.15.0, which broke `semantic-stream@3.0.4` because `ReadableStream` and the required engine level were missing.
+
+Decision: Install Node 22.23.2 into the user-local account on the mini and repoint `/usr/local/bin/node`, `npm`, and `npx` at that install.
+
+Consequences: The remote trailer loop and the focused semantic-stream tests can now run under the module’s supported runtime without touching system-owned packages.
 
 ### D-0025: Keep the CANK Launcher Minimal
 
@@ -257,3 +333,53 @@ Context: The live deployment already stores the current generation cache under `
 Decision: Prefer `lib/GENERATIONS` before the top-level `GENERATIONS` folder when booting the server on the deployment host.
 
 Consequences: The live site refreshes from the same folder tree used by the deployed uploads, so new folders like `CANK` appear after restart.
+
+### D-0025: Publish Only Sound-Ready CANK Trailers
+
+Status: Accepted
+
+Context: A silent collision cut can exist before the final Mirelo fallback mux; DailyDoase needs an adjacent `.mp4.json` sidecar to resolve a video route.
+
+Decision: Publish only `*-with-sound` movies, preserve the existing live result otherwise, copy the `.mp4.json` sidecar, and put final WAV assets under `CANK-TRAILER/Sound`.
+
+Consequences: Visitors receive a complete mobile trailer; raw sound remains separately accessible.
+
+### D-0031: Advance After Failed CANK Trailer Rather Than Repeating It
+
+Status: Accepted
+
+Context: Repeating a failed WAN trailer prompt wastes media credit and stalls the semantic stream.
+
+Decision: Keep the existing three same-clip retries. If they are exhausted, discard the failed trailer prompt, run two new iterations from the existing Semantic Stream instances, then resume the normal fourteen-hour delay.
+
+Consequences: Recovery produces forward semantic material, avoids an immediate Supervisor restart for handled async failures, and preserves normal behavior for presets that do not enable this policy.
+
+### D-0032: Publish Every Sound-Ready Trailer per Branch
+
+Status: Accepted
+
+Context: A generation directory can contain several completed trailers. Selecting only its newest movie silently drops earlier validated iterations.
+
+Decision: The CANK publisher now selects every `*-with-sound` movie, accepts a generation-match filter, and publishes each branch to its own `CANK-TRAILER-GOOD-*` folder with newest-first numbered prefixes.
+
+Consequences: All five iterations per branch remain comparable on the live site and each has a standalone sound asset.
+
+### D-0033: Keep the Continuous Trailer Service Alive Through Stalls
+
+Status: Accepted
+
+Context: Supervisor restarts a crashed process, but cannot see a Node process that is alive while an external request is permanently stuck.
+
+Decision: Run a separate `cankTrailerWatchdog` service. It checks the CANK generator log every five minutes and restarts `cankTrailer` only after fifteen hours without output. The fifteen-hour threshold exceeds the intentional fourteen-hour cadence.
+
+Consequences: Normal waits remain uninterrupted; a provider/network stall cannot leave the production generator alive-but-idle indefinitely.
+
+### D-0034: CANK-TRAILER Publishing Is Append-Only
+
+Status: Accepted
+
+Context: Restarting the continuous renderer must make a fresh trailer live without erasing earlier public CANK trailers.
+
+Decision: The publisher creates target folders when absent, reuses an already-published filename for the same source artifact, and only copies newly completed sound trailers plus their sidecars and sound files. It never clears `lib/GENERATIONS/CANK-TRAILER`.
+
+Consequences: Each completed trailer remains accessible; fresh trailers are added as newest-first entries without overwriting old video artifacts.

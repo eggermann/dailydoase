@@ -23,7 +23,7 @@ $spacing-xl: 3.2rem;
 
 // Layout
 $header-height: 90vh;
-$menu-width: max-content;
+$menu-width: clamp(16rem, 22vw, 20rem);
 $border-radius: 4px;
 
 // Z-indices
