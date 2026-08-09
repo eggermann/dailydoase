@@ -4,7 +4,7 @@ const { execFileSync } = require('node:child_process');
 const logPath = process.env.CANK_TRAILER_LOG_PATH
   || '/home/eggman/logs/cankTrailer.out.log';
 const pollMs = Number(process.env.CANK_TRAILER_WATCHDOG_POLL_MS || 300_000);
-const staleMs = Number(process.env.CANK_TRAILER_WATCHDOG_STALE_MS || 54_000_000);
+const staleMs = Number(process.env.CANK_TRAILER_WATCHDOG_STALE_MS || 108_000_000);
 
 if (!Number.isFinite(pollMs) || pollMs <= 0) {
   throw new Error('CANK_TRAILER_WATCHDOG_POLL_MS must be a positive number');

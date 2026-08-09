@@ -28,7 +28,7 @@ resume_renderer() {
   supervisorctl start "$sync" || true
   supervisorctl start "$trailer"
   supervisorctl start "$watchdog"
-  echo 'Renderer resumed. It makes one trailer, waits about 14 hours, then continues.'
+  echo 'Renderer resumed. It makes one trailer, waits about 24 hours, then continues.'
 }
 
 case "$ACTION" in
