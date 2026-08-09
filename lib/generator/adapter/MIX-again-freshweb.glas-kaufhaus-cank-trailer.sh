@@ -9,11 +9,11 @@ REPO_ROOT="$(cd "$(pwd)/../../.." && pwd)"
 # One vertical trailer iteration per cycle, then wait 24 hours before the next.
 # These production dimensions mirror the proven mobile preview format so the
 # local test and the public CANK page receive the same mobile movie shape.
-export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-cank-trailer-good-1-live}
-export GENERATIONS_PATH=${GENERATIONS_PATH:-$REPO_ROOT/GENERATIONS-CANK-TRAILER-GOOD-1}
+export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-cank-trailer-mobile-live}
+export GENERATIONS_PATH=${GENERATIONS_PATH:-$REPO_ROOT/GENERATIONS-CANK-TRAILER}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-86400000}
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:--1}
-export FRESHWEB_WORDS="${FRESHWEB_WORDS:-kaufhaus,en | fleisch,de | LSD,en | people,en | terror,en | Konsum,de}"
+export FRESHWEB_WORDS="${FRESHWEB_WORDS:-Department store,en | Toy,en | Horror,en | Fast food,en}"
 export FRESHWEB_VIDEO_ASPECT_RATIO=${FRESHWEB_VIDEO_ASPECT_RATIO:-9:16}
 export FRESHWEB_IMAGE_WIDTH=${FRESHWEB_IMAGE_WIDTH:-576}
 export FRESHWEB_IMAGE_HEIGHT=${FRESHWEB_IMAGE_HEIGHT:-1024}

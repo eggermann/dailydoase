@@ -13,7 +13,7 @@ deploy/cank-trailer-control.sh status
 | Service | Job |
 | --- | --- |
 | `cankTrailer` | Creates one new mobile trailer, then waits about 24 hours. |
-| `cankTrailerSync` | Copies finished trailers to live folder `lib/GENERATIONS/CANK-TRAILER-GOOD-1`. |
+| `cankTrailerSync` | Copies finished trailers to live folder `lib/GENERATIONS/CANK-TRAILER`. |
 | `cankTrailerWatchdog` | Restarts `cankTrailer` only when no progress appears for 30 hours. |
 
 Only `cankTrailer` spends generation credits. The other two are local server processes.
@@ -65,4 +65,4 @@ After one finished trailer the renderer intentionally sleeps for about 24 hours.
 3. If status is not `RUNNING`, run `deploy/cank-trailer-control.sh restart`.
 4. If restart fails, leave it paused and share the last 120 log lines. Do not run several launcher scripts manually: there must be only one `cankTrailer` renderer.
 
-The live URL is `https://dailydoase.de/v/CANK-TRAILER-GOOD-1`.
+The live URL is `https://dailydoase.de/v/CANK-TRAILER`.
