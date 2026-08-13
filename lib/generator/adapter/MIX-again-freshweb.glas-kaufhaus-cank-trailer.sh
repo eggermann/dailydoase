@@ -5,15 +5,15 @@ cd "$(dirname "$0")"
 
 REPO_ROOT="$(cd "$(pwd)/../../.." && pwd)"
 
-# CANK trailer launcher.
-# One vertical trailer iteration per cycle, then wait ~14 hours before the next.
+# CANK GOOD-2 trailer launcher.
+# One vertical GOOD-2 trailer iteration per cycle, then wait 24 hours.
 # These production dimensions mirror the proven mobile preview format so the
 # local test and the public CANK page receive the same mobile movie shape.
-export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-cank-trailer-mobile-live}
-export GENERATIONS_PATH=${GENERATIONS_PATH:-$REPO_ROOT/GENERATIONS-CANK-TRAILER}
-export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-50400000}
+export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-cank-trailer-good-2-live}
+export GENERATIONS_PATH=${GENERATIONS_PATH:-$REPO_ROOT/GENERATIONS-CANK-TRAILER-GOOD-2}
+export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-86400000}
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:--1}
-export FRESHWEB_WORDS="${FRESHWEB_WORDS:-kaufhaus,en | fleisch,de | LSD,en | people,en | terror,en | Konsum,de}"
+export FRESHWEB_WORDS="${FRESHWEB_WORDS:-Horror,en | Art exhibition,en | Playground,en | Department store,en}"
 export FRESHWEB_VIDEO_ASPECT_RATIO=${FRESHWEB_VIDEO_ASPECT_RATIO:-9:16}
 export FRESHWEB_IMAGE_WIDTH=${FRESHWEB_IMAGE_WIDTH:-576}
 export FRESHWEB_IMAGE_HEIGHT=${FRESHWEB_IMAGE_HEIGHT:-1024}
@@ -26,11 +26,12 @@ export FRESHWEB_VIDEO_HEIGHT=${FRESHWEB_VIDEO_HEIGHT:-1024}
 # Runware can briefly lose its generated frame URL while a video job starts.
 # Retry that same clip first. If all retries fail, retain the live Semantic
 # Stream, mark the trailer failed, make two fresh semantic iterations, then
-# resume the normal fourteen-hour cadence.
+# resume the normal twenty-four-hour cadence.
 export FRESHWEB_RETRY_ON_FAILURE=${FRESHWEB_RETRY_ON_FAILURE:-true}
 export FRESHWEB_ADVANCE_ON_FAILURE=${FRESHWEB_ADVANCE_ON_FAILURE:-true}
 export FRESHWEB_FAILURE_RECOVERY_ITERATIONS=${FRESHWEB_FAILURE_RECOVERY_ITERATIONS:-2}
 export FRESHWEB_FAILURE_RECOVERY_DELAY_MS=${FRESHWEB_FAILURE_RECOVERY_DELAY_MS:-1000}
+export FRESHWEB_SEMANTIC_STEP_TIMEOUT_MS=${FRESHWEB_SEMANTIC_STEP_TIMEOUT_MS:-90000}
 export FRESHWEB_VIDEO_MAX_RETRIES_ON_FAILURE=${FRESHWEB_VIDEO_MAX_RETRIES_ON_FAILURE:-3}
 export FRESHWEB_VIDEO_RETRY_DELAY_MS=${FRESHWEB_VIDEO_RETRY_DELAY_MS:-15000}
 # A long-lived service must keep its logs useful. The underlying preset enables
