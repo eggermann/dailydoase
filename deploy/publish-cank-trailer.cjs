@@ -27,7 +27,10 @@ const listFiles = (dirPath) => fs.existsSync(dirPath)
 const selectFinalVideos = (mergedDir) => {
   const videos = listFiles(mergedDir)
     .filter((filePath) => videoExtensions.has(path.extname(filePath).toLowerCase()))
-    .filter((filePath) => !path.basename(filePath).toLowerCase().includes('end-card'));
+    .filter((filePath) => !path.basename(filePath).toLowerCase().includes('end-card'))
+    // The generator writes this sidecar only after the MP4 mux has closed.
+    // Without this gate, the publisher can copy a still-growing MP4.
+    .filter((filePath) => fs.existsSync(`${filePath}.json`));
   return videos
     .filter((filePath) => /with-sound\.(mp4|mov|webm)$/i.test(filePath))
     .sort((left, right) => getFileTime(right) - getFileTime(left));
@@ -49,6 +52,12 @@ const ensureLiveFolder = () => {
 
 const findExistingPublishedFile = (dirPath, suffix) => listFiles(dirPath)
   .find((filePath) => path.basename(filePath).endsWith(suffix)) || null;
+
+const replaceFileAtomically = (sourcePath, targetPath) => {
+  const temporaryPath = `${targetPath}.publishing-${process.pid}`;
+  fs.copyFileSync(sourcePath, temporaryPath);
+  fs.renameSync(temporaryPath, targetPath);
+};
 
 const readManifest = () => {
   try {
@@ -98,12 +107,12 @@ const main = () => {
     const videoSuffix = `-${slug(trailer.generationName)}-${slug(path.basename(trailer.videoPath))}`;
     const videoTarget = findExistingPublishedFile(targetRoot, videoSuffix)
       || path.join(targetRoot, `${prefix}${videoSuffix}`);
-    if (!fs.existsSync(videoTarget)) {
-      fs.copyFileSync(trailer.videoPath, videoTarget);
-    }
+    // Always replace an existing target: this also repairs a partial file from
+    // an interrupted older publish. Rename keeps readers on a complete file.
+    replaceFileAtomically(trailer.videoPath, videoTarget);
     const sourceVideoMetadata = `${trailer.videoPath}.json`;
-    if (fs.existsSync(sourceVideoMetadata) && !fs.existsSync(`${videoTarget}.json`)) {
-      fs.copyFileSync(sourceVideoMetadata, `${videoTarget}.json`);
+    if (fs.existsSync(sourceVideoMetadata)) {
+      replaceFileAtomically(sourceVideoMetadata, `${videoTarget}.json`);
     }
 
     let audioTarget = null;
@@ -111,9 +120,7 @@ const main = () => {
       const audioSuffix = `-${slug(trailer.generationName)}-${slug(path.basename(trailer.audioPath))}`;
       audioTarget = findExistingPublishedFile(soundRoot, audioSuffix)
         || path.join(soundRoot, `${prefix}${audioSuffix}`);
-      if (!fs.existsSync(audioTarget)) {
-        fs.copyFileSync(trailer.audioPath, audioTarget);
-      }
+      replaceFileAtomically(trailer.audioPath, audioTarget);
     }
 
     const entry = {
