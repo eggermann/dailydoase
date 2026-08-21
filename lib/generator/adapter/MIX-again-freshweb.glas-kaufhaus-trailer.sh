@@ -45,15 +45,14 @@ export FRESHWEB_MIN_SCENE_DURATION_SECONDS=${FRESHWEB_MIN_SCENE_DURATION_SECONDS
 export FRESHWEB_SINGLE_VIDEO_MAX_DURATION=${FRESHWEB_SINGLE_VIDEO_MAX_DURATION:-4}
 export FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION=${FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION:-4}
 
-# Scene 1 uses the stable single-image opening. Later scenes keep the planner's
-# choice: singleImage for continuous action, firstLast for a reachable new pose
-# or actor interaction in the same room.
+# Every exhibition clip is a two-anchor transition: current visible frame to a
+# generated reachable destination in the same room. No image-to-video fallback.
 export VIDEO_MODE_PRESET=storyDrivenMixed
 export FRESHWEB_IMAGE_TO_VIDEO_ONLY=0
-export FRESHWEB_FIRST_CLIP_VIDEO_MODE=singleImage
+export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-firstLast}
 export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=0
-export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=1
-export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1
+export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=0
+export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=0
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
 export FRESHWEB_SINGLE_VIDEO_MODEL=alibaba:wan@2.6-flash
 export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
