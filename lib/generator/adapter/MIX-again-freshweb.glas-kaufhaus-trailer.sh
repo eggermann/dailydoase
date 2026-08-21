@@ -6,7 +6,7 @@ cd "$(dirname "$0")/../../.."
 # Cheap exhibition proof: two iterations, three scenes, no sound.
 export GENERATIONS_PATH=${GENERATIONS_PATH:-"$PWD/GENRATIONS-KAUFHAUF"}
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-word-low-test}
-export FRESHWEB_WORDS=${FRESHWEB_WORDS:-wort,de | war,en | Einkaufszentrum,de}
+export FRESHWEB_WORDS=${FRESHWEB_WORDS:-human,en | Einkaufszentrum,de}
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-2}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
 
@@ -17,6 +17,14 @@ export FRESHWEB_CAMERA_IMAGE_PATH=${FRESHWEB_CAMERA_IMAGE_PATH-}
 export FRESHWEB_OPENING_IMAGE_PATH=${FRESHWEB_OPENING_IMAGE_PATH-}
 export FRESHWEB_REQUIRE_PERSON_IN_CAMERA=${FRESHWEB_REQUIRE_PERSON_IN_CAMERA:-1}
 export FRESHWEB_VALIDATE_CAMERA_SHOT=${FRESHWEB_VALIDATE_CAMERA_SHOT:-1}
+
+# Exhibition gate: compare small local camera frames first. Vision only runs on
+# the initial background, two confirmed changes, or a 30-second heartbeat.
+# On the Mac mini set LMSTUDIO_URL=http://127.0.0.1:8080 and LMSTUDIO_MODEL to
+# the installed Qwen3-VL model; no cloud vision provider is needed.
+export FRESHWEB_CAMERA_CHANGE_GATE_ENABLED=${FRESHWEB_CAMERA_CHANGE_GATE_ENABLED:-1}
+export FRESHWEB_CAMERA_CHANGE_GATE_REQUIRED_FRAMES=${FRESHWEB_CAMERA_CHANGE_GATE_REQUIRED_FRAMES:-2}
+export FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS=${FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS:-30000}
 
 # Proven scene planner from all three good trailer branches. Keep camera vision
 # local/independent; GPT-5 mini plans only the complete causal scene sequence.
@@ -52,7 +60,9 @@ export FRESHWEB_SINGLE_VIDEO_WIDTH=1088
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=832
 export FRESHWEB_SINGLE_FPS=12
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Kaufhaus story inside the exact visible exhibition room, preserve the real person and room geometry, turn semantic cues into physical actor actions or interactions, preserve existing objects, no visible words or invented typography, strong causal progression}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
+export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
+export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
 # Build the narrated opening scene from the real camera shot through Runware
 # image-to-image. This is the proven trailer path; no FAL image edit is used.
@@ -63,6 +73,11 @@ export FRESHWEB_OPENING_START_PROVIDER=runware
 export FRESHWEB_OPENING_START_MODEL=bfl:3@1
 export FRESHWEB_OPENING_START_WIDTH=${FRESHWEB_OPENING_START_WIDTH:-1184}
 export FRESHWEB_OPENING_START_HEIGHT=${FRESHWEB_OPENING_START_HEIGHT:-880}
+
+# All scene and first/last destination stills use the same Runware image path.
+# Do not fall back to legacy Qwen/FAL for a later scene endpoint.
+export FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL:-bfl:3@1}
+export FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER:-runware}
 
 # A selected person from CAST MEMORY is mixed with current room frame before
 # WAN animates it. bfl:6@1 accepts up to ten total reference images.
