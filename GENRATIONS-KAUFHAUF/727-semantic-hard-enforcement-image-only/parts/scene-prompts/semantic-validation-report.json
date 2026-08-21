@@ -1,0 +1,40 @@
+[
+  {
+    "sceneIndex": 0,
+    "anchor": "1983",
+    "collision": "NATO-Doppelbeschluss",
+    "valid": true,
+    "cueIdentityValid": true,
+    "mandatoryFieldsValid": true,
+    "derivationValid": true,
+    "collisionPhysicalizationValid": true,
+    "consequenceInheritanceValid": true,
+    "clueDerivationValid": true,
+    "monsterAgencyValid": true,
+    "tensionDerivationValid": true,
+    "promptPropagationValid": true,
+    "visibleEvidenceOfAgency": "The monster's appendages actively morph and distort the environment.",
+    "errors": [],
+    "warnings": []
+  },
+  {
+    "sceneIndex": 1,
+    "anchor": "NATO-Doppelbeschluss",
+    "collision": "Betriebsform",
+    "valid": true,
+    "cueIdentityValid": true,
+    "mandatoryFieldsValid": true,
+    "derivationValid": true,
+    "collisionPhysicalizationValid": true,
+    "consequenceInheritanceValid": true,
+    "clueDerivationValid": true,
+    "monsterAgencyValid": true,
+    "tensionDerivationValid": true,
+    "promptPropagationValid": true,
+    "visibleEvidenceOfAgency": "Monster's tendrils pulse and flow, altering room textures and reflections.",
+    "errors": [],
+    "warnings": [
+      "physicalization propagation is marginal in: semanticAction"
+    ]
+  }
+]

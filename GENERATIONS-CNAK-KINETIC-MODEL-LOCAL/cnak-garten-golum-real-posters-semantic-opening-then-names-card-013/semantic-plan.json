@@ -1,0 +1,40 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "effect": "lamps",
+  "semanticMotion": "a gentle, slow pulsation of light around the lamps, simulating a soft glow that brightens and dims subtly over four seconds",
+  "openingPoster": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/9-16-Insta-Reel.jpg",
+  "namesCard": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/9-16-Insta2-Reel.jpg",
+  "rendering": "source-pixels-only supplied poster sequence"
+}

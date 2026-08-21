@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "dem Morphem Oldenbourg Grundriss der Geschichte eines Einzelhandelsgeschäfts, das Handelswaren aus Frankfurt am Main",
+    "ist diese Unterscheidung im Deutsches Wörterbuch Terror (Begriffsklärung) das Einzelhandelsgeschäft",
+    ", Flexion Einsatzgruppen der Sicherheitspolizei und des SD aus einer oder wenigen bestimmten Warengruppe(n) in hoher Handelsware"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "story": {
+    "openingBeat": "The room transforms as the colors awaken memories of a retail space, hinting at a deeper story.",
+    "finalBeat": "The flood of light signifies a release from the previous tension, transforming the space into a vibrant spectacle.",
+    "summary": "The room transforms as the colors awaken memories of a retail space, hinting at a deeper story. -> The transformation introduces a sense of fear and tension, as the once vibrant colors now represent lurking threats. -> The flood of light signifies a release from the previous tension, transforming the space into a vibrant spectacle.",
+    "nextOpeningObligation": "Continue from this consequence: The flood of light signifies a release from the previous tension, transforming the space into a vibrant spectacle."
+  }
+}

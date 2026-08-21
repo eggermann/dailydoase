@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/730-730-semantic-english-trailer-iteration-1/parts/1785926557645-runware-image-video-last-frame.png",
+  "outputText": "Subject: Human male in casual clothing grappling with a green, tentacle-covered monster with glowing green eyes. Setting: Industrial-style office space with exposed ceiling ducts, fluorescent lights, and scattered office furniture. Framing: Medium shot capturing both figures centrally, showing full bodies and immediate surroundings. Lighting: Overhead fluorescent lighting casting even, neutral light with slight shadows beneath subjects. Visible transformation: Monster's tentacles are actively extending and wrapping around the human, emphasizing organic growth and integration with the environment. Continuity: Maintain the industrial office setting with visible ducts overhead; next scene should evolve ducts into a dense, surreal urban maze reflecting Bezirk Neukölln's complexity, preserving the monster's organic influence as it intensifies.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T10:42:42.969Z"
+}

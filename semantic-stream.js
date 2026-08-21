@@ -11,6 +11,11 @@ const chalk = require('chalk');
 
 const WORD_STREAM_CACHE_KEY = '__dailydoaseSemanticStreamCache';
 const SEMANTIC_STREAM_LOG_MAX_LENGTH = 1600;
+export const SEMANTIC_STREAM_TITLE_FILTER = Object.freeze(['doi', 'isbn']);
+
+const createSemanticStreamInitOptions = () => ({
+    filter: [...SEMANTIC_STREAM_TITLE_FILTER],
+});
 
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -41,7 +46,7 @@ export const getWordStreams = async (
     words,
     {
         forceRefresh = false,
-        initStreams = (nextWords) => wordStream.initStreams(nextWords),
+        initStreams = (nextWords, options) => wordStream.initStreams(nextWords, options),
     } = {}
 ) => {
     const cache = getWordStreamCache();
@@ -56,7 +61,7 @@ export const getWordStreams = async (
     }
 
     const pendingStreams = Promise.resolve()
-        .then(() => initStreams(words))
+        .then(() => initStreams(words, createSemanticStreamInitOptions()))
         .catch((error) => {
             cache.delete(cacheKey);
             throw error;
@@ -173,6 +178,25 @@ const resolveRetryOnFailure = (config = {}) => {
     return Boolean(config.model.retryOnFailure);
 };
 
+export const shouldScheduleNextIteration = ({
+    iteration = 0,
+    maxIterations = null,
+    pollingTime = 0,
+    success,
+    retryOnFailure = true,
+} = {}) => {
+    const parsedMaxIterations = Number(maxIterations);
+    const reachedIterationLimit = Number.isFinite(parsedMaxIterations)
+        && parsedMaxIterations > 0
+        && iteration >= Math.floor(parsedMaxIterations);
+
+    if (reachedIterationLimit || !pollingTime) {
+        return false;
+    }
+
+    return success !== false || retryOnFailure;
+};
+
 const _ = {
     rnd_cnt: [], // Now an array, one counter per stream index
     async configPromptFunktion(streams) { return streams },
@@ -244,12 +268,22 @@ const _ = {
             const wait = hasPollingTime ? config.model.pollingTime : 4000;
             const retryOnFailure = resolveRetryOnFailure(config);
 
-            if (wait && (success !== false || retryOnFailure)) {
+            const scheduleNextIteration = shouldScheduleNextIteration({
+                iteration,
+                maxIterations: config.model?.maxIterations,
+                pollingTime: wait,
+                success,
+                retryOnFailure,
+            });
+
+            if (scheduleNextIteration) {
                 setTimeout(async () => {
                     console.log('******** again ****** polling interval ', 'wait:', wait)
                     await loop(streams, keepPrompt);
 
                 }, wait);
+            } else if (Number(config.model?.maxIterations) > 0 && iteration >= Number(config.model.maxIterations)) {
+                console.log(chalk.green(`[semantic-stream] reached max iterations: ${config.model.maxIterations}`));
             }
 
             return success;

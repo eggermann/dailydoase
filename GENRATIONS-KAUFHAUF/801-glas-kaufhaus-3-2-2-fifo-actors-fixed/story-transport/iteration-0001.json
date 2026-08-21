@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "den Begriff „Wort“ völlig zurück und sprach stattdessen Ferdinand de Saussure Staaten wie des Totalitarismus zu einem großen Einzelhandelsbetrieb. Es bietet Waren aus Fachgeschäft",
+    "Mit einem Wort ist mitunter auch eine Abstraktion von der Zeichen und des Stalinismus waren Deutschland",
+    "sowie dem Wortgruppe formulierte 2005 eine Unterscheidung zwischen Terror und Peter Waldmann ab 1317 gebaute Kaufhaus am Brand in Mittelalter"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "cast": {
+    "actorReferenceLimit": 10,
+    "actorReferences": []
+  },
+  "story": {
+    "openingBeat": "The introduction of the word 'Wort' transforms the room into a hallucinatory space, setting the stage for a deeper exploration of meaning.",
+    "finalBeat": "The release of oppressive shadows into vibrant memories shifts the narrative towards a celebration of life and commerce, contrasting the previous tension.",
+    "summary": "The introduction of the word 'Wort' transforms the room into a hallucinatory space, setting the stage for a deeper exploration of meaning. -> The transformation of the word into ominous shadows introduces a theme of oppression, linking it to historical concepts of totalitarianism. -> The release of oppressive shadows into vibrant memories shifts the narrative towards a celebration of life and commerce, contrasting the previous tension.",
+    "nextOpeningObligation": "Continue from this consequence: The release of oppressive shadows into vibrant memories shifts the narrative towards a celebration of life and commerce, contrasting the previous tension."
+  }
+}

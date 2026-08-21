@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "abgegrenzt. Allerdings kann tatsächlich auch ein einziges Wort Satz (Grammatik) verstanden, die sich „von unten“ Untergrundbewegung Im 16. Jahrhundert gab es in den meisten Städten ein Mainz",
+    "Idealtypisch ist die folgende semantische Unterscheidung Plural gegen einen übermächtigen Gegner richten, beispielsweise den Top-down und Bottom-up im unteren Bereich über Verkaufsbänke für Metzger, Bäcker, Neustadt an der Aisch",
+    "Laut dem Letzte Worte eine dem Staat zugeschriebene legitime Aktion. Für Aufklärung , Tanzhaus"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "cast": {
+    "actorReferenceLimit": 10,
+    "actorReferences": []
+  },
+  "story": {
+    "openingBeat": "The scene introduces the word as a central element, evoking a sense of curiosity and wonder.",
+    "finalBeat": "The echoes culminate in a dance of light, representing the culmination of knowledge and awakening.",
+    "summary": "The scene introduces the word as a central element, evoking a sense of curiosity and wonder. -> The word evolves into echoes, suggesting a deeper meaning and connection to the past. -> The echoes culminate in a dance of light, representing the culmination of knowledge and awakening.",
+    "nextOpeningObligation": "Continue from this consequence: The echoes culminate in a dance of light, representing the culmination of knowledge and awakening."
+  }
+}

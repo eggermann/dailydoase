@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "Kreuzkölln Pull",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Exterior-to-interior shot take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a residue of. Build the mood around 2s: Exterior-to-interior shot, while Face features deep-set glowing amber eyes, a long stays just readable enough to orient the shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931782053-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931821271-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931821271-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:10:22.603Z"
+}

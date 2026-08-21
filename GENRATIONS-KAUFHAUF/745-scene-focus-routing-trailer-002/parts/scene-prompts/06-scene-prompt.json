@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "Market of Coins",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s sequence: the creature touches several items in sequence; each take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s sequence: the creature touches several items in sequence;. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the conversion sequence, top-down pan following the coin stream as it.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934492366-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934513762-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934513762-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:55:14.649Z"
+}

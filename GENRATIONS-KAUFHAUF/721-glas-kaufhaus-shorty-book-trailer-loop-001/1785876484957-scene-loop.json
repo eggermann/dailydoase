@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785876484957-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785876484957-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "NATO-Doppelbeschluss Distortion",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876537670-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876537670-runware-image-video.mp4",
+      "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let opening: make the first semantic disturbance visible take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream. Build the mood around opening: make the first semantic disturbance visible, while The monster’s body is a complex fusion of stays just readable enough to orient. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. A steady forward dolly through the aisles, moving deeper into the fractured.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Betriebsform Amplification",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876566092-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876566092-runware-image-video.mp4",
+      "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let escalation: intensify the inherited transformation take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around escalation: intensify the inherited transformation, while The monster’s body is a complex fusion of stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Kunsthalle Morphing",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876593536-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876593536-runware-image-video.mp4",
+      "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let escalation: intensify the inherited transformation take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around escalation: intensify the inherited transformation, while The monster’s body is a complex fusion of stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "St. Kitts und Nevis Flux",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876622304-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876622304-runware-image-video.mp4",
+      "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let escalation: intensify the inherited transformation take over the scene; Starting with a flooded Kaufhaus interior, hanging lamps melt into glowing vine-like streams of light flooding,. Build the mood around escalation: intensify the inherited transformation, while The monster’s body is a complex fusion of stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Sortimentstiefe Rupture",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876666138-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876666138-runware-image-video.mp4",
+      "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let rupture: destabilize the established scene state take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let. Build the mood around rupture: destabilize the established scene state, while The monster’s body is a complex fusion of stays just readable enough to orient the. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "1955 Resolution",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876690390-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876690390-runware-image-video.mp4",
+      "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let consequence: transform and resolve the accumulated visible residue take over the scene; Starting from chaotic infinite labyrinth, the scene smoothly collapses into a calm, orderly. Build the mood around consequence: transform and resolve the accumulated visible residue, while The monster’s body is a complex fusion of stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-04T20:51:31.900Z"
+}

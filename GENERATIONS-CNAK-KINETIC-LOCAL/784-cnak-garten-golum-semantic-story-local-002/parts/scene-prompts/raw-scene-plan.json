@@ -1,0 +1,25 @@
+[
+  {
+    "index": 1,
+    "title": "Garten-Golum Awakens",
+    "semanticAnchor": "Department store",
+    "semanticAnchorEnglish": "Department store",
+    "semanticCollision": "ISBN (identifier)",
+    "semanticCollisionEnglish": "ISBN (identifier)",
+    "sceneFocus": "location",
+    "event": "A large botanical face poster flickers under pulsing fluorescent lights, its mirrored columns reflecting a faint, shifting green tendril creeping across the concrete floor, distorting the Kaufhaus's dusty, cluttered aisles.",
+    "transformationMechanism": "Light and shadow interaction with reflected surfaces causing subtle physical movement in organic",
+    "monsterPresence": "trace",
+    "consequence": "A creeping green tendril made of plant-like matter extends from the poster reflection onto the floor, hinting at the Garten-Golum's emergence.",
+    "nextHook": "Green tendril advancing along the cracked concrete floor towards a cluttered display table.",
+    "stillPrompt": "Inside the dusty concrete Kaufhaus, a large green botanical face poster flickers faintly under pulsing fluorescent lights; mirrored columns reflect a creeping green tendril moving along the cracked floor towards cluttered displays.",
+    "videoPrompt": "The view hesitantly reframes with subtle organic micro-sway as pulsing fluorescent lights cause the Garten-Golum poster to flicker; mirrored columns tremble, reflecting a green tendril advancing slowly across the dusty concrete floor towards cluttered aisles, shadows shifting subtly.",
+    "cameraCue": "hesitant reframe with organic micro-sway, settling imperfectly on the advancing tendril",
+    "videoMode": "singleImage",
+    "frameSource": "lastFrame",
+    "freshImage": false,
+    "startFrameStrategy": "locationReanchor",
+    "startFrameReason": "establish the Kaufhaus environment with botanical poster and initial tendril trace",
+    "durationSeconds": 4.5
+  }
+]

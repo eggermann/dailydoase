@@ -1,0 +1,63 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 7,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/merged/1787260180929-concat.mp4",
+  "mireloMode": "off",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort",
+      "terror",
+      "kaufhaus"
+    ],
+    "semanticCues": [
+      "dem Morphem Oldenbourg Grundriss der Geschichte eines Einzelhandelsgeschäfts, das Handelswaren aus Frankfurt am Main",
+      "ist diese Unterscheidung im Deutsches Wörterbuch Terror (Begriffsklärung) das Einzelhandelsgeschäft",
+      ", Flexion Einsatzgruppen der Sicherheitspolizei und des SD aus einer oder wenigen bestimmten Warengruppe(n) in hoher Handelsware"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "previous": null,
+    "story": {
+      "openingBeat": "The room transforms as the colors awaken memories of a retail space, hinting at a deeper story.",
+      "finalBeat": "The flood of light signifies a release from the previous tension, transforming the space into a vibrant spectacle.",
+      "summary": "The room transforms as the colors awaken memories of a retail space, hinting at a deeper story. -> The transformation introduces a sense of fear and tension, as the once vibrant colors now represent lurking threats. -> The flood of light signifies a release from the previous tension, transforming the space into a vibrant spectacle.",
+      "nextOpeningObligation": "Continue from this consequence: The flood of light signifies a release from the previous tension, transforming the space into a vibrant spectacle."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "The Retail Memory Awakens",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/parts/1787260201058-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/parts/1787260201058-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let A surreal light begins to swirl around the room, casting take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A surreal light begins to swirl around the room,, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Echoes of Terror",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/parts/1787260230006-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/parts/1787260230006-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The colors morph into shadowy figures that loom, representing the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The colors morph into shadowy figures that loom, representing, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "The Retail Flood",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/parts/1787260254217-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/796-glas-kaufhaus-3-2-2-documented-001/parts/1787260254217-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The shadows dissolve, and a flood of liquid light bursts take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The shadows dissolve, and a flood of liquid light, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T21:10:57.754Z"
+}

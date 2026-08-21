@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "Consequence: Sortimentstiefe Meets 1955",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "Final scene resolving accumulated visible residue with minimal transformation.",
+  "videoMode": "singleImage",
+  "prompt": "The green plant-monster in a vintage 1955 style Kaufhaus; condensed form with dimmed glowing eyes; simple industrial lamps; calm browsing visitors; muted colors and softened lighting; medium close-up; forward camera push; 1989 BRD style. The 1955 motif introduces calm and order that resolve the chaotic flood, condensing the monster and softening the room’s atmosphere. The monster condenses and dims its glow, accepting the restored calm and nostalgic order of the Kaufhaus. The Kaufhaus interior settles into muted retro colors and softened lighting; lamps simplify; visitors browse calmly; the space feels nostalgic and quiet.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874197559-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874475342-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874475342-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:14:36.157Z"
+}

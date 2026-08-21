@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Rupture: Reuterkiez Meets Sortimentsbreite",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New visual emphasis on chaotic rupture and multiplication.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The neighborhood influence (Reuterkiez) collides with product assortment breadth (Sortimentsbreite), take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The neighborhood influence (Reuterkiez) collides with product assortment breadth, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Push back to reveal full chaotic rupture and monster recoil.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927141827-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927178095-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927178095-runware-image-video.mp4",
+  "timestamp": "2026-08-05T10:52:59.382Z"
+}

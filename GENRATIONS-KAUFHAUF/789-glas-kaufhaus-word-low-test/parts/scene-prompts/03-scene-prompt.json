@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Overwhelming Meaning",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Start from A man in a black tank top in Art studio and let the image break away from plain webcam realism; keep A. Let The words and symbols explode into a kaleidoscope of colors, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The words and symbols explode into a kaleidoscope of, while The shot captures a man in a black stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257405320-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257428149-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257428149-runware-image-video.mp4",
+  "timestamp": "2026-08-20T20:23:49.079Z"
+}

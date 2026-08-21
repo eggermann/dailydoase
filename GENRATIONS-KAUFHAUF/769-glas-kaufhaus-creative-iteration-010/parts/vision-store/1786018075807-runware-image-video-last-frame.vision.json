@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/769-glas-kaufhaus-creative-iteration-010/parts/1786018075807-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty office space with modular white cubicle partitions arranged in an L-shape near center frame. Setting: Modern, unfinished office interior with exposed ceiling pipes and ducts, large windows on far wall letting in natural light. Framing: Medium-wide shot capturing floor to ceiling, centered on cubicle cluster with vertical mirror panel on right side. Lighting: Natural daylight streaming through windows from right side, casting sharp triangular light patch and shadows on floor and cubicle surfaces. Visible transformation: No human presence or movement; static environment with clear light pattern on floor and cubicle. Continuity: Maintain exact cubicle layout, mirror panel position, and natural light angle/direction for next scene \"Unexplained Trace.\"",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T12:07:59.788Z"
+}

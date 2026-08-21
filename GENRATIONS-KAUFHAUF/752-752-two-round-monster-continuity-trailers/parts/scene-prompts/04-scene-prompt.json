@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "IV. Public: shoppers echo and ripple fixtures",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s handheld follow: move behind the shopper as they fold take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s handheld follow: move behind the shopper as they. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After event: steadicam follow from behind the shopper up the escalator into.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938913388-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938966629-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938966629-runware-image-video.mp4",
+  "timestamp": "2026-08-05T14:09:27.455Z"
+}

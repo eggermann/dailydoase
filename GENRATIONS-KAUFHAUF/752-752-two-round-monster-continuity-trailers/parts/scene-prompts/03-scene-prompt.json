@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "III. H- und P-Sätze: the sculpture answers safety pulses",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s dolly: start tight on the smear, then pull back take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s dolly: start tight on the smear, then pull. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After event: slow dolly from the smear up and back to show.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938877595-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938913388-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938913388-runware-image-video.mp4",
+  "timestamp": "2026-08-05T14:08:34.263Z"
+}

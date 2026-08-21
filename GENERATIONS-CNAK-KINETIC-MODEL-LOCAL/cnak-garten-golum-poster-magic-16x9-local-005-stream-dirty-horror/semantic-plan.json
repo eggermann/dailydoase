@@ -1,0 +1,42 @@
+{
+  "configuredWords": [
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ],
+    [
+      "Department store",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Horror",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Erotic horror",
+      "streamLabel": "Horror",
+      "description": "Erotic horror"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "words": [
+    "Horror",
+    "Erotic horror"
+  ],
+  "semanticMotion": "The single sickly eye on Garten-Golum blinks slowly, then glows faintly with a sickly green hue. From the mouth of the figure, a dark root-filament extends outward, twisting and curling sensuously. Simultaneously, the existing roots beneath the title 'Formen der Abweichung' grow subtly, pushing the title upward into its exact printed placement. Meanwhile, a grimy fluorescent light travels slowly across the existing artist names, adding an eerie shimmer without altering their form or location.",
+  "prompt": "Supplied image is an original printed Formen der Abweichung Garten-Golum campaign poster. Keep sharp central poster in focus for entire clip; background is only its own blurred colour echo. Actual Semantic Stream direction (Horror → Erotic horror; Erotic horror): The single sickly eye on Garten-Golum blinks slowly, then glows faintly with a sickly green hue. From the mouth of the figure, a dark root-filament extends outward, twisting and curling sensuously. Simultaneously, the existing roots beneath the title 'Formen der Abweichung' grow subtly, pushing the title upward into its exact printed placement. Meanwhile, a grimy fluorescent light travels slowly across the existing artist names, adding an eerie shimmer without altering their form or location. Dirty horror magic must occur on and inside this exact poster: one blink and sickly eye glow, damp breathing botanical roots, a brief dark root-filament from an existing mouth or flower, flickering dirty gallery light over existing printed names, original title grows organically but retains exactly same letters, typeface, words and final positions. 16:9 landscape. Static camera. Preserve face, leaf ears, green root body, hand-drawn coloured-pencil surface, full poster composition and every existing text line. No new readable text, no altered spelling, no new character, no replacement monster, no new room, no Kaufhaus cutaway, no zoom, no pan, no cinematic action, no 3D, no cartoon redraw, no collage, no transformation. Keep central poster readable and sharp.",
+  "model": "gpt-4.1-mini-2025-04-14"
+}

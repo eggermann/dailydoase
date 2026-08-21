@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Terror of the Unseen",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The atmosphere shifts as the words morph into shadows, creating take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The atmosphere shifts as the words morph into shadows,, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261329526-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261348748-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261348748-runware-image-video.mp4",
+  "timestamp": "2026-08-20T21:29:11.701Z"
+}

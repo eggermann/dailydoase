@@ -1,0 +1,28 @@
+{
+  "sceneCount": 2,
+  "totalTrackDuration": 4,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/merged/1785851505704-concat.mp4",
+  "mireloMode": "off",
+  "endCard": null,
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851555120-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851555120-runware-image-video.mp4",
+      "prompt": "Starting state: green monster tense with glowing eyes in warped Kaufhaus warehouse. Temporal transformation: subtle warping of metal shelves and flickering lamps. Subject motion: tendrils twitching with electric energy. Environmental motion: shadows stretching and pulsing. Atmosphere: eerie, charged tension. Changing light: flickering fluorescent pulses. Composition continuity: medium close-up, 50mm lens, low angle. Camera move: slow dolly forward towards monster.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Consequence and Transformation: NATO-Doppelbeschluss Meets Betriebsform",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851578774-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851578774-runware-image-video.mp4",
+      "prompt": "Starting state: green monster with extended mechanical appendages interfacing with machinery in Kaufhaus. Temporal transformation: rhythmic pulsing of conveyor belts and breathing industrial architecture. Subject motion: appendages extending and pulsing. Environmental motion: machinery shifting rhythmically, workers moving stiffly. Atmosphere: cold, clinical tension. Changing light: sharp fractured shadows under cold lighting. Composition continuity: wide medium shot, 35mm lens, high angle. Camera move: slow crane rising and circling to reveal surreal fusion.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-04T13:52:59.808Z"
+}

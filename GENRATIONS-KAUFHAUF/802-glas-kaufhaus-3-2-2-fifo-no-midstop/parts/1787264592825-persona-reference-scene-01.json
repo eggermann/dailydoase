@@ -1,0 +1,10 @@
+{
+  "kind": "persona-reference",
+  "personDescription": "",
+  "personStrength": 95,
+  "provider": "lmstudio",
+  "visionText": "PERSON_PRESENT: yes\nPERSON_STRENGTH: 95\nPerson wearing glasses, short-sleeved top, indoors with partial window background.",
+  "sourcePath": "/Users/eggermann/Projekte/dailydoase/tests/GENERATIONS/camera-shot/1787264558281-camera.jpg",
+  "sceneIndex": 1,
+  "timestamp": "2026-08-20T22:23:12.827Z"
+}

@@ -1,0 +1,89 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 7,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/merged/1787257333521-concat.mp4",
+  "mireloMode": "off",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 2,
+    "topic": "wort",
+    "topics": [
+      "wort"
+    ],
+    "semanticCues": [
+      "gemeint („Baum“ und „Bäume“ als Formen ein und desselben Wortform",
+      "unter dem Begriff des Semantik",
+      "präzisere Beschreibungen. Das „Wort“ wird begrifflich vom Lexem"
+    ],
+    "people": {
+      "count": 1,
+      "actors": [
+        {
+          "reference": "man",
+          "description": "A man in a black tank top standing in an art studio, facing away from the camera",
+          "position": "midground right",
+          "orientation": "back-facing"
+        }
+      ]
+    },
+    "location": "Art studio",
+    "previous": {
+      "iteration": 1,
+      "topic": "wort",
+      "topics": [
+        "wort"
+      ],
+      "people": {
+        "count": 1,
+        "actors": [
+          {
+            "reference": "man",
+            "description": "A man in a black tank top standing in an art studio, facing away from the camera",
+            "position": "midground right",
+            "orientation": "back-facing"
+          }
+        ]
+      },
+      "location": "Art studio",
+      "storySummary": "The scene introduces the concept of 'wort' as a living entity, transforming the space with its presence. -> This moment represents the unfolding layers of meaning behind 'wort', as it transforms into visual symbols. -> The scene culminates in a sensory overload, representing the overwhelming nature of language and meaning.",
+      "finalBeat": "The scene culminates in a sensory overload, representing the overwhelming nature of language and meaning.",
+      "nextOpeningObligation": "Continue from this consequence: The scene culminates in a sensory overload, representing the overwhelming nature of language and meaning."
+    },
+    "story": {
+      "openingBeat": "The scene captures the man's stillness amidst the overwhelming transformation of the space, embodying the concept of 'wort' as a living entity.",
+      "finalBeat": "The scene culminates in a visual explosion, representing the overwhelming nature of language and meaning.",
+      "summary": "The scene captures the man's stillness amidst the overwhelming transformation of the space, embodying the concept of 'wort' as a living entity. -> The scene illustrates the transformation of abstract language into visual symbols, engaging the man's curiosity. -> The scene culminates in a visual explosion, representing the overwhelming nature of language and meaning.",
+      "nextOpeningObligation": "Continue from this consequence: The scene culminates in a visual explosion, representing the overwhelming nature of language and meaning."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Unraveling the Word",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257370292-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257370292-runware-image-video.mp4",
+      "prompt": "Start from A man in a black tank top in Art studio and let the image break away from plain webcam realism; keep A. Let The man stands still, overwhelmed by the sensory overload of take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The man stands still, overwhelmed by the sensory overload, while The shot captures a man in a black stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Semantic Transformation",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257405320-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257405320-runware-image-video.mp4",
+      "prompt": "Start from A man in a black tank top in Art studio and let the image break away from plain webcam realism; keep A. Let The colors begin to morph into recognizable words and symbols, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The colors begin to morph into recognizable words, while The shot captures a man in a black stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Overwhelming Meaning",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257428149-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/789-glas-kaufhaus-word-low-test/parts/1787257428149-runware-image-video.mp4",
+      "prompt": "Start from A man in a black tank top in Art studio and let the image break away from plain webcam realism; keep A. Let The words and symbols explode into a kaleidoscope of colors, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The words and symbols explode into a kaleidoscope of, while The shot captures a man in a black stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T20:23:49.414Z"
+}

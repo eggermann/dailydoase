@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Banner Tear",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 5s handheld-shot inside the photographed Kaufhaus: off-center medium-close on the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s handheld-shot inside the photographed Kaufhaus: off-center medium-close on, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932786902-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932809726-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932809726-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:26:50.751Z"
+}

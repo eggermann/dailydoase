@@ -1,0 +1,519 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create the requested number of short scene plans for a green-monster trailer grounded in supplied photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as composition or background. Treat each Kaufhaus photograph as an immutable location plate. In every stillPrompt preserve its exact viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least eighty percent of the room; the location must remain immediately recognizable, not become a generic warehouse or fantasy set. People may appear when the semantic streams naturally call for them; neither add nor exclude them by default. Each source cue labels a carried Anchor and fresh getNext Collision. Let that collision compose every variable part of the scene: storyCause, monsterIntent, semanticAction, local roomConsequence, monsterPresence, viewpoint, motionCue, cameraCue, stillPrompt, and singleImagePrompt. Do not add a generic trailer action, generic warehouse atmosphere, or default camera move independent of the words. Infer one specific surprising causal event: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms something because of the collision. Keep surreal mutation local to protagonist, people when semantically justified, movable objects, light, reflections, shadows, or one nearby architectural detail; never replace or dissolve the whole Kaufhaus. The next scene inherits the visible consequence, not merely the terms. The monster is protagonist by agency, never a permanent large advertising mascot; vary scale and presence. Select viewpoint and cameraCue only after semanticAction: use hold, pan, tilt, sideways track, arc, push, pullback, rise, descent, or focus shift according to what best reveals that action. Do not default to forward movement and do not repeat the same dominant camera behavior in adjacent scenes. Every stillPrompt captures the decisive action inside the recognizable location. Every singleImagePrompt shows tactic beginning, changing, and leaving its local consequence, including the chosen cameraCue. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 6,
+  "effectiveSceneCount": 6,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): 1983. Collision A (fresh getNext from 1983): NATO-Doppelbeschluss. Dramatic function: opening: make the first semantic disturbance visible. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: NATO-Doppelbeschluss becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): NATO-Doppelbeschluss. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Betriebsform becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Betriebsform. Collision A (fresh getNext from Kunstausstellung): Grafik. Context: , ,. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Grafik becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Grafik. Collision A (fresh getNext from 1983): St. Kitts und Nevis. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: St. Kitts und Nevis becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): St. Kitts und Nevis. Collision A (fresh getNext from Kaufhaus): Sortimentstiefe. Context: und aus einer oder wenigen bestimmten Warengruppe(n) in hoher. Dramatic function: rupture: let the inherited and fresh terms destabilize the established scene state. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentstiefe becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentstiefe. Collision A (fresh getNext from Kunstausstellung): Fotografie. Context: oder ,. Dramatic function: consequence: use the fresh term to transform and resolve the accumulated visible residue. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: Fotografie remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "1983",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "NATO-Doppelbeschluss",
+        "streamLabel": "1983",
+        "description": "NATO-Doppelbeschluss"
+      },
+      "dramaticFunction": "opening: make the first semantic disturbance visible",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 1,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "NATO-Doppelbeschluss",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Betriebsform",
+        "streamLabel": "Kaufhaus",
+        "description": "eines und über Kaufhaus im Katalog der Deutschen"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Betriebsform",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Grafik",
+        "streamLabel": "Kunstausstellung",
+        "description": ", ,"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Grafik",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "St. Kitts und Nevis",
+        "streamLabel": "1983",
+        "description": "St. Kitts und Nevis"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 4,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "St. Kitts und Nevis",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentstiefe",
+        "streamLabel": "Kaufhaus",
+        "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+      },
+      "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 5,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentstiefe",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Fotografie",
+        "streamLabel": "Kunstausstellung",
+        "description": "oder ,"
+      },
+      "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": []
+  },
+  "visionStoryContext": "",
+  "sceneLengths": [
+    5,
+    2,
+    3,
+    2,
+    5,
+    2
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+    "outputText": "",
+    "provider": "",
+    "model": ""
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let A service elevator door groans open and a stamped metal take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A service elevator door groans open and a stamped. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike. Still image direction: Generate a single still preserving the supplied photographed Kaufhaus EXACT viewpoint and crop (keep floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, and color balance). Show the dented metal crate stamped 'NATO-Doppelbeschluss' sitting under an askew industrial hanging lamp; scattered 1983 catalog leaflets across the tiled floor; the isolated green monster visible at distance between two columns with its plant-like face and glowing eyes, dark green industrial texture, and hanging lamps intact in frame. Preserve at least 80% of the visible room and avoid changing architecture or color grading of the Kaufhaus.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening dent (5s)",
+      "semanticAnchor": "1983",
+      "semanticCollision": "NATO-Doppelbeschluss",
+      "event": "A service elevator door groans open and a stamped metal crate marked 'NATO-Doppelbeschluss' tumbles onto the Kaufhaus floor beneath the row of hanging industrial lamps. The crate dents a suspended lamp, which swings and cracks a panel of promotional catalog posters (dated 1983), flinging a scatter of leaflets across the tiled floor. The isolated green creature is at distance, shoulders visible between two columns, one tendril hesitantly touching a fallen leaflet.",
+      "monsterPresence": "distant figure (torso and glowing eyes between columns)",
+      "consequence": "a dented metal crate labeled 'NATO-Doppelbeschluss' under an askew hanging lamp; scattered 1983 catalog leaflets on floor",
+      "nextHook": "dented crate under askew lamp with scattered catalogs",
+      "stillPrompt": "Generate a single still preserving the supplied photographed Kaufhaus EXACT viewpoint and crop (keep floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, and color balance). Show the dented metal crate stamped 'NATO-Doppelbeschluss' sitting under an askew industrial hanging lamp; scattered 1983 catalog leaflets across the tiled floor; the isolated green monster visible at distance between two columns with its plant-like face and glowing eyes, dark green industrial texture, and hanging lamps intact in frame. Preserve at least 80% of the visible room and avoid changing architecture or color grading of the Kaufhaus.",
+      "videoPrompt": "5s shot from the fixed Kaufhaus viewpoint: elevator door opens; a crate stamped 'NATO-Doppelbeschluss' falls and dents a hanging lamp; lamp swings and a poster panel peels, leaflets flutter across the floor; the green creature (distant, torso and glowing eyes between columns) reacts with a slow tendril movement. Keep original Kaufhaus exposure and color; do not obscure ceiling, ducts, windows, columns, elevators or more than 20% of the visible room.",
+      "cameraCue": "After the crate hits, dolly slightly inward from the high-right corner to reveal the dented crate and the distant monster between columns, keeping crate centered.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5
+    },
+    {
+      "index": 2,
+      "title": "Retail motors engage (2s)",
+      "semanticAnchor": "NATO-Doppelbeschluss",
+      "semanticCollision": "Betriebsform",
+      "event": "The dented crate's impact triggers a dormant service circuit: motorized shelving racks along the central display engage with a low hydraulic clank and slide forward like a mechanical 'Betriebsform' reconfiguring the store. One shelf grinds, exposing a bundle of motor cables; a promotional price-board is flung and pins itself against a column. The green creature steps closer, a partial torso emerging; its tendrils wrap a fallen catalogue and press it into the exposed cable, which sparks and stalls the rack.",
+      "monsterPresence": "partial torso and glowing eyes closer, tendrils interacting with cables",
+      "consequence": "a display island shifted forward exposing motor cables; a price-board pinned to a column; a short burn spark mark on a catalogue",
+      "nextHook": "shifted display island with exposed motor cable and price-board pinned to column",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint and crop: show the central display island now slid forward, its motor housing exposed and a bundle of motor cables visible; a price-board pinned to a column; a small spark burn on a catalogue caught in the cables. The green creature appears closer (partial torso and glowing eyes), tendril touching the catalog. Maintain original lighting, hanging lamps, windows, columns and at least 80% of room visibility.",
+      "videoPrompt": "2s shot continuing from previous frame: motorized shelving engages with clanking hydraulics, display island slides forward exposing motor cables; a price-board swings and pins to a column; the creature's tendril pushes a catalogue into the cable causing a small spark and a stall. Keep Kaufhaus architecture unchanged and camera movement minimal.",
+      "cameraCue": "After the rack stalls, pan slightly to the left and hold on the creature and the pinned price-board, partially concealing the exposed motor cables behind the column.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Posters recompose (3s)",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Grafik",
+      "event": "Peeling promotional posters and catalog pages pulled by stalled cables and the creature's tendrils begin to stick and rearrange themselves across columns and wall panels, forming an emergent graphic mural — a collage of catalog imagery that snaps into a grid like a gallery installation (Kunstausstellung). Lamps cast banded shadows that register as halftone dots on the tiled floor. The creature is out of frame; only its trailing tendril marks and a smear of plant sap remain visible.",
+      "monsterPresence": "absent from frame; only tendril marks and sap smears visible",
+      "consequence": "a newly assembled mural of repurposed catalog graphics spanning a column and adjacent wall with lamp-shadow halftone patterns on the floor",
+      "nextHook": "mural of repurposed catalog graphics across column and floor shadow pattern",
+      "stillPrompt": "Single still preserving the exact photographed Kaufhaus viewpoint: show the collage mural made from catalog pages and posters adhered across the column and wall panels; hanging lamps project banded halftone shadow patterns onto the tiled floor. Include tendril smears and plant sap on the floor where the creature worked; keep windows, elevators, columns, and ceiling in frame and maintain original exposure and color balance.",
+      "videoPrompt": "3s shot: posters peel and snap into place to form a graphic mural across the column and wall; hanging lamps pulse once and their shadows create halftone dots on the floor; traces of the creature's tendrils smear sap across the mural. No alteration of Kaufhaus architecture or color.",
+      "cameraCue": "After the mural locks, do a slow tilt from floor halftone pattern up to the top of the mural to reveal its scale, keeping the original Kaufhaus viewpoint.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Island motif sneaks in (2s)",
+      "semanticAnchor": "Grafik",
+      "semanticCollision": "St. Kitts und Nevis",
+      "event": "The mural's graphic elements snap into an island motif: folded paper price-tags click free and take shape as tiny paper boats. A spill of cleaning fluid on the floor creates a slick pool; lightweight paper boats drift and are nudged by newly sprouted seedlets (tiny green shoots from the creature's sap) toward the glass elevator. One paper boat is trapped and flattened against the elevator glass as the elevator door slides shut with a damp thud. The creature's face and glowing eyes catch in the elevator glass reflection.",
+      "monsterPresence": "face and glowing eyes reflected in elevator glass (partial presence)",
+      "consequence": "elevator glass with a trapped paper boat and small seedlet smears; an oil/cleaner-sheen puddle on the floor leading to elevator",
+      "nextHook": "elevator glass with trapped paper boat and oil-sheen puddle",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show a trapped folded paper 'boat' flattened against the elevator glass with seedlet smears and an oil/cleaner-sheen puddle leading to the elevator. The green creature's face and glowing eyes are visible only as a reflection in the elevator glass. Keep hanging lamps, columns, windows and ceiling exactly as in the supplied plate, preserving exposure and color balance and at least 80% of the room.",
+      "videoPrompt": "2s shot: paper price-tags fold into tiny boats and drift across a slick puddle toward the elevator; one is trapped against the elevator glass as the door closes; the creature's face and glowing eyes appear reflected in the glass. Maintain Kaufhaus architecture and lighting.",
+      "cameraCue": "After the boat is trapped, push in to a tight close on the trapped paper boat and the creature's reflected eyes in the elevator glass, concealing most of the surrounding floor.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Assortment collapses (5s)",
+      "semanticAnchor": "St. Kitts und Nevis",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "Shelving that had been held closed yaws open in an accordion as if revealing 'Sortimentstiefe': dozens of identical boxed items tumble out in a coordinated wave, creating a shallow moving barricade across the Kaufhaus center. The wave of boxes slams against the elevator doors and the pinned price-board, knocking a hanging lamp free; the lamp swings and its bulb shatters, showering glass onto a nearby display. The green creature bursts through one of the collapsing racks in a sudden hop — full body visible for a beat — scattering more boxes with plant-fiber dust clinging to them.",
+      "monsterPresence": "brief full-body foreground burst (not lingering)",
+      "consequence": "a barricade of identical boxed items strewn across the central floor, shattered display glass, and a dangling lamp with a broken bulb",
+      "nextHook": "barricade of identical boxed items across floor with shattered glass and dangling lamp",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show the newly formed barricade of identical boxed items across the central floor, shards of display glass, and a hanging lamp dangling with a broken bulb. The green creature has just burst through a rack and is visible full-body briefly in the foreground — keep its plant-like anatomy, dark green industrial texture, and glowing eyes accurate. Maintain all original Kaufhaus architectural elements, exposure, and color balance; preserve at least 80% of the visible room.",
+      "videoPrompt": "5s shot: shelving yawns open releasing a wave of identical boxed products that tumble across the floor and jam the elevator; a price-board is struck and a hanging lamp breaks its bulb, glass shards scatter; the creature bursts through a rack in a short leap, then withdraws. Keep Kaufhaus setting unaltered and visible.",
+      "cameraCue": "After the burst, drop to a low-angle wide that reveals the depth of the barricade and the dangling broken lamp to emphasize the assortment collapse.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 5
+    },
+    {
+      "index": 6,
+      "title": "Flashframe (2s)",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Fotografie",
+      "event": "Using shards of broken display glass and the swinging lamp as a makeshift aperture, the creature manipulates reflections and its glowing eyes to form a sudden concentrated flash. A black-and-white photographic image of the Kaufhaus (dated 1983) is projected across the barricade of boxes and the catalog mural; text on the box labels rearranges in reflected light to spell 'Fotografie'. The creature retreats into shadow behind a column as the photographic projection freezes the room's accumulated chaos into a single composed frame.",
+      "monsterPresence": "receding shadow behind a column (present but concealed)",
+      "consequence": "a black-and-white photograph projection across the mural and boxed barricade; box labels visually rearranged to read 'Fotografie'; creature as shadow behind a column",
+      "nextHook": "black-and-white photograph projection on barricade and mural with creature shadow behind column",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show a clear black-and-white photographic projection (an image of the Kaufhaus dated 1983) cast across the catalog mural and the barricade of boxes; labels on boxes appear rearranged by reflected light to read 'Fotografie'. The green creature is present only as a receding shadow behind a column; keep hanging lamps, windows, elevators, columns, ceiling, exposure and color balance identical to the supplied plate and preserve at least 80% of the visible room.",
+      "videoPrompt": "2s shot: the creature aligns glass shards and its glowing eyes to generate a concentrated flash; a black-and-white photograph of the Kaufhaus (1983) projects across the mural and boxes, and box labels appear to shift into the word 'Fotografie'; the creature slips back into shadow behind a column. Maintain original Kaufhaus framing and lighting.",
+      "cameraCue": "After the flash, crane back to the original full-view Kaufhaus vantage to reveal the projection mapped across the mural and the barricade while keeping the creature concealed as a column-shadow.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 2
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening dent (5s)",
+      "semanticAnchor": "1983",
+      "semanticCollision": "NATO-Doppelbeschluss",
+      "event": "A service elevator door groans open and a stamped metal crate marked 'NATO-Doppelbeschluss' tumbles onto the Kaufhaus floor beneath the row of hanging industrial lamps. The crate dents a suspended lamp, which swings and cracks a panel of promotional catalog posters (dated 1983), flinging a scatter of leaflets across the tiled floor. The isolated green creature is at distance, shoulders visible between two columns, one tendril hesitantly touching a fallen leaflet.",
+      "monsterPresence": "distant figure (torso and glowing eyes between columns)",
+      "consequence": "a dented metal crate labeled 'NATO-Doppelbeschluss' under an askew hanging lamp; scattered 1983 catalog leaflets on floor",
+      "nextHook": "dented crate under askew lamp with scattered catalogs",
+      "stillPrompt": "Generate a single still preserving the supplied photographed Kaufhaus EXACT viewpoint and crop (keep floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, and color balance). Show the dented metal crate stamped 'NATO-Doppelbeschluss' sitting under an askew industrial hanging lamp; scattered 1983 catalog leaflets across the tiled floor; the isolated green monster visible at distance between two columns with its plant-like face and glowing eyes, dark green industrial texture, and hanging lamps intact in frame. Preserve at least 80% of the visible room and avoid changing architecture or color grading of the Kaufhaus.",
+      "videoPrompt": "5s shot from the fixed Kaufhaus viewpoint: elevator door opens; a crate stamped 'NATO-Doppelbeschluss' falls and dents a hanging lamp; lamp swings and a poster panel peels, leaflets flutter across the floor; the green creature (distant, torso and glowing eyes between columns) reacts with a slow tendril movement. Keep original Kaufhaus exposure and color; do not obscure ceiling, ducts, windows, columns, elevators or more than 20% of the visible room.",
+      "cameraCue": "After the crate hits, dolly slightly inward from the high-right corner to reveal the dented crate and the distant monster between columns, keeping crate centered.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "Retail motors engage (2s)",
+      "semanticAnchor": "NATO-Doppelbeschluss",
+      "semanticCollision": "Betriebsform",
+      "event": "The dented crate's impact triggers a dormant service circuit: motorized shelving racks along the central display engage with a low hydraulic clank and slide forward like a mechanical 'Betriebsform' reconfiguring the store. One shelf grinds, exposing a bundle of motor cables; a promotional price-board is flung and pins itself against a column. The green creature steps closer, a partial torso emerging; its tendrils wrap a fallen catalogue and press it into the exposed cable, which sparks and stalls the rack.",
+      "monsterPresence": "partial torso and glowing eyes closer, tendrils interacting with cables",
+      "consequence": "a display island shifted forward exposing motor cables; a price-board pinned to a column; a short burn spark mark on a catalogue",
+      "nextHook": "shifted display island with exposed motor cable and price-board pinned to column",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint and crop: show the central display island now slid forward, its motor housing exposed and a bundle of motor cables visible; a price-board pinned to a column; a small spark burn on a catalogue caught in the cables. The green creature appears closer (partial torso and glowing eyes), tendril touching the catalog. Maintain original lighting, hanging lamps, windows, columns and at least 80% of room visibility.",
+      "videoPrompt": "2s shot continuing from previous frame: motorized shelving engages with clanking hydraulics, display island slides forward exposing motor cables; a price-board swings and pins to a column; the creature's tendril pushes a catalogue into the cable causing a small spark and a stall. Keep Kaufhaus architecture unchanged and camera movement minimal.",
+      "cameraCue": "After the rack stalls, pan slightly to the left and hold on the creature and the pinned price-board, partially concealing the exposed motor cables behind the column.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 3,
+      "title": "Posters recompose (3s)",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Grafik",
+      "event": "Peeling promotional posters and catalog pages pulled by stalled cables and the creature's tendrils begin to stick and rearrange themselves across columns and wall panels, forming an emergent graphic mural — a collage of catalog imagery that snaps into a grid like a gallery installation (Kunstausstellung). Lamps cast banded shadows that register as halftone dots on the tiled floor. The creature is out of frame; only its trailing tendril marks and a smear of plant sap remain visible.",
+      "monsterPresence": "absent from frame; only tendril marks and sap smears visible",
+      "consequence": "a newly assembled mural of repurposed catalog graphics spanning a column and adjacent wall with lamp-shadow halftone patterns on the floor",
+      "nextHook": "mural of repurposed catalog graphics across column and floor shadow pattern",
+      "stillPrompt": "Single still preserving the exact photographed Kaufhaus viewpoint: show the collage mural made from catalog pages and posters adhered across the column and wall panels; hanging lamps project banded halftone shadow patterns onto the tiled floor. Include tendril smears and plant sap on the floor where the creature worked; keep windows, elevators, columns, and ceiling in frame and maintain original exposure and color balance.",
+      "videoPrompt": "3s shot: posters peel and snap into place to form a graphic mural across the column and wall; hanging lamps pulse once and their shadows create halftone dots on the floor; traces of the creature's tendrils smear sap across the mural. No alteration of Kaufhaus architecture or color.",
+      "cameraCue": "After the mural locks, do a slow tilt from floor halftone pattern up to the top of the mural to reveal its scale, keeping the original Kaufhaus viewpoint.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 4,
+      "title": "Island motif sneaks in (2s)",
+      "semanticAnchor": "Grafik",
+      "semanticCollision": "St. Kitts und Nevis",
+      "event": "The mural's graphic elements snap into an island motif: folded paper price-tags click free and take shape as tiny paper boats. A spill of cleaning fluid on the floor creates a slick pool; lightweight paper boats drift and are nudged by newly sprouted seedlets (tiny green shoots from the creature's sap) toward the glass elevator. One paper boat is trapped and flattened against the elevator glass as the elevator door slides shut with a damp thud. The creature's face and glowing eyes catch in the elevator glass reflection.",
+      "monsterPresence": "face and glowing eyes reflected in elevator glass (partial presence)",
+      "consequence": "elevator glass with a trapped paper boat and small seedlet smears; an oil/cleaner-sheen puddle on the floor leading to elevator",
+      "nextHook": "elevator glass with trapped paper boat and oil-sheen puddle",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show a trapped folded paper 'boat' flattened against the elevator glass with seedlet smears and an oil/cleaner-sheen puddle leading to the elevator. The green creature's face and glowing eyes are visible only as a reflection in the elevator glass. Keep hanging lamps, columns, windows and ceiling exactly as in the supplied plate, preserving exposure and color balance and at least 80% of the room.",
+      "videoPrompt": "2s shot: paper price-tags fold into tiny boats and drift across a slick puddle toward the elevator; one is trapped against the elevator glass as the door closes; the creature's face and glowing eyes appear reflected in the glass. Maintain Kaufhaus architecture and lighting.",
+      "cameraCue": "After the boat is trapped, push in to a tight close on the trapped paper boat and the creature's reflected eyes in the elevator glass, concealing most of the surrounding floor.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 5,
+      "title": "Assortment collapses (5s)",
+      "semanticAnchor": "St. Kitts und Nevis",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "Shelving that had been held closed yaws open in an accordion as if revealing 'Sortimentstiefe': dozens of identical boxed items tumble out in a coordinated wave, creating a shallow moving barricade across the Kaufhaus center. The wave of boxes slams against the elevator doors and the pinned price-board, knocking a hanging lamp free; the lamp swings and its bulb shatters, showering glass onto a nearby display. The green creature bursts through one of the collapsing racks in a sudden hop — full body visible for a beat — scattering more boxes with plant-fiber dust clinging to them.",
+      "monsterPresence": "brief full-body foreground burst (not lingering)",
+      "consequence": "a barricade of identical boxed items strewn across the central floor, shattered display glass, and a dangling lamp with a broken bulb",
+      "nextHook": "barricade of identical boxed items across floor with shattered glass and dangling lamp",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show the newly formed barricade of identical boxed items across the central floor, shards of display glass, and a hanging lamp dangling with a broken bulb. The green creature has just burst through a rack and is visible full-body briefly in the foreground — keep its plant-like anatomy, dark green industrial texture, and glowing eyes accurate. Maintain all original Kaufhaus architectural elements, exposure, and color balance; preserve at least 80% of the visible room.",
+      "videoPrompt": "5s shot: shelving yawns open releasing a wave of identical boxed products that tumble across the floor and jam the elevator; a price-board is struck and a hanging lamp breaks its bulb, glass shards scatter; the creature bursts through a rack in a short leap, then withdraws. Keep Kaufhaus setting unaltered and visible.",
+      "cameraCue": "After the burst, drop to a low-angle wide that reveals the depth of the barricade and the dangling broken lamp to emphasize the assortment collapse.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 6,
+      "title": "Flashframe (2s)",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Fotografie",
+      "event": "Using shards of broken display glass and the swinging lamp as a makeshift aperture, the creature manipulates reflections and its glowing eyes to form a sudden concentrated flash. A black-and-white photographic image of the Kaufhaus (dated 1983) is projected across the barricade of boxes and the catalog mural; text on the box labels rearranges in reflected light to spell 'Fotografie'. The creature retreats into shadow behind a column as the photographic projection freezes the room's accumulated chaos into a single composed frame.",
+      "monsterPresence": "receding shadow behind a column (present but concealed)",
+      "consequence": "a black-and-white photograph projection across the mural and boxed barricade; box labels visually rearranged to read 'Fotografie'; creature as shadow behind a column",
+      "nextHook": "black-and-white photograph projection on barricade and mural with creature shadow behind column",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show a clear black-and-white photographic projection (an image of the Kaufhaus dated 1983) cast across the catalog mural and the barricade of boxes; labels on boxes appear rearranged by reflected light to read 'Fotografie'. The green creature is present only as a receding shadow behind a column; keep hanging lamps, windows, elevators, columns, ceiling, exposure and color balance identical to the supplied plate and preserve at least 80% of the visible room.",
+      "videoPrompt": "2s shot: the creature aligns glass shards and its glowing eyes to generate a concentrated flash; a black-and-white photograph of the Kaufhaus (1983) projects across the mural and boxes, and box labels appear to shift into the word 'Fotografie'; the creature slips back into shadow behind a column. Maintain original Kaufhaus framing and lighting.",
+      "cameraCue": "After the flash, crane back to the original full-view Kaufhaus vantage to reveal the projection mapped across the mural and the barricade while keeping the creature concealed as a column-shadow.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening dent (5s)",
+      "semanticAnchor": "1983",
+      "semanticCollision": "NATO-Doppelbeschluss",
+      "event": "A service elevator door groans open and a stamped metal crate marked 'NATO-Doppelbeschluss' tumbles onto the Kaufhaus floor beneath the row of hanging industrial lamps. The crate dents a suspended lamp, which swings and cracks a panel of promotional catalog posters (dated 1983), flinging a scatter of leaflets across the tiled floor. The isolated green creature is at distance, shoulders visible between two columns, one tendril hesitantly touching a fallen leaflet.",
+      "monsterPresence": "distant figure (torso and glowing eyes between columns)",
+      "consequence": "a dented metal crate labeled 'NATO-Doppelbeschluss' under an askew hanging lamp; scattered 1983 catalog leaflets on floor",
+      "nextHook": "dented crate under askew lamp with scattered catalogs",
+      "stillPrompt": "Generate a single still preserving the supplied photographed Kaufhaus EXACT viewpoint and crop (keep floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, and color balance). Show the dented metal crate stamped 'NATO-Doppelbeschluss' sitting under an askew industrial hanging lamp; scattered 1983 catalog leaflets across the tiled floor; the isolated green monster visible at distance between two columns with its plant-like face and glowing eyes, dark green industrial texture, and hanging lamps intact in frame. Preserve at least 80% of the visible room and avoid changing architecture or color grading of the Kaufhaus.",
+      "videoPrompt": "5s shot from the fixed Kaufhaus viewpoint: elevator door opens; a crate stamped 'NATO-Doppelbeschluss' falls and dents a hanging lamp; lamp swings and a poster panel peels, leaflets flutter across the floor; the green creature (distant, torso and glowing eyes between columns) reacts with a slow tendril movement. Keep original Kaufhaus exposure and color; do not obscure ceiling, ducts, windows, columns, elevators or more than 20% of the visible room.",
+      "cameraCue": "After the crate hits, dolly slightly inward from the high-right corner to reveal the dented crate and the distant monster between columns, keeping crate centered.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 2,
+      "title": "Retail motors engage (2s)",
+      "semanticAnchor": "NATO-Doppelbeschluss",
+      "semanticCollision": "Betriebsform",
+      "event": "The dented crate's impact triggers a dormant service circuit: motorized shelving racks along the central display engage with a low hydraulic clank and slide forward like a mechanical 'Betriebsform' reconfiguring the store. One shelf grinds, exposing a bundle of motor cables; a promotional price-board is flung and pins itself against a column. The green creature steps closer, a partial torso emerging; its tendrils wrap a fallen catalogue and press it into the exposed cable, which sparks and stalls the rack.",
+      "monsterPresence": "partial torso and glowing eyes closer, tendrils interacting with cables",
+      "consequence": "a display island shifted forward exposing motor cables; a price-board pinned to a column; a short burn spark mark on a catalogue",
+      "nextHook": "shifted display island with exposed motor cable and price-board pinned to column",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint and crop: show the central display island now slid forward, its motor housing exposed and a bundle of motor cables visible; a price-board pinned to a column; a small spark burn on a catalogue caught in the cables. The green creature appears closer (partial torso and glowing eyes), tendril touching the catalog. Maintain original lighting, hanging lamps, windows, columns and at least 80% of room visibility.",
+      "videoPrompt": "2s shot continuing from previous frame: motorized shelving engages with clanking hydraulics, display island slides forward exposing motor cables; a price-board swings and pins to a column; the creature's tendril pushes a catalogue into the cable causing a small spark and a stall. Keep Kaufhaus architecture unchanged and camera movement minimal.",
+      "cameraCue": "After the rack stalls, pan slightly to the left and hold on the creature and the pinned price-board, partially concealing the exposed motor cables behind the column.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Posters recompose (3s)",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Grafik",
+      "event": "Peeling promotional posters and catalog pages pulled by stalled cables and the creature's tendrils begin to stick and rearrange themselves across columns and wall panels, forming an emergent graphic mural — a collage of catalog imagery that snaps into a grid like a gallery installation (Kunstausstellung). Lamps cast banded shadows that register as halftone dots on the tiled floor. The creature is out of frame; only its trailing tendril marks and a smear of plant sap remain visible.",
+      "monsterPresence": "absent from frame; only tendril marks and sap smears visible",
+      "consequence": "a newly assembled mural of repurposed catalog graphics spanning a column and adjacent wall with lamp-shadow halftone patterns on the floor",
+      "nextHook": "mural of repurposed catalog graphics across column and floor shadow pattern",
+      "stillPrompt": "Single still preserving the exact photographed Kaufhaus viewpoint: show the collage mural made from catalog pages and posters adhered across the column and wall panels; hanging lamps project banded halftone shadow patterns onto the tiled floor. Include tendril smears and plant sap on the floor where the creature worked; keep windows, elevators, columns, and ceiling in frame and maintain original exposure and color balance.",
+      "videoPrompt": "3s shot: posters peel and snap into place to form a graphic mural across the column and wall; hanging lamps pulse once and their shadows create halftone dots on the floor; traces of the creature's tendrils smear sap across the mural. No alteration of Kaufhaus architecture or color.",
+      "cameraCue": "After the mural locks, do a slow tilt from floor halftone pattern up to the top of the mural to reveal its scale, keeping the original Kaufhaus viewpoint.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Island motif sneaks in (2s)",
+      "semanticAnchor": "Grafik",
+      "semanticCollision": "St. Kitts und Nevis",
+      "event": "The mural's graphic elements snap into an island motif: folded paper price-tags click free and take shape as tiny paper boats. A spill of cleaning fluid on the floor creates a slick pool; lightweight paper boats drift and are nudged by newly sprouted seedlets (tiny green shoots from the creature's sap) toward the glass elevator. One paper boat is trapped and flattened against the elevator glass as the elevator door slides shut with a damp thud. The creature's face and glowing eyes catch in the elevator glass reflection.",
+      "monsterPresence": "face and glowing eyes reflected in elevator glass (partial presence)",
+      "consequence": "elevator glass with a trapped paper boat and small seedlet smears; an oil/cleaner-sheen puddle on the floor leading to elevator",
+      "nextHook": "elevator glass with trapped paper boat and oil-sheen puddle",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show a trapped folded paper 'boat' flattened against the elevator glass with seedlet smears and an oil/cleaner-sheen puddle leading to the elevator. The green creature's face and glowing eyes are visible only as a reflection in the elevator glass. Keep hanging lamps, columns, windows and ceiling exactly as in the supplied plate, preserving exposure and color balance and at least 80% of the room.",
+      "videoPrompt": "2s shot: paper price-tags fold into tiny boats and drift across a slick puddle toward the elevator; one is trapped against the elevator glass as the door closes; the creature's face and glowing eyes appear reflected in the glass. Maintain Kaufhaus architecture and lighting.",
+      "cameraCue": "After the boat is trapped, push in to a tight close on the trapped paper boat and the creature's reflected eyes in the elevator glass, concealing most of the surrounding floor.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Assortment collapses (5s)",
+      "semanticAnchor": "St. Kitts und Nevis",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "Shelving that had been held closed yaws open in an accordion as if revealing 'Sortimentstiefe': dozens of identical boxed items tumble out in a coordinated wave, creating a shallow moving barricade across the Kaufhaus center. The wave of boxes slams against the elevator doors and the pinned price-board, knocking a hanging lamp free; the lamp swings and its bulb shatters, showering glass onto a nearby display. The green creature bursts through one of the collapsing racks in a sudden hop — full body visible for a beat — scattering more boxes with plant-fiber dust clinging to them.",
+      "monsterPresence": "brief full-body foreground burst (not lingering)",
+      "consequence": "a barricade of identical boxed items strewn across the central floor, shattered display glass, and a dangling lamp with a broken bulb",
+      "nextHook": "barricade of identical boxed items across floor with shattered glass and dangling lamp",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show the newly formed barricade of identical boxed items across the central floor, shards of display glass, and a hanging lamp dangling with a broken bulb. The green creature has just burst through a rack and is visible full-body briefly in the foreground — keep its plant-like anatomy, dark green industrial texture, and glowing eyes accurate. Maintain all original Kaufhaus architectural elements, exposure, and color balance; preserve at least 80% of the visible room.",
+      "videoPrompt": "5s shot: shelving yawns open releasing a wave of identical boxed products that tumble across the floor and jam the elevator; a price-board is struck and a hanging lamp breaks its bulb, glass shards scatter; the creature bursts through a rack in a short leap, then withdraws. Keep Kaufhaus setting unaltered and visible.",
+      "cameraCue": "After the burst, drop to a low-angle wide that reveals the depth of the barricade and the dangling broken lamp to emphasize the assortment collapse.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 6,
+      "title": "Flashframe (2s)",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Fotografie",
+      "event": "Using shards of broken display glass and the swinging lamp as a makeshift aperture, the creature manipulates reflections and its glowing eyes to form a sudden concentrated flash. A black-and-white photographic image of the Kaufhaus (dated 1983) is projected across the barricade of boxes and the catalog mural; text on the box labels rearranges in reflected light to spell 'Fotografie'. The creature retreats into shadow behind a column as the photographic projection freezes the room's accumulated chaos into a single composed frame.",
+      "monsterPresence": "receding shadow behind a column (present but concealed)",
+      "consequence": "a black-and-white photograph projection across the mural and boxed barricade; box labels visually rearranged to read 'Fotografie'; creature as shadow behind a column",
+      "nextHook": "black-and-white photograph projection on barricade and mural with creature shadow behind column",
+      "stillPrompt": "Single still preserving the photographed Kaufhaus viewpoint: show a clear black-and-white photographic projection (an image of the Kaufhaus dated 1983) cast across the catalog mural and the barricade of boxes; labels on boxes appear rearranged by reflected light to read 'Fotografie'. The green creature is present only as a receding shadow behind a column; keep hanging lamps, windows, elevators, columns, ceiling, exposure and color balance identical to the supplied plate and preserve at least 80% of the visible room.",
+      "videoPrompt": "2s shot: the creature aligns glass shards and its glowing eyes to generate a concentrated flash; a black-and-white photograph of the Kaufhaus (1983) projects across the mural and boxes, and box labels appear to shift into the word 'Fotografie'; the creature slips back into shadow behind a column. Maintain original Kaufhaus framing and lighting.",
+      "cameraCue": "After the flash, crane back to the original full-view Kaufhaus vantage to reveal the projection mapped across the mural and the barricade while keeping the creature concealed as a column-shadow.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    }
+  ]
+}

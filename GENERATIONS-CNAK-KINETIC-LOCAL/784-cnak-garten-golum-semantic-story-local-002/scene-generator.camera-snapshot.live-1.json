@@ -1,0 +1,145 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-4.1-mini-2025-04-14",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe supplied Garten-Golum poster as main campaign identity for a dark department-store art-horror Reel. Preserve exact green botanical face, luminous eyes, leaf ears, root body, coloured-pencil texture and headline; permit only controlled scenic drift and one local uncanny organic event.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create one six-second scene from supplied Garten-Golum poster. Semantic stream is Department store, Horror, Art exhibition; make their collision concrete and clever. Preserve recognizable green botanical Golem face, leaf ears, root body, coloured-pencil poster language and headline. Drift is allowed only as an exhibition nightmare growing out of this poster: dark Kaufhaus architecture may form behind it, gallery lights can shine across printed artist names, a single nasty organic tongue or root may emerge from an existing mouth or flower. Make one escalating event, not a generic trailer. Slow dramatic light, breathing shadows, hesitant handheld observation are allowed. Do not invent a replacement protagonist, unrelated monster, clean CGI, unrelated location, new title text, fast action, fight, or montage. Return required JSON only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 1,
+  "effectiveSceneCount": 1,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Department store. Collision A (fresh getNext from Department store): ISBN (identifier). Context: International Association of Department Stores Under One. Dramatic function: condensed arc: establish the world, intensify the collision, and show its consequence in one scene. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: ISBN (identifier) remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 1,
+      "anchor": {
+        "term": "Department store",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "ISBN (identifier)",
+        "streamLabel": "Department store",
+        "description": "International Association of Department Stores Under One"
+      },
+      "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": [],
+    "planningAttempts": []
+  },
+  "visionStoryContext": "Description: The Garten-Golum poster serves as a striking main campaign identity for the dark department-store art-horror Reel, blending botanical surrealism with eerie organic life. Central to the composition is a large, green botanical face rendered in a coloured-penc",
+  "sceneLengths": [
+    4.5
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+    "outputText": "The Garten-Golum poster serves as a striking main campaign identity for the dark department-store art-horror Reel, blending botanical surrealism with eerie organic life. Central to the composition is a large, green botanical face rendered in a coloured-pencil texture, its luminous eyes glowing with an unsettling inner light. The face is formed from intertwined leaves and roots, with leaf-shaped ears extending outward, emphasizing its plant-like nature. Surrounding the face, various plant-like appendages grow, each morphing into different organic forms—some resembling flowers, others like hanging pods or fruit, all drawn with the same coloured-pencil detail. The background and overall scene maintain a controlled scenic drift: the environment subtly shifts from the botanical face’s immediate green and yellow hues into darker, shadowy tones at the edges, suggesting encroaching darkness or decay without overwhelming the central figure. A single uncanny organic event punctuates the scene: one of the hanging pods near the right side of the face is slowly unfurling, revealing a cluster of tiny, glowing eyes within, hinting at hidden life or a sinister presence",
+    "provider": "openai",
+    "model": "gpt-4.1-mini-2025-04-14"
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Treat the supplied Kaufhaus image as local physical truth: keep its original viewpoint, major geometry, dusty matte concrete floor, exposed ducts, cable trays, loose wiring, old fluorescent fixtures, plain partitions, mirrored steel columns, windows, walls and elevators. Match its mixed cold daylight and uneven practical light, modest dynamic range, wide-angle perspective, construction wear, ordinary clutter, imperfect exposure and unpolished material texture. Keep practical fluorescent pulses, trembling reflections and moving shadows subtle, local and physically tied to the scene action. The semantic event may alter the local function, arrangement, illumination, reflection, circulation or spatial behavior of the interior. Never beautify it into a luxury mall, clean studio set, glossy CGI hall or concept-art environment. Inside the dusty concrete Kaufhaus, a large green botanical face poster flickers faintly under pulsing fluorescent lights; mirrored columns reflect a creeping green tendril moving along the cracked floor towards cluttered displays. Visible result: A creeping green tendril made of plant-like matter extends from the poster reflection onto the floor, hinting at the Garten-Golum's emergence. Create one unretouched documentary image matching the supplied source in exposure, perspective, wear, grain and material texture. No readable text or logos.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Garten-Golum Awakens",
+      "semanticAnchor": "Department store",
+      "semanticAnchorEnglish": "Department store",
+      "semanticCollision": "ISBN (identifier)",
+      "semanticCollisionEnglish": "ISBN (identifier)",
+      "sceneFocus": "location",
+      "event": "A large botanical face poster flickers under pulsing fluorescent lights, its mirrored columns reflecting a faint, shifting green tendril creeping across the concrete floor, distorting the Kaufhaus's dusty, cluttered aisles.",
+      "transformationMechanism": "Light and shadow interaction with reflected surfaces causing subtle physical movement in organic",
+      "monsterPresence": "trace",
+      "consequence": "A creeping green tendril made of plant-like matter extends from the poster reflection onto the floor, hinting at the Garten-Golum's emergence.",
+      "nextHook": "Green tendril advancing along the cracked concrete floor towards a cluttered display table.",
+      "stillPrompt": "Inside the dusty concrete Kaufhaus, a large green botanical face poster flickers faintly under pulsing fluorescent lights; mirrored columns reflect a creeping green tendril moving along the cracked floor towards cluttered displays.",
+      "videoPrompt": "The view hesitantly reframes with subtle organic micro-sway as pulsing fluorescent lights cause the Garten-Golum poster to flicker; mirrored columns tremble, reflecting a green tendril advancing slowly across the dusty concrete floor towards cluttered aisles, shadows shifting subtly.",
+      "cameraCue": "hesitant reframe with organic micro-sway, settling imperfectly on the advancing tendril",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "establish the Kaufhaus environment with botanical poster and initial tendril trace",
+      "durationSeconds": 4.5
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Garten-Golum Awakens",
+      "semanticAnchor": "Department store",
+      "semanticAnchorEnglish": "Department store",
+      "semanticCollision": "ISBN (identifier)",
+      "semanticCollisionEnglish": "ISBN (identifier)",
+      "sceneFocus": "location",
+      "event": "A large botanical face poster flickers under pulsing fluorescent lights, its mirrored columns reflecting a faint, shifting green tendril creeping across the concrete floor, distorting the Kaufhaus's dusty, cluttered aisles.",
+      "transformationMechanism": "Light and shadow interaction with reflected surfaces causing subtle physical movement in organic",
+      "monsterPresence": "trace",
+      "consequence": "A creeping green tendril made of plant-like matter extends from the poster reflection onto the floor, hinting at the Garten-Golum's emergence.",
+      "nextHook": "Green tendril advancing along the cracked concrete floor towards a cluttered display table.",
+      "stillPrompt": "Inside the dusty concrete Kaufhaus, a large green botanical face poster flickers faintly under pulsing fluorescent lights; mirrored columns reflect a creeping green tendril moving along the cracked floor towards cluttered displays.",
+      "videoPrompt": "The view hesitantly reframes with subtle organic micro-sway as pulsing fluorescent lights cause the Garten-Golum poster to flicker; mirrored columns tremble, reflecting a green tendril advancing slowly across the dusty concrete floor towards cluttered aisles, shadows shifting subtly.",
+      "cameraCue": "hesitant reframe with organic micro-sway, settling imperfectly on the advancing tendril",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "establish the Kaufhaus environment with botanical poster and initial tendril trace",
+      "durationSeconds": 4.5,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Garten-Golum Awakens",
+      "semanticAnchor": "Department store",
+      "semanticAnchorEnglish": "Department store",
+      "semanticCollision": "ISBN (identifier)",
+      "semanticCollisionEnglish": "ISBN (identifier)",
+      "sceneFocus": "location",
+      "event": "A large botanical face poster flickers under pulsing fluorescent lights, its mirrored columns reflecting a faint, shifting green tendril creeping across the concrete floor, distorting the Kaufhaus's dusty, cluttered aisles.",
+      "transformationMechanism": "Light and shadow interaction with reflected surfaces causing subtle physical movement in organic",
+      "monsterPresence": "trace",
+      "consequence": "A creeping green tendril made of plant-like matter extends from the poster reflection onto the floor, hinting at the Garten-Golum's emergence.",
+      "nextHook": "Green tendril advancing along the cracked concrete floor towards a cluttered display table.",
+      "stillPrompt": "Inside the dusty concrete Kaufhaus, a large green botanical face poster flickers faintly under pulsing fluorescent lights; mirrored columns reflect a creeping green tendril moving along the cracked floor towards cluttered displays.",
+      "videoPrompt": "The view hesitantly reframes with subtle organic micro-sway as pulsing fluorescent lights cause the Garten-Golum poster to flicker; mirrored columns tremble, reflecting a green tendril advancing slowly across the dusty concrete floor towards cluttered aisles, shadows shifting subtly.",
+      "cameraCue": "hesitant reframe with organic micro-sway, settling imperfectly on the advancing tendril",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "establish the Kaufhaus environment with botanical poster and initial tendril trace",
+      "durationSeconds": 4.5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 4.5,
+      "rawTaktmusterDuration": 4,
+      "curvedDurationSeconds": 4,
+      "preQuantizedDurationSeconds": 4.5,
+      "rhythmCurve": "power",
+      "rhythmCurveExponent": 1.3
+    }
+  ]
+}

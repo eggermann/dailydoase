@@ -1,0 +1,519 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create the requested number of short scene plans for a green-monster trailer grounded in supplied photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as composition or background. Treat each Kaufhaus photograph as an immutable location plate. In every stillPrompt preserve its exact viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least eighty percent of the room; the location must remain immediately recognizable, not become a generic warehouse or fantasy set. People may appear when the semantic streams naturally call for them; neither add nor exclude them by default. Each source cue labels a carried Anchor and fresh getNext Collision. Let that collision compose every variable part of the scene: storyCause, monsterIntent, semanticAction, local roomConsequence, monsterPresence, viewpoint, motionCue, cameraCue, stillPrompt, and singleImagePrompt. Do not add a generic trailer action, generic warehouse atmosphere, or default camera move independent of the words. Infer one specific surprising causal event: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms something because of the collision. Keep surreal mutation local to protagonist, people when semantically justified, movable objects, light, reflections, shadows, or one nearby architectural detail; never replace or dissolve the whole Kaufhaus. The next scene inherits the visible consequence, not merely the terms. The monster is protagonist by agency, never a permanent large advertising mascot; vary scale and presence. Select viewpoint and cameraCue only after semanticAction: use hold, pan, tilt, sideways track, arc, push, pullback, rise, descent, or focus shift according to what best reveals that action. Do not default to forward movement and do not repeat the same dominant camera behavior in adjacent scenes. Every stillPrompt captures the decisive action inside the recognizable location. Every singleImagePrompt shows tactic beginning, changing, and leaving its local consequence, including the chosen cameraCue. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 6,
+  "effectiveSceneCount": 6,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Kaufhaus. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen. Dramatic function: opening: make the first semantic disturbance visible. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Betriebsform becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Betriebsform. Collision A (fresh getNext from Berlin-Neukölln): Verwaltungsgliederung Berlins. Context: des ist der nördlichste und am dichtesten bebaute, namensgebende. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Verwaltungsgliederung Berlins becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Verwaltungsgliederung Berlins. Collision A (fresh getNext from Kaufhaus): Sortimentstiefe. Context: und aus einer oder wenigen bestimmten Warengruppe(n) in hoher. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentstiefe becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentstiefe. Collision A (fresh getNext from Berlin-Neukölln): Reuterkiez. Context: gehört zum von Neu-Berlinern umgangssprachlich so und Neukölln).Zum Ortsteil Neukölln gehören die. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Reuterkiez becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Reuterkiez. Collision A (fresh getNext from Kaufhaus): Sortimentsbreite. Context: auf einer und. Dramatic function: rupture: let the inherited and fresh terms destabilize the established scene state. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentsbreite becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentsbreite. Collision A (fresh getNext from Berlin-Neukölln): Berlin-Kreuzberg. Context: und Neukölln).Zum Ortsteil Neukölln gehören die Ortslagen so bezeichneten „Kreuzkölln“ (von. Dramatic function: consequence: use the fresh term to transform and resolve the accumulated visible residue. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: Berlin-Kreuzberg remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Kaufhaus",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "Betriebsform",
+        "streamLabel": "Kaufhaus",
+        "description": "eines und über Kaufhaus im Katalog der Deutschen"
+      },
+      "dramaticFunction": "opening: make the first semantic disturbance visible",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 1,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Betriebsform",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Verwaltungsgliederung Berlins",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "des ist der nördlichste und am dichtesten bebaute, namensgebende"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Verwaltungsgliederung Berlins",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentstiefe",
+        "streamLabel": "Kaufhaus",
+        "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentstiefe",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Reuterkiez",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "gehört zum von Neu-Berlinern umgangssprachlich so und Neukölln).Zum Ortsteil Neukölln gehören die"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 4,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Reuterkiez",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentsbreite",
+        "streamLabel": "Kaufhaus",
+        "description": "auf einer und"
+      },
+      "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 5,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentsbreite",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Berlin-Kreuzberg",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "und Neukölln).Zum Ortsteil Neukölln gehören die Ortslagen so bezeichneten „Kreuzkölln“ (von"
+      },
+      "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": []
+  },
+  "visionStoryContext": "",
+  "sceneLengths": [
+    5,
+    2,
+    3,
+    2,
+    5,
+    2
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+    "outputText": "",
+    "provider": "",
+    "model": ""
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let A rusty overhead metal sign stenciled with 'Betriebsform' above the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A rusty overhead metal sign stenciled with 'Betriebsform' above. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the drop, dolly slightly inward from the storefront edge to reveal. Still image direction: Keep the supplied photographed Kaufhaus viewpoint, crop and floor plan exactly; preserve ceiling, ducts, windows, columns, elevators, walls, exposure and color balance and at least 80% of the visible room. Show the central checkout area with the 'Betriebsform' overhead metal sign now hanging crooked; include the distance to the rear columns where a small green plant-like monster stands (dark green industrial body, glowing eyes, leaf-like limbs, hanging lamps still in frame). Capture the shattered lamp shards and sticky vine smear on floor. No global re-styling — maintain original Kaufhaus details.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening: the Betriebsform Sign",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "A rusty overhead metal sign stenciled with 'Betriebsform' above the central checkout vibrates loose. The isolated green monster stands far back by the rear columns and exhales a cloud of bioluminescent spores that condense into sticky vine filaments. The vines snag the sign; the sign tears from two rivets and tilts, dropping a short metal shelf that clips a hanging lamp — the lamp shatters and its swing sends a shower of glass and sparks across the floor.",
+      "monsterPresence": "distant figure near rear columns; full body small in frame, glowing eyes and plant-leaves visible but not foreground",
+      "consequence": "crooked, half-detached 'Betriebsform' sign dangling at an angle; a cluster of lamp shards and a trailing green vine smear on the floor under the sign",
+      "nextHook": "dangling Betriebsform sign with trailing green vine and lamp shards",
+      "stillPrompt": "Keep the supplied photographed Kaufhaus viewpoint, crop and floor plan exactly; preserve ceiling, ducts, windows, columns, elevators, walls, exposure and color balance and at least 80% of the visible room. Show the central checkout area with the 'Betriebsform' overhead metal sign now hanging crooked; include the distance to the rear columns where a small green plant-like monster stands (dark green industrial body, glowing eyes, leaf-like limbs, hanging lamps still in frame). Capture the shattered lamp shards and sticky vine smear on floor. No global re-styling — maintain original Kaufhaus details.",
+      "videoPrompt": "From the immutable Kaufhaus plate, hold exact viewpoint and framing. Play the 5s action: distant green monster exhales spores that form vines; vines snag the 'Betriebsform' sign; sign tears loose and drops a metal shelf, shattering a hanging lamp and showering glass. Keep all original architectural elements (columns, ducts, ceiling, windows, elevators) in-frame and unchanged; monster remains a distant small figure with glowing eyes. Sound: single metallic creak, lamp crash.",
+      "cameraCue": "After the drop, dolly slightly inward from the storefront edge to reveal the crooked 'Betriebsform' sign and the shard cluster while keeping the rear columns and the monster in the background.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5
+    },
+    {
+      "index": 2,
+      "title": "Escalation: the Map Unfurls",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "The crooked sign's oscillation transmits through ceiling ducts to a row of suspended department placards; they rattle and flip, one slamming into a stored rolling ladder. The ladder tips and knocks a rolled poster from a high shelf; the poster peels free and unfurls across the polished floor: a large illustrated city map labeled 'Verwaltungsgliederung Berlins' unrolls with a loud slap and half-unwraps onto the aisle.",
+      "monsterPresence": "partial; the monster slinks beneath shelving, vine-tendrils brushing the ladder's base as it pulls away, eyes reflected on the map's glossy surface",
+      "consequence": "a half-unfurled 'Verwaltungsgliederung Berlins' city map slapped across the aisle floor with a leaning ladder next to it",
+      "nextHook": "unfurled map of Verwaltungsgliederung Berlins lying on aisle, leaning ladder",
+      "stillPrompt": "Maintain the original Kaufhaus plate and viewpoint, showing the aisle with the unfurled city map titled 'Verwaltungsgliederung Berlins' laid flat across the floor. Keep columns, ceiling ducts, hanging lamps, elevators and visible walls unchanged. Include the leaning rolling ladder and a partial view of the small green monster under shelves (glowing eyes, plant-like leaves). Preserve exposure and original color balance.",
+      "videoPrompt": "Two-second clip from the provided Kaufhaus viewpoint: placards rattle, ladder tips, the poster peels free and unfurls with a slap onto the floor revealing 'Verwaltungsgliederung Berlins'. Keep room framing identical to plate; the monster is partially visible under shelving. Sound: placard rattle and the slap of paper.",
+      "cameraCue": "After the poster slaps down, drop the camera low to the floor and hold a ground-level steady shot that reveals the map's title and the leaning ladder while keeping the rest of the room in-frame.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Cascade: Sortimentstiefe Spills",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "The monster climbs the leaning ladder to peer at the map. Its hooked tendril dislodges a tightly packed display of identical boxed goods; the entire shelf section collapses in a precise cascading domino down the central aisle — hundreds of identical boxes tumble in a stripe and slam into a revolving stock carousel. The carousel spins violently, scattering a flurry of identical price tags that slap onto the monster's leaves and add weight, causing it to stumble.",
+      "monsterPresence": "mid-distance presence; climbing the ladder and partially obscured by falling boxes, glowing eyes and leaf-edges visible as tags cling to foliage",
+      "consequence": "a long stripe of identical boxed goods blocking the central aisle with scattered price tags stuck to the monster's leaves nearby",
+      "nextHook": "stripe of boxed goods blocking aisle and tagged monster retreating",
+      "stillPrompt": "Preserve the photographed Kaufhaus viewpoint and at least 80% of the visible room. Show the central aisle piled in a long stripe of identical boxed goods (Sortimentstiefe), the revolving stock carousel ajar, and the monster mid-distance with price tags stuck to its leaves and glowing eyes peeking from behind boxes. Keep ceiling, ducts, windows, columns and elevators consistent with the plate.",
+      "videoPrompt": "Three-second motion from the exact Kaufhaus plate: the monster dislodges a shelf and hundreds of identical boxes cascade in a line down the aisle, hitting the stock carousel which spins and spatters price tags that stick to the monster. Keep all architectural elements unchanged; monster visible mid-frame. Sound: wooden/metal crash, carousel grinding, tags slapping.",
+      "cameraCue": "After the cascade, lift to a slow overhead crane pan that tracks the stripe of boxes from front to back, then pause on the monster huddled half-obscured with tags.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Obstruction: Reuterkiez Banner",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "The dominoed stripe hits a stack of mannequin crates near the window. Momentum releases a stored roll of fabric which unfurls across the aisle and snaps taut: a long fabric banner reading 'Reuterkiez' unfurls and drapes across the boxed barricade. The banner snags a hanging lamp; as it catches the lamp swings and its light washes across the monster's face, startling it to fling a seed pod into the elevator doors — the pod wedges between the doors and they pop shut with a metallic ping, then stick half-open.",
+      "monsterPresence": "mostly concealed behind the new 'Reuterkiez' banner; only glowing eyes and a few tendrils visible through gaps",
+      "consequence": "a long 'Reuterkiez' fabric banner draped across the boxed barricade, a wedged seed pod jammed in the elevator doors (doors half-closed)",
+      "nextHook": "Reuterkiez banner across aisle and elevator doors slightly ajar with seed pod jam",
+      "stillPrompt": "Keep the Kaufhaus plate intact: show the aisle with the long fabric banner 'Reuterkiez' draped over the stripe of boxes, a hanging lamp caught by the banner and angled, and the elevator doors at the side with a small seed pod jammed between them (doors half-closed). Keep columns, ducts, windows and other store fixtures unchanged; the monster is mostly hidden behind the banner, its glowing eyes visible.",
+      "videoPrompt": "Two-second clip in the exact photographed Kaufhaus frame: the fabric banner unrolls across the aisle, snags a hanging lamp that swings its light across a hidden monster; the monster tosses a seed pod which wedges in the elevator doors that ping shut and stick. Maintain original room framing and lighting balance.",
+      "cameraCue": "After the banner snaps taut and the doors ping, place a low lateral camera that first conceals the monster behind the banner then tilts to reveal the seed pod jam in the elevator doors.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Rupture: Sortimentsbreite Breaks Out",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "The stuck elevator triggers its emergency venting: the doors shudder and a tensioned shutter drops, dumping a mixed cascade of assorted wide-format goods (different sizes and colors) onto the 'Reuterkiez' banner. The weight rips the banner free; the assorted goods spill and roll, striking a gondola on casters and forcing it to rotate ninety degrees. The monster leaps onto the gondola and its movement spins it faster; a hanging lamp chain snags on the gondola, yanking a skylight duct panel loose — the duct pops open with a gust that blows a wide fan of price stickers and flyers across the sales floor, painting a broad swath of varied color (a literal Sortimentsbreite).",
+      "monsterPresence": "active foreground but not central: perched on the rotating gondola, tendrils gripping spokes, face visible but not expanded into mascot scale",
+      "consequence": "a rotated gondola at 90°, assorted wide-format goods spread across the floor in a broad color fan of scattered stickers and flyers, an open skylight duct panel dangling",
+      "nextHook": "rotated gondola, wide fan of assorted goods and stickers, open duct panel",
+      "stillPrompt": "Preserve the supplied Kaufhaus viewpoint, showing the rotated gondola, a wide fan of assorted goods and scattered price stickers across the floor (Sortimentsbreite), and the skylight duct panel now open and dangling. Keep original ceiling, ducts, columns, windows, elevators and the shop's color/exposure. The green creature perches on the gondola (dark green industrial skin, plant-like limbs, glowing eyes), visible but not as a dominating foreground mascot.",
+      "videoPrompt": "Five-second motion from the immutable Kaufhaus plate: the elevator's emergency motion dumps assorted wide goods onto the banner; goods roll and pivot a gondola 90°, the monster jumps aboard and accelerates the spin; the gondola tugs a lamp chain and a skylight duct panel pops open, releasing a gust that scatters stickers into a broad fan. Maintain exact room framing and architectural details.",
+      "cameraCue": "After the gondola begins to spin, lock a rotational follow that matches the gondola's movement for one turn, then whip-pan up to the ceiling to reveal the popped duct and the sticker fan.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5
+    },
+    {
+      "index": 6,
+      "title": "Consequence: Kreuzkölln Mosaic",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "The fan of stickers and the spilled assortment sweep toward the front tile area. They collect into a rough mosaic over an exposed tile patch; under the weight a single tile pops up to reveal a warm amber light beneath and the assembled stickers briefly form the word 'Kreuzkölln'. The monster peels a glowing seed from its leaf and drops it into the open tile socket; the seed sprouts instantly into a small green shoot that wedges the tile slightly higher and emits a soft pulse. The shop's hidden PA stutters to life on that pulse, broadcasting a warped radio jingle that mutters 'Berlin-Kreuzberg' as all the hanging lamps synchronize one blink and then dim, freezing the store into a resolved tableau.",
+      "monsterPresence": "minimal and receding: the monster moves toward the exit, only its glowing eyes and a trailing tendril visible near the mosaic",
+      "consequence": "a small green sprout wedged into a lifted tile in a mosaic now reading 'Kreuzkölln', one tile lit from below, hanging lamps synchronized and dimmed, the store frozen as a tableau",
+      "nextHook": "mosaic 'Kreuzkölln' with lifted lit tile and sprout; synchronized dimmed lamps",
+      "stillPrompt": "From the original photographed Kaufhaus viewpoint, show the front tile area with the assembled sticker mosaic reading 'Kreuzkölln', one tile lifted and glowing warm from below with a small green sprout emerging. Keep the rotated gondola, scattered goods, open duct and most of the room visible (≥80% of plate). The monster is retreating at frame edge, only eyes and a tendril visible. Preserve exposure, color balance, and all architectural details.",
+      "videoPrompt": "Two-second clip retaining the supplied Kaufhaus plate: stickers and goods sweep into a mosaic that reads 'Kreuzkölln', a tile pops to reveal warm light, the monster drops a glowing seed that sprouts and the PA emits a warped 'Berlin-Kreuzberg' jingle; lights blink synchronous then dim. Keep all original spatial relationships and store fixtures unchanged.",
+      "cameraCue": "After the seed sprouts, perform a slow pull-back from the tile mosaic to reframe the whole Kaufhaus plate, revealing the lifted glowing tile, the sprout, and the dimmed hanging lamps across the room.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening: the Betriebsform Sign",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "A rusty overhead metal sign stenciled with 'Betriebsform' above the central checkout vibrates loose. The isolated green monster stands far back by the rear columns and exhales a cloud of bioluminescent spores that condense into sticky vine filaments. The vines snag the sign; the sign tears from two rivets and tilts, dropping a short metal shelf that clips a hanging lamp — the lamp shatters and its swing sends a shower of glass and sparks across the floor.",
+      "monsterPresence": "distant figure near rear columns; full body small in frame, glowing eyes and plant-leaves visible but not foreground",
+      "consequence": "crooked, half-detached 'Betriebsform' sign dangling at an angle; a cluster of lamp shards and a trailing green vine smear on the floor under the sign",
+      "nextHook": "dangling Betriebsform sign with trailing green vine and lamp shards",
+      "stillPrompt": "Keep the supplied photographed Kaufhaus viewpoint, crop and floor plan exactly; preserve ceiling, ducts, windows, columns, elevators, walls, exposure and color balance and at least 80% of the visible room. Show the central checkout area with the 'Betriebsform' overhead metal sign now hanging crooked; include the distance to the rear columns where a small green plant-like monster stands (dark green industrial body, glowing eyes, leaf-like limbs, hanging lamps still in frame). Capture the shattered lamp shards and sticky vine smear on floor. No global re-styling — maintain original Kaufhaus details.",
+      "videoPrompt": "From the immutable Kaufhaus plate, hold exact viewpoint and framing. Play the 5s action: distant green monster exhales spores that form vines; vines snag the 'Betriebsform' sign; sign tears loose and drops a metal shelf, shattering a hanging lamp and showering glass. Keep all original architectural elements (columns, ducts, ceiling, windows, elevators) in-frame and unchanged; monster remains a distant small figure with glowing eyes. Sound: single metallic creak, lamp crash.",
+      "cameraCue": "After the drop, dolly slightly inward from the storefront edge to reveal the crooked 'Betriebsform' sign and the shard cluster while keeping the rear columns and the monster in the background.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "Escalation: the Map Unfurls",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "The crooked sign's oscillation transmits through ceiling ducts to a row of suspended department placards; they rattle and flip, one slamming into a stored rolling ladder. The ladder tips and knocks a rolled poster from a high shelf; the poster peels free and unfurls across the polished floor: a large illustrated city map labeled 'Verwaltungsgliederung Berlins' unrolls with a loud slap and half-unwraps onto the aisle.",
+      "monsterPresence": "partial; the monster slinks beneath shelving, vine-tendrils brushing the ladder's base as it pulls away, eyes reflected on the map's glossy surface",
+      "consequence": "a half-unfurled 'Verwaltungsgliederung Berlins' city map slapped across the aisle floor with a leaning ladder next to it",
+      "nextHook": "unfurled map of Verwaltungsgliederung Berlins lying on aisle, leaning ladder",
+      "stillPrompt": "Maintain the original Kaufhaus plate and viewpoint, showing the aisle with the unfurled city map titled 'Verwaltungsgliederung Berlins' laid flat across the floor. Keep columns, ceiling ducts, hanging lamps, elevators and visible walls unchanged. Include the leaning rolling ladder and a partial view of the small green monster under shelves (glowing eyes, plant-like leaves). Preserve exposure and original color balance.",
+      "videoPrompt": "Two-second clip from the provided Kaufhaus viewpoint: placards rattle, ladder tips, the poster peels free and unfurls with a slap onto the floor revealing 'Verwaltungsgliederung Berlins'. Keep room framing identical to plate; the monster is partially visible under shelving. Sound: placard rattle and the slap of paper.",
+      "cameraCue": "After the poster slaps down, drop the camera low to the floor and hold a ground-level steady shot that reveals the map's title and the leaning ladder while keeping the rest of the room in-frame.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 3,
+      "title": "Cascade: Sortimentstiefe Spills",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "The monster climbs the leaning ladder to peer at the map. Its hooked tendril dislodges a tightly packed display of identical boxed goods; the entire shelf section collapses in a precise cascading domino down the central aisle — hundreds of identical boxes tumble in a stripe and slam into a revolving stock carousel. The carousel spins violently, scattering a flurry of identical price tags that slap onto the monster's leaves and add weight, causing it to stumble.",
+      "monsterPresence": "mid-distance presence; climbing the ladder and partially obscured by falling boxes, glowing eyes and leaf-edges visible as tags cling to foliage",
+      "consequence": "a long stripe of identical boxed goods blocking the central aisle with scattered price tags stuck to the monster's leaves nearby",
+      "nextHook": "stripe of boxed goods blocking aisle and tagged monster retreating",
+      "stillPrompt": "Preserve the photographed Kaufhaus viewpoint and at least 80% of the visible room. Show the central aisle piled in a long stripe of identical boxed goods (Sortimentstiefe), the revolving stock carousel ajar, and the monster mid-distance with price tags stuck to its leaves and glowing eyes peeking from behind boxes. Keep ceiling, ducts, windows, columns and elevators consistent with the plate.",
+      "videoPrompt": "Three-second motion from the exact Kaufhaus plate: the monster dislodges a shelf and hundreds of identical boxes cascade in a line down the aisle, hitting the stock carousel which spins and spatters price tags that stick to the monster. Keep all architectural elements unchanged; monster visible mid-frame. Sound: wooden/metal crash, carousel grinding, tags slapping.",
+      "cameraCue": "After the cascade, lift to a slow overhead crane pan that tracks the stripe of boxes from front to back, then pause on the monster huddled half-obscured with tags.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 4,
+      "title": "Obstruction: Reuterkiez Banner",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "The dominoed stripe hits a stack of mannequin crates near the window. Momentum releases a stored roll of fabric which unfurls across the aisle and snaps taut: a long fabric banner reading 'Reuterkiez' unfurls and drapes across the boxed barricade. The banner snags a hanging lamp; as it catches the lamp swings and its light washes across the monster's face, startling it to fling a seed pod into the elevator doors — the pod wedges between the doors and they pop shut with a metallic ping, then stick half-open.",
+      "monsterPresence": "mostly concealed behind the new 'Reuterkiez' banner; only glowing eyes and a few tendrils visible through gaps",
+      "consequence": "a long 'Reuterkiez' fabric banner draped across the boxed barricade, a wedged seed pod jammed in the elevator doors (doors half-closed)",
+      "nextHook": "Reuterkiez banner across aisle and elevator doors slightly ajar with seed pod jam",
+      "stillPrompt": "Keep the Kaufhaus plate intact: show the aisle with the long fabric banner 'Reuterkiez' draped over the stripe of boxes, a hanging lamp caught by the banner and angled, and the elevator doors at the side with a small seed pod jammed between them (doors half-closed). Keep columns, ducts, windows and other store fixtures unchanged; the monster is mostly hidden behind the banner, its glowing eyes visible.",
+      "videoPrompt": "Two-second clip in the exact photographed Kaufhaus frame: the fabric banner unrolls across the aisle, snags a hanging lamp that swings its light across a hidden monster; the monster tosses a seed pod which wedges in the elevator doors that ping shut and stick. Maintain original room framing and lighting balance.",
+      "cameraCue": "After the banner snaps taut and the doors ping, place a low lateral camera that first conceals the monster behind the banner then tilts to reveal the seed pod jam in the elevator doors.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 5,
+      "title": "Rupture: Sortimentsbreite Breaks Out",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "The stuck elevator triggers its emergency venting: the doors shudder and a tensioned shutter drops, dumping a mixed cascade of assorted wide-format goods (different sizes and colors) onto the 'Reuterkiez' banner. The weight rips the banner free; the assorted goods spill and roll, striking a gondola on casters and forcing it to rotate ninety degrees. The monster leaps onto the gondola and its movement spins it faster; a hanging lamp chain snags on the gondola, yanking a skylight duct panel loose — the duct pops open with a gust that blows a wide fan of price stickers and flyers across the sales floor, painting a broad swath of varied color (a literal Sortimentsbreite).",
+      "monsterPresence": "active foreground but not central: perched on the rotating gondola, tendrils gripping spokes, face visible but not expanded into mascot scale",
+      "consequence": "a rotated gondola at 90°, assorted wide-format goods spread across the floor in a broad color fan of scattered stickers and flyers, an open skylight duct panel dangling",
+      "nextHook": "rotated gondola, wide fan of assorted goods and stickers, open duct panel",
+      "stillPrompt": "Preserve the supplied Kaufhaus viewpoint, showing the rotated gondola, a wide fan of assorted goods and scattered price stickers across the floor (Sortimentsbreite), and the skylight duct panel now open and dangling. Keep original ceiling, ducts, columns, windows, elevators and the shop's color/exposure. The green creature perches on the gondola (dark green industrial skin, plant-like limbs, glowing eyes), visible but not as a dominating foreground mascot.",
+      "videoPrompt": "Five-second motion from the immutable Kaufhaus plate: the elevator's emergency motion dumps assorted wide goods onto the banner; goods roll and pivot a gondola 90°, the monster jumps aboard and accelerates the spin; the gondola tugs a lamp chain and a skylight duct panel pops open, releasing a gust that scatters stickers into a broad fan. Maintain exact room framing and architectural details.",
+      "cameraCue": "After the gondola begins to spin, lock a rotational follow that matches the gondola's movement for one turn, then whip-pan up to the ceiling to reveal the popped duct and the sticker fan.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 6,
+      "title": "Consequence: Kreuzkölln Mosaic",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "The fan of stickers and the spilled assortment sweep toward the front tile area. They collect into a rough mosaic over an exposed tile patch; under the weight a single tile pops up to reveal a warm amber light beneath and the assembled stickers briefly form the word 'Kreuzkölln'. The monster peels a glowing seed from its leaf and drops it into the open tile socket; the seed sprouts instantly into a small green shoot that wedges the tile slightly higher and emits a soft pulse. The shop's hidden PA stutters to life on that pulse, broadcasting a warped radio jingle that mutters 'Berlin-Kreuzberg' as all the hanging lamps synchronize one blink and then dim, freezing the store into a resolved tableau.",
+      "monsterPresence": "minimal and receding: the monster moves toward the exit, only its glowing eyes and a trailing tendril visible near the mosaic",
+      "consequence": "a small green sprout wedged into a lifted tile in a mosaic now reading 'Kreuzkölln', one tile lit from below, hanging lamps synchronized and dimmed, the store frozen as a tableau",
+      "nextHook": "mosaic 'Kreuzkölln' with lifted lit tile and sprout; synchronized dimmed lamps",
+      "stillPrompt": "From the original photographed Kaufhaus viewpoint, show the front tile area with the assembled sticker mosaic reading 'Kreuzkölln', one tile lifted and glowing warm from below with a small green sprout emerging. Keep the rotated gondola, scattered goods, open duct and most of the room visible (≥80% of plate). The monster is retreating at frame edge, only eyes and a tendril visible. Preserve exposure, color balance, and all architectural details.",
+      "videoPrompt": "Two-second clip retaining the supplied Kaufhaus plate: stickers and goods sweep into a mosaic that reads 'Kreuzkölln', a tile pops to reveal warm light, the monster drops a glowing seed that sprouts and the PA emits a warped 'Berlin-Kreuzberg' jingle; lights blink synchronous then dim. Keep all original spatial relationships and store fixtures unchanged.",
+      "cameraCue": "After the seed sprouts, perform a slow pull-back from the tile mosaic to reframe the whole Kaufhaus plate, revealing the lifted glowing tile, the sprout, and the dimmed hanging lamps across the room.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening: the Betriebsform Sign",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "A rusty overhead metal sign stenciled with 'Betriebsform' above the central checkout vibrates loose. The isolated green monster stands far back by the rear columns and exhales a cloud of bioluminescent spores that condense into sticky vine filaments. The vines snag the sign; the sign tears from two rivets and tilts, dropping a short metal shelf that clips a hanging lamp — the lamp shatters and its swing sends a shower of glass and sparks across the floor.",
+      "monsterPresence": "distant figure near rear columns; full body small in frame, glowing eyes and plant-leaves visible but not foreground",
+      "consequence": "crooked, half-detached 'Betriebsform' sign dangling at an angle; a cluster of lamp shards and a trailing green vine smear on the floor under the sign",
+      "nextHook": "dangling Betriebsform sign with trailing green vine and lamp shards",
+      "stillPrompt": "Keep the supplied photographed Kaufhaus viewpoint, crop and floor plan exactly; preserve ceiling, ducts, windows, columns, elevators, walls, exposure and color balance and at least 80% of the visible room. Show the central checkout area with the 'Betriebsform' overhead metal sign now hanging crooked; include the distance to the rear columns where a small green plant-like monster stands (dark green industrial body, glowing eyes, leaf-like limbs, hanging lamps still in frame). Capture the shattered lamp shards and sticky vine smear on floor. No global re-styling — maintain original Kaufhaus details.",
+      "videoPrompt": "From the immutable Kaufhaus plate, hold exact viewpoint and framing. Play the 5s action: distant green monster exhales spores that form vines; vines snag the 'Betriebsform' sign; sign tears loose and drops a metal shelf, shattering a hanging lamp and showering glass. Keep all original architectural elements (columns, ducts, ceiling, windows, elevators) in-frame and unchanged; monster remains a distant small figure with glowing eyes. Sound: single metallic creak, lamp crash.",
+      "cameraCue": "After the drop, dolly slightly inward from the storefront edge to reveal the crooked 'Betriebsform' sign and the shard cluster while keeping the rear columns and the monster in the background.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 2,
+      "title": "Escalation: the Map Unfurls",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "The crooked sign's oscillation transmits through ceiling ducts to a row of suspended department placards; they rattle and flip, one slamming into a stored rolling ladder. The ladder tips and knocks a rolled poster from a high shelf; the poster peels free and unfurls across the polished floor: a large illustrated city map labeled 'Verwaltungsgliederung Berlins' unrolls with a loud slap and half-unwraps onto the aisle.",
+      "monsterPresence": "partial; the monster slinks beneath shelving, vine-tendrils brushing the ladder's base as it pulls away, eyes reflected on the map's glossy surface",
+      "consequence": "a half-unfurled 'Verwaltungsgliederung Berlins' city map slapped across the aisle floor with a leaning ladder next to it",
+      "nextHook": "unfurled map of Verwaltungsgliederung Berlins lying on aisle, leaning ladder",
+      "stillPrompt": "Maintain the original Kaufhaus plate and viewpoint, showing the aisle with the unfurled city map titled 'Verwaltungsgliederung Berlins' laid flat across the floor. Keep columns, ceiling ducts, hanging lamps, elevators and visible walls unchanged. Include the leaning rolling ladder and a partial view of the small green monster under shelves (glowing eyes, plant-like leaves). Preserve exposure and original color balance.",
+      "videoPrompt": "Two-second clip from the provided Kaufhaus viewpoint: placards rattle, ladder tips, the poster peels free and unfurls with a slap onto the floor revealing 'Verwaltungsgliederung Berlins'. Keep room framing identical to plate; the monster is partially visible under shelving. Sound: placard rattle and the slap of paper.",
+      "cameraCue": "After the poster slaps down, drop the camera low to the floor and hold a ground-level steady shot that reveals the map's title and the leaning ladder while keeping the rest of the room in-frame.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Cascade: Sortimentstiefe Spills",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "The monster climbs the leaning ladder to peer at the map. Its hooked tendril dislodges a tightly packed display of identical boxed goods; the entire shelf section collapses in a precise cascading domino down the central aisle — hundreds of identical boxes tumble in a stripe and slam into a revolving stock carousel. The carousel spins violently, scattering a flurry of identical price tags that slap onto the monster's leaves and add weight, causing it to stumble.",
+      "monsterPresence": "mid-distance presence; climbing the ladder and partially obscured by falling boxes, glowing eyes and leaf-edges visible as tags cling to foliage",
+      "consequence": "a long stripe of identical boxed goods blocking the central aisle with scattered price tags stuck to the monster's leaves nearby",
+      "nextHook": "stripe of boxed goods blocking aisle and tagged monster retreating",
+      "stillPrompt": "Preserve the photographed Kaufhaus viewpoint and at least 80% of the visible room. Show the central aisle piled in a long stripe of identical boxed goods (Sortimentstiefe), the revolving stock carousel ajar, and the monster mid-distance with price tags stuck to its leaves and glowing eyes peeking from behind boxes. Keep ceiling, ducts, windows, columns and elevators consistent with the plate.",
+      "videoPrompt": "Three-second motion from the exact Kaufhaus plate: the monster dislodges a shelf and hundreds of identical boxes cascade in a line down the aisle, hitting the stock carousel which spins and spatters price tags that stick to the monster. Keep all architectural elements unchanged; monster visible mid-frame. Sound: wooden/metal crash, carousel grinding, tags slapping.",
+      "cameraCue": "After the cascade, lift to a slow overhead crane pan that tracks the stripe of boxes from front to back, then pause on the monster huddled half-obscured with tags.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Obstruction: Reuterkiez Banner",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "The dominoed stripe hits a stack of mannequin crates near the window. Momentum releases a stored roll of fabric which unfurls across the aisle and snaps taut: a long fabric banner reading 'Reuterkiez' unfurls and drapes across the boxed barricade. The banner snags a hanging lamp; as it catches the lamp swings and its light washes across the monster's face, startling it to fling a seed pod into the elevator doors — the pod wedges between the doors and they pop shut with a metallic ping, then stick half-open.",
+      "monsterPresence": "mostly concealed behind the new 'Reuterkiez' banner; only glowing eyes and a few tendrils visible through gaps",
+      "consequence": "a long 'Reuterkiez' fabric banner draped across the boxed barricade, a wedged seed pod jammed in the elevator doors (doors half-closed)",
+      "nextHook": "Reuterkiez banner across aisle and elevator doors slightly ajar with seed pod jam",
+      "stillPrompt": "Keep the Kaufhaus plate intact: show the aisle with the long fabric banner 'Reuterkiez' draped over the stripe of boxes, a hanging lamp caught by the banner and angled, and the elevator doors at the side with a small seed pod jammed between them (doors half-closed). Keep columns, ducts, windows and other store fixtures unchanged; the monster is mostly hidden behind the banner, its glowing eyes visible.",
+      "videoPrompt": "Two-second clip in the exact photographed Kaufhaus frame: the fabric banner unrolls across the aisle, snags a hanging lamp that swings its light across a hidden monster; the monster tosses a seed pod which wedges in the elevator doors that ping shut and stick. Maintain original room framing and lighting balance.",
+      "cameraCue": "After the banner snaps taut and the doors ping, place a low lateral camera that first conceals the monster behind the banner then tilts to reveal the seed pod jam in the elevator doors.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Rupture: Sortimentsbreite Breaks Out",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "The stuck elevator triggers its emergency venting: the doors shudder and a tensioned shutter drops, dumping a mixed cascade of assorted wide-format goods (different sizes and colors) onto the 'Reuterkiez' banner. The weight rips the banner free; the assorted goods spill and roll, striking a gondola on casters and forcing it to rotate ninety degrees. The monster leaps onto the gondola and its movement spins it faster; a hanging lamp chain snags on the gondola, yanking a skylight duct panel loose — the duct pops open with a gust that blows a wide fan of price stickers and flyers across the sales floor, painting a broad swath of varied color (a literal Sortimentsbreite).",
+      "monsterPresence": "active foreground but not central: perched on the rotating gondola, tendrils gripping spokes, face visible but not expanded into mascot scale",
+      "consequence": "a rotated gondola at 90°, assorted wide-format goods spread across the floor in a broad color fan of scattered stickers and flyers, an open skylight duct panel dangling",
+      "nextHook": "rotated gondola, wide fan of assorted goods and stickers, open duct panel",
+      "stillPrompt": "Preserve the supplied Kaufhaus viewpoint, showing the rotated gondola, a wide fan of assorted goods and scattered price stickers across the floor (Sortimentsbreite), and the skylight duct panel now open and dangling. Keep original ceiling, ducts, columns, windows, elevators and the shop's color/exposure. The green creature perches on the gondola (dark green industrial skin, plant-like limbs, glowing eyes), visible but not as a dominating foreground mascot.",
+      "videoPrompt": "Five-second motion from the immutable Kaufhaus plate: the elevator's emergency motion dumps assorted wide goods onto the banner; goods roll and pivot a gondola 90°, the monster jumps aboard and accelerates the spin; the gondola tugs a lamp chain and a skylight duct panel pops open, releasing a gust that scatters stickers into a broad fan. Maintain exact room framing and architectural details.",
+      "cameraCue": "After the gondola begins to spin, lock a rotational follow that matches the gondola's movement for one turn, then whip-pan up to the ceiling to reveal the popped duct and the sticker fan.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 6,
+      "title": "Consequence: Kreuzkölln Mosaic",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "The fan of stickers and the spilled assortment sweep toward the front tile area. They collect into a rough mosaic over an exposed tile patch; under the weight a single tile pops up to reveal a warm amber light beneath and the assembled stickers briefly form the word 'Kreuzkölln'. The monster peels a glowing seed from its leaf and drops it into the open tile socket; the seed sprouts instantly into a small green shoot that wedges the tile slightly higher and emits a soft pulse. The shop's hidden PA stutters to life on that pulse, broadcasting a warped radio jingle that mutters 'Berlin-Kreuzberg' as all the hanging lamps synchronize one blink and then dim, freezing the store into a resolved tableau.",
+      "monsterPresence": "minimal and receding: the monster moves toward the exit, only its glowing eyes and a trailing tendril visible near the mosaic",
+      "consequence": "a small green sprout wedged into a lifted tile in a mosaic now reading 'Kreuzkölln', one tile lit from below, hanging lamps synchronized and dimmed, the store frozen as a tableau",
+      "nextHook": "mosaic 'Kreuzkölln' with lifted lit tile and sprout; synchronized dimmed lamps",
+      "stillPrompt": "From the original photographed Kaufhaus viewpoint, show the front tile area with the assembled sticker mosaic reading 'Kreuzkölln', one tile lifted and glowing warm from below with a small green sprout emerging. Keep the rotated gondola, scattered goods, open duct and most of the room visible (≥80% of plate). The monster is retreating at frame edge, only eyes and a tendril visible. Preserve exposure, color balance, and all architectural details.",
+      "videoPrompt": "Two-second clip retaining the supplied Kaufhaus plate: stickers and goods sweep into a mosaic that reads 'Kreuzkölln', a tile pops to reveal warm light, the monster drops a glowing seed that sprouts and the PA emits a warped 'Berlin-Kreuzberg' jingle; lights blink synchronous then dim. Keep all original spatial relationships and store fixtures unchanged.",
+      "cameraCue": "After the seed sprouts, perform a slow pull-back from the tile mosaic to reframe the whole Kaufhaus plate, revealing the lifted glowing tile, the sprout, and the dimmed hanging lamps across the room.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    }
+  ]
+}

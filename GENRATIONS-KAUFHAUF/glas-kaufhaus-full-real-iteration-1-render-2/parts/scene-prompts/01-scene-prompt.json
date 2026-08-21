@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 3.2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone with distinct lighting and architecture to establish opening scene.",
+  "videoMode": "singleImage",
+  "prompt": "Starting with a frozen image of the green plant-like monster mid-roar, tendrils twisting violently amid flickering hanging lamps casting fractured shadows in a 1983 Kaufhaus interior; temporal transformation shows tendrils writhing and lamps flickering erratically; subject motion is violent tendril movement; environmental motion is pulsing light and dynamic shadow fractures; atmosphere tense and charged; lighting ambient with warm and cold contrasts; composition continuity maintained; camera dollies slowly forward to intensify focus.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785852953911-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785852976535-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785852976535-runware-image-video.mp4",
+  "timestamp": "2026-08-04T14:16:17.443Z"
+}

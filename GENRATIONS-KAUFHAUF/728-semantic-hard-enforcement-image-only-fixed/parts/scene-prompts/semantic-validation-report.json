@@ -1,0 +1,38 @@
+[
+  {
+    "sceneIndex": 0,
+    "anchor": "1983",
+    "collision": "NATO-Doppelbeschluss",
+    "valid": true,
+    "cueIdentityValid": true,
+    "mandatoryFieldsValid": true,
+    "derivationValid": true,
+    "collisionPhysicalizationValid": true,
+    "consequenceInheritanceValid": true,
+    "clueDerivationValid": true,
+    "monsterAgencyValid": true,
+    "tensionDerivationValid": true,
+    "promptPropagationValid": true,
+    "visibleEvidenceOfAgency": "The monster's tentacle ripples and glowing eyes visibly respond to the spectral distortion.",
+    "errors": [],
+    "warnings": []
+  },
+  {
+    "sceneIndex": 1,
+    "anchor": "NATO-Doppelbeschluss",
+    "collision": "Betriebsform",
+    "valid": true,
+    "cueIdentityValid": true,
+    "mandatoryFieldsValid": true,
+    "derivationValid": true,
+    "collisionPhysicalizationValid": true,
+    "consequenceInheritanceValid": true,
+    "clueDerivationValid": true,
+    "monsterAgencyValid": true,
+    "tensionDerivationValid": true,
+    "promptPropagationValid": true,
+    "visibleEvidenceOfAgency": "Tentacle mechanical morphing and synchronization with pulsing room light.",
+    "errors": [],
+    "warnings": []
+  }
+]

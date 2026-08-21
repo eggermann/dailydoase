@@ -1,0 +1,67 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 7,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/merged/1787263687420-concat.mp4",
+  "mireloMode": "off",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort",
+      "terror",
+      "kaufhaus"
+    ],
+    "semanticCues": [
+      "womit es zu den Bedeutung um ein politisches Ziel wie die Aufrechterhaltung der eigenen Soziale Gruppe und mit SinnLeffers",
+      "eine präzis definierbare Sprachwissenschaft und George W. Breslauer definierten politischen Terror 1970 Alexander Dallin oder Elektrogerät",
+      "ist, ist umstritten. So stellte Kategorie (Philosophie) Anwendung von starkem Zwang gegen Individuen oder Gruppen Willkür (Recht) Das Kaufhaus ist eine Weiterentwicklung des Elektronik"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "previous": null,
+    "cast": {
+      "actorReferenceLimit": 10,
+      "actorReferences": []
+    },
+    "story": {
+      "openingBeat": "The introduction of 'wort' creates a surreal atmosphere, hinting at the beginning of a transformation.",
+      "finalBeat": "The transformation of the room reflects the overwhelming nature of the political themes, engulfing the man in a surreal experience.",
+      "summary": "The introduction of 'wort' creates a surreal atmosphere, hinting at the beginning of a transformation. -> The atmosphere thickens with tension as political symbols manifest, reflecting the weight of the topic. -> The transformation of the room reflects the overwhelming nature of the political themes, engulfing the man in a surreal experience.",
+      "nextOpeningObligation": "Continue from this consequence: The transformation of the room reflects the overwhelming nature of the political themes, engulfing the man in a surreal experience."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Awakening of the Word",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263724344-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263724344-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The room begins to shimmer with liquid light as the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room begins to shimmer with liquid light as, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Echoes of Political Tension",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263796649-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263796649-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The liquid light morphs into abstract shapes that resemble political take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The liquid light morphs into abstract shapes that resemble, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Transformation of the Space",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263862928-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263862928-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The room begins to warp and bend as the symbols take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room begins to warp and bend as the, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T22:11:16.156Z"
+}

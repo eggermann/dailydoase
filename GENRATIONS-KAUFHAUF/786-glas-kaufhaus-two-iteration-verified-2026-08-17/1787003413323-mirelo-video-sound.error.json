@@ -1,0 +1,77 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/merged/1787003413323-concat.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/merged/1787003413323-concat.mp4",
+  "mireloPrompt": "A bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. One person only: same real person from the source frame, same face and clothes. Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion, The background includes a white wall with; The background includes a white wall with a large artwork, The camera is at eye level, capturing the.\n\nA bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Und Sortimentstiefe Ruhollah Chomeini. One person only: same real person from the source frame, same face and clothes. Let a trace of Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion linger in the expression, posture, and gaze.\n\nA bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. One person only: same real person from the source frame, same face and clothes. Let a trace of Und Sortimentstiefe Ruhollah Chomeini linger in the expression, posture, and gaze.",
+  "extraMetadata": {
+    "sceneCount": 3,
+    "totalTrackDuration": 9,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/merged/1787003413323-concat.mp4",
+    "mireloMode": "finalOnly",
+    "storyTransport": {
+      "schemaVersion": 1,
+      "iteration": 1,
+      "topic": "Kaufhaus",
+      "topics": [
+        "Kaufhaus",
+        "1989"
+      ],
+      "semanticCues": [
+        "eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion",
+        "und Sortimentstiefe Ruhollah Chomeini",
+        "auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl"
+      ],
+      "people": {
+        "count": 1,
+        "actors": [
+          {
+            "reference": "man",
+            "description": "A bald man with a goatee, wearing a dark puffer jacket and a scarf",
+            "position": "center",
+            "orientation": "front-facing"
+          }
+        ]
+      },
+      "location": "An indoor space",
+      "previous": null,
+      "story": {
+        "openingBeat": "Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+        "finalBeat": "Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+        "summary": "Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag. -> Und Sortimentstiefe Ruhollah Chomeini. A bald man with a goatee, wearing a dark carries the cue while The background includes a white wall with a large stays under pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag. -> Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+        "nextOpeningObligation": "Continue from this consequence: Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag."
+      }
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Eines Betriebsform Zurück; Damit Endete Der",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003433907-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003433907-runware-image-video.mp4",
+        "prompt": "A bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. One person only: same real person from the source frame, same face and clothes. Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion, The background includes a white wall with; The background includes a white wall with a large artwork, The camera is at eye level, capturing the.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Und Sortimentstiefe Ruhollah Chomeini",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003456069-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003456069-runware-image-video.mp4",
+        "prompt": "A bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Und Sortimentstiefe Ruhollah Chomeini. One person only: same real person from the source frame, same face and clothes. Let a trace of Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion linger in the expression, posture, and gaze.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Auf Einer Sortimentsbreite In Polen, Dem",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003476040-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003476040-runware-image-video.mp4",
+        "prompt": "A bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. One person only: same real person from the source frame, same face and clothes. Let a trace of Und Sortimentstiefe Ruhollah Chomeini linger in the expression, posture, and gaze.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/1787003413323-scene-loop.json"
+  },
+  "timestamp": "2026-08-17T21:51:17.639Z"
+}

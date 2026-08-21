@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933533267-runware-image-video-last-frame.png",
+  "outputText": "Subject: Large green humanoid creature with bark-like skin and multiple horn-like protrusions on head, facing directly forward with wide-open mouth showing sharp teeth, eyes wide and intense. Setting: Industrial indoor space with exposed ceiling pipes and ducts, beige walls, and tiled floor; background includes structural columns and a window with blue light. Framing: Close-up frontal shot centered on creature’s face and upper torso, filling most of the frame. Lighting: Even, soft overhead lighting illuminating creature’s face and body from above, casting minimal shadows. Visible transformation: Creature appears fully formed with detailed textured skin and aggressive facial expression; no visible changes in this frame. Continuity: Creature’s direct forward-facing pose, intense expression, and indoor industrial setting must be maintained for smooth transition to next scene.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Favor a grounded mobile-device look: handheld, candid, lightly imperfect, and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:38:57.455Z"
+}

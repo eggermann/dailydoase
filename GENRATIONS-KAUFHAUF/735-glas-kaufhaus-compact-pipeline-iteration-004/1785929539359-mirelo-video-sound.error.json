@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/merged/1785929539359-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/merged/1785929539359-collision-cut.mp4",
+  "mireloPrompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 5s take: start anchored on the original viewpoint of the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s take: start anchored on the original viewpoint of, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 2s take: close to the elevator call panel while retaining take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s take: close to the elevator call panel while, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 3s take: start wide in the Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream,. Build the mood around 3s take: start wide in the Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 2s take: from the Kaufhaus midplane, the trapped monster tugs take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s take: from the Kaufhaus midplane, the trapped monster, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 5s take: wide Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around 5s take: wide Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 2s take: reanchor to the Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and. Build the mood around 2s take: reanchor to the Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to orient. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/merged/1785929539359-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/merged/1785929539359-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening: Catalog Takedown",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929594737-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929594737-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 5s take: start anchored on the original viewpoint of the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s take: start anchored on the original viewpoint of, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Elevator Summons",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929637536-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929637536-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 2s take: close to the elevator call panel while retaining take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s take: close to the elevator call panel while, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Avalanche of Assortment",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929680892-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929680892-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 3s take: start wide in the Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream,. Build the mood around 3s take: start wide in the Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Reuterkiez Shiver",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929718135-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929718135-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 2s take: from the Kaufhaus midplane, the trapped monster tugs take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s take: from the Kaufhaus midplane, the trapped monster, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Ramp and Bloom",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929757790-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929757790-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 5s take: wide Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around 5s take: wide Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Kreuzberg Haze",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929795360-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929795360-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 2s take: reanchor to the Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and. Build the mood around 2s take: reanchor to the Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to orient. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/1785929539359-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T11:36:36.917Z"
+}

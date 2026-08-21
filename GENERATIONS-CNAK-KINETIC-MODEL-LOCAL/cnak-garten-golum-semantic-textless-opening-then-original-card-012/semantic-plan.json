@@ -1,0 +1,39 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticMotion": "The flower-lamps in the Garten-Golum illustration gently sway and pulse with a soft glow, as if breathing, creating a subtle, enchanting rhythm that suggests a hidden life and connection beneath the surface.",
+  "providerPrompt": "16:9 landscape. Animate only the supplied text-free Garten-Golum illustration, kept sharp and centered in its neutral black matte. Semantic Stream motion: The flower-lamps in the Garten-Golum illustration gently sway and pulse with a soft glow, as if breathing, creating a subtle, enchanting rhythm that suggests a hidden life and connection beneath the surface. Dirty botanical horror, restrained and pictorial: a single blink or a slow pulse of lamp-light through existing roots. Static camera, one continuous moment. Preserve the exact Golem face, leaf ears, roots, flowers, lamps, hand-drawn colored-pencil texture, composition, and black matte. No words, letters, signs, typography, new character, room, cutaway, camera movement, action scene, 3D, redraw, collage, or transformation.",
+  "textlessPoster": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/garten-golum-no-text-v001.png",
+  "originalPoster": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg"
+}

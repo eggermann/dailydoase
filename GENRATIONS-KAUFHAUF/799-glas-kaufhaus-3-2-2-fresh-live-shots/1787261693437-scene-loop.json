@@ -1,0 +1,63 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 7,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/merged/1787261693437-concat.mp4",
+  "mireloMode": "off",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort",
+      "terror",
+      "kaufhaus"
+    ],
+    "semanticCues": [
+      "In der Sprachliche Einheit und Schrecken durch Angst (z. B. Textilie",
+      "besitzt das Wort – im Gegensatz zu einem Natürliche Sprache des Gewalt , C&A",
+      "oder einer Laut oder einer dominanten Staat , H&M"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "previous": null,
+    "story": {
+      "openingBeat": "The scene introduces a surreal ambiance, where the concept of 'word' begins to manifest visually through color and light.",
+      "finalBeat": "The scene culminates in a visual explosion of brand identities, showcasing the struggle and tension inherent in language and commerce.",
+      "summary": "The scene introduces a surreal ambiance, where the concept of 'word' begins to manifest visually through color and light. -> The atmosphere shifts from wonder to fear, as the shadows represent the darker side of language and communication. -> The scene culminates in a visual explosion of brand identities, showcasing the struggle and tension inherent in language and commerce.",
+      "nextOpeningObligation": "Continue from this consequence: The scene culminates in a visual explosion of brand identities, showcasing the struggle and tension inherent in language and commerce."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Whispers of Language",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787261713532-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787261713532-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor and let the image break away from plain webcam realism; keep the same real person. Let The air shimmers with a liquid texture, reflecting the tension take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The air shimmers with a liquid texture, reflecting the, while ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor space stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Echoes of Fear",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787262156365-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787262156365-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor and let the image break away from plain webcam realism; keep the same real person. Let The room darkens as shadows stretch, embodying the fear of take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room darkens as shadows stretch, embodying the fear, while ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor space stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "The Clash of Brands",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787262768672-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787262768672-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor and let the image break away from plain webcam realism; keep the same real person. Let A burst of chaotic colors explodes, representing the conflict between take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A burst of chaotic colors explodes, representing the conflict, while ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor space stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T21:53:10.332Z"
+}

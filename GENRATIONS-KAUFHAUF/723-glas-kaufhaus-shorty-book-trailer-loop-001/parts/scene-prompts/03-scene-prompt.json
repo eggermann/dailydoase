@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Münchner Secession Escalation",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone emphasizing artistic transformation.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let Tentacles sprout delicate graphic leaves as the monster mimics Münchner take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Tentacles sprout delicate graphic leaves as the monster mimics, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc around monster to reveal light fracturing and room reaction.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877561446-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877600438-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877600438-runware-image-video.mp4",
+  "timestamp": "2026-08-04T21:06:41.676Z"
+}

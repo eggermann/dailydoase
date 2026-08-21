@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Artistic Escalation: Betriebsform Meets Münchner Secession",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "newImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New composition focusing on transformed shelving and monster merging",
+  "videoMode": "singleImage",
+  "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The monster's glowing eyes flare as it shifts attention to take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's glowing eyes flare as it shifts attention, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Sideways track to reveal merging of monster and sculptures.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921625122-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921625122-runware-image-video.mp4",
+  "timestamp": "2026-08-05T09:20:26.441Z"
+}

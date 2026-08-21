@@ -1,0 +1,20 @@
+[
+  {
+    "index": 1,
+    "title": "Kaufhaus — Betriebsform Snap",
+    "semanticAnchor": "Kaufhaus",
+    "semanticCollision": "Betriebsform",
+    "event": "In the medium close-up, the green plant-monster lifts a single tentacle and flicks a small hanging catalogue tag stamped 'Betriebsform'; the tag snags a maintenance cable above a row of industrial hanging lamps, yanking it. One lamp pivots free in a sudden staggered arc, its metal mount snapping and sending a bright metallic catalog corner slapping and sticking to the elevator door; the lampshade hangs crooked and begins to swing.",
+    "monsterPresence": "Medium close-up on the monster's face and upper torso: glowing eyes and plant-like facial structure centered, upper tentacles visible as they extend off-frame and one tentacle actively touches the hanging tag; mechanical appendage glimpses at edge of frame.",
+    "consequence": "A torn 'Betriebsform' catalog tag (corner visibly stuck) clings to the elevator door; one hanging lamp is crooked and swinging; small metallic scuff marks and a fallen corner of catalogue lie on the floor beneath—clearly visible in the left third of the room.",
+    "nextHook": "Betriebsform becomes next anchor — the stuck catalog tag now labels the elevator as an active Betriebsform node and remains visible on the elevator face for subsequent scenes.",
+    "stillPrompt": "Create a single still that preserves the supplied photographed Kaufhaus viewpoint exactly (keep original crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room). Style: BRD television trailer, 1989 — slight broadcast scanlines, light film grain, desaturated color with warm studio tungsten push, subtle vignette. Scene: medium close-up of the green plant-like monster (primary protagonist) with glowing eyes, plant anatomy, hanging lamps in frame. The monster's tentacle touches a small hanging catalogue tag stamped 'Betriebsform'; one hanging lamp is crooked and swinging, a torn corner of the catalog sticker is stuck to the elevator door, and small metallic scuffs lie on the floor. Keep the Kaufhaus fixtures (columns, elevator face, ducts, hanging lamps) unchanged and clearly recognizable as in the photo. Do not change architecture or viewpoint.",
+    "videoPrompt": "Produce a 3-second BRD 1989 TV trailer clip from the supplied Kaufhaus photograph viewpoint (do not alter crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance; keep >=80% of visible room). Action: a medium close-up holds on the monster; a tentacle reaches out and flicks a hanging catalogue tag labeled 'Betriebsform'. The tag snags a maintenance cable overhead: lamps stutter, one lamp snaps free and swings; a metallic corner flies and smacks the elevator door, adhering as a torn 'Betriebsform' fragment. Motion notes: lamp swing is sudden then pendulates; the sticker flutters then sticks. Visual style: 1989 broadcast grain and slight scanlines, 25 fps feel, warm tungsten push, modest motion blur on fast swing, audio placeholder: distant industrial hum and a single soft mechanical clang at impact. Preserve Kaufhaus architecture and lighting exactly.",
+    "cameraCue": "After the impact, cut to a steady medium-close 50mm framing with shallow depth of field on the monster's face; rack focus from the monster's glowing eyes to the torn 'Betriebsform' fragment stuck on the elevator door to reveal the consequence.",
+    "videoMode": "singleImage",
+    "frameSource": "lastFrame",
+    "freshImage": false,
+    "startFrameStrategy": "locationReanchor",
+    "durationSeconds": 3
+  }
+]

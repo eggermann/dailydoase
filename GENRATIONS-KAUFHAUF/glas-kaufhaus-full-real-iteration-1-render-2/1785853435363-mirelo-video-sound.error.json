@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/merged/1785853435363-concat.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/merged/1785853435363-concat.mp4",
+  "mireloPrompt": "Starting with a frozen image of the green plant-like monster mid-roar, tendrils twisting violently amid flickering hanging lamps casting fractured shadows in a 1983 Kaufhaus interior; temporal transformation shows tendrils writhing and lamps flickering erratically; subject motion is violent tendril movement; environmental motion is pulsing light and dynamic shadow fractures; atmosphere tense and charged; lighting ambient with warm and cold contrasts; composition continuity maintained; camera dollies slowly forward to intensify focus.\n\nStarting with the green monster weaving tendrils through steel beams causing rhythmic pulsing, shoppers frozen mid-step with anxious expressions in a 1980s Kaufhaus; temporal transformation shows steel beams warping rhythmically; subject motion is tendril weaving; environmental motion is rhythmic structural pulsing; atmosphere tense and surreal; lighting warm ambient; composition continuity maintained; camera pans slowly across scene.\n\nStarting with the green monster's tendrils sprouting glowing flower heads amid rippling walls and abstract projections in a morphing Kaufhaus-Kunsthalle interior; temporal transformation shows walls flowing with shapes and metal bending; subject motion is tendril blooming; environmental motion is wall rippling and metal bending; atmosphere surreal and charged; lighting warm ambient; composition continuity maintained; camera slowly zooms in.\n\nStarting with the green monster's tendrils swaying like palm fronds under bioluminescent lamps in a surreal Kaufhaus gallery merging tropical island motifs; temporal transformation shows gentle tendril sway and lamp flicker; subject motion is tendril movement; environmental motion is lamp flicker; atmosphere surreal and exotic; lighting warm ambient mixed with green glow; composition continuity maintained; camera cranes slowly upward.\n\nStarting with the green monster entangling infinite multiplying product shelves pulsing organically in a surreal Kaufhaus gallery-island hybrid; temporal transformation shows shelves multiplying and pulsing; subject motion is tendril twisting; environmental motion is shelf pulsing; atmosphere chaotic and overwhelming; lighting warm ambient with flickers; composition continuity maintained; camera shakes rapidly handheld style.\n\nStarting with the green monster curled tightly amid collapsing shelves, temporal transformation shows shelves settling into orderly 1955 Kaufhaus rows; subject motion is tendril curling and shrinking; environmental motion is shelf settling; atmosphere calm with subtle tension; lighting soft warm; composition continuity maintained; camera tracks slowly backward revealing restored vintage interior.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 16,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/merged/1785853435363-concat.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/merged/1785853435363-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785852976535-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785852976535-runware-image-video.mp4",
+        "prompt": "Starting with a frozen image of the green plant-like monster mid-roar, tendrils twisting violently amid flickering hanging lamps casting fractured shadows in a 1983 Kaufhaus interior; temporal transformation shows tendrils writhing and lamps flickering erratically; subject motion is violent tendril movement; environmental motion is pulsing light and dynamic shadow fractures; atmosphere tense and charged; lighting ambient with warm and cold contrasts; composition continuity maintained; camera dollies slowly forward to intensify focus.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Escalation: NATO-Doppelbeschluss Meets Betriebsform",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853021303-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853021303-runware-image-video.mp4",
+        "prompt": "Starting with the green monster weaving tendrils through steel beams causing rhythmic pulsing, shoppers frozen mid-step with anxious expressions in a 1980s Kaufhaus; temporal transformation shows steel beams warping rhythmically; subject motion is tendril weaving; environmental motion is rhythmic structural pulsing; atmosphere tense and surreal; lighting warm ambient; composition continuity maintained; camera pans slowly across scene.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Further Escalation: Betriebsform Meets Kunsthalle",
+        "durationSeconds": 2.4,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853049331-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853049331-runware-image-video.mp4",
+        "prompt": "Starting with the green monster's tendrils sprouting glowing flower heads amid rippling walls and abstract projections in a morphing Kaufhaus-Kunsthalle interior; temporal transformation shows walls flowing with shapes and metal bending; subject motion is tendril blooming; environmental motion is wall rippling and metal bending; atmosphere surreal and charged; lighting warm ambient; composition continuity maintained; camera slowly zooms in.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Intensification: Kunsthalle Meets St. Kitts und Nevis",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853075783-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853075783-runware-image-video.mp4",
+        "prompt": "Starting with the green monster's tendrils swaying like palm fronds under bioluminescent lamps in a surreal Kaufhaus gallery merging tropical island motifs; temporal transformation shows gentle tendril sway and lamp flicker; subject motion is tendril movement; environmental motion is lamp flicker; atmosphere surreal and exotic; lighting warm ambient mixed with green glow; composition continuity maintained; camera cranes slowly upward.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Rupture: St. Kitts und Nevis Meets Sortimentstiefe",
+        "durationSeconds": 2.8,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853117435-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853117435-runware-image-video.mp4",
+        "prompt": "Starting with the green monster entangling infinite multiplying product shelves pulsing organically in a surreal Kaufhaus gallery-island hybrid; temporal transformation shows shelves multiplying and pulsing; subject motion is tendril twisting; environmental motion is shelf pulsing; atmosphere chaotic and overwhelming; lighting warm ambient with flickers; composition continuity maintained; camera shakes rapidly handheld style.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Consequence: Sortimentstiefe Meets 1955",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853371491-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853371491-runware-image-video.mp4",
+        "prompt": "Starting with the green monster curled tightly amid collapsing shelves, temporal transformation shows shelves settling into orderly 1955 Kaufhaus rows; subject motion is tendril curling and shrinking; environmental motion is shelf settling; atmosphere calm with subtle tension; lighting soft warm; composition continuity maintained; camera tracks slowly backward revealing restored vintage interior.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/1785853435363-scene-loop.json"
+  },
+  "timestamp": "2026-08-04T14:23:56.121Z"
+}

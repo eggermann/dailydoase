@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932325446-runware-image-video-last-frame.png",
+  "outputText": "Subject: Large, menacing tree-like creature with glowing eyes and antler-like branches, reaching forward aggressively. Setting: Indoor public space resembling a subway or train station, with escalators and signage in the background. Framing: Medium close-up focusing on the creature’s upper body and face, with a metal tray of raw steaks prominently in the foreground. Lighting: Even, artificial overhead lighting casting soft shadows; light source primarily from above and slightly left. Visible transformation: Creature’s skin is bark-textured with glowing eyes, emphasizing a supernatural or monstrous form; raw steaks on tray suggest imminent consumption. Continuity: Creature’s forward-reaching pose and intense gaze must carry into next scene; tray with steaks remains central and fully visible, maintaining spatial relationship and lighting consistency.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:18:49.593Z"
+}

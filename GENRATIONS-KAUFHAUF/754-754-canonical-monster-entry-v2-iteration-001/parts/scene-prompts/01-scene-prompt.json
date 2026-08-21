@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Configured Operation",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Five-second slow push: shutters slide fully into place, kiosks rotate smoothly into alignment, the chained carts begin to roll as a slow mechanical river, echoes and small clacks as metal links click. Camera stabilizes as the river of carts advances under the mezzanine lights, revealing the reconfigured circulation. Camera: After the carts lock and begin rolling, camera pulls back and rises slightly to reveal the full length of the cart river and the reoriented kiosks.. End with this readable result: A single-file river of locked shopping carts moves down the central aisle toward the entrance. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/754-754-canonical-monster-entry-v2-iteration-001/parts/1785941538594-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/754-754-canonical-monster-entry-v2-iteration-001/parts/1785941575102-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/754-754-canonical-monster-entry-v2-iteration-001/parts/1785941575102-runware-image-video.mp4",
+  "timestamp": "2026-08-05T14:52:56.140Z"
+}

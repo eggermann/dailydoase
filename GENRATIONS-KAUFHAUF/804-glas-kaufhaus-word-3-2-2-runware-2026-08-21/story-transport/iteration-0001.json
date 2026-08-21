@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "Diese bestehen ihrerseits aus mehreren grammatikalischen Sprichwort und Zerreißen bei lebendigem Leibe als „Terrorapparat“ Rädern 1673 wurde das Kaufhaus Echigoya mit dem Werbeslogan „Genkin Edo-Periode",
+    "Des Weiteren bezeichnet das Wort als Oxymoron bekannten Periode ideologisch begründeten. In einem Terrorherrschaft als die älteste moderne Kaufhauskette der Welt gilt. Schon Mitsukoshi",
+    "– von dem hierbei kein Plural gebildet werden kann – eine Singularetantum durch Vernunft zu leiten und die Volk und im Winter, wurden die Rechnungen gestellt und beglichen. Obon"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "cast": {
+    "actorReferenceLimit": 10,
+    "actorReferences": []
+  },
+  "story": {
+    "openingBeat": "The room is alive with color and creativity, setting the stage for the unfolding story.",
+    "finalBeat": "The room morphs into a dreamlike state, blending reality with imagination.",
+    "summary": "The room is alive with color and creativity, setting the stage for the unfolding story. -> The word 'wort' becomes the focal point, altering the atmosphere of the room. -> The room morphs into a dreamlike state, blending reality with imagination.",
+    "nextOpeningObligation": "Continue from this consequence: The room morphs into a dreamlike state, blending reality with imagination."
+  }
+}

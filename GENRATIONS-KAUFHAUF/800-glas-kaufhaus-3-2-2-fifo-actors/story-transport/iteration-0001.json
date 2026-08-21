@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "womit es zu den Bedeutung um ein politisches Ziel wie die Aufrechterhaltung der eigenen Soziale Gruppe und mit SinnLeffers",
+    "eine präzis definierbare Sprachwissenschaft und George W. Breslauer definierten politischen Terror 1970 Alexander Dallin oder Elektrogerät",
+    "ist, ist umstritten. So stellte Kategorie (Philosophie) Anwendung von starkem Zwang gegen Individuen oder Gruppen Willkür (Recht) Das Kaufhaus ist eine Weiterentwicklung des Elektronik"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "cast": {
+    "actorReferenceLimit": 10,
+    "actorReferences": []
+  },
+  "story": {
+    "openingBeat": "The introduction of 'wort' creates a surreal atmosphere, hinting at the beginning of a transformation.",
+    "finalBeat": "The transformation of the room reflects the overwhelming nature of the political themes, engulfing the man in a surreal experience.",
+    "summary": "The introduction of 'wort' creates a surreal atmosphere, hinting at the beginning of a transformation. -> The atmosphere thickens with tension as political symbols manifest, reflecting the weight of the topic. -> The transformation of the room reflects the overwhelming nature of the political themes, engulfing the man in a surreal experience.",
+    "nextOpeningObligation": "Continue from this consequence: The transformation of the room reflects the overwhelming nature of the political themes, engulfing the man in a surreal experience."
+  }
+}

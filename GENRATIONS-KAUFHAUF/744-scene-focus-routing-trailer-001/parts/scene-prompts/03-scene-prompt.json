@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Afterimage Stalker",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Low-angle tracking as chromatic trails stretch from the lights take over the scene; the room warps, the light flickers, and the frame mutates like a. Build the mood around Low-angle tracking as chromatic trails stretch from the lights. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934067540-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934089547-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934089547-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:48:10.617Z"
+}

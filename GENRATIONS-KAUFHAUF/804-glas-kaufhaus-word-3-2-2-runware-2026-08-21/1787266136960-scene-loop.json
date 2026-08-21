@@ -1,0 +1,67 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 7,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/merged/1787266136960-concat.mp4",
+  "mireloMode": "off",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort",
+      "terror",
+      "kaufhaus"
+    ],
+    "semanticCues": [
+      "Diese bestehen ihrerseits aus mehreren grammatikalischen Sprichwort und Zerreißen bei lebendigem Leibe als „Terrorapparat“ Rädern 1673 wurde das Kaufhaus Echigoya mit dem Werbeslogan „Genkin Edo-Periode",
+      "Des Weiteren bezeichnet das Wort als Oxymoron bekannten Periode ideologisch begründeten. In einem Terrorherrschaft als die älteste moderne Kaufhauskette der Welt gilt. Schon Mitsukoshi",
+      "– von dem hierbei kein Plural gebildet werden kann – eine Singularetantum durch Vernunft zu leiten und die Volk und im Winter, wurden die Rechnungen gestellt und beglichen. Obon"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "previous": null,
+    "cast": {
+      "actorReferenceLimit": 10,
+      "actorReferences": []
+    },
+    "story": {
+      "openingBeat": "The room is alive with color and creativity, setting the stage for the unfolding story.",
+      "finalBeat": "The room morphs into a dreamlike state, blending reality with imagination.",
+      "summary": "The room is alive with color and creativity, setting the stage for the unfolding story. -> The word 'wort' becomes the focal point, altering the atmosphere of the room. -> The room morphs into a dreamlike state, blending reality with imagination.",
+      "nextOpeningObligation": "Continue from this consequence: The room morphs into a dreamlike state, blending reality with imagination."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Establishing the Space",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266182796-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266182796-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Art studio workspace\", \"Setting\": and let the image break away from plain webcam realism; keep the same real person. Let The room is filled with unfinished paintings and a desk take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room is filled with unfinished paintings and a, while ```json { \"Subject\": \"Art studio workspace\", \"Setting\": \"Indoor stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "The Word Emerges",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266235091-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266235091-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Art studio workspace\", \"Setting\": and let the image break away from plain webcam realism; keep the same real person. Let A glowing word 'wort' appears in the center of the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A glowing word 'wort' appears in the center of, while ```json { \"Subject\": \"Art studio workspace\", \"Setting\": \"Indoor stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Zoom in on the glowing word 'wort'.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Liquid Paint Transformation",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266301364-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266301364-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Art studio workspace\", \"Setting\": and let the image break away from plain webcam realism; keep the same real person. Let The word 'wort' spills into liquid paint, transforming the studio take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The word 'wort' spills into liquid paint, transforming the, while ```json { \"Subject\": \"Art studio workspace\", \"Setting\": \"Indoor stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Pan across the transformed landscape of liquid paint.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T22:52:03.767Z"
+}

@@ -1,0 +1,45 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "words": [
+    "Department store",
+    "ISBN (identifier)"
+  ],
+  "providerCollision": "ISBN (identifier)",
+  "providerContext": "International Association of Department Stores Under One",
+  "semanticMotion": "A sickly green eye glow pulses slowly once in the upper left corner of the poster. Simultaneously, grimy fluorescent light creeps horizontally across the existing artist names, flickering with a subtle, unsettling rhythm. From the existing root lines at the bottom, dirty botanical shadows crawl upward, twisting and writhing as if alive, eventually coalescing into the exact printed placement of the title 'Formen der Abweichung,' which grows organically from the roots without altering any lettering or position. Throughout, a single blink occurs in the eye glow, enhancing the eerie, escalating horror ambiance while preserving the poster's original identity and text.",
+  "plannerPrompt": "Supplied image is an original printed Formen der Abweichung Garten-Golum campaign poster. Keep sharp central poster in focus for entire clip; background is only its own blurred colour echo. Actual Semantic Stream direction (Department store → ISBN (identifier); International Association of Department Stores Under One): A sickly green eye glow pulses slowly once in the upper left corner of the poster. Simultaneously, grimy fluorescent light creeps horizontally across the existing artist names, flickering with a subtle, unsettling rhythm. From the existing root lines at the bottom, dirty botanical shadows crawl upward, twisting and writhing as if alive, eventually coalescing into the exact printed placement of the title 'Formen der Abweichung,' which grows organically from the roots without altering any lettering or position. Throughout, a single blink occurs in the eye glow, enhancing the eerie, escalating horror ambiance while preserving the poster's original identity and text. Dirty horror magic must occur on and inside this exact poster: one blink and sickly eye glow, aged botanical roots breathing gently, a dirty shadow travelling through existing root lines, flickering gallery light over existing printed names, original title grows organically but retains exactly same letters, typeface, words and final positions. 16:9 landscape. Static camera. Preserve face, leaf ears, green root body, hand-drawn coloured-pencil surface, full poster composition and every existing text line. No new readable text, no altered spelling, no new character, no replacement monster, no new room, no Kaufhaus cutaway, no zoom, no pan, no cinematic action, no 3D, no cartoon redraw, no collage, no transformation. Keep central poster readable and sharp.",
+  "providerPrompt": "16:9 landscape, original Garten-Golum printed campaign poster sharp and central over its own dark blurred colour echo. Poster-only dirty botanical magic: existing yellow eyes blink once and glow; aged green roots subtly breathe; dim yellow-green light moves across existing artist names; existing title grows from roots into same exact readable printed position. Static camera. Preserve exact face, leaf ears, root body, hand-drawn texture, full composition and all existing lettering. No new text, new character, new room, cutaway, zoom, action, 3D, cartoon redraw, collage, or transformation.",
+  "model": "gpt-4.1-mini-2025-04-14"
+}

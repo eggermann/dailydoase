@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/769-glas-kaufhaus-creative-iteration-010/parts/1786018158249-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty metal shelving units arranged in rows with a reflective elevator door on the right side. Setting: Industrial or commercial storage room with a tiled floor and exposed ceiling pipes. Framing: Wide-angle shot capturing multiple shelving units from a corner perspective, elevator door on the right edge. Lighting: Cool, artificial overhead lighting casting blue reflections and shadows on the floor and shelves, light source from above and slightly left. Visible transformation: Blue light reflection forming a curved pattern on the floor in front of the elevator, no objects or people present. Continuity: Maintain the empty, orderly shelving layout and reflective elevator door with consistent overhead lighting and blue reflections for the next scene \"Route Settles.\"",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T12:09:24.293Z"
+}

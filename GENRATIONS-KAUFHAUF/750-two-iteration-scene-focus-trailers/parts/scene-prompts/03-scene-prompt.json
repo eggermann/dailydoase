@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Indexing the Flesh",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s sequence: After the sculpture finishes rearranging the spiral, the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s sequence: After the sculpture finishes rearranging the spiral,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the discs assemble and the sculpture touches them, camera pulls up.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937268965-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-mirrored-columns.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937290032-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937290032-runware-image-video.mp4",
+  "timestamp": "2026-08-05T13:41:30.964Z"
+}

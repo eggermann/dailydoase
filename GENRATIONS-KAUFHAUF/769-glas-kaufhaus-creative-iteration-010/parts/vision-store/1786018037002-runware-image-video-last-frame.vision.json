@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/769-glas-kaufhaus-creative-iteration-010/parts/1786018037002-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty office space with modular white partitions and a tall mirror structure. Setting: Modern, industrial-style interior with exposed ceiling pipes and ducts, large windows allowing natural light. Framing: Wide shot capturing the central partitions and mirror, with visible ceiling and floor space. Lighting: Bright natural light streaming from windows on the right, casting sharp shadows and reflections on the floor and partitions. Visible transformation: Sunlight creates a distinct triangular light patch on the partition and floor, emphasizing spatial geometry. Continuity: Maintain the open layout with white partitions and mirror; preserve natural light direction and shadow patterns for consistent spatial orientation in Changed Circulation.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T12:07:20.907Z"
+}

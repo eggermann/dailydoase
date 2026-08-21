@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Neukölln Panel Exposed",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Midshot on the promotional map wall adjacent to escalator take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s: Midshot on the promotional map wall adjacent to, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931645511-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931673540-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931673540-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:07:54.511Z"
+}

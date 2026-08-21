@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Liquid Paint Transformation",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Art studio workspace\", \"Setting\": and let the image break away from plain webcam realism; keep the same real person. Let The word 'wort' spills into liquid paint, transforming the studio take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The word 'wort' spills into liquid paint, transforming the, while ```json { \"Subject\": \"Art studio workspace\", \"Setting\": \"Indoor stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Pan across the transformed landscape of liquid paint.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266278071-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266301364-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/804-glas-kaufhaus-word-3-2-2-runware-2026-08-21/parts/1787266301364-runware-image-video.mp4",
+  "timestamp": "2026-08-20T22:51:43.017Z"
+}

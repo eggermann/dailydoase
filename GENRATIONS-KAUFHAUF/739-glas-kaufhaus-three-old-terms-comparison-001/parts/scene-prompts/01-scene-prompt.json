@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening dent (5s)",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s shot from the fixed Kaufhaus viewpoint: elevator door opens; take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s shot from the fixed Kaufhaus viewpoint: elevator door. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930766612-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930819883-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930819883-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:53:40.833Z"
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "In der Sprachliche Einheit und Schrecken durch Angst (z. B. Textilie",
+    "besitzt das Wort – im Gegensatz zu einem Natürliche Sprache des Gewalt , C&A",
+    "oder einer Laut oder einer dominanten Staat , H&M"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "story": {
+    "openingBeat": "The scene introduces a surreal ambiance, where the concept of 'word' begins to manifest visually through color and light.",
+    "finalBeat": "The scene culminates in a visual explosion of brand identities, showcasing the struggle and tension inherent in language and commerce.",
+    "summary": "The scene introduces a surreal ambiance, where the concept of 'word' begins to manifest visually through color and light. -> The atmosphere shifts from wonder to fear, as the shadows represent the darker side of language and communication. -> The scene culminates in a visual explosion of brand identities, showcasing the struggle and tension inherent in language and commerce.",
+    "nextOpeningObligation": "Continue from this consequence: The scene culminates in a visual explosion of brand identities, showcasing the struggle and tension inherent in language and commerce."
+  }
+}

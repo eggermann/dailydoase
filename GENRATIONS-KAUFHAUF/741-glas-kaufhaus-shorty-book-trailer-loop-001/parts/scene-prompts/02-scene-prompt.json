@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Scene 2 — 2s: Meat Brochure Contact",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let Macro start on the meat tray; brochure flutters and sticks; take over the scene; Macro start on the meat tray; brochure flutters and sticks; tentacle. Build the mood around Macro start on the meat tray; brochure flutters, while Face textured with bark-like, cracked green skin; glowing stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932216231-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932245737-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932245737-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:17:26.568Z"
+}

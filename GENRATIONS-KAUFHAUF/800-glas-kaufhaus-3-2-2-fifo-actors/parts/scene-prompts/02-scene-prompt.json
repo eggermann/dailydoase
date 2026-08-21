@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Echoes of Political Tension",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The liquid light morphs into abstract shapes that resemble political take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The liquid light morphs into abstract shapes that resemble, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263724344-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263796649-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263796649-runware-image-video.mp4",
+  "timestamp": "2026-08-20T22:10:41.147Z"
+}

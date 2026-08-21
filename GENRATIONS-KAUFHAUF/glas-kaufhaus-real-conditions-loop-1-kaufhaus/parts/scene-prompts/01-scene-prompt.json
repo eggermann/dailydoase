@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "Create one fresh, semantic Kaufhaus start image for the test.",
+  "videoMode": "singleImage",
+  "prompt": "Starting state: green monster tense with glowing eyes in warped Kaufhaus warehouse. Temporal transformation: subtle warping of metal shelves and flickering lamps. Subject motion: tendrils twitching with electric energy. Environmental motion: shadows stretching and pulsing. Atmosphere: eerie, charged tension. Changing light: flickering fluorescent pulses. Composition continuity: medium close-up, 50mm lens, low angle. Camera move: slow dolly forward towards monster.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851517692-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851555120-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-real-conditions-loop-1-kaufhaus/parts/1785851555120-runware-image-video.mp4",
+  "timestamp": "2026-08-04T13:52:36.175Z"
+}

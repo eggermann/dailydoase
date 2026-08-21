@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "The Awakening of the Word",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "cameraShot",
+  "videoMode": "singleImage",
+  "prompt": "Start from Framing: Ensure similar close-up shot focusing on and let the image break away from plain webcam realism; keep the same real person. Let A surreal transformation begins as the concept of 'wort' emerges take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A surreal transformation begins as the concept of 'wort', while Framing: Ensure similar close-up shot focusing on their stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Zoom in on the person's face, capturing their expression of wonder.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/803-glas-kaufhaus-word-3-2-2-2026-08-21/parts/opening-persona-reference.jpg",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/803-glas-kaufhaus-word-3-2-2-2026-08-21/parts/1787265992786-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/803-glas-kaufhaus-word-3-2-2-2026-08-21/parts/1787265992786-runware-image-video.mp4",
+  "timestamp": "2026-08-20T22:47:11.628Z"
+}

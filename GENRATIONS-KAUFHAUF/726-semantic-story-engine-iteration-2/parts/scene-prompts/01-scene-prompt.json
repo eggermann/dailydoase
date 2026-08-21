@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "fluxContext",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "Initial scene establishing location and monster presence",
+  "videoMode": "singleImage",
+  "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The green plant-like monster stands near the center of the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green plant-like monster stands near the center of, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc around monster to reveal fractured reflections and warped shadows.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921526220-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921549885-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921549885-runware-image-video.mp4",
+  "timestamp": "2026-08-05T09:19:11.260Z"
+}

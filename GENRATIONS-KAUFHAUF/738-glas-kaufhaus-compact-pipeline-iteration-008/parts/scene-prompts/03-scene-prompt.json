@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Cascade: Sortimentstiefe Spills",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Three-second motion from the exact Kaufhaus plate: the monster dislodges take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Three-second motion from the exact Kaufhaus plate: the monster. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the cascade, lift to a slow overhead crane pan that tracks.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929931302-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929951763-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929951763-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:39:12.614Z"
+}

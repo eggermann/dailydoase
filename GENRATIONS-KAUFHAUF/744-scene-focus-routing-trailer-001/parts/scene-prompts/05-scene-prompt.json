@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Shower and Scorch",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let High-speed pan as a rig of industrial lights collapses into take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around High-speed pan as a rig of industrial lights collapses. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934121454-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934142205-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934142205-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:49:03.083Z"
+}

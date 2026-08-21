@@ -1,0 +1,146 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe supplied Garten-Golum poster as immutable reference. Preserve exact face, green botanical body, luminous eyes, coloured-pencil texture, title typography, layout and all printed information. Only small local animation is allowed.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create one four-second kinetic-poster Reel from supplied Garten-Golum poster. Use next Semantic Stream word as a tiny local change only: eyes may blink or glow, one lamp/reflection may breathe, or the existing printed title may subtly emerge from its existing roots. Preserve exact original figure, face, poster layout, typography, colour, drawing texture and composition. Camera locked. No new character, place, object, text, body motion, redesign, cinematic action, zoom, cut, collage or generative reinterpretation. Return required JSON only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 1,
+  "effectiveSceneCount": 1,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Department store. Collision A (fresh getNext from Department store): ISBN (identifier). Context: International Association of Department Stores Under One. Dramatic function: condensed arc: establish the world, intensify the collision, and show its consequence in one scene. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: ISBN (identifier) remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 1,
+      "anchor": {
+        "term": "Department store",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "ISBN (identifier)",
+        "streamLabel": "Department store",
+        "description": "International Association of Department Stores Under One"
+      },
+      "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": [],
+    "planningAttempts": []
+  },
+  "visionStoryContext": "Description: The Garten-Golum poster titled \"Formen der Abweichung\" features a central figure with an exact face rendered in a green botanical style, resembling a plant-based humanoid. The face is detailed with luminous eyes that glow softly, and the entire figure is te",
+  "sceneLengths": [
+    4.5
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+    "outputText": "The Garten-Golum poster titled \"Formen der Abweichung\" features a central figure with an exact face rendered in a green botanical style, resembling a plant-based humanoid. The face is detailed with luminous eyes that glow softly, and the entire figure is textured with a coloured-pencil effect, giving it a hand-drawn, organic feel. Around the head, various plant-like extensions bloom, each labeled with names of artists or performers such as Tuli Mekondjo, Catherine Lorent, Stefan Kaminski, and others, arranged in a balanced layout. The typography of the title \"Formen der Abweichung\" is bold and yellow, set against a green diamond-patterned background at the top, with smaller text in pink and black providing additional event details. The bottom section of the poster contains venue and event information in a mix of bright pink, green, and yellow text on a dark background, specifying the location (CANK Neukölln, Karl-Marx-Straße 95, 12043 Berlin), dates (6.9.–12.9.2026),",
+    "provider": "openai",
+    "model": "gpt-4.1-mini-2025-04-14"
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": false,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": false,
+  "openingFluxContextPrompt": "",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Formen der Abweichung — Aisle Echo",
+      "semanticAnchor": "Department store",
+      "semanticAnchorEnglish": "Department store",
+      "semanticCollision": "ISBN (identifier)",
+      "semanticCollisionEnglish": "ISBN (identifier)",
+      "sceneFocus": "mixed",
+      "event": "A barcode-bearing ISBN sticker folded over the edge of a returned art-catalog stack catches the pulsed fluorescent glint; that striped reflection lines up with the mirrored column duplicating the Garten-Golum poster, and the poster's luminous eyes track the pattern. A thin paper tendril peels free from the poster,",
+      "transformationMechanism": "optical resonance and mechanical leverage — pulsed fluorescent light and reflected barcode pattern",
+      "monsterPresence": "partial — Garten-Golum visible as animated poster face and a single emerging paper tendril; creature",
+      "consequence": "A cracked fluorescent tube hangs askew over the counter, a thin dust veil drifting in the air; the metal price-rail is ajar and a curled ISBN sticker lies hooked under it with its free edge visible and ready to slide.",
+      "nextHook": "curled ISBN sticker folded under the ajar metal price-rail clip; its free curved edge is visible and begins to slide in the following motion.",
+      "stillPrompt": "Interior Kaufhaus aisle at late-1980s scale: dusty concrete floor, exposed service conduits overhead, plain partition walls, mirrored column reflecting the poster titled \"Formen der Abweichung.\" A stack of returned art catalogs on a low display shows a folded ISBN (black-and-white barcode) peeking over the edge and tucked under a cheap metal price-rail clip. The Garten-Golum poster's botanical face floats on the partition with softly glowing eyes; a thin paper tendril from the poster is threaded beneath the ISBN sticker. Practical fluorescent fixtures pulse gently; one tube hangs askew,",
+      "videoPrompt": "Start from the still: pulsed fluorescent light and mirrored reflection align the barcode stripes with the poster's plant-face. The poster's eyes blink; the paper tendril slides fully beneath the ISBN sticker and nudges the metal clip — the ISBN sticker peels up and begins to slide forward. The rail releases with a metallic snap; hanging price tags fan outward, one slapping a nearby fluorescent tube so it fractures",
+      "cameraCue": "hesitant reframe with organic micro-sway, then a slight searching pan following the sliding ISBN sticker and the fanning",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "Begin anchored to the Kaufhaus layout and poster reflection so the precise object placements (folded ISBN sticker under the clip, mirrored column, cracked tube, tendril position)",
+      "durationSeconds": 4.5
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Formen der Abweichung — Aisle Echo",
+      "semanticAnchor": "Department store",
+      "semanticAnchorEnglish": "Department store",
+      "semanticCollision": "ISBN (identifier)",
+      "semanticCollisionEnglish": "ISBN (identifier)",
+      "sceneFocus": "mixed",
+      "event": "A barcode-bearing ISBN sticker folded over the edge of a returned art-catalog stack catches the pulsed fluorescent glint; that striped reflection lines up with the mirrored column duplicating the Garten-Golum poster, and the poster's luminous eyes track the pattern. A thin paper tendril peels free from the poster,",
+      "transformationMechanism": "optical resonance and mechanical leverage — pulsed fluorescent light and reflected barcode pattern",
+      "monsterPresence": "partial — Garten-Golum visible as animated poster face and a single emerging paper tendril; creature",
+      "consequence": "A cracked fluorescent tube hangs askew over the counter, a thin dust veil drifting in the air; the metal price-rail is ajar and a curled ISBN sticker lies hooked under it with its free edge visible and ready to slide.",
+      "nextHook": "curled ISBN sticker folded under the ajar metal price-rail clip; its free curved edge is visible and begins to slide in the following motion.",
+      "stillPrompt": "Interior Kaufhaus aisle at late-1980s scale: dusty concrete floor, exposed service conduits overhead, plain partition walls, mirrored column reflecting the poster titled \"Formen der Abweichung.\" A stack of returned art catalogs on a low display shows a folded ISBN (black-and-white barcode) peeking over the edge and tucked under a cheap metal price-rail clip. The Garten-Golum poster's botanical face floats on the partition with softly glowing eyes; a thin paper tendril from the poster is threaded beneath the ISBN sticker. Practical fluorescent fixtures pulse gently; one tube hangs askew,",
+      "videoPrompt": "Start from the still: pulsed fluorescent light and mirrored reflection align the barcode stripes with the poster's plant-face. The poster's eyes blink; the paper tendril slides fully beneath the ISBN sticker and nudges the metal clip — the ISBN sticker peels up and begins to slide forward. The rail releases with a metallic snap; hanging price tags fan outward, one slapping a nearby fluorescent tube so it fractures",
+      "cameraCue": "hesitant reframe with organic micro-sway, then a slight searching pan following the sliding ISBN sticker and the fanning",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "Begin anchored to the Kaufhaus layout and poster reflection so the precise object placements (folded ISBN sticker under the clip, mirrored column, cracked tube, tendril position)",
+      "durationSeconds": 4.5,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Formen der Abweichung — Aisle Echo",
+      "semanticAnchor": "Department store",
+      "semanticAnchorEnglish": "Department store",
+      "semanticCollision": "ISBN (identifier)",
+      "semanticCollisionEnglish": "ISBN (identifier)",
+      "sceneFocus": "mixed",
+      "event": "A barcode-bearing ISBN sticker folded over the edge of a returned art-catalog stack catches the pulsed fluorescent glint; that striped reflection lines up with the mirrored column duplicating the Garten-Golum poster, and the poster's luminous eyes track the pattern. A thin paper tendril peels free from the poster,",
+      "transformationMechanism": "optical resonance and mechanical leverage — pulsed fluorescent light and reflected barcode pattern",
+      "monsterPresence": "partial — Garten-Golum visible as animated poster face and a single emerging paper tendril; creature",
+      "consequence": "A cracked fluorescent tube hangs askew over the counter, a thin dust veil drifting in the air; the metal price-rail is ajar and a curled ISBN sticker lies hooked under it with its free edge visible and ready to slide.",
+      "nextHook": "curled ISBN sticker folded under the ajar metal price-rail clip; its free curved edge is visible and begins to slide in the following motion.",
+      "stillPrompt": "Interior Kaufhaus aisle at late-1980s scale: dusty concrete floor, exposed service conduits overhead, plain partition walls, mirrored column reflecting the poster titled \"Formen der Abweichung.\" A stack of returned art catalogs on a low display shows a folded ISBN (black-and-white barcode) peeking over the edge and tucked under a cheap metal price-rail clip. The Garten-Golum poster's botanical face floats on the partition with softly glowing eyes; a thin paper tendril from the poster is threaded beneath the ISBN sticker. Practical fluorescent fixtures pulse gently; one tube hangs askew,",
+      "videoPrompt": "Start from the still: pulsed fluorescent light and mirrored reflection align the barcode stripes with the poster's plant-face. The poster's eyes blink; the paper tendril slides fully beneath the ISBN sticker and nudges the metal clip — the ISBN sticker peels up and begins to slide forward. The rail releases with a metallic snap; hanging price tags fan outward, one slapping a nearby fluorescent tube so it fractures",
+      "cameraCue": "hesitant reframe with organic micro-sway, then a slight searching pan following the sliding ISBN sticker and the fanning",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "Begin anchored to the Kaufhaus layout and poster reflection so the precise object placements (folded ISBN sticker under the clip, mirrored column, cracked tube, tendril position)",
+      "durationSeconds": 4.5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "monsterEntryMode": "freshCanonicalFlux",
+      "requestedDurationSeconds": 4.5,
+      "rawTaktmusterDuration": 4,
+      "curvedDurationSeconds": 4,
+      "preQuantizedDurationSeconds": 4.5,
+      "rhythmCurve": "power",
+      "rhythmCurveExponent": 1.3
+    }
+  ]
+}

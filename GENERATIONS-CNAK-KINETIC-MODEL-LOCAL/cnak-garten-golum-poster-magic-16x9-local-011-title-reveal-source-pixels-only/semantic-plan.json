@@ -1,0 +1,40 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticKey": "Department store|ISBN (identifier)|International Association of Department Stores Under One",
+  "effect": "slow sickly eye pulse",
+  "rendering": "source-pixels-only: original poster plus empty black 16:9 matte; the exact source-pixel title is hidden, then revealed; a masked eye-light overlay follows",
+  "posterSha256": "27885d202a5c3a01fe9d09e0c46372ea1e840016fd68b6ee5af5d6c3650f18e1",
+  "video": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-poster-magic-16x9-local-011-title-reveal-source-pixels-only/poster-semantic-source-pixels-only-16x9.mp4"
+}

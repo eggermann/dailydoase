@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932245737-runware-image-video-last-frame.png",
+  "outputText": "Subject: Green, multi-tentacled plant creature with glowing yellow eyes and open mouth in a shocked or aggressive expression, facing forward. Setting: Industrial or warehouse-like interior with metal beams and large windows, visible exit sign on the left. Framing: Medium close-up centered on the creature's upper body and face, with a metal tray holding two raw steaks and a document labeled \"Bocure\" in the foreground. Lighting: Even, natural light from above and behind, casting soft shadows; highlights on creature's face and tray. Visible transformation: Creature's tentacles spread outward, some tipped with flower-like buds; eyes intensely glowing, mouth wide open showing teeth. Continuity: Maintain creature's frontal pose and glowing eyes; keep tray with steaks and document clearly visible in foreground; preserve industrial background and lighting direction for smooth transition to ink bloom effect.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:17:29.713Z"
+}

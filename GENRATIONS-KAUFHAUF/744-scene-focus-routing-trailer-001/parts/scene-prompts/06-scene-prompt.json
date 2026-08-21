@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "Transactions",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Slow, deliberate dolly in as tills click and swallow overturned take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Slow, deliberate dolly in as tills click and swallow. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the creature presses the pawprint, a tight close-up on the print.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934142205-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934269162-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934269162-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:51:10.063Z"
+}

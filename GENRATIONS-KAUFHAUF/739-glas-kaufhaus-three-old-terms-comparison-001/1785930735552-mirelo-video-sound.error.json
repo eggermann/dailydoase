@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/merged/1785930735552-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/merged/1785930735552-collision-cut.mp4",
+  "mireloPrompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s shot from the fixed Kaufhaus viewpoint: elevator door opens; take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s shot from the fixed Kaufhaus viewpoint: elevator door. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot continuing from previous frame: motorized shelving engages with take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot continuing from previous frame: motorized shelving engages. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the rack stalls, pan slightly to the left and hold on.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s shot: posters peel and snap into place to form take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s shot: posters peel and snap into place to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the mural locks, do a slow tilt from floor halftone pattern.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: paper price-tags fold into tiny boats and drift take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: paper price-tags fold into tiny boats. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the boat is trapped, push in to a tight close on.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s shot: shelving yawns open releasing a wave of identical take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s shot: shelving yawns open releasing a wave of. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: the creature aligns glass shards and its glowing take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: the creature aligns glass shards and its. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the flash, crane back to the original full-view Kaufhaus vantage to.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/merged/1785930735552-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/merged/1785930735552-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening dent (5s)",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930819883-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930819883-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s shot from the fixed Kaufhaus viewpoint: elevator door opens; take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s shot from the fixed Kaufhaus viewpoint: elevator door. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Retail motors engage (2s)",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930844076-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930844076-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot continuing from previous frame: motorized shelving engages with take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot continuing from previous frame: motorized shelving engages. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the rack stalls, pan slightly to the left and hold on.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Posters recompose (3s)",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930896418-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930896418-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s shot: posters peel and snap into place to form take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s shot: posters peel and snap into place to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the mural locks, do a slow tilt from floor halftone pattern.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Island motif sneaks in (2s)",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930917161-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930917161-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: paper price-tags fold into tiny boats and drift take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: paper price-tags fold into tiny boats. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the boat is trapped, push in to a tight close on.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Assortment collapses (5s)",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930941789-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930941789-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s shot: shelving yawns open releasing a wave of identical take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s shot: shelving yawns open releasing a wave of. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Flashframe (2s)",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930962768-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930962768-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: the creature aligns glass shards and its glowing take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: the creature aligns glass shards and its. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the flash, crane back to the original full-view Kaufhaus vantage to.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/1785930735552-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T11:56:04.403Z"
+}

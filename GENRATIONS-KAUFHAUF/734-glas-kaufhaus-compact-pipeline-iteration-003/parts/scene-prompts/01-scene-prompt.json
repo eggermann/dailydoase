@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening: The Betriebsform Unlatches",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (5s) from the Kaufhaus plate viewpoint: start on take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (5s) from the Kaufhaus plate viewpoint: start, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929463297-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929485010-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929485010-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:31:26.103Z"
+}

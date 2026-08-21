@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "1955 Resolution",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "Resolve and stabilize the accumulated transformations into a final calm state.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let consequence: transform and resolve the accumulated visible residue take over the scene; Starting from chaotic infinite labyrinth, the scene smoothly collapses into a calm, orderly. Build the mood around consequence: transform and resolve the accumulated visible residue, while The monster’s body is a complex fusion of stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876666138-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876690390-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876690390-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:51:31.300Z"
+}

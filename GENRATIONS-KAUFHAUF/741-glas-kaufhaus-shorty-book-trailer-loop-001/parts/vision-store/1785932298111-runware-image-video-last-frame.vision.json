@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932298111-runware-image-video-last-frame.png",
+  "outputText": "Subject: Green humanoid creature with plant-like features advancing toward a young boy standing near a tray of raw steaks. Setting: Indoor subway or train station platform with escalator, signage, and tiled floor. Framing: Medium-wide shot capturing the creature centrally, boy on the right, tray of steaks in the foreground, and people on escalator to the left. Lighting: Even, fluorescent overhead lighting casting soft shadows downward; light source from ceiling panels. Visible transformation: Creature’s plant-like limbs and glowing eyes emphasize a menacing, unnatural form; steaks appear fresh and raw on metal tray. Continuity: Creature’s forward motion and boy’s stationary stance must carry forward; tray with steaks remains prominently in foreground; spatial relationships between creature, boy, and tray preserved.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:18:22.910Z"
+}

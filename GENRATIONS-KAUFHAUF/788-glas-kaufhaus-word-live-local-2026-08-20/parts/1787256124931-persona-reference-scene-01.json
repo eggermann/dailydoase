@@ -1,0 +1,10 @@
+{
+  "kind": "persona-reference",
+  "personDescription": "A bald man in a black tank top is standing in an art studio, facing a large painting.",
+  "personStrength": 70,
+  "provider": "lmstudio",
+  "visionText": "PERSON_PRESENT: yes\nPERSON_STRENGTH: 70\nPERSON_DESCRIPTION: A bald man in a black tank top is standing in an art studio, facing a large painting.",
+  "sourcePath": "/Users/eggermann/Projekte/dailydoase/tests/GENERATIONS/camera-shot/2026-08-20-local-mac-camera-user.jpg",
+  "sceneIndex": 1,
+  "timestamp": "2026-08-20T20:02:04.936Z"
+}

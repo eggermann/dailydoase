@@ -1,0 +1,23 @@
+{
+  "configuredWords": [
+    ["Department store", "en"],
+    ["Horror", "en"],
+    ["Art exhibition", "en"]
+  ],
+  "selectedWord": ["Art exhibition", "en"],
+  "selectedStreamIndex": 2,
+  "previousStreamAdvances": 1,
+  "semanticCue": "Art exhibition → Drawing",
+  "openingTransformation": "Flower lamps scan the Golem surface as petals unfold and expose fine drawn veins.",
+  "cardArrival": "The lamps' moving botanical shadows buckle brown paper and leave a faint embossed residue.",
+  "models": {
+    "imageToImage": "bfl:3@1",
+    "firstLastFrameVideo": "bytedance:seedance@2.0"
+  },
+  "cardTransition": "Actual final Golem frame → text-free I2I ornamental card target → original names source card.",
+  "stateAdvancedAfterSuccessfulMux": true,
+  "nextStreamState": {
+    "iteration": 3,
+    "advances": [2, 1, 1]
+  }
+}

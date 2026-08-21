@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Hazard Bloom",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s emergence: start with placards detaching and drifting, then reveal take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s emergence: start with placards detaching and drifting, then. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935719257-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935741577-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935741577-runware-image-video.mp4",
+  "timestamp": "2026-08-05T13:15:42.771Z"
+}

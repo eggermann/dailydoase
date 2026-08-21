@@ -1,0 +1,74 @@
+[
+  {
+    "sceneIndex": 0,
+    "anchor": "1983",
+    "collision": "NATO-Doppelbeschluss",
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 1,
+    "anchor": "NATO-Doppelbeschluss",
+    "collision": "Betriebsform",
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 2,
+    "anchor": "Betriebsform",
+    "collision": "Münchner Secession",
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 3,
+    "anchor": "Münchner Secession",
+    "collision": "St. Kitts und Nevis",
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 4,
+    "anchor": "St. Kitts und Nevis",
+    "collision": "Sortimentstiefe",
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 5,
+    "anchor": "Sortimentstiefe",
+    "collision": "Gemälde",
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  }
+]

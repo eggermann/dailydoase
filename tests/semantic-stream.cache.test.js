@@ -4,6 +4,7 @@ import {
   clearWordStreamCache,
   getWordStreamCacheKey,
   getWordStreams,
+  SEMANTIC_STREAM_TITLE_FILTER,
 } from '../semantic-stream.js';
 
 describe('semantic-stream cache', () => {
@@ -35,5 +36,17 @@ describe('semantic-stream cache', () => {
     expect(getWordStreamCacheKey([['horror', 'de']])).not.toBe(
       getWordStreamCacheKey([['thriller', 'de']])
     );
+  });
+
+  test('filters DOI and ISBN titles when initializing semantic streams', async () => {
+    const words = [['kaufhaus', 'de']];
+    const initStreams = jest.fn(async () => []);
+
+    await getWordStreams(words, { initStreams });
+
+    expect(SEMANTIC_STREAM_TITLE_FILTER).toEqual(['doi', 'isbn']);
+    expect(initStreams).toHaveBeenCalledWith(words, {
+      filter: ['doi', 'isbn'],
+    });
   });
 });

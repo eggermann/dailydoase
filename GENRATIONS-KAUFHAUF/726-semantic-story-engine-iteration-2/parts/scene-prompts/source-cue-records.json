@@ -1,0 +1,116 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "1983",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "NATO-Doppelbeschluss",
+      "streamLabel": "1983",
+      "description": "NATO-Doppelbeschluss"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "NATO-Doppelbeschluss",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Betriebsform",
+      "streamLabel": "Kaufhaus",
+      "description": "eines und über Kaufhaus im Katalog der Deutschen"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Betriebsform",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Münchner Secession",
+      "streamLabel": "Kunstausstellung",
+      "description": "Grafiken, Fotografien oder Skulpturen einzelner"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 3,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Münchner Secession",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "St. Kitts und Nevis",
+      "streamLabel": "1983",
+      "description": "St. Kitts und Nevis"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 4,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "St. Kitts und Nevis",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Sortimentstiefe",
+      "streamLabel": "Kaufhaus",
+      "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+    },
+    "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 5,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Sortimentstiefe",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Gemälde",
+      "streamLabel": "Kunstausstellung",
+      "description": ", „Kunstausstellungen“ in Meyers Konversationslexikon"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

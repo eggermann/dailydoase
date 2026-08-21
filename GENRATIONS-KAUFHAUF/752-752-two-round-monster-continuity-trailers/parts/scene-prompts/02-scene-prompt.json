@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "II. Fleisc: soft goods behave like flesh",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s push-in: a hand is briefly implied by a ripple take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s push-in: a hand is briefly implied by a. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After event: macro push into the fibrous smear, follow its movement down.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938808899-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938862413-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/752-752-two-round-monster-continuity-trailers/parts/1785938862413-runware-image-video.mp4",
+  "timestamp": "2026-08-05T14:07:44.987Z"
+}

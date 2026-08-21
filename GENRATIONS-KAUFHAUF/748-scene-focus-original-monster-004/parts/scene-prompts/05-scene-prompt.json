@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Shreds and Panic",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5-second whip-pan: start on the closed drawer, whip toward the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5-second whip-pan: start on the closed drawer, whip toward. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Low handheld tilt up that jerks into a quick pan as the.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/748-scene-focus-original-monster-004/parts/1785936289069-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/748-scene-focus-original-monster-004/parts/1785936325663-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/748-scene-focus-original-monster-004/parts/1785936325663-runware-image-video.mp4",
+  "timestamp": "2026-08-05T13:25:27.174Z"
+}

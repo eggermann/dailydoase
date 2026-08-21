@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Wie Das Im Gemeinschaftswarenhaus Das Amt",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "A bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Wie das im Gemeinschaftswarenhaus das Amt des 41. One person only: same real person from the source frame, same face and clothes. Let a trace of Food-Sektor) und anderen Waren Englische Sprache der Grenzbefestigungen der Tschechoslowakei im Dezember linger in the expression, posture, and gaze.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003556835-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003594975-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003594975-runware-image-video.mp4",
+  "timestamp": "2026-08-17T21:53:16.546Z"
+}

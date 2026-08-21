@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/merged/1785929435210-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/merged/1785929435210-collision-cut.mp4",
+  "mireloPrompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (5s) from the Kaufhaus plate viewpoint: start on take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (5s) from the Kaufhaus plate viewpoint: start, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (2s) from the preserved plate: tickets swirl up, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (2s) from the preserved plate: tickets swirl, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (3s) from the plate: telescoping crates extend in take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (3s) from the plate: telescoping crates extend, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (2s) from the fixed plate: seedlings tug the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (2s) from the fixed plate: seedlings tug, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (5s) from the preserved plate: hidden latch released; take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (5s) from the preserved plate: hidden latch, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.\n\nStart from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (2s) from the preserved plate: the music box take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (2s) from the preserved plate: the music, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/merged/1785929435210-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/merged/1785929435210-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening: The Betriebsform Unlatches",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929485010-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929485010-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (5s) from the Kaufhaus plate viewpoint: start on take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (5s) from the Kaufhaus plate viewpoint: start, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Stamping the Verwaltungsgliederung",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929529194-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929529194-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (2s) from the preserved plate: tickets swirl up, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (2s) from the preserved plate: tickets swirl, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Telescoping Sortimentstiefe",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929553637-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929553637-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (3s) from the plate: telescoping crates extend in take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (3s) from the plate: telescoping crates extend, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Poster Sailing to Reuterkiez",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929596823-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929596823-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (2s) from the fixed plate: seedlings tug the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (2s) from the fixed plate: seedlings tug, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Sortimentsbreite Unleashed",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929635996-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929635996-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (5s) from the preserved plate: hidden latch released; take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (5s) from the preserved plate: hidden latch, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Kreuzberg Blackout — Consequence",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929661927-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/parts/1785929661927-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Short clip (2s) from the preserved plate: the music box take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Short clip (2s) from the preserved plate: the music, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/734-glas-kaufhaus-compact-pipeline-iteration-003/1785929435210-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T11:34:23.432Z"
+}

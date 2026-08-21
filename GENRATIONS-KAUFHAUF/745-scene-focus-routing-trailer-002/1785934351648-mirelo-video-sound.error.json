@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/merged/1785934351648-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/merged/1785934351648-collision-cut.mp4",
+  "mireloPrompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s sequence: slow, mechanical folding of display islands into stacked take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s sequence: slow, mechanical folding of display islands into. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the folding completes, crane down and hold on the half-open drawer.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: close-up as catalogue slivers pulse once, a single take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: close-up as catalogue slivers pulse once, a. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the pulse, whip-pan along the wet strand toward the escalator to.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s slow-motion: laminated strips detach and spin; a thin pearly take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s slow-motion: laminated strips detach and spin; a thin. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the strips take flight, push in through the fogged glass to.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s rapid cut: close-ups of synchronized hands aligning products into take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s rapid cut: close-ups of synchronized hands aligning products. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the alignment completes, dolly forward along the trail of products toward.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s kinetic sequence: sudden launch of packaged goods like a take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s kinetic sequence: sudden launch of packaged goods like. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the burst, low-angle push-in from below to silhouette the creature in.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s sequence: the creature touches several items in sequence; each take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s sequence: the creature touches several items in sequence;. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the conversion sequence, top-down pan following the coin stream as it.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/merged/1785934351648-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/merged/1785934351648-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Ledger Aisles",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934399383-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934399383-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s sequence: slow, mechanical folding of display islands into stacked take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s sequence: slow, mechanical folding of display islands into. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the folding completes, crane down and hold on the half-open drawer.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Fleshy Catalogue",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934423466-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934423466-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: close-up as catalogue slivers pulse once, a single take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: close-up as catalogue slivers pulse once, a. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the pulse, whip-pan along the wet strand toward the escalator to.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Hazard Ribbon",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934447099-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934447099-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s slow-motion: laminated strips detach and spin; a thin pearly take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s slow-motion: laminated strips detach and spin; a thin. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the strips take flight, push in through the fogged glass to.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Mannequin Cadence",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934468115-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934468115-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s rapid cut: close-ups of synchronized hands aligning products into take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s rapid cut: close-ups of synchronized hands aligning products. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the alignment completes, dolly forward along the trail of products toward.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Through the Ragged Hole",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934492366-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934492366-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s kinetic sequence: sudden launch of packaged goods like a take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s kinetic sequence: sudden launch of packaged goods like. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the burst, low-angle push-in from below to silhouette the creature in.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Market of Coins",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934513762-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/parts/1785934513762-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s sequence: the creature touches several items in sequence; each take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s sequence: the creature touches several items in sequence;. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the conversion sequence, top-down pan following the coin stream as it.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/745-scene-focus-routing-trailer-002/1785934351648-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T12:55:15.546Z"
+}

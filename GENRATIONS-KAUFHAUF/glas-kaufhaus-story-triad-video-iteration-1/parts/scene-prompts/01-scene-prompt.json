@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+  "durationSeconds": 5,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone establishing the opening scene.",
+  "videoMode": "singleImage",
+  "prompt": "The green plant-monster’s glowing eyes flicker as cold mechanical pulses warp the Kaufhaus architecture and angular shadows slice through the industrial space; tense surreal mood; harsh fluorescent greenish lighting; medium close-up; forward camera push; 1989 BRD style. The NATO-Doppelbeschluss introduces a harsh mechanical rhythm that disturbs the Kaufhaus’s organic atmosphere, physically warping the room and unsettling the monster. The monster decides to steady itself against the cold mechanical pulse, attempting to anchor its organic presence amid the shifting architecture. The Kaufhaus interior now bears sharp angular shadows and subtle warping, reflecting the mechanical disturbance that unsettles the monster.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785873969074-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874009817-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874009817-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:06:51.471Z"
+}

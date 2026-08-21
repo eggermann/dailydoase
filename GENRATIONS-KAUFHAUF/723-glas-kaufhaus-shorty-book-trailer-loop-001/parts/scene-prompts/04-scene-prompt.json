@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "St. Kitts und Nevis Flux",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone to emphasize tropical surrealism.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's form ripples with tropical colors and patterns, briefly take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's form ripples with tropical colors and patterns,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt down to reveal surreal flora reflections and monster's color shift.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877618591-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877656989-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877656989-runware-image-video.mp4",
+  "timestamp": "2026-08-04T21:07:37.991Z"
+}

@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/merged/1785929349894-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/merged/1785929349894-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening: Betriebsform engages",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929394937-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929394937-runware-image-video.mp4",
+      "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 5s: shelving rails unlatch and slide, directory swings take over the scene; the subject recoils, changes expression, and moves as if pulled into a. Build the mood around Animate 5s: shelving rails unlatch and slide, directory swings, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Projection of Berlin grids",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929421944-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929421944-runware-image-video.mp4",
+      "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 2s: projector latch drops, cracked lens flips the Berlin-Neukölln take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Animate 2s: projector latch drops, cracked lens flips the, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Depth of goods collapses",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929450012-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929450012-runware-image-video.mp4",
+      "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 3s: shelving extends, tower of boxes topples in domino, take over the scene; Animate 3s: shelving extends, tower of boxes topples in domino, lantern. Build the mood around Animate 3s: shelving extends, tower of boxes topples in, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Reuterkiez banners drop",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929474486-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929474486-runware-image-video.mp4",
+      "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 2s: banners snap open, one snags the monster take over the scene; the subject recoils, changes expression, and moves as if pulled into a. Build the mood around Animate 2s: banners snap open, one snags the monster, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Sortimentsbreite ruptures the floor",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929514867-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929514867-runware-image-video.mp4",
+      "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 5s: facade panels slide outward, tile seam opens, the take over the scene; Animate 5s: facade panels slide outward, tile seam opens, the monster. Build the mood around Animate 5s: facade panels slide outward, tile seam opens,, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Kreuzberg reflection seals",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929538165-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929538165-runware-image-video.mp4",
+      "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 2s: seedlings burst into moss that crawls over shards take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Animate 2s: seedlings burst into moss that crawls over, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T11:32:19.370Z"
+}

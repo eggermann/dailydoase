@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Further Escalation: Betriebsform Meets Kunsthalle",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "Major composition change to a new photographed Kaufhaus zone as Kunsthalle.",
+  "videoMode": "singleImage",
+  "prompt": "The green plant-monster in a Kaufhaus transformed into a surreal Kunsthalle with twisted glowing lamps and floating mechanical lanterns; frozen human visitors in curious postures; soft green ambient lighting; medium close-up; forward camera push; 1989 BRD style. The Kunsthalle introduces artistic transformation that detaches and animates the monster’s mechanical lanterns and freezes human behavior, altering room dynamics. The monster allows its lanterns to float freely, observing the frozen visitors and the artistic transformation with cautious curiosity. The Kaufhaus interior now blends industrial and artistic elements with glowing sculptural lamps and floating lanterns; human visitors frozen mid-gesture add surreal tension.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874057741-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874093582-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874093582-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:08:14.646Z"
+}

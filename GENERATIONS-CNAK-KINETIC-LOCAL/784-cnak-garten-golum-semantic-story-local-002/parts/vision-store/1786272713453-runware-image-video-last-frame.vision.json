@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-LOCAL/784-cnak-garten-golum-semantic-story-local-002/parts/1786272713453-runware-image-video-last-frame.png",
+  "outputText": "Subject: Green vine-like plant extending from foreground center toward the back wall, no visible person or animal. Setting: Indoor library or bookstore with concrete floor, bookshelves on left and right sides, and a poster on the back wall. Framing: Wide shot centered on the vine, symmetrical composition with bookshelves framing the sides and the poster centered on the back wall. Lighting: Overhead fluorescent light casting even illumination, slight reflections on polished pillars, soft shadows beneath the vine. Visible transformation: Vine has grown and stretched across the floor in a sinuous, winding path toward the back wall. Continuity: Maintain the vine’s exact curved shape and position on the floor, consistent lighting direction from above, and the static placement of bookshelves and poster on the back wall.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe supplied Garten-Golum poster as main campaign identity for a dark department-store art-horror Reel. Preserve exact green botanical face, luminous eyes, leaf ears, root body, coloured-pencil texture and headline; permit only controlled scenic drift and one local uncanny organic event.",
+  "timestamp": "2026-08-09T10:51:57.788Z"
+}

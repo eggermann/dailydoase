@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Rupture: Sortimentsbreite Breaks Out",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Five-second motion from the immutable Kaufhaus plate: the elevator's emergency take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Five-second motion from the immutable Kaufhaus plate: the elevator's. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the gondola begins to spin, lock a rotational follow that matches.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929974435-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929995083-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929995083-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:39:56.095Z"
+}

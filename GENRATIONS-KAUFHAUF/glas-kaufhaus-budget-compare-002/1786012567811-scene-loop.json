@@ -1,0 +1,58 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 5.357143,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/merged/1786012567811-collision-cut.mp4",
+  "mireloMode": "off",
+  "endCard": null,
+  "clips": [
+    {
+      "index": 0,
+      "title": "Shifted Passage",
+      "durationSeconds": 2,
+      "rawTaktmusterDuration": null,
+      "curvedDurationSeconds": null,
+      "preQuantizedDurationSeconds": 2,
+      "providerDurationSeconds": 2,
+      "rhythmCurve": "",
+      "rhythmCurveExponent": null,
+      "providerDurationRule": "runware-wan-2.6-flash-integer-2-15",
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/parts/1786012601131-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/parts/1786012601131-runware-image-video.mp4",
+      "prompt": "The nearest partition shifts slightly and redirects the open passage. Camera: Restrained handheld camera movement with one small imperfect adjustment. Camera viewpoint only: lightly imperfect handheld documentary framing. Do not show a phone, camera, operator, hands holding a device, selfie framing, screen, or recording UI. Use at most one small physically possible camera movement. No orbit, drone, crane, gimbal, floating camera or movement through objects. Keep the camera nearly held; use one tiny adjustment at most. End state: The former straight passage now ends at a mirrored column. No monster or substitute figure appears. Animate only subjects and objects already visible in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Moving Reflections",
+      "durationSeconds": 2,
+      "rawTaktmusterDuration": null,
+      "curvedDurationSeconds": null,
+      "preQuantizedDurationSeconds": 2,
+      "providerDurationSeconds": 2,
+      "rhythmCurve": "",
+      "rhythmCurveExponent": null,
+      "providerDurationRule": "runware-wan-2.6-flash-integer-2-15",
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/parts/1786012624582-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/parts/1786012624582-runware-image-video.mp4",
+      "prompt": "The reflected light moves once across the fixtures and settles on the floor. Camera: Mostly held handheld documentary shot with one slight imperfect reframe. Camera viewpoint only: lightly imperfect handheld documentary framing. Do not show a phone, camera, operator, hands holding a device, selfie framing, screen, or recording UI. Use at most one small physically possible camera movement. No orbit, drone, crane, gimbal, floating camera or movement through objects. Keep the camera nearly held; use one tiny adjustment at most. End state: A narrow band of reflected light settles across the concrete floor. No monster or substitute figure appears. Animate only subjects and objects already visible in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Changed Circulation",
+      "durationSeconds": 2,
+      "rawTaktmusterDuration": null,
+      "curvedDurationSeconds": null,
+      "preQuantizedDurationSeconds": 2,
+      "providerDurationSeconds": 2,
+      "rhythmCurve": "",
+      "rhythmCurveExponent": null,
+      "providerDurationRule": "runware-wan-2.6-flash-integer-2-15",
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/parts/1786012661839-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-budget-compare-002/parts/1786012661839-runware-image-video.mp4",
+      "prompt": "The visitors complete one calm turn around the barrier and leave the curved route readable. Camera: Restrained handheld camera movement with one small imperfect adjustment. Camera viewpoint only: lightly imperfect handheld documentary framing. Do not show a phone, camera, operator, hands holding a device, selfie framing, screen, or recording UI. Use at most one small physically possible camera movement. No orbit, drone, crane, gimbal, floating camera or movement through objects. Keep the camera nearly held; use one tiny adjustment at most. End state: A clear curved walking route remains around the barrier. No monster or substitute figure appears. Animate only subjects and objects already visible in the start frame.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-06T10:37:42.678Z"
+}

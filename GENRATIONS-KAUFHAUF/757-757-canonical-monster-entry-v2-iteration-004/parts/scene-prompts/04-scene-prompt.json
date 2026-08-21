@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "Public",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start with the sculpture and frozen shoppers in frame (monster already visible). Animate environmental motion only: the crystalline filament pulses at the sculpture's base and the overhead lights flicker faintly; a tiny particulate drift moves across the scene. Keep the sculpture stationary; do not show it appearing. Camera does a slow location‑anchored push to reveal the dropped bag. Camera: low camera at sculpture height, slow push out to reveal the frozen ring and the dropped bag. End with this readable result: Shoppers stand frozen in a ring around the sculpture; a dropped shopping bag lies on the tile beside it. The exact canonical Green Monster is already visible in the input frame. Animate only that existing individual creature. Do not create, reveal, add, duplicate, redesign or replace the protagonist. Do not generate another green creature, human-like green figure, plant person, duplicate body or substitute monster. Preserve the face, eye placement, leaf ears, mouth tendril, proportions, botanical anatomy and material structure already visible in the start frame. Keep the monster as a weathered practical sculpture physically filmed in the Kaufhaus: no illustration, comic, cartoon, cel shading, glossy fantasy CGI, or concept art.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942580287-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942617887-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942617887-runware-image-video.mp4",
+  "timestamp": "2026-08-05T15:10:19.878Z"
+}

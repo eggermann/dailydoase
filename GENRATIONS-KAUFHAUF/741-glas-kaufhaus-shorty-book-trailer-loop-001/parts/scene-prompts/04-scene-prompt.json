@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "Scene 4 — 2s: Public Freeze",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let Escalator disgorges shoppers; ink underfoot causes a child to chase take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Escalator disgorges shoppers; ink underfoot causes a child to, while Face textured with bark-like, cracked green skin; glowing stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932273256-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932298111-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/741-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932298111-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:18:19.068Z"
+}

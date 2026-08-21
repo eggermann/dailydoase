@@ -1,0 +1,64 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "selectedWord": [
+    "Department store",
+    "en"
+  ],
+  "selectedStreamIndex": 0,
+  "previousStreamAdvances": 0,
+  "nextStreamState": {
+    "iteration": 1,
+    "advances": [
+      1,
+      0,
+      1
+    ]
+  },
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticCue": "Department store → ISBN (identifier); International Association of Department Stores Under One",
+  "seedanceModel": "bytedance:seedance@2.0",
+  "arrival": "Subtle glowing lamps emerge within the Golem's eyes, casting soft light over nearby leaves and flowers, enhancing the figure's facial features and making its gaze more distinct.",
+  "continuation": "Delicate roots gently shift to intertwine with the surrounding paper texture, creating a natural frame that accentuates the Golem's form and adds depth without obscuring details.",
+  "cardArrival": "The separate name card blossoms with small flowers and leaves along its edges, while a faint light illuminates the paper texture, linking it visually to the main Golem poster and emphasizing their connection.",
+  "artStart": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-017/art-i2i-start-16x9.png",
+  "originalTarget": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-017/original-golum-target-16x9.png",
+  "titleLayer": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-017/exact-original-title-layer.png",
+  "namesArtStart": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-017/names-card-i2i-start-16x9.png",
+  "namesStage": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-017/exact-original-names-panel-16x9.png",
+  "arrivalPrompt": "A single four-second 16:9 illustrated transformation. Begin in supplied painterly image-to-image artwork and arrive precisely at supplied original Garten-Golum drawing. Subtle glowing lamps emerge within the Golem's eyes, casting soft light over nearby leaves and flowers, enhancing the figure's facial features and making its gaze more distinct. Original Golem identity becomes clearer while paper light, flowers and roots move causally. Preserve colored-pencil and ink marks, hand pressure, rough paper, flat illustrated color and static camera. No text, letters, names, signs, new character, room, photorealism, 3D, glossy repaint, crop change, pan, zoom, cutaway or montage.",
+  "continuationPrompt": "A single four-second 16:9 continuation from this exact supplied original Garten-Golum drawing. Keep its face, leaf ears, flower lamps and roots recognisable from first to last frame. Delicate roots gently shift to intertwine with the surrounding paper texture, creating a natural frame that accentuates the Golem's form and adds depth without obscuring details. Small painterly kinetic gestures only: blink, warm lamp shimmer, flower tilt and root ripple. Preserve exact colored-pencil/ink drawing, hand pressure, rough paper, flat composition and static camera. No text, letters, names, signs, replacement character, room, photorealism, 3D, glossy repaint, crop change, pan, zoom or cutaway.",
+  "cardPrompt": "A single four-second 16:9 illustrated transformation. Begin in supplied text-free painterly exhibition-card paper and arrive precisely at supplied genuine exhibition names panel. The separate name card blossoms with small flowers and leaves along its edges, while a faint light illuminates the paper texture, linking it visually to the main Golem poster and emphasizing their connection. The green ornamental border and brown paper settle calmly into the supplied closing composition. Static camera, tactile coloured-pencil and ink texture. No invented or altered words, names, title, letters, number, character, room, photorealism, 3D, glossy repaint, crop change, pan, zoom, cutaway or montage.",
+  "finalVideo": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-017/art-to-original-golum-then-real-names-panel-16x9.mp4",
+  "sha256": "f6cd9e619cc57477f787d7a80f9cc513a38de27beabcab5281b38ca86fceb170"
+}

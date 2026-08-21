@@ -1,0 +1,40 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 2,
+    "anchor": {
+      "term": "1983",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "NATO-Doppelbeschluss",
+      "streamLabel": "1983",
+      "description": "NATO-Doppelbeschluss"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 2,
+    "anchor": {
+      "term": "NATO-Doppelbeschluss",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Betriebsform",
+      "streamLabel": "Kaufhaus",
+      "description": "eines und über Kaufhaus im Katalog der Deutschen"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

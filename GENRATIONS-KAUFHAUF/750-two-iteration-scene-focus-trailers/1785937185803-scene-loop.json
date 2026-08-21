@@ -1,0 +1,76 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 11.142857,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/merged/1785937185803-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/merged/1785937185803-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Aisle of One",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937220664-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937220664-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s sequence: Start tight on a shelf of identical ceramic take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s sequence: Start tight on a shelf of identical. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Butchered Assortment",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937268965-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937268965-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s sequence: Start on the pallet coil; with a single take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s sequence: Start on the pallet coil; with a. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Indexing the Flesh",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937290032-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937290032-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s sequence: After the sculpture finishes rearranging the spiral, the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s sequence: After the sculpture finishes rearranging the spiral,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the discs assemble and the sculpture touches them, camera pulls up.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T13:41:31.340Z"
+}

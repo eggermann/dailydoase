@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Flesh in the Drawers",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second macro: quivering tissue pads undulate inside the drawer; a take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second macro: quivering tissue pads undulate inside the drawer;. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Macro dolly along the drawer interior ending on the droplet impact.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/748-scene-focus-original-monster-004/parts/1785936186495-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/748-scene-focus-original-monster-004/parts/1785936210657-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/748-scene-focus-original-monster-004/parts/1785936210657-runware-image-video.mp4",
+  "timestamp": "2026-08-05T13:23:31.511Z"
+}

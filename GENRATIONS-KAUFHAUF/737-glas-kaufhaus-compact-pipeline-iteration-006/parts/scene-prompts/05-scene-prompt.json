@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Rupture: Assortment Flood",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Escalation: Roots. Build the mood around 5s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the merchandise flood: hold medium-wide to capture the heap protruding from.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929823861-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929861504-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929861504-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:37:42.438Z"
+}

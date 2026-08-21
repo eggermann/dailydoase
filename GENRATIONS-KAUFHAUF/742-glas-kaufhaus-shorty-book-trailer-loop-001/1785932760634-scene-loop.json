@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932760634-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785932760634-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Banner Tear",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932809726-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932809726-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 5s handheld-shot inside the photographed Kaufhaus: off-center medium-close on the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s handheld-shot inside the photographed Kaufhaus: off-center medium-close on, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Dusting Old Words",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932880654-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932880654-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 2s handheld shot: monster holds the 'Althochdeutsche Sprache' page (red take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s handheld shot: monster holds the 'Althochdeutsche Sprache' page, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Barcode Pulse",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932923369-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932923369-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 3s handheld: a DOI-style label '978-0-07-029325-0.LSD' is scanned; checkout chirps, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 3s handheld: a DOI-style label '978-0-07-029325-0.LSD' is scanned; checkout, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Crowd Ring",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932948061-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932948061-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 2s handheld shot: customers converge, 'Public' board is struck take over the scene; the subject recoils, changes expression, and moves as if pulled into a. Build the mood around 2s handheld shot: customers converge, 'Public' board is struck, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Assortment Collapse",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932976750-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932976750-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 5s handheld sequence: customers pull deep-stock (Sortimentstiefe), a long shelving take over the scene; 5s handheld sequence: customers pull deep-stock (Sortimentstiefe), a long shelving run. Build the mood around 5s handheld sequence: customers pull deep-stock (Sortimentstiefe), a long, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Edible Crown",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933001561-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933001561-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 2s handheld close: monster crowns the mound with a sealed take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s handheld close: monster crowns the mound with a, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T12:30:02.893Z"
+}

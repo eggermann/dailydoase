@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929474486-runware-image-video-last-frame.png",
+  "outputText": "Subject: Angry green cartoon germ character emerging from a hole in the floor, arms on the floor, mouth open in a shout, furrowed brows. Setting: Warehouse interior with metal shelving on both sides, cardboard boxes scattered around, large window showing a city street with multi-story buildings. Framing: Medium shot centered on the germ character, hole in the floor directly below, boxes framing the lower foreground, window in the background. Lighting: Even indoor lighting with slight shadowing under the germ and boxes, light source from above and slightly left, natural daylight visible through window. Visible transformation: Germ has fully emerged from the hole, body partially out, arms supporting its upper body on the floor. Continuity: Maintain germ’s aggressive pose and expression, hole edges intact, warehouse shelving and boxes in same positions, cityscape visible through window, lighting consistent with overhead source.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T11:31:18.186Z"
+}

@@ -1,0 +1,58 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 6.357143,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/merged/1786013189663-collision-cut.mp4",
+  "mireloMode": "off",
+  "endCard": null,
+  "clips": [
+    {
+      "index": 0,
+      "title": "Shifted Passage",
+      "durationSeconds": 2,
+      "rawTaktmusterDuration": null,
+      "curvedDurationSeconds": null,
+      "preQuantizedDurationSeconds": 2,
+      "providerDurationSeconds": 2,
+      "rhythmCurve": "",
+      "rhythmCurveExponent": null,
+      "providerDurationRule": "runware-wan-2.6-flash-integer-2-15",
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/parts/1786013224496-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/parts/1786013224496-runware-image-video.mp4",
+      "prompt": "The nearest partition shifts slightly and redirects the open passage. Viewpoint: The viewpoint makes one small restrained adjustment. Use at most one small viewpoint movement. Keep movement restrained, physically coherent and continuous. Do not orbit, fly, float, pass through objects or combine multiple moves. Keep the viewpoint nearly fixed; use one tiny adjustment at most. End state: The former straight passage now ends at a mirrored column. No monster or substitute figure appears. Animate only subjects and objects already visible in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Moving Reflections",
+      "durationSeconds": 3,
+      "rawTaktmusterDuration": null,
+      "curvedDurationSeconds": null,
+      "preQuantizedDurationSeconds": 3,
+      "providerDurationSeconds": 3,
+      "rhythmCurve": "",
+      "rhythmCurveExponent": null,
+      "providerDurationRule": "runware-wan-2.6-flash-integer-2-15",
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/parts/1786013248119-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/parts/1786013248119-runware-image-video.mp4",
+      "prompt": "The reflected light moves once across the fixtures and settles on the floor. Viewpoint: The viewpoint remains nearly fixed with one slight imperfect reframe. Use at most one small viewpoint movement. Keep movement restrained, physically coherent and continuous. Do not orbit, fly, float, pass through objects or combine multiple moves. Use one restrained viewpoint movement at most. End state: A narrow band of reflected light settles across the concrete floor. No monster or substitute figure appears. Animate only subjects and objects already visible in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Changed Circulation",
+      "durationSeconds": 2,
+      "rawTaktmusterDuration": null,
+      "curvedDurationSeconds": null,
+      "preQuantizedDurationSeconds": 2,
+      "providerDurationSeconds": 2,
+      "rhythmCurve": "",
+      "rhythmCurveExponent": null,
+      "providerDurationRule": "runware-wan-2.6-flash-integer-2-15",
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/parts/1786013271249-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-takt-budget-iteration-001/parts/1786013271249-runware-image-video.mp4",
+      "prompt": "The visitors complete one calm turn around the barrier and leave the curved route readable. Viewpoint: The viewpoint makes one small restrained adjustment. Use at most one small viewpoint movement. Keep movement restrained, physically coherent and continuous. Do not orbit, fly, float, pass through objects or combine multiple moves. Keep the viewpoint nearly fixed; use one tiny adjustment at most. End state: A clear curved walking route remains around the barrier. No monster or substitute figure appears. Animate only subjects and objects already visible in the start frame.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-06T10:47:52.067Z"
+}

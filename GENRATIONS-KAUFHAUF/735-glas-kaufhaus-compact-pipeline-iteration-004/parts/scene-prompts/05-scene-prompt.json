@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Ramp and Bloom",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-like monster as the protagonist, with its in Large warehouse space and let the image break away from plain source. Let 5s take: wide Kaufhaus plate take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around 5s take: wide Kaufhaus plate, while A complex, organic-mechanical hybrid creature with a textured, stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929718135-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929757790-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929757790-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:35:58.651Z"
+}

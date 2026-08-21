@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Butchered Assortment",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s sequence: Start on the pallet coil; with a single take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s sequence: Start on the pallet coil; with a. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937232639-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-mirrored-columns.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937268965-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937268965-runware-image-video.mp4",
+  "timestamp": "2026-08-05T13:41:09.715Z"
+}

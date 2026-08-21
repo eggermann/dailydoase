@@ -1,0 +1,10 @@
+{
+  "kind": "persona-reference",
+  "personDescription": "",
+  "personStrength": 95,
+  "provider": "lmstudio",
+  "visionText": "PERSON_PRESENT: yes\nPERSON_STRENGTH: 95\nPerson is a bald man with glasses, touching his chin in an indoor setting.",
+  "sourcePath": "/Users/eggermann/Projekte/dailydoase/tests/GENERATIONS/camera-shot/1787263954816-camera.jpg",
+  "sceneIndex": 1,
+  "timestamp": "2026-08-20T22:13:22.518Z"
+}

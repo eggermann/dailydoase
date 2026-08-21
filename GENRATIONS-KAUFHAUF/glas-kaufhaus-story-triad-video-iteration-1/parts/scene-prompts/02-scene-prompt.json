@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "Continue previous transformation while restoring realism and identity.",
+  "videoMode": "singleImage",
+  "prompt": "The green plant-monster’s silhouette blurs and stretches amid shifting conveyor belts and flickering cash registers inside a Kaufhaus; flickering fluorescent green and metallic lighting; medium close-up; forward camera push; 1989 BRD style. The Betriebsform introduces operational machinery that amplifies the mechanical pulse, physically distorting the monster’s form and the room’s textures. The monster attempts to mimic the mechanical rhythm by stretching and retracting its limbs, seeking harmony or control over the shifting machinery. The Kaufhaus interior now features moving conveyor belts and flickering registers that ripple through the space, visibly distorting surfaces and the monster’s form.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874009817-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874038286-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874038286-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:07:19.394Z"
+}

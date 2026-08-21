@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785933457523-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785933457523-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Aisle Reconfigure",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933533267-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933533267-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Handheld mobile-phone style: candid, slightly shaky framing, autofocus breathing take over the scene; the subject recoils, changes expression, and moves as if pulled into a. Build the mood around Handheld mobile-phone style: candid, slightly shaky framing, autofocus breathing, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Deli Labels",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933575196-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933575196-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Handheld, candid mobile recording: small tremor as the camera follows take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Handheld, candid mobile recording: small tremor as the camera, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Iridescent Identifier",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933603982-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933603982-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Candid handheld recording: camera follows the spill as it spreads take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Candid handheld recording: camera follows the spill as it, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Gathering Crowd",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933628482-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933628482-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Handheld mobile footage: a small crowd forms as people point take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Handheld mobile footage: a small crowd forms as people, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Alarm and Reveal",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933660139-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933660139-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Mobile-device style footage: a shouted alarm, camera jostle as people take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Mobile-device style footage: a shouted alarm, camera jostle as, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Checkout Ritual",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933684211-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933684211-runware-image-video.mp4",
+      "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Candid handheld recording: camera follows the conveyor belt as a take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Candid handheld recording: camera follows the conveyor belt as, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T12:41:25.685Z"
+}

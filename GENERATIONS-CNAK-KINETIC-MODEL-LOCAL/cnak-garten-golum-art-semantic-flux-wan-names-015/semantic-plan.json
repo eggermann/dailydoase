@@ -1,0 +1,46 @@
+{
+  "configuredWords": [
+    [
+      "Art exhibition",
+      "en"
+    ],
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Art exhibition",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Art gallery",
+      "streamLabel": "Art exhibition",
+      "description": "or at some place the principal business of which is not the art halls, art clubs or private"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticCue": "Art exhibition → Art gallery; or at some place the principal business of which is not the art halls, art clubs or private",
+  "transformation": "The lamps flicker softly, their light pooling like whispered secrets among the blossoming flowers. Eyes emerge painted on petals, blinking slowly as leaves unfurl, revealing veins that pulse like roots beneath the earth. The roots twist and climb, reaching toward the lamps, drawing their glow downward, as the flowers lean into the light, their faces shifting with curious gazes. The exhibition breathes, a garden alive, eyes and light entwined, growing beyond its frame, the final bloom half-open, awaiting the next breath.",
+  "beats": [
+    "Lamps flicker, casting light onto blooming flowers with painted eyes.",
+    "Leaves unfurl, veins pulsing like roots reaching toward the lamps.",
+    "Roots twist upward, drawing lamps' glow downward as flowers lean in."
+  ],
+  "imagePrompt": "Use the supplied image as the exact composition reference. Create a restrained image-to-image art transformation of its Garten-Golum illustration only. The lamps flicker softly, their light pooling like whispered secrets among the blossoming flowers. Eyes emerge painted on petals, blinking slowly as leaves unfurl, revealing veins that pulse like roots beneath the earth. The roots twist and climb, reaching toward the lamps, drawing their glow downward, as the flowers lean into the light, their faces shifting with curious gazes. The exhibition breathes, a garden alive, eyes and light entwined, growing beyond its frame, the final bloom half-open, awaiting the next breath. Keep the colored-pencil and ink drawing language, rough paper grain, imperfect hand pressure, flat illustrated shapes, leaf ears, green face, flowers, lamps and roots. The result must look like the same artist made a living exhibition-poster painting. The top blank band must remain blank: no text or lettering anywhere. No photorealism, 3D, glossy AI paint, new creature, room, signage, collage, or camera framing change.",
+  "videoPrompt": "16:9 landscape. Animate this supplied painterly Garten-Golum drawing as one continuous gallery apparition. Preserve exact colored-pencil/ink linework, paper grain, flat illustration, face, ears, flowers, lamps, roots and black matte. Semantic progression: Lamps flicker, casting light onto blooming flowers with painted eyes. Then Leaves unfurl, veins pulsing like roots reaching toward the lamps. Finally Roots twist upward, drawing lamps' glow downward as flowers lean in.. The motion is artistic, tactile and visible: drawn light bleeds through paper, flower lamps pivot, roots make an organic graphic ripple, eyes react. Static camera. No text, letters, sign, barcode, new character, new room, cutaway, zoom, pan, photorealism, 3D, glossy repaint, collage, or transformation into another creature.",
+  "openingPoster": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/9-16-Insta-Reel.jpg",
+  "namesCard": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/9-16-Insta2-Reel.jpg"
+}

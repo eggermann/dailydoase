@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785926961184-runware-image-video-last-frame.png",
+  "outputText": "Subject: Green, multi-tentacled monster with robotic limbs, standing upright with arms slightly bent and mouth open in a growl. Setting: Large, industrial basement or parking garage with exposed pipes and ducts on the ceiling, concrete floor with scattered debris, and minimal furniture including a bench and a blue bucket. Framing: Centered full-body shot of the monster, mid-distance, showing entire figure and surrounding environment. Lighting: Overhead fluorescent lights casting soft shadows directly beneath the monster, with neutral, even illumination and slight greenish tint from ceiling pipes. Visible transformation: Monster’s form is stable, no visible change yet; mechanical limbs and organic head clearly defined. Continuity: Maintain monster’s upright, aggressive stance and central position; preserve industrial basement spatial layout with overhead pipes and scattered objects; lighting direction from above with consistent shadow placement under the monster.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T10:49:24.850Z"
+}

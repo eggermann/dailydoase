@@ -1,0 +1,65 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "selectedWord": [
+    "Department store",
+    "en"
+  ],
+  "selectedStreamIndex": 0,
+  "previousStreamAdvances": 2,
+  "nextStreamState": {
+    "iteration": 4,
+    "advances": [
+      3,
+      1,
+      1
+    ]
+  },
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Retail",
+      "streamLabel": "Department store",
+      "description": "establishment offering a wide range of under way in London (with Whiteleys), in Paris (Le Bon"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticCue": "Department store → Retail; establishment offering a wide range of under way in London (with Whiteleys), in Paris (Le Bon",
+  "microMotion": "one restrained lamp shimmer",
+  "seedanceModel": "bytedance:seedance@2.0",
+  "animationPrompt": "One restrained four-second kinetic moment inside this exact supplied hand-drawn Garten-Golum poster. Semantic micro-motion: one restrained lamp shimmer First and last frame are identical. Preserve the same face, leaf ears, flowers, lamps, roots, coloured-pencil marks, ink contours, rough paper, proportions, framing and flat composition at every moment. Static camera. Only the named existing feature may move, very slightly, then return exactly. No transformation, morphing, growth, redesign, replacement, new object, new character, room, photorealism, 3D, glossy repaint, crop change, pan, zoom, cutaway, montage, text, letters, names or signs.",
+  "animationVideo": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-020/seedance-original-golum-micro-motion.mp4",
+  "namesStage": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-020/exact-original-names-panel-16x9.png",
+  "vernissageStage": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-020/exact-original-vernissage-panel-16x9.png",
+  "durations": {
+    "animation": 4,
+    "names": 3.5,
+    "vernissage": 4.5,
+    "transition": 0.35,
+    "final": 12
+  },
+  "finalVideo": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-seedance-names-020/golum-micro-motion-then-names-and-vernissage-16x9.mp4",
+  "sha256": "7cb463d0551667fe1e0fa8b0f9d84d208faeecdd45d3b8a29f5bc36f29d04e05"
+}

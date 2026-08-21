@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/merged/1785942452919-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/merged/1785942452919-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening — Betriebsform",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942499892-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942499892-runware-image-video.mp4",
+      "prompt": "Begin framed wide in the Kaufhaus atrium: display islands pivoting on tracks, registers folding into a continuous conveyor. Animate the refrigerated island sliding open, the raw meat slab sliding out and thudding onto the tile; a small puddle of moisture spreads along grout lines. Camera dollies slowly forward, then tilts up to reveal glass balustrade and mezzanine. Keep lighting practical; no text. Camera: wide low angle dolly forward to emphasize the fallen slab, reveal mezzanine. End with this readable result: A large, wet slab of raw meat rests on the central floor, a dark puddle seeping into grout lines. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Fleisch",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942523837-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942523837-runware-image-video.mp4",
+      "prompt": "Macro push‑in on the meat slab: animate the shallow pulsing of the slab and the slow unfurl of a sinewy strand as it tightens against the chrome display leg, pulling a small product free. Camera holds and then shifts along the wet strand toward the main aisle. Camera: macro push toward the chrome display leg, follow the wet sinew across the tile. End with this readable result: A long wet sinew stretches across the floor toward the main aisle, anchored to a display leg. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "LSD",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942564711-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942564711-runware-image-video.mp4",
+      "prompt": "Start on the balustrade rung: animate the crystalline dust settling like slow snow, then the filament crawling up the glass with a subtle refractive shimmer. Camera cranes upward following the filament toward the mezzanine, catching glints in the overhead fixtures. Camera: upward crane following the filament along the balustrade to the mezzanine. End with this readable result: A glowing, crystalline filament adheres to the balustrade and runs up toward the upper floor, visible as a pale ribbon of refraction. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Public",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942617887-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942617887-runware-image-video.mp4",
+      "prompt": "Start with the sculpture and frozen shoppers in frame (monster already visible). Animate environmental motion only: the crystalline filament pulses at the sculpture's base and the overhead lights flicker faintly; a tiny particulate drift moves across the scene. Keep the sculpture stationary; do not show it appearing. Camera does a slow location‑anchored push to reveal the dropped bag. Camera: low camera at sculpture height, slow push out to reveal the frozen ring and the dropped bag. End with this readable result: Shoppers stand frozen in a ring around the sculpture; a dropped shopping bag lies on the tile beside it. The exact canonical Green Monster is already visible in the input frame. Animate only that existing individual creature. Do not create, reveal, add, duplicate, redesign or replace the protagonist. Do not generate another green creature, human-like green figure, plant person, duplicate body or substitute monster. Preserve the face, eye placement, leaf ears, mouth tendril, proportions, botanical anatomy and material structure already visible in the start frame. Keep the monster as a weathered practical sculpture physically filmed in the Kaufhaus: no illustration, comic, cartoon, cel shading, glossy fantasy CGI, or concept art.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Terror",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942645686-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942645686-runware-image-video.mp4",
+      "prompt": "Animate the canister impact and flash, thick oily smoke billowing and spreading across the atrium, a display collapsing and products tumbling into the aisle. Camera performs a handheld whip‑pan to convey panic, then rests on the charred arc of merchandise and the single oxidized coin on the tile. Camera: handheld whip‑pan from explosion to charred merchandise, settle on coin on tile. End with this readable result: A broad arc of charred, soot‑coated merchandise and shattered display glass across the central floor; a single oxidized coin lies on the sooted tile near the creature's dropped bag. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Konsum",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942680894-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942680894-runware-image-video.mp4",
+      "prompt": "Start with the sculpture and stacks visible. Animate only the visible motions: the sculpture's rigged arms (practical puppet mechanics) shifting a product into a stack, shoppers' hands reaching and coins clinking into the tin, and a subtle camera push to close on the tin. Do not animate the sculpture appearing. Camera: tight two-shot on sculpture hands and tin of coins, slow push to the clinking coins. End with this readable result: Tidy stacks of soot‑marked merchandise and a small tin of coins clinking on the floor — the chaotic rupture reorganized into purchasable lots. The exact canonical Green Monster is already visible in the input frame. Animate only that existing individual creature. Do not create, reveal, add, duplicate, redesign or replace the protagonist. Do not generate another green creature, human-like green figure, plant person, duplicate body or substitute monster. Preserve the face, eye placement, leaf ears, mouth tendril, proportions, botanical anatomy and material structure already visible in the start frame. Keep the monster as a weathered practical sculpture physically filmed in the Kaufhaus: no illustration, comic, cartoon, cel shading, glossy fantasy CGI, or concept art.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T15:11:22.862Z"
+}

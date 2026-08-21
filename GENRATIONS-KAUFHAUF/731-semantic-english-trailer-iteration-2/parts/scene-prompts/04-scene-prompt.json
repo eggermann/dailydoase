@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "Intensification: Sortimentstiefe Meets Reuterkiez",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New visual emphasis on psychedelic color and ghostly presence.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The deep product assortment (Sortimentstiefe) collides with the local neighborhood take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The deep product assortment (Sortimentstiefe) collides with the local, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc slowly to reveal psychedelic patterns and ghostly figures.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927097228-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927121279-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927121279-runware-image-video.mp4",
+  "timestamp": "2026-08-05T10:52:02.293Z"
+}

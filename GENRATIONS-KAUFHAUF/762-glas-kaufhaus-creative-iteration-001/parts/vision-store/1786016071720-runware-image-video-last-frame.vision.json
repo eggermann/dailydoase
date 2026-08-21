@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/762-glas-kaufhaus-creative-iteration-001/parts/1786016071720-runware-image-video-last-frame.png",
+  "outputText": "Subject: Small white object (possibly a crumpled paper or cloth) lying on the floor near the center foreground. Setting: Large, empty industrial or commercial interior space with exposed ceiling pipes and ducts, partition walls, and tiled floor. Framing: Wide shot with low angle, focusing on the floor and the small object, with the room extending into the background. Lighting: Natural light coming from the left side, casting shadows on the floor and illuminating the space evenly. Visible transformation: Floor shows some wear and dirt marks; no visible changes to walls or ceiling. Continuity: Maintain the empty, spacious environment with the small object on the floor as a focal point; consistent lighting direction from the left; preserve the industrial ceiling and partition layout.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T11:34:37.973Z"
+}

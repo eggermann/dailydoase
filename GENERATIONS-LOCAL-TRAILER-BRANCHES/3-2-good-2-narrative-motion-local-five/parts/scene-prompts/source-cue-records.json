@@ -1,0 +1,116 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Horror",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Erotic horror",
+      "streamLabel": "Horror",
+      "description": "Erotic horror"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Erotic horror",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Art gallery",
+      "streamLabel": "Art exhibition",
+      "description": "or at some place the principal business of which is not the art halls, art clubs or private"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Art gallery",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Wayback Machine",
+      "streamLabel": "Playground",
+      "description": "living within walking distance of a park at The New York"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 3,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Wayback Machine",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 4,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "ISBN (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Horror fiction",
+      "streamLabel": "Horror",
+      "description": "Horror fiction"
+    },
+    "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 5,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Horror fiction",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Drawing",
+      "streamLabel": "Art exhibition",
+      "description": ", ,"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "mode": "image-only",
+  "runIndex": 11,
+  "generatedAt": "2026-08-04T12:13:10.419Z",
+  "requestName": "1785845577996",
+  "scenes": [
+    {
+      "runIndex": 11,
+      "sceneIndex": 1,
+      "title": "Opening Collision: 1983 Meets NATO-Doppelbeschluss",
+      "storyBeat": "The monster's presence triggers a violent shattering of the warehouse's lamps, embodying the conflict between 1983 and NATO-Doppelbeschluss.",
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "New dramatic act with a canonical reset of protagonist and architecture, establishing the initial semantic collision.",
+      "prompt": "Green plant-like monster with glowing eyes frozen mid-roar, its tendrils twisting violently as sharp, metallic shards of broken hanging lamps scatter in an old dark green industrial Kaufhaus warehouse, 1983 BRD, moody cold lighting with green and steel blue palette, rough textured walls, wide angle lens, centered composition, cinematic 1980s style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785845589979-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-11-scene-01.png"
+    }
+  ],
+  "timestamp": "2026-08-04T12:13:10.419Z"
+}

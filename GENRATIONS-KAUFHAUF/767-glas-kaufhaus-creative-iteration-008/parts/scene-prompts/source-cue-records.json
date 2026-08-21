@@ -1,0 +1,116 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Kaufhaus",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Betriebsform",
+      "streamLabel": "Kaufhaus",
+      "description": "eines und über Kaufhaus im Katalog der Deutschen"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Betriebsform",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Bezirk Friedrichshain-Kreuzberg",
+      "streamLabel": "Berlin-Kreuzberg",
+      "description": "in Berlin. Bis zur Fusion mit dem benachbarten damaligen Bezirk Kreuzberg deckungsgleich mit dem heutigen"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Bezirk Friedrichshain-Kreuzberg",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Sortimentstiefe",
+      "streamLabel": "Kaufhaus",
+      "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 3,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Sortimentstiefe",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Berlin SO 36",
+      "streamLabel": "Berlin-Kreuzberg",
+      "description": "(SO = Südost). Zu Zeiten der Berliner Mauer war SO 36 von drei in beispielsweise SW 11, SW 29 und weitere, sowie das kleinere"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 4,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Berlin SO 36",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Sortimentsbreite",
+      "streamLabel": "Kaufhaus",
+      "description": "auf einer und"
+    },
+    "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 5,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Sortimentsbreite",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Berlin-Friedrichshain",
+      "streamLabel": "Berlin-Kreuzberg",
+      "description": "in Berlin. Bis zur Fusion mit dem benachbarten in Berlin. Bis zur"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

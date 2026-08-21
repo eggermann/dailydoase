@@ -1,0 +1,519 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create the requested number of short scene plans for a green-monster trailer grounded in supplied photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as composition or background. Treat each Kaufhaus photograph as an immutable location plate. In every stillPrompt preserve its exact viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least eighty percent of the room; the location must remain immediately recognizable, not become a generic warehouse or fantasy set. People may appear when the semantic streams naturally call for them; neither add nor exclude them by default. Each source cue labels a carried Anchor and fresh getNext Collision. Let that collision compose every variable part of the scene: storyCause, monsterIntent, semanticAction, local roomConsequence, monsterPresence, viewpoint, motionCue, cameraCue, stillPrompt, and singleImagePrompt. Do not add a generic trailer action, generic warehouse atmosphere, or default camera move independent of the words. Infer one specific surprising causal event: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms something because of the collision. Keep surreal mutation local to protagonist, people when semantically justified, movable objects, light, reflections, shadows, or one nearby architectural detail; never replace or dissolve the whole Kaufhaus. The next scene inherits the visible consequence, not merely the terms. The monster is protagonist by agency, never a permanent large advertising mascot; vary scale and presence. Select viewpoint and cameraCue only after semanticAction: use hold, pan, tilt, sideways track, arc, push, pullback, rise, descent, or focus shift according to what best reveals that action. Do not default to forward movement and do not repeat the same dominant camera behavior in adjacent scenes. Every stillPrompt captures the decisive action inside the recognizable location. Every singleImagePrompt shows tactic beginning, changing, and leaving its local consequence, including the chosen cameraCue. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 6,
+  "effectiveSceneCount": 6,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Kaufhaus. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen. Dramatic function: opening: make the first semantic disturbance visible. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Betriebsform becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Betriebsform. Collision A (fresh getNext from Berlin-Neukölln): Verwaltungsgliederung Berlins. Context: des ist der nördlichste und am dichtesten bebaute, namensgebende. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Verwaltungsgliederung Berlins becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Verwaltungsgliederung Berlins. Collision A (fresh getNext from Kaufhaus): Sortimentstiefe. Context: und aus einer oder wenigen bestimmten Warengruppe(n) in hoher. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentstiefe becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentstiefe. Collision A (fresh getNext from Berlin-Neukölln): Reuterkiez. Context: gehört zum von Neu-Berlinern umgangssprachlich so und Neukölln).Zum Ortsteil Neukölln gehören die. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Reuterkiez becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Reuterkiez. Collision A (fresh getNext from Kaufhaus): Sortimentsbreite. Context: auf einer und. Dramatic function: rupture: let the inherited and fresh terms destabilize the established scene state. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentsbreite becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentsbreite. Collision A (fresh getNext from Berlin-Neukölln): Berlin-Kreuzberg. Context: und Neukölln).Zum Ortsteil Neukölln gehören die Ortslagen so bezeichneten „Kreuzkölln“ (von. Dramatic function: consequence: use the fresh term to transform and resolve the accumulated visible residue. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: Berlin-Kreuzberg remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Kaufhaus",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "Betriebsform",
+        "streamLabel": "Kaufhaus",
+        "description": "eines und über Kaufhaus im Katalog der Deutschen"
+      },
+      "dramaticFunction": "opening: make the first semantic disturbance visible",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 1,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Betriebsform",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Verwaltungsgliederung Berlins",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "des ist der nördlichste und am dichtesten bebaute, namensgebende"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Verwaltungsgliederung Berlins",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentstiefe",
+        "streamLabel": "Kaufhaus",
+        "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentstiefe",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Reuterkiez",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "gehört zum von Neu-Berlinern umgangssprachlich so und Neukölln).Zum Ortsteil Neukölln gehören die"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 4,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Reuterkiez",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentsbreite",
+        "streamLabel": "Kaufhaus",
+        "description": "auf einer und"
+      },
+      "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 5,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentsbreite",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Berlin-Kreuzberg",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "und Neukölln).Zum Ortsteil Neukölln gehören die Ortslagen so bezeichneten „Kreuzkölln“ (von"
+      },
+      "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": []
+  },
+  "visionStoryContext": "Location: Large warehouse space. Actors: [{\"reference\":\"the actor\",\"description\":\"The green plant-monster as the protagonist, with smaller plant-like creatures and mechanical appendages acting as secondary elements\"}]. Setup: Medium close-up focusing on the monster’s face and upper body silhouette, highlighting intricate textures in Large warehouse space...",
+  "sceneLengths": [
+    5,
+    2,
+    3,
+    2,
+    5,
+    2
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+    "outputText": "Subject: Central green plant-like monster with glowing eyes and a detailed face. Setting: Industrial warehouse with hanging lamps and mechanical elements integrated into organic forms. Framing: Medium close-up focusing on the monster’s face and upper body silhouette, highlighting intricate textures. Lighting: Warm, ambient glow from multiple hanging lamps and internal light sources within the monster’s eyes and mechanical parts. Location: Large warehouse space featuring industrial textures like metal, rust, and aged wood, combined with organic plant-like growths. Actors: The green plant-monster as the protagonist, with smaller plant-like creatures and mechanical appendages acting as secondary elements. Description: A fusion of organic and mechanical design, the monster’s face is textured like bark with glowing eyes; multiple tentacle-like vines extend outward, adorned with lanterns, flowers, and mechanical devices, creating a complex silhouette. Continuity Requirements: Maintain consistent lighting from hanging lamps and glowing eyes; preserve the intricate mechanical-organic hybrid textures and fixed elements such as lanterns, flower buds, and vine structures across scenes.",
+    "provider": "openai",
+    "model": "gpt-4.1-mini-2025-04-14"
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Start from The green plant-monster as the protagonist, with smaller plant-like in Large warehouse space and let the image break away from plain source. Let Medium close-up on the green plant-monster (face and upper body take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Medium close-up on the green plant-monster (face and upper, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Still image direction: Create a still that preserves the supplied Kaufhaus plate EXACTLY — keep the same viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room. Medium close-up framing: the green plant-monster's face and upper body silhouette in left-of-center, glowing eyes on, plant-like textures visible; tendril touching a hanging catalog rack labeled with price slips. Show the bent metal price-rack leaning against the column and scattered price-tickets across the floor and stuck to the ducts. Keep hanging lamps, industrial color, and original lighting unchanged.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening: The Betriebsform Unlatches",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "Medium close-up on the green plant-monster (face and upper body silhouette visible) as a tendril brushes an old hanging catalog rack labeled with price slips. The rack's rusty latch (a Betriebsform relic) snaps open; a cascade of stiff paper price-tickets and thin metal tags ejects, slamming into a concrete column and tangling across a duct. One heavy metal price-rack is ripped free and leans against the column at a dangerous angle.",
+      "monsterPresence": "medium close-up on face and upper torso; tendril makes contact but monster does not dominate foreground",
+      "consequence": "bent metal price-rack leaning against the column and a fan of scattered price-tickets stuck to ductwork and floor",
+      "nextHook": "bent price-rack and scattered price-tickets remain visible against the original column and ducts",
+      "stillPrompt": "Create a still that preserves the supplied Kaufhaus plate EXACTLY — keep the same viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room. Medium close-up framing: the green plant-monster's face and upper body silhouette in left-of-center, glowing eyes on, plant-like textures visible; tendril touching a hanging catalog rack labeled with price slips. Show the bent metal price-rack leaning against the column and scattered price-tickets across the floor and stuck to the ducts. Keep hanging lamps, industrial color, and original lighting unchanged.",
+      "videoPrompt": "Short clip (5s) from the Kaufhaus plate viewpoint: start on the medium close-up of the monster's face, its tendril nudges the hanging catalog rack; latch snaps; price-tickets fly, slam into the column, and one metal price-rack rips free and leans against the column. Keep camera motion minimal so the plate remains recognizable; preserve original ducts, lamps, and exposure. End on the bent rack and tickets.",
+      "cameraCue": "After the ejection, cut from the close-up to a slightly wider fixed frame of the original plate to reveal the bent rack and tickets; hold for a beat so the consequences read within the preserved Kaufhaus interior.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5
+    },
+    {
+      "index": 2,
+      "title": "Stamping the Verwaltungsgliederung",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "A gust produced by the monster's retracting tendril makes the scattered price-tickets spin up and adhere to a suspended directory/map panel. The tickets, bearing operating stamps, peel a hidden adhesive tab and expose a printed sticker that reads 'Verwaltungsgliederung Berlins — Berlin-Neukölln.' The panel tips on its hinge, scraping a fluorescent fixture; the fixture wobbles and a diffuser cracks, flinging a shard of plastic that bounces and pins a ticket to the column.",
+      "monsterPresence": "monster partially out of frame — only an extended arm/tendril and a partial facial silhouette; face briefly reflected in elevator stainless steel",
+      "consequence": "directory/map panel hangs askew with stickers and tickets pinned to it; a cracked fluorescent diffuser dangles",
+      "nextHook": "askew directory panel with 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker and pinned tickets",
+      "stillPrompt": "Create a still preserving the original Kaufhaus plate viewpoint and lighting (>=80% of room visible). Show the askew directory/map panel hanging from its hinge with tickets stuck to it and the revealed sticker reading 'Verwaltungsgliederung Berlins — Berlin-Neukölln.' Include the cracked fluorescent diffuser and the column with price-tickets pinned. The monster is partial: only an extended tendril and a reflected facial silhouette in the elevator stainless surface. Maintain original color balance and visible ducts, lamps, windows.",
+      "videoPrompt": "Short clip (2s) from the preserved plate: tickets swirl up, adhere to the suspended map panel, a hidden tab peels revealing the 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker; the panel tips, the fluorescent fixture wobbles and a plastic diffuser cracks and spins down. Keep monster mostly out of frame except for the tendril and reflection.",
+      "cameraCue": "After the panel tips, perform a slow dolly out from the tendril to reveal the askew map panel and cracked diffuser, exposing the 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Telescoping Sortimentstiefe",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "The tipped directory panel presses against a recessed actuator hidden in the wall labeled with small product icons. That contact triggers a long telescoping crate system in a recessed bay: nested crates slide out in sequence (demonstrating extreme Sortimentstiefe). One crate jams, tilts, and spills a swarm of small plant-like seedlings (secondary creatures) that scatter across the concrete toward a column and slip under a torn floor mat.",
+      "monsterPresence": "partial silhouette at the edge of frame; a tendril nudges the actuator but the creature's face remains mostly off-camera",
+      "consequence": "a jammed, half-extended crate with seedlings crawling out and a visible trail of small plants heading toward a column and floor mat",
+      "nextHook": "trail of seedlings moving across the floor toward the column and floor mat",
+      "stillPrompt": "Create a still preserving the original Kaufhaus plate (same viewpoint, crop, ducts, lamps, exposure; >=80% room visible). Show the recessed bay with telescoped crates partly extended, one crate jammed and tilted, and small plant-like seedlings crawling out and forming a trail toward the column and under a torn floor mat. The monster is peripheral: a dark silhouette at the frame edge, tendril near the actuator. Keep the map panel and cracked diffuser visible in background.",
+      "videoPrompt": "Short clip (3s) from the plate: telescoping crates extend in a mechanical sequence; a crate jams and tilts; a tide of seedlings pours out and scuttles toward the column and slips under a floor mat. Maintain static overall plate composition but allow small, readable motion.",
+      "cameraCue": "After the crate jams, cut to a tight, low-angle close-up on the jammed crate mouth and the streaming seedlings to conceal broader action but make the biological spill immediate.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Poster Sailing to Reuterkiez",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "The seedlings converge on a community poster stuck to the column reading 'Reuterkiez' and begin tugging at its edges. As the adhesive peels, long strips of poster paper catch the HVAC airflow and whip upward, snagging a hanging lamp's safety cable; the lamp tilts and knocks a perforated ceiling vent cover free. The vent cover drops a soft cascade of dusty insulation fibers that shower the floor and dust the seedlings into a pale pile.",
+      "monsterPresence": "mostly off-frame; face glimpsed briefly in the dark reflection of a window pane; small appendages visible at frame edge",
+      "consequence": "a torn 'Reuterkiez' poster half-peeled from the column, a hanging lamp slightly askew, and a dusting of insulation fibers across the floor and seedlings",
+      "nextHook": "torn 'Reuterkiez' poster on the column and dusted floor/stuck insulation fibers",
+      "stillPrompt": "Create a still strictly preserving the supplied Kaufhaus plate (same viewpoint, crop, ceiling ducts, lamps, windows, columns; >=80% room visible). Show the torn 'Reuterkiez' poster half-peeled on the column, a hanging lamp tilted, bits of insulation dust on the concrete and seedlings partially buried. Monster presence minimal: a faint reflection in a window; keep original exposure and industrial color.",
+      "videoPrompt": "Short clip (2s) from the fixed plate: seedlings tug the 'Reuterkiez' poster; paper strips sail, snag a lamp cable; the lamp tilts and a vent cover drops, dust spilling down and settling over seedlings. Keep motion readable but preserve the Kaufhaus plate context.",
+      "cameraCue": "After the vent cover drops, hold a steady wide frame that reveals the torn poster on the column and the dusted floor; then slowly push in to the peeled corner of the poster to emphasize the 'Reuterkiez' text.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Sortimentsbreite Unleashed",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "A peeled corner of the 'Reuterkiez' poster pulls free a hidden latch labeled 'Sortimentsbreite' behind the column. The latch releases a horizontal carousel: shelving banks slide outward, colliding with hanging lamps. One lamp cord tangles a nearby plant-mech appendage; the mech lurches, snags the elevator door, and a woven basket of assorted goods (wide-ranging products) tumbles out onto the half-open elevator threshold and across the floor, scattering diverse items.",
+      "monsterPresence": "distant silhouette near the elevator; face visible but small in frame, not dominating foreground",
+      "consequence": "a sprawl of diverse products across the warehouse floor, a half-open elevator with a basket stuck on its threshold, and a shelf bank now splayed outward",
+      "nextHook": "scattered products forming a messy path across the floor and the stuck elevator basket",
+      "stillPrompt": "Create a still that keeps the Kaufhaus plate identical in viewpoint and lighting (>=80% of room visible). Show shelving banks slid outward, a half-open elevator with a basket jammed at its threshold, and a scatter of diverse products (cans, boxes, flyers) across the floor forming a path. The monster is small and distant near the elevator; preserve ducts, lamps, columns, and original exposure.",
+      "videoPrompt": "Short clip (5s) from the preserved plate: hidden latch released; shelving banks thrust outward; a lamp cord snags a plant-mech which yanks and tangles the elevator door; the basket of assorted products tilts and spills across the floor. Keep monster peripheral and maintain room recognizability.",
+      "cameraCue": "After the basket spills, cut to a slow, low pan along the floor-level product spill toward the elevator, then tilt up to reveal the stuck basket and distant monster silhouette.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5
+    },
+    {
+      "index": 6,
+      "title": "Kreuzberg Blackout — Consequence",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "Among the scattered products a small mechanical music box labeled with a Kreuzberg flyer winds and plays; its vibrations sync the seedlings and small plant-creatures into a collective tug that yanks at a service cable. The cable shorts; overhead fluorescents surge and fail — everything cuts to emergency red — leaving only the monster's glowing eyes and bioluminescent seedlings as points of light. The monster steps into the half-open elevator; the doors close with the basket and scattered residue inside and the elevator departs.",
+      "monsterPresence": "monster as silhouette inside the elevator, eyes glowing through the narrow closing slit — not a large foreground mascot",
+      "consequence": "elevator doors close and depart carrying the basket of products and the monster inside; the floor remains scattered with dust, seedlings, torn poster strips, and Kreuzberg flyers",
+      "nextHook": "empty Kaufhaus floor with scattered dust, seedlings, torn poster strips, and Kreuzberg flyers where the elevator just departed",
+      "stillPrompt": "Create a still preserving the Kaufhaus plate viewpoint and exposure (>=80% room visible). Show the elevator doors closing and a narrow slit where the monster's glowing eyes are visible; scattered products, torn poster strips, Kreuzberg flyers, and a dusting of insulation on the floor remain. Maintain original ducts, lamps, columns, and industrial color balance; do not redesign the space.",
+      "videoPrompt": "Short clip (2s) from the preserved plate: the music box plays; seedlings tug a cable; lights surge and blackout to emergency red; the monster's eyes glow and it steps into the half-open elevator; doors close and the elevator departs, leaving the scattered residue. Hold the fixed Kaufhaus viewpoint throughout.",
+      "cameraCue": "After the blackout and the elevator beginning to close, cut to the fixed plate and hold as the doors shut; then perform a very slight push-in to the narrow slit of the closing door so the glowing eyes are readable but the creature remains contained.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening: The Betriebsform Unlatches",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "Medium close-up on the green plant-monster (face and upper body silhouette visible) as a tendril brushes an old hanging catalog rack labeled with price slips. The rack's rusty latch (a Betriebsform relic) snaps open; a cascade of stiff paper price-tickets and thin metal tags ejects, slamming into a concrete column and tangling across a duct. One heavy metal price-rack is ripped free and leans against the column at a dangerous angle.",
+      "monsterPresence": "medium close-up on face and upper torso; tendril makes contact but monster does not dominate foreground",
+      "consequence": "bent metal price-rack leaning against the column and a fan of scattered price-tickets stuck to ductwork and floor",
+      "nextHook": "bent price-rack and scattered price-tickets remain visible against the original column and ducts",
+      "stillPrompt": "Create a still that preserves the supplied Kaufhaus plate EXACTLY — keep the same viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room. Medium close-up framing: the green plant-monster's face and upper body silhouette in left-of-center, glowing eyes on, plant-like textures visible; tendril touching a hanging catalog rack labeled with price slips. Show the bent metal price-rack leaning against the column and scattered price-tickets across the floor and stuck to the ducts. Keep hanging lamps, industrial color, and original lighting unchanged.",
+      "videoPrompt": "Short clip (5s) from the Kaufhaus plate viewpoint: start on the medium close-up of the monster's face, its tendril nudges the hanging catalog rack; latch snaps; price-tickets fly, slam into the column, and one metal price-rack rips free and leans against the column. Keep camera motion minimal so the plate remains recognizable; preserve original ducts, lamps, and exposure. End on the bent rack and tickets.",
+      "cameraCue": "After the ejection, cut from the close-up to a slightly wider fixed frame of the original plate to reveal the bent rack and tickets; hold for a beat so the consequences read within the preserved Kaufhaus interior.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "Stamping the Verwaltungsgliederung",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "A gust produced by the monster's retracting tendril makes the scattered price-tickets spin up and adhere to a suspended directory/map panel. The tickets, bearing operating stamps, peel a hidden adhesive tab and expose a printed sticker that reads 'Verwaltungsgliederung Berlins — Berlin-Neukölln.' The panel tips on its hinge, scraping a fluorescent fixture; the fixture wobbles and a diffuser cracks, flinging a shard of plastic that bounces and pins a ticket to the column.",
+      "monsterPresence": "monster partially out of frame — only an extended arm/tendril and a partial facial silhouette; face briefly reflected in elevator stainless steel",
+      "consequence": "directory/map panel hangs askew with stickers and tickets pinned to it; a cracked fluorescent diffuser dangles",
+      "nextHook": "askew directory panel with 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker and pinned tickets",
+      "stillPrompt": "Create a still preserving the original Kaufhaus plate viewpoint and lighting (>=80% of room visible). Show the askew directory/map panel hanging from its hinge with tickets stuck to it and the revealed sticker reading 'Verwaltungsgliederung Berlins — Berlin-Neukölln.' Include the cracked fluorescent diffuser and the column with price-tickets pinned. The monster is partial: only an extended tendril and a reflected facial silhouette in the elevator stainless surface. Maintain original color balance and visible ducts, lamps, windows.",
+      "videoPrompt": "Short clip (2s) from the preserved plate: tickets swirl up, adhere to the suspended map panel, a hidden tab peels revealing the 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker; the panel tips, the fluorescent fixture wobbles and a plastic diffuser cracks and spins down. Keep monster mostly out of frame except for the tendril and reflection.",
+      "cameraCue": "After the panel tips, perform a slow dolly out from the tendril to reveal the askew map panel and cracked diffuser, exposing the 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 3,
+      "title": "Telescoping Sortimentstiefe",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "The tipped directory panel presses against a recessed actuator hidden in the wall labeled with small product icons. That contact triggers a long telescoping crate system in a recessed bay: nested crates slide out in sequence (demonstrating extreme Sortimentstiefe). One crate jams, tilts, and spills a swarm of small plant-like seedlings (secondary creatures) that scatter across the concrete toward a column and slip under a torn floor mat.",
+      "monsterPresence": "partial silhouette at the edge of frame; a tendril nudges the actuator but the creature's face remains mostly off-camera",
+      "consequence": "a jammed, half-extended crate with seedlings crawling out and a visible trail of small plants heading toward a column and floor mat",
+      "nextHook": "trail of seedlings moving across the floor toward the column and floor mat",
+      "stillPrompt": "Create a still preserving the original Kaufhaus plate (same viewpoint, crop, ducts, lamps, exposure; >=80% room visible). Show the recessed bay with telescoped crates partly extended, one crate jammed and tilted, and small plant-like seedlings crawling out and forming a trail toward the column and under a torn floor mat. The monster is peripheral: a dark silhouette at the frame edge, tendril near the actuator. Keep the map panel and cracked diffuser visible in background.",
+      "videoPrompt": "Short clip (3s) from the plate: telescoping crates extend in a mechanical sequence; a crate jams and tilts; a tide of seedlings pours out and scuttles toward the column and slips under a floor mat. Maintain static overall plate composition but allow small, readable motion.",
+      "cameraCue": "After the crate jams, cut to a tight, low-angle close-up on the jammed crate mouth and the streaming seedlings to conceal broader action but make the biological spill immediate.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 4,
+      "title": "Poster Sailing to Reuterkiez",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "The seedlings converge on a community poster stuck to the column reading 'Reuterkiez' and begin tugging at its edges. As the adhesive peels, long strips of poster paper catch the HVAC airflow and whip upward, snagging a hanging lamp's safety cable; the lamp tilts and knocks a perforated ceiling vent cover free. The vent cover drops a soft cascade of dusty insulation fibers that shower the floor and dust the seedlings into a pale pile.",
+      "monsterPresence": "mostly off-frame; face glimpsed briefly in the dark reflection of a window pane; small appendages visible at frame edge",
+      "consequence": "a torn 'Reuterkiez' poster half-peeled from the column, a hanging lamp slightly askew, and a dusting of insulation fibers across the floor and seedlings",
+      "nextHook": "torn 'Reuterkiez' poster on the column and dusted floor/stuck insulation fibers",
+      "stillPrompt": "Create a still strictly preserving the supplied Kaufhaus plate (same viewpoint, crop, ceiling ducts, lamps, windows, columns; >=80% room visible). Show the torn 'Reuterkiez' poster half-peeled on the column, a hanging lamp tilted, bits of insulation dust on the concrete and seedlings partially buried. Monster presence minimal: a faint reflection in a window; keep original exposure and industrial color.",
+      "videoPrompt": "Short clip (2s) from the fixed plate: seedlings tug the 'Reuterkiez' poster; paper strips sail, snag a lamp cable; the lamp tilts and a vent cover drops, dust spilling down and settling over seedlings. Keep motion readable but preserve the Kaufhaus plate context.",
+      "cameraCue": "After the vent cover drops, hold a steady wide frame that reveals the torn poster on the column and the dusted floor; then slowly push in to the peeled corner of the poster to emphasize the 'Reuterkiez' text.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 5,
+      "title": "Sortimentsbreite Unleashed",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "A peeled corner of the 'Reuterkiez' poster pulls free a hidden latch labeled 'Sortimentsbreite' behind the column. The latch releases a horizontal carousel: shelving banks slide outward, colliding with hanging lamps. One lamp cord tangles a nearby plant-mech appendage; the mech lurches, snags the elevator door, and a woven basket of assorted goods (wide-ranging products) tumbles out onto the half-open elevator threshold and across the floor, scattering diverse items.",
+      "monsterPresence": "distant silhouette near the elevator; face visible but small in frame, not dominating foreground",
+      "consequence": "a sprawl of diverse products across the warehouse floor, a half-open elevator with a basket stuck on its threshold, and a shelf bank now splayed outward",
+      "nextHook": "scattered products forming a messy path across the floor and the stuck elevator basket",
+      "stillPrompt": "Create a still that keeps the Kaufhaus plate identical in viewpoint and lighting (>=80% of room visible). Show shelving banks slid outward, a half-open elevator with a basket jammed at its threshold, and a scatter of diverse products (cans, boxes, flyers) across the floor forming a path. The monster is small and distant near the elevator; preserve ducts, lamps, columns, and original exposure.",
+      "videoPrompt": "Short clip (5s) from the preserved plate: hidden latch released; shelving banks thrust outward; a lamp cord snags a plant-mech which yanks and tangles the elevator door; the basket of assorted products tilts and spills across the floor. Keep monster peripheral and maintain room recognizability.",
+      "cameraCue": "After the basket spills, cut to a slow, low pan along the floor-level product spill toward the elevator, then tilt up to reveal the stuck basket and distant monster silhouette.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 6,
+      "title": "Kreuzberg Blackout — Consequence",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "Among the scattered products a small mechanical music box labeled with a Kreuzberg flyer winds and plays; its vibrations sync the seedlings and small plant-creatures into a collective tug that yanks at a service cable. The cable shorts; overhead fluorescents surge and fail — everything cuts to emergency red — leaving only the monster's glowing eyes and bioluminescent seedlings as points of light. The monster steps into the half-open elevator; the doors close with the basket and scattered residue inside and the elevator departs.",
+      "monsterPresence": "monster as silhouette inside the elevator, eyes glowing through the narrow closing slit — not a large foreground mascot",
+      "consequence": "elevator doors close and depart carrying the basket of products and the monster inside; the floor remains scattered with dust, seedlings, torn poster strips, and Kreuzberg flyers",
+      "nextHook": "empty Kaufhaus floor with scattered dust, seedlings, torn poster strips, and Kreuzberg flyers where the elevator just departed",
+      "stillPrompt": "Create a still preserving the Kaufhaus plate viewpoint and exposure (>=80% room visible). Show the elevator doors closing and a narrow slit where the monster's glowing eyes are visible; scattered products, torn poster strips, Kreuzberg flyers, and a dusting of insulation on the floor remain. Maintain original ducts, lamps, columns, and industrial color balance; do not redesign the space.",
+      "videoPrompt": "Short clip (2s) from the preserved plate: the music box plays; seedlings tug a cable; lights surge and blackout to emergency red; the monster's eyes glow and it steps into the half-open elevator; doors close and the elevator departs, leaving the scattered residue. Hold the fixed Kaufhaus viewpoint throughout.",
+      "cameraCue": "After the blackout and the elevator beginning to close, cut to the fixed plate and hold as the doors shut; then perform a very slight push-in to the narrow slit of the closing door so the glowing eyes are readable but the creature remains contained.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Opening: The Betriebsform Unlatches",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "Medium close-up on the green plant-monster (face and upper body silhouette visible) as a tendril brushes an old hanging catalog rack labeled with price slips. The rack's rusty latch (a Betriebsform relic) snaps open; a cascade of stiff paper price-tickets and thin metal tags ejects, slamming into a concrete column and tangling across a duct. One heavy metal price-rack is ripped free and leans against the column at a dangerous angle.",
+      "monsterPresence": "medium close-up on face and upper torso; tendril makes contact but monster does not dominate foreground",
+      "consequence": "bent metal price-rack leaning against the column and a fan of scattered price-tickets stuck to ductwork and floor",
+      "nextHook": "bent price-rack and scattered price-tickets remain visible against the original column and ducts",
+      "stillPrompt": "Create a still that preserves the supplied Kaufhaus plate EXACTLY — keep the same viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room. Medium close-up framing: the green plant-monster's face and upper body silhouette in left-of-center, glowing eyes on, plant-like textures visible; tendril touching a hanging catalog rack labeled with price slips. Show the bent metal price-rack leaning against the column and scattered price-tickets across the floor and stuck to the ducts. Keep hanging lamps, industrial color, and original lighting unchanged.",
+      "videoPrompt": "Short clip (5s) from the Kaufhaus plate viewpoint: start on the medium close-up of the monster's face, its tendril nudges the hanging catalog rack; latch snaps; price-tickets fly, slam into the column, and one metal price-rack rips free and leans against the column. Keep camera motion minimal so the plate remains recognizable; preserve original ducts, lamps, and exposure. End on the bent rack and tickets.",
+      "cameraCue": "After the ejection, cut from the close-up to a slightly wider fixed frame of the original plate to reveal the bent rack and tickets; hold for a beat so the consequences read within the preserved Kaufhaus interior.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 2,
+      "title": "Stamping the Verwaltungsgliederung",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "A gust produced by the monster's retracting tendril makes the scattered price-tickets spin up and adhere to a suspended directory/map panel. The tickets, bearing operating stamps, peel a hidden adhesive tab and expose a printed sticker that reads 'Verwaltungsgliederung Berlins — Berlin-Neukölln.' The panel tips on its hinge, scraping a fluorescent fixture; the fixture wobbles and a diffuser cracks, flinging a shard of plastic that bounces and pins a ticket to the column.",
+      "monsterPresence": "monster partially out of frame — only an extended arm/tendril and a partial facial silhouette; face briefly reflected in elevator stainless steel",
+      "consequence": "directory/map panel hangs askew with stickers and tickets pinned to it; a cracked fluorescent diffuser dangles",
+      "nextHook": "askew directory panel with 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker and pinned tickets",
+      "stillPrompt": "Create a still preserving the original Kaufhaus plate viewpoint and lighting (>=80% of room visible). Show the askew directory/map panel hanging from its hinge with tickets stuck to it and the revealed sticker reading 'Verwaltungsgliederung Berlins — Berlin-Neukölln.' Include the cracked fluorescent diffuser and the column with price-tickets pinned. The monster is partial: only an extended tendril and a reflected facial silhouette in the elevator stainless surface. Maintain original color balance and visible ducts, lamps, windows.",
+      "videoPrompt": "Short clip (2s) from the preserved plate: tickets swirl up, adhere to the suspended map panel, a hidden tab peels revealing the 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker; the panel tips, the fluorescent fixture wobbles and a plastic diffuser cracks and spins down. Keep monster mostly out of frame except for the tendril and reflection.",
+      "cameraCue": "After the panel tips, perform a slow dolly out from the tendril to reveal the askew map panel and cracked diffuser, exposing the 'Verwaltungsgliederung Berlins — Berlin-Neukölln' sticker.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Telescoping Sortimentstiefe",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "The tipped directory panel presses against a recessed actuator hidden in the wall labeled with small product icons. That contact triggers a long telescoping crate system in a recessed bay: nested crates slide out in sequence (demonstrating extreme Sortimentstiefe). One crate jams, tilts, and spills a swarm of small plant-like seedlings (secondary creatures) that scatter across the concrete toward a column and slip under a torn floor mat.",
+      "monsterPresence": "partial silhouette at the edge of frame; a tendril nudges the actuator but the creature's face remains mostly off-camera",
+      "consequence": "a jammed, half-extended crate with seedlings crawling out and a visible trail of small plants heading toward a column and floor mat",
+      "nextHook": "trail of seedlings moving across the floor toward the column and floor mat",
+      "stillPrompt": "Create a still preserving the original Kaufhaus plate (same viewpoint, crop, ducts, lamps, exposure; >=80% room visible). Show the recessed bay with telescoped crates partly extended, one crate jammed and tilted, and small plant-like seedlings crawling out and forming a trail toward the column and under a torn floor mat. The monster is peripheral: a dark silhouette at the frame edge, tendril near the actuator. Keep the map panel and cracked diffuser visible in background.",
+      "videoPrompt": "Short clip (3s) from the plate: telescoping crates extend in a mechanical sequence; a crate jams and tilts; a tide of seedlings pours out and scuttles toward the column and slips under a floor mat. Maintain static overall plate composition but allow small, readable motion.",
+      "cameraCue": "After the crate jams, cut to a tight, low-angle close-up on the jammed crate mouth and the streaming seedlings to conceal broader action but make the biological spill immediate.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Poster Sailing to Reuterkiez",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "The seedlings converge on a community poster stuck to the column reading 'Reuterkiez' and begin tugging at its edges. As the adhesive peels, long strips of poster paper catch the HVAC airflow and whip upward, snagging a hanging lamp's safety cable; the lamp tilts and knocks a perforated ceiling vent cover free. The vent cover drops a soft cascade of dusty insulation fibers that shower the floor and dust the seedlings into a pale pile.",
+      "monsterPresence": "mostly off-frame; face glimpsed briefly in the dark reflection of a window pane; small appendages visible at frame edge",
+      "consequence": "a torn 'Reuterkiez' poster half-peeled from the column, a hanging lamp slightly askew, and a dusting of insulation fibers across the floor and seedlings",
+      "nextHook": "torn 'Reuterkiez' poster on the column and dusted floor/stuck insulation fibers",
+      "stillPrompt": "Create a still strictly preserving the supplied Kaufhaus plate (same viewpoint, crop, ceiling ducts, lamps, windows, columns; >=80% room visible). Show the torn 'Reuterkiez' poster half-peeled on the column, a hanging lamp tilted, bits of insulation dust on the concrete and seedlings partially buried. Monster presence minimal: a faint reflection in a window; keep original exposure and industrial color.",
+      "videoPrompt": "Short clip (2s) from the fixed plate: seedlings tug the 'Reuterkiez' poster; paper strips sail, snag a lamp cable; the lamp tilts and a vent cover drops, dust spilling down and settling over seedlings. Keep motion readable but preserve the Kaufhaus plate context.",
+      "cameraCue": "After the vent cover drops, hold a steady wide frame that reveals the torn poster on the column and the dusted floor; then slowly push in to the peeled corner of the poster to emphasize the 'Reuterkiez' text.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Sortimentsbreite Unleashed",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "A peeled corner of the 'Reuterkiez' poster pulls free a hidden latch labeled 'Sortimentsbreite' behind the column. The latch releases a horizontal carousel: shelving banks slide outward, colliding with hanging lamps. One lamp cord tangles a nearby plant-mech appendage; the mech lurches, snags the elevator door, and a woven basket of assorted goods (wide-ranging products) tumbles out onto the half-open elevator threshold and across the floor, scattering diverse items.",
+      "monsterPresence": "distant silhouette near the elevator; face visible but small in frame, not dominating foreground",
+      "consequence": "a sprawl of diverse products across the warehouse floor, a half-open elevator with a basket stuck on its threshold, and a shelf bank now splayed outward",
+      "nextHook": "scattered products forming a messy path across the floor and the stuck elevator basket",
+      "stillPrompt": "Create a still that keeps the Kaufhaus plate identical in viewpoint and lighting (>=80% of room visible). Show shelving banks slid outward, a half-open elevator with a basket jammed at its threshold, and a scatter of diverse products (cans, boxes, flyers) across the floor forming a path. The monster is small and distant near the elevator; preserve ducts, lamps, columns, and original exposure.",
+      "videoPrompt": "Short clip (5s) from the preserved plate: hidden latch released; shelving banks thrust outward; a lamp cord snags a plant-mech which yanks and tangles the elevator door; the basket of assorted products tilts and spills across the floor. Keep monster peripheral and maintain room recognizability.",
+      "cameraCue": "After the basket spills, cut to a slow, low pan along the floor-level product spill toward the elevator, then tilt up to reveal the stuck basket and distant monster silhouette.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 6,
+      "title": "Kreuzberg Blackout — Consequence",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "Among the scattered products a small mechanical music box labeled with a Kreuzberg flyer winds and plays; its vibrations sync the seedlings and small plant-creatures into a collective tug that yanks at a service cable. The cable shorts; overhead fluorescents surge and fail — everything cuts to emergency red — leaving only the monster's glowing eyes and bioluminescent seedlings as points of light. The monster steps into the half-open elevator; the doors close with the basket and scattered residue inside and the elevator departs.",
+      "monsterPresence": "monster as silhouette inside the elevator, eyes glowing through the narrow closing slit — not a large foreground mascot",
+      "consequence": "elevator doors close and depart carrying the basket of products and the monster inside; the floor remains scattered with dust, seedlings, torn poster strips, and Kreuzberg flyers",
+      "nextHook": "empty Kaufhaus floor with scattered dust, seedlings, torn poster strips, and Kreuzberg flyers where the elevator just departed",
+      "stillPrompt": "Create a still preserving the Kaufhaus plate viewpoint and exposure (>=80% room visible). Show the elevator doors closing and a narrow slit where the monster's glowing eyes are visible; scattered products, torn poster strips, Kreuzberg flyers, and a dusting of insulation on the floor remain. Maintain original ducts, lamps, columns, and industrial color balance; do not redesign the space.",
+      "videoPrompt": "Short clip (2s) from the preserved plate: the music box plays; seedlings tug a cable; lights surge and blackout to emergency red; the monster's eyes glow and it steps into the half-open elevator; doors close and the elevator departs, leaving the scattered residue. Hold the fixed Kaufhaus viewpoint throughout.",
+      "cameraCue": "After the blackout and the elevator beginning to close, cut to the fixed plate and hold as the doors shut; then perform a very slight push-in to the narrow slit of the closing door so the glowing eyes are readable but the creature remains contained.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    }
+  ]
+}

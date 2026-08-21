@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "Checkout Ritual",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a large, textured face and let the image break away from plain source realism; keep Central green. Let Candid handheld recording: camera follows the conveyor belt as a take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Candid handheld recording: camera follows the conveyor belt as, while The monster’s face is deeply textured with bark-like stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933660139-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933684211-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933684211-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:41:25.199Z"
+}

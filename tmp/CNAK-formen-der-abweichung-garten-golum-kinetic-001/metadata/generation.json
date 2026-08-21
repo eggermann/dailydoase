@@ -1,0 +1,15 @@
+{
+  "project": "Formen der Abweichung",
+  "experiment": "Garten-Golum kinetic poster",
+  "folder": "CNAK-formen-der-abweichung-garten-golum-kinetic-001",
+  "sourcePoster": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/page-1.jpg",
+  "sourceSelection": "repository fallback: page-1.jpg, complete printed Garten-Golum poster",
+  "video": "video/formen-der-abweichung-kinetic-v001.mp4",
+  "width": 1080,
+  "height": 1920,
+  "durationSeconds": 7.5,
+  "generatorCalls": 0,
+  "posterSha256": "27885d202a5c3a01fe9d09e0c46372ea1e840016fd68b6ee5af5d6c3650f18e1",
+  "videoSha256": "d0011b21c6f480f9e29f438e35a1f0bcee671a6471c05b62fb69a3e83d91cdb9",
+  "createdAt": "2026-08-09T10:24:31.352Z"
+}

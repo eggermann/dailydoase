@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785931577869-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785931577869-collision-cut.mp4",
+  "mireloPrompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 5s: Close-to-midshot of the monster at a promotional podium in take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s: Close-to-midshot of the monster at a promotional podium, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Midshot on the promotional map wall adjacent to escalator take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s: Midshot on the promotional map wall adjacent to, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 3s: Wide-to-midshot down an aisle take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around 3s: Wide-to-midshot down an aisle, while Face features deep-set glowing amber eyes, a long stays just readable enough to orient the shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Mid-to-high shot from the can-bridge up toward the skylight take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s: Mid-to-high shot from the can-bridge up toward the, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 5s: Wide shot tracking the product-chain as it forms on take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s: Wide shot tracking the product-chain as it forms, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Exterior-to-interior shot take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a residue of. Build the mood around 2s: Exterior-to-interior shot, while Face features deep-set glowing amber eyes, a long stays just readable enough to orient the shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785931577869-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785931577869-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Price Roll Disturbance",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931645511-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931645511-runware-image-video.mp4",
+        "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 5s: Close-to-midshot of the monster at a promotional podium in take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s: Close-to-midshot of the monster at a promotional podium, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Neukölln Panel Exposed",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931673540-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931673540-runware-image-video.mp4",
+        "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Midshot on the promotional map wall adjacent to escalator take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s: Midshot on the promotional map wall adjacent to, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Depth Collapse",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931697607-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931697607-runware-image-video.mp4",
+        "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 3s: Wide-to-midshot down an aisle take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around 3s: Wide-to-midshot down an aisle, while Face features deep-set glowing amber eyes, a long stays just readable enough to orient the shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Reuterkiez Steam",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931725117-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931725117-runware-image-video.mp4",
+        "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Mid-to-high shot from the can-bridge up toward the skylight take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 2s: Mid-to-high shot from the can-bridge up toward the, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Product Chain Unravel",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931782053-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931782053-runware-image-video.mp4",
+        "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 5s: Wide shot tracking the product-chain as it forms on take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 5s: Wide shot tracking the product-chain as it forms, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Kreuzkölln Pull",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931821271-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931821271-runware-image-video.mp4",
+        "prompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let 2s: Exterior-to-interior shot take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a residue of. Build the mood around 2s: Exterior-to-interior shot, while Face features deep-set glowing amber eyes, a long stays just readable enough to orient the shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/1785931577869-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T12:10:23.528Z"
+}

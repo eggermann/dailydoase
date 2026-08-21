@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/merged/1785935635384-collision-cut.mp4",
+  "mireloMode": "off",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/merged/1785935635384-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Catalogue Shift",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935681236-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935681236-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s slow mechanical choreography: camera holds as shelving units fold take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s slow mechanical choreography: camera holds as shelving units. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the drawers finish folding open, dolly low along the line of.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Flesh Displays",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935705466-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935705466-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s tracking close-up: glide along the row of drawers as take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s tracking close-up: glide along the row of drawers. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the last slab slumps, whip the camera in a quick lateral.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Hazard Bloom",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935741577-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935741577-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s emergence: start with placards detaching and drifting, then reveal take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3s emergence: start with placards detaching and drifting, then. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Drill",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935765367-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935765367-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s lateral track following the human chain as it moves take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s lateral track following the human chain as it. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the chain settles, crane up quickly to reveal the cleared channel.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Arc",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935804666-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935804666-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s dynamic sequence: quick cuts of thrown packs erupting into take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5s dynamic sequence: quick cuts of thrown packs erupting. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the crown is formed and the dome shudders, push in to.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Market of Shards",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935825959-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/746-746-scene-focus-original-monster-001/parts/1785935825959-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s concise action: the creature slots the last shard, a take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s concise action: the creature slots the last shard,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the final token drops, pull the camera back in a short.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T13:17:07.212Z"
+}

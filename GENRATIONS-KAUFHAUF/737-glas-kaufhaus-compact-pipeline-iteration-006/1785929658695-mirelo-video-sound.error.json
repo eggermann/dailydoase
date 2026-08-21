@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/merged/1785929658695-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/merged/1785929658695-collision-cut.mp4",
+  "mireloPrompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s take over the scene; the room warps, the light flickers, and the frame mutates like a dream. Build the mood around 5s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the cascade: slow 0.8s dolly-in from aisle midpoint to the perched.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Opening: Inventory. Build the mood around 2s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Escalation: Neighborhood. Build the mood around 3s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the lamp crash: rack focus from the sliding rows to a.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s take over the scene; 2s, and let a residue of Escalation: Deep Stock Reveal haunt the light, texture, and room pressure. Build the mood around 2s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After roots lift tiles: lateral 0.3s push following the jagged crack toward.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Escalation: Roots. Build the mood around 5s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the merchandise flood: hold medium-wide to capture the heap protruding from.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Rupture: Assortment. Build the mood around 2s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the crate bursts: quick 0.4s cut to medium-close on the poster.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/merged/1785929658695-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/merged/1785929658695-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening: Inventory Pulse",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929723279-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929723279-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s take over the scene; the room warps, the light flickers, and the frame mutates like a dream. Build the mood around 5s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the cascade: slow 0.8s dolly-in from aisle midpoint to the perched.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Escalation: Neighborhood Labels",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929762666-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929762666-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Opening: Inventory. Build the mood around 2s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Escalation: Deep Stock Reveal",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929800597-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929800597-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Escalation: Neighborhood. Build the mood around 3s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the lamp crash: rack focus from the sliding rows to a.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Escalation: Roots of the Reuterkiez",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929823861-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929823861-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s take over the scene; 2s, and let a residue of Escalation: Deep Stock Reveal haunt the light, texture, and room pressure. Build the mood around 2s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After roots lift tiles: lateral 0.3s push following the jagged crack toward.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Rupture: Assortment Flood",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929861504-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929861504-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Escalation: Roots. Build the mood around 5s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the merchandise flood: hold medium-wide to capture the heap protruding from.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Consequence: Kreuzkölln Crate",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929882321-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/parts/1785929882321-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s take over the scene; the room warps, the light flickers, and the frame mutates like a dream, and let a residue of Rupture: Assortment. Build the mood around 2s. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the crate bursts: quick 0.4s cut to medium-close on the poster.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/737-glas-kaufhaus-compact-pipeline-iteration-006/1785929658695-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T11:38:03.923Z"
+}

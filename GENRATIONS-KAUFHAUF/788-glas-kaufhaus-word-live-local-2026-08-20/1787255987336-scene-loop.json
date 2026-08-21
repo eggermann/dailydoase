@@ -1,0 +1,61 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 9,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/merged/1787255987336-concat.mp4",
+  "mireloMode": "finalOnly",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort"
+    ],
+    "semanticCues": [
+      "– eine eigenständige Silbe",
+      "(Bedeutungsträgern) gehört. Ob „Wort“ in der Symbol",
+      "vom Phonem"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "previous": null,
+    "story": {
+      "openingBeat": "The scene introduces the concept of 'wort' as it begins to manifest visually in the room.",
+      "finalBeat": "The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+      "summary": "The scene introduces the concept of 'wort' as it begins to manifest visually in the room. -> The energy of the word 'wort' begins to affect the artist, creating a connection between him and the letters. -> The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+      "nextOpeningObligation": "Continue from this consequence: The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "The Birth of a Word",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256007553-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256007553-runware-image-video.mp4",
+      "prompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let A surreal light begins to swirl around the artist, illuminating take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A surreal light begins to swirl around the artist,, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Echoes of Meaning",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256042763-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256042763-runware-image-video.mp4",
+      "prompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The letters begin to pulse and vibrate, sending ripples of take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The letters begin to pulse and vibrate, sending ripples, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Transformation of Sound",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256079279-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256079279-runware-image-video.mp4",
+      "prompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The letters explode into a cascade of sound waves, transforming take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The letters explode into a cascade of sound waves,, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T20:01:20.782Z"
+}

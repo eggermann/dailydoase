@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/766-glas-kaufhaus-creative-iteration-007/parts/1786017052713-runware-image-video-last-frame.png",
+  "outputText": "Subject: Scattered papers labeled \"Neukölln\" on the floor in an industrial storage area. Setting: Large, dimly lit warehouse or storage room with metal shelving units filled with boxes, exposed ceiling pipes, and concrete flooring. Framing: Low-angle, wide shot focusing on the papers in the foreground with shelves receding into the background, creating depth. Lighting: Overhead fluorescent lights casting cool, even illumination with slight shadows beneath shelving and papers. Visible transformation: Papers are spread out chaotically, suggesting recent disturbance; no human presence. Continuity: Maintain the industrial, utilitarian environment with visible shelving and boxes; preserve the scattered paper motif as a visual anchor for the transition to Station Echoes.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T11:50:56.070Z"
+}

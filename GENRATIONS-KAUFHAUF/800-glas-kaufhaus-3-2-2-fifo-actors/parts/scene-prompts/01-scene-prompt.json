@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Awakening of the Word",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "cameraShot",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The room begins to shimmer with liquid light as the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room begins to shimmer with liquid light as, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/opening-persona-reference.jpg",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263724344-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/800-glas-kaufhaus-3-2-2-fifo-actors/parts/1787263724344-runware-image-video.mp4",
+  "timestamp": "2026-08-20T22:09:35.385Z"
+}

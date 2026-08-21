@@ -1,0 +1,519 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create the requested number of short scene plans for a green-monster trailer grounded in supplied photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, face, body language, and motion vocabulary, never as composition, background, location, or set design. Treat each Kaufhaus photograph as the physical location source. In every stillPrompt preserve its exact viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least eighty percent of the room; the location must remain immediately recognizable, not become a generic warehouse or fantasy set. People may appear when the semantic streams naturally call for them; neither add nor exclude them by default. Each source cue labels a carried Anchor and fresh getNext Collision. Let that collision compose every variable part of the scene: storyCause, monsterIntent, semanticAction, local roomConsequence, monsterPresence, viewpoint, motionCue, cameraCue, stillPrompt, and singleImagePrompt. Do not add a generic trailer action, generic warehouse atmosphere, or default camera move independent of the words. Infer one specific surprising causal event: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms something because of the collision. Keep surreal mutation local to protagonist, semantically justified people, movable objects, light, reflections, shadows, or one nearby architectural detail; never replace or dissolve the whole Kaufhaus. The next scene inherits the visible consequence, not merely the terms. The monster is protagonist by agency, never a permanent large advertising mascot; vary scale and presence. Select viewpoint and cameraCue only after semanticAction: use hold, pan, tilt, sideways track, arc, push, pullback, rise, descent, or focus shift according to what best reveals that action. Do not default to forward movement and do not repeat the same dominant camera behavior in adjacent scenes. Every stillPrompt captures the decisive action inside the recognizable location. Every singleImagePrompt shows tactic beginning, changing, and leaving its local consequence, including the chosen cameraCue. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 6,
+  "effectiveSceneCount": 6,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Kaufhaus. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen. Dramatic function: opening: make the first semantic disturbance visible. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Betriebsform becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Betriebsform. Collision A (fresh getNext from Berlin-Neukölln): Verwaltungsgliederung Berlins. Context: des ist der nördlichste und am dichtesten bebaute, namensgebende. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Verwaltungsgliederung Berlins becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Verwaltungsgliederung Berlins. Collision A (fresh getNext from Kaufhaus): Sortimentstiefe. Context: und aus einer oder wenigen bestimmten Warengruppe(n) in hoher. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentstiefe becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentstiefe. Collision A (fresh getNext from Berlin-Neukölln): Reuterkiez. Context: gehört zum von Neu-Berlinern umgangssprachlich so und Neukölln).Zum Ortsteil Neukölln gehören die. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Reuterkiez becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Reuterkiez. Collision A (fresh getNext from Kaufhaus): Sortimentsbreite. Context: auf einer und. Dramatic function: rupture: let the inherited and fresh terms destabilize the established scene state. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentsbreite becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentsbreite. Collision A (fresh getNext from Berlin-Neukölln): Berlin-Kreuzberg. Context: und Neukölln).Zum Ortsteil Neukölln gehören die Ortslagen so bezeichneten „Kreuzkölln“ (von. Dramatic function: consequence: use the fresh term to transform and resolve the accumulated visible residue. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: Berlin-Kreuzberg remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Kaufhaus",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "Betriebsform",
+        "streamLabel": "Kaufhaus",
+        "description": "eines und über Kaufhaus im Katalog der Deutschen"
+      },
+      "dramaticFunction": "opening: make the first semantic disturbance visible",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 1,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Betriebsform",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Verwaltungsgliederung Berlins",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "des ist der nördlichste und am dichtesten bebaute, namensgebende"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Verwaltungsgliederung Berlins",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentstiefe",
+        "streamLabel": "Kaufhaus",
+        "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentstiefe",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Reuterkiez",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "gehört zum von Neu-Berlinern umgangssprachlich so und Neukölln).Zum Ortsteil Neukölln gehören die"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 4,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Reuterkiez",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Sortimentsbreite",
+        "streamLabel": "Kaufhaus",
+        "description": "auf einer und"
+      },
+      "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 5,
+      "sceneCount": 6,
+      "anchor": {
+        "term": "Sortimentsbreite",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Berlin-Kreuzberg",
+        "streamLabel": "Berlin-Neukölln",
+        "description": "und Neukölln).Zum Ortsteil Neukölln gehören die Ortslagen so bezeichneten „Kreuzkölln“ (von"
+      },
+      "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": []
+  },
+  "visionStoryContext": "Actors: [{\"reference\":\"the actor\",\"description\":\"Central green plant-like monster with a large humanoid face, elongated ears, and multiple tentacle-like appendages adorned with mechanical and botanical elements\"}]. Setup: Head and upper body centered, symmetrical composition emphasizing the face and sprawling tentacles extending outward under Warm, glowin...",
+  "sceneLengths": [
+    5,
+    2,
+    3,
+    2,
+    5,
+    2
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+    "outputText": "Subject: Central green plant-like monster with a large humanoid face, elongated ears, and multiple tentacle-like appendages adorned with mechanical and botanical elements. Framing: Head and upper body centered, symmetrical composition emphasizing the face and sprawling tentacles extending outward. Lighting: Warm, glowing eyes provide internal illumination; ambient lighting highlights textured bark-like skin and metallic details on appendages. Description: Face features deep-set glowing amber eyes, a long trunk-like nose/tongue extending downward, and a textured bark surface resembling tree bark. Body silhouette is irregular with numerous twisting tentacles resembling vines and roots, decorated with mechanical lanterns, gears, and flower-like growths. Materials combine organic wood and plant textures with steampunk metallic components. Continuity requirements: Maintain glowing amber eyes and bark-textured face; preserve the unique tentacle arrangement with mechanical and floral attachments; ensure consistent warm internal glow and detailed mixed organic-mechanical material appearance throughout all scenes.",
+    "provider": "openai",
+    "model": "gpt-4.1-mini-2025-04-14"
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Start from Central green plant-like monster with a large humanoid face, and let the image break away from plain source realism; keep Central green. Let In the central Kaufhaus atrium the creature sits centered beneath take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around In the central Kaufhaus atrium the creature sits centered, while Face features deep-set glowing amber eyes, a long stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike. Still image direction: Kaufhaus atrium: central plant-like monster with humanoid face unspooling a sticky price-tape that snakes over an escalator step; torn catalog placards scattered on steps; warm store lighting and recognizable store signage in the background.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Price Roll Disturbance",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "In the central Kaufhaus atrium the creature sits centered beneath the store's hanging signage. A tentacle flicks a suspended, automatic pricing dispenser on a promotional podium; it whirs and vomits a continuous adhesive price-tape that unspools across the polished floor, snagging on an escalator step and yanking a row of ceiling catalog placards loose. The placards slide down the escalator like sleds, scattering brochures.",
+      "monsterPresence": "Head and upper body visible, face intent; multiple tentacles actively manipulate the dispenser and press against the escalator rail.",
+      "consequence": "A long sticky price-tape snakes from the podium, stuck over an escalator step and trailing into aisle space; several catalog placards lie torn on the escalator.",
+      "nextHook": "sticky price tape across central escalator",
+      "stillPrompt": "Kaufhaus atrium: central plant-like monster with humanoid face unspooling a sticky price-tape that snakes over an escalator step; torn catalog placards scattered on steps; warm store lighting and recognizable store signage in the background.",
+      "videoPrompt": "5s: Close-to-midshot of the monster at a promotional podium in a Kaufhaus atrium. Tentacle engages an automatic pricing dispenser. Tape unspools, slaps onto an escalator step, pulls down hanging catalog placards which slide and scatter. Keep the store's escalator, ceiling signage, and display counters visible. Sound: motor whirr, soft tearing.",
+      "cameraCue": "After the tape snaps onto the escalator, camera tilts down and pushes forward to fully reveal the sticky tape trail and catalog placards on the steps, briefly concealing the monster behind the podium rim before revealing the trailing tape.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5
+    },
+    {
+      "index": 2,
+      "title": "Neukölln Panel Exposed",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "The sticky price-tape drags across a promotional borough map wall near the escalator. As a tentacle tightens the tape, it rips whole printed layers off the map; a hidden leaflet panel swings open revealing a neon-laminated insert that reads 'Neukölln' and a band of locality photos. A security sensor pops red and a small alarm strobe blinks above the map.",
+      "monsterPresence": "Mostly tentacles in frame pulling the tape; the creature's eyes and lower face appear at the map edge, studying the exposed panel.",
+      "consequence": "A partially torn borough map panel hangs ajar with a neon 'Neukölln' insert visible and a blinking red alarm/strobe above it.",
+      "nextHook": "exposed Neukölln panel & alarm light",
+      "stillPrompt": "Interior near Kaufhaus escalator: torn promotional map panel hanging open to reveal a neon 'Neukölln' insert and locality photos; a tentacle pulls tape across it; a small red alarm strobe blinks overhead. Visible store fixtures and shelving frame the composition.",
+      "videoPrompt": "2s: Midshot on the promotional map wall adjacent to escalator. Tentacle yanks sticky tape across the map, peeling printed layers; panel flips open to show neon 'Neukölln' insert; red alarm strobe blinks. Keep shot tight on map so store background hints Kaufhaus identity.",
+      "cameraCue": "After the panel flips, camera quickly dollies in and tilts to frame the exposed 'Neukölln' insert and the blinking alarm, partially concealing the creature behind the map frame to emphasize the discovered panel.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Depth Collapse",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "A nearby endcap labeled 'Kaufhaus Sortiment' (a deep vertical stack of identical canned goods) becomes the target: the monster hooks two tentacles under the bottom shelf and drags; the stacked cans wobble, then topple in a controlled vertical domino, rolling down an aisle and slamming into a low platform to form an arched bridge of cans spanning the walkway, revealing a dark service shaft lid hidden beneath the display.",
+      "monsterPresence": "Hands and shoulders visible; face leans forward watching the cascade, expression focused and pleased.",
+      "consequence": "A neat arched bridge of linked cans spans the aisle, with the service shaft lid now exposed where the display used to stand.",
+      "nextHook": "can-bridge across aisle",
+      "stillPrompt": "Kaufhaus aisle: arching bridge of canned goods formed from a toppled endcap; the service shaft lid is exposed beneath the former display. The plant-like monster leans over the bridge with tentacles still touching the cans.",
+      "videoPrompt": "3s: Wide-to-midshot down an aisle. Monster pulls at a stacked endcap; cans topple and roll, colliding to form an arched bridge across the walkway while a service shaft lid is revealed where the display collapsed. Ambient store sounds and the clatter of cans.",
+      "cameraCue": "After the last can locks into the arch, the camera cranes back and shifts to a low wide to reveal the full can-bridge and the exposed shaft, momentarily concealing the monster behind the arch before revealing its upper body watching the structure.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Reuterkiez Steam",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "On the arched can-bridge the monster opens small jars pulled from the collapsed endcap and sprinkles spices; the spice dust hits tiny embedded LED labels and reacts—bursting into short-lived colored steam puffs that rise and paint ephemeral silhouettes of playground slides and rowhouse rooftops onto the atrium skylight. The scented steam drifts across a nearby clothing mannequin display, making a scarf billow as if a breeze from the neighborhood has blown through.",
+      "monsterPresence": "Face is visible, inhaling; tentacles scatter spices across the can-bridge. The creature's expression shifts to a mischievous smile as steam forms.",
+      "consequence": "Faint, colored steam graffiti—silhouettes of local Reuterkiez features—clings to the atrium skylight glass; a scarf on a mannequin flutters from the scented draft.",
+      "nextHook": "colored steam graffiti on glass skylight",
+      "stillPrompt": "Kaufhaus atrium under skylight: colored, ephemeral steam silhouettes of slides and rowhouse roofs on the glass; a mannequin scarf billows; the creature's face watches from the can-bridge below, tentacles dusted with spice.",
+      "videoPrompt": "2s: Mid-to-high shot from the can-bridge up toward the skylight. Monster sprinkles spice; colored puffs form and drift, leaving temporary silhouettes on the glass; the mannequin scarf flutters. Emphasize store skylight and interior architecture so location reads as Kaufhaus.",
+      "cameraCue": "After colored puffs hit the skylight, camera cranes upward and holds on the glass graffiti, concealing the monster behind the bright skylight until the next beat.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Product Chain Unravel",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "The steam condenses into droplets that fall onto a nearby wide assortment table; when droplets strike product labels they briefly electrify, and the monster's tentacles guide a chaotic wave: varied items (books, scarves, tins, toys) levitate a few inches and latch together magnetically, forming a snaking product-chain banner. The chain slithers across the floor toward the storefront window, labels aligning into a stitched strip that reads 'Sortimentsbreite' in mismatched type.",
+      "monsterPresence": "Mostly tentacles actively shaping and holding items; the creature's face is off-center, half-occluded by a hanging lamp, watching the chain form.",
+      "consequence": "A long snaking product-chain banner composed of diverse store items extends from the assortment table and heads toward the storefront window, reading 'Sortimentsbreite' in patched labels.",
+      "nextHook": "product-chain banner extending into storefront window",
+      "stillPrompt": "Kaufhaus interior near storefront: a long product-chain banner formed of books, tins, scarves and toys snakes toward the window bearing a patched 'Sortimentsbreite' label; tentacles adjust links; store window and street beyond are visible.",
+      "videoPrompt": "5s: Wide shot tracking the product-chain as it forms on an assortment table and slithers toward the Kaufhaus storefront window. Items levitate briefly, snap together magnetically, forming a stitched banner reading 'Sortimentsbreite'. Keep store architecture and window display visible.",
+      "cameraCue": "After the banner completes, camera pushes through the storefront glass to follow the chain into the window, briefly concealing the monster behind the glass reflection as the banner strikes the outside sidewalk.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5
+    },
+    {
+      "index": 6,
+      "title": "Kreuzkölln Pull",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "The product-chain reaches the storefront glass and a street performer on the sidewalk (a Kreuzkölln-style busker visible through the window) grabs the banner's end and gives it a theatrical pull. The stitched labels snap into new positions as the performer tugs, rearranging into a stencil-like graffiti that spells 'Kreuzkölln' on the pavement; a flurry of lightweight price tags flutters out through the open doorway and into the street like confetti.",
+      "monsterPresence": "The creature's face appears as a reflected overlay in the storefront glass—eyes wide, mouth a small O—partially occluded; a single tentacle rests on the inside of the glass as if feeling the pull.",
+      "consequence": "Stencil-style graffiti on the sidewalk spells 'Kreuzkölln'; the storefront door is ajar with scattered price-tag confetti trailing outside and the monster's reflection marked on the glass.",
+      "nextHook": "sidewalk graffiti 'Kreuzkölln' visible through storefront",
+      "stillPrompt": "Exterior view through Kaufhaus storefront: stencil-like 'Kreuzkölln' graffiti appears on the sidewalk as a busker pulls a banner through the open door; confetti price-tags trail out; the monster's face is reflected in the window overlapping the graffiti.",
+      "videoPrompt": "2s: Exterior-to-interior shot. Busker grabs the product-chain banner through the open storefront and pulls; labels snap into 'Kreuzkölln' on the pavement; price-tag confetti drifts outside; the creature's face is reflected in the glass. End on the layered reflection of monster and graffiti.",
+      "cameraCue": "After the banner snaps into place on the pavement, camera stays outside and frames the storefront so the monster's reflected face overlays the freshly formed 'Kreuzkölln' graffiti, revealing consequence while concealing the creature behind reflection.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Price Roll Disturbance",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "In the central Kaufhaus atrium the creature sits centered beneath the store's hanging signage. A tentacle flicks a suspended, automatic pricing dispenser on a promotional podium; it whirs and vomits a continuous adhesive price-tape that unspools across the polished floor, snagging on an escalator step and yanking a row of ceiling catalog placards loose. The placards slide down the escalator like sleds, scattering brochures.",
+      "monsterPresence": "Head and upper body visible, face intent; multiple tentacles actively manipulate the dispenser and press against the escalator rail.",
+      "consequence": "A long sticky price-tape snakes from the podium, stuck over an escalator step and trailing into aisle space; several catalog placards lie torn on the escalator.",
+      "nextHook": "sticky price tape across central escalator",
+      "stillPrompt": "Kaufhaus atrium: central plant-like monster with humanoid face unspooling a sticky price-tape that snakes over an escalator step; torn catalog placards scattered on steps; warm store lighting and recognizable store signage in the background.",
+      "videoPrompt": "5s: Close-to-midshot of the monster at a promotional podium in a Kaufhaus atrium. Tentacle engages an automatic pricing dispenser. Tape unspools, slaps onto an escalator step, pulls down hanging catalog placards which slide and scatter. Keep the store's escalator, ceiling signage, and display counters visible. Sound: motor whirr, soft tearing.",
+      "cameraCue": "After the tape snaps onto the escalator, camera tilts down and pushes forward to fully reveal the sticky tape trail and catalog placards on the steps, briefly concealing the monster behind the podium rim before revealing the trailing tape.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "Neukölln Panel Exposed",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "The sticky price-tape drags across a promotional borough map wall near the escalator. As a tentacle tightens the tape, it rips whole printed layers off the map; a hidden leaflet panel swings open revealing a neon-laminated insert that reads 'Neukölln' and a band of locality photos. A security sensor pops red and a small alarm strobe blinks above the map.",
+      "monsterPresence": "Mostly tentacles in frame pulling the tape; the creature's eyes and lower face appear at the map edge, studying the exposed panel.",
+      "consequence": "A partially torn borough map panel hangs ajar with a neon 'Neukölln' insert visible and a blinking red alarm/strobe above it.",
+      "nextHook": "exposed Neukölln panel & alarm light",
+      "stillPrompt": "Interior near Kaufhaus escalator: torn promotional map panel hanging open to reveal a neon 'Neukölln' insert and locality photos; a tentacle pulls tape across it; a small red alarm strobe blinks overhead. Visible store fixtures and shelving frame the composition.",
+      "videoPrompt": "2s: Midshot on the promotional map wall adjacent to escalator. Tentacle yanks sticky tape across the map, peeling printed layers; panel flips open to show neon 'Neukölln' insert; red alarm strobe blinks. Keep shot tight on map so store background hints Kaufhaus identity.",
+      "cameraCue": "After the panel flips, camera quickly dollies in and tilts to frame the exposed 'Neukölln' insert and the blinking alarm, partially concealing the creature behind the map frame to emphasize the discovered panel.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 3,
+      "title": "Depth Collapse",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "A nearby endcap labeled 'Kaufhaus Sortiment' (a deep vertical stack of identical canned goods) becomes the target: the monster hooks two tentacles under the bottom shelf and drags; the stacked cans wobble, then topple in a controlled vertical domino, rolling down an aisle and slamming into a low platform to form an arched bridge of cans spanning the walkway, revealing a dark service shaft lid hidden beneath the display.",
+      "monsterPresence": "Hands and shoulders visible; face leans forward watching the cascade, expression focused and pleased.",
+      "consequence": "A neat arched bridge of linked cans spans the aisle, with the service shaft lid now exposed where the display used to stand.",
+      "nextHook": "can-bridge across aisle",
+      "stillPrompt": "Kaufhaus aisle: arching bridge of canned goods formed from a toppled endcap; the service shaft lid is exposed beneath the former display. The plant-like monster leans over the bridge with tentacles still touching the cans.",
+      "videoPrompt": "3s: Wide-to-midshot down an aisle. Monster pulls at a stacked endcap; cans topple and roll, colliding to form an arched bridge across the walkway while a service shaft lid is revealed where the display collapsed. Ambient store sounds and the clatter of cans.",
+      "cameraCue": "After the last can locks into the arch, the camera cranes back and shifts to a low wide to reveal the full can-bridge and the exposed shaft, momentarily concealing the monster behind the arch before revealing its upper body watching the structure.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 4,
+      "title": "Reuterkiez Steam",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "On the arched can-bridge the monster opens small jars pulled from the collapsed endcap and sprinkles spices; the spice dust hits tiny embedded LED labels and reacts—bursting into short-lived colored steam puffs that rise and paint ephemeral silhouettes of playground slides and rowhouse rooftops onto the atrium skylight. The scented steam drifts across a nearby clothing mannequin display, making a scarf billow as if a breeze from the neighborhood has blown through.",
+      "monsterPresence": "Face is visible, inhaling; tentacles scatter spices across the can-bridge. The creature's expression shifts to a mischievous smile as steam forms.",
+      "consequence": "Faint, colored steam graffiti—silhouettes of local Reuterkiez features—clings to the atrium skylight glass; a scarf on a mannequin flutters from the scented draft.",
+      "nextHook": "colored steam graffiti on glass skylight",
+      "stillPrompt": "Kaufhaus atrium under skylight: colored, ephemeral steam silhouettes of slides and rowhouse roofs on the glass; a mannequin scarf billows; the creature's face watches from the can-bridge below, tentacles dusted with spice.",
+      "videoPrompt": "2s: Mid-to-high shot from the can-bridge up toward the skylight. Monster sprinkles spice; colored puffs form and drift, leaving temporary silhouettes on the glass; the mannequin scarf flutters. Emphasize store skylight and interior architecture so location reads as Kaufhaus.",
+      "cameraCue": "After colored puffs hit the skylight, camera cranes upward and holds on the glass graffiti, concealing the monster behind the bright skylight until the next beat.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 5,
+      "title": "Product Chain Unravel",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "The steam condenses into droplets that fall onto a nearby wide assortment table; when droplets strike product labels they briefly electrify, and the monster's tentacles guide a chaotic wave: varied items (books, scarves, tins, toys) levitate a few inches and latch together magnetically, forming a snaking product-chain banner. The chain slithers across the floor toward the storefront window, labels aligning into a stitched strip that reads 'Sortimentsbreite' in mismatched type.",
+      "monsterPresence": "Mostly tentacles actively shaping and holding items; the creature's face is off-center, half-occluded by a hanging lamp, watching the chain form.",
+      "consequence": "A long snaking product-chain banner composed of diverse store items extends from the assortment table and heads toward the storefront window, reading 'Sortimentsbreite' in patched labels.",
+      "nextHook": "product-chain banner extending into storefront window",
+      "stillPrompt": "Kaufhaus interior near storefront: a long product-chain banner formed of books, tins, scarves and toys snakes toward the window bearing a patched 'Sortimentsbreite' label; tentacles adjust links; store window and street beyond are visible.",
+      "videoPrompt": "5s: Wide shot tracking the product-chain as it forms on an assortment table and slithers toward the Kaufhaus storefront window. Items levitate briefly, snap together magnetically, forming a stitched banner reading 'Sortimentsbreite'. Keep store architecture and window display visible.",
+      "cameraCue": "After the banner completes, camera pushes through the storefront glass to follow the chain into the window, briefly concealing the monster behind the glass reflection as the banner strikes the outside sidewalk.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 6,
+      "title": "Kreuzkölln Pull",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "The product-chain reaches the storefront glass and a street performer on the sidewalk (a Kreuzkölln-style busker visible through the window) grabs the banner's end and gives it a theatrical pull. The stitched labels snap into new positions as the performer tugs, rearranging into a stencil-like graffiti that spells 'Kreuzkölln' on the pavement; a flurry of lightweight price tags flutters out through the open doorway and into the street like confetti.",
+      "monsterPresence": "The creature's face appears as a reflected overlay in the storefront glass—eyes wide, mouth a small O—partially occluded; a single tentacle rests on the inside of the glass as if feeling the pull.",
+      "consequence": "Stencil-style graffiti on the sidewalk spells 'Kreuzkölln'; the storefront door is ajar with scattered price-tag confetti trailing outside and the monster's reflection marked on the glass.",
+      "nextHook": "sidewalk graffiti 'Kreuzkölln' visible through storefront",
+      "stillPrompt": "Exterior view through Kaufhaus storefront: stencil-like 'Kreuzkölln' graffiti appears on the sidewalk as a busker pulls a banner through the open door; confetti price-tags trail out; the monster's face is reflected in the window overlapping the graffiti.",
+      "videoPrompt": "2s: Exterior-to-interior shot. Busker grabs the product-chain banner through the open storefront and pulls; labels snap into 'Kreuzkölln' on the pavement; price-tag confetti drifts outside; the creature's face is reflected in the glass. End on the layered reflection of monster and graffiti.",
+      "cameraCue": "After the banner snaps into place on the pavement, camera stays outside and frames the storefront so the monster's reflected face overlays the freshly formed 'Kreuzkölln' graffiti, revealing consequence while concealing the creature behind reflection.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Price Roll Disturbance",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "In the central Kaufhaus atrium the creature sits centered beneath the store's hanging signage. A tentacle flicks a suspended, automatic pricing dispenser on a promotional podium; it whirs and vomits a continuous adhesive price-tape that unspools across the polished floor, snagging on an escalator step and yanking a row of ceiling catalog placards loose. The placards slide down the escalator like sleds, scattering brochures.",
+      "monsterPresence": "Head and upper body visible, face intent; multiple tentacles actively manipulate the dispenser and press against the escalator rail.",
+      "consequence": "A long sticky price-tape snakes from the podium, stuck over an escalator step and trailing into aisle space; several catalog placards lie torn on the escalator.",
+      "nextHook": "sticky price tape across central escalator",
+      "stillPrompt": "Kaufhaus atrium: central plant-like monster with humanoid face unspooling a sticky price-tape that snakes over an escalator step; torn catalog placards scattered on steps; warm store lighting and recognizable store signage in the background.",
+      "videoPrompt": "5s: Close-to-midshot of the monster at a promotional podium in a Kaufhaus atrium. Tentacle engages an automatic pricing dispenser. Tape unspools, slaps onto an escalator step, pulls down hanging catalog placards which slide and scatter. Keep the store's escalator, ceiling signage, and display counters visible. Sound: motor whirr, soft tearing.",
+      "cameraCue": "After the tape snaps onto the escalator, camera tilts down and pushes forward to fully reveal the sticky tape trail and catalog placards on the steps, briefly concealing the monster behind the podium rim before revealing the trailing tape.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 2,
+      "title": "Neukölln Panel Exposed",
+      "semanticAnchor": "Betriebsform",
+      "semanticCollision": "Verwaltungsgliederung Berlins",
+      "event": "The sticky price-tape drags across a promotional borough map wall near the escalator. As a tentacle tightens the tape, it rips whole printed layers off the map; a hidden leaflet panel swings open revealing a neon-laminated insert that reads 'Neukölln' and a band of locality photos. A security sensor pops red and a small alarm strobe blinks above the map.",
+      "monsterPresence": "Mostly tentacles in frame pulling the tape; the creature's eyes and lower face appear at the map edge, studying the exposed panel.",
+      "consequence": "A partially torn borough map panel hangs ajar with a neon 'Neukölln' insert visible and a blinking red alarm/strobe above it.",
+      "nextHook": "exposed Neukölln panel & alarm light",
+      "stillPrompt": "Interior near Kaufhaus escalator: torn promotional map panel hanging open to reveal a neon 'Neukölln' insert and locality photos; a tentacle pulls tape across it; a small red alarm strobe blinks overhead. Visible store fixtures and shelving frame the composition.",
+      "videoPrompt": "2s: Midshot on the promotional map wall adjacent to escalator. Tentacle yanks sticky tape across the map, peeling printed layers; panel flips open to show neon 'Neukölln' insert; red alarm strobe blinks. Keep shot tight on map so store background hints Kaufhaus identity.",
+      "cameraCue": "After the panel flips, camera quickly dollies in and tilts to frame the exposed 'Neukölln' insert and the blinking alarm, partially concealing the creature behind the map frame to emphasize the discovered panel.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Depth Collapse",
+      "semanticAnchor": "Verwaltungsgliederung Berlins",
+      "semanticCollision": "Sortimentstiefe",
+      "event": "A nearby endcap labeled 'Kaufhaus Sortiment' (a deep vertical stack of identical canned goods) becomes the target: the monster hooks two tentacles under the bottom shelf and drags; the stacked cans wobble, then topple in a controlled vertical domino, rolling down an aisle and slamming into a low platform to form an arched bridge of cans spanning the walkway, revealing a dark service shaft lid hidden beneath the display.",
+      "monsterPresence": "Hands and shoulders visible; face leans forward watching the cascade, expression focused and pleased.",
+      "consequence": "A neat arched bridge of linked cans spans the aisle, with the service shaft lid now exposed where the display used to stand.",
+      "nextHook": "can-bridge across aisle",
+      "stillPrompt": "Kaufhaus aisle: arching bridge of canned goods formed from a toppled endcap; the service shaft lid is exposed beneath the former display. The plant-like monster leans over the bridge with tentacles still touching the cans.",
+      "videoPrompt": "3s: Wide-to-midshot down an aisle. Monster pulls at a stacked endcap; cans topple and roll, colliding to form an arched bridge across the walkway while a service shaft lid is revealed where the display collapsed. Ambient store sounds and the clatter of cans.",
+      "cameraCue": "After the last can locks into the arch, the camera cranes back and shifts to a low wide to reveal the full can-bridge and the exposed shaft, momentarily concealing the monster behind the arch before revealing its upper body watching the structure.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 4,
+      "title": "Reuterkiez Steam",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Reuterkiez",
+      "event": "On the arched can-bridge the monster opens small jars pulled from the collapsed endcap and sprinkles spices; the spice dust hits tiny embedded LED labels and reacts—bursting into short-lived colored steam puffs that rise and paint ephemeral silhouettes of playground slides and rowhouse rooftops onto the atrium skylight. The scented steam drifts across a nearby clothing mannequin display, making a scarf billow as if a breeze from the neighborhood has blown through.",
+      "monsterPresence": "Face is visible, inhaling; tentacles scatter spices across the can-bridge. The creature's expression shifts to a mischievous smile as steam forms.",
+      "consequence": "Faint, colored steam graffiti—silhouettes of local Reuterkiez features—clings to the atrium skylight glass; a scarf on a mannequin flutters from the scented draft.",
+      "nextHook": "colored steam graffiti on glass skylight",
+      "stillPrompt": "Kaufhaus atrium under skylight: colored, ephemeral steam silhouettes of slides and rowhouse roofs on the glass; a mannequin scarf billows; the creature's face watches from the can-bridge below, tentacles dusted with spice.",
+      "videoPrompt": "2s: Mid-to-high shot from the can-bridge up toward the skylight. Monster sprinkles spice; colored puffs form and drift, leaving temporary silhouettes on the glass; the mannequin scarf flutters. Emphasize store skylight and interior architecture so location reads as Kaufhaus.",
+      "cameraCue": "After colored puffs hit the skylight, camera cranes upward and holds on the glass graffiti, concealing the monster behind the bright skylight until the next beat.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 5,
+      "title": "Product Chain Unravel",
+      "semanticAnchor": "Reuterkiez",
+      "semanticCollision": "Sortimentsbreite",
+      "event": "The steam condenses into droplets that fall onto a nearby wide assortment table; when droplets strike product labels they briefly electrify, and the monster's tentacles guide a chaotic wave: varied items (books, scarves, tins, toys) levitate a few inches and latch together magnetically, forming a snaking product-chain banner. The chain slithers across the floor toward the storefront window, labels aligning into a stitched strip that reads 'Sortimentsbreite' in mismatched type.",
+      "monsterPresence": "Mostly tentacles actively shaping and holding items; the creature's face is off-center, half-occluded by a hanging lamp, watching the chain form.",
+      "consequence": "A long snaking product-chain banner composed of diverse store items extends from the assortment table and heads toward the storefront window, reading 'Sortimentsbreite' in patched labels.",
+      "nextHook": "product-chain banner extending into storefront window",
+      "stillPrompt": "Kaufhaus interior near storefront: a long product-chain banner formed of books, tins, scarves and toys snakes toward the window bearing a patched 'Sortimentsbreite' label; tentacles adjust links; store window and street beyond are visible.",
+      "videoPrompt": "5s: Wide shot tracking the product-chain as it forms on an assortment table and slithers toward the Kaufhaus storefront window. Items levitate briefly, snap together magnetically, forming a stitched banner reading 'Sortimentsbreite'. Keep store architecture and window display visible.",
+      "cameraCue": "After the banner completes, camera pushes through the storefront glass to follow the chain into the window, briefly concealing the monster behind the glass reflection as the banner strikes the outside sidewalk.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 6,
+      "title": "Kreuzkölln Pull",
+      "semanticAnchor": "Sortimentsbreite",
+      "semanticCollision": "Berlin-Kreuzberg",
+      "event": "The product-chain reaches the storefront glass and a street performer on the sidewalk (a Kreuzkölln-style busker visible through the window) grabs the banner's end and gives it a theatrical pull. The stitched labels snap into new positions as the performer tugs, rearranging into a stencil-like graffiti that spells 'Kreuzkölln' on the pavement; a flurry of lightweight price tags flutters out through the open doorway and into the street like confetti.",
+      "monsterPresence": "The creature's face appears as a reflected overlay in the storefront glass—eyes wide, mouth a small O—partially occluded; a single tentacle rests on the inside of the glass as if feeling the pull.",
+      "consequence": "Stencil-style graffiti on the sidewalk spells 'Kreuzkölln'; the storefront door is ajar with scattered price-tag confetti trailing outside and the monster's reflection marked on the glass.",
+      "nextHook": "sidewalk graffiti 'Kreuzkölln' visible through storefront",
+      "stillPrompt": "Exterior view through Kaufhaus storefront: stencil-like 'Kreuzkölln' graffiti appears on the sidewalk as a busker pulls a banner through the open door; confetti price-tags trail out; the monster's face is reflected in the window overlapping the graffiti.",
+      "videoPrompt": "2s: Exterior-to-interior shot. Busker grabs the product-chain banner through the open storefront and pulls; labels snap into 'Kreuzkölln' on the pavement; price-tag confetti drifts outside; the creature's face is reflected in the glass. End on the layered reflection of monster and graffiti.",
+      "cameraCue": "After the banner snaps into place on the pavement, camera stays outside and frames the storefront so the monster's reflected face overlays the freshly formed 'Kreuzkölln' graffiti, revealing consequence while concealing the creature behind reflection.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 2
+    }
+  ]
+}

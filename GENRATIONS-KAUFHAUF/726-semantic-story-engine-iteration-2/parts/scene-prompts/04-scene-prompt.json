@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "Exotic Escalation: Münchner Secession Meets St. Kitts und Nevis",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "newImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New composition emphasizing tropical light and architectural warping",
+  "videoMode": "singleImage",
+  "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The angular sculptures begin to ripple and pulse with tropical take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The angular sculptures begin to ripple and pulse with, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Push forward slowly to immerse viewer in tropical transformation.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921657687-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921657687-runware-image-video.mp4",
+  "timestamp": "2026-08-05T09:20:59.293Z"
+}

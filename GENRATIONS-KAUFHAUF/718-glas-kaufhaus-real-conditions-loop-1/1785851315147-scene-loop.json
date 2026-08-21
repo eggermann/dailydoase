@@ -1,0 +1,28 @@
+{
+  "sceneCount": 2,
+  "totalTrackDuration": 4,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/merged/1785851315147-concat.mp4",
+  "mireloMode": "off",
+  "endCard": null,
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/parts/1785851353358-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/parts/1785851353358-runware-image-video.mp4",
+      "prompt": "The green monster as the protagonist, with smaller plant-monster heads and mechanical appendages acting as secondary characters in Warehouse characterized by industrial textures such as metal; A fusion of organic and mechanical elements creating a surreal,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Consequence and Transformation: NATO-Doppelbeschluss Meets Betriebsform",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/parts/1785851377754-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/parts/1785851377754-runware-image-video.mp4",
+      "prompt": "The green monster as the protagonist, with smaller plant-monster heads and mechanical appendages acting as secondary characters in Warehouse characterized by industrial textures such as metal; A fusion of organic and mechanical elements creating a surreal,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. The green monster as the protagonist, with smaller plant-monster heads and mechanical appendages acting as secondary characters or extensions, Warehouse characterized by industrial textures such as metal, A fusion of organic and mechanical elements creating a surreal, surrounded by extending tentacle-like branches in Warehouse characterized by industrial textures such as metal under Warm, surrounded by extending tentacle-like branches in Warehouse characterized by industrial Anchor (carried semantic inheritance): NATO-Doppelbeschluss.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-04T13:49:38.828Z"
+}

@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/merged/1785854923010-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/merged/1785854923010-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785854983579-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785854983579-runware-image-video.mp4",
+      "prompt": "The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements in Large warehouse space; A fusion of organic and mechanical design, the monster’s body is composed of twisted. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements, Large warehouse space, A fusion of organic and mechanical design, ambient glow from multiple hanging lamps and internal light sources within, ambient glow from multiple hanging lamps and internal light sources Medium close-up focusing on the monster’s face and upper body silhouette.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855011491-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855011491-runware-image-video.mp4",
+      "prompt": "The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements in Large warehouse space; A fusion of organic and mechanical design, the monster’s body is composed of twisted. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Anchor (carried semantic inheritance): NATO-Doppelbeschluss. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Further Escalation: Betriebsform Meets Kunsthalle",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855039632-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855039632-runware-image-video.mp4",
+      "prompt": "The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements in Large warehouse space; A fusion of organic and mechanical design, the monster’s body is composed of twisted. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Anchor (carried semantic inheritance): Betriebsform. Collision A (fresh getNext from Kunstausstellung): Kunsthalle. Context: , ,.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Intensification: Kunsthalle Meets St. Kitts und Nevis",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855082937-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855082937-runware-image-video.mp4",
+      "prompt": "The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements in Large warehouse space; A fusion of organic and mechanical design, the monster’s body is composed of twisted. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Anchor (carried semantic inheritance): Kunsthalle. Collision A (fresh getNext from 1983): St. Kitts und Nevis.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Rupture: St. Kitts und Nevis Collides with Sortimentstiefe",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855199835-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855199835-runware-image-video.mp4",
+      "prompt": "The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements in Large warehouse space; A fusion of organic and mechanical design, the monster’s body is composed of twisted. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements, Large warehouse space, A fusion of organic and mechanical design, ambient glow from multiple hanging lamps and internal light sources within, ambient glow from multiple hanging lamps and internal light sources Medium close-up focusing on the monster’s face and upper body silhouette.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Consequence: Sortimentstiefe Resolves into 1955",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855242337-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/720-glas-kaufhaus-fresh-sound-iteration-1/parts/1785855242337-runware-image-video.mp4",
+      "prompt": "The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements in Large warehouse space; A fusion of organic and mechanical design, the monster’s body is composed of twisted. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. The green plant-monster as the protagonist, supported by smaller plant-like appendages and mechanical lanterns acting as secondary elements, Large warehouse space, A fusion of organic and mechanical design, The green plant-monster with dimmed glowing eyes stands still as the 1989 Kaufhaus interior transforms into a muted, The green plant-monster with dimmed glowing eyes stands still as Anchor (carried semantic inheritance): Sortimentstiefe. Collision A (fresh getNext from Kunstausstellung): 1955.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-04T14:54:03.755Z"
+}

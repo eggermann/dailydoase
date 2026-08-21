@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort"
+  ],
+  "semanticCues": [
+    "– eine eigenständige Silbe",
+    "(Bedeutungsträgern) gehört. Ob „Wort“ in der Symbol",
+    "vom Phonem"
+  ],
+  "people": {
+    "count": 1,
+    "actors": [
+      {
+        "reference": "man",
+        "description": "A man in a black tank top",
+        "position": "midground center",
+        "orientation": "back-facing"
+      }
+    ]
+  },
+  "location": "Art studio",
+  "previous": null,
+  "story": {
+    "openingBeat": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative.",
+    "finalBeat": "The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+    "summary": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative. -> The transformation of 'wort' into liquid paint signifies a deeper connection to the meaning behind the word, as it begins to take physical form. -> The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+    "nextOpeningObligation": "Continue from this consequence: The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal."
+  }
+}

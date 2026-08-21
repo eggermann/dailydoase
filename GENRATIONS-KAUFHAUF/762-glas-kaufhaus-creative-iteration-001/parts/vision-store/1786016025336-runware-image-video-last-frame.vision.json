@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/762-glas-kaufhaus-creative-iteration-001/parts/1786016025336-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty industrial interior space with reflective glass panels and white partition walls. Setting: Large, open, unfinished room with exposed ceiling pipes and ducts, concrete floor with marked lines. Framing: Wide-angle, low-to-mid height perspective capturing depth and symmetry, centered on the white partition wall and glass panels. Lighting: Soft natural light from left side windows casting subtle shadows, warm ambient tones highlighting textures. Visible transformation: No visible human presence or movement; static scene emphasizing architectural elements and reflections. Continuity: Maintain the spatial layout with glass panels and partition walls; preserve natural light direction and reflective surfaces for dynamic interplay in \"Moving Reflections.\"",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T11:33:49.121Z"
+}

@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "1983 meets NATO-Doppelbeschluss",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "fluxContext",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone to open the story.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green monster as the protagonist, with animated glowing in Large warehouse and let the image break away from plain source realism;. Let Opening disturbance: green monster reacts to conflicting 1983 and NATO-Doppelbeschluss take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Opening disturbance: green monster reacts to conflicting 1983, while A fusion of organic plant forms and mechanical stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold to emphasize tension and detailed transformation.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/722-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877240577-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/722-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877276525-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/722-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877276525-runware-image-video.mp4",
+  "timestamp": "2026-08-04T21:01:18.302Z"
+}

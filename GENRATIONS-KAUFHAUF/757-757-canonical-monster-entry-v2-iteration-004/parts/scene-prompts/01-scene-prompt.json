@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening — Betriebsform",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Begin framed wide in the Kaufhaus atrium: display islands pivoting on tracks, registers folding into a continuous conveyor. Animate the refrigerated island sliding open, the raw meat slab sliding out and thudding onto the tile; a small puddle of moisture spreads along grout lines. Camera dollies slowly forward, then tilts up to reveal glass balustrade and mezzanine. Keep lighting practical; no text. Camera: wide low angle dolly forward to emphasize the fallen slab, reveal mezzanine. End with this readable result: A large, wet slab of raw meat rests on the central floor, a dark puddle seeping into grout lines. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942478305-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942499892-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942499892-runware-image-video.mp4",
+  "timestamp": "2026-08-05T15:08:21.295Z"
+}

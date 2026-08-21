@@ -1,4 +1,15 @@
 require('dotenv').config();
+const fs = require('fs');
+const os = require('os');
+
+const resolvePrivateKey = (value) => {
+    if (!value) return value;
+    const filePath = value.startsWith('~/') ? `${os.homedir()}${value.slice(1)}` : value;
+    if (fs.existsSync(filePath)) return fs.readFileSync(filePath, 'utf8');
+    // A non-PEM, unreadable value is a path typo, not a usable key. Returning
+    // undefined lets an intentionally configured password authenticate instead.
+    return value.includes('BEGIN') ? value.replace(/\\n/g, '\n') : undefined;
+};
 
 const parseJsonConfig = (value) => {
     if (!value) {
@@ -19,7 +30,7 @@ const loadSshConfig = () => {
             ...jsonConfig,
             username: jsonConfig.username || jsonConfig.user,
             user: jsonConfig.user || jsonConfig.username,
-            privateKey: jsonConfig.privateKey || jsonConfig.key,
+            privateKey: resolvePrivateKey(jsonConfig.privateKey || jsonConfig.key),
         };
     }
 
@@ -37,7 +48,7 @@ const loadSshConfig = () => {
         config.password = password;
     }
     if (privateKey) {
-        config.privateKey = privateKey;
+        config.privateKey = resolvePrivateKey(privateKey);
     }
 
     if (!config.password && !config.privateKey) {

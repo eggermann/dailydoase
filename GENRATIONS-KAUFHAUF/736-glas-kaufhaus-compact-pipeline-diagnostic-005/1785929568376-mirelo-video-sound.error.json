@@ -1,0 +1,75 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/merged/1785929568376-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/merged/1785929568376-collision-cut.mp4",
+  "mireloPrompt": "Start from The green plant-like monster as the protagonist, with smaller in Large warehouse space and let the image break away from plain source. Let Produce a 3-second BRD 1989 TV trailer clip from the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Produce a 3-second BRD 1989 TV trailer clip from, while The monster’s face is textured like bark with stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from The green plant-like monster as the protagonist, with smaller in Large warehouse space and let the image break away from plain source. Let Start from The green plant-like monster as the protagonist, with take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Start from The green plant-like monster as the protagonist,, while The monster’s face is textured like bark with stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "extraMetadata": {
+    "sceneCount": 2,
+    "totalTrackDuration": 9.285714,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/merged/1785929568376-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/merged/1785929568376-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Kaufhaus — Betriebsform Snap",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/parts/1785929633109-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/parts/1785929633109-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with smaller in Large warehouse space and let the image break away from plain source. Let Produce a 3-second BRD 1989 TV trailer clip from the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Produce a 3-second BRD 1989 TV trailer clip from, while The monster’s face is textured like bark with stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "",
+        "durationSeconds": null,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/parts/1785929657768-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/parts/1785929657768-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with smaller in Large warehouse space and let the image break away from plain source. Let Start from The green plant-like monster as the protagonist, with take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Start from The green plant-like monster as the protagonist,, while The monster’s face is textured like bark with stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/736-glas-kaufhaus-compact-pipeline-diagnostic-005/1785929568376-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T11:34:19.709Z"
+}

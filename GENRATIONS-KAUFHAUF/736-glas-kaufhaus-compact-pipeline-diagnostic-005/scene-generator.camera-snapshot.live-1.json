@@ -1,0 +1,124 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create the requested number of short scene plans for a green-monster trailer grounded in supplied photographed Kaufhaus interiors. The protagonist reference contains only one isolated green plant-like monster; use it only for creature identity, never as composition or background. Treat each Kaufhaus photograph as an immutable location plate. In every stillPrompt preserve its exact viewpoint, crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least eighty percent of the room; the location must remain immediately recognizable, not become a generic warehouse or fantasy set. People may appear when the semantic streams naturally call for them; neither add nor exclude them by default. Each source cue labels a carried Anchor and fresh getNext Collision. Let that collision compose every variable part of the scene: storyCause, monsterIntent, semanticAction, local roomConsequence, monsterPresence, viewpoint, motionCue, cameraCue, stillPrompt, and singleImagePrompt. Do not add a generic trailer action, generic warehouse atmosphere, or default camera move independent of the words. Infer one specific surprising causal event: the monster discovers, misunderstands, uses, protects, rejects, imitates, or transforms something because of the collision. Keep surreal mutation local to protagonist, people when semantically justified, movable objects, light, reflections, shadows, or one nearby architectural detail; never replace or dissolve the whole Kaufhaus. The next scene inherits the visible consequence, not merely the terms. The monster is protagonist by agency, never a permanent large advertising mascot; vary scale and presence. Select viewpoint and cameraCue only after semanticAction: use hold, pan, tilt, sideways track, arc, push, pullback, rise, descent, or focus shift according to what best reveals that action. Do not default to forward movement and do not repeat the same dominant camera behavior in adjacent scenes. Every stillPrompt captures the decisive action inside the recognizable location. Every singleImagePrompt shows tactic beginning, changing, and leaving its local consequence, including the chosen cameraCue. Preserve monster identity and photographed Kaufhaus continuity; no live camera, poster layout, panels, portraits, callout lines, readable text, or modern logos. Return required JSON scene plan only. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 1,
+  "effectiveSceneCount": 1,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Kaufhaus. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen. Dramatic function: condensed arc: establish the world, intensify the collision, and show its consequence in one scene. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: Betriebsform remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 1,
+      "anchor": {
+        "term": "Kaufhaus",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "Betriebsform",
+        "streamLabel": "Kaufhaus",
+        "description": "eines und über Kaufhaus im Katalog der Deutschen"
+      },
+      "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": []
+  },
+  "visionStoryContext": "Location: Large warehouse space. Actors: [{\"reference\":\"the actor\",\"description\":\"The green plant-like monster as the protagonist, with smaller plant-monster heads and mechanical appendages as secondary elements\"}]. Setup: Medium close-up focusing on the monster’s face and upper body silhouette with extended tentacle-like appendages in Large warehouse spa...",
+  "sceneLengths": [
+    3
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+    "outputText": "Subject: Central green plant-like monster with glowing eyes and a detailed face. Setting: Industrial warehouse environment with hanging lamps and mechanical elements. Framing: Medium close-up focusing on the monster’s face and upper body silhouette with extended tentacle-like appendages. Lighting: Warm, ambient glow from multiple hanging lamps integrated into the monster’s structure. Location: Large warehouse space featuring industrial textures such as metal, rust, and aged wood. Actors: The green plant-like monster as the protagonist, with smaller plant-monster heads and mechanical appendages as secondary elements. Description: The monster’s face is textured like bark with glowing amber eyes, large pointed ears, and a long trunk-like mouth. Its body is a complex network of vines, roots, and mechanical parts, adorned with hanging lanterns and flower-like growths. Continuity Requirements: Maintain consistent glowing eye intensity, lamp lighting, and detailed textures of the plant-mechanical hybrid throughout all scenes. Preserve the unique silhouette with extended tentacles and fixed mechanical attachments.",
+    "provider": "openai",
+    "model": "gpt-4.1-mini-2025-04-14"
+  },
+  "storyRunIndex": 1,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Start from The green plant-like monster as the protagonist, with smaller in Large warehouse space and let the image break away from plain source. Let In the medium close-up, the green plant-monster lifts a single take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around In the medium close-up, the green plant-monster lifts a, while The monster’s face is textured like bark with stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike. Still image direction: Create a single still that preserves the supplied photographed Kaufhaus viewpoint exactly (keep original crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room). Style: BRD television trailer, 1989 — slight broadcast scanlines, light film grain, desaturated color with warm studio tungsten push, subtle vignette. Scene: medium close-up of the green plant-like monster (primary protagonist) with glowing eyes, plant anatomy, hanging lamps in frame. The monster's tentacle touches a small hanging catalogue tag stamped 'Betriebsform'; one hanging lamp is crooked and swinging, a torn corner of the catalog sticker is stuck to the elevator door, and small metallic scuffs lie on the floor. Keep the Kaufhaus fixtures (columns, elevator face, ducts, hanging lamps) unchanged and clearly recognizable as in the photo. Do not change architecture or viewpoint.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Kaufhaus — Betriebsform Snap",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "In the medium close-up, the green plant-monster lifts a single tentacle and flicks a small hanging catalogue tag stamped 'Betriebsform'; the tag snags a maintenance cable above a row of industrial hanging lamps, yanking it. One lamp pivots free in a sudden staggered arc, its metal mount snapping and sending a bright metallic catalog corner slapping and sticking to the elevator door; the lampshade hangs crooked and begins to swing.",
+      "monsterPresence": "Medium close-up on the monster's face and upper torso: glowing eyes and plant-like facial structure centered, upper tentacles visible as they extend off-frame and one tentacle actively touches the hanging tag; mechanical appendage glimpses at edge of frame.",
+      "consequence": "A torn 'Betriebsform' catalog tag (corner visibly stuck) clings to the elevator door; one hanging lamp is crooked and swinging; small metallic scuff marks and a fallen corner of catalogue lie on the floor beneath—clearly visible in the left third of the room.",
+      "nextHook": "Betriebsform becomes next anchor — the stuck catalog tag now labels the elevator as an active Betriebsform node and remains visible on the elevator face for subsequent scenes.",
+      "stillPrompt": "Create a single still that preserves the supplied photographed Kaufhaus viewpoint exactly (keep original crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room). Style: BRD television trailer, 1989 — slight broadcast scanlines, light film grain, desaturated color with warm studio tungsten push, subtle vignette. Scene: medium close-up of the green plant-like monster (primary protagonist) with glowing eyes, plant anatomy, hanging lamps in frame. The monster's tentacle touches a small hanging catalogue tag stamped 'Betriebsform'; one hanging lamp is crooked and swinging, a torn corner of the catalog sticker is stuck to the elevator door, and small metallic scuffs lie on the floor. Keep the Kaufhaus fixtures (columns, elevator face, ducts, hanging lamps) unchanged and clearly recognizable as in the photo. Do not change architecture or viewpoint.",
+      "videoPrompt": "Produce a 3-second BRD 1989 TV trailer clip from the supplied Kaufhaus photograph viewpoint (do not alter crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance; keep >=80% of visible room). Action: a medium close-up holds on the monster; a tentacle reaches out and flicks a hanging catalogue tag labeled 'Betriebsform'. The tag snags a maintenance cable overhead: lamps stutter, one lamp snaps free and swings; a metallic corner flies and smacks the elevator door, adhering as a torn 'Betriebsform' fragment. Motion notes: lamp swing is sudden then pendulates; the sticker flutters then sticks. Visual style: 1989 broadcast grain and slight scanlines, 25 fps feel, warm tungsten push, modest motion blur on fast swing, audio placeholder: distant industrial hum and a single soft mechanical clang at impact. Preserve Kaufhaus architecture and lighting exactly.",
+      "cameraCue": "After the impact, cut to a steady medium-close 50mm framing with shallow depth of field on the monster's face; rack focus from the monster's glowing eyes to the torn 'Betriebsform' fragment stuck on the elevator door to reveal the consequence.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 3
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Kaufhaus — Betriebsform Snap",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "In the medium close-up, the green plant-monster lifts a single tentacle and flicks a small hanging catalogue tag stamped 'Betriebsform'; the tag snags a maintenance cable above a row of industrial hanging lamps, yanking it. One lamp pivots free in a sudden staggered arc, its metal mount snapping and sending a bright metallic catalog corner slapping and sticking to the elevator door; the lampshade hangs crooked and begins to swing.",
+      "monsterPresence": "Medium close-up on the monster's face and upper torso: glowing eyes and plant-like facial structure centered, upper tentacles visible as they extend off-frame and one tentacle actively touches the hanging tag; mechanical appendage glimpses at edge of frame.",
+      "consequence": "A torn 'Betriebsform' catalog tag (corner visibly stuck) clings to the elevator door; one hanging lamp is crooked and swinging; small metallic scuff marks and a fallen corner of catalogue lie on the floor beneath—clearly visible in the left third of the room.",
+      "nextHook": "Betriebsform becomes next anchor — the stuck catalog tag now labels the elevator as an active Betriebsform node and remains visible on the elevator face for subsequent scenes.",
+      "stillPrompt": "Create a single still that preserves the supplied photographed Kaufhaus viewpoint exactly (keep original crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room). Style: BRD television trailer, 1989 — slight broadcast scanlines, light film grain, desaturated color with warm studio tungsten push, subtle vignette. Scene: medium close-up of the green plant-like monster (primary protagonist) with glowing eyes, plant anatomy, hanging lamps in frame. The monster's tentacle touches a small hanging catalogue tag stamped 'Betriebsform'; one hanging lamp is crooked and swinging, a torn corner of the catalog sticker is stuck to the elevator door, and small metallic scuffs lie on the floor. Keep the Kaufhaus fixtures (columns, elevator face, ducts, hanging lamps) unchanged and clearly recognizable as in the photo. Do not change architecture or viewpoint.",
+      "videoPrompt": "Produce a 3-second BRD 1989 TV trailer clip from the supplied Kaufhaus photograph viewpoint (do not alter crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance; keep >=80% of visible room). Action: a medium close-up holds on the monster; a tentacle reaches out and flicks a hanging catalogue tag labeled 'Betriebsform'. The tag snags a maintenance cable overhead: lamps stutter, one lamp snaps free and swings; a metallic corner flies and smacks the elevator door, adhering as a torn 'Betriebsform' fragment. Motion notes: lamp swing is sudden then pendulates; the sticker flutters then sticks. Visual style: 1989 broadcast grain and slight scanlines, 25 fps feel, warm tungsten push, modest motion blur on fast swing, audio placeholder: distant industrial hum and a single soft mechanical clang at impact. Preserve Kaufhaus architecture and lighting exactly.",
+      "cameraCue": "After the impact, cut to a steady medium-close 50mm framing with shallow depth of field on the monster's face; rack focus from the monster's glowing eyes to the torn 'Betriebsform' fragment stuck on the elevator door to reveal the consequence.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Kaufhaus — Betriebsform Snap",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Betriebsform",
+      "event": "In the medium close-up, the green plant-monster lifts a single tentacle and flicks a small hanging catalogue tag stamped 'Betriebsform'; the tag snags a maintenance cable above a row of industrial hanging lamps, yanking it. One lamp pivots free in a sudden staggered arc, its metal mount snapping and sending a bright metallic catalog corner slapping and sticking to the elevator door; the lampshade hangs crooked and begins to swing.",
+      "monsterPresence": "Medium close-up on the monster's face and upper torso: glowing eyes and plant-like facial structure centered, upper tentacles visible as they extend off-frame and one tentacle actively touches the hanging tag; mechanical appendage glimpses at edge of frame.",
+      "consequence": "A torn 'Betriebsform' catalog tag (corner visibly stuck) clings to the elevator door; one hanging lamp is crooked and swinging; small metallic scuff marks and a fallen corner of catalogue lie on the floor beneath—clearly visible in the left third of the room.",
+      "nextHook": "Betriebsform becomes next anchor — the stuck catalog tag now labels the elevator as an active Betriebsform node and remains visible on the elevator face for subsequent scenes.",
+      "stillPrompt": "Create a single still that preserves the supplied photographed Kaufhaus viewpoint exactly (keep original crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance, and at least 80% of the visible room). Style: BRD television trailer, 1989 — slight broadcast scanlines, light film grain, desaturated color with warm studio tungsten push, subtle vignette. Scene: medium close-up of the green plant-like monster (primary protagonist) with glowing eyes, plant anatomy, hanging lamps in frame. The monster's tentacle touches a small hanging catalogue tag stamped 'Betriebsform'; one hanging lamp is crooked and swinging, a torn corner of the catalog sticker is stuck to the elevator door, and small metallic scuffs lie on the floor. Keep the Kaufhaus fixtures (columns, elevator face, ducts, hanging lamps) unchanged and clearly recognizable as in the photo. Do not change architecture or viewpoint.",
+      "videoPrompt": "Produce a 3-second BRD 1989 TV trailer clip from the supplied Kaufhaus photograph viewpoint (do not alter crop, floor plan, ceiling, ducts, windows, columns, elevators, walls, exposure, color balance; keep >=80% of visible room). Action: a medium close-up holds on the monster; a tentacle reaches out and flicks a hanging catalogue tag labeled 'Betriebsform'. The tag snags a maintenance cable overhead: lamps stutter, one lamp snaps free and swings; a metallic corner flies and smacks the elevator door, adhering as a torn 'Betriebsform' fragment. Motion notes: lamp swing is sudden then pendulates; the sticker flutters then sticks. Visual style: 1989 broadcast grain and slight scanlines, 25 fps feel, warm tungsten push, modest motion blur on fast swing, audio placeholder: distant industrial hum and a single soft mechanical clang at impact. Preserve Kaufhaus architecture and lighting exactly.",
+      "cameraCue": "After the impact, cut to a steady medium-close 50mm framing with shallow depth of field on the monster's face; rack focus from the monster's glowing eyes to the torn 'Betriebsform' fragment stuck on the elevator door to reveal the consequence.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3
+    }
+  ]
+}

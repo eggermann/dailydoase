@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/merged/1785933988274-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/merged/1785933988274-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Shelves Reconfigure",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934043863-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934043863-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let A slow push from the far atrium edge toward the take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A slow push from the far atrium edge toward. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "The Smear",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934067540-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934067540-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Tight tracking shot along the conveyor as one parcel's seam take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Tight tracking shot along the conveyor as one parcel's. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Afterimage Stalker",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934089547-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934089547-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Low-angle tracking as chromatic trails stretch from the lights take over the scene; the room warps, the light flickers, and the frame mutates like a. Build the mood around Low-angle tracking as chromatic trails stretch from the lights. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Collective Choreography",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934121454-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934121454-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Overhead crane shot that descends as shoppers chant clipped syllables take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Overhead crane shot that descends as shoppers chant clipped. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the choreography forms, an overhead crane pulls back to show the.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Shower and Scorch",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934142205-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934142205-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let High-speed pan as a rig of industrial lights collapses into take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around High-speed pan as a rig of industrial lights collapses. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Transactions",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934269162-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/744-scene-focus-routing-trailer-001/parts/1785934269162-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Slow, deliberate dolly in as tills click and swallow overturned take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Slow, deliberate dolly in as tills click and swallow. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the creature presses the pawprint, a tight close-up on the print.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T12:51:10.542Z"
+}

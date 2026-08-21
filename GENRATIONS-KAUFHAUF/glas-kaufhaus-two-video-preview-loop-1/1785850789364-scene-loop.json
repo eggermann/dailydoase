@@ -1,0 +1,28 @@
+{
+  "sceneCount": 2,
+  "totalTrackDuration": 4,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/merged/1785850789364-concat.mp4",
+  "mireloMode": "off",
+  "endCard": null,
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening Collision: 1983 Meets NATO-Doppelbeschluss",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850841132-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850841132-runware-image-video.mp4",
+      "prompt": "Green plant-like monster mid-roar with twisting tendrils, shards of broken hanging lamps spiraling outward in old Kaufhaus warehouse, cold green and steel blue lighting, rough textured walls, wide angle lens, cinematic 1980s style.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850869089-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850869089-runware-image-video.mp4",
+      "prompt": "Green plant-like monster with glowing eyes, tendrils as metallic pistons, surrounded by industrial cogs and conveyor belts morphing from lamp shards, harsh fluorescent green and grey lighting, textured steel and concrete, medium shot, symmetrical composition.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-04T13:41:10.147Z"
+}

@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Whispers of Language",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "cameraShot",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor and let the image break away from plain webcam realism; keep the same real person. Let The air shimmers with a liquid texture, reflecting the tension take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The air shimmers with a liquid texture, reflecting the, while ```json { \"Subject\": \"Single individual\", \"Setting\": Indoor space stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/opening-persona-reference.jpg",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787261713532-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/799-glas-kaufhaus-3-2-2-fresh-live-shots/parts/1787261713532-runware-image-video.mp4",
+  "timestamp": "2026-08-20T21:42:04.532Z"
+}

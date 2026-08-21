@@ -1,0 +1,103 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 17.428571,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/merged/1785929841774-collision-cut.mp4",
+  "mireloMode": "finalOnly",
+  "endCard": {
+    "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/end-card/trailer-end-card.png",
+    "width": 448,
+    "height": 336,
+    "data": {
+      "title": "Formen der Abweichung",
+      "projectTitle": "Green Monster Ware Haus",
+      "vernissageDate": "05.09.2026",
+      "vernissageTime": "18:00",
+      "exhibitionRange": "06.09.2026–12.09.2026",
+      "venueName": "CANK Neukölln",
+      "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ]
+    },
+    "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/end-card/last-scene-frame.png",
+    "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/merged/1785929841774-end-card.mp4"
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "Opening: the Betriebsform Sign",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929908079-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929908079-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let From the immutable Kaufhaus plate, hold exact viewpoint and framing take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around From the immutable Kaufhaus plate, hold exact viewpoint. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the drop, dolly slightly inward from the storefront edge to reveal.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Escalation: the Map Unfurls",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929931302-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929931302-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Two-second clip from the provided Kaufhaus viewpoint: placards rattle, ladder take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Two-second clip from the provided Kaufhaus viewpoint: placards rattle,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the poster slaps down, drop the camera low to the floor.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Cascade: Sortimentstiefe Spills",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929951763-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929951763-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Three-second motion from the exact Kaufhaus plate: the monster dislodges take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Three-second motion from the exact Kaufhaus plate: the monster. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the cascade, lift to a slow overhead crane pan that tracks.",
+      "useSingleImage": true
+    },
+    {
+      "index": 3,
+      "title": "Obstruction: Reuterkiez Banner",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929974435-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929974435-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Two-second clip in the exact photographed Kaufhaus frame: the fabric take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Two-second clip in the exact photographed Kaufhaus frame: the. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "Rupture: Sortimentsbreite Breaks Out",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929995083-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785929995083-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Five-second motion from the immutable Kaufhaus plate: the elevator's emergency take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Five-second motion from the immutable Kaufhaus plate: the elevator's. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the gondola begins to spin, lock a rotational follow that matches.",
+      "useSingleImage": true
+    },
+    {
+      "index": 5,
+      "title": "Consequence: Kreuzkölln Mosaic",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785930016053-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/738-glas-kaufhaus-compact-pipeline-iteration-008/parts/1785930016053-runware-image-video.mp4",
+      "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let Two-second clip retaining the supplied Kaufhaus plate: stickers and goods take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around Two-second clip retaining the supplied Kaufhaus plate: stickers. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the seed sprouts, perform a slow pull-back from the tile mosaic.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-05T11:40:17.462Z"
+}

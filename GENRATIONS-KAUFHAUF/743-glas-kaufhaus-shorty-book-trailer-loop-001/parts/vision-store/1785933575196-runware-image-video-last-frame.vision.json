@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/743-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785933575196-runware-image-video-last-frame.png",
+  "outputText": "Subject: Close-up of a green, humanoid creature with bark-like skin, large eyes, and an aggressive facial expression showing sharp teeth. Setting: Indoor industrial or office space with visible ceiling pipes, fluorescent lights, and large windows in the background. Framing: Tight close-up focusing on the creature's face and upper torso, centered in the frame. Lighting: Even, cool artificial lighting from above and front, casting minimal shadows and highlighting texture on the creature's skin. Visible transformation: The creature's skin has a cracked, bark-like texture with pronounced ridges and spikes on the head; eyes are wide open with intense focus. Continuity: Maintain the creature’s forward-leaning aggressive pose, detailed bark-textured skin, and the industrial indoor environment with overhead lighting and visible ceiling infrastructure.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Favor a grounded mobile-device look: handheld, candid, lightly imperfect, and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:39:39.232Z"
+}

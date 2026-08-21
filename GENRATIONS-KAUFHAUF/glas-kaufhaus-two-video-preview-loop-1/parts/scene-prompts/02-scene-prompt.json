@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "Continue directly from the actual final frame of scene 1; no paid repair in this cheap test.",
+  "videoMode": "singleImage",
+  "prompt": "Green plant-like monster with glowing eyes, tendrils as metallic pistons, surrounded by industrial cogs and conveyor belts morphing from lamp shards, harsh fluorescent green and grey lighting, textured steel and concrete, medium shot, symmetrical composition.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850841132-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850869089-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850869089-runware-image-video.mp4",
+  "timestamp": "2026-08-04T13:41:10.034Z"
+}

@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/merged/1785936910076-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/merged/1785936910076-collision-cut.mp4",
+  "mireloPrompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5-second steady push: begin with a slow high shot down take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5-second steady push: begin with a slow high shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the drawers finish rising, dolly slowly in toward the jammed drawer.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second low dolly: follow the crate as it disgorges pale take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second low dolly: follow the crate as it disgorges. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3-second sequence: start medium-wide on the service counter as canisters take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3-second sequence: start medium-wide on the service counter as. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the sculpture snaps the cabinet, cut to a tight still push.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second handheld shot: follow the shoppers as they converge, one take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second handheld shot: follow the shoppers as they converge,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Handheld move to shoulder level that tracks a shopper's hand as it.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5-second sequence: begin handheld as alarms stutter and sprinklers burst; take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5-second sequence: begin handheld as alarms stutter and sprinklers. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the carts tumble, handheld crane down to ground level to frame.\n\nStart from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second mechanical pan: watch the automated checkout conveyors draw in take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second mechanical pan: watch the automated checkout conveyors draw. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the conveyors finish stacking, dolly in to a tight overhead on.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/merged/1785936910076-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/merged/1785936910076-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Inventory Grid",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785936953830-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785936953830-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5-second steady push: begin with a slow high shot down take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5-second steady push: begin with a slow high shot. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the drawers finish rising, dolly slowly in toward the jammed drawer.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Chilled Order",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785936977773-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785936977773-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second low dolly: follow the crate as it disgorges pale take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second low dolly: follow the crate as it disgorges. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Safety Labels Pop",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937014299-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937014299-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 3-second sequence: start medium-wide on the service counter as canisters take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 3-second sequence: start medium-wide on the service counter as. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the sculpture snaps the cabinet, cut to a tight still push.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Aisle of Shoppers",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937038129-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937038129-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second handheld shot: follow the shoppers as they converge, one take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second handheld shot: follow the shoppers as they converge,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Handheld move to shoulder level that tracks a shopper's hand as it.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Rupture at Midday",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937086972-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937086972-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 5-second sequence: begin handheld as alarms stutter and sprinklers burst; take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 5-second sequence: begin handheld as alarms stutter and sprinklers. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the carts tumble, handheld crane down to ground level to frame.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Commerce Reconfigures",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937108066-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/parts/1785937108066-runware-image-video.mp4",
+        "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2-second mechanical pan: watch the automated checkout conveyors draw in take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2-second mechanical pan: watch the automated checkout conveyors draw. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the conveyors finish stacking, dolly in to a tight overhead on.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/750-two-iteration-scene-focus-trailers/1785936910076-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T13:38:29.670Z"
+}

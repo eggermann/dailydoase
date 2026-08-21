@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Kunsthalle Morphing",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "newImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone transformed into exhibition space.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let escalation: intensify the inherited transformation take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream, and let a. Build the mood around escalation: intensify the inherited transformation, while The monster’s body is a complex fusion of stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876593536-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876593536-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:49:54.930Z"
+}

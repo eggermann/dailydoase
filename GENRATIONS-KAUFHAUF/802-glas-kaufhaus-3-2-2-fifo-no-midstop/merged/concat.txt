@@ -1,0 +1,3 @@
+file '/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/802-glas-kaufhaus-3-2-2-fifo-no-midstop/parts/1787264557339-runware-image-video.mp4'
+file '/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/802-glas-kaufhaus-3-2-2-fifo-no-midstop/parts/1787264643312-runware-image-video.mp4'
+file '/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/802-glas-kaufhaus-3-2-2-fifo-no-midstop/parts/1787264727296-runware-image-video.mp4'

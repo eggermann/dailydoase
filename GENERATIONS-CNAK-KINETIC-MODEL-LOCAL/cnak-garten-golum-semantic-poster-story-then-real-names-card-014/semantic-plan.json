@@ -1,0 +1,45 @@
+{
+  "configuredWords": [
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ],
+    [
+      "Art exhibition",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticCue": "Department store → ISBN (identifier); International Association of Department Stores Under One",
+  "physicalRule": "The yellow light pulses gradually faster when 'collision' occurs, affecting nearby elements' behavior.",
+  "beats": [
+    "The yellow light flickers softly, casting gentle shadows on the face and flowers, creating a calm atmosphere.",
+    "Suddenly, the yellow light pulses rapidly, causing the flowers to sway violently and the leaf ears to twitch nervously, as if reacting to an unseen tension.",
+    "The roots subtly lift from the ground, the face's expression shifts uneasily, and the lamps dim unevenly, conveying growing unrest and unresolved conflict."
+  ],
+  "providerPrompt": "16:9 landscape. Animate the supplied hand-drawn Garten-Golum poster illustration below its blank top margin. Keep its portrait composition fixed and sharp in the neutral black matte. Semantic physical rule: The yellow light pulses gradually faster when 'collision' occurs, affecting nearby elements' behavior. Four-second progression: first The yellow light flickers softly, casting gentle shadows on the face and flowers, creating a calm atmosphere.; then Suddenly, the yellow light pulses rapidly, causing the flowers to sway violently and the leaf ears to twitch nervously, as if reacting to an unseen tension.; finally The roots subtly lift from the ground, the face's expression shifts uneasily, and the lamps dim unevenly, conveying growing unrest and unresolved conflict.. Dirty poetic botanical horror. Motion is visible and causal, but small enough to remain a printed-poster miracle: lamp beams, flowers, leaf ears, eyes, and root lines may move. Preserve exact colored-pencil marks, face, leaf ears, green body, roots, flowers, lamps, white paper and black matte. Static camera, one continuous shot. No readable text, letters, sign, barcode, new character, new object, new room, cutaway, zoom, pan, 3D, collage, glossy repaint, or transformation.",
+  "openingPoster": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/9-16-Insta-Reel.jpg",
+  "namesCard": "/Users/eggermann/Projekte/dailydoase/scripts/cnak/assets/9-16-Insta2-Reel.jpg"
+}

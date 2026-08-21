@@ -1,0 +1,12 @@
+{
+  "configuredWords": [
+    ["Department store", "en"],
+    ["Horror", "en"],
+    ["Art exhibition", "en"]
+  ],
+  "selectedWord": ["Horror", "en"],
+  "semanticCue": "Horror → Erotic horror; Erotic horror",
+  "endCardFlow": "actual final Golem frame → text-free FLUX I2I card → exact original names card",
+  "durationSeconds": 10.25,
+  "note": "The source card holds for the final 0.75 seconds to preserve exact artist names."
+}

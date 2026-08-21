@@ -1,0 +1,86 @@
+[
+  {
+    "sceneIndex": 0,
+    "anchor": "1983",
+    "collision": "NATO-Doppelbeschluss",
+    "valid": false,
+    "errors": [
+      "collision is not explained by its declared physical interpretation"
+    ],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": false,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 1,
+    "anchor": "NATO-Doppelbeschluss",
+    "collision": "Betriebsform",
+    "valid": false,
+    "errors": [
+      "collision is not explained by its declared physical interpretation"
+    ],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": false,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 2,
+    "anchor": "Betriebsform",
+    "collision": "Münchner Secession",
+    "valid": false,
+    "errors": [
+      "collision is not explained by its declared physical interpretation"
+    ],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": false,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 3,
+    "anchor": "Münchner Secession",
+    "collision": "St. Kitts und Nevis",
+    "valid": false,
+    "errors": [
+      "collision is not explained by its declared physical interpretation"
+    ],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": false,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 4,
+    "anchor": "St. Kitts und Nevis",
+    "collision": "Sortimentstiefe",
+    "valid": false,
+    "errors": [
+      "collision is not explained by its declared physical interpretation"
+    ],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": false,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  },
+  {
+    "sceneIndex": 5,
+    "anchor": "Sortimentstiefe",
+    "collision": "Gemälde",
+    "valid": false,
+    "errors": [
+      "tensionCause is unrelated to the semantic consequence"
+    ],
+    "warnings": [],
+    "consequenceInheritanceValid": true,
+    "collisionPhysicalizationValid": true,
+    "clueDerivationValid": true,
+    "promptPropagationValid": true
+  }
+]

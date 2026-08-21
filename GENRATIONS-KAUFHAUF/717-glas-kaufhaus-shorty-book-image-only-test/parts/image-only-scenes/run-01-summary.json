@@ -1,0 +1,75 @@
+{
+  "mode": "image-only",
+  "runIndex": 1,
+  "generatedAt": "2026-08-04T09:57:34.179Z",
+  "requestName": "1785837384262",
+  "scenes": [
+    {
+      "runIndex": 1,
+      "sceneIndex": 1,
+      "title": "Opening Collision: 1983 Meets NATO-Doppelbeschluss",
+      "storyBeat": "The monster's presence triggers a violent shattering of the warehouse's lamps, embodying the conflict between 1983 and NATO-Doppelbeschluss.",
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "New dramatic act with a canonical reset of protagonist and architecture, establishing the initial semantic collision.",
+      "prompt": "Green plant-like monster with glowing eyes frozen mid-roar, its tendrils twisting violently as sharp, metallic shards of broken hanging lamps scatter in an old dark green industrial Kaufhaus warehouse, 1983 BRD, moody cold lighting with green and steel blue palette, rough textured walls, wide angle lens, centered composition, cinematic 1980s style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785837397632-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-01-scene-01.png"
+    },
+    {
+      "runIndex": 1,
+      "sceneIndex": 2,
+      "title": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+      "storyBeat": "The monster's organic form clashes with the emerging mechanical Betriebsform, intensifying the warehouse's transformation into a cold industrial machine.",
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "startFrameReason": "Continue previous transformation but restore room geometry and lighting for realism before animation.",
+      "prompt": "Green plant-like monster with glowing eyes, tendrils transforming into metallic pistons, surrounded by warped hanging lamp shards morphing into industrial cogs and conveyor belts inside the dark green industrial Kaufhaus warehouse, 1983 BRD, harsh fluorescent lighting with green and grey palette, textured steel and concrete surfaces, medium shot, symmetrical composition, 1980s industrial style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785837408329-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-01-scene-02.png"
+    },
+    {
+      "runIndex": 1,
+      "sceneIndex": 3,
+      "title": "Further Escalation: Betriebsform Meets Kunsthalle",
+      "storyBeat": "The warehouse shifts from cold industry to surreal art space, the monster embodying the collision of Betriebsform and Kunsthalle aesthetics.",
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "startFrameReason": "Continue transformation while restoring lighting and room realism before animation.",
+      "prompt": "Green plant-like monster with glowing eyes reflecting gallery spotlights, tendrils curling into delicate sculptural forms, surrounded by warped industrial machinery transforming into abstract Kunsthalle art installations inside the old Kaufhaus warehouse, 1983 BRD, soft spotlighting with green and warm amber palette, textured concrete and steel, wide angle lens, asymmetrical composition, 1980s avant-garde style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785837418266-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-01-scene-03.png"
+    },
+    {
+      "runIndex": 1,
+      "sceneIndex": 4,
+      "title": "Intensification: Kunsthalle Collides with St. Kitts und Nevis",
+      "storyBeat": "The collision of Kunsthalle and St. Kitts und Nevis transforms the warehouse into a surreal tropical paradise, altering the monster's aura and surroundings.",
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "startFrameReason": "Maintain continuity of tropical transformation while restoring room realism before animation.",
+      "prompt": "Green plant-like monster with glowing eyes pulsing warm island hues, tendrils blending into tropical foliage, surrounded by shimmering Caribbean light patterns and dissolving concrete walls turning into palm fronds inside the old Kaufhaus warehouse, 1983 BRD, warm dappled sunlight with green and turquoise palette, textured organic and concrete surfaces, wide shot, dynamic composition, 1980s surreal cinematic style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785837430137-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-01-scene-04.png"
+    },
+    {
+      "runIndex": 1,
+      "sceneIndex": 5,
+      "title": "Rupture: St. Kitts und Nevis Meets Sortimentstiefe",
+      "storyBeat": "The collision of tropical paradise and overwhelming assortment destabilizes the warehouse, physically crushing the monster and space itself.",
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "startFrameReason": "Continue previous chaotic transformation while restoring realism and room continuity before animation.",
+      "prompt": "Green plant-like monster with glowing eyes struggling as tendrils fragment under crushing dense layers of assorted goods, tropical foliage and ocean light fractured into chaotic stacks inside the collapsing old Kaufhaus warehouse, 1983 BRD, dramatic harsh lighting with green, brown and muted yellow palette, rough textured debris and merchandise, chaotic composition, wide angle lens, 1980s industrial surrealism.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785837440404-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-01-scene-05.png"
+    },
+    {
+      "runIndex": 1,
+      "sceneIndex": 6,
+      "title": "Consequence: Sortimentstiefe Resolves into 1955",
+      "storyBeat": "The final collision resolves the accumulated chaos into a nostalgic calm, blending the monster into a restored past environment.",
+      "startFrameStrategy": "rawLastFrame",
+      "startFrameReason": "Final scene resolves accumulated residue with no further transformation, preserving final semantic consequence.",
+      "prompt": "Green plant-like monster with steady glowing eyes, tendrils gently retracting, surrounded by a calm vintage 1955 Kaufhaus warehouse interior with soft flickering hanging lamps, muted pastel palette with greens and browns, textured aged wood and concrete, medium shot, balanced composition, 1980s BRD television style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785837453664-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-01-scene-06.png"
+    }
+  ],
+  "timestamp": "2026-08-04T09:57:34.179Z"
+}

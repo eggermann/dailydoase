@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Barcode Pulse",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from Central green plant-like monster with a humanoid face, large and let the image break away from plain source realism; keep Central green. Let 3s handheld: a DOI-style label '978-0-07-029325-0.LSD' is scanned; checkout chirps, take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around 3s handheld: a DOI-style label '978-0-07-029325-0.LSD' is scanned; checkout, while The monster’s face is textured like cracked bark stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932880654-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932923369-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932923369-runware-image-video.mp4",
+  "timestamp": "2026-08-05T12:28:44.212Z"
+}

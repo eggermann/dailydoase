@@ -1,0 +1,97 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Horror",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Space horror",
+      "streamLabel": "Horror",
+      "description": "Space horror"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Space horror",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Sculpture",
+      "streamLabel": "Art exhibition",
+      "description": "exhibition is traditionally the space in which art objects or"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Sculpture",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "ISSN (identifier)",
+      "streamLabel": "Playground",
+      "description": "ISSN (identifier)"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 3,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "ISSN (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Retail",
+      "streamLabel": "Department store",
+      "description": "establishment offering a wide range of under way in London (with Whiteleys), in Paris (Le Bon"
+    },
+    "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 4,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Retail",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Folk horror",
+      "streamLabel": "Horror",
+      "description": "Folk horror"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

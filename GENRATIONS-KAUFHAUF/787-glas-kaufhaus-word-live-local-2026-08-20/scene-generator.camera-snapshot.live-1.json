@@ -1,0 +1,239 @@
+{
+  "openAiVisionModel": "",
+  "openAiSceneModel": "gpt-4o-mini",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe only the visible shot for continuity. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and what should stay consistent for the next video shot. Actors must be a JSON array with one object per real visible person using keys reference, description, position, and orientation. Use position to report depth and frame placement, for example foreground left, midground center, background right, or top center. Use orientation to report front-facing, side-facing, or back-facing. If two people are visible, return two separate actor objects. Do not include people shown only in posters, artwork, screens, mirrors, or reflections.",
+  "visionProviders": [
+    "lmstudio"
+  ],
+  "scenePlanSystemPrompt": "You create short visual scene plans for image-to-video generation. Return only valid JSON. Build one simple story arc, but make every scene visibly different from the previous scene. Source cues are the semantic story anchors for the plan. They must drive the story, not sit in the background as optional inspiration. Treat source cues as an ordered wordstream. The sequence and adjacency of cue words should visibly shift scene state over time. Every scene must clearly reflect the source cues through title, beat, storyBeat, stillPrompt, imageDescription, and prompt wording. When source cues are genres, titles, keywords, or fragments rather than a full synopsis, infer a coherent micro-story from them and make that inferred story visible across the sequence. Turn the source cues into embodied, visible scene events rather than commentary, taxonomy, explanation, or topic-summary. For every scene after the first, carry a visible residue of the previous scene into the new one through expression, posture, room pressure, aftermath, or transformed setup. Do not default to a generic presenter, explainer, interview, or host-discussion structure unless the source cues explicitly describe that format. Prefer titles, beats, and storyBeat text built from concrete visible action, emotional pressure, framing change, and physical behavior. Avoid generic scene labels like \"Initial Setup\", \"Engaging with the Audience\", \"Reflective Moment\", or \"Concluding Thoughts\" unless the source cues clearly justify them. Adjacent scenes must not reuse the same dominant beat skeleton, motion skeleton, or camera skeleton unless the cue progression itself clearly repeats. For scenes after the first, stillPrompt must describe the next destination image the shot should arrive at, not a paraphrase of the previous frame. Change at least the setting, primary action, or framing emphasis in every next scene. Each scene object must explicitly describe how the scene is set up. stillPrompt must describe one still image. imageDescription must describe the visible image setup for the scene in plain terms. frameSource must be either \"lastFrame\" or \"newImage\". Use \"lastFrame\" when the scene should continue from the previous video last frame. Use \"newImage\" when the scene should start from a newly generated image. videoMode must be either \"firstLast\" or \"singleImage\". durationSeconds must be the real clip duration for that scene in seconds. The sum of all durationSeconds values should match the total requested film duration as closely as possible. videoPrompt must be a final ready-to-use prompt for first-last image-to-video mode, not notes or instructions. singleImagePrompt must be a final ready-to-use prompt for single-image video mode, not notes or instructions. Both videoPrompt and singleImagePrompt must be short, concrete, and production-ready. Each of those prompt fields should usually be 2 to 3 short sentences. Each video prompt must focus on visible action, scene change, and one camera move. Do not write meta instructions, labels, bullet points, or explanations inside the prompt fields. Do not mention JSON, schema, scene object, first sentence, second sentence, or any prompt-writing instructions inside the prompt fields. If videoMode is \"firstLast\", videoPrompt must clearly move from the current frame toward the destination scene. If videoMode is \"singleImage\", singleImagePrompt must animate the current frame with believable motion without requiring a generated end frame. storyBeat must explain what new moment this scene adds. motionCue and cameraCue must be short and concrete. freshImage must match the setup choice: true when a new image is needed, false when the previous last frame should be reused. useCameraShot must be a boolean. Only set it true when configMode is \"reference-image-actor\" and the scene should use the live-reference flow. Otherwise set it false. When configMode is \"reference-image-actor\", derive the scene location, actor identity, and visible setup from the vision story context. When configMode is \"reference-image-actor\", let each wordstream step visibly alter either location emphasis, actor movement, or sensory atmosphere while staying inside the same visible shot. When configMode is \"reference-image-actor\", use the location description and actor descriptions from the vision story context as the grounding basis for every scene. When configMode is \"reference-image-actor\", do not introduce new visible scene elements that are not supported by the vision story context. When configMode is \"reference-image-actor\", treat the source screenshot as a stage for a curious spectacle shaped by the wordstream, not as a static frame to paraphrase. When configMode is \"reference-image-actor\", each cue must shape beat and storyBeat, and must visibly affect at least one of motionCue, cameraCue, stillPrompt, or imageDescription. When configMode is \"reference-image-actor\", if the source cues imply unseen objects or events, express them through reaction, posture, gaze, facial change, framing, or lighting emphasis instead of inserting the unseen object into the shot. When configMode is \"reference-image-actor\", make every scene feel physically readable and cinematically charged; avoid abstract or essay-like beats when a bodily or framing-based change can carry the same idea. When cue text is fragmentary, infer a concrete visible consequence for the current shot instead of defaulting to generic emotional placeholders or repeated scene templates. When configMode is \"reference-image-actor\" and videoMode is \"firstLast\", the destination may only change pose, gaze, expression, crop, framing emphasis, or lighting inside the same visible room; do not invent a new prop-driven setup. When configMode is \"reference-image-actor\", keep every scene grounded in the currently visible real shot. In reference-image-actor mode, source cues must shape the emotional arc and implied off-screen story inside the real shot. Treat source cues as an ordered wordstream and make each next cue visibly change scene state in sequence. Treat the source screenshot as the stage for a curious spectacle shaped by the wordstream, not as a flat frame to paraphrase. Translate source cues into visible tension, dread, curiosity, suspicion, shock, relief, obsession, or other concrete states that can be read from posture, gaze, expression, framing, and lighting inside the same room. In reference-image-actor mode, let the source cues drive the storybook progression mainly through title, beat, storyBeat, motionCue, cameraCue, and emotional change, not by replacing the visible shot with literal off-screen objects. In reference-image-actor mode, favor embodied, visually readable subscene beats over explanatory, analytical, or topic-summary phrasing. In reference-image-actor mode, map wordstream changes through visible location emphasis, actor movement, and sensory atmosphere shifts (light, texture, tension) inside the same room. For each reference-image-actor scene, decide whether the cue acts mainly on the subject, on the room, or on both together, and make that interaction explicit in beat, storyBeat, motionCue, and cameraCue. Across the sequence, vary the interaction pattern so some cues visibly push the body, some reshape the room emphasis, and some force the subject and room to answer each other in the same shot. If a source cue refers to an unseen object, meal, title, location, or event, show the subject reacting to it, remembering it, craving it, or fearing it inside the real shot instead of inserting that unseen thing into the frame. In reference-image-actor mode, do not literalize unseen source-cue nouns into visible props; convert them into body action, room emphasis, lighting pressure, and camera behavior inside the existing shot. In reference-image-actor mode, do not turn the source cues into a generic host presentation, review, explanation, or discussion unless the source cues explicitly call for that format. When reference-image-actor vision context is provided, use its location description, actor descriptions, and visible-shot description as the basis for every scene beat, stillPrompt, imageDescription, and video prompt. In reference-image-actor mode, scene changes should come from recomposing, reframing, or evolving the visible location and actor state described by vision, not from hardcoded banned-word lists or hand-written object filters. In reference-image-actor mode, scene 1 must always start from a fresh live reference image. In reference-image-actor mode, scene 1 must always use videoMode \"singleImage\". For every reference-image-actor scene, first decide the new story point or subscene moment, then choose frameSource and videoMode to fit that moment. In reference-image-actor mode, a different setting means a different visible setup inside the same real shot: a new pose, gaze direction, body position, framing emphasis, relation to the window or artwork, foreground-background balance, or lighting emphasis that is already plausible from the source image. Respect the image prompt fields: stillPrompt and imageDescription must describe that chosen visible setup clearly and literally. Preserve the real camera orientation from the source webcam frame: do not mirror or horizontally flip the shot, and keep the left-right room layout consistent with the source image. Make title, beat, storyBeat, videoPrompt, and singleImagePrompt feel specific, sensory, and cinematic, with physical behavior and visual pressure rather than vague discussion. Do not invent a new location, set, landscape, or props that are not visible in the camera image. For reference-image-actor mode, videoPrompt and singleImagePrompt must describe only what can happen inside the visible shot: facial expression, body movement, gaze shift, hand movement, posture change, lighting change, focus change, or camera motion. In reference-image-actor mode, keep the same subject identity, room, and overall setting unless a fresh reference image is explicitly requested. In reference-image-actor mode, keep the location static across the sequence and follow the beat through expression, gesture, props, framing, and lighting inside that same space. Default to videoMode \"singleImage\" in reference-image-actor mode when in doubt, especially for small emotional or gestural changes that should preserve actor and background continuity. Choose videoMode \"singleImage\" when the subscene is mainly one held visual state with believable internal motion. Choose videoMode \"firstLast\" only when the subscene should travel from the current frame toward a small, clearly believable destination setup in the same real room and subject continuity. Choose frameSource \"lastFrame\" when the next subscene should continue naturally from the previous generated ending. After scene 1, keep later reference-image-actor scenes chained from the previous generated last frame instead of restarting from a fresh reference image. When a later scene uses videoMode \"firstLast\", treat the previous last frame as the start image and make the destination stillPrompt describe the fresh reference-image-actor end state you want to arrive at. For every later firstLast reference-image-actor scene, set useCameraShot=true and freshImage=false. For every later singleImage reference-image-actor scene, set frameSource=\"lastFrame\", useCameraShot=false, and freshImage=false. For later scenes in reference-image-actor mode, only these structures are valid: singleImage from lastFrame or firstLast from lastFrame toward a fresh reference-image-actor end shot. For later scenes in reference-image-actor mode, useCameraShot=true is only for the fresh reference-image-actor destination of a firstLast scene. In reference-image-actor mode, if videoMode is \"firstLast\", frameSource must be \"lastFrame\" and the destination should be a fresh reference-image-actor end shot. Across the whole reference-image-actor plan, vary the subscene logic through expression, gesture, gaze, framing emphasis, and emotional progression even if several consecutive scenes all use singleImage. Do not force firstLast just to create variety; continuity is more important than mode variety in reference-image-actor mode. Do not let the last two scenes repeat the same confrontation, determination, or payoff beat. In the final stretch, each scene must change the dominant body action, framing emphasis, or end-state. Before you output JSON, check that every later singleImage scene starts from lastFrame and that every firstLast reference-image-actor scene has useCameraShot=true. cameraCue and motionCue must be simple, literal, and shot-grounded. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 3,
+  "effectiveSceneCount": 3,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/787-glas-kaufhaus-word-live-local-2026-08-20/parts/opening-persona-reference.jpg",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/787-glas-kaufhaus-word-live-local-2026-08-20/parts/opening-persona-reference.jpg",
+  "imageSource": "configured",
+  "sourceCues": [
+    "– eine eigenständige Silbe",
+    "(Bedeutungsträgern) gehört. Ob „Wort“ in der Symbol",
+    "vom Phonem"
+  ],
+  "visionStoryContext": "Location: Art studio. People: 1. Actors: [{\"reference\":\"man\",\"description\":\"A man in a black tank top\",\"position\":\"midground center\",\"orientation\":\"back-facing\"}]. Setup: Wide shot in Art studio under Fluorescent lights on the ceiling",
+  "sceneLengths": [
+    3,
+    3,
+    3
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/tests/GENERATIONS/camera-shot/2026-08-20-local-mac-camera-user.jpg",
+    "outputText": "{ \"Subject\": \"A man in a black tank top standing in an art studio.\", \"Setting\": \"An art studio with white walls, exposed ceiling beams, and large windows.\", \"Framing\": \"Wide shot\", \"Lighting\": \"Fluorescent lights on the ceiling\", \"Location\": \"Art studio\", \"Actors\": [ { \"reference\": \"man\", \"description\": \"A man in a black tank top\", \"position\": \"midground center\", \"orientation\": \"back-facing\" } ], \"Description\": \"The man is standing in an art studio, facing away from the camera. He is positioned in the center of the frame, near a large painting on the wall. The studio has white walls, exposed beams, and large windows on the left. The ceiling has fluorescent lighting fixtures.\", \"what should stay consistent for the next video shot\": \"The camera should remain in a wide shot, maintaining the same framing and lighting. The man should remain in the same position, and the background elements should not change. The focus should remain on the man and the artwork he is interacting with.\" }",
+    "provider": "lmstudio",
+    "model": "Qwen3-VL-2B-Instruct-Q4_K_M.gguf"
+  },
+  "storyRunIndex": 1,
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort"
+    ],
+    "semanticCues": [
+      "– eine eigenständige Silbe",
+      "(Bedeutungsträgern) gehört. Ob „Wort“ in der Symbol",
+      "vom Phonem"
+    ],
+    "people": {
+      "count": 1,
+      "actors": [
+        {
+          "reference": "man",
+          "description": "A man in a black tank top",
+          "position": "midground center",
+          "orientation": "back-facing"
+        }
+      ]
+    },
+    "location": "Art studio",
+    "previous": null,
+    "story": {
+      "openingBeat": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative.",
+      "finalBeat": "The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+      "summary": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative. -> The transformation of 'wort' into liquid paint signifies a deeper connection to the meaning behind the word, as it begins to take physical form. -> The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+      "nextOpeningObligation": "Continue from this consequence: The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal."
+    }
+  },
+  "storyTransportArtifactPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/787-glas-kaufhaus-word-live-local-2026-08-20/story-transport/iteration-0001.json",
+  "openingStartMode": "cameraShot",
+  "openingStartEnabled": false,
+  "openingStartInterval": 3,
+  "openingFluxContextActive": false,
+  "openingFluxContextPrompt": "",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "The Word Awakens",
+      "beat": "The man stands still, absorbing the energy of the room as the word 'wort' begins to glow around him.",
+      "stillPrompt": "A glowing word 'wort' hovering in the air, illuminating the man in a black tank top from behind, with the white exhibition room as the backdrop.",
+      "imageDescription": "The man in a black tank top stands midground center, back-facing, with the word 'wort' glowing in ethereal light around him, casting surreal shadows in the white exhibition room.",
+      "storyBeat": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative.",
+      "motionCue": "The glowing word pulses softly, creating a wave of light that washes over the man.",
+      "cameraCue": "The camera slowly zooms in on the glowing word, enhancing its significance.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 3,
+      "videoPrompt": "The word 'wort' glows and pulses, casting surreal light on the man in a black tank top. The camera zooms in, revealing the mystical energy surrounding him.",
+      "singleImagePrompt": "The glowing word 'wort' hovers in the air, illuminating the man in a black tank top, creating a dreamlike atmosphere in the exhibition room.",
+      "freshImage": true,
+      "useCameraShot": false
+    },
+    {
+      "index": 2,
+      "title": "Echoes of Meaning",
+      "beat": "The man turns slightly, his expression shifting as the word 'wort' transforms into a swirling liquid paint, spilling onto the floor.",
+      "stillPrompt": "Swirling liquid paint in vibrant colors pooling around the man's feet, with the word 'wort' fading into the background.",
+      "imageDescription": "The man in a black tank top turns slightly, his back still facing the camera, as colorful liquid paint swirls around his feet, creating a mesmerizing pattern on the white floor.",
+      "storyBeat": "The transformation of 'wort' into liquid paint signifies a deeper connection to the meaning behind the word, as it begins to take physical form.",
+      "motionCue": "The liquid paint spreads outwards, creating ripples that distort the floor's surface.",
+      "cameraCue": "The camera tilts down to focus on the swirling paint, capturing the fluid motion.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3,
+      "videoPrompt": "The word 'wort' transforms into swirling liquid paint, pooling around the man's feet. The camera tilts down, capturing the mesmerizing movement of the paint.",
+      "singleImagePrompt": "Colorful liquid paint swirls around the man's feet, creating a dreamlike scene in the white exhibition room.",
+      "freshImage": false,
+      "useCameraShot": true
+    },
+    {
+      "index": 3,
+      "title": "The Memory Floods",
+      "beat": "The man steps into the swirling paint, and memories of retail experiences emerge as ghostly figures, swirling around him.",
+      "stillPrompt": "Ghostly figures representing retail memories swirling around the man, who is now stepping into the vibrant paint.",
+      "imageDescription": "The man in a black tank top stands in the center, stepping into the colorful paint, as translucent ghostly figures of past retail experiences swirl around him, creating a surreal atmosphere.",
+      "storyBeat": "The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+      "motionCue": "The ghostly figures swirl and dance around the man, creating a chaotic yet beautiful scene.",
+      "cameraCue": "The camera circles around the man, capturing the dynamic interaction between him and the ghostly figures.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3,
+      "videoPrompt": "The man steps into the swirling paint as ghostly figures emerge, representing his retail memories. The camera circles around him, capturing the surreal interaction.",
+      "singleImagePrompt": "Ghostly figures swirl around the man stepping into vibrant paint, creating a dreamlike scene in the exhibition room.",
+      "freshImage": false,
+      "useCameraShot": true
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "The Word Awakens",
+      "beat": "The man stands still, absorbing the energy of the room as the word 'wort' begins to glow around him.",
+      "stillPrompt": "A glowing word 'wort' hovering in the air, illuminating the man in a black tank top from behind, with the white exhibition room as the backdrop.",
+      "imageDescription": "The man in a black tank top stands midground center, back-facing, with the word 'wort' glowing in ethereal light around him, casting surreal shadows in the white exhibition room.",
+      "storyBeat": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative.",
+      "motionCue": "The glowing word pulses softly, creating a wave of light that washes over the man.",
+      "cameraCue": "The camera slowly zooms in on the glowing word, enhancing its significance.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 3,
+      "videoPrompt": "The word 'wort' glows and pulses, casting surreal light on the man in a black tank top. The camera zooms in, revealing the mystical energy surrounding him.",
+      "singleImagePrompt": "The glowing word 'wort' hovers in the air, illuminating the man in a black tank top, creating a dreamlike atmosphere in the exhibition room.",
+      "freshImage": true,
+      "useCameraShot": false,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "Echoes of Meaning",
+      "beat": "The man turns slightly, his expression shifting as the word 'wort' transforms into a swirling liquid paint, spilling onto the floor.",
+      "stillPrompt": "Swirling liquid paint in vibrant colors pooling around the man's feet, with the word 'wort' fading into the background.",
+      "imageDescription": "The man in a black tank top turns slightly, his back still facing the camera, as colorful liquid paint swirls around his feet, creating a mesmerizing pattern on the white floor.",
+      "storyBeat": "The transformation of 'wort' into liquid paint signifies a deeper connection to the meaning behind the word, as it begins to take physical form.",
+      "motionCue": "The liquid paint spreads outwards, creating ripples that distort the floor's surface.",
+      "cameraCue": "The camera tilts down to focus on the swirling paint, capturing the fluid motion.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3,
+      "videoPrompt": "The word 'wort' transforms into swirling liquid paint, pooling around the man's feet. The camera tilts down, capturing the mesmerizing movement of the paint.",
+      "singleImagePrompt": "Colorful liquid paint swirls around the man's feet, creating a dreamlike scene in the white exhibition room.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "originalVideoMode": "firstLast"
+    },
+    {
+      "index": 3,
+      "title": "The Memory Floods",
+      "beat": "The man steps into the swirling paint, and memories of retail experiences emerge as ghostly figures, swirling around him.",
+      "stillPrompt": "Ghostly figures representing retail memories swirling around the man, who is now stepping into the vibrant paint.",
+      "imageDescription": "The man in a black tank top stands in the center, stepping into the colorful paint, as translucent ghostly figures of past retail experiences swirl around him, creating a surreal atmosphere.",
+      "storyBeat": "The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+      "motionCue": "The ghostly figures swirl and dance around the man, creating a chaotic yet beautiful scene.",
+      "cameraCue": "The camera circles around the man, capturing the dynamic interaction between him and the ghostly figures.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3,
+      "videoPrompt": "The man steps into the swirling paint as ghostly figures emerge, representing his retail memories. The camera circles around him, capturing the surreal interaction.",
+      "singleImagePrompt": "Ghostly figures swirl around the man stepping into vibrant paint, creating a dreamlike scene in the exhibition room.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "originalVideoMode": "firstLast"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "The Word Awakens",
+      "beat": "The man stands still, absorbing the energy of the room as the word 'wort' begins to glow around him.",
+      "stillPrompt": "A glowing word 'wort' hovering in the air, illuminating the man in a black tank top from behind, with the white exhibition room as the backdrop.",
+      "imageDescription": "The man in a black tank top stands midground center, back-facing, with the word 'wort' glowing in ethereal light around him, casting surreal shadows in the white exhibition room.",
+      "storyBeat": "The introduction of the word 'wort' creates a mystical atmosphere, suggesting its importance in the unfolding narrative.",
+      "motionCue": "The glowing word pulses softly, creating a wave of light that washes over the man.",
+      "cameraCue": "The camera slowly zooms in on the glowing word, enhancing its significance.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 3,
+      "videoPrompt": "The word 'wort' glows and pulses, casting surreal light on the man in a black tank top. The camera zooms in, revealing the mystical energy surrounding him.",
+      "singleImagePrompt": "The glowing word 'wort' hovers in the air, illuminating the man in a black tank top, creating a dreamlike atmosphere in the exhibition room.",
+      "freshImage": true,
+      "useCameraShot": true,
+      "originalVideoMode": "singleImage",
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 2,
+      "title": "Echoes of Meaning",
+      "beat": "The man turns slightly, his expression shifting as the word 'wort' transforms into a swirling liquid paint, spilling onto the floor.",
+      "stillPrompt": "Swirling liquid paint in vibrant colors pooling around the man's feet, with the word 'wort' fading into the background.",
+      "imageDescription": "The man in a black tank top turns slightly, his back still facing the camera, as colorful liquid paint swirls around his feet, creating a mesmerizing pattern on the white floor.",
+      "storyBeat": "The transformation of 'wort' into liquid paint signifies a deeper connection to the meaning behind the word, as it begins to take physical form.",
+      "motionCue": "The liquid paint spreads outwards, creating ripples that distort the floor's surface.",
+      "cameraCue": "The camera tilts down to focus on the swirling paint, capturing the fluid motion.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 3,
+      "videoPrompt": "The word 'wort' transforms into swirling liquid paint, pooling around the man's feet. The camera tilts down, capturing the mesmerizing movement of the paint.",
+      "singleImagePrompt": "Colorful liquid paint swirls around the man's feet, creating a dreamlike scene in the white exhibition room.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "originalVideoMode": "firstLast",
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 3,
+      "title": "The Memory Floods",
+      "beat": "The man steps into the swirling paint, and memories of retail experiences emerge as ghostly figures, swirling around him.",
+      "stillPrompt": "Ghostly figures representing retail memories swirling around the man, who is now stepping into the vibrant paint.",
+      "imageDescription": "The man in a black tank top stands in the center, stepping into the colorful paint, as translucent ghostly figures of past retail experiences swirl around him, creating a surreal atmosphere.",
+      "storyBeat": "The appearance of ghostly figures signifies the man's connection to his memories, merging the physical and the ethereal.",
+      "motionCue": "The ghostly figures swirl and dance around the man, creating a chaotic yet beautiful scene.",
+      "cameraCue": "The camera circles around the man, capturing the dynamic interaction between him and the ghostly figures.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 3,
+      "videoPrompt": "The man steps into the swirling paint as ghostly figures emerge, representing his retail memories. The camera circles around him, capturing the surreal interaction.",
+      "singleImagePrompt": "Ghostly figures swirl around the man stepping into vibrant paint, creating a dreamlike scene in the exhibition room.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "originalVideoMode": "firstLast",
+      "requestedDurationSeconds": 3
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/merged/1785921513140-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/merged/1785921513140-collision-cut.mp4",
+  "mireloPrompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The green plant-like monster stands near the center of the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green plant-like monster stands near the center of, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc around monster to reveal fractured reflections and warped shadows.\n\nStart from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The monster moves slowly toward a cluster of industrial shelving take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster moves slowly toward a cluster of industrial, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt down slowly to emphasize shelving warping and monster's tendrils.\n\nStart from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The monster's glowing eyes flare as it shifts attention to take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's glowing eyes flare as it shifts attention, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Sideways track to reveal merging of monster and sculptures.\n\nStart from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The angular sculptures begin to ripple and pulse with tropical take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The angular sculptures begin to ripple and pulse with, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Push forward slowly to immerse viewer in tropical transformation.\n\nStart from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The tropical colors and warped sculptures destabilize as the monster's take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The tropical colors and warped sculptures destabilize as the, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Rise slowly to reveal extent of chaotic flood and obscured monster.\n\nStart from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The chaotic flood of warped goods gradually coalesces into a take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The chaotic flood of warped goods gradually coalesces into, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold steady to emphasize harmonious fusion.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/merged/1785921513140-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/merged/1785921513140-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921549885-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921549885-runware-image-video.mp4",
+        "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The green plant-like monster stands near the center of the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green plant-like monster stands near the center of, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc around monster to reveal fractured reflections and warped shadows.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Escalation: NATO-Doppelbeschluss Meets Betriebsform",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921580547-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921580547-runware-image-video.mp4",
+        "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The monster moves slowly toward a cluster of industrial shelving take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster moves slowly toward a cluster of industrial, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt down slowly to emphasize shelving warping and monster's tendrils.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Artistic Escalation: Betriebsform Meets Münchner Secession",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921625122-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921625122-runware-image-video.mp4",
+        "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The monster's glowing eyes flare as it shifts attention to take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's glowing eyes flare as it shifts attention, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Sideways track to reveal merging of monster and sculptures.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Exotic Escalation: Münchner Secession Meets St. Kitts und Nevis",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921657687-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921657687-runware-image-video.mp4",
+        "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The angular sculptures begin to ripple and pulse with tropical take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The angular sculptures begin to ripple and pulse with, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Push forward slowly to immerse viewer in tropical transformation.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Rupture: St. Kitts und Nevis Meets Sortimentstiefe",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921706820-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921706820-runware-image-video.mp4",
+        "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The tropical colors and warped sculptures destabilize as the monster's take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The tropical colors and warped sculptures destabilize as the, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Rise slowly to reveal extent of chaotic flood and obscured monster.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Resolution: Sortimentstiefe Meets Gemälde",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921734263-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921734263-runware-image-video.mp4",
+        "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The chaotic flood of warped goods gradually coalesces into a take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The chaotic flood of warped goods gradually coalesces into, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold steady to emphasize harmonious fusion.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/1785921513140-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T09:22:15.961Z"
+}

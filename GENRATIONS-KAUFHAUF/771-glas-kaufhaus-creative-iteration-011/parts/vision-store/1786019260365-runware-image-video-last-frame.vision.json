@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/771-glas-kaufhaus-creative-iteration-011/parts/1786019260365-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty warehouse aisle with metal shelves filled with cardboard boxes, no people present. Setting: Industrial storage area with polished concrete floor, overhead pipes, and emergency exit signs. Framing: Central vanishing point perspective down the aisle, symmetrical shelving on both sides, elevator doors on left foreground. Lighting: Even, diffuse overhead fluorescent lighting casting soft reflections on the shiny floor, light source from ceiling. Visible transformation: Clean, orderly environment with no visible movement or change; floor shows a faint curved path or trail. Continuity: Maintain exact aisle layout, shelving arrangement, box placement, elevator position, and lighting conditions for seamless transition to Route Settles scene.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T12:27:45.720Z"
+}

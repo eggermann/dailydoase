@@ -1,0 +1,116 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Department store",
+      "description": "International Association of Department Stores Under One"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "ISBN (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Doi (identifier)",
+      "streamLabel": "Landscape",
+      "description": "and literature\" [2] Plan & Execute landscape"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Doi (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Art gallery",
+      "streamLabel": "Art exhibition",
+      "description": "or at some place the principal business of which is not the art halls, art clubs or private"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 3,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Art gallery",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Animals",
+      "description": "Diversity Web – University of Michigan's database of"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 4,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "ISBN (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Shopping center",
+      "streamLabel": "Department store",
+      "description": "Shopping center"
+    },
+    "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 5,
+    "sceneCount": 6,
+    "anchor": {
+      "term": "Shopping center",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "William Wordsworth",
+      "streamLabel": "Landscape",
+      "description": "William Wordsworth"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

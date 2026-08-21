@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening Collision: 1983 Meets NATO-Doppelbeschluss",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "sceneContextImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "Create one fresh, semantic Kaufhaus start image for the test.",
+  "videoMode": "singleImage",
+  "prompt": "Green plant-like monster mid-roar with twisting tendrils, shards of broken hanging lamps spiraling outward in old Kaufhaus warehouse, cold green and steel blue lighting, rough textured walls, wide angle lens, cinematic 1980s style.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850804482-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850841132-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-two-video-preview-loop-1/parts/1785850841132-runware-image-video.mp4",
+  "timestamp": "2026-08-04T13:40:42.644Z"
+}

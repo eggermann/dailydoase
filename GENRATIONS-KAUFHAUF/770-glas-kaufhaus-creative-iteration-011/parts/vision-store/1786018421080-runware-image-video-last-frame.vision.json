@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/770-glas-kaufhaus-creative-iteration-011/parts/1786018421080-runware-image-video-last-frame.png",
+  "outputText": "Subject: Central swirling dust vortex rising from the floor, no human or animal presence. Setting: Large, empty industrial warehouse with exposed ceiling pipes and fluorescent lights, reflective pillar on left, exit sign overhead. Framing: Wide shot centered on dust vortex, symmetrical layout with pillar slightly left, empty shelving unit and bucket in mid-ground. Lighting: Even, cool fluorescent overhead lighting casting soft shadows, light source from ceiling fixtures above and slightly left. Visible transformation: Dust vortex emerging from floor, indicating active disturbance or energy concentration at center. Continuity: Maintain vortex position and scale, empty warehouse environment, consistent lighting and spatial arrangement for seamless transition into deeper operational focus.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T12:13:45.643Z"
+}

@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Further Escalation: Betriebsform Meets Kunsthalle",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2.4,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "Maintain continuity of morphing space while restoring lighting and texture fidelity.",
+  "videoMode": "singleImage",
+  "prompt": "Starting with the green monster's tendrils sprouting glowing flower heads amid rippling walls and abstract projections in a morphing Kaufhaus-Kunsthalle interior; temporal transformation shows walls flowing with shapes and metal bending; subject motion is tendril blooming; environmental motion is wall rippling and metal bending; atmosphere surreal and charged; lighting warm ambient; composition continuity maintained; camera slowly zooms in.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853021303-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853049331-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853049331-runware-image-video.mp4",
+  "timestamp": "2026-08-04T14:17:29.980Z"
+}

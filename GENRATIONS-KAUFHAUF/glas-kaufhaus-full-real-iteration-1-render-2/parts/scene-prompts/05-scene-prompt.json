@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Rupture: St. Kitts und Nevis Meets Sortimentstiefe",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2.8,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "Maintain continuity of chaotic multiplication while restoring lighting and texture fidelity.",
+  "videoMode": "singleImage",
+  "prompt": "Starting with the green monster entangling infinite multiplying product shelves pulsing organically in a surreal Kaufhaus gallery-island hybrid; temporal transformation shows shelves multiplying and pulsing; subject motion is tendril twisting; environmental motion is shelf pulsing; atmosphere chaotic and overwhelming; lighting warm ambient with flickers; composition continuity maintained; camera shakes rapidly handheld style.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853075783-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853117435-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853117435-runware-image-video.mp4",
+  "timestamp": "2026-08-04T14:18:38.176Z"
+}

@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Projection of Berlin grids",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green monster as the protagonist, with smaller plant-like in Large warehouse space characterized by industrial textures and let the image break. Let Animate 2s: projector latch drops, cracked lens flips the Berlin-Neukölln take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Animate 2s: projector latch drops, cracked lens flips the, while A fusion of organic and mechanical design featuring stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929394937-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929421944-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/733-glas-kaufhaus-compact-pipeline-iteration-002/parts/1785929421944-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:30:22.789Z"
+}

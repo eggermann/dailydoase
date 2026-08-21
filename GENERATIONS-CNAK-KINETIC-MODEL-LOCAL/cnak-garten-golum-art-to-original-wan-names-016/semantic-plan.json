@@ -1,0 +1,47 @@
+{
+  "configuredWords": [
+    [
+      "Art exhibition",
+      "en"
+    ],
+    [
+      "Department store",
+      "en"
+    ],
+    [
+      "Horror",
+      "en"
+    ]
+  ],
+  "cue": {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Art exhibition",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Art gallery",
+      "streamLabel": "Art exhibition",
+      "description": "or at some place the principal business of which is not the art halls, art clubs or private"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  "semanticCue": "Art exhibition → Art gallery; or at some place the principal business of which is not the art halls, art clubs or private",
+  "seedanceModel": "bytedance:seedance@2.0",
+  "arrival": "The eyes of the botanical Golem subtly brighten, transforming from mere shadows into glowing lamps that cast gentle light upon the surrounding leaves and flowers, revealing the intricate details of the hand-drawn textures.",
+  "continuation": "Simultaneously, delicate roots beneath the Golem shift and intertwine with the paper texture, causing the flowers to bloom more vividly and the leaves to unfurl, enhancing the Golem's form and making its silhouette increasingly distinct and recognizable.",
+  "artStart": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-wan-names-016/art-i2i-start-16x9.png",
+  "originalTarget": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-wan-names-016/original-golum-target-16x9.png",
+  "titleLayer": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-wan-names-016/exact-original-title-layer.png",
+  "namesStage": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-wan-names-016/exact-original-names-panel-16x9.png",
+  "arrivalPrompt": "A single four-second 16:9 illustrated transformation. Begin in supplied painterly image-to-image artwork and arrive precisely at supplied original Garten-Golum drawing. The eyes of the botanical Golem subtly brighten, transforming from mere shadows into glowing lamps that cast gentle light upon the surrounding leaves and flowers, revealing the intricate details of the hand-drawn textures. Original Golem identity becomes clearer while paper light, flowers and roots move causally. Preserve colored-pencil and ink marks, hand pressure, rough paper, flat illustrated color and static camera. No text, letters, names, signs, new character, room, photorealism, 3D, glossy repaint, crop change, pan, zoom, cutaway or montage.",
+  "continuationPrompt": "A single four-second 16:9 continuation from this exact supplied original Garten-Golum drawing. Keep its face, leaf ears, flower lamps and roots recognisable from first to last frame. Simultaneously, delicate roots beneath the Golem shift and intertwine with the paper texture, causing the flowers to bloom more vividly and the leaves to unfurl, enhancing the Golem's form and making its silhouette increasingly distinct and recognizable. Small painterly kinetic gestures only: blink, warm lamp shimmer, flower tilt and root ripple. Preserve exact colored-pencil/ink drawing, hand pressure, rough paper, flat composition and static camera. No text, letters, names, signs, replacement character, room, photorealism, 3D, glossy repaint, crop change, pan, zoom or cutaway.",
+  "finalVideo": "/Users/eggermann/Projekte/dailydoase/GENERATIONS-CNAK-KINETIC-MODEL-LOCAL/cnak-garten-golum-art-to-original-wan-names-016/art-to-original-golum-then-real-names-panel-16x9.mp4",
+  "sha256": "4c0b5e665747e559a6483f96a127174a5b05abfae9a1b7ddf056a08df1102f85"
+}

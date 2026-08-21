@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/762-glas-kaufhaus-creative-iteration-001/parts/1786016099574-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty elevator lobby with three closed elevator doors; no people present. Setting: Modern, industrial-style interior with exposed ceiling pipes and ducts, polished floor with circular design near elevators. Framing: Wide shot centered on middle elevator door, symmetrical composition with elevators aligned horizontally; reflections visible on floor and glass surfaces. Lighting: Even, diffused overhead lighting casting soft shadows; light source primarily from ceiling fixtures above and slightly to the left. Visible transformation: None; scene static with no movement or change in objects or lighting. Continuity: Maintain empty, clean elevator lobby with closed doors and consistent industrial aesthetic for smooth transition into Canonical Arrival scene.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T11:35:02.647Z"
+}

@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/742-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785932809726-runware-image-video-last-frame.png",
+  "outputText": "Subject: Grotesque creature with glowing orange eyes, snarling with mouth open, leaning forward with clawed hand extended over a table. Setting: Modern office space with exposed ceiling pipes and fluorescent lights, visible exit sign in background. Framing: Medium close-up, creature positioned right foreground, table with scattered papers and a binder clip in left foreground. Lighting: Overhead fluorescent lighting casting even light, slight shadows under creature's features, eyes emitting internal glow. Visible transformation: Creature’s skin is bark-like with thorny protrusions and vine-like tendrils, eyes glowing intensely, mouth open showing sharp teeth. Continuity: Maintain creature’s forward-leaning aggressive pose with claw extended over table, glowing eyes, and detailed thorny texture; preserve office setting with visible papers and binder clip on table.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Favor a grounded mobile-device look: handheld, candid, lightly imperfect, and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:26:53.895Z"
+}

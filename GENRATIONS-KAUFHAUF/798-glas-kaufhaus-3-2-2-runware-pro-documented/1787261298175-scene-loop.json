@@ -1,0 +1,63 @@
+{
+  "sceneCount": 3,
+  "totalTrackDuration": 7,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/merged/1787261298175-concat.mp4",
+  "mireloMode": "off",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort",
+      "terror",
+      "kaufhaus"
+    ],
+    "semanticCues": [
+      "zählt nahezu 1000 Sprichwörter mit „Wort“ auf, sieht man von Wanders Deutsches Sprichwörter-Lexikon Iwanhorod-Einsatzgruppen-Fotografie von mindestens 1500 m² bietet.Kaufhäuser weisen eine Verkaufsfläche",
+      "Wort (Begriffsklärung) terror „Schrecken“) bezeichnet das gezielte Auslösen Iwanhorod (Uman) ( Lebensmittel",
+      "Einheit. In der natürlichen Sprache besitzt das Latein terror „Schrecken“) bezeichnet das gezielte Auslösen von Latein die an den Waren vorbeiführen. Am stärksten verbreitet sind Kontaktstrecke"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "previous": null,
+    "story": {
+      "openingBeat": "The scene introduces the concept of 'Wort' as the words begin to take form, enveloping the man in a surreal experience.",
+      "finalBeat": "The room transforms into a chaotic spectacle, representing the flood of memories triggered by the earlier tension.",
+      "summary": "The scene introduces the concept of 'Wort' as the words begin to take form, enveloping the man in a surreal experience. -> The transformation of words into shadows introduces a feeling of terror, as the man reacts to the unseen threat. -> The room transforms into a chaotic spectacle, representing the flood of memories triggered by the earlier tension.",
+      "nextOpeningObligation": "Continue from this consequence: The room transforms into a chaotic spectacle, representing the flood of memories triggered by the earlier tension."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "The Whispering Words",
+      "durationSeconds": 3,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261317765-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261317765-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let A cascade of words begins to swirl around the man, take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A cascade of words begins to swirl around the, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "Terror of the Unseen",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261348748-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261348748-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The atmosphere shifts as the words morph into shadows, creating take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The atmosphere shifts as the words morph into shadows,, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "Flood of Memories",
+      "durationSeconds": 2,
+      "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261382410-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261382410-runware-image-video.mp4",
+      "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The shadows burst into a flood of vibrant memories, transforming take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The shadows burst into a flood of vibrant memories,, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-08-20T21:29:54.113Z"
+}

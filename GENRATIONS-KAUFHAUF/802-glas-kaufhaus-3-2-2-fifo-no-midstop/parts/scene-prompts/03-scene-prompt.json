@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "The Dance of Enlightenment",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Self-portrait of an individual\", and let the image break away from plain webcam realism; keep the same real person. Let The echoes coalesce into a vibrant dance of light take over the scene; the room warps, the light flickers, and the frame mutates like a. Build the mood around The echoes coalesce into a vibrant dance of light, while ```json { \"Subject\": \"Self-portrait of an individual\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/802-glas-kaufhaus-3-2-2-fifo-no-midstop/parts/1787264706072-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/802-glas-kaufhaus-3-2-2-fifo-no-midstop/parts/1787264727296-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/802-glas-kaufhaus-3-2-2-fifo-no-midstop/parts/1787264727296-runware-image-video.mp4",
+  "timestamp": "2026-08-20T22:25:28.144Z"
+}

@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "Flood of Memories",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Start from ```json { \"Subject\": \"Self-portrait of a man\", and let the image break away from plain webcam realism; keep the same real person. Let The shadows burst into a flood of vibrant memories, transforming take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The shadows burst into a flood of vibrant memories,, while ```json { \"Subject\": \"Self-portrait of a man\", \"Setting\": stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and hallucinatory.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261361674-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261382410-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/798-glas-kaufhaus-3-2-2-runware-pro-documented/parts/1787261382410-runware-image-video.mp4",
+  "timestamp": "2026-08-20T21:29:43.273Z"
+}

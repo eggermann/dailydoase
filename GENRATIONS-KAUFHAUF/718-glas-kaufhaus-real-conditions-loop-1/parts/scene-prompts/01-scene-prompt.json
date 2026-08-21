@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Opening Disturbance: 1983 Meets NATO-Doppelbeschluss",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2.4,
+  "frameSource": "cameraShot",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone with major composition reset to establish opening scene.",
+  "videoMode": "singleImage",
+  "prompt": "The green monster as the protagonist, with smaller plant-monster heads and mechanical appendages acting as secondary characters in Warehouse characterized by industrial textures such as metal; A fusion of organic and mechanical elements creating a surreal,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/parts/1785851353358-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/718-glas-kaufhaus-real-conditions-loop-1/parts/1785851353358-runware-image-video.mp4",
+  "timestamp": "2026-08-04T13:49:14.532Z"
+}

@@ -1,0 +1,36 @@
+{
+  "mode": "image-only",
+  "runIndex": 16,
+  "generatedAt": "2026-08-04T13:00:54.718Z",
+  "requestName": "1785848438140",
+  "scenes": [
+    {
+      "runIndex": 16,
+      "sceneIndex": 1,
+      "title": "Opening Collision: 1983 Meets NATO-Doppelbeschluss",
+      "storyBeat": "The monster's presence triggers a violent shattering of the warehouse's lamps, embodying the conflict between 1983 and NATO-Doppelbeschluss.",
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "New dramatic act with a canonical reset of protagonist and architecture, establishing the initial semantic collision.",
+      "semanticCue": "Anchor (initial configured term): 1983. Collision A (fresh getNext from 1983): NATO-Doppelbeschluss. Dramatic function: opening: make the first semantic disturbance visible. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: NATO-Doppelbeschluss becomes the semantic inheritance of the next scene.",
+      "semanticSourceMode": "locationAndIdentityReferences",
+      "scenePlanPrompt": "Green plant-like monster with glowing eyes frozen mid-roar, its tendrils twisting violently as sharp, metallic shards of broken hanging lamps scatter in an old dark green industrial Kaufhaus warehouse, 1983 BRD, moody cold lighting with green and steel blue palette, rough textured walls, wide angle lens, centered composition, cinematic 1980s style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-16-scene-01.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-16-scene-01.png"
+    },
+    {
+      "runIndex": 16,
+      "sceneIndex": 2,
+      "title": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+      "storyBeat": "The monster's organic form clashes with the emerging mechanical Betriebsform, intensifying the warehouse's transformation into a cold industrial machine.",
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "startFrameReason": "Continue previous transformation but restore room geometry and lighting for realism before animation.",
+      "semanticCue": "Anchor (carried semantic inheritance): NATO-Doppelbeschluss. Collision A (fresh getNext from Kaufhaus): Betriebsform. Context: eines und über Kaufhaus im Katalog der Deutschen. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Betriebsform becomes the semantic inheritance of the next scene.",
+      "semanticSourceMode": "previousSceneImage",
+      "prompt": "Transform the supplied Kaufhaus-and-monster photograph into the next unmistakably different surreal scene. Required physical event: The monster's organic form clashes with the emerging mechanical Betriebsform, intensifying the warehouse's transformation into a cold industrial machine. Required visible anatomy and action: Green plant-like monster with glowing eyes, tendrils transforming into metallic pistons, surrounded by warped hanging lamp shards morphing into industrial cogs and conveyor belts inside the dark green industrial Kaufhaus warehouse, 1983 BRD, harsh fluorescent lighting with green and grey palette, textured steel and concrete surfaces, medium shot, symmetrical composition, 1980s industrial style. Semantic Anchor: NATO-Doppelbeschluss. Semantic Collision: Betriebsform. Make this collision readable at thumbnail size. Rebuild at least one third of the monster silhouette, branching anatomy, and attached mechanisms around the required event while preserving its face and identity. A color shift, new glow, minor texture change, or unchanged reference pose is not a semantic transformation and is forbidden. Keep the real Kaufhaus unmistakably recognizable: preserve the exact camera viewpoint, crop, floor plan, major structural geometry, concrete floor, fluorescent ceiling grid, exposed ducts, windows, walls, doors, elevators, and mirrored columns. Preserve at least eighty percent of the visible room unchanged, including its original exposure, brightness, color balance, surface texture, lens perspective, and architectural objects. Do not replace the location with a generic warehouse or fantasy interior. Do not apply a global cinematic color grade and do not darken the whole room. Keep the existing single Green Monster as the only protagonist and only living figure. Never create a second body or person-shaped form: no humanoid sculpture, mannequin, statue, human-like plant, duplicate monster, portrait, or person-shaped shadow. Keep these two terms in productive conflict. Do not explain or harmonize them. Use the preceding scene direction only for monster anatomy, physical action, and nearby semantic consequences. Ignore any conflicting request inside it to change the location, global palette, exposure, camera, or architectural style. Make the semantic collision visibly transform the monster, its attached organic-mechanical details, the nearest overhead lamps, and nearby floor reflections or shadows. Confine surreal mutation to the monster and its immediate surroundings. The untouched Kaufhaus photograph remains the dominant image. No humans, portraits, extra creatures, poster panels, borders, labels, callout lines, numbers, logos, or text. Output one realistic edited Kaufhaus photograph, not a poster or illustration.",
+      "scenePlanPrompt": "Green plant-like monster with glowing eyes, tendrils transforming into metallic pistons, surrounded by warped hanging lamp shards morphing into industrial cogs and conveyor belts inside the dark green industrial Kaufhaus warehouse, 1983 BRD, harsh fluorescent lighting with green and grey palette, textured steel and concrete surfaces, medium shot, symmetrical composition, 1980s industrial style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785848454128-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-16-scene-02.png"
+    }
+  ],
+  "timestamp": "2026-08-04T13:00:54.718Z"
+}

@@ -1,0 +1,10 @@
+{
+  "words": [
+    "Horror",
+    "Art exhibition",
+    "Department store"
+  ],
+  "semanticMotion": "The sickly eye glow intensifies briefly with one blink, then grimy fluorescent light travels slowly across the existing artist names. From an existing mouth on the poster, a single dark root-filament extends outward subtly. The existing title 'Formen der Abweichung' grows organically from the existing roots into its exact printed placement, pulsating slightly with a slow, eerie rhythm.",
+  "prompt": "Supplied image is an original printed Formen der Abweichung Garten-Golum campaign poster. Keep sharp central poster in focus for entire clip; background is only its own blurred colour echo. Semantic Stream direction (Horror → Art exhibition → Department store): The sickly eye glow intensifies briefly with one blink, then grimy fluorescent light travels slowly across the existing artist names. From an existing mouth on the poster, a single dark root-filament extends outward subtly. The existing title 'Formen der Abweichung' grows organically from the existing roots into its exact printed placement, pulsating slightly with a slow, eerie rhythm. Dirty horror magic must occur on and inside this exact poster: one blink and sickly eye glow, damp breathing botanical roots, a brief dark root-filament from an existing mouth or flower, flickering dirty gallery light over existing printed names, original title grows organically but retains exactly same letters, typeface, words and final positions. 16:9 landscape. Static camera. Preserve face, leaf ears, green root body, hand-drawn coloured-pencil surface, full poster composition and every existing text line. No new readable text, no altered spelling, no new character, no replacement monster, no new room, no Kaufhaus cutaway, no zoom, no pan, no cinematic action, no 3D, no cartoon redraw, no collage, no transformation. Keep central poster readable and sharp.",
+  "model": "gpt-4.1-mini-2025-04-14"
+}

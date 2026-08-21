@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "Consequence: Sortimentstiefe Meets 1955",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "Final scene resets to a new photographed 1955 Kaufhaus interior with stable lighting and composition.",
+  "videoMode": "singleImage",
+  "prompt": "Starting with the green monster curled tightly amid collapsing shelves, temporal transformation shows shelves settling into orderly 1955 Kaufhaus rows; subject motion is tendril curling and shrinking; environmental motion is shelf settling; atmosphere calm with subtle tension; lighting soft warm; composition continuity maintained; camera tracks slowly backward revealing restored vintage interior.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853117435-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853371491-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-full-real-iteration-1-render-2/parts/1785853371491-runware-image-video.mp4",
+  "timestamp": "2026-08-04T14:22:52.319Z"
+}

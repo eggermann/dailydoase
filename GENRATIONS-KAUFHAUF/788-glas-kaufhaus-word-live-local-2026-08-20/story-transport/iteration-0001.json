@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort"
+  ],
+  "semanticCues": [
+    "– eine eigenständige Silbe",
+    "(Bedeutungsträgern) gehört. Ob „Wort“ in der Symbol",
+    "vom Phonem"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "story": {
+    "openingBeat": "The scene introduces the concept of 'wort' as it begins to manifest visually in the room.",
+    "finalBeat": "The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+    "summary": "The scene introduces the concept of 'wort' as it begins to manifest visually in the room. -> The energy of the word 'wort' begins to affect the artist, creating a connection between him and the letters. -> The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+    "nextOpeningObligation": "Continue from this consequence: The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color."
+  }
+}

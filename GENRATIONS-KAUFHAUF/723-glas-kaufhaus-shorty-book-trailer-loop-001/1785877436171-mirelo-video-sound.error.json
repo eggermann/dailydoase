@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785877436171-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785877436171-collision-cut.mp4",
+  "mireloPrompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The green monster's glowing eyes flare as the Kaufhaus lighting take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green monster's glowing eyes flare as the Kaufhaus, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold to emphasize the unsettling lighting and monster's reaction.\n\nStart from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's tentacles stretch toward a shimmering, translucent catalog floating take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's tentacles stretch toward a shimmering, translucent catalog, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Pan slowly to reveal catalog and monster's reaching limbs.\n\nStart from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let Tentacles sprout delicate graphic leaves as the monster mimics Münchner take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Tentacles sprout delicate graphic leaves as the monster mimics, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc around monster to reveal light fracturing and room reaction.\n\nStart from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's form ripples with tropical colors and patterns, briefly take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's form ripples with tropical colors and patterns,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt down to reveal surreal flora reflections and monster's color shift.\n\nStart from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's tentacles multiply and intertwine, creating a dense, deep take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's tentacles multiply and intertwine, creating a dense,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Track sideways to reveal spread of botanical chaos and room destabilization.\n\nStart from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's form briefly crystallizes into a living painting, its take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's form briefly crystallizes into a living painting,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Focus shift to emphasize painting textures and glowing eyes.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785877436171-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/merged/1785877436171-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "NATO-Doppelbeschluss Disturbance",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877499540-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877499540-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The green monster's glowing eyes flare as the Kaufhaus lighting take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green monster's glowing eyes flare as the Kaufhaus, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold to emphasize the unsettling lighting and monster's reaction.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Betriebsform Intensifies",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877541543-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877541543-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's tentacles stretch toward a shimmering, translucent catalog floating take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's tentacles stretch toward a shimmering, translucent catalog, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Pan slowly to reveal catalog and monster's reaching limbs.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Münchner Secession Escalation",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877600438-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877600438-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let Tentacles sprout delicate graphic leaves as the monster mimics Münchner take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around Tentacles sprout delicate graphic leaves as the monster mimics, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc around monster to reveal light fracturing and room reaction.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "St. Kitts und Nevis Flux",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877656989-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877656989-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's form ripples with tropical colors and patterns, briefly take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's form ripples with tropical colors and patterns,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt down to reveal surreal flora reflections and monster's color shift.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Sortimentstiefe Rupture",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877714833-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877714833-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's tentacles multiply and intertwine, creating a dense, deep take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's tentacles multiply and intertwine, creating a dense,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Track sideways to reveal spread of botanical chaos and room destabilization.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Gemälde Resolution",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877739271-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785877739271-runware-image-video.mp4",
+        "prompt": "Start from The green plant-like monster as the protagonist, with animated in Large warehouse space and let the image break away from plain source. Let The monster's form briefly crystallizes into a living painting, its take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster's form briefly crystallizes into a living painting,, while A complex fusion of organic plant forms stays just readable enough to. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Focus shift to emphasize painting textures and glowing eyes.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/723-glas-kaufhaus-shorty-book-trailer-loop-001/1785877436171-scene-loop.json"
+  },
+  "timestamp": "2026-08-04T21:09:01.022Z"
+}

@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931725117-runware-image-video-last-frame.png",
+  "outputText": "Subject: Two goblin-like creatures with glowing orange eyes; the larger one in front has an open mouth showing teeth, the smaller one peeks from behind. Setting: Indoor public transit or station area with escalator in background, informational posters on walls including a colorful map labeled \"Sornaha Map.\" Framing: Medium close-up centered on the larger goblin’s face and upper torso behind a podium with microphones; smaller goblin partially visible behind on the left. Lighting: Overhead fluorescent lighting casting even, neutral light; slight shadowing on goblins’ faces emphasizing glowing eyes. Visible transformation: Goblins’ eyes are intensely glowing orange, mouth of front goblin is open in a grimace or shout; no change in posture or props. Continuity: Maintain goblins’ frontal pose behind podium with microphones, escalator and map remain visible in background, glowing eyes and open mouth expression persist for next scene.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:08:49.709Z"
+}

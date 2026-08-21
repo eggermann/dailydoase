@@ -1,0 +1,62 @@
+{
+  "mode": "image-only",
+  "runIndex": 15,
+  "generatedAt": "2026-08-04T12:49:12.114Z",
+  "requestName": "1785847720250",
+  "scenes": [
+    {
+      "runIndex": 15,
+      "sceneIndex": 1,
+      "title": "Opening Collision: 1983 Meets NATO-Doppelbeschluss",
+      "storyBeat": "The monster's presence triggers a violent shattering of the warehouse's lamps, embodying the conflict between 1983 and NATO-Doppelbeschluss.",
+      "startFrameStrategy": "locationReanchor",
+      "startFrameReason": "New dramatic act with a canonical reset of protagonist and architecture, establishing the initial semantic collision.",
+      "prompt": "Green plant-like monster with glowing eyes frozen mid-roar, its tendrils twisting violently as sharp, metallic shards of broken hanging lamps scatter in an old dark green industrial Kaufhaus warehouse, 1983 BRD, moody cold lighting with green and steel blue palette, rough textured walls, wide angle lens, centered composition, cinematic 1980s style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785847738518-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-15-scene-01.png"
+    },
+    {
+      "runIndex": 15,
+      "sceneIndex": 2,
+      "title": "Escalation: NATO-Doppelbeschluss Collides with Betriebsform",
+      "storyBeat": "The monster's organic form clashes with the emerging mechanical Betriebsform, intensifying the warehouse's transformation into a cold industrial machine.",
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "startFrameReason": "Continue previous transformation but restore room geometry and lighting for realism before animation.",
+      "prompt": "Green plant-like monster with glowing eyes, tendrils transforming into metallic pistons, surrounded by warped hanging lamp shards morphing into industrial cogs and conveyor belts inside the dark green industrial Kaufhaus warehouse, 1983 BRD, harsh fluorescent lighting with green and grey palette, textured steel and concrete surfaces, medium shot, symmetrical composition, 1980s industrial style.",
+      "sourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/1785847751638-runware-image-actor-in-scene.png",
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-15-scene-02.png"
+    },
+    {
+      "runIndex": 15,
+      "sceneIndex": 3,
+      "type": "endCard",
+      "title": "Formen der Abweichung",
+      "artists": [
+        "Alex Tennigkeit",
+        "Nadine Deja",
+        "Matthias Hesselbacher",
+        "Ben Cottrell",
+        "Mariola Groener",
+        "Tania Elstermeyer",
+        "Dome Wood",
+        "Matthias Dornfeld",
+        "Sebastian Hammwöhner",
+        "Franziska Hufnagel",
+        "Nouchka Wolf",
+        "Stefan Kaminski",
+        "Kerstin Podbiel",
+        "Tuli Mekondjo",
+        "John Davies",
+        "Joe Neave",
+        "Catherine Lorent",
+        "Dominik Eggermann",
+        "Alex Weiss",
+        "Gabriel Vormstein",
+        "Kurt von Bley",
+        "Charlotte Hiltmann"
+      ],
+      "outputPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/717-glas-kaufhaus-shorty-book-image-only-test/parts/image-only-scenes/run-15-end-card.png"
+    }
+  ],
+  "timestamp": "2026-08-04T12:49:12.114Z"
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "iteration": 2,
+  "topic": "Kaufhaus",
+  "topics": [
+    "Kaufhaus",
+    "1989"
+  ],
+  "semanticCues": [
+    "sind mit einer Verkaufsfläche von mindestens 3000 m² Warenhaus am 9. November 1989 kam es zur Öffnung des Eisernen Vorhangs. Berliner Mauer",
+    "food-Sektor) und anderen Waren Englische Sprache der Grenzbefestigungen der Tschechoslowakei im Dezember und Eiserner Vorhang",
+    "wie das im Gemeinschaftswarenhaus das Amt des 41. Präsidenten der Vereinigten Staaten an. George H. W. Bush"
+  ],
+  "people": {
+    "count": 1,
+    "actors": [
+      {
+        "reference": "man",
+        "description": "A bald man with a goatee, wearing a dark puffer jacket and a scarf",
+        "position": "center",
+        "orientation": "front-facing"
+      }
+    ]
+  },
+  "location": "An indoor space",
+  "previous": {
+    "iteration": 1,
+    "topic": "Kaufhaus",
+    "topics": [
+      "Kaufhaus",
+      "1989"
+    ],
+    "people": {
+      "count": 1,
+      "actors": [
+        {
+          "reference": "man",
+          "description": "A bald man with a goatee, wearing a dark puffer jacket and a scarf",
+          "position": "center",
+          "orientation": "front-facing"
+        }
+      ]
+    },
+    "location": "An indoor space",
+    "storySummary": "Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag. -> Und Sortimentstiefe Ruhollah Chomeini. A bald man with a goatee, wearing a dark carries the cue while The background includes a white wall with a large stays under pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag. -> Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+    "finalBeat": "Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+    "nextOpeningObligation": "Continue from this consequence: Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag."
+  },
+  "story": {
+    "openingBeat": "Sind mit einer Verkaufsfläche von mindestens 3000 m² Warenhaus am 9. November 1989 kam es zur Öffnung des Eisernen Vorhangs. Berliner Mauer. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+    "finalBeat": "Wie das im Gemeinschaftswarenhaus das Amt des 41. Präsidenten der Vereinigten Staaten an. George H. W. Bush. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+    "summary": "Sind mit einer Verkaufsfläche von mindestens 3000 m² Warenhaus am 9. November 1989 kam es zur Öffnung des Eisernen Vorhangs. Berliner Mauer. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag. -> Food-Sektor) und anderen Waren Englische Sprache der Grenzbefestigungen der Tschechoslowakei im Dezember und Eiserner Vorhang. A bald man with a goatee, wearing a dark carries the cue while The background includes a white wall with a large stays under pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag. -> Wie das im Gemeinschaftswarenhaus das Amt des 41. Präsidenten der Vereinigten Staaten an. George H. W. Bush. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag.",
+    "nextOpeningObligation": "Continue from this consequence: Wie das im Gemeinschaftswarenhaus das Amt des 41. Präsidenten der Vereinigten Staaten an. George H. W. Bush. A bald man with a goatee, wearing a dark and The background includes a white wall with a large answer each other under the cue pressure. A bald man with a goatee, wearing a dark puffer jacket and a scarf. The background includes a white wall with a large artwork and a red flag, An indoor space. The background includes a white wall with a large artwork and a red flag."
+  }
+}

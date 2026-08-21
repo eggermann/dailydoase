@@ -1,0 +1,10 @@
+{
+  "kind": "persona-reference",
+  "personDescription": "",
+  "personStrength": 95,
+  "provider": "lmstudio",
+  "visionText": "PERSON_PRESENT: yes\nPERSON_STRENGTH: 95\nPerson wearing glasses, black tank top, indoors with partial reflection of surroundings.",
+  "sourcePath": "/Users/eggermann/Projekte/dailydoase/tmp/camera-probe/current-camera-2.jpg",
+  "sceneIndex": 2,
+  "timestamp": "2026-08-20T21:29:11.701Z"
+}

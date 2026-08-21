@@ -1,0 +1,59 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 3,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Retail",
+      "streamLabel": "Department store",
+      "description": "establishment offering a wide range of under way in London (with Whiteleys), in Paris (Le Bon"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 3,
+    "anchor": {
+      "term": "Retail",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "PMID (identifier)",
+      "streamLabel": "Toy",
+      "description": "978-1-85984-059-7. Walsh, Tim (2005). Timeless Toys:"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 3,
+    "anchor": {
+      "term": "PMID (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Horror fiction",
+      "streamLabel": "Horror",
+      "description": "Horror fiction"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "iteration": 2,
+  "topic": "wort",
+  "topics": [
+    "wort"
+  ],
+  "semanticCues": [
+    "gemeint („Baum“ und „Bäume“ als Formen ein und desselben Wortform",
+    "unter dem Begriff des Semantik",
+    "präzisere Beschreibungen. Das „Wort“ wird begrifflich vom Lexem"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": {
+    "iteration": 1,
+    "topic": "wort",
+    "topics": [
+      "wort"
+    ],
+    "people": {
+      "count": 0,
+      "actors": []
+    },
+    "location": "",
+    "storySummary": "The scene introduces the concept of 'wort' as it begins to manifest visually in the room. -> The energy of the word 'wort' begins to affect the artist, creating a connection between him and the letters. -> The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+    "finalBeat": "The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+    "nextOpeningObligation": "Continue from this consequence: The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color."
+  },
+  "story": {
+    "openingBeat": "The concept of 'wort' begins to take on a life of its own, creating a vivid sensory experience.",
+    "finalBeat": "The concept of 'wort' fully transforms the environment, creating a hallucinatory experience that engulfs the artist.",
+    "summary": "The concept of 'wort' begins to take on a life of its own, creating a vivid sensory experience. -> The concept of 'wort' evolves further, morphing into abstract shapes that interact with the artist's movements. -> The concept of 'wort' fully transforms the environment, creating a hallucinatory experience that engulfs the artist.",
+    "nextOpeningObligation": "Continue from this consequence: The concept of 'wort' fully transforms the environment, creating a hallucinatory experience that engulfs the artist."
+  }
+}

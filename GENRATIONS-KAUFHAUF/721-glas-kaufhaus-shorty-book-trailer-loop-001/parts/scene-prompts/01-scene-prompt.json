@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "NATO-Doppelbeschluss Distortion",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "fluxContext",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone establishing the story start.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let opening: make the first semantic disturbance visible take over the scene; the subject recoils, changes expression, and moves as if pulled into a dream. Build the mood around opening: make the first semantic disturbance visible, while The monster’s body is a complex fusion of stays just readable enough to orient. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. A steady forward dolly through the aisles, moving deeper into the fractured.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876500145-runware-image-actor-in-scene.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876537670-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876537670-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:48:58.742Z"
+}

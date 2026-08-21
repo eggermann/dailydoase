@@ -1,0 +1,9 @@
+{
+  "endpoint": "/video-audio-mux",
+  "source_video": "1786025971631-collision-cut.mp4",
+  "source_audio": "1786027131457-runware-mirelo.wav",
+  "options": {
+    "crf": 23,
+    "preset": "veryfast"
+  }
+}

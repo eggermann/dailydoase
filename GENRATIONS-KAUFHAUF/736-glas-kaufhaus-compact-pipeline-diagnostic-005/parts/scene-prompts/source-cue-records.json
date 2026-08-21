@@ -1,0 +1,21 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 1,
+    "anchor": {
+      "term": "Kaufhaus",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Betriebsform",
+      "streamLabel": "Kaufhaus",
+      "description": "eines und über Kaufhaus im Katalog der Deutschen"
+    },
+    "dramaticFunction": "condensed arc: establish the world, intensify the collision, and show its consequence in one scene",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

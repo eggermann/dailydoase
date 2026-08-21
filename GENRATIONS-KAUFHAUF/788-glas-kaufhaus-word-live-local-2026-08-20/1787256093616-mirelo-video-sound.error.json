@@ -1,0 +1,83 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/merged/1787256093616-concat.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/merged/1787256093616-concat.mp4",
+  "mireloPrompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The artist stands still, absorbing the vibrant energy of 'wort' take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The artist stands still, absorbing the vibrant energy of, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The energy of 'wort' begins to transform, causing the colors take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The energy of 'wort' begins to transform, causing the, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.\n\nStart from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The room begins to dissolve into a liquid-like state, with take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room begins to dissolve into a liquid-like state,, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "extraMetadata": {
+    "sceneCount": 3,
+    "totalTrackDuration": 9,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/merged/1787256093616-concat.mp4",
+    "mireloMode": "finalOnly",
+    "storyTransport": {
+      "schemaVersion": 1,
+      "iteration": 2,
+      "topic": "wort",
+      "topics": [
+        "wort"
+      ],
+      "semanticCues": [
+        "gemeint („Baum“ und „Bäume“ als Formen ein und desselben Wortform",
+        "unter dem Begriff des Semantik",
+        "präzisere Beschreibungen. Das „Wort“ wird begrifflich vom Lexem"
+      ],
+      "people": {
+        "count": 0,
+        "actors": []
+      },
+      "location": "",
+      "previous": {
+        "iteration": 1,
+        "topic": "wort",
+        "topics": [
+          "wort"
+        ],
+        "people": {
+          "count": 0,
+          "actors": []
+        },
+        "location": "",
+        "storySummary": "The scene introduces the concept of 'wort' as it begins to manifest visually in the room. -> The energy of the word 'wort' begins to affect the artist, creating a connection between him and the letters. -> The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+        "finalBeat": "The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color.",
+        "nextOpeningObligation": "Continue from this consequence: The concept of 'wort' evolves into a sensory experience, engulfing the artist in a vivid display of sound and color."
+      },
+      "story": {
+        "openingBeat": "The concept of 'wort' begins to take on a life of its own, creating a vivid sensory experience.",
+        "finalBeat": "The concept of 'wort' fully transforms the environment, creating a hallucinatory experience that engulfs the artist.",
+        "summary": "The concept of 'wort' begins to take on a life of its own, creating a vivid sensory experience. -> The concept of 'wort' evolves further, morphing into abstract shapes that interact with the artist's movements. -> The concept of 'wort' fully transforms the environment, creating a hallucinatory experience that engulfs the artist.",
+        "nextOpeningObligation": "Continue from this consequence: The concept of 'wort' fully transforms the environment, creating a hallucinatory experience that engulfs the artist."
+      }
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Manifesting 'Wort'",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256114129-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256114129-runware-image-video.mp4",
+        "prompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The artist stands still, absorbing the vibrant energy of 'wort' take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The artist stands still, absorbing the vibrant energy of, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "The Transformation of Meaning",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256150138-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256150138-runware-image-video.mp4",
+        "prompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The energy of 'wort' begins to transform, causing the colors take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The energy of 'wort' begins to transform, causing the, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Embracing the Hallucination",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256188641-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/parts/1787256188641-runware-image-video.mp4",
+        "prompt": "Start from { \"Subject\": \"A man in a black and let the image break away from plain webcam realism; keep the same real person. Let The room begins to dissolve into a liquid-like state, with take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around The room begins to dissolve into a liquid-like state,, while { \"Subject\": \"A man in a black tank stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/788-glas-kaufhaus-word-live-local-2026-08-20/1787256093616-scene-loop.json"
+  },
+  "timestamp": "2026-08-20T20:03:10.664Z"
+}

@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/735-glas-kaufhaus-compact-pipeline-iteration-004/parts/1785929757790-runware-image-video-last-frame.png",
+  "outputText": "Subject: Small green creature partially entering an elevator, tail extended behind; large mechanical dinosaur facing it, mouth open showing teeth, glowing blue eye. Setting: Industrial hallway with tiled floor, ceiling vents, and elevator on left wall; scattered papers on floor between subjects. Framing: Medium shot capturing both subjects in profile, elevator door on left edge, mechanical dinosaur on right, green creature mid-motion entering elevator. Lighting: Overhead fluorescent lighting casting soft shadows downward; mechanical dinosaur’s glowing blue eye adds localized light on its face. Visible transformation: Green creature’s tail elongated and stretched toward mechanical dinosaur; mechanical dinosaur’s eye glowing intensely. Continuity: Maintain elevator door partially open with green creature entering, tail trailing; mechanical dinosaur positioned facing elevator, papers scattered on floor between them; overhead lighting consistent.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a location and protagonist reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, hanging lamps, warehouse architecture, industrial textures, colors, and fixed elements. Do not treat source lettering as a scene object. Return concise labeled lines for Subject, Setting, Framing, Lighting, Location, Actors, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T11:36:01.173Z"
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "wort",
+  "topics": [
+    "wort",
+    "terror",
+    "kaufhaus"
+  ],
+  "semanticCues": [
+    "bezeugt und hat sich im 16. Jahrhundert verstärkt Mittelhochdeutsch war der „Schrecken gesetzlicher Bestrafung“ (terror of legal Thomas Hobbes Schütthäuser oder Kauf- und Gewerbshäuser genannt. Die Hochzeitshaus",
+    "postulierte jene semantische Unterscheidung im 17. Justus Georg Schottelius vor, ein terroristisches Schreckensregiment (par la terreur) Monarchie Kaufhäuser begann im Privatwirtschaft",
+    "auch eine bedeutsame, kurze Aussage (Ein Wort der Weisheit, Kollektivum bezeichnet 1769 die staatlich inszenierte öffentliche Voltaire der Japan"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "cast": {
+    "actorReferenceLimit": 10,
+    "actorReferences": []
+  },
+  "story": {
+    "openingBeat": "The room starts to shimmer with hallucinatory light as the word 'wort' takes shape.",
+    "finalBeat": "The tension releases into a chaotic celebration of memories and experiences.",
+    "summary": "The room starts to shimmer with hallucinatory light as the word 'wort' takes shape. -> The word 'wort' transforms into a heavy atmosphere of historical weight and fear. -> The tension releases into a chaotic celebration of memories and experiences.",
+    "nextOpeningObligation": "Continue from this consequence: The tension releases into a chaotic celebration of memories and experiences."
+  }
+}

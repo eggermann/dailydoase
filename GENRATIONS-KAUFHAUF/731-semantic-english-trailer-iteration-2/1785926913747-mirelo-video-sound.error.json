@@ -1,0 +1,111 @@
+{
+  "error": "fetch failed",
+  "stage": "mirelo-prompt",
+  "videoSource": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/merged/1785926913747-collision-cut.mp4",
+  "mireloInput": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/merged/1785926913747-collision-cut.mp4",
+  "mireloPrompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The green plant-monster appears as a distant silhouette amidst the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green plant-monster appears as a distant silhouette amidst, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold to emphasize eerie stillness with dynamic light.\n\nStart from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The operational mode (Betriebsform) collides with Berlin's administrative division (Verwaltungsgliederung take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The operational mode (Betriebsform) collides with Berlin's administrative division, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Pan slowly to reveal warped reflections and monster's extending flora.\n\nStart from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The administrative division (Verwaltungsgliederung Berlins) collides with product assortment depth take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The administrative division (Verwaltungsgliederung Berlins) collides with product assortment, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt upward to emphasize vertical elongation and depth fracturing.\n\nStart from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The deep product assortment (Sortimentstiefe) collides with the local neighborhood take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The deep product assortment (Sortimentstiefe) collides with the local, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc slowly to reveal psychedelic patterns and ghostly figures.\n\nStart from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The neighborhood influence (Reuterkiez) collides with product assortment breadth (Sortimentsbreite), take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The neighborhood influence (Reuterkiez) collides with product assortment breadth, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Push back to reveal full chaotic rupture and monster recoil.\n\nStart from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The broad product assortment (Sortimentsbreite) collides with Berlin-Kreuzberg, resolving the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The broad product assortment (Sortimentsbreite) collides with Berlin-Kreuzberg, resolving, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Focus shift to monster's confident gaze and glowing flora.",
+  "extraMetadata": {
+    "sceneCount": 6,
+    "totalTrackDuration": 17.428571,
+    "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/merged/1785926913747-collision-cut.mp4",
+    "mireloMode": "finalOnly",
+    "endCard": {
+      "path": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/end-card/trailer-end-card.png",
+      "width": 448,
+      "height": 336,
+      "data": {
+        "title": "Formen der Abweichung",
+        "projectTitle": "Green Monster Ware Haus",
+        "vernissageDate": "05.09.2026",
+        "vernissageTime": "18:00",
+        "exhibitionRange": "06.09.2026–12.09.2026",
+        "venueName": "CANK Neukölln",
+        "venueAddress": "Karl-Marx-Straße 95, 12043 Berlin",
+        "artists": [
+          "Alex Tennigkeit",
+          "Nadine Deja",
+          "Matthias Hesselbacher",
+          "Ben Cottrell",
+          "Mariola Groener",
+          "Tania Elstermeyer",
+          "Dome Wood",
+          "Matthias Dornfeld",
+          "Sebastian Hammwöhner",
+          "Franziska Hufnagel",
+          "Nouchka Wolf",
+          "Stefan Kaminski",
+          "Kerstin Podbiel",
+          "Tuli Mekondjo",
+          "John Davies",
+          "Joe Neave",
+          "Catherine Lorent",
+          "Dominik Eggermann",
+          "Alex Weiss",
+          "Gabriel Vormstein",
+          "Kurt von Bley",
+          "Charlotte Hiltmann"
+        ]
+      },
+      "backgroundImagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/end-card/last-scene-frame.png",
+      "videoPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/merged/1785926913747-end-card.mp4"
+    },
+    "clips": [
+      {
+        "index": 0,
+        "title": "Opening Disturbance: Kaufhaus Meets Betriebsform",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785926961184-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785926961184-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The green plant-monster appears as a distant silhouette amidst the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The green plant-monster appears as a distant silhouette amidst, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Hold to emphasize eerie stillness with dynamic light.",
+        "useSingleImage": true
+      },
+      {
+        "index": 1,
+        "title": "Escalation: Betriebsform Meets Verwaltungsgliederung Berlins",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927018401-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927018401-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The operational mode (Betriebsform) collides with Berlin's administrative division (Verwaltungsgliederung take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The operational mode (Betriebsform) collides with Berlin's administrative division, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Pan slowly to reveal warped reflections and monster's extending flora.",
+        "useSingleImage": true
+      },
+      {
+        "index": 2,
+        "title": "Intensification: Verwaltungsgliederung Berlins Meets Sortimentstiefe",
+        "durationSeconds": 3,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927074254-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927074254-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The administrative division (Verwaltungsgliederung Berlins) collides with product assortment depth take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The administrative division (Verwaltungsgliederung Berlins) collides with product assortment, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt upward to emphasize vertical elongation and depth fracturing.",
+        "useSingleImage": true
+      },
+      {
+        "index": 3,
+        "title": "Intensification: Sortimentstiefe Meets Reuterkiez",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927121279-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927121279-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The deep product assortment (Sortimentstiefe) collides with the local neighborhood take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The deep product assortment (Sortimentstiefe) collides with the local, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Arc slowly to reveal psychedelic patterns and ghostly figures.",
+        "useSingleImage": true
+      },
+      {
+        "index": 4,
+        "title": "Rupture: Reuterkiez Meets Sortimentsbreite",
+        "durationSeconds": 3.2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927178095-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927178095-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The neighborhood influence (Reuterkiez) collides with product assortment breadth (Sortimentsbreite), take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The neighborhood influence (Reuterkiez) collides with product assortment breadth, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Push back to reveal full chaotic rupture and monster recoil.",
+        "useSingleImage": true
+      },
+      {
+        "index": 5,
+        "title": "Final Consequence: Sortimentsbreite Meets Berlin-Kreuzberg",
+        "durationSeconds": 2,
+        "file": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927216078-runware-image-video.mp4",
+        "outputFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/parts/1785927216078-runware-image-video.mp4",
+        "prompt": "Start from The green plant-monster as the protagonist, with animated mechanical in Large warehouse space and let the image break away from plain source. Let The broad product assortment (Sortimentsbreite) collides with Berlin-Kreuzberg, resolving the take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The broad product assortment (Sortimentsbreite) collides with Berlin-Kreuzberg, resolving, while A fusion of organic and mechanical design, the stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Focus shift to monster's confident gaze and glowing flora.",
+        "useSingleImage": true
+      }
+    ],
+    "summaryPath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/731-semantic-english-trailer-iteration-2/1785926913747-scene-loop.json"
+  },
+  "timestamp": "2026-08-05T10:53:37.830Z"
+}

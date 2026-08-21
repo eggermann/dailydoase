@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "LSD",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start on the balustrade rung: animate the crystalline dust settling like slow snow, then the filament crawling up the glass with a subtle refractive shimmer. Camera cranes upward following the filament toward the mezzanine, catching glints in the overhead fixtures. Camera: upward crane following the filament along the balustrade to the mezzanine. End with this readable result: A glowing, crystalline filament adheres to the balustrade and runs up toward the upper floor, visible as a pale ribbon of refraction. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942523837-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942564711-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942564711-runware-image-video.mp4",
+  "timestamp": "2026-08-05T15:09:25.447Z"
+}

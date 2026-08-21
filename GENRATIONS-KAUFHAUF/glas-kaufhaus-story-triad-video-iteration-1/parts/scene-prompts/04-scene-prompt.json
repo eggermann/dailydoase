@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "Intensification: Kunsthalle Meets St. Kitts und Nevis",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "Continue previous transformation while restoring realism and identity.",
+  "videoMode": "singleImage",
+  "prompt": "The green plant-monster in a Kaufhaus Kunsthalle with tropical motifs; flowering limbs sway; palm shadows ripple; human visitors dance gently; warm green and amber lighting; medium close-up; forward camera push; 1989 BRD style. The tropical St. Kitts und Nevis motif introduces warmth and organic growth that animate the monster’s limbs and human behavior, softening the surreal art space. The monster embraces the tropical transformation, allowing its limbs to flower and sway in rhythm with the pulsing lamps. The Kaufhaus Kunsthalle now glows with warm island hues, palm shadows ripple, and human visitors gently dance, blending industrial and tropical surrealism.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874093582-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-elevators.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874143102-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/glas-kaufhaus-story-triad-video-iteration-1/parts/1785874143102-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:09:03.941Z"
+}

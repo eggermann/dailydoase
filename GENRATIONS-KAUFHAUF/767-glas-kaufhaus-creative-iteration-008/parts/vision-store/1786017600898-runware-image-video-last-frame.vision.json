@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/767-glas-kaufhaus-creative-iteration-008/parts/1786017600898-runware-image-video-last-frame.png",
+  "outputText": "Subject: Empty industrial interior with mirrored columns and reflective floor. Setting: Large, open, unfinished commercial space with exposed ceiling ducts and pipes, white walls, and tiled floor. Framing: Wide-angle, centered view down the length of the room, with mirrored columns symmetrically aligned along the central axis. Lighting: Soft, natural light entering from a bright window at the far end, casting diffuse illumination and subtle reflections on the floor and mirrored surfaces. Visible transformation: No human presence; reflections and symmetry dominate; floor shows faint white markings or residue near foreground. Continuity: Maintain the empty, reflective environment with clear, aligned mirrored columns and consistent natural light direction from the distant window for the Moving Reflections scene.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded documentary appearance: candid, lightly imperfect and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-06T12:00:05.128Z"
+}

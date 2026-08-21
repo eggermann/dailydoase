@@ -1,0 +1,10 @@
+{
+  "kind": "persona-reference",
+  "personDescription": "Man in glasses with short hair and a beard, wearing sleeveless black top.",
+  "personStrength": 95,
+  "provider": "lmstudio",
+  "visionText": "PERSON_PRESENT: yes\nPERSON_STRENGTH: 95\nPERSON_DESCRIPTION: Man in glasses with short hair and a beard, wearing sleeveless black top.",
+  "sourcePath": "/Users/eggermann/Projekte/dailydoase/tests/GENERATIONS/camera-shot/1787264644013-camera.jpg",
+  "sceneIndex": 2,
+  "timestamp": "2026-08-20T22:24:40.466Z"
+}

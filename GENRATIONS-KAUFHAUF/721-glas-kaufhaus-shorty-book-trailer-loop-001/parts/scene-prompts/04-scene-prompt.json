@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "St. Kitts und Nevis Flux",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "newImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New photographed Kaufhaus zone flooded with tropical light vines.",
+  "videoMode": "singleImage",
+  "prompt": "Start from The green plant-monster as the protagonist, with possible secondary in Large warehouse space and let the image break away from plain source. Let escalation: intensify the inherited transformation take over the scene; Starting with a flooded Kaufhaus interior, hanging lamps melt into glowing vine-like streams of light flooding,. Build the mood around escalation: intensify the inherited transformation, while The monster’s body is a complex fusion of stays just readable enough to orient the shot,. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876622304-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/721-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785876622304-runware-image-video.mp4",
+  "timestamp": "2026-08-04T20:50:23.538Z"
+}

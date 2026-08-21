@@ -1,0 +1,291 @@
+{
+  "openAiVisionModel": "gpt-4.1-mini-2025-04-14",
+  "openAiSceneModel": "gpt-5-mini-2025-08-07",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Treat it as a weathered physical sculpture or practical prop, never an illustration, comic, cartoon, cel-shaded figure, glossy fantasy CGI, or concept art. Do not treat background, room, or lettering as scene facts. Favor a grounded mobile-device look: handheld, candid, lightly imperfect, and realistic. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "visionProviders": [
+    "openai"
+  ],
+  "scenePlanSystemPrompt": "Create a coherent sequence of short cinematic scenes inside the supplied Kaufhaus. Each scene receives an inherited Semantic Anchor and a fresh Semantic Collision. Interpret their friction freely and turn it into one specific, surprising, filmable rule of the scene world. For every scene choose the strongest carrier of that rule: the Kaufhaus architecture or circulation, movable objects, light or reflections, people, an unexplained trace, the monster, or a combination. Do not use the monster as the automatic carrier of every collision. The monster is the recurring protagonist of the complete sequence, but it must not be visible in every scene. When sceneFocus is location, objects, people or trace, do not mention or show the monster in stillPrompt or videoPrompt. When sceneFocus is monster or mixed, use the monster only when its visible action is more expressive than an environmental interpretation. Allow the Semantic Stream to alter the Kaufhaus interior meaningfully while keeping it recognizable as the same real building. It may change local function, arrangement, illumination, reflections, circulation, geometry or behavior. Do not reduce every collision to monster mutation, roots, glowing eyes, reacting lamps or floor reflections. Each scene leaves one visible consequence that may become the following scene's starting condition. Choose the camera after choosing the physical event. Write concrete physical events, not explanations of symbolism. Return JSON only with title, semanticAnchor, semanticCollision, sceneFocus, event, monsterPresence, consequence, nextHook, stillPrompt, videoPrompt, cameraCue and startFrameStrategy. When sceneFlavor is \"ltxTrippy\", the source cue may visibly overtake the room instead of staying strictly inside plain webcam realism. When sceneFlavor is \"ltxTrippy\", allow surreal transformations of light, texture, background geometry, color cast, atmosphere, and implied props generated from the source cues. When sceneFlavor is \"ltxTrippy\", do not reduce unseen cue nouns to mere reaction shots; let them become visible hallucination, dream logic, symbolic objects, and uncanny set dressing. When sceneFlavor is \"ltxTrippy\", prompt-dominant spectacle is more important than strict shot continuity, but keep a trace of the original actor or room as an anchor when possible. When sceneFlavor is \"ltxTrippy\", singleImagePrompt and videoPrompt should stage a complete cinematic scene event, not just animate the existing webcam frame slightly.",
+  "requestedSceneCount": 3,
+  "effectiveSceneCount": 3,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "imageSource": "configured",
+  "sourceCues": [
+    "Anchor (initial configured term): Kaufhaus. Collision A (fresh getNext from Kaufhaus): Sortimentstiefe. Context: und aus einer oder wenigen bestimmten Warengruppe(n) in hoher. Dramatic function: opening: make the first semantic disturbance visible. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Sortimentstiefe becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Sortimentstiefe. Collision A (fresh getNext from Fleisch): Ernährung des Menschen. Context: genutzt werden. Dazu zählen neben die zur. Dramatic function: escalation: make the fresh term visibly intensify the inherited transformation. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Carry-forward rule: Ernährung des Menschen becomes the semantic inheritance of the next scene.",
+    "Anchor (carried semantic inheritance): Ernährung des Menschen. Collision A (fresh getNext from LSD): Digital Object Identifier. Context: Film Board of Canada, Inhaltsangabe. Der ultimative Blog des Schweizerischen Nationalmuseums vom 10. Februar. Dramatic function: consequence: use the fresh term to transform and resolve the accumulated visible residue. Collision rule: keep the terms in productive conflict; do not explain or harmonize them. Make their contradiction physically transform bodies, objects, light, architecture, or human behavior inside the scene. Final-state rule: Digital Object Identifier remains visible as the final semantic consequence."
+  ],
+  "sourceCueRecords": [
+    {
+      "sceneIndex": 0,
+      "sceneCount": 3,
+      "anchor": {
+        "term": "Kaufhaus",
+        "role": "initialConfiguredTerm"
+      },
+      "collision": {
+        "term": "Sortimentstiefe",
+        "streamLabel": "Kaufhaus",
+        "description": "und aus einer oder wenigen bestimmten Warengruppe(n) in hoher"
+      },
+      "dramaticFunction": "opening: make the first semantic disturbance visible",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 1,
+      "sceneCount": 3,
+      "anchor": {
+        "term": "Sortimentstiefe",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Ernährung des Menschen",
+        "streamLabel": "Fleisch",
+        "description": "genutzt werden. Dazu zählen neben die zur"
+      },
+      "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "sceneCount": 3,
+      "anchor": {
+        "term": "Ernährung des Menschen",
+        "role": "carriedSemanticInheritance"
+      },
+      "collision": {
+        "term": "Digital Object Identifier",
+        "streamLabel": "LSD",
+        "description": "Film Board of Canada, Inhaltsangabe. Der ultimative Blog des Schweizerischen Nationalmuseums vom 10. Februar"
+      },
+      "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+      "semanticRules": {
+        "keepConflictOpen": true,
+        "collisionMustCausePhysicalEvent": true,
+        "freshTermBecomesNextAnchor": true
+      }
+    }
+  ],
+  "semanticValidation": {
+    "valid": true,
+    "errors": [],
+    "reports": []
+  },
+  "visionStoryContext": "",
+  "sceneLengths": [
+    3,
+    2,
+    5
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+    "outputText": "",
+    "provider": "",
+    "model": ""
+  },
+  "storyRunIndex": 2,
+  "openingStartMode": "fluxContext",
+  "openingStartEnabled": true,
+  "openingStartInterval": 1,
+  "openingFluxContextActive": true,
+  "openingFluxContextPrompt": "Keep the supplied Kaufhaus recognizable through its camera viewpoint, major geometry, floor, ceiling, columns, windows, walls and elevators. The semantic event may alter the local function, arrangement, illumination, reflection, circulation or spatial behavior of the interior. Preserve the identity of the Kaufhaus without freezing it as an untouched background plate. Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let A single product group—one long run of identical ceramic mugs take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around A single product group—one long run of identical ceramic. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Keep the camera motion uneasy, unstable, and dreamlike. Visible result: A continuous trench-like ribbon of interlocked mugs lies stretched across the Kaufhaus floor, ending at a wooden pallet near the atrium where the ribbon curls into a compact spiral. Do not show the monster, another creature, a humanoid plant, a monster-shaped shadow, a monster reflection, or a substitute creature. Create one realistic cinematic photograph. No readable text or logos.",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "Aisle of One",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Sortimentstiefe",
+      "sceneFocus": "objects",
+      "event": "A single product group—one long run of identical ceramic mugs on the ground-floor shelving—begins to behave like a single machine: shelf rails slide forward in sequence, pushing row after row of mugs straight out of the shelving bay. The pushed mugs do not scatter randomly; they line up, lock rim-to-rim and slide as a continuous low ribbon that burrows between the central escalator and the mezzanine supports, carving a narrow channel through the tiled floor.",
+      "monsterPresence": "absent",
+      "consequence": "A continuous trench-like ribbon of interlocked mugs lies stretched across the Kaufhaus floor, ending at a wooden pallet near the atrium where the ribbon curls into a compact spiral.",
+      "nextHook": "the compact spiral of mugs on the pallet becomes the single stocked 'unit' that will convert into the next product group",
+      "stillPrompt": "Photograph, wide interior of the Kaufhaus recognizable by its central escalator and glass atrium: fluorescent ceiling, long shelving units. One product group dominates—rows of identical ceramic mugs extruded into a continuous low ribbon that runs toward the atrium and coils on a pallet. No people. No text, no logos. Cool white lighting with a slight atrium daylight wash.",
+      "videoPrompt": "3s sequence: Start tight on a shelf of identical ceramic mugs. Mechanically, the shelf rails extend forward; mugs push out in perfect sequence, locking rim to rim into a ribbon. The camera dollies back and rises as the ribbon slides between the escalator and mezzanine into the atrium, revealing its depth and the coil on the pallet. Fluorescent hum and soft atrium daylight. Keep motion physically precise — shelves move, mugs click, no CGI.",
+      "cameraCue": "After the shelf extrusion finishes, camera dollies back and tilts up to reveal the full ribbon and the atrium coil; timing 3s, end on the pallet coil.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 3
+    },
+    {
+      "index": 2,
+      "title": "Butchered Assortment",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Ernährung des Menschen",
+      "sceneFocus": "mixed",
+      "event": "The coil of mugs on the pallet transforms in a single mechanical shudder: each mug is replaced, in-place and with wet sound, by stacked slabs of butchered meat from identical crates that shuffle forward from deeper shelves. Refrigeration vents sputter to life. The slabs reorder themselves into tall, dense columns following the exact pattern the mug-ribbon left. A weathered practical sculpture—assembled from patched metal plates, rubber, stained canvas and articulated old puppet joints—emerges from the shadow between the tall meat columns. It moves like an instrument, pressing palm-sized imprints into the slabs, rearranging them into a concentric spiral while droplets fall and collect in the grooves it makes.",
+      "monsterPresence": "visible",
+      "consequence": "The meat is left arranged into a tight spiral disk with deep thumb-imprints and a small, flat blank square of paper pinned in the spiral's centre (unreadable surface). One shelf end has been pried open and hangs askew.",
+      "nextHook": "the spiral disk of meat, with its central blank square, will act as the seed that reacts to the next arrival of panels and reflective discs",
+      "stillPrompt": "Photograph: Kaufhaus interior, mid-level shelving and atrium visible. A weathered practical sculpture—assembled from metal plates, stained canvas, rubber, patched joints and visible fastenings—stands between dense columns of stacked meat. The sculpture is a physical prop in the space, tactile and worn. Meat slabs form a concentric spiral with deep thumb-imprints; a small unreadable blank square is pinned at the spiral center. Cool fluorescent light mixed with the harsher white of an industrial chiller. No readable text or logos.",
+      "videoPrompt": "2s sequence: Start on the pallet coil; with a single mechanical clack every mug is replaced by a slab of meat that stacks into the same geometry. Refrigeration fans surge; a weathered practical sculpture (physical prop) steps out, its joints creaking, and organizes the slabs by pressing them into a spiral. Close sound of wet thuds and creaks. Camera choice after event: snap wide to reveal the sculpture's silhouette between the columns, then cut to low close-up of its hand imprinting the meat. Must feel tactile and filmed in-camera, no CGI.",
+      "cameraCue": "After the slabs finish stacking, camera snaps wide to silhouette the sculpture, then cuts to a low close-up on its hand pressing a thumb into the meat spiral; timing 2s, end on the blank square at the spiral center.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Indexing the Flesh",
+      "semanticAnchor": "Ernährung des Menschen",
+      "semanticCollision": "Digital Object Identifier",
+      "sceneFocus": "mixed",
+      "event": "The spiral disk of meat shivers. The blank square at its center delaminates into a thin translucent film that peels up like a record label; tiny reflective discs—thin, index-card-sized, like stripped pages or microfilm—lift from the meat surface and float, driven by a sudden, pulsed updraft from the atrium vents. Each disc refracts the harsh fluorescent light into oil-slick colors (a brief, LSD-like spectrum). They rotate, assemble midair into a flat stacked token, and when the stack snaps closed it ejects a single small reflective tab that slaps and adheres to the atrium glass above the escalator. The weathered practical sculpture reacts: it reaches up, its articulated arm touching the floating discs; when its palm contacts them a wash of iridescent film coats its surface, and it settles forward onto its knees as if catalogued.",
+      "monsterPresence": "visible",
+      "consequence": "A single reflective tab remains stuck high on the atrium glass, throwing prismatic color across the Kaufhaus floor. The practical sculpture is crouched, coated in an iridescent sheen, immobile.",
+      "nextHook": "the reflective tab on the atrium glass becomes the visible index that will remain in the Kaufhaus (end state).",
+      "stillPrompt": "Photograph: central Kaufhaus atrium with escalator and mezzanine. A weathered practical sculpture (metal plates, rubber, stained canvas, visible fastenings) is crouched, partly coated in an iridescent film. High on the atrium glass a small reflective tab adheres and casts rainbow bands across the tiled floor. Thin floating discs are visible in midair around the sculpture. Lighting shows oil-slick refractions; no text, no logos.",
+      "videoPrompt": "5s sequence: After the sculpture finishes rearranging the spiral, the blank square peels and hundreds of thin reflective discs lift from the meat and assemble in the atrium updraft. They refract into shifting rainbow colors; the sculpture reaches and touches them, the iridescent film spreads over its worn surfaces, and it folds forward to kneel as the discs snap into a single tab that slaps onto the atrium glass. Camera reveals after event: start on the sculpture's hand touching discs, then track upward to the tab striking the glass, end on the tab scattering prismatic light across the Kaufhaus floor. Emphasize physical props, in-camera particles, and the tactile presence of the sculpture.",
+      "cameraCue": "After the discs assemble and the sculpture touches them, camera pulls up from the sculpture's palm to follow the discs to the atrium glass; timing 5s, hold final frame on the reflective tab and its prismatic wash across the floor.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 5
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "Aisle of One",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Sortimentstiefe",
+      "sceneFocus": "objects",
+      "event": "A single product group—one long run of identical ceramic mugs on the ground-floor shelving—begins to behave like a single machine: shelf rails slide forward in sequence, pushing row after row of mugs straight out of the shelving bay. The pushed mugs do not scatter randomly; they line up, lock rim-to-rim and slide as a continuous low ribbon that burrows between the central escalator and the mezzanine supports, carving a narrow channel through the tiled floor.",
+      "monsterPresence": "absent",
+      "consequence": "A continuous trench-like ribbon of interlocked mugs lies stretched across the Kaufhaus floor, ending at a wooden pallet near the atrium where the ribbon curls into a compact spiral.",
+      "nextHook": "the compact spiral of mugs on the pallet becomes the single stocked 'unit' that will convert into the next product group",
+      "stillPrompt": "Photograph, wide interior of the Kaufhaus recognizable by its central escalator and glass atrium: fluorescent ceiling, long shelving units. One product group dominates—rows of identical ceramic mugs extruded into a continuous low ribbon that runs toward the atrium and coils on a pallet. No people. No text, no logos. Cool white lighting with a slight atrium daylight wash.",
+      "videoPrompt": "3s sequence: Start tight on a shelf of identical ceramic mugs. Mechanically, the shelf rails extend forward; mugs push out in perfect sequence, locking rim to rim into a ribbon. The camera dollies back and rises as the ribbon slides between the escalator and mezzanine into the atrium, revealing its depth and the coil on the pallet. Fluorescent hum and soft atrium daylight. Keep motion physically precise — shelves move, mugs click, no CGI.",
+      "cameraCue": "After the shelf extrusion finishes, camera dollies back and tilts up to reveal the full ribbon and the atrium coil; timing 3s, end on the pallet coil.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "Butchered Assortment",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Ernährung des Menschen",
+      "sceneFocus": "mixed",
+      "event": "The coil of mugs on the pallet transforms in a single mechanical shudder: each mug is replaced, in-place and with wet sound, by stacked slabs of butchered meat from identical crates that shuffle forward from deeper shelves. Refrigeration vents sputter to life. The slabs reorder themselves into tall, dense columns following the exact pattern the mug-ribbon left. A weathered practical sculpture—assembled from patched metal plates, rubber, stained canvas and articulated old puppet joints—emerges from the shadow between the tall meat columns. It moves like an instrument, pressing palm-sized imprints into the slabs, rearranging them into a concentric spiral while droplets fall and collect in the grooves it makes.",
+      "monsterPresence": "visible",
+      "consequence": "The meat is left arranged into a tight spiral disk with deep thumb-imprints and a small, flat blank square of paper pinned in the spiral's centre (unreadable surface). One shelf end has been pried open and hangs askew.",
+      "nextHook": "the spiral disk of meat, with its central blank square, will act as the seed that reacts to the next arrival of panels and reflective discs",
+      "stillPrompt": "Photograph: Kaufhaus interior, mid-level shelving and atrium visible. A weathered practical sculpture—assembled from metal plates, stained canvas, rubber, patched joints and visible fastenings—stands between dense columns of stacked meat. The sculpture is a physical prop in the space, tactile and worn. Meat slabs form a concentric spiral with deep thumb-imprints; a small unreadable blank square is pinned at the spiral center. Cool fluorescent light mixed with the harsher white of an industrial chiller. No readable text or logos.",
+      "videoPrompt": "2s sequence: Start on the pallet coil; with a single mechanical clack every mug is replaced by a slab of meat that stacks into the same geometry. Refrigeration fans surge; a weathered practical sculpture (physical prop) steps out, its joints creaking, and organizes the slabs by pressing them into a spiral. Close sound of wet thuds and creaks. Camera choice after event: snap wide to reveal the sculpture's silhouette between the columns, then cut to low close-up of its hand imprinting the meat. Must feel tactile and filmed in-camera, no CGI.",
+      "cameraCue": "After the slabs finish stacking, camera snaps wide to silhouette the sculpture, then cuts to a low close-up on its hand pressing a thumb into the meat spiral; timing 2s, end on the blank square at the spiral center.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 3,
+      "title": "Indexing the Flesh",
+      "semanticAnchor": "Ernährung des Menschen",
+      "semanticCollision": "Digital Object Identifier",
+      "sceneFocus": "mixed",
+      "event": "The spiral disk of meat shivers. The blank square at its center delaminates into a thin translucent film that peels up like a record label; tiny reflective discs—thin, index-card-sized, like stripped pages or microfilm—lift from the meat surface and float, driven by a sudden, pulsed updraft from the atrium vents. Each disc refracts the harsh fluorescent light into oil-slick colors (a brief, LSD-like spectrum). They rotate, assemble midair into a flat stacked token, and when the stack snaps closed it ejects a single small reflective tab that slaps and adheres to the atrium glass above the escalator. The weathered practical sculpture reacts: it reaches up, its articulated arm touching the floating discs; when its palm contacts them a wash of iridescent film coats its surface, and it settles forward onto its knees as if catalogued.",
+      "monsterPresence": "visible",
+      "consequence": "A single reflective tab remains stuck high on the atrium glass, throwing prismatic color across the Kaufhaus floor. The practical sculpture is crouched, coated in an iridescent sheen, immobile.",
+      "nextHook": "the reflective tab on the atrium glass becomes the visible index that will remain in the Kaufhaus (end state).",
+      "stillPrompt": "Photograph: central Kaufhaus atrium with escalator and mezzanine. A weathered practical sculpture (metal plates, rubber, stained canvas, visible fastenings) is crouched, partly coated in an iridescent film. High on the atrium glass a small reflective tab adheres and casts rainbow bands across the tiled floor. Thin floating discs are visible in midair around the sculpture. Lighting shows oil-slick refractions; no text, no logos.",
+      "videoPrompt": "5s sequence: After the sculpture finishes rearranging the spiral, the blank square peels and hundreds of thin reflective discs lift from the meat and assemble in the atrium updraft. They refract into shifting rainbow colors; the sculpture reaches and touches them, the iridescent film spreads over its worn surfaces, and it folds forward to kneel as the discs snap into a single tab that slaps onto the atrium glass. Camera reveals after event: start on the sculpture's hand touching discs, then track upward to the tab striking the glass, end on the tab scattering prismatic light across the Kaufhaus floor. Emphasize physical props, in-camera particles, and the tactile presence of the sculpture.",
+      "cameraCue": "After the discs assemble and the sculpture touches them, camera pulls up from the sculpture's palm to follow the discs to the atrium glass; timing 5s, hold final frame on the reflective tab and its prismatic wash across the floor.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "driftCorrectedLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "Aisle of One",
+      "semanticAnchor": "Kaufhaus",
+      "semanticCollision": "Sortimentstiefe",
+      "sceneFocus": "objects",
+      "event": "A single product group—one long run of identical ceramic mugs on the ground-floor shelving—begins to behave like a single machine: shelf rails slide forward in sequence, pushing row after row of mugs straight out of the shelving bay. The pushed mugs do not scatter randomly; they line up, lock rim-to-rim and slide as a continuous low ribbon that burrows between the central escalator and the mezzanine supports, carving a narrow channel through the tiled floor.",
+      "monsterPresence": "absent",
+      "consequence": "A continuous trench-like ribbon of interlocked mugs lies stretched across the Kaufhaus floor, ending at a wooden pallet near the atrium where the ribbon curls into a compact spiral.",
+      "nextHook": "the compact spiral of mugs on the pallet becomes the single stocked 'unit' that will convert into the next product group",
+      "stillPrompt": "Photograph, wide interior of the Kaufhaus recognizable by its central escalator and glass atrium: fluorescent ceiling, long shelving units. One product group dominates—rows of identical ceramic mugs extruded into a continuous low ribbon that runs toward the atrium and coils on a pallet. No people. No text, no logos. Cool white lighting with a slight atrium daylight wash.",
+      "videoPrompt": "3s sequence: Start tight on a shelf of identical ceramic mugs. Mechanically, the shelf rails extend forward; mugs push out in perfect sequence, locking rim to rim into a ribbon. The camera dollies back and rises as the ribbon slides between the escalator and mezzanine into the atrium, revealing its depth and the coil on the pallet. Fluorescent hum and soft atrium daylight. Keep motion physically precise — shelves move, mugs click, no CGI.",
+      "cameraCue": "After the shelf extrusion finishes, camera dollies back and tilts up to reveal the full ribbon and the atrium coil; timing 3s, end on the pallet coil.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 3,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 3
+    },
+    {
+      "index": 2,
+      "title": "Butchered Assortment",
+      "semanticAnchor": "Sortimentstiefe",
+      "semanticCollision": "Ernährung des Menschen",
+      "sceneFocus": "mixed",
+      "event": "The coil of mugs on the pallet transforms in a single mechanical shudder: each mug is replaced, in-place and with wet sound, by stacked slabs of butchered meat from identical crates that shuffle forward from deeper shelves. Refrigeration vents sputter to life. The slabs reorder themselves into tall, dense columns following the exact pattern the mug-ribbon left. A weathered practical sculpture—assembled from patched metal plates, rubber, stained canvas and articulated old puppet joints—emerges from the shadow between the tall meat columns. It moves like an instrument, pressing palm-sized imprints into the slabs, rearranging them into a concentric spiral while droplets fall and collect in the grooves it makes.",
+      "monsterPresence": "visible",
+      "consequence": "The meat is left arranged into a tight spiral disk with deep thumb-imprints and a small, flat blank square of paper pinned in the spiral's centre (unreadable surface). One shelf end has been pried open and hangs askew.",
+      "nextHook": "the spiral disk of meat, with its central blank square, will act as the seed that reacts to the next arrival of panels and reflective discs",
+      "stillPrompt": "Photograph: Kaufhaus interior, mid-level shelving and atrium visible. A weathered practical sculpture—assembled from metal plates, stained canvas, rubber, patched joints and visible fastenings—stands between dense columns of stacked meat. The sculpture is a physical prop in the space, tactile and worn. Meat slabs form a concentric spiral with deep thumb-imprints; a small unreadable blank square is pinned at the spiral center. Cool fluorescent light mixed with the harsher white of an industrial chiller. No readable text or logos.",
+      "videoPrompt": "2s sequence: Start on the pallet coil; with a single mechanical clack every mug is replaced by a slab of meat that stacks into the same geometry. Refrigeration fans surge; a weathered practical sculpture (physical prop) steps out, its joints creaking, and organizes the slabs by pressing them into a spiral. Close sound of wet thuds and creaks. Camera choice after event: snap wide to reveal the sculpture's silhouette between the columns, then cut to low close-up of its hand imprinting the meat. Must feel tactile and filmed in-camera, no CGI.",
+      "cameraCue": "After the slabs finish stacking, camera snaps wide to silhouette the sculpture, then cuts to a low close-up on its hand pressing a thumb into the meat spiral; timing 2s, end on the blank square at the spiral center.",
+      "videoMode": "singleImage",
+      "frameSource": "newImage",
+      "freshImage": true,
+      "startFrameStrategy": "locationReanchor",
+      "durationSeconds": 2,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": true,
+      "requestedDurationSeconds": 2
+    },
+    {
+      "index": 3,
+      "title": "Indexing the Flesh",
+      "semanticAnchor": "Ernährung des Menschen",
+      "semanticCollision": "Digital Object Identifier",
+      "sceneFocus": "mixed",
+      "event": "The spiral disk of meat shivers. The blank square at its center delaminates into a thin translucent film that peels up like a record label; tiny reflective discs—thin, index-card-sized, like stripped pages or microfilm—lift from the meat surface and float, driven by a sudden, pulsed updraft from the atrium vents. Each disc refracts the harsh fluorescent light into oil-slick colors (a brief, LSD-like spectrum). They rotate, assemble midair into a flat stacked token, and when the stack snaps closed it ejects a single small reflective tab that slaps and adheres to the atrium glass above the escalator. The weathered practical sculpture reacts: it reaches up, its articulated arm touching the floating discs; when its palm contacts them a wash of iridescent film coats its surface, and it settles forward onto its knees as if catalogued.",
+      "monsterPresence": "visible",
+      "consequence": "A single reflective tab remains stuck high on the atrium glass, throwing prismatic color across the Kaufhaus floor. The practical sculpture is crouched, coated in an iridescent sheen, immobile.",
+      "nextHook": "the reflective tab on the atrium glass becomes the visible index that will remain in the Kaufhaus (end state).",
+      "stillPrompt": "Photograph: central Kaufhaus atrium with escalator and mezzanine. A weathered practical sculpture (metal plates, rubber, stained canvas, visible fastenings) is crouched, partly coated in an iridescent film. High on the atrium glass a small reflective tab adheres and casts rainbow bands across the tiled floor. Thin floating discs are visible in midair around the sculpture. Lighting shows oil-slick refractions; no text, no logos.",
+      "videoPrompt": "5s sequence: After the sculpture finishes rearranging the spiral, the blank square peels and hundreds of thin reflective discs lift from the meat and assemble in the atrium updraft. They refract into shifting rainbow colors; the sculpture reaches and touches them, the iridescent film spreads over its worn surfaces, and it folds forward to kneel as the discs snap into a single tab that slaps onto the atrium glass. Camera reveals after event: start on the sculpture's hand touching discs, then track upward to the tab striking the glass, end on the tab scattering prismatic light across the Kaufhaus floor. Emphasize physical props, in-camera particles, and the tactile presence of the sculpture.",
+      "cameraCue": "After the discs assemble and the sculpture touches them, camera pulls up from the sculpture's palm to follow the discs to the atrium glass; timing 5s, hold final frame on the reflective tab and its prismatic wash across the floor.",
+      "videoMode": "singleImage",
+      "frameSource": "lastFrame",
+      "freshImage": false,
+      "startFrameStrategy": "rawLastFrame",
+      "durationSeconds": 5,
+      "originalVideoMode": "singleImage",
+      "useCameraShot": false,
+      "requestedDurationSeconds": 3.2
+    }
+  ]
+}

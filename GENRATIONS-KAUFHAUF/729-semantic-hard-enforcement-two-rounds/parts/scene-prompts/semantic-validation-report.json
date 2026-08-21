@@ -1,0 +1,38 @@
+[
+  {
+    "sceneIndex": 0,
+    "anchor": "1983",
+    "collision": "St. Kitts und Nevis",
+    "valid": true,
+    "cueIdentityValid": true,
+    "mandatoryFieldsValid": true,
+    "derivationValid": true,
+    "collisionPhysicalizationValid": true,
+    "consequenceInheritanceValid": true,
+    "clueDerivationValid": true,
+    "monsterAgencyValid": true,
+    "tensionDerivationValid": true,
+    "promptPropagationValid": true,
+    "visibleEvidenceOfAgency": "The monster's limbs actively sprout and pulse with tropical flora, interacting with room elements.",
+    "errors": [],
+    "warnings": []
+  },
+  {
+    "sceneIndex": 1,
+    "anchor": "St. Kitts und Nevis",
+    "collision": "Sortimentstiefe",
+    "valid": true,
+    "cueIdentityValid": true,
+    "mandatoryFieldsValid": true,
+    "derivationValid": true,
+    "collisionPhysicalizationValid": true,
+    "consequenceInheritanceValid": true,
+    "clueDerivationValid": true,
+    "monsterAgencyValid": true,
+    "tensionDerivationValid": true,
+    "promptPropagationValid": true,
+    "visibleEvidenceOfAgency": "Tentacles weave and warp ducts and lamps, showing active environmental manipulation.",
+    "errors": [],
+    "warnings": []
+  }
+]

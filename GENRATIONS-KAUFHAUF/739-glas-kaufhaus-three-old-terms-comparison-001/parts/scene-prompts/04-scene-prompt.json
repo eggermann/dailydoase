@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "Island motif sneaks in (2s)",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "rawLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Start from the visible shot and let the image break away from plain source realism; keep the same real person from the green monster. Let 2s shot: paper price-tags fold into tiny boats and drift take over the scene; the room warps, the light flickers, and the frame mutates like. Build the mood around 2s shot: paper price-tags fold into tiny boats. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. After the boat is trapped, push in to a tight close on.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930896418-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-central-hall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930917161-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/739-glas-kaufhaus-three-old-terms-comparison-001/parts/1785930917161-runware-image-video.mp4",
+  "timestamp": "2026-08-05T11:55:18.093Z"
+}

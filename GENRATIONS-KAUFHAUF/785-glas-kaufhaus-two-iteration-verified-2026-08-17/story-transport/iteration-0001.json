@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "Kaufhaus",
+  "topics": [
+    "Kaufhaus",
+    "1989"
+  ],
+  "semanticCues": [
+    "eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion",
+    "und Sortimentstiefe Ruhollah Chomeini",
+    "auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl"
+  ],
+  "people": {
+    "count": 0,
+    "actors": []
+  },
+  "location": "",
+  "previous": null,
+  "story": {
+    "openingBeat": "Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. \"Setting\": \"An indoor space with white walls starts carrying the cue around the shot. Wearing a dark jacket and a scarf, looking directly at the camera. \"Setting\": \"An indoor space with white walls.",
+    "finalBeat": "Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. \"Setting\": \"An indoor space with white walls starts carrying the cue around the shot. Wearing a dark jacket and a scarf, looking directly at the camera. \"Setting\": \"An indoor space with white walls.",
+    "summary": "Eines Betriebsform zurück; damit endete der zehn Jahre lang andauernde Sowjetunion. \"Setting\": \"An indoor space with white walls starts carrying the cue around the shot. Wearing a dark jacket and a scarf, looking directly at the camera. \"Setting\": \"An indoor space with white walls. -> Und Sortimentstiefe Ruhollah Chomeini. \"Setting\": \"An indoor space with white walls starts carrying the cue around the shot. Wearing a dark jacket and a scarf, looking directly at the camera. \"Setting\": \"An indoor space with white walls. -> Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. \"Setting\": \"An indoor space with white walls starts carrying the cue around the shot. Wearing a dark jacket and a scarf, looking directly at the camera. \"Setting\": \"An indoor space with white walls.",
+    "nextOpeningObligation": "Continue from this consequence: Auf einer Sortimentsbreite in Polen, dem Abbau der Grenzanlagen Ungarns Helmut Kohl. \"Setting\": \"An indoor space with white walls starts carrying the cue around the shot. Wearing a dark jacket and a scarf, looking directly at the camera. \"Setting\": \"An indoor space with white walls."
+  }
+}

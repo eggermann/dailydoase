@@ -1,0 +1,16 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "Sind Mit Einer Verkaufsfläche Von Mindestens",
+  "durationSeconds": 3,
+  "plannedDurationSeconds": 3,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "A bald man with a goatee, wearing a dark puffer jacket and a scarf in An indoor space; The man is looking directly at the camera with a serious expression. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Sind mit einer Verkaufsfläche von mindestens 3000 m² Warenhaus am 9. One person only: same real person from the source frame, same face and clothes. Sind mit einer Verkaufsfläche von mindestens 3000 m² Warenhaus am 9; The background includes a white wall with a large artwork, The camera is at eye level, capturing the.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003476040-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003520973-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/786-glas-kaufhaus-two-iteration-verified-2026-08-17/parts/1787003520973-runware-image-video.mp4",
+  "timestamp": "2026-08-17T21:52:02.104Z"
+}

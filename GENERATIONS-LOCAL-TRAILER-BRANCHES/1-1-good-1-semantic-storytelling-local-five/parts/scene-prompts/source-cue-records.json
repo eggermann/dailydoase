@@ -1,0 +1,97 @@
+[
+  {
+    "sceneIndex": 0,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Department store",
+      "role": "initialConfiguredTerm"
+    },
+    "collision": {
+      "term": "Big-box store",
+      "streamLabel": "Department store",
+      "description": "Big-box store"
+    },
+    "dramaticFunction": "opening: make the first semantic disturbance visible",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 1,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Big-box store",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Board game",
+      "streamLabel": "Toy",
+      "description": "and ,"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 2,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Board game",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Analog horror",
+      "streamLabel": "Horror",
+      "description": "Analog horror"
+    },
+    "dramaticFunction": "escalation: make the fresh term visibly intensify the inherited transformation",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 3,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "Analog horror",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "ISBN (identifier)",
+      "streamLabel": "Fast food",
+      "description": "1-85285-148-1. Hogan, David (1997). Selling 'em by the Sack: Intake from Fast Food Among Adults: United States,"
+    },
+    "dramaticFunction": "rupture: let the inherited and fresh terms destabilize the established scene state",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  },
+  {
+    "sceneIndex": 4,
+    "sceneCount": 5,
+    "anchor": {
+      "term": "ISBN (identifier)",
+      "role": "carriedSemanticInheritance"
+    },
+    "collision": {
+      "term": "Charity shop",
+      "streamLabel": "Department store",
+      "description": "Charity shop"
+    },
+    "dramaticFunction": "consequence: use the fresh term to transform and resolve the accumulated visible residue",
+    "semanticRules": {
+      "keepConflictOpen": true,
+      "collisionMustCausePhysicalEvent": true,
+      "freshTermBecomesNextAnchor": true
+    }
+  }
+]

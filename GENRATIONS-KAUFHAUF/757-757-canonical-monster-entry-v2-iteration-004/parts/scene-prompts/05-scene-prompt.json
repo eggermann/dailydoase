@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "Terror",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 5,
+  "frameSource": "lastFrame",
+  "startFrameStrategy": "driftCorrectedLastFrame",
+  "startFrameReason": "",
+  "videoMode": "singleImage",
+  "prompt": "Animate the canister impact and flash, thick oily smoke billowing and spreading across the atrium, a display collapsing and products tumbling into the aisle. Camera performs a handheld whip‑pan to convey panic, then rests on the charred arc of merchandise and the single oxidized coin on the tile. Camera: handheld whip‑pan from explosion to charred merchandise, settle on coin on tile. End with this readable result: A broad arc of charred, soot‑coated merchandise and shattered display glass across the central floor; a single oxidized coin lies on the sooted tile near the creature's dropped bag. No monster is present in the input frame or in this clip. Do not introduce, reveal, imply visually, construct, morph, transform, or generate any monster, creature, green humanoid, plant person, monster-shaped shadow, monster reflection or substitute protagonist. Do not turn a person, object, reflection, shadow or architectural form into a green figure. Animate only subjects and objects already present in the start frame.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942617887-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/kaufhaus-location/location-white-wall.jpeg",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942645686-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/757-757-canonical-monster-entry-v2-iteration-004/parts/1785942645686-runware-image-video.mp4",
+  "timestamp": "2026-08-05T15:10:47.512Z"
+}

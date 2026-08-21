@@ -1,0 +1,18 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "Escalation: NATO-Doppelbeschluss Meets Betriebsform",
+  "durationSeconds": 2,
+  "plannedDurationSeconds": 2,
+  "frameSource": "newImage",
+  "startFrameStrategy": "locationReanchor",
+  "startFrameReason": "New focus on shelving area and monster's tendrils interaction",
+  "videoMode": "singleImage",
+  "prompt": "Start from actor 1 (The green plant-like monster as protagonist); actor in Large warehouse space and let the image break away from plain source. Let The monster moves slowly toward a cluster of industrial shelving take over the scene; the subject recoils, changes expression, and moves as if pulled into. Build the mood around The monster moves slowly toward a cluster of industrial, while The monster combines organic plant textures with mechanical stays just readable enough. Keep the source camera orientation unmirrored; preserve the real left-right layout from the source frame and avoid a mirrored selfie look. Tilt down slowly to emphasize shelving warping and monster's tendrils.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase/lib/Plak-2_images/monster-reference/green-monster-protagonist-realistic-chroma.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921580547-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/726-semantic-story-engine-iteration-2/parts/1785921580547-runware-image-video.mp4",
+  "timestamp": "2026-08-05T09:19:41.671Z"
+}

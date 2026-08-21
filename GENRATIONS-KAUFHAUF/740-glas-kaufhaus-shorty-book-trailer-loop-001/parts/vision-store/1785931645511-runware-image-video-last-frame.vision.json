@@ -1,0 +1,8 @@
+{
+  "imagePath": "/Users/eggermann/Projekte/dailydoase/GENRATIONS-KAUFHAUF/740-glas-kaufhaus-shorty-book-trailer-loop-001/parts/1785931645511-runware-image-video-last-frame.png",
+  "outputText": "Subject: Large green goblin-like creature with glowing orange eyes, open mouth with tongue extended, and mechanical elements integrated into its head and body. Setting: Industrial or warehouse-like interior with exposed ceiling pipes and a spacious, open floor. Framing: Medium close-up centered on the creature’s head and upper torso behind a podium with two microphones. Lighting: Even, diffuse overhead lighting illuminating the creature’s face and podium, with slight shadows under the eyes and chin. Visible transformation: Creature’s mouth wide open with tongue protruding, eyes glowing intensely, mechanical tubes and wires visibly attached to its head and shoulders. Continuity: Maintain creature’s frontal pose behind the podium, glowing eyes, and mechanical integration; preserve industrial setting and overhead lighting for seamless transition to the next scene.",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt": "Describe the visible green-monster reference as a protagonist-only identity reference for a multi-scene video. Identify the central green plant-like monster, glowing eyes, face, body silhouette, material cues, and continuity requirements. Do not treat background, room, or lettering as scene facts. Return concise labeled lines for Subject, Framing, Lighting, Description, and continuity requirements.",
+  "timestamp": "2026-08-05T12:07:29.688Z"
+}

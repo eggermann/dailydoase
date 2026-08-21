@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 
-import { resolveLoopOutcome } from '../semantic-stream.js';
+import { resolveLoopOutcome, shouldScheduleNextIteration } from '../semantic-stream.js';
 
 describe('resolveLoopOutcome', () => {
   test('throws when a non-polling generation returns false', () => {
@@ -21,5 +21,25 @@ describe('resolveLoopOutcome', () => {
   test('marks a polling false result as failed when retry-on-failure is disabled', () => {
     expect(resolveLoopOutcome({ success: false, pollingTime: 1000, retryOnFailure: false }))
       .toEqual({ status: 'failed', success: false });
+  });
+});
+
+describe('shouldScheduleNextIteration', () => {
+  test('schedules before the configured limit', () => {
+    expect(shouldScheduleNextIteration({
+      iteration: 1,
+      maxIterations: 2,
+      pollingTime: 10,
+      success: true,
+    })).toBe(true);
+  });
+
+  test('stops exactly at the configured limit', () => {
+    expect(shouldScheduleNextIteration({
+      iteration: 2,
+      maxIterations: 2,
+      pollingTime: 10,
+      success: true,
+    })).toBe(false);
   });
 });
