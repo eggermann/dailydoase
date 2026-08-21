@@ -327,7 +327,7 @@ export default async (configs) => {
 
     await store.initCache();
 
-    configs.map(async (config, index) => {
+    await Promise.all(configs.map(async (config) => {
         const words = config.words;
 
         const wordStreams = await getWordStreams(words);
@@ -335,7 +335,8 @@ export default async (configs) => {
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
         const model = await generator.setVersion(config);
 
-        await _.getLoop(model, config)(wordStreams).then((success) => {
+        try {
+            const success = await _.getLoop(model, config)(wordStreams);
             const hasPollingTime = !!config.model
               && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
             const pollingTime = hasPollingTime ? config.model.pollingTime : 4000;
@@ -347,9 +348,9 @@ export default async (configs) => {
             } else {
                 console.log(chalk.yellow(`Generator loop ${outcome.status}`));
             }
-        }).catch(err => {
+        } catch (err) {
             console.error(chalk.red('Error starting generator:', err));
-        })
-    });
+        }
+    }));
 
 }
