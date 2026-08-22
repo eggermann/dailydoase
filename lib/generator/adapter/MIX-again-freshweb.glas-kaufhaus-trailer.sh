@@ -10,6 +10,10 @@ export FRESHWEB_WORDS=${FRESHWEB_WORDS:-art-vernissage,en | Einkaufszentrum,de |
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-2}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
 
+# Between iterations always inspect the current camera/cast context, then let
+# GPT choose continuation, First/Last transition, or a fresh camera reset.
+export FRESHWEB_ITERATION_START_MODE=${FRESHWEB_ITERATION_START_MODE:-storyDriven}
+
 # Capture the current Mac camera by default. A fixed test frame can still be
 # supplied explicitly through FRESHWEB_CAMERA_IMAGE_PATH.
 export FRESHWEB_MODE=${FRESHWEB_MODE:-reference-image-actor}
@@ -68,9 +72,16 @@ export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=0
 export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
 export FRESHWEB_SINGLE_VIDEO_MODEL=alibaba:wan@2.6-flash
+
+# Lauf 819 stayed smooth because every First/Last and single-image clip shared
+# one render contract. Wan 2.6 Flash accepts 1088x832 as its smallest landscape
+# 4:3 input, so both mixed modes use that same contract before concat.
+export FRESHWEB_VIDEO_WIDTH=${FRESHWEB_VIDEO_WIDTH:-1088}
+export FRESHWEB_VIDEO_HEIGHT=${FRESHWEB_VIDEO_HEIGHT:-832}
+export FRESHWEB_VIDEO_FPS=${FRESHWEB_VIDEO_FPS:-10}
 export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=${FRESHWEB_SINGLE_VIDEO_HEIGHT:-832}
-export FRESHWEB_SINGLE_FPS=12
+export FRESHWEB_SINGLE_FPS=${FRESHWEB_SINGLE_FPS:-10}
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
 export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
 export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
