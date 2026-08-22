@@ -130,6 +130,12 @@ export FRESHWEB_DRIFT_CONTEXT_BUFFER_SIZE=${FRESHWEB_DRIFT_CONTEXT_BUFFER_SIZE:-
 export FRESHWEB_DRIFT_CONTEXT_BUFFER_CAPTURE_BEFORE_EACH_CALL=${FRESHWEB_DRIFT_CONTEXT_BUFFER_CAPTURE_BEFORE_EACH_CALL:-0}
 export FRESHWEB_TRIPPY_REANCHOR_INTERVAL=0
 
+# Every completed shot gets one synchronous fresh camera observation. GPT then
+# chooses continue, First/Last return into real room, or direct camera reset.
+export FRESHWEB_SCENE_BOUNDARY_TRANSPORT=${FRESHWEB_SCENE_BOUNDARY_TRANSPORT:-1}
+export FRESHWEB_ROOM_MEMORY_SIZE=${FRESHWEB_ROOM_MEMORY_SIZE:-10}
+export FRESHWEB_ASYNC_PERSONA_REFERENCE_UPDATES=0
+
 # Stable low-test assembly: no audio and no repeated boundary hold. Later clips
 # lose their first 0.125 seconds and are re-timed.
 export FRESHWEB_MIRELO_MODE=off
