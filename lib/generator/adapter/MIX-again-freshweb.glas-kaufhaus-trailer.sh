@@ -3,10 +3,10 @@ set -euo pipefail
 
 cd "$(dirname "$0")/../../.."
 
-# Cheap exhibition proof: two iterations, three scenes, no sound.
+# Cheap exhibition proof: two Taktmuster iterations, no sound.
 export GENERATIONS_PATH=${GENERATIONS_PATH:-"$PWD/GENRATIONS-KAUFHAUF"}
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-word-low-test}
-export FRESHWEB_WORDS=${FRESHWEB_WORDS:-human,en | Einkaufszentrum,de}
+export FRESHWEB_WORDS=${FRESHWEB_WORDS:-art-vernissage,en | Einkaufszentrum,de | Psycho_(1960),de}
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-2}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
 
@@ -30,29 +30,42 @@ export FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS=${FRESHWEB_CAMERA_CHANGE_GATE_HE
 # local/independent; GPT-5 mini plans only the complete causal scene sequence.
 export FRESHWEB_SCENE_PLAN_MODEL=gpt-5-mini-2025-08-07
 
-# One exact 3-2-2 sequence. Callers may still override the lengths explicitly.
-export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT:-3}
-export FRESHWEB_SCENE_LENGTHS=${FRESHWEB_SCENE_LENGTHS:-3,2,2}
-if [[ -n "$FRESHWEB_SCENE_LENGTHS" ]]; then
-  export FRESHWEB_USE_TAKTMUSTER_LENGTHS=0
-else
-  export FRESHWEB_USE_TAKTMUSTER_LENGTHS=1
-fi
-export FRESHWEB_SCENE_LENGTH_TAKT=${FRESHWEB_SCENE_LENGTH_TAKT:-3}
+# Taktmuster chooses scene count and lengths for every iteration. Keep explicit
+# values empty: FRESHWEB_SCENE_COUNT and FRESHWEB_SCENE_LENGTHS disable this.
+export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT-}
+export FRESHWEB_SCENE_LENGTHS=${FRESHWEB_SCENE_LENGTHS-}
+export FRESHWEB_USE_TAKTMUSTER_LENGTHS=${FRESHWEB_USE_TAKTMUSTER_LENGTHS:-1}
+export FRESHWEB_SCENE_COUNT_TAKT_COUNT=${FRESHWEB_SCENE_COUNT_TAKT_COUNT:-2}
+export FRESHWEB_SCENE_COUNT_TAKT_ZAEHLER=${FRESHWEB_SCENE_COUNT_TAKT_ZAEHLER:-4}
+export FRESHWEB_SCENE_COUNT_TAKT_NENNER=${FRESHWEB_SCENE_COUNT_TAKT_NENNER:-4}
+export FRESHWEB_SCENE_COUNT_TAKT_TYPE=${FRESHWEB_SCENE_COUNT_TAKT_TYPE:-balanced}
+export FRESHWEB_MIN_SCENE_COUNT=${FRESHWEB_MIN_SCENE_COUNT:-2}
+# Second rhythm: scene lengths use 2 x 3/4. Consume one beat at startup so
+# the length rhythm begins off the scene-count downbeat.
+export FRESHWEB_SCENE_LENGTH_TAKT_COUNT=${FRESHWEB_SCENE_LENGTH_TAKT_COUNT:-2}
+export FRESHWEB_SCENE_LENGTH_TAKT_ZAEHLER=${FRESHWEB_SCENE_LENGTH_TAKT_ZAEHLER:-3}
+export FRESHWEB_SCENE_LENGTH_TAKT_NENNER=${FRESHWEB_SCENE_LENGTH_TAKT_NENNER:-4}
+export FRESHWEB_SCENE_LENGTH_TAKT_SHIFT=${FRESHWEB_SCENE_LENGTH_TAKT_SHIFT:-1}
 export FRESHWEB_SCENE_LENGTH_TAKT_TYPE=${FRESHWEB_SCENE_LENGTH_TAKT_TYPE:-balanced}
+# Sum with an independent 2 x 4/4 length rhythm, then cap every shot at 4s.
+export FRESHWEB_SCENE_LENGTH_PRIMARY_TAKT_COUNT=${FRESHWEB_SCENE_LENGTH_PRIMARY_TAKT_COUNT:-2}
+export FRESHWEB_SCENE_LENGTH_PRIMARY_TAKT_ZAEHLER=${FRESHWEB_SCENE_LENGTH_PRIMARY_TAKT_ZAEHLER:-4}
+export FRESHWEB_SCENE_LENGTH_PRIMARY_TAKT_NENNER=${FRESHWEB_SCENE_LENGTH_PRIMARY_TAKT_NENNER:-4}
+export FRESHWEB_SCENE_LENGTH_SUM_MAX_SECONDS=${FRESHWEB_SCENE_LENGTH_SUM_MAX_SECONDS:-4}
 export FRESHWEB_SCENE_LENGTH_MULTIPLIER=${FRESHWEB_SCENE_LENGTH_MULTIPLIER:-1}
 export FRESHWEB_MIN_SCENE_DURATION_SECONDS=${FRESHWEB_MIN_SCENE_DURATION_SECONDS:-2}
 export FRESHWEB_SINGLE_VIDEO_MAX_DURATION=${FRESHWEB_SINGLE_VIDEO_MAX_DURATION:-4}
 export FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION=${FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION:-4}
 
-# Every exhibition clip is a two-anchor transition: current visible frame to a
-# generated reachable destination in the same room. No image-to-video fallback.
+# GPT chooses singleImage or First/Last for every later scene. The opening is a
+# single-image start from the current camera frame; a First/Last transition is
+# used only where the scene plan asks for one.
 export VIDEO_MODE_PRESET=storyDrivenMixed
 export FRESHWEB_IMAGE_TO_VIDEO_ONLY=0
-export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-firstLast}
+export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-singleImage}
 export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=0
 export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=0
-export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=0
+export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
 export FRESHWEB_SINGLE_VIDEO_MODEL=alibaba:wan@2.6-flash
 export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
@@ -63,25 +76,29 @@ export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1
 export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
 export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
+# Use one current Runware image model for opening, persona continuity and cast.
+# This avoids switching between old Kontext routes inside one sequence.
+export FRESHWEB_RUNWARE_IMAGE_MODEL=${FRESHWEB_RUNWARE_IMAGE_MODEL:-bfl:6@1}
+
 # Build the narrated opening scene from the real camera shot through Runware
 # image-to-image. This is the proven trailer path; no FAL image edit is used.
 export FRESHWEB_OPENING_START_ENABLED=1
 export FRESHWEB_OPENING_START_MODE=fluxContext
 export FRESHWEB_OPENING_START_INTERVAL=1
 export FRESHWEB_OPENING_START_PROVIDER=runware
-export FRESHWEB_OPENING_START_MODEL=bfl:3@1
+export FRESHWEB_OPENING_START_MODEL=${FRESHWEB_OPENING_START_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
 export FRESHWEB_OPENING_START_WIDTH=${FRESHWEB_OPENING_START_WIDTH:-1184}
 export FRESHWEB_OPENING_START_HEIGHT=${FRESHWEB_OPENING_START_HEIGHT:-880}
 
 # All scene and first/last destination stills use the same Runware image path.
 # Do not fall back to legacy Qwen/FAL for a later scene endpoint.
-export FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL:-bfl:3@1}
+export FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
 export FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER:-runware}
 
 # A selected person from CAST MEMORY is mixed with current room frame before
 # WAN animates it. bfl:6@1 accepts up to ten total reference images.
 export FRESHWEB_CAST_CONTEXT_ENABLED=${FRESHWEB_CAST_CONTEXT_ENABLED:-1}
-export FRESHWEB_CAST_CONTEXT_MODEL=${FRESHWEB_CAST_CONTEXT_MODEL:-bfl:6@1}
+export FRESHWEB_CAST_CONTEXT_MODEL=${FRESHWEB_CAST_CONTEXT_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
 export FRESHWEB_CAST_CONTEXT_PROVIDER=${FRESHWEB_CAST_CONTEXT_PROVIDER:-runware}
 export FRESHWEB_CAST_CONTEXT_TIMEOUT_MS=${FRESHWEB_CAST_CONTEXT_TIMEOUT_MS:-120000}
 export FRESHWEB_CAST_CONTEXT_WIDTH=${FRESHWEB_CAST_CONTEXT_WIDTH:-1184}
