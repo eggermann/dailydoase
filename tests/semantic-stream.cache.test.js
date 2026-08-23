@@ -2,6 +2,7 @@ import { afterEach, describe, expect, jest, test } from '@jest/globals';
 
 import {
   clearWordStreamCache,
+  getConfiguredWordStreams,
   getWordStreamCacheKey,
   getWordStreams,
   SEMANTIC_STREAM_TITLE_FILTER,
@@ -48,5 +49,17 @@ describe('semantic-stream cache', () => {
     expect(initStreams).toHaveBeenCalledWith(words, {
       filter: ['doi', 'isbn'],
     });
+  });
+
+  test('bypasses semantic-stream initialization for a replay config', async () => {
+    const getStreams = jest.fn(async () => [{ startWord: 'should-not-run' }]);
+
+    const streams = await getConfiguredWordStreams({
+      words: [['art-vernissage', 'en']],
+      semanticStream: { enabled: false, streams: [] },
+    }, { getStreams });
+
+    expect(streams).toEqual([]);
+    expect(getStreams).not.toHaveBeenCalled();
   });
 });

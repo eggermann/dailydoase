@@ -67,9 +67,9 @@ export FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION=${FRESHWEB_CAMERA_SIN
 export VIDEO_MODE_PRESET=storyDrivenMixed
 export FRESHWEB_IMAGE_TO_VIDEO_ONLY=0
 export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-singleImage}
-export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=0
-export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=0
-export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1
+export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=${FRESHWEB_LATER_CLIPS_SINGLE_IMAGE:-0}
+export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=${FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS:-0}
+export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=${FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE:-1}
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
 export FRESHWEB_SINGLE_VIDEO_MODEL=alibaba:wan@2.6-flash
 
@@ -83,8 +83,8 @@ export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=${FRESHWEB_SINGLE_VIDEO_HEIGHT:-832}
 export FRESHWEB_SINGLE_FPS=${FRESHWEB_SINGLE_FPS:-10}
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
-export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Authentic unedited low-cost webcam and security-camera recording inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. New, invented, or transformed people may enter, but they must appear physically present under the same room light, lens, perspective, focus, compression, shadows, reflections, and occlusion as the webcam source. Surreal events remain mundane photographic evidence, never illustration, cartoon, CGI, collage, cutout, or separately lit portrait. Preserve room geometry and existing objects; use only subtle 1989 German Einkaufszentrum analog noise and interlace; no visible words or invented typography; strong causal progression.}
+export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Fixed low-cost room webcam, wide practical view, ordinary auto-exposure and compression, subtle analog noise; no operator movement, cinematic lighting, shallow focus, or stylized characters.}
 export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
 # Use one current Runware image model for opening, persona continuity and cast.

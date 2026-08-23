@@ -71,6 +71,18 @@ export const getWordStreams = async (
     return pendingStreams;
 };
 
+export const getConfiguredWordStreams = async (
+    config = {},
+    { getStreams = getWordStreams } = {}
+) => {
+    if (config?.semanticStream?.enabled === false) {
+        return Array.isArray(config.semanticStream.streams)
+            ? config.semanticStream.streams
+            : [];
+    }
+    return getStreams(config?.words);
+};
+
 const toWordLabel = (entry) => {
     if (Array.isArray(entry)) {
         const [value, langOrOptions] = entry;
@@ -330,7 +342,7 @@ export default async (configs) => {
     await Promise.all(configs.map(async (config) => {
         const words = config.words;
 
-        const wordStreams = await getWordStreams(words);
+        const wordStreams = await getConfiguredWordStreams(config);
 
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
         const model = await generator.setVersion(config);
