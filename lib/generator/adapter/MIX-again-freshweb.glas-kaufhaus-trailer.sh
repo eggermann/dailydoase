@@ -61,9 +61,8 @@ export FRESHWEB_MIN_SCENE_DURATION_SECONDS=${FRESHWEB_MIN_SCENE_DURATION_SECONDS
 export FRESHWEB_SINGLE_VIDEO_MAX_DURATION=${FRESHWEB_SINGLE_VIDEO_MAX_DURATION:-4}
 export FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION=${FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION:-4}
 
-# GPT chooses singleImage or First/Last for every later scene. The opening is a
-# single-image start from the current camera frame; a First/Last transition is
-# used only where the scene plan asks for one.
+# b1aaf247 contributes CCTV material and reference handling. GPT still chooses
+# singleImage or firstLast independently for each scene.
 export VIDEO_MODE_PRESET=storyDrivenMixed
 export FRESHWEB_IMAGE_TO_VIDEO_ONLY=0
 export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-singleImage}
@@ -83,31 +82,33 @@ export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=${FRESHWEB_SINGLE_VIDEO_HEIGHT:-832}
 export FRESHWEB_SINGLE_FPS=${FRESHWEB_SINGLE_FPS:-10}
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Authentic unedited low-cost webcam and security-camera recording inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. New, invented, or transformed people may enter, but they must appear physically present under the same room light, lens, perspective, focus, compression, shadows, reflections, and occlusion as the webcam source. Surreal events remain mundane photographic evidence, never illustration, cartoon, CGI, collage, cutout, or separately lit portrait. Preserve room geometry and existing objects; use only subtle 1989 German Einkaufszentrum analog noise and interlace; no visible words or invented typography; strong causal progression.}
-export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Fixed low-cost room webcam, wide practical view, ordinary auto-exposure and compression, subtle analog noise; no operator movement, cinematic lighting, shallow focus, or stylized characters.}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
+export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
 export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
 # Use one current Runware image model for opening, persona continuity and cast.
 # This avoids switching between old Kontext routes inside one sequence.
 export FRESHWEB_RUNWARE_IMAGE_MODEL=${FRESHWEB_RUNWARE_IMAGE_MODEL:-bfl:6@1}
 
-# Build the narrated opening scene from the real camera shot through Runware
-# image-to-image. This is the proven trailer path; no FAL image edit is used.
-export FRESHWEB_OPENING_START_ENABLED=1
-export FRESHWEB_OPENING_START_MODE=fluxContext
+# The opening starts on the unmodified camera observation. WAN receives that
+# exact frame, so the visitor, room, lens and cheap-webcam material stay real.
+# Set this to 1 only for an intentionally authored BFL opening transformation.
+export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-1}
+export FRESHWEB_OPENING_START_MODE=${FRESHWEB_OPENING_START_MODE:-fluxContext}
 export FRESHWEB_OPENING_START_INTERVAL=1
 export FRESHWEB_OPENING_START_PROVIDER=runware
-export FRESHWEB_OPENING_START_MODEL=${FRESHWEB_OPENING_START_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
+export FRESHWEB_OPENING_START_MODEL=${FRESHWEB_OPENING_START_MODEL:-bfl:3@1}
 export FRESHWEB_OPENING_START_WIDTH=${FRESHWEB_OPENING_START_WIDTH:-1184}
 export FRESHWEB_OPENING_START_HEIGHT=${FRESHWEB_OPENING_START_HEIGHT:-880}
 
 # All scene and first/last destination stills use the same Runware image path.
 # Do not fall back to legacy Qwen/FAL for a later scene endpoint.
-export FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
+export FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_MODEL:-bfl:3@1}
 export FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER=${FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER:-runware}
 
-# A selected person from CAST MEMORY is mixed with current room frame before
-# WAN animates it. bfl:6@1 accepts up to ten total reference images.
+# A selected person from CAST MEMORY can be mixed into an explicit First/Last
+# destination. It is off for normal webcam shots: reconstructing every opening
+# through BFL makes the person and the room drift before WAN has started.
 export FRESHWEB_CAST_CONTEXT_ENABLED=${FRESHWEB_CAST_CONTEXT_ENABLED:-1}
 export FRESHWEB_CAST_CONTEXT_MODEL=${FRESHWEB_CAST_CONTEXT_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
 export FRESHWEB_CAST_CONTEXT_PROVIDER=${FRESHWEB_CAST_CONTEXT_PROVIDER:-runware}

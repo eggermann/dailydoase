@@ -55,7 +55,7 @@
 
 ## In Progress
 
-- None for Loop 8.
+- Loop 9: review and commit b1aaf247 CCTV grammar, GPT video-mode ownership, person-anchor changes, and completed Run 850.
 
 ## Next
 

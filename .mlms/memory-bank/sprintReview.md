@@ -2,6 +2,44 @@
 
 ## Loop Reviews
 
+## Loop 9 Review
+
+### What Changed
+
+- Reused the b1aaf247 high-angle 1989 Einkaufszentrum CCTV grammar and BFL opening/cast path.
+- Kept GPT as the sole owner of `singleImage` versus `firstLast`.
+- Restored technical camera/person anchoring between generated scenes.
+- Removed compiler keyword and visual-mode inference.
+
+### Acceptance Criteria Result
+
+- [x] b1 camera material is explicit in planner and WAN prompts.
+- [x] Scene mode is not forced by the launcher.
+- [x] Run 850 rendered and concatenated from the old webcam image.
+- [x] Focused tests pass.
+
+### Verification Result
+
+44 focused tests passed. Run 850 concatenated successfully at `GENRATIONS-KAUFHAUF/850-850-glas-kaufhaus-b1-cctv-gpt-modes/merged/1787494469903-concat.mp4`.
+
+### Issues / Gaps
+
+- Node still retains listeners after successful concat and must be stopped manually.
+
+## Loop 9 Retrospective
+
+### What Worked
+
+- Separating b1 image material from GPT transport ownership preserved the intended artistic control.
+
+### What To Improve Next Loop
+
+- Inspect run output visually before deciding whether the b1 high-angle reconstruction is preferable to raw-camera continuity.
+
+### Process Decision
+
+Commit requested by user.
+
 ## Loop 1 Review
 
 ### What Changed

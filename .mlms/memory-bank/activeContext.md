@@ -6,13 +6,13 @@ Render and document one live 3–2–2 Kaufhaus sequence with `wort` as topic, s
 
 ## Current Loop
 
-Loop: 8
+Loop: 9
 
-Phase: Completed and verified
+Phase: Review
 
 ## Current Focus
 
-Generation `802` is complete: exact 3-second, 2-second, and 2-second WAN clips; FLUX.2 Flex FIFO transitions with 3, 4, and 5 references; and an exact 7-second concat. Person checks can no longer pause an iteration after scene 1 starts.
+Run `850` completed with the old webcam image. GPT chose `singleImage`, `singleImage`, `singleImage`, then `firstLast`; b1 CCTV grammar and current person anchor were active.
 
 ## Assumptions
 
@@ -42,4 +42,4 @@ Generation `802` is complete: exact 3-second, 2-second, and 2-second WAN clips; 
 
 ## Next Action
 
-Strengthen planner output from text/light effects to explicit `actorAction` or `actorsInteraction`; preserve the now-verified no-mid-iteration-stop rule.
+Commit the reviewed b1-CCTV/GPT-mode/person-anchor change set.

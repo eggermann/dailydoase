@@ -209,3 +209,16 @@ Wait for a visible person only before iteration start. During a running iteratio
 
 Consequences:
 Generation `802` completed its exact 3–2–2 sequence and 7-second concat without a mid-iteration stop.
+
+### D-0017: Keep GPT as Video-Mode Owner While Reusing b1 CCTV Grammar
+
+Status: Accepted by user
+
+Context:
+`b1aaf247` produced desired surveillance material but forced First/Last for every scene.
+
+Decision:
+Reuse its fixed high-angle 1989 Einkaufszentrum CCTV grammar, BFL opening and cast-reference path. Keep `FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1`, so GPT selects `singleImage` or `firstLast` per scene.
+
+Consequences:
+Camera style and transport mode remain separate artistic decisions.
