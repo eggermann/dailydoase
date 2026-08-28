@@ -82,8 +82,8 @@ export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=${FRESHWEB_SINGLE_VIDEO_HEIGHT:-832}
 export FRESHWEB_SINGLE_FPS=${FRESHWEB_SINGLE_FPS:-10}
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
-export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, dirty VHS interlace, clipped highlights, crushed blacks, chroma bleed, lens grime, uneven auto exposure, dropped frames and low bitrate; no visible words or invented typography; strong causal progression.}
+export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, dirty VHS interlace, harsh clipped fluorescent highlights, crushed shadows, chroma bleed, lens grime, dead pixels, unstable auto exposure and low bitrate. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
 export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
 # Use one current Runware image model for opening, persona continuity and cast.
@@ -98,6 +98,7 @@ export FRESHWEB_OPENING_START_MODE=${FRESHWEB_OPENING_START_MODE:-fluxContext}
 export FRESHWEB_OPENING_START_INTERVAL=1
 export FRESHWEB_OPENING_START_PROVIDER=runware
 export FRESHWEB_OPENING_START_MODEL=${FRESHWEB_OPENING_START_MODEL:-bfl:3@1}
+export FRESHWEB_OPENING_START_NEGATIVE_PROMPT=${FRESHWEB_OPENING_START_NEGATIVE_PROMPT:-different person, second person, extra person, crowd, duplicate face, changed hair, changed age, changed clothing, oversized objects, giant props, clean cinematic image, polished commercial lighting}
 export FRESHWEB_OPENING_START_WIDTH=${FRESHWEB_OPENING_START_WIDTH:-1184}
 export FRESHWEB_OPENING_START_HEIGHT=${FRESHWEB_OPENING_START_HEIGHT:-880}
 
