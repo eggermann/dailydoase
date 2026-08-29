@@ -330,7 +330,12 @@ export default async (configs) => {
     configs.map(async (config, index) => {
         const words = config.words;
 
-        const wordStreams = await getWordStreams(words);
+        // A static generator test supplies its cues in config.promptFunktion.
+        // Do not contact Wikipedia merely to create stream objects that test
+        // mode will never consume.
+        const wordStreams = config.semanticStreamStaticTest
+            ? []
+            : await getWordStreams(words);
 
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
         const model = await generator.setVersion(config);

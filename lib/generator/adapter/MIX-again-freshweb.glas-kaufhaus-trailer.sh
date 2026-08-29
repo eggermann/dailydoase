@@ -30,9 +30,10 @@ export FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS=${FRESHWEB_CAMERA_CHANGE_GATE_HE
 # local/independent; GPT-5 mini plans only the complete causal scene sequence.
 export FRESHWEB_SCENE_PLAN_MODEL=gpt-5-mini-2025-08-07
 
-# One exact 3-2-2 sequence. Callers may still override the lengths explicitly.
-export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT:-3}
-export FRESHWEB_SCENE_LENGTHS=${FRESHWEB_SCENE_LENGTHS:-3,2,2}
+# An explicit count/length list overrides Taktmuster. Leave either value empty
+# to let Taktmuster determine that dimension for each iteration.
+export FRESHWEB_SCENE_COUNT=${FRESHWEB_SCENE_COUNT-}
+export FRESHWEB_SCENE_LENGTHS=${FRESHWEB_SCENE_LENGTHS-}
 if [[ -n "$FRESHWEB_SCENE_LENGTHS" ]]; then
   export FRESHWEB_USE_TAKTMUSTER_LENGTHS=0
 else
@@ -45,28 +46,33 @@ export FRESHWEB_MIN_SCENE_DURATION_SECONDS=${FRESHWEB_MIN_SCENE_DURATION_SECONDS
 export FRESHWEB_SINGLE_VIDEO_MAX_DURATION=${FRESHWEB_SINGLE_VIDEO_MAX_DURATION:-4}
 export FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION=${FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION:-4}
 
-# Scene 1 uses the stable single-image opening. Later scenes keep the planner's
-# choice: singleImage for continuous action, firstLast for a reachable new pose
-# or actor interaction in the same room.
-export VIDEO_MODE_PRESET=storyDrivenMixed
-export FRESHWEB_IMAGE_TO_VIDEO_ONLY=0
+# Exhibition default: Runware Wan 2.6 Flash renders every shot from its start
+# frame. It is the cheap, reliable path for visible action. GPT still plans the
+# story, but no scene may trigger a paid FAL First/Last render.
+export VIDEO_MODE_PRESET=singleImageOnly
+export FRESHWEB_IMAGE_TO_VIDEO_ONLY=1
 export FRESHWEB_FIRST_CLIP_VIDEO_MODE=singleImage
-export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=0
-export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=1
-export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1
+export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=1
+export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=0
+export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=0
+export FRESHWEB_CREATIVE_CUTS_ENABLED=${FRESHWEB_CREATIVE_CUTS_ENABLED:-0}
+# First/Last is disabled for this preset, so do not inherit a FAL endpoint
+# from an interactive shell when the script is started manually.
+unset FRESHWEB_FIRST_LAST_VIDEO_MODEL_TYPE
+unset FRESHWEB_FIRST_LAST_VIDEO_MODEL
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
 export FRESHWEB_SINGLE_VIDEO_MODEL=alibaba:wan@2.6-flash
 export FRESHWEB_SINGLE_VIDEO_WIDTH=1088
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=832
 export FRESHWEB_SINGLE_FPS=12
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
-export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Real 1989 German Einkaufszentrum surveillance footage inside the exact visible exhibition room. Each ordinary continuation preserves the exact source camera position, lens, height, perspective, and room coverage. A different motivated fixed security camera is allowed only when the scene explicitly has creativeCut=true. Never use operator movement. Preserve real people, room geometry, existing objects, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
+export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: preserve the exact fixed security-camera position, lens, height, perspective, and framing of the source frame for this clip. A different fixed camera is allowed only for explicit creativeCut=true. Slight VHS noise and interlace; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay. Physical spatial integrity: bodies, hands, easels, tables, counters, and props keep clear separate volumes; limbs never pass through furniture or objects, and touching happens only at a named contact point.}
 export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
-# Build the narrated opening scene from the real camera shot through Runware
-# image-to-image. This is the proven trailer path; no FAL image edit is used.
-export FRESHWEB_OPENING_START_ENABLED=1
+# Proven real-camera path: WAN starts from the untouched camera shot. Turn this
+# on only when an intentional Runware image-to-image opening is wanted.
+export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-0}
 export FRESHWEB_OPENING_START_MODE=fluxContext
 export FRESHWEB_OPENING_START_INTERVAL=1
 export FRESHWEB_OPENING_START_PROVIDER=runware
@@ -105,7 +111,7 @@ export FRESHWEB_TRIPPY_REANCHOR_INTERVAL=0
 # lose their first 0.125 seconds and are re-timed.
 export FRESHWEB_MIRELO_MODE=off
 export FRESHWEB_CONCAT_TRIM_LEADING_SECONDS=${FRESHWEB_CONCAT_TRIM_LEADING_SECONDS:-0.125}
-export FRESHWEB_RETRY_ON_FAILURE=0
-export FRESHWEB_VIDEO_MAX_RETRIES_ON_FAILURE=0
+export FRESHWEB_RETRY_ON_FAILURE=${FRESHWEB_RETRY_ON_FAILURE:-0}
+export FRESHWEB_VIDEO_MAX_RETRIES_ON_FAILURE=${FRESHWEB_VIDEO_MAX_RETRIES_ON_FAILURE:-0}
 
 exec node lib/generator/adapter/MIX-again-freshweb.js
