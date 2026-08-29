@@ -6,7 +6,7 @@ cd "$(dirname "$0")/../../.."
 # Cheap exhibition proof: two Taktmuster iterations, no sound.
 export GENERATIONS_PATH=${GENERATIONS_PATH:-"$PWD/GENRATIONS-KAUFHAUF"}
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-word-low-test}
-export FRESHWEB_WORDS=${FRESHWEB_WORDS:-art-vernissage,en | Einkaufszentrum,de | Psycho_(1960),de}
+export FRESHWEB_WORDS=${FRESHWEB_WORDS:-human,en | Einkaufszentrum,de}
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-2}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
 
