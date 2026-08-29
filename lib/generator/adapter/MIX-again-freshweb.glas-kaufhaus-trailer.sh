@@ -54,6 +54,10 @@ export FRESHWEB_FIRST_CLIP_VIDEO_MODE=singleImage
 export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=0
 export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=1
 export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=1
+# First/last frames already anchor person, room, camera, and end state. Runware
+# 2.7 is the normal transition renderer; FAL remains a fallback only.
+export FRESHWEB_FIRST_LAST_VIDEO_MODEL_TYPE=${FRESHWEB_FIRST_LAST_VIDEO_MODEL_TYPE:-runwareFirstLast}
+export FRESHWEB_FIRST_LAST_VIDEO_MODEL=${FRESHWEB_FIRST_LAST_VIDEO_MODEL:-alibaba:wan@2.7}
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
 export FRESHWEB_SINGLE_VIDEO_MODEL=alibaba:wan@2.6-flash
 export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
