@@ -105,10 +105,10 @@ export FRESHWEB_DRIFT_CONTEXT_BUFFER_SIZE=${FRESHWEB_DRIFT_CONTEXT_BUFFER_SIZE:-
 export FRESHWEB_DRIFT_CONTEXT_BUFFER_CAPTURE_BEFORE_EACH_CALL=${FRESHWEB_DRIFT_CONTEXT_BUFFER_CAPTURE_BEFORE_EACH_CALL:-0}
 export FRESHWEB_TRIPPY_REANCHOR_INTERVAL=0
 
-# Stable low-test assembly: no audio and no repeated boundary hold. Later clips
-# lose their first 0.125 seconds and are re-timed.
+# Preserve every shared First/Last anchor. This may retain a brief held frame,
+# but prevents concat from cutting past the common image into visible motion.
 export FRESHWEB_MIRELO_MODE=off
-export FRESHWEB_CONCAT_TRIM_LEADING_SECONDS=${FRESHWEB_CONCAT_TRIM_LEADING_SECONDS:-0.125}
+export FRESHWEB_CONCAT_TRIM_LEADING_SECONDS=${FRESHWEB_CONCAT_TRIM_LEADING_SECONDS:-0}
 export FRESHWEB_RETRY_ON_FAILURE=0
 export FRESHWEB_VIDEO_MAX_RETRIES_ON_FAILURE=0
 
