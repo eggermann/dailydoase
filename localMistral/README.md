@@ -84,3 +84,26 @@ FRESHWEB_USE_VISION=1 sh localMistral/run-freshweb-local-mistral.sh
 
 The vision fallback uses the dedicated multimodal server on
 `http://dominiks-Mac-mini.local:8082` by default.
+
+## Private Qwen camera presence: `mac-mini-vision`
+
+`mac-mini-vision` is separate from the legacy Mistral setup. It opens a
+temporary SSH tunnel to the Mac mini's loopback-only Qwen3-VL server on port
+`8080`. Chat stays untouched; only the camera presence gate uses Qwen.
+
+```bash
+sh lib/generator/adapter/MIX-again-freshweb.prompt-fast-wan-strict-4-3.sh
+```
+
+`mac-mini-vision` is the strict preset's default. The profile sets
+`FRESHWEB_CAMERA_PRESENCE_VISION_PROVIDERS=mac-mini-vision`, which is an
+`lmstudio` transport alias, and disables recurring persona vision.
+Override `MAC_MINI_VISION_SSH_TARGET` if the Mini gets a new Tailscale name.
+The runner never starts a remote server and never exposes a public port.
+
+To keep legacy Mistral vision instead, select it explicitly:
+
+```bash
+FRESHWEB_VISION_CONFIG=local-mistral \
+  sh lib/generator/adapter/MIX-again-freshweb.prompt-fast-wan-strict-4-3.sh
+```
