@@ -58,3 +58,25 @@ Server bleibt im zweiten Terminal laufen. Erwartete Meldung:
 ```text
 Server running at http://0.0.0.0:4000/
 ```
+
+Ohne `folder`-Parameter erwartet der Player den neuesten `parts`-Ordner. Solange
+dieser noch keine Videos hat, spielt er stattdessen aus
+`87-freshweb-prompt-fast-wan-strict-4-3-test/parts`. Sobald im neuesten Ordner
+ein Video liegt, wird dieser automatisch zum Standard.
+
+## 3× see all
+
+Neben `Tail size` kann `3× see all` aktiviert werden. Der Player spielt dann
+`Tail size × 3 × 10` Clips, danach alle stabilen Parts seit Erstellung der
+Steuerdatei einmal, und kehrt anschließend zum neuesten Tail zurück.
+
+Beim ersten Laden eines Parts-Ordners erstellt der Server dort diese editierbare
+Steuerdatei:
+
+```js
+var repeatallaafter = -1;
+```
+
+`-1` bedeutet nur neuesten Tail. Die Checkbox schreibt `3` in dieselbe Datei.
+Die Erstellungszeit der Datei bleibt dabei die Grenze für den vollständigen
+Durchlauf.
