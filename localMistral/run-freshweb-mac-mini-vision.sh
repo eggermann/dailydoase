@@ -9,7 +9,7 @@ PROJECT_ROOT=$(CDPATH= cd -- "${SCRIPT_DIR}/.." && pwd)
 PRESET_PATH="${MAC_MINI_VISION_PRESET:-lib/generator/adapter/MIX-again-freshweb.prompt-fast-wan-strict-4-3.sh}"
 TUNNEL_PID=""
 
-# The strict preset sees this and does not launch a second tunnel.
+# The strict preset sees this and does not launch a second connection.
 export MAC_MINI_VISION_TUNNEL_ACTIVE=1
 
 cleanup() {
@@ -21,18 +21,20 @@ cleanup() {
 
 trap cleanup EXIT INT TERM
 
-ssh \
-  -o BatchMode=yes \
-  -o ExitOnForwardFailure=yes \
-  -o ConnectTimeout=10 \
-  -N \
-  -L "127.0.0.1:${MAC_MINI_VISION_LOCAL_PORT}:127.0.0.1:${MAC_MINI_VISION_REMOTE_PORT}" \
-  "${MAC_MINI_VISION_SSH_TARGET}" &
-TUNNEL_PID=$!
+if [ "${MAC_MINI_VISION_LOCAL}" != "1" ]; then
+  ssh \
+    -o BatchMode=yes \
+    -o ExitOnForwardFailure=yes \
+    -o ConnectTimeout=10 \
+    -N \
+    -L "127.0.0.1:${MAC_MINI_VISION_LOCAL_PORT}:127.0.0.1:${MAC_MINI_VISION_REMOTE_PORT}" \
+    "${MAC_MINI_VISION_SSH_TARGET}" &
+  TUNNEL_PID=$!
+fi
 
 attempt=0
 until curl -fsS "${LMSTUDIO_URL}/health" >/dev/null 2>&1; do
-  if ! kill -0 "${TUNNEL_PID}" 2>/dev/null; then
+  if [ -n "${TUNNEL_PID}" ] && ! kill -0 "${TUNNEL_PID}" 2>/dev/null; then
     echo "mac-mini-vision SSH tunnel stopped before Qwen became reachable" >&2
     exit 1
   fi
