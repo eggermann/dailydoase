@@ -26,6 +26,7 @@ if [ "${MAC_MINI_VISION_LOCAL}" != "1" ]; then
     -o BatchMode=yes \
     -o ExitOnForwardFailure=yes \
     -o ConnectTimeout=10 \
+    -o "HostKeyAlias=${MAC_MINI_VISION_SSH_HOST_KEY_ALIAS}" \
     -N \
     -L "127.0.0.1:${MAC_MINI_VISION_LOCAL_PORT}:127.0.0.1:${MAC_MINI_VISION_REMOTE_PORT}" \
     "${MAC_MINI_VISION_SSH_TARGET}" &
