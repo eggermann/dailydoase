@@ -8,11 +8,11 @@ Implement Lost Audience visitor memory, returning-visitor re-identification, and
 
 Loop: 9
 
-Phase: Blocked — external render balance
+Phase: Complete
 
 ## Current Focus
 
-Implementation and focused verification are complete. The finite live render stopped before clip one because the video provider has no currently available balance.
+One finite live iteration completed with Mac-mini Qwen3-VL vision, a persisted returning-visitor event, and a verified H.264 concat.
 
 ## Assumptions
 
@@ -23,9 +23,9 @@ Implementation and focused verification are complete. The finite live render sto
 ## Risks / Unknowns
 
 - Descriptions can be incomplete or vary; return matching must stay conservative.
-- Live render needs a visible camera person, configured external providers, and available Runware balance.
+- The Mac mini has only Node 12 available, so its focused Jest test needs a current Node runtime before it can run there.
 - Existing user changes remain isolated in the original worktree; this new worktree is clean.
 
 ## Next Action
 
-When Runware has free balance, rerun the one-iteration command. Verify `parts/visitor-memory.json`, then link the final concat MP4.
+Deliver the verified concat and keep the Mini sparse worktree for a later current-Node test if requested.

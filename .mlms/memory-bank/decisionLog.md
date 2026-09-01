@@ -248,3 +248,16 @@ Use the current semantic stream's `actorsInteraction`, falling back to story eve
 
 Consequences:
 Visitor memory supplies continuity; the semantic stream supplies scene meaning.
+
+### D-0019: Use Mac-mini Qwen3-VL Through a Local SSH Tunnel
+
+Status: Live-verified
+
+Context:
+Qwen3-VL runs privately on the Mac mini at `127.0.0.1:8080`, so the work Mac could not reach it by direct hostname.
+
+Decision:
+Forward local port `18080` through SSH and set the live run's `LMSTUDIO_URL` and `LMSTUDIO_MODEL` explicitly to that tunnel and Qwen3-VL model.
+
+Consequences:
+Opening and transition captures use the actual Mac-mini vision server. A remote code test remains blocked only by the Mini's Node 12 runtime, not vision availability.

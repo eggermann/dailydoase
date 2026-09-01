@@ -503,3 +503,40 @@ No-mid-iteration-stop GOAL complete. Next loop should enforce actor action in pl
 ### Process Decision
 
 Implementation is ready. Wait for provider balance, then rerun the finite command and verify the resulting concat. No commit.
+
+## Loop 9 Resumed Review — Mini Vision Render
+
+### Acceptance Criteria Result
+
+- [x] Lost Audience code is committed and pushed as `5744ede3`.
+- [x] Mac-mini Qwen3-VL vision is live-verified through the SSH tunnel.
+- [x] One run-local visitor-memory artifact records a return with two sightings.
+- [x] Returning transition receives interaction from the semantic stream, not a fixed gesture.
+- [x] One H.264 concat was rendered and technically verified.
+- [ ] Focused Jest suite cannot run on the Mini until it has a current Node runtime; the same suite passed 47/47 on the work Mac.
+
+### Verification Result
+
+- `visitor-memory.json`: `returning`, overlap `1`, two sightings of the same run-local visitor.
+- Scene 3 destination prompt explicitly virtualises the semantic event: projector activation, portrait projection, and silhouette.
+- Final concat: 1088x832 H.264, 12 fps, 120 frames, 10.000 seconds.
+- Mini sparse worktree is checked out at `~/Projekte/dailydoase-lost-audience` and tracks `exhibition/lost-audience`.
+
+### User Demo Notes
+
+Open `GENRATIONS-KAUFHAUF/3-lost-audience-one-iteration-mini-vision/merged/1788292192045-concat.mp4`.
+
+## Loop 9 Resumed Retrospective
+
+### What Worked
+
+- Qwen3-VL's distinct visitor description made conservative return matching succeed across two captures.
+- Sparse checkout avoided the Mini's historic generation archive filling its disk.
+
+### What Was Confusing
+
+- The Mini has a working vision server but only an old Node 12 runtime, so its local Jest cannot load modern optional chaining.
+
+### Process Decision
+
+Goal complete. Keep generated artifacts uncommitted; code branch is pushed.

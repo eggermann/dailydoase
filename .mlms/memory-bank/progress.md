@@ -8,6 +8,10 @@
 - Made visible returning-visitor interaction depend on semantic-stream virtualisation (`actorsInteraction`, then story event/beat), not a fixed gaze or gesture.
 - Passed focused Shorty Book suite: 47/47 tests; syntax and whitespace checks passed.
 - Started the requested finite one-iteration run. Opening camera frame and scene plan were created; Runware rejected the first video request because all currently free balance is reserved by active requests.
+- Restored the Mini vision path through a localhost SSH tunnel to its live Qwen3-VL server; a direct vision call correctly described the current visitor.
+- Created a sparse Mini worktree at `~/Projekte/dailydoase-lost-audience` on `5744ede3`, without materializing the repository's large historic generation archives.
+- Rendered one completed Mini-vision iteration: scene 1 capture was `new`; scene 2 capture was `returning` with overlap `1` and two sightings; scene 3 received the semantic-stream projector/silhouette interaction.
+- Verified final H.264 concat: 1088x832, 12 fps, 120 frames, 10.000 seconds.
 
 - Chosen current branch as required working branch.
 - Preserved unrelated dirty work.
@@ -62,9 +66,8 @@
 
 ## In Progress
 
-- Loop 9: Lost Audience implementation is ready; concat output is blocked on external Runware balance.
+- None.
 
 ## Next
 
-- Rerun one finite concat once the provider has free balance.
-- Verify visitor-memory artifact and final concat with `ffprobe`.
+- Optional: install or expose a current Node runtime on the Mac mini, then run its focused Jest suite.
