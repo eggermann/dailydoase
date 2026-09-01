@@ -2,6 +2,13 @@
 
 ## Done
 
+- Loop 9: forked `origin/exhibition/person-fix-d6fab8c4--822-823` into `exhibition/lost-audience` without touching the user's dirty worktree.
+- Added bounded run-local visitor memory, description-based return recognition, and persisted `parts/visitor-memory.json`.
+- Routed new and returning camera visitors through a forced First/Last destination; returning references reuse their earlier camera anchors.
+- Made visible returning-visitor interaction depend on semantic-stream virtualisation (`actorsInteraction`, then story event/beat), not a fixed gaze or gesture.
+- Passed focused Shorty Book suite: 47/47 tests; syntax and whitespace checks passed.
+- Started the requested finite one-iteration run. Opening camera frame and scene plan were created; Runware rejected the first video request because all currently free balance is reserved by active requests.
+
 - Chosen current branch as required working branch.
 - Preserved unrelated dirty work.
 - Traced shell entry chain.
@@ -55,9 +62,9 @@
 
 ## In Progress
 
-- None for Loop 8.
+- Loop 9: Lost Audience implementation is ready; concat output is blocked on external Runware balance.
 
 ## Next
 
-- Require visible actor action or actor interaction in scene planning without rejecting atmosphere/effect content.
-- Fix fenced opening-vision JSON so StoryTransport records the visible person.
+- Rerun one finite concat once the provider has free balance.
+- Verify visitor-memory artifact and final concat with `ffprobe`.

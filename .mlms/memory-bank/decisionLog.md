@@ -2,6 +2,19 @@
 
 ## Decisions
 
+### D-0017: Build Lost Audience From the Person-Fix Branch
+
+Status: Accepted by user
+
+Context:
+`person-fix` already introduces a newly detected live visitor into a First/Last destination without a scene jump, but it retains only the latest persona reference.
+
+Decision:
+Fork `origin/exhibition/person-fix-d6fab8c4--822-823` as `exhibition/lost-audience`. Keep a bounded run-local visitor memory, use conservative description-token return matching, and make a return an interaction-aware destination event.
+
+Consequences:
+The feature preserves camera continuity and does not make a biometric identity claim. Old visitor references are bounded and inspectable as run artifacts.
+
 ### D-0001: Use Memory Bank and a Bounded Documentation Loop
 
 Status: Accepted
@@ -209,3 +222,29 @@ Wait for a visible person only before iteration start. During a running iteratio
 
 Consequences:
 Generation `802` completed its exact 3–2–2 sequence and 7-second concat without a mid-iteration stop.
+
+### D-0017: Lost Audience Uses Run-Local Descriptive Memory
+
+Status: Implemented and focused-test verified
+
+Context:
+The `person-fix` branch can introduce a fresh camera visitor, but has no record that a previously seen visitor has returned.
+
+Decision:
+Keep at most ten run-local visitor records, match conservative normalized vision-description tokens, and retain up to three recent camera references per remembered visitor. This is continuity matching, not biometric identification.
+
+Consequences:
+New and returning visitors can force the next First/Last transition while keeping the story start frame as continuity truth.
+
+### D-0018: Semantic Stream Owns Returning-Visitor Interaction
+
+Status: Implemented and focused-test verified
+
+Context:
+Memory can identify a return but cannot decide what the return should visibly mean.
+
+Decision:
+Use the current semantic stream's `actorsInteraction`, falling back to story event or beat, to virtualise visible interaction. Never hard-code a look, gesture, dialogue, or touch.
+
+Consequences:
+Visitor memory supplies continuity; the semantic stream supplies scene meaning.

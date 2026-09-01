@@ -482,3 +482,24 @@ Pause for a visible camera person; GOAL remains incomplete. No commit.
 ### Process Decision
 
 No-mid-iteration-stop GOAL complete. Next loop should enforce actor action in planning. No commit.
+
+## Loop 9 Review — Lost Audience
+
+### What Changed
+
+- Created `exhibition/lost-audience` from `origin/exhibition/person-fix-d6fab8c4--822-823` in a clean worktree.
+- Added bounded descriptive visitor memory and return events with earlier camera-reference continuity.
+- Persisted visitor state as `parts/visitor-memory.json`.
+- Forced a First/Last destination for a new or returning visitor even when the planner selected single-image continuation.
+- Routed returning-visitor interaction through the current semantic stream instead of a fixed social gesture.
+
+### Verification Result
+
+- Focused generator suite: 47/47 passed.
+- Syntax and whitespace checks passed.
+- Live one-iteration startup captured the opening persona frame and generated a three-scene semantic plan.
+- First Runware video request returned insufficient available balance because credits were reserved by active requests; no scene video or concat was produced.
+
+### Process Decision
+
+Implementation is ready. Wait for provider balance, then rerun the finite command and verify the resulting concat. No commit.
