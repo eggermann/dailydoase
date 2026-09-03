@@ -131,6 +131,8 @@ export FRESHWEB_DRIFT_CONTEXT_BUFFER_ENABLED=${FRESHWEB_DRIFT_CONTEXT_BUFFER_ENA
 export FRESHWEB_DRIFT_CONTEXT_BUFFER_SIZE=${FRESHWEB_DRIFT_CONTEXT_BUFFER_SIZE:-10}
 # Each drift starts from a new camera observation instead of a stale buffer frame.
 export FRESHWEB_DRIFT_CONTEXT_BUFFER_CAPTURE_BEFORE_EACH_CALL=${FRESHWEB_DRIFT_CONTEXT_BUFFER_CAPTURE_BEFORE_EACH_CALL:-1}
+# Two stale references may bridge a brief absence. Then wait for a real new person.
+export FRESHWEB_CAMERA_MAX_LAST_VALID_REUSES=${FRESHWEB_CAMERA_MAX_LAST_VALID_REUSES:-2}
 export FRESHWEB_TRIPPY_REANCHOR_INTERVAL=0
 
 # Every completed shot gets one synchronous fresh camera observation. GPT then
