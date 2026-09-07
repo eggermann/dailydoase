@@ -7,6 +7,8 @@ cd "$(dirname "$0")/../../.."
 export GENERATIONS_PATH=${GENERATIONS_PATH:-"$PWD/GENRATIONS-KAUFHAUF"}
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-word-low-test}
 export FRESHWEB_WORDS=${FRESHWEB_WORDS:-Kaufhaus,de | animal,en | isolation strategy,en | Art_critic,en}
+# One `getNext()` from every configured semantic stream is mixed into each cue.
+export FRESHWEB_SOURCE_CUE_MIX_TYPE=${FRESHWEB_SOURCE_CUE_MIX_TYPE:-sequential}
 export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-2}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
 
