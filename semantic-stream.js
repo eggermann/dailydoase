@@ -23,6 +23,13 @@ const shuffleArray = array => {
 
 const { fullFillPrompt: fullFillPrompt } = generator;
 
+// The semantic-stream package installs an uncaught-exception handler that
+// exits immediately. Log the original error first so production runs leave a
+// usable diagnosis instead of stopping after a model request without context.
+process.prependListener('uncaughtException', (error) => {
+    console.error('[semantic-stream] uncaught exception:', error?.stack || error);
+});
+
 const getWordStreamCache = () => {
     if (!globalThis[WORD_STREAM_CACHE_KEY]) {
         globalThis[WORD_STREAM_CACHE_KEY] = new Map();
@@ -37,11 +44,76 @@ export const clearWordStreamCache = () => {
     getWordStreamCache().clear();
 };
 
+const waitForSemanticStream = (delayMs) => new Promise((resolve) => {
+    setTimeout(resolve, delayMs);
+});
+
+const isWikipediaRateLimit = (error) => {
+    const message = String(error?.message || error || '');
+    return message.includes('429') || message.includes('Too Many Requests');
+};
+
+export const initWordStreamsSequentially = async (
+    words,
+    {
+        // The dependency's legacy exit hooks call process.exit() for every
+        // uncaught exception. That hides the actual rendering failure and can
+        // leave a trailer iteration with no diagnosable result. This process
+        // owns lifecycle and error reporting, so streams must not register
+        // their own global exit handlers.
+        initSingleStream = (word) => wordStream.initStreams([word], {
+            registerExitHandlers: false,
+        }),
+        pauseBetweenStreamsMs = 2000,
+        rateLimitRetryMs = 10000,
+        maxAttempts = 3,
+        wait = waitForSemanticStream,
+    } = {}
+) => {
+    const initializedStreams = [];
+
+    for (let wordIndex = 0; wordIndex < words.length; wordIndex += 1) {
+        const word = words[wordIndex];
+        let initializedStream = null;
+
+        for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+            try {
+                const streams = await initSingleStream(word);
+                initializedStream = streams[0];
+                break;
+            } catch (error) {
+                const canRetry = isWikipediaRateLimit(error) && attempt < maxAttempts;
+                if (!canRetry) {
+                    throw error;
+                }
+
+                const retryDelay = rateLimitRetryMs * attempt;
+                console.warn(
+                    `[semantic-stream] Wikipedia rate limit for ${toWordLabel(word)}; retry ${attempt}/${maxAttempts - 1} in ${retryDelay}ms.`
+                );
+                await wait(retryDelay);
+            }
+        }
+
+        if (!initializedStream) {
+            throw new Error(`Semantic Stream failed to initialize ${toWordLabel(word)}.`);
+        }
+        initializedStreams.push(initializedStream);
+
+        const hasAnotherStream = wordIndex < words.length - 1;
+        if (hasAnotherStream && pauseBetweenStreamsMs > 0) {
+            await wait(pauseBetweenStreamsMs);
+        }
+    }
+
+    return initializedStreams;
+};
+
 export const getWordStreams = async (
     words,
     {
         forceRefresh = false,
-        initStreams = (nextWords) => wordStream.initStreams(nextWords),
+        initStreams = initWordStreamsSequentially,
     } = {}
 ) => {
     const cache = getWordStreamCache();
@@ -173,6 +245,31 @@ const resolveRetryOnFailure = (config = {}) => {
     return Boolean(config.model.retryOnFailure);
 };
 
+export const resolveMaxIterations = (config = {}) => {
+    const configuredLimit = Number(config?.model?.maxIterations);
+    if (configuredLimit === -1) {
+        return -1;
+    }
+    if (Number.isFinite(configuredLimit) && configuredLimit > 0) {
+        return Math.floor(configuredLimit);
+    }
+    return -1;
+};
+
+export const shouldScheduleNextIteration = ({
+    iteration,
+    maxIterations,
+    wait,
+    success,
+    retryOnFailure,
+} = {}) => {
+    const reachedFiniteLimit = maxIterations !== -1 && iteration >= maxIterations;
+    if (reachedFiniteLimit || !wait) {
+        return false;
+    }
+    return success !== false || retryOnFailure;
+};
+
 const _ = {
     rnd_cnt: [], // Now an array, one counter per stream index
     async configPromptFunktion(streams) { return streams },
@@ -243,13 +340,23 @@ const _ = {
               && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
             const wait = hasPollingTime ? config.model.pollingTime : 4000;
             const retryOnFailure = resolveRetryOnFailure(config);
+            const maxIterations = resolveMaxIterations(config);
+            const scheduleNextIteration = shouldScheduleNextIteration({
+                iteration,
+                maxIterations,
+                wait,
+                success,
+                retryOnFailure,
+            });
 
-            if (wait && (success !== false || retryOnFailure)) {
+            if (scheduleNextIteration) {
                 setTimeout(async () => {
                     console.log('******** again ****** polling interval ', 'wait:', wait)
                     await loop(streams, keepPrompt);
 
                 }, wait);
+            } else if (maxIterations !== -1 && iteration >= maxIterations) {
+                console.log(chalk.green(`[semantic-stream] reached ${maxIterations} iterations; stopping in the same output folder.`));
             }
 
             return success;
@@ -259,6 +366,8 @@ const _ = {
         return loop
     }
 }
+
+export const createSemanticStreamLoop = (model, config) => _.getLoop(model, config);
 
 export const resolveLoopOutcome = ({ success, pollingTime, retryOnFailure = true }) => {
     if (success === false && !pollingTime) {
@@ -293,7 +402,7 @@ export default async (configs) => {
 
     await store.initCache();
 
-    configs.map(async (config, index) => {
+    await Promise.all(configs.map(async (config, index) => {
         const words = config.words;
 
         const wordStreams = await getWordStreams(words);
@@ -301,7 +410,7 @@ export default async (configs) => {
         //TODO--> server.addRoute(getNext(wordStreams, config), config)
         const model = await generator.setVersion(config);
 
-        await _.getLoop(model, config)(wordStreams).then((success) => {
+        await createSemanticStreamLoop(model, config)(wordStreams).then((success) => {
             const hasPollingTime = !!config.model
               && Object.prototype.hasOwnProperty.call(config.model, 'pollingTime');
             const pollingTime = hasPollingTime ? config.model.pollingTime : 4000;
@@ -316,6 +425,6 @@ export default async (configs) => {
         }).catch(err => {
             console.error(chalk.red('Error starting generator:', err));
         })
-    });
+    }));
 
 }
