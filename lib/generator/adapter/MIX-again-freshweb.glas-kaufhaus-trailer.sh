@@ -6,6 +6,7 @@ cd "$(dirname "$0")/../../.."
 # Cheap exhibition proof: two Taktmuster iterations, no sound.
 export GENERATIONS_PATH=${GENERATIONS_PATH:-"$PWD/GENRATIONS-KAUFHAUF"}
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-word-low-test}
+export FRESHWEB_SERIES_CONTEXT=${FRESHWEB_SERIES_CONTEXT:-Kaufhaus 1983}
 export FRESHWEB_WORDS=${FRESHWEB_WORDS:-Kaufhaus,de | animal,en | isolation strategy,en | Art_critic,en}
 # Randomly mix fresh `getNext()` results from the configured semantic streams.
 export FRESHWEB_SOURCE_CUE_MIX_TYPE=${FRESHWEB_SOURCE_CUE_MIX_TYPE:-random}
@@ -89,8 +90,8 @@ export FRESHWEB_SINGLE_VIDEO_WIDTH=${FRESHWEB_SINGLE_VIDEO_WIDTH:-1088}
 export FRESHWEB_SINGLE_VIDEO_HEIGHT=${FRESHWEB_SINGLE_VIDEO_HEIGHT:-832}
 export FRESHWEB_SINGLE_FPS=${FRESHWEB_SINGLE_FPS:-10}
 export FRESHWEB_SINGLE_VIDEO_PROMPT_FLAVOR=default
-export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Photorealistic 1989 German Einkaufszentrum surveillance footage beginning in the current visible room. Let the semantic stream transform architecture, display objects, and spatial atmosphere when the story calls for it, but keep every transformation materially plausible and visibly filmed rather than illustrated. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
-export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1989 German Einkaufszentrum CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
+export FRESHWEB_SCENE_VISUAL_DIRECTION=${FRESHWEB_SCENE_VISUAL_DIRECTION:-Photorealistic 1983 German Kaufhaus surveillance footage beginning in the current visible room. Let the semantic stream transform architecture, display objects, and spatial atmosphere when the story calls for it, but keep every transformation materially plausible and visibly filmed rather than illustrated. For every scene choose one fixed high corner, ceiling, doorway, checkout-monitor, or aisle-end camera angle because that view best reveals the story event and its consequence. A new scene may cut to another motivated security camera, but never use operator movement. Preserve real people, practical coverage, slight VHS noise and interlace; no visible words or invented typography; strong causal progression.}
+export FRESHWEB_CAMERA_STYLE=${FRESHWEB_CAMERA_STYLE:-Real 1983 German Kaufhaus CCTV footage: fixed high security-camera angle, wide practical room coverage, slight VHS noise and interlace. The selected angle reveals this story event; no handheld, dolly, crane, cinematic close-up, shallow depth of field, studio lighting, or timestamp overlay.}
 export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semantic}
 
 # Use one current Runware image model for opening, persona continuity and cast.
