@@ -19,12 +19,18 @@ export FRESHWEB_REQUIRE_PERSON_IN_CAMERA=${FRESHWEB_REQUIRE_PERSON_IN_CAMERA:-1}
 export FRESHWEB_VALIDATE_CAMERA_SHOT=${FRESHWEB_VALIDATE_CAMERA_SHOT:-1}
 
 # Exhibition gate: compare small local camera frames first. Vision only runs on
-# the initial background, two confirmed changes, or a 30-second heartbeat.
+# the initial background, two confirmed changes, or a two-minute heartbeat.
 # On the Mac mini set LMSTUDIO_URL=http://127.0.0.1:8080 and LMSTUDIO_MODEL to
 # the installed Qwen3-VL model; no cloud vision provider is needed.
 export FRESHWEB_CAMERA_CHANGE_GATE_ENABLED=${FRESHWEB_CAMERA_CHANGE_GATE_ENABLED:-1}
 export FRESHWEB_CAMERA_CHANGE_GATE_REQUIRED_FRAMES=${FRESHWEB_CAMERA_CHANGE_GATE_REQUIRED_FRAMES:-2}
-export FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS=${FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS:-30000}
+export FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS=${FRESHWEB_CAMERA_CHANGE_GATE_HEARTBEAT_MS:-120000}
+# Keep the branch self-contained: OpenAI reads the live person and room first;
+# the Mini's local vision service remains available as its offline fallback.
+export OPENAI_VISION_MODEL=${OPENAI_VISION_MODEL:-gpt-4o-mini}
+export FRESHWEB_VISION_PROVIDERS=${FRESHWEB_VISION_PROVIDERS:-openai,lmstudio}
+export FRESHWEB_CAMERA_PRESENCE_VISION_PROVIDERS=${FRESHWEB_CAMERA_PRESENCE_VISION_PROVIDERS:-openai,lmstudio}
+export FRESHWEB_PERSONA_DESCRIPTION_VISION_PROVIDERS=${FRESHWEB_PERSONA_DESCRIPTION_VISION_PROVIDERS:-openai,lmstudio}
 
 # Proven scene planner from all three good trailer branches. Keep camera vision
 # local/independent; GPT-5 mini plans only the complete causal scene sequence.
