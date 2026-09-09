@@ -63,7 +63,10 @@ export FRESHWEB_CAMERA_SINGLE_IMAGE_STABILITY_MAX_DURATION=${FRESHWEB_CAMERA_SIN
 export VIDEO_MODE_PRESET=storyDrivenMixed
 export FRESHWEB_IMAGE_TO_VIDEO_ONLY=0
 export FRESHWEB_FIRST_CLIP_VIDEO_MODE=${FRESHWEB_FIRST_CLIP_VIDEO_MODE:-firstLast}
-export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=0
+# The opening transition establishes the cinematic consequence. Every later
+# scene animates its already-established start frame, avoiding a paid FLUX
+# destination still and a second WAN anchor for each additional cut.
+export FRESHWEB_LATER_CLIPS_SINGLE_IMAGE=1
 export FRESHWEB_DYNAMIC_SINGLE_IMAGE_LATER_CLIPS=0
 export FRESHWEB_SCENE_PLAN_CONTROLS_VIDEO_MODE=0
 export FRESHWEB_SINGLE_VIDEO_MODEL_TYPE=runwareImageToVideo
