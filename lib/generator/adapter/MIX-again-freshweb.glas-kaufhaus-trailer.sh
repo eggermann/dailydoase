@@ -31,6 +31,11 @@ export OPENAI_VISION_MODEL=${OPENAI_VISION_MODEL:-gpt-4.1-mini-2025-04-14}
 # Proven scene planner from all three good trailer branches. GPT-5 mini plans
 # only the complete causal scene sequence; OpenAI Vision remains camera-specific.
 export FRESHWEB_SCENE_PLAN_MODEL=gpt-5-mini-2025-08-07
+# If OpenAI is slow or unreachable, the already running Mini Qwen server keeps
+# the scene loop alive instead of leaving the exhibition without a new clip.
+export FRESHWEB_LOCAL_MISTRAL_AS_CHAT=${FRESHWEB_LOCAL_MISTRAL_AS_CHAT:-1}
+export LOCAL_MISTRAL_OPENAI_BASE_URL=${LOCAL_MISTRAL_OPENAI_BASE_URL:-http://127.0.0.1:8080/v1}
+export LOCAL_MISTRAL_MODEL=${LOCAL_MISTRAL_MODEL:-Qwen3-VL-2B-Instruct-Q4_K_M.gguf}
 
 # Taktmuster chooses scene count and lengths for every iteration. Keep explicit
 # values empty: FRESHWEB_SCENE_COUNT and FRESHWEB_SCENE_LENGTHS disable this.
