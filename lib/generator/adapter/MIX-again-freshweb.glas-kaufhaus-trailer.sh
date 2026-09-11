@@ -99,8 +99,10 @@ export FRESHWEB_WEBCAM_PERSONA_REFERENCE_PROVIDER=${FRESHWEB_WEBCAM_PERSONA_REFE
 
 # A selected person from CAST MEMORY is mixed with current room frame before
 # WAN animates it. bfl:6@1 accepts up to ten total reference images.
-# One live person is enough. Do not reintroduce people from earlier cast memory.
-export FRESHWEB_CAST_CONTEXT_ENABLED=0
+# A planned return may use one deliberately selected earlier person, never a
+# crowd of remembered faces. Without a GPT cast selection, no old person enters.
+export FRESHWEB_CAST_CONTEXT_ENABLED=1
+export FRESHWEB_CAST_CONTEXT_MAX_REFERENCES=1
 export FRESHWEB_CAST_CONTEXT_MODEL=${FRESHWEB_CAST_CONTEXT_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
 export FRESHWEB_CAST_CONTEXT_PROVIDER=${FRESHWEB_CAST_CONTEXT_PROVIDER:-runware}
 export FRESHWEB_CAST_CONTEXT_TIMEOUT_MS=${FRESHWEB_CAST_CONTEXT_TIMEOUT_MS:-120000}
