@@ -115,11 +115,12 @@ export FRESHWEB_CAST_CONTEXT_WIDTH=${FRESHWEB_CAST_CONTEXT_WIDTH:-1184}
 export FRESHWEB_CAST_CONTEXT_HEIGHT=${FRESHWEB_CAST_CONTEXT_HEIGHT:-880}
 
 # Re-anchor every next single-image shot against the camera-person reference
-# captured synchronously after the previous shot. Keep correction moderate so
-# the generated story survives while person and room drift are pulled back.
+# captured synchronously after the previous shot. This must use FLUX.2 flex:
+# Kontext dev accepts only one image and silently drops the real-person anchor.
+# Flex keeps both the generated last frame and the live-person reference.
 export FRESHWEB_ENABLE_DRIFT_CORRECTION=1
 export FRESHWEB_DRIFT_CORRECTION_LEVEL=moderate
-export FRESHWEB_DRIFT_CORRECTION_MODEL=runware:106@1
+export FRESHWEB_DRIFT_CORRECTION_MODEL=${FRESHWEB_DRIFT_CORRECTION_MODEL:-$FRESHWEB_RUNWARE_IMAGE_MODEL}
 export FRESHWEB_DRIFT_CORRECTION_PROVIDER=runware
 export FRESHWEB_DRIFT_CORRECTION_WIDTH=${FRESHWEB_DRIFT_CORRECTION_WIDTH:-1088}
 export FRESHWEB_DRIFT_CORRECTION_HEIGHT=${FRESHWEB_DRIFT_CORRECTION_HEIGHT:-832}
