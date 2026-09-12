@@ -3,11 +3,12 @@ set -euo pipefail
 
 cd "$(dirname "$0")/../../.."
 
-# Cheap exhibition proof: two iterations, three scenes, no sound.
+# One continuous exhibition process: preserve cast and camera memory between
+# iterations. The runner intervenes only after a real failure or stall.
 export GENERATIONS_PATH=${GENERATIONS_PATH:-"$PWD/GENRATIONS-KAUFHAUF"}
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-glas-kaufhaus-word-low-test}
 export FRESHWEB_WORDS=${FRESHWEB_WORDS:-Einkaufszentrum,de | Berlin Art Week,en | Rosa Winkel,de}
-export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-2}
+export FRESHWEB_MAX_ITERATIONS=${FRESHWEB_MAX_ITERATIONS:-0}
 export FRESHWEB_POLLING_TIME_MS=${FRESHWEB_POLLING_TIME_MS:-1000}
 
 # Capture the current Mac camera by default. A fixed test frame can still be
