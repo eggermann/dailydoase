@@ -32,6 +32,10 @@ export OPENAI_VISION_MODEL=${OPENAI_VISION_MODEL:-gpt-4.1-mini-2025-04-14}
 # Proven scene planner from all three good trailer branches. Keep camera vision
 # local/independent; GPT-5 mini plans only the complete causal scene sequence.
 export FRESHWEB_SCENE_PLAN_MODEL=gpt-5-mini-2025-08-07
+# A structured three-scene plan can legitimately take longer than the old
+# 30-second cutoff. The planner input is compacted in code; this remains a
+# bounded request, not an unbounded wait.
+export FRESHWEB_OPENAI_REQUEST_TIMEOUT_MS=${FRESHWEB_OPENAI_REQUEST_TIMEOUT_MS:-60000}
 # If GPT is temporarily unavailable, the local Qwen server keeps the live
 # loop moving rather than leaving the finissage without a new scene plan.
 export FRESHWEB_LOCAL_MISTRAL_AS_CHAT=${FRESHWEB_LOCAL_MISTRAL_AS_CHAT:-1}
