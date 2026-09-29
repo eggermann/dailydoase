@@ -11,6 +11,11 @@ const chalk = require('chalk');
 
 const WORD_STREAM_CACHE_KEY = '__dailydoaseSemanticStreamCache';
 const SEMANTIC_STREAM_LOG_MAX_LENGTH = 1600;
+export const SEMANTIC_STREAM_TITLE_FILTER = Object.freeze(['doi', 'isbn', 'pmid']);
+
+const createSemanticStreamInitOptions = () => ({
+    filter: [...SEMANTIC_STREAM_TITLE_FILTER],
+});
 
 const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -41,7 +46,7 @@ export const getWordStreams = async (
     words,
     {
         forceRefresh = false,
-        initStreams = (nextWords) => wordStream.initStreams(nextWords),
+        initStreams = (nextWords, options) => wordStream.initStreams(nextWords, options),
     } = {}
 ) => {
     const cache = getWordStreamCache();
@@ -56,7 +61,7 @@ export const getWordStreams = async (
     }
 
     const pendingStreams = Promise.resolve()
-        .then(() => initStreams(words))
+        .then(() => initStreams(words, createSemanticStreamInitOptions()))
         .catch((error) => {
             cache.delete(cacheKey);
             throw error;
