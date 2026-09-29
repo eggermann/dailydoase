@@ -1,4 +1,41 @@
-# Progress
+# Progress — Selfomat
+
+## Loop 2 — Image-Only Starter-Photo Series
+
+### In Progress
+
+- Run bounded Selfomat iterations from sequential queued selfies.
+- Feed `love,en | animal,en` concurrently into Semantic Stream.
+- Verify one generated starter photo per input, with no video call and no last-video-frame reference.
+- Added readable per-iteration `selfomat-prompt-log/iteration-NNNN.txt` including vision, semantic inputs, FIFO context, planner prompts, and final render prompts.
+- Passed 4 focused suites and 22 tests for prompt logging and Selfomat behavior.
+- Passed focused Selfomat and StoryTransport tests: 2 suites, 16 tests.
+
+### Blocked
+
+- Previous video run reached planning but Runware rejected video with HTTP 400 insufficient credits. New image-only mode bypasses video/audio initialization and generation.
+- Reduced cast-context identity drift with explicit lead-face anchoring and stronger negatives; focused generator/Selfomat regression passed: 2 suites, 45 tests.
+
+## Done
+
+- Created isolated `openStudios26/selfomat` branch from `exhibition/1928ee42-2iter`.
+- Read generator path, StoryTransport, cast rendering, preset, tests, and previous project memory.
+- Initialized Selfomat project brief.
+- Added an opt-in Selfomat scene adapter, preset, and phone-specific image/video prompt path.
+- Passed six focused suites and 107 tests; syntax and whitespace checks passed.
+- Reviewed the branch diff without changing the existing production preset.
+- Added people-chain selection: recent-to-old temporal handoff, semantic override, one optional extra returner, and an archived FIFO tail.
+- Passed five focused suites and 94 tests after the people-chain extension.
+
+## In Progress
+
+- Image-only starter-photo preset and regression coverage.
+
+## Next
+
+- Supervised live-camera/model test with a current visitor, a recent previous visitor, and an archived visitor; inspect rendered identity, cast count, and accidental-selfie style.
+
+# Prior Progress (retained)
 
 ## Done
 

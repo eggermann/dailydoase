@@ -1,5 +1,73 @@
 # Decision Log
 
+## S-0005 — Two films reuse one low-resolution protagonist image
+
+**Date:** 2026-09-29
+**Status:** Accepted for live verification
+
+Both bounded iterations use a deterministic test queue: `selfie_01.jpg` then `selfie_02.jpg`. `love,en` and `animal,en` enter the same semantic-stream mix rather than one word being assigned to each film.
+
+**Why:** This tests automated handoff from one visitor to next without needing a live camera yet.
+
+## S-0006 — FIFO identity, not image-path equality, distinguishes returners
+
+**Date:** 2026-09-29
+**Status:** Accepted
+
+Two consecutive uses of one selfie create two iteration-specific FIFO identities. The second iteration may select the first identity even when both refer to the same file path.
+
+**Why:** Rejecting identical file paths silently disconnected repeat-image films and contradicted the accepted repeat-image input rule.
+
+## S-0007 — Preserve current lead identity during cast-context composition
+
+**Date:** 2026-09-29
+**Status:** Accepted
+
+Cast-context prompts now treat the current image as the exact facial anchor, keep its face unobstructed and dominant, keep returning visitors secondary, and reject facial blending, beautification, and hands crossing the lead face.
+
+**Why:** The first two-person test preserved hair, clothing, and room but visibly changed the current woman's facial proportions.
+
+## S-0004 — FIFO chooses people; semantic stream chooses interaction
+
+**Date:** 2026-09-29
+**Status:** Accepted for the Selfomat prototype
+
+The first scene favors the newest active FIFO visitor; later scenes walk toward the oldest still-active visitor. The closing scene may include that person's FIFO neighbor as a second returner. An evicted visitor remains historical data but is never a candidate or reference image. The Semantic Stream does not choose a person: it asks the already-selected people for a short, visible physical gesture.
+
+**Why:** The rule makes "next or last" and the occasional three-person selfie inspectable in stored scene plans, while preventing unjustified semantic matching from deciding who returns.
+
+**Trade-off:** Semantic cues need a planner-provided action to become specific (for example, dancing rather than a generic gesture); the next live render decides whether that needs a dedicated action interpreter.
+
+## Selfomat Decisions
+
+### S-0001: Use a separate opt-in preset
+
+Status: Accepted
+
+Context:
+The source branch serves a CCTV installation. Selfomat needs a candid phone viewpoint without changing that installation.
+
+Decision:
+Enable Selfomat only through a dedicated preset flag. Reuse existing StoryTransport and cast-context image rendering.
+
+Consequences:
+The first prototype can be tested offline and compared with the prior preset.
+
+### S-0002: Select one prior person by recency
+
+Status: Accepted for first prototype
+
+Context:
+No stable person-matching or semantic ranking system exists.
+
+Decision:
+Use the newest prior cast reference outside the current detected actor set. A single current actor remains the lead.
+
+Consequences:
+Selection is deterministic and inspectable. A future semantic ranking strategy may replace it.
+
+## Prior Decisions (retained)
+
 ## Decisions
 
 ### D-0001: Use Memory Bank and a Bounded Documentation Loop

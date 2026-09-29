@@ -1,4 +1,14 @@
-# System Patterns
+# System Patterns — Selfomat
+
+## Working Pattern
+
+Read scene plan, choose a current lead from one or more visible visitors, choose one earlier reference, adapt a short semantic interaction, then render through the existing cast-context path.
+
+## Quality Pattern
+
+The opt-in adapter must be pure and tested with two iterations, no past person, and group current-person inputs. Runtime flow stays readable from planner to scene adapter to cast-image attachment.
+
+# Prior System Patterns (retained)
 
 ## Working Pattern
 

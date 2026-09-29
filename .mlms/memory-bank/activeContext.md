@@ -1,4 +1,44 @@
-# Active Context
+# Active Context — Selfomat
+
+## Current Goal
+
+Finish image-only Selfomat starter-photo series from sequential supplied selfies. Each queue image leads one iteration; `love,en | animal,en` runs as one mixed semantic stream.
+
+## Current Loop
+
+Loop: 2
+
+Phase: Implemented — image-only test path ready; no video credits required
+
+## Shared Loop Budget
+
+Root Context: .mlms
+Used: 2
+Maximum: 5
+
+## Current Focus
+
+Run one generated starter photo per deterministic queue entry, in queue order. No scene video, no last-video-frame chaining, no Mirelo audio. Keep readable prompt logs.
+
+Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN.txt` next to its output. It records source image, semantic topics and cues, display text, vision prompt/result, scene-planner prompt/context, and every final still/image/video prompt.
+
+## Assumptions
+
+- Both source images are intentionally low resolution and clear enough for initial vision.
+- Test queue is an implementation stand-in for later live camera input.
+- `love` and `animal` are concurrent input words, not one word per film.
+
+## Risks / Unknowns
+
+- External image/video generation can fail or take longer than local checks.
+- First iteration has no earlier FIFO visitor, so it is a one-person film; second iteration's new person stays lead while first FIFO person may return.
+- Previous video calls failed with Runware HTTP 400: insufficient credits; image-only mode now skips video and audio model initialization.
+
+## Next Action
+
+Run `MIX-again-freshweb.selfomat-starter-photos.sh` with `FRESHWEB_CAMERA_PERSON_QUEUE_PATH`; inspect one starter-photo artifact per queue entry.
+
+# Prior Goal Context (retained)
 
 ## Current Goal
 

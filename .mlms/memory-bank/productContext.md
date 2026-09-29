@@ -1,4 +1,27 @@
-# Product Context
+# Product Context — Selfomat
+
+## Purpose
+
+Create short, candid selfie films where the current visitor shares a small celebration with one previously seen visitor. Semantic Stream supplies the changing occasion or action.
+
+## Users
+
+- Current exhibition visitor and returning visitors represented in the film.
+- Artist/operator controlling words, clip rhythm, and model routing.
+
+## Core Value
+
+The scene feels like a real accidental phone memory while retaining a clear present person and one return from exhibition history.
+
+## Current Scope
+
+One opt-in, offline-tested scene planning and cast-reference slice.
+
+## Non-Goals
+
+Face matching, deployment, and live provider quality claims.
+
+# Prior Product Context (retained)
 
 ## Purpose
 

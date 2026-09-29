@@ -1,5 +1,62 @@
 # Sprint Review
 
+## Loop 2 Review — Blocked by Video Credits
+
+### What Changed
+
+- Prepared bounded two-film run: test queue `selfie_01.jpg` then `selfie_02.jpg`, mixed `love,en | animal,en`, 448×336 rendering. Each new current person is protagonist; film one becomes active FIFO memory for film two.
+
+### Acceptance Criteria Result
+
+- [x] Run configuration is bounded to two iterations with concurrent semantic words.
+- [ ] Two external films are rendered; Runware rejected video generation for insufficient credits.
+
+### Verification Result
+
+- Image archive verified: five readable JPEGs; `selfie_01.jpg` selected as clean single-person low-resolution input.
+- Focused Selfomat tests remain green from the preceding loop.
+- Repeated-image FIFO continuity passed: 2 suites, 16 tests.
+- Prompt-log formatting and persistence passed with the complete Selfomat test set: 4 suites, 22 tests.
+- Both live iterations reached planning and wrote prompt logs plus StoryTransport artifacts. Iteration two correctly used `selfie_02` as lead and the `selfie_01` person as FIFO returner.
+
+### Issues / Gaps
+
+- Runware returned HTTP 400 for each first video clip: insufficient credits. No final MP4 files were produced.
+
+### Process Decision
+
+- Stop until Runware has video-generation credit, then repeat same two-item queue.
+
+## Selfomat Loop 1 Review
+
+### What Changed
+
+- Created isolated `openStudios26/selfomat` branch from `exhibition/1928ee42-2iter`.
+- Added a pure, opt-in Selfomat adapter: first detected visitor stays primary, while same-person and group images remain valid; newest earlier visitor may return from active FIFO memory.
+- Carried semantic cues and an ordinary, imperfect iPhone-selfie look through opening, cast-context image, and video prompts.
+- Added a separate Selfomat launch preset; the normal exhibition preset stays unchanged.
+
+### Acceptance Criteria Result
+
+- [x] Current visitor leads; at most one earlier visitor is selected.
+- [x] Only a frame without people preserves the ordinary scene plan; group frames choose a visible lead.
+- [x] Semantic cue shapes a short interaction and the visual direction remains candid.
+- [x] Focused tests and static checks pass.
+- [x] Diff reviewed and next step recorded.
+
+### Verification Result
+
+Six focused suites and 107 tests passed. JavaScript syntax, shell syntax, and Git whitespace checks passed.
+
+### Issues / Gaps
+
+- No paid render or supervised live-camera iteration yet; actual identity fidelity and framing remain unverified.
+- No deployment, merge, push, or commit. Commit remains ask-first under this mini-loop.
+
+### Retrospective
+
+The small scene-plan adapter made cast selection and fallback behavior directly testable. Existing camera-grounded prompts enforced a one-person view, so the Selfomat path needed explicit opening and video prompt handling. Stop this loop after the offline slice; evaluate one real short film before any wider rollout.
+
 ## Loop Reviews
 
 ## Loop 1 Review

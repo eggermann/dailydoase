@@ -213,9 +213,16 @@ const _ = {
 
 
             if (!oldPrompt) {//the last api call was sucessfull
+                try {
                 prompt = config.promptFunktion
                     ? await config.promptFunktion(streams, config)
                     : await promptCreator.default(streams, config);
+                } catch (error) {
+                    await config.onIterationError?.(error);
+                    if (!config.onIterationError) throw error;
+                    setTimeout(() => loop(streams).catch(console.error), config.model?.pollingTime || 1000);
+                    return false;
+                }
 
                 //
 
@@ -242,7 +249,15 @@ const _ = {
             // console.log('Prompt:---> ', chalk.yellow(prompt));
 
             let keepPrompt = null;
-            const success = await model.prompt(prompt, config);// v
+            let success;
+            try {
+                success = await model.prompt(prompt, config);
+            } catch (error) {
+                await config.onIterationError?.(error);
+                if (!config.onIterationError) throw error;
+                success = false;
+            }
+            await config.onIterationFinished?.(success);
           
           
           //TODO --> somehow keep prompt when false to not repeat the same prompt eg stream get next and api calls 
@@ -255,7 +270,7 @@ const _ = {
 
 
             if (!success) {
-                keepPrompt = prompt;
+                keepPrompt = config.onIterationFinished ? null : prompt;
                 console.error(chalk.red('---> no success'), success);
             } else {
                 _.rnd_cnt[idx] = (_.rnd_cnt[idx] ?? 0) + 1;
