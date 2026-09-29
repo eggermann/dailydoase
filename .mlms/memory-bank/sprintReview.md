@@ -539,3 +539,36 @@ Pause for a visible camera person; GOAL remains incomplete. No commit.
 ### Process Decision
 
 No-mid-iteration-stop GOAL complete. Next loop should enforce actor action in planning. No commit.
+
+## Loop 2 Nested Audio Review
+
+### What Changed
+
+- Added the StoryTransport-to-MiniMax Music 3 test path and live-rendered iteration 2 through the public Hugging Face Space.
+- Kept the audio artifact standalone; the existing image-only film path is unchanged.
+
+### Acceptance Criteria Result
+
+- [x] `o4-mini` creates separate structured description and tagged lyrics.
+- [x] MiniMax Studio endpoint was discovered and called with the correct state.
+- [x] MP3 and WAV are saved beside the story artifact.
+- [x] Focused tests pass.
+
+### Verification Result
+
+- 4 focused story-music tests passed.
+- MP3 verified by ffprobe: 60.070 seconds, 44.1 kHz, stereo.
+- Prompt blueprint contains no credentials or raw image reference paths.
+
+### Issues / Gaps
+
+- Audio is not muxed into a film; that remains a separate user decision.
+- Generated media and the sample generation directory are untracked and must not enter a commit.
+
+### Retrospective
+
+The exact Space API was discovered with the configured HF access, then frozen in a pure adapter and test. The audio slice is independently inspectable without changing camera/video behavior.
+
+### Process Decision
+
+Continue parent Selfomat loop; stop this child.

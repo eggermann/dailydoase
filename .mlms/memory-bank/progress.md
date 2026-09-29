@@ -30,10 +30,19 @@
 ## In Progress
 
 - Image-only starter-photo preset and regression coverage.
+- Nested StoryTransport-to-MiniMax Music 3 slice is complete.
+
+## Audio Slice Handoff
+
+- `story-music/iteration-0002.mp3` exists beside the requested StoryTransport artifact.
+- It is 60.070 seconds, stereo, 44.1 kHz; the WAV source and JSON blueprint are beside it.
+- Four focused story-music tests pass.
+- No audio is muxed into films yet.
 
 ## Next
 
 - Supervised live-camera/model test with a current visitor, a recent previous visitor, and an archived visitor; inspect rendered identity, cast count, and accidental-selfie style.
+- Listen to the standalone MP3 before deciding on future film/audio integration.
 
 # Prior Progress (retained)
 

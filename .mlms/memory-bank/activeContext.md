@@ -13,12 +13,12 @@ Phase: Implemented — image-only test path ready; no video credits required
 ## Shared Loop Budget
 
 Root Context: .mlms
-Used: 2
+Used: 3
 Maximum: 5
 
 ## Current Focus
 
-Run one generated starter photo per deterministic queue entry, in queue order. No scene video, no last-video-frame chaining, no Mirelo audio. Keep readable prompt logs.
+Run one generated starter photo per deterministic queue entry, in queue order. The nested sound slice is complete; keep readable prompt logs and standalone music artifacts.
 
 Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN.txt` next to its output. It records source image, semantic topics and cues, display text, vision prompt/result, scene-planner prompt/context, and every final still/image/video prompt.
 
@@ -36,7 +36,7 @@ Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN
 
 ## Next Action
 
-Run `MIX-again-freshweb.selfomat-starter-photos.sh` with `FRESHWEB_CAMERA_PERSON_QUEUE_PATH`; inspect one starter-photo artifact per queue entry.
+Inspect the saved iteration-0002 MP3 and decide later whether Selfomat should mux standalone story sound into a film.
 
 # Prior Goal Context (retained)
 
