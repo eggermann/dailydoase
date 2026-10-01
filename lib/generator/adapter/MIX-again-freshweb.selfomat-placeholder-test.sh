@@ -19,7 +19,9 @@ export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-selfomat-love-animal-casino-two-iterat
 export FRESHWEB_REALITY_INTRUSION_MODE=off
 export FRESHWEB_CHAIN_FROM_PREVIOUS_LOOP_LAST_FRAME=0
 export FRESHWEB_RESTART_FROM_PREVIOUS_MOVIE_LAST_FRAME=0
-export FRESHWEB_OPENING_START_ENABLED=0
+export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-0}
+export FRESHWEB_OPENING_START_MODE=${FRESHWEB_OPENING_START_MODE:-fluxContext}
+export FRESHWEB_OPENING_START_INTERVAL=${FRESHWEB_OPENING_START_INTERVAL:-1}
 export FRESHWEB_SCENE_VISUAL_DIRECTION='Five connected, visible scene consequences from the input image. Current visitor remains the protagonist. Preserve identity, clothing, room geometry, and image mood. Let love, animal, and Casino become physical actions, not explanation. For every scene choose a story-motivated loose handheld-phone or small-drone viewpoint; re-evaluate it each scene, so it may switch between scenes. Then choose one distinct camera move such as pan, focus shift, approach, retreat, hover, reframe, or shake. Never repeat a fixed camera angle by default. Documentary, imperfect, natural.'
 export FRESHWEB_CAMERA_STYLE='Use provided placeholder image as source frame. Story selects a loose phone or small-drone viewpoint plus one distinct camera move; no fixed default angle.'
 

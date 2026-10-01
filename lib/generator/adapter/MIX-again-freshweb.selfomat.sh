@@ -16,7 +16,9 @@ else
 fi
 export FRESHWEB_REALITY_INTRUSION_MODE=off
 export FRESHWEB_CAST_CONTEXT_ENABLED=1
-export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-0}
+export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-1}
+export FRESHWEB_OPENING_START_MODE=${FRESHWEB_OPENING_START_MODE:-fluxContext}
+export FRESHWEB_OPENING_START_INTERVAL=${FRESHWEB_OPENING_START_INTERVAL:-1}
 export FRESHWEB_SELFOMAT_PORT=${FRESHWEB_SELFOMAT_PORT:-4011}
 export FRESHWEB_SELFOMAT_STATE_DIR=${FRESHWEB_SELFOMAT_STATE_DIR:-.selfomat}
 export FRESHWEB_SCENE_VISUAL_DIRECTION='A short, ordinary, unplanned camera memory. The current real visitor is the main person nearest the camera. One earlier visitor may return and share a tiny celebratory action motivated by each semantic cue. For every scene make two separate story decisions: first choose the camera source/viewpoint, either loose handheld phone or small drone, only when that source suits the visible event; re-evaluate it for every scene, so the source may switch between scenes. Then choose one distinct story-motivated camera movement such as pan, focus shift, approach, retreat, hover, reframe, or shake. Do not default to a fixed tilted phone angle. Keep recognizable faces, natural skin, imperfect available light, and unposed framing. Ordinary, intimate, imperfect.'
