@@ -1,5 +1,31 @@
 # Sprint Review
 
+## Loop 4 Review — One-iteration semantic decision trace
+
+### What Changed
+
+- Added configurable `FRESHWEB_SOURCE_CUE_COUNT` (default 8), independent from Taktmuster `sceneCount`.
+- Scene planner now receives all source cues and must return explicit `creativeDecision` fields: visual event, person action, transformation, residue, next word, reason, camera move.
+- StoryTransport now takes `nextTopic` from final scene creative decision; lexical extraction is fallback and recorded with source/reason.
+- Prompt log now records runtime config, exact planner trace, creative decision/residue per scene, final next-word decision, and completed transport in colored HTML/TXT.
+- Generated local mock acceptance artifact for one placeholder selfie, three scenes, image-only mode.
+
+### Acceptance Criteria Result
+
+- [x] One local iteration trace exists.
+- [x] Source cue count (8) differs from scene count (3) and is visible in request/log.
+- [x] Final visible consequence selects `shelter` through planner decision.
+- [x] Completed StoryTransport stores `nextTopic: shelter` with reason and non-fallback source.
+- [x] No external visitor image upload used.
+
+### Verification Result
+
+Focused suites passed: 5 suites, 42 tests. Syntax and `git diff --check` passed. Full suite is not a valid acceptance check here: unrelated live tests need API credentials/native `sharp`, and fixture tests launch large FFmpeg joins; run was stopped.
+
+### Review / Next
+
+Diff reviewed. Existing unrelated dirty files and generated folders remain untouched. Commit `41d4e93d` created from explicit Selfomat files only.
+
 ## Loop 2 Review — Blocked by Video Credits
 
 ### What Changed

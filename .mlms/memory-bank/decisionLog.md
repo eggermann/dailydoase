@@ -1,5 +1,19 @@
 # Decision Log
 
+## S-0008 — Source cues and scene count are independent
+
+**Date:** 2026-09-30
+**Status:** Accepted for one-iteration prototype
+
+Generate configurable semantic source stream (default 8 cues) independently from visible scene count. Planner receives all cues as private material and turns them into causal scenes.
+
+## S-0009 — Final creative decision owns next word
+
+**Date:** 2026-09-30
+**Status:** Accepted for one-iteration prototype
+
+`StoryTransport.nextTopic` comes from final scene's explicit `creativeDecision.nextWord`. Lexical extraction remains emergency fallback only and is recorded with reason/fallback metadata.
+
 ## S-0005 — Two films reuse one low-resolution protagonist image
 
 **Date:** 2026-09-29

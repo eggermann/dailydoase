@@ -2,23 +2,23 @@
 
 ## Current Goal
 
-Finish image-only Selfomat starter-photo series from sequential supplied selfies. Each queue image leads one iteration; `love,en | animal,en` runs as one mixed semantic stream.
+Implement and verify one Selfomat iteration end-to-end. Use local/reference input, analyse it, generate causal Taktmuster scenes, keep source-cue count independent from scene count, derive final `nextWord` from last visible consequence, and publish colored HTML/TXT prompt trace.
 
 ## Current Loop
 
-Loop: 2
+Loop: 4
 
-Phase: Implemented — image-only test path ready; no video credits required
+Phase: Committed -> focused checks green; Taktmuster design next
 
 ## Shared Loop Budget
 
 Root Context: .mlms
-Used: 3
+Used: 4
 Maximum: 5
 
 ## Current Focus
 
-Run one generated starter photo per deterministic queue entry, in queue order. The nested sound slice is complete; keep readable prompt logs and standalone music artifacts.
+Slice implemented: `sourceCueCount=8`, creative decision/residue/nextWord transport, and colored HTML/TXT trace. Preserve existing dirty files. Focused tests green; full suite blocked by unrelated live/sharp/API-key tests.
 
 Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN.txt` next to its output. It records source image, semantic topics and cues, display text, vision prompt/result, scene-planner prompt/context, and every final still/image/video prompt.
 
@@ -36,7 +36,7 @@ Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN
 
 ## Next Action
 
-Inspect the saved iteration-0002 MP3 and decide later whether Selfomat should mux standalone story sound into a film.
+Commit `41d4e93d` records semantic decision slice. Next: decide whether `2|4|4` is fixed scene-duration pattern or generated Taktmuster pattern.
 
 # Prior Goal Context (retained)
 

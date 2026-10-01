@@ -1,5 +1,25 @@
 # Progress — Selfomat
 
+## Loop 4 — One-iteration semantic decision trace
+
+### In Progress
+
+- Replace scene-count-coupled semantic sampling with configurable source-cue count.
+- Carry planner creative decisions and final next-word reason into StoryTransport.
+- Extend colored HTML/TXT trace with runtime config and exact decision provenance.
+
+### Acceptance Target
+
+- One local/mock iteration produces 8 raw cues, 3 scenes, separate image prompts, and `completedTransport.nextTopic` equal to planner-selected final `nextWord`.
+- No external visitor image upload required.
+
+### Verification
+
+- Focused Selfomat/planner/transport/log suites: 5 suites, 42 tests passed.
+- Local mock artifact: `GENERATION-SELFIEBOX/4-selfomat-one-iteration-semantic-decision/selfomat-prompt-log/iteration-0001.html` and `.txt`.
+- Artifact proves 8 cues, 3 scenes, `shelter` selected by final planner decision, and `planner-final-creative-decision` source.
+- Full repository suite intentionally stopped: unrelated live tests require missing OpenAI key and native `sharp`; several tests also launch large FFmpeg fixture joins.
+
 ## Loop 2 — Image-Only Starter-Photo Series
 
 ### In Progress

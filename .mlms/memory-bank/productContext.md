@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create short, candid selfie films where the current visitor shares a small celebration with one previously seen visitor. Semantic Stream supplies the changing occasion or action.
+Create short, candid selfie scenes where current visitor remains protagonist. Semantic Stream supplies private, changing meaning; planner turns it into visible physical events and a causal next word.
 
 ## Users
 
@@ -15,7 +15,7 @@ The scene feels like a real accidental phone memory while retaining a clear pres
 
 ## Current Scope
 
-One opt-in, offline-tested scene planning and cast-reference slice.
+One opt-in, offline-tested iteration with 8 semantic source cues, configurable Taktmuster scenes, explicit creative decisions, and inspectable prompt provenance.
 
 ## Non-Goals
 

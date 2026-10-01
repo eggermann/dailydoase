@@ -2,11 +2,11 @@
 
 ## Working Pattern
 
-Read scene plan, choose a current lead from one or more visible visitors, choose one earlier reference, adapt a short semantic interaction, then render through the existing cast-context path.
+Read one input frame, analyse visible person/room, collect independent semantic cues, ask planner for causal scene decisions, render one final state per scene, then store final residue and `nextWord` in StoryTransport.
 
 ## Quality Pattern
 
-The opt-in adapter must be pure and tested with two iterations, no past person, and group current-person inputs. Runtime flow stays readable from planner to scene adapter to cast-image attachment.
+Source-cue count never derives from scene count. Final `nextWord` comes from final creative decision, not raw last token. Runtime flow stays readable from planner to scene adapter to cast-image attachment and colored prompt trace.
 
 # Prior System Patterns (retained)
 
