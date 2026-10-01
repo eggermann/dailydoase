@@ -1,5 +1,14 @@
 # Decision Log
 
+## S-0010 — Log the iteration as an ordered stage contract
+
+**Date:** 2026-10-01
+**Status:** Accepted for the one-iteration prototype
+
+The prompt trace now exposes one ordered contract: input → vision/assets → semantic stream → Taktmuster allocation → GPT scene planner → render prompts → StoryTransport. Raw semantic fragments remain planner evidence, while final image prompts stay separate.
+
+**Why:** Operators need to see what was observed, what was generated, what was scheduled, and what was finally sent to rendering without reverse-engineering a long linear log.
+
 ## S-0008 — Source cues and scene count are independent
 
 **Date:** 2026-09-30

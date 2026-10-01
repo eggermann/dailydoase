@@ -1,5 +1,51 @@
 # Sprint Review
 
+## Loop 5 Review
+
+### What Changed
+
+- Added `Iteration structure` overview to both TXT and colored HTML logs.
+- Added structured vision/assets summary and explicit Taktmuster/semantic-stream boundaries.
+- Added regression assertions for the stage contract.
+
+### Acceptance Criteria Result
+
+- [x] Log shows ordered structure of one iteration.
+- [x] Raw `prev/title/next` fragments remain visible and separate from image prompts.
+- [x] Taktmuster pattern, calls, and cue batches are visible.
+- [x] Asset anchors and final StoryTransport decision are represented.
+
+### Verification Result
+
+Focused `selfomat-run-log` and `source-cues` suites passed: 2 suites, 13 tests. Syntax and whitespace checks passed.
+
+### Issues / Gaps
+
+- Real provider render was not run; generated artifact inspection remains next validation step.
+- Full suite remains unsuitable because of unrelated live credentials/native module tests.
+
+### User Demo Notes
+
+Open any new `selfomat-prompt-log/iteration-NNNN.html`; the compact stage map appears before the detailed linear trace.
+
+## Loop 5 Retrospective
+
+### What Worked
+
+- Existing trace inputs were sufficient to expose the full pipeline without changing planner or renderer contracts.
+
+### What Was Confusing
+
+- Vision asset structure is optional in old callers, so the logger must show an empty asset section rather than inventing anchors.
+
+### What To Improve Next Loop
+
+- Inspect one real generated HTML/TXT pair and decide whether GPT should propose rhythm intent or only interpret a code-generated Taktmuster.
+
+### Process Decision
+
+Stop at bounded loop budget; resume with artifact inspection.
+
 ## Loop 4 Review — One-iteration semantic decision trace
 
 ### What Changed

@@ -8,6 +8,10 @@ Read one input frame, analyse visible person/room, collect independent semantic 
 
 Source-cue count never derives from scene count. Final `nextWord` comes from final creative decision, not raw last token. Runtime flow stays readable from planner to scene adapter to cast-image attachment and colored prompt trace.
 
+## Iteration Trace Pattern
+
+Each iteration log presents the same ordered stages: input, vision/assets, semantic `prev/title/next`, Taktmuster allocation, GPT planner request, scene render prompts, and StoryTransport result. Full prompt payloads remain in their detailed sections; the stage map provides the compact overview.
+
 # Prior System Patterns (retained)
 
 ## Working Pattern

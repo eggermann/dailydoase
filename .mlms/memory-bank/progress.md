@@ -1,5 +1,24 @@
 # Progress — Selfomat
 
+## Loop 5 — Iteration structure trace
+
+### Done
+
+- Added one explicit `Iteration structure` block to the Selfomat TXT/HTML prompt log.
+- Logged ordered stages: input, vision/assets, semantic stream, Taktmuster allocation, GPT scene planner, render prompts, and StoryTransport.
+- Preserved semantic `title`, `cnt`, `prev`, and `next` as planner trace data; `cnt` remains a counter only.
+- Passed structured vision context into the logger so person/location asset anchors are visible in the stage map.
+
+### Verification
+
+- Focused log and source-cue suites: 2 suites, 13 tests passed.
+- JavaScript syntax checks and `git diff --check` passed.
+
+### Limits
+
+- No external image/model render was run.
+- Existing dirty source and generated artifacts were preserved.
+
 ## Loop 4 — One-iteration semantic decision trace
 
 ### In Progress

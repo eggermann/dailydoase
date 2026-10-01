@@ -6,19 +6,19 @@ Implement and verify one Selfomat iteration end-to-end. Use local/reference inpu
 
 ## Current Loop
 
-Loop: 4
+Loop: 5
 
-Phase: Committed -> focused checks green; Taktmuster design next
+Phase: Review -> iteration-structure trace slice green; max loop reached
 
 ## Shared Loop Budget
 
 Root Context: .mlms
-Used: 4
+Used: 5
 Maximum: 5
 
 ## Current Focus
 
-Slice implemented: `sourceCueCount=8`, creative decision/residue/nextWord transport, and colored HTML/TXT trace. Preserve existing dirty files. Focused tests green; full suite blocked by unrelated live/sharp/API-key tests.
+Iteration-structure overview now records input, vision/assets, semantic `prev/title/next`, Taktmuster allocation, GPT planner boundary, render prompts, and StoryTransport. Preserve existing dirty files. Focused tests green; full suite remains blocked by unrelated live/sharp/API-key tests.
 
 Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN.txt` next to its output. It records source image, semantic topics and cues, display text, vision prompt/result, scene-planner prompt/context, and every final still/image/video prompt.
 
@@ -36,7 +36,7 @@ Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN
 
 ## Next Action
 
-Commit `41d4e93d` records semantic decision slice. Next: decide whether `2|4|4` is fixed scene-duration pattern or generated Taktmuster pattern.
+Stop this bounded loop. Next run can inspect one real generated HTML/TXT artifact and decide whether GPT should propose rhythm intent.
 
 # Prior Goal Context (retained)
 
