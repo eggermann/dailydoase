@@ -18,7 +18,7 @@ export FRESHWEB_REALITY_INTRUSION_MODE=off
 export FRESHWEB_CAST_CONTEXT_ENABLED=1
 export FRESHWEB_SELFOMAT_PORT=${FRESHWEB_SELFOMAT_PORT:-4011}
 export FRESHWEB_SELFOMAT_STATE_DIR=${FRESHWEB_SELFOMAT_STATE_DIR:-.selfomat}
-export FRESHWEB_SCENE_VISUAL_DIRECTION='A short, accidental iPhone selfie memory. The current real visitor is the main person nearest the phone. One earlier visitor may return and share a tiny celebratory action motivated by each semantic cue. Keep recognizable faces, natural skin, uneven light, slight blur, odd angle, mild overexposure, and messy frame edges. Ordinary, intimate, imperfect, unposed.'
-export FRESHWEB_CAMERA_STYLE='Handheld front-phone camera, casually tilted and imperfectly framed. Uneven available light, no studio polish.'
+export FRESHWEB_SCENE_VISUAL_DIRECTION='A short, ordinary, unplanned camera memory. The current real visitor is the main person nearest the camera. One earlier visitor may return and share a tiny celebratory action motivated by each semantic cue. For every scene make two separate story decisions: first choose the camera source/viewpoint, either loose handheld phone or small drone, only when that source suits the visible event; re-evaluate it for every scene, so the source may switch between scenes. Then choose one distinct story-motivated camera movement such as pan, focus shift, approach, retreat, hover, reframe, or shake. Do not default to a fixed tilted phone angle. Keep recognizable faces, natural skin, imperfect available light, and unposed framing. Ordinary, intimate, imperfect.'
+export FRESHWEB_CAMERA_STYLE='Story-selected loose phone or small-drone viewpoint. One distinct camera move per scene; movement and visible framing consequence must follow the action, never a static house angle.'
 
 exec "$(dirname "$0")/MIX-again-freshweb.glas-kaufhaus-trailer.sh"

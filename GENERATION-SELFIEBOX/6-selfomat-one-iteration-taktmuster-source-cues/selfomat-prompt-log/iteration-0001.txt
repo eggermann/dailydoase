@@ -1,0 +1,1736 @@
+# Selfomat Prompt Log
+
+
+
+Iteration: 1
+
+Source image: surprise_selfies_folder/surprise_selfie_01.jpg
+
+PROVENANCE LEGEND:
+
+- RAW = semantic input, shown for traceability; not an image prompt.
+
+- STATIC = configured instruction or runtime rule.
+
+- GENERATED = Vision/GPT output or prompt derived by planner.
+
+- RUNTIME = mode decision applied by Selfomat.
+
+Semantic topics: love | animal
+
+## Iteration runtime config
+
+SOURCE TYPE: RUNTIME CONFIG → rhythm and camera decision; independent from raw cue count
+
+currentWord=love
+sourceCueCount=11
+sourceCuePattern=4 | 1 | 2 | 1 | 3
+sourceCuePatternSource=taktmuster-getNext
+sourceCuePatternTrace=[{"call":"taktmuster.getNext()","result":{"index":0,"cycle":0,"mode":"balanced","beatIndex":0,"stepInBeat":0,"patternValue":4,"waveformValue":1,"taktValue":1,"metricStrength":3.25,"timeoutMillis":500,"newCycle":false},"patternValue":4},{"call":"taktmuster.getNext()","result":{"index":1,"cycle":0,"mode":"balanced","beatIndex":1,"stepInBeat":0,"patternValue":1,"waveformValue":0.171417,"taktValue":0.184615,"metricStrength":0.6,"timeoutMillis":500,"newCycle":false},"patternValue":1},{"call":"taktmuster.getNext()","result":{"index":2,"cycle":0,"mode":"balanced","beatIndex":2,"stepInBeat":0,"patternValue":2,"waveformValue":0.138462,"taktValue":0.415385,"metricStrength":1.35,"timeoutMillis":500,"newCycle":false},"patternValue":2},{"call":"taktmuster.getNext()","result":{"index":3,"cycle":0,"mode":"balanced","beatIndex":3,"stepInBeat":0,"patternValue":1,"waveformValue":-0.263725,"taktValue":0.184615,"metricStrength":0.6,"timeoutMillis":500,"newCycle":false},"patternValue":1},{"call":"taktmuster.getNext()","result":{"index":4,"cycle":1,"mode":"balanced","beatIndex":4,"stepInBeat":0,"patternValue":3,"waveformValue":0.384615,"taktValue":0.692308,"metricStrength":2.25,"timeoutMillis":500,"newCycle":false},"patternValue":3}]
+sourceCueBatches=[["love","animal","warmth","care"],["paper"],["gesture","shelter"],["belonging"],["threshold","offer","return"]]
+sourceCueStreamTrace=[{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":0,"title":"love","cnt":1,"prev":[],"next":["context after love: animal"],"beforeWord":"","currentWord":"love","afterWord":"animal"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":1,"title":"animal","cnt":1,"prev":["context before animal: love"],"next":["context after animal: warmth"],"beforeWord":"love","currentWord":"animal","afterWord":"warmth"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":2,"title":"warmth","cnt":1,"prev":["context before warmth: animal"],"next":["context after warmth: care"],"beforeWord":"animal","currentWord":"warmth","afterWord":"care"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":3,"title":"care","cnt":1,"prev":["context before care: warmth"],"next":["context after care: paper"],"beforeWord":"warmth","currentWord":"care","afterWord":"paper"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":4,"title":"paper","cnt":1,"prev":["context before paper: care"],"next":["context after paper: gesture"],"beforeWord":"care","currentWord":"paper","afterWord":"gesture"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":5,"title":"gesture","cnt":1,"prev":["context before gesture: paper"],"next":["context after gesture: shelter"],"beforeWord":"paper","currentWord":"gesture","afterWord":"shelter"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":6,"title":"shelter","cnt":1,"prev":["context before shelter: gesture"],"next":["context after shelter: belonging"],"beforeWord":"gesture","currentWord":"shelter","afterWord":"belonging"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":7,"title":"belonging","cnt":1,"prev":["context before belonging: shelter"],"next":["context after belonging: threshold"],"beforeWord":"shelter","currentWord":"belonging","afterWord":"threshold"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":8,"title":"threshold","cnt":1,"prev":["context before threshold: belonging"],"next":["context after threshold: offer"],"beforeWord":"belonging","currentWord":"threshold","afterWord":"offer"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":9,"title":"offer","cnt":1,"prev":["context before offer: threshold"],"next":["context after offer: return"],"beforeWord":"threshold","currentWord":"offer","afterWord":"return"},{"call":"semanticStream.getNext()","streamIndex":0,"cueIndex":10,"title":"return","cnt":1,"prev":["context before return: offer"],"next":[],"beforeWord":"offer","currentWord":"return","afterWord":""}]
+sceneCount=5
+sceneLengths=2, 2, 2, 2, 2
+realityRatio=0.9
+cameraPolicy=stable selfiebox; subtle movement only
+
+## Semantic cues
+
+SOURCE TYPE: RAW SEMANTIC INPUT → sent to scene planner; not sent verbatim to image renderer
+
+love
+animal
+warmth
+care
+paper
+gesture
+shelter
+belonging
+threshold
+offer
+return
+
+## Display announcement
+
+SOURCE TYPE: GENERATED GPT ANNOUNCEMENT
+
+Ich sehe dich. Der Wortfluss wandert von love über animal und warmth bis return.
+
+## Vision prompt
+
+SOURCE TYPE: STATIC CONFIG PROMPT → Vision model
+
+Describe visible person, position, orientation, and room.
+
+## Vision result
+
+SOURCE TYPE: GENERATED VISION OUTPUT → scene planner context
+
+One visitor in blue top, foreground center, front-facing, small artist studio.
+
+## Scene-planner system prompt
+
+SOURCE TYPE: STATIC CONFIG PROMPT → GPT scene planner
+
+Static planner rules. Taktmuster getNext selects cue-batch size. Semantic stream getNext supplies title, cnt, sentences.prev, and sentences.next as private causal context. Empty prev/next remain empty; no fallback text.
+
+## Scene-planner request trace
+
+SOURCE TYPE: RUNTIME CAPTURE → exact GPT request arguments, messages, schema, and response metadata
+
+[
+  {
+    "attempt": 1,
+    "model": "LOCAL-MOCK-GPT-5",
+    "payload": {
+      "model": "LOCAL-MOCK-GPT-5",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Static planner rules."
+        },
+        {
+          "role": "user",
+          "content": "Scene count: 5\nSource cue count: 11\nTaktmuster pattern: [4,1,2,1,3]\nSemantic stream context by scene: [[{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":0,\"title\":\"love\",\"cnt\":1,\"prev\":[],\"next\":[\"context after love: animal\"],\"beforeWord\":\"\",\"currentWord\":\"love\",\"afterWord\":\"animal\"},{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":1,\"title\":\"animal\",\"cnt\":1,\"prev\":[\"context before animal: love\"],\"next\":[\"context after animal: warmth\"],\"beforeWord\":\"love\",\"currentWord\":\"animal\",\"afterWord\":\"warmth\"},{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":2,\"title\":\"warmth\",\"cnt\":1,\"prev\":[\"context before warmth: animal\"],\"next\":[\"context after warmth: care\"],\"beforeWord\":\"animal\",\"currentWord\":\"warmth\",\"afterWord\":\"care\"},{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":3,\"title\":\"care\",\"cnt\":1,\"prev\":[\"context before care: warmth\"],\"next\":[\"context after care: paper\"],\"beforeWord\":\"warmth\",\"currentWord\":\"care\",\"afterWord\":\"paper\"}],[{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":4,\"title\":\"paper\",\"cnt\":1,\"prev\":[\"context before paper: care\"],\"next\":[\"context after paper: gesture\"],\"beforeWord\":\"care\",\"currentWord\":\"paper\",\"afterWord\":\"gesture\"}],[{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":5,\"title\":\"gesture\",\"cnt\":1,\"prev\":[\"context before gesture: paper\"],\"next\":[\"context after gesture: shelter\"],\"beforeWord\":\"paper\",\"currentWord\":\"gesture\",\"afterWord\":\"shelter\"},{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":6,\"title\":\"shelter\",\"cnt\":1,\"prev\":[\"context before shelter: gesture\"],\"next\":[\"context after shelter: belonging\"],\"beforeWord\":\"gesture\",\"currentWord\":\"shelter\",\"afterWord\":\"belonging\"}],[{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":7,\"title\":\"belonging\",\"cnt\":1,\"prev\":[\"context before belonging: shelter\"],\"next\":[\"context after belonging: threshold\"],\"beforeWord\":\"shelter\",\"currentWord\":\"belonging\",\"afterWord\":\"threshold\"}],[{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":8,\"title\":\"threshold\",\"cnt\":1,\"prev\":[\"context before threshold: belonging\"],\"next\":[\"context after threshold: offer\"],\"beforeWord\":\"belonging\",\"currentWord\":\"threshold\",\"afterWord\":\"offer\"},{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":9,\"title\":\"offer\",\"cnt\":1,\"prev\":[\"context before offer: threshold\"],\"next\":[\"context after offer: return\"],\"beforeWord\":\"threshold\",\"currentWord\":\"offer\",\"afterWord\":\"return\"},{\"call\":\"semanticStream.getNext()\",\"streamIndex\":0,\"cueIndex\":10,\"title\":\"return\",\"cnt\":1,\"prev\":[\"context before return: offer\"],\"next\":[],\"beforeWord\":\"offer\",\"currentWord\":\"return\",\"afterWord\":\"\"}]]\nUse prev as inherited cause, title as current event, next as forward obligation, cnt as emphasis. Do not copy source sentences into visible prompts."
+        }
+      ],
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "scene_plan"
+        }
+      }
+    },
+    "response": {
+      "content": "local mock accepted 5 scenes and used prev/title/next causal context"
+    }
+  }
+]
+
+## Scene-planner context
+
+SOURCE TYPE: RUNTIME-GENERATED CONTEXT → GPT scene planner
+
+Current topic word: love. Taktmuster pattern controls batch sizes: 4 | 1 | 2 | 1 | 3. Private semantic stream context is sent to the scene planner: prev → title → next; empty values stay empty.
+
+## Final next-word decision
+
+SOURCE TYPE: RUNTIME/GENERATED → final scene consequence becomes StoryTransport.nextTopic
+
+{
+  "selectedNextWord": "return",
+  "finalScenePlannerNextWord": "return",
+  "source": "planner-final-creative-decision",
+  "fallback": false,
+  "reason": "The offered return is the visible final consequence and next bridge.",
+  "assertion": true
+}
+
+## Completed StoryTransport
+
+SOURCE TYPE: RUNTIME ARTIFACT → completed narrative state
+
+{
+  "schemaVersion": 1,
+  "iteration": 1,
+  "topic": "love",
+  "topics": [
+    "love",
+    "animal"
+  ],
+  "semanticCues": [
+    "love",
+    "animal",
+    "warmth",
+    "care",
+    "paper",
+    "gesture",
+    "shelter",
+    "belonging",
+    "threshold",
+    "offer",
+    "return"
+  ],
+  "sourceCueCount": 11,
+  "sourceCuePattern": [
+    4,
+    1,
+    2,
+    1,
+    3
+  ],
+  "sourceCuePatternSource": "taktmuster-getNext",
+  "sourceCueBatches": [
+    [
+      "love",
+      "animal",
+      "warmth",
+      "care"
+    ],
+    [
+      "paper"
+    ],
+    [
+      "gesture",
+      "shelter"
+    ],
+    [
+      "belonging"
+    ],
+    [
+      "threshold",
+      "offer",
+      "return"
+    ]
+  ],
+  "semanticStreamNextTopic": "return",
+  "people": {
+    "count": 1,
+    "actors": [
+      {
+        "reference": "current visitor",
+        "description": "visitor in blue top",
+        "position": "foreground center",
+        "orientation": "front-facing",
+        "personaId": "cast-001",
+        "referenceImage": "surprise_selfies_folder/surprise_selfie_01.jpg",
+        "firstSeenIteration": 1,
+        "lastSeenIteration": 1,
+        "status": "present"
+      }
+    ]
+  },
+  "location": "small artist studio",
+  "previous": null,
+  "cast": {
+    "actorReferenceLimit": 10,
+    "actorReferences": [
+      {
+        "personaId": "cast-001",
+        "reference": "current visitor",
+        "description": "visitor in blue top",
+        "position": "foreground center",
+        "orientation": "front-facing",
+        "referenceImage": "surprise_selfies_folder/surprise_selfie_01.jpg",
+        "firstSeenIteration": 1,
+        "lastSeenIteration": 1,
+        "status": "present"
+      }
+    ],
+    "archivedActorReferences": []
+  },
+  "linkWord": "return",
+  "nextTopic": "return",
+  "nextWord": "return",
+  "nextWordSource": "planner-final-creative-decision",
+  "nextWordFallback": false,
+  "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+  "story": {
+    "openingBeat": "The visitor holds four private semantic impulses as one warm paper signal.",
+    "openingScene": {
+      "sceneIndex": 1,
+      "beat": "The visitor holds four private semantic impulses as one warm paper signal.",
+      "title": "A held signal",
+      "eventType": "actorOnly",
+      "actorAction": "The visitor cups both hands around the paper.",
+      "castUse": "current lead only",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "cameraCue": "Stable selfiebox frame.",
+      "stillPrompt": "One final visible destination state.",
+      "videoPrompt": "Temporal motion disabled for this image-only test.",
+      "topic": "love",
+      "durationSeconds": 2,
+      "creativeDecision": {
+        "visualEvent": "The visitor holds four private semantic impulses as one warm paper signal.",
+        "personAction": "The visitor cups both hands around the paper.",
+        "transformation": "The semantic material becomes one physical paper change.",
+        "residue": {
+          "description": "Warm paper remains held at the chest.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Stable selfiebox."
+      },
+      "semanticCue": "love | animal | warmth | care",
+      "actorsInteraction": "The visitor cups both hands around the paper.",
+      "imageDescription": "The visitor holds four private semantic impulses as one warm paper signal.",
+      "singleImagePrompt": "Render one still image: The visitor holds four private semantic impulses as one warm paper signal. The visitor cups both hands around the paper.",
+      "freshImage": true,
+      "useCameraShot": true
+    },
+    "finalBeat": "The visitor offers the small animal back toward the camera.",
+    "finalScene": {
+      "sceneIndex": 5,
+      "beat": "The visitor offers the small animal back toward the camera.",
+      "title": "An offered return",
+      "eventType": "actorOnly",
+      "actorAction": "The visitor extends the animal shape toward the camera.",
+      "castUse": "current lead only",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "cameraCue": "Small continuous handheld settle.",
+      "stillPrompt": "One final visible destination state.",
+      "videoPrompt": "Temporal motion disabled for this image-only test.",
+      "topic": "love",
+      "durationSeconds": 2,
+      "creativeDecision": {
+        "visualEvent": "The visitor offers the small animal back toward the camera.",
+        "personAction": "The visitor extends the animal shape toward the camera.",
+        "transformation": "The semantic material becomes one physical paper change.",
+        "residue": {
+          "description": "The offered animal remains at the frame edge.",
+          "mustSurvive": true
+        },
+        "nextWord": "return",
+        "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+        "cameraMove": "Subtle handheld settle."
+      },
+      "nextWord": "return",
+      "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+      "semanticCue": "threshold | offer | return",
+      "actorsInteraction": "The visitor extends the animal shape toward the camera.",
+      "imageDescription": "The visitor offers the small animal back toward the camera.",
+      "singleImagePrompt": "Render one still image: The visitor offers the small animal back toward the camera. The visitor extends the animal shape toward the camera.",
+      "freshImage": false,
+      "useCameraShot": true
+    },
+    "scenes": [
+      {
+        "sceneIndex": 1,
+        "beat": "The visitor holds four private semantic impulses as one warm paper signal.",
+        "title": "A held signal",
+        "eventType": "actorOnly",
+        "actorAction": "The visitor cups both hands around the paper.",
+        "castUse": "current lead only",
+        "frameSource": "newImage",
+        "videoMode": "singleImage",
+        "cameraCue": "Stable selfiebox frame.",
+        "stillPrompt": "One final visible destination state.",
+        "videoPrompt": "Temporal motion disabled for this image-only test.",
+        "topic": "love",
+        "durationSeconds": 2,
+        "creativeDecision": {
+          "visualEvent": "The visitor holds four private semantic impulses as one warm paper signal.",
+          "personAction": "The visitor cups both hands around the paper.",
+          "transformation": "The semantic material becomes one physical paper change.",
+          "residue": {
+            "description": "Warm paper remains held at the chest.",
+            "mustSurvive": true
+          },
+          "nextWord": "",
+          "nextWordReason": "",
+          "cameraMove": "Stable selfiebox."
+        },
+        "semanticCue": "love | animal | warmth | care",
+        "actorsInteraction": "The visitor cups both hands around the paper.",
+        "imageDescription": "The visitor holds four private semantic impulses as one warm paper signal.",
+        "singleImagePrompt": "Render one still image: The visitor holds four private semantic impulses as one warm paper signal. The visitor cups both hands around the paper.",
+        "freshImage": true,
+        "useCameraShot": true
+      },
+      {
+        "sceneIndex": 2,
+        "beat": "The visitor pauses; the warm signal remains visible between both hands.",
+        "title": "A pause",
+        "eventType": "actorOnly",
+        "actorAction": "The visitor holds still and watches the paper.",
+        "castUse": "current lead only",
+        "frameSource": "lastFrame",
+        "videoMode": "singleImage",
+        "cameraCue": "Small continuous handheld settle.",
+        "stillPrompt": "One final visible destination state.",
+        "videoPrompt": "Temporal motion disabled for this image-only test.",
+        "topic": "love",
+        "durationSeconds": 2,
+        "creativeDecision": {
+          "visualEvent": "The visitor pauses; the warm signal remains visible between both hands.",
+          "personAction": "The visitor holds still and watches the paper.",
+          "transformation": "The semantic material becomes one physical paper change.",
+          "residue": {
+            "description": "The held paper remains centered.",
+            "mustSurvive": true
+          },
+          "nextWord": "",
+          "nextWordReason": "",
+          "cameraMove": "Subtle handheld settle."
+        },
+        "semanticCue": "paper",
+        "actorsInteraction": "The visitor holds still and watches the paper.",
+        "imageDescription": "The visitor pauses; the warm signal remains visible between both hands.",
+        "singleImagePrompt": "Render one still image: The visitor pauses; the warm signal remains visible between both hands. The visitor holds still and watches the paper.",
+        "freshImage": false,
+        "useCameraShot": true
+      },
+      {
+        "sceneIndex": 3,
+        "beat": "Two folds turn the paper signal into a small animal shape.",
+        "title": "A folded animal",
+        "eventType": "actorOnly",
+        "actorAction": "The visitor folds the paper twice.",
+        "castUse": "current lead only",
+        "frameSource": "lastFrame",
+        "videoMode": "singleImage",
+        "cameraCue": "Small continuous handheld settle.",
+        "stillPrompt": "One final visible destination state.",
+        "videoPrompt": "Temporal motion disabled for this image-only test.",
+        "topic": "love",
+        "durationSeconds": 2,
+        "creativeDecision": {
+          "visualEvent": "Two folds turn the paper signal into a small animal shape.",
+          "personAction": "The visitor folds the paper twice.",
+          "transformation": "The semantic material becomes one physical paper change.",
+          "residue": {
+            "description": "A small paper animal remains in both hands.",
+            "mustSurvive": true
+          },
+          "nextWord": "",
+          "nextWordReason": "",
+          "cameraMove": "Subtle handheld settle."
+        },
+        "semanticCue": "gesture | shelter",
+        "actorsInteraction": "The visitor folds the paper twice.",
+        "imageDescription": "Two folds turn the paper signal into a small animal shape.",
+        "singleImagePrompt": "Render one still image: Two folds turn the paper signal into a small animal shape. The visitor folds the paper twice.",
+        "freshImage": false,
+        "useCameraShot": true
+      },
+      {
+        "sceneIndex": 4,
+        "beat": "The animal shape rests at the doorway edge as a threshold marker.",
+        "title": "A threshold",
+        "eventType": "actorOnly",
+        "actorAction": "The visitor places the animal shape near the doorway.",
+        "castUse": "current lead only",
+        "frameSource": "lastFrame",
+        "videoMode": "singleImage",
+        "cameraCue": "Small continuous handheld settle.",
+        "stillPrompt": "One final visible destination state.",
+        "videoPrompt": "Temporal motion disabled for this image-only test.",
+        "topic": "love",
+        "durationSeconds": 2,
+        "creativeDecision": {
+          "visualEvent": "The animal shape rests at the doorway edge as a threshold marker.",
+          "personAction": "The visitor places the animal shape near the doorway.",
+          "transformation": "The semantic material becomes one physical paper change.",
+          "residue": {
+            "description": "The animal remains at the threshold.",
+            "mustSurvive": true
+          },
+          "nextWord": "",
+          "nextWordReason": "",
+          "cameraMove": "Subtle handheld settle."
+        },
+        "semanticCue": "belonging",
+        "actorsInteraction": "The visitor places the animal shape near the doorway.",
+        "imageDescription": "The animal shape rests at the doorway edge as a threshold marker.",
+        "singleImagePrompt": "Render one still image: The animal shape rests at the doorway edge as a threshold marker. The visitor places the animal shape near the doorway.",
+        "freshImage": false,
+        "useCameraShot": true
+      },
+      {
+        "sceneIndex": 5,
+        "beat": "The visitor offers the small animal back toward the camera.",
+        "title": "An offered return",
+        "eventType": "actorOnly",
+        "actorAction": "The visitor extends the animal shape toward the camera.",
+        "castUse": "current lead only",
+        "frameSource": "lastFrame",
+        "videoMode": "singleImage",
+        "cameraCue": "Small continuous handheld settle.",
+        "stillPrompt": "One final visible destination state.",
+        "videoPrompt": "Temporal motion disabled for this image-only test.",
+        "topic": "love",
+        "durationSeconds": 2,
+        "creativeDecision": {
+          "visualEvent": "The visitor offers the small animal back toward the camera.",
+          "personAction": "The visitor extends the animal shape toward the camera.",
+          "transformation": "The semantic material becomes one physical paper change.",
+          "residue": {
+            "description": "The offered animal remains at the frame edge.",
+            "mustSurvive": true
+          },
+          "nextWord": "return",
+          "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+          "cameraMove": "Subtle handheld settle."
+        },
+        "nextWord": "return",
+        "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+        "semanticCue": "threshold | offer | return",
+        "actorsInteraction": "The visitor extends the animal shape toward the camera.",
+        "imageDescription": "The visitor offers the small animal back toward the camera.",
+        "singleImagePrompt": "Render one still image: The visitor offers the small animal back toward the camera. The visitor extends the animal shape toward the camera.",
+        "freshImage": false,
+        "useCameraShot": true
+      }
+    ],
+    "summary": "The visitor holds four private semantic impulses as one warm paper signal. -> The visitor pauses; the warm signal remains visible between both hands. -> Two folds turn the paper signal into a small animal shape. -> The animal shape rests at the doorway edge as a threshold marker. -> The visitor offers the small animal back toward the camera.",
+    "linkWord": "return",
+    "nextTopic": "return",
+    "nextWord": "return",
+    "nextWordSource": "planner-final-creative-decision",
+    "nextWordFallback": false,
+    "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+    "nextOpeningObligation": "Continue from this consequence: The visitor offers the small animal back toward the camera."
+  },
+  "sourceCuePatternTrace": [
+    {
+      "call": "taktmuster.getNext()",
+      "result": {
+        "index": 0,
+        "cycle": 0,
+        "mode": "balanced",
+        "beatIndex": 0,
+        "stepInBeat": 0,
+        "patternValue": 4,
+        "waveformValue": 1,
+        "taktValue": 1,
+        "metricStrength": 3.25,
+        "timeoutMillis": 500,
+        "newCycle": false
+      },
+      "patternValue": 4
+    },
+    {
+      "call": "taktmuster.getNext()",
+      "result": {
+        "index": 1,
+        "cycle": 0,
+        "mode": "balanced",
+        "beatIndex": 1,
+        "stepInBeat": 0,
+        "patternValue": 1,
+        "waveformValue": 0.171417,
+        "taktValue": 0.184615,
+        "metricStrength": 0.6,
+        "timeoutMillis": 500,
+        "newCycle": false
+      },
+      "patternValue": 1
+    },
+    {
+      "call": "taktmuster.getNext()",
+      "result": {
+        "index": 2,
+        "cycle": 0,
+        "mode": "balanced",
+        "beatIndex": 2,
+        "stepInBeat": 0,
+        "patternValue": 2,
+        "waveformValue": 0.138462,
+        "taktValue": 0.415385,
+        "metricStrength": 1.35,
+        "timeoutMillis": 500,
+        "newCycle": false
+      },
+      "patternValue": 2
+    },
+    {
+      "call": "taktmuster.getNext()",
+      "result": {
+        "index": 3,
+        "cycle": 0,
+        "mode": "balanced",
+        "beatIndex": 3,
+        "stepInBeat": 0,
+        "patternValue": 1,
+        "waveformValue": -0.263725,
+        "taktValue": 0.184615,
+        "metricStrength": 0.6,
+        "timeoutMillis": 500,
+        "newCycle": false
+      },
+      "patternValue": 1
+    },
+    {
+      "call": "taktmuster.getNext()",
+      "result": {
+        "index": 4,
+        "cycle": 1,
+        "mode": "balanced",
+        "beatIndex": 4,
+        "stepInBeat": 0,
+        "patternValue": 3,
+        "waveformValue": 0.384615,
+        "taktValue": 0.692308,
+        "metricStrength": 2.25,
+        "timeoutMillis": 500,
+        "newCycle": false
+      },
+      "patternValue": 3
+    }
+  ],
+  "sourceCueStreamTrace": [
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 0,
+      "title": "love",
+      "cnt": 1,
+      "prev": [],
+      "next": [
+        "context after love: animal"
+      ],
+      "beforeWord": "",
+      "currentWord": "love",
+      "afterWord": "animal"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 1,
+      "title": "animal",
+      "cnt": 1,
+      "prev": [
+        "context before animal: love"
+      ],
+      "next": [
+        "context after animal: warmth"
+      ],
+      "beforeWord": "love",
+      "currentWord": "animal",
+      "afterWord": "warmth"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 2,
+      "title": "warmth",
+      "cnt": 1,
+      "prev": [
+        "context before warmth: animal"
+      ],
+      "next": [
+        "context after warmth: care"
+      ],
+      "beforeWord": "animal",
+      "currentWord": "warmth",
+      "afterWord": "care"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 3,
+      "title": "care",
+      "cnt": 1,
+      "prev": [
+        "context before care: warmth"
+      ],
+      "next": [
+        "context after care: paper"
+      ],
+      "beforeWord": "warmth",
+      "currentWord": "care",
+      "afterWord": "paper"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 4,
+      "title": "paper",
+      "cnt": 1,
+      "prev": [
+        "context before paper: care"
+      ],
+      "next": [
+        "context after paper: gesture"
+      ],
+      "beforeWord": "care",
+      "currentWord": "paper",
+      "afterWord": "gesture"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 5,
+      "title": "gesture",
+      "cnt": 1,
+      "prev": [
+        "context before gesture: paper"
+      ],
+      "next": [
+        "context after gesture: shelter"
+      ],
+      "beforeWord": "paper",
+      "currentWord": "gesture",
+      "afterWord": "shelter"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 6,
+      "title": "shelter",
+      "cnt": 1,
+      "prev": [
+        "context before shelter: gesture"
+      ],
+      "next": [
+        "context after shelter: belonging"
+      ],
+      "beforeWord": "gesture",
+      "currentWord": "shelter",
+      "afterWord": "belonging"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 7,
+      "title": "belonging",
+      "cnt": 1,
+      "prev": [
+        "context before belonging: shelter"
+      ],
+      "next": [
+        "context after belonging: threshold"
+      ],
+      "beforeWord": "shelter",
+      "currentWord": "belonging",
+      "afterWord": "threshold"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 8,
+      "title": "threshold",
+      "cnt": 1,
+      "prev": [
+        "context before threshold: belonging"
+      ],
+      "next": [
+        "context after threshold: offer"
+      ],
+      "beforeWord": "belonging",
+      "currentWord": "threshold",
+      "afterWord": "offer"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 9,
+      "title": "offer",
+      "cnt": 1,
+      "prev": [
+        "context before offer: threshold"
+      ],
+      "next": [
+        "context after offer: return"
+      ],
+      "beforeWord": "threshold",
+      "currentWord": "offer",
+      "afterWord": "return"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 10,
+      "title": "return",
+      "cnt": 1,
+      "prev": [
+        "context before return: offer"
+      ],
+      "next": [],
+      "beforeWord": "offer",
+      "currentWord": "return",
+      "afterWord": ""
+    }
+  ],
+  "sourceCueStreamTraceBatches": [
+    [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 0,
+        "title": "love",
+        "cnt": 1,
+        "prev": [],
+        "next": [
+          "context after love: animal"
+        ],
+        "beforeWord": "",
+        "currentWord": "love",
+        "afterWord": "animal"
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 1,
+        "title": "animal",
+        "cnt": 1,
+        "prev": [
+          "context before animal: love"
+        ],
+        "next": [
+          "context after animal: warmth"
+        ],
+        "beforeWord": "love",
+        "currentWord": "animal",
+        "afterWord": "warmth"
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 2,
+        "title": "warmth",
+        "cnt": 1,
+        "prev": [
+          "context before warmth: animal"
+        ],
+        "next": [
+          "context after warmth: care"
+        ],
+        "beforeWord": "animal",
+        "currentWord": "warmth",
+        "afterWord": "care"
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 3,
+        "title": "care",
+        "cnt": 1,
+        "prev": [
+          "context before care: warmth"
+        ],
+        "next": [
+          "context after care: paper"
+        ],
+        "beforeWord": "warmth",
+        "currentWord": "care",
+        "afterWord": "paper"
+      }
+    ],
+    [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 4,
+        "title": "paper",
+        "cnt": 1,
+        "prev": [
+          "context before paper: care"
+        ],
+        "next": [
+          "context after paper: gesture"
+        ],
+        "beforeWord": "care",
+        "currentWord": "paper",
+        "afterWord": "gesture"
+      }
+    ],
+    [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 5,
+        "title": "gesture",
+        "cnt": 1,
+        "prev": [
+          "context before gesture: paper"
+        ],
+        "next": [
+          "context after gesture: shelter"
+        ],
+        "beforeWord": "paper",
+        "currentWord": "gesture",
+        "afterWord": "shelter"
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 6,
+        "title": "shelter",
+        "cnt": 1,
+        "prev": [
+          "context before shelter: gesture"
+        ],
+        "next": [
+          "context after shelter: belonging"
+        ],
+        "beforeWord": "gesture",
+        "currentWord": "shelter",
+        "afterWord": "belonging"
+      }
+    ],
+    [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 7,
+        "title": "belonging",
+        "cnt": 1,
+        "prev": [
+          "context before belonging: shelter"
+        ],
+        "next": [
+          "context after belonging: threshold"
+        ],
+        "beforeWord": "shelter",
+        "currentWord": "belonging",
+        "afterWord": "threshold"
+      }
+    ],
+    [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 8,
+        "title": "threshold",
+        "cnt": 1,
+        "prev": [
+          "context before threshold: belonging"
+        ],
+        "next": [
+          "context after threshold: offer"
+        ],
+        "beforeWord": "belonging",
+        "currentWord": "threshold",
+        "afterWord": "offer"
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 9,
+        "title": "offer",
+        "cnt": 1,
+        "prev": [
+          "context before offer: threshold"
+        ],
+        "next": [
+          "context after offer: return"
+        ],
+        "beforeWord": "threshold",
+        "currentWord": "offer",
+        "afterWord": "return"
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 10,
+        "title": "return",
+        "cnt": 1,
+        "prev": [
+          "context before return: offer"
+        ],
+        "next": [],
+        "beforeWord": "offer",
+        "currentWord": "return",
+        "afterWord": ""
+      }
+    ]
+  ]
+}
+
+## Image-only interpretation
+
+SOURCE TYPE: RUNTIME EXPLANATION → no video was generated
+
+The iteration produced still-image prompts only.
+stillPrompt = the visible destination frame for this scene.
+singleImagePrompt = the prompt sent to the image renderer.
+videoPrompt fields, when present inside the transport JSON, are trace-only and were not sent.
+
+## Image-only starter-photo prompt
+
+SOURCE TYPE: STATIC/GENERATED STARTER PROMPT → image renderer
+
+Local placeholder start image only; no camera capture and no external upload.
+
+## Video generation
+
+SOURCE TYPE: RUNTIME CONFIG DECISION
+
+disabled
+
+# Final render prompts
+
+### Scene 1: A held signal
+
+FIELD ORIGIN:
+
+- GENERATED GPT: title, beat, interaction, story event, and image wording.
+
+- RUNTIME/STATIC: duration=2 seconds; frameSource=newImage; videoMode=singleImage; freshImage=true; useCameraShot=true.
+
+- GENERATED GPT / FIFO: current lead only
+
+## BEFORE → planner input
+
+SOURCE TYPE: RUNTIME INPUT → state carried into this scene; semantic fragments remain planner-only
+
+{
+  "previousScene": {
+    "sourceImage": "surprise_selfies_folder/surprise_selfie_01.jpg",
+    "visionResult": "One visitor in blue top, foreground center, front-facing, small artist studio.",
+    "openingState": "No previous scene; this is the opening frame."
+  },
+  "sourceCueBatch": [
+    "love",
+    "animal",
+    "warmth",
+    "care"
+  ],
+  "rawSceneCue": "love | animal | warmth | care"
+}
+
+## Semantic stream getNext: BEFORE → CURRENT → AFTER
+
+SOURCE TYPE: GENERATED SEMANTIC STREAM TRACE → actual stream.getNext() context; not the Taktmuster count
+
+{
+  "plannerUse": "title identifies the current item; prev and next provide local context; cnt indicates occurrence weight. These fields guide the scene planner and are not copied verbatim into image prompts.",
+  "records": [
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 0,
+      "title": "love",
+      "cnt": 1,
+      "prev": [],
+      "next": [
+        "context after love: animal"
+      ],
+      "beforeWord": "",
+      "currentWord": "love",
+      "afterWord": "animal"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 1,
+      "title": "animal",
+      "cnt": 1,
+      "prev": [
+        "context before animal: love"
+      ],
+      "next": [
+        "context after animal: warmth"
+      ],
+      "beforeWord": "love",
+      "currentWord": "animal",
+      "afterWord": "warmth"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 2,
+      "title": "warmth",
+      "cnt": 1,
+      "prev": [
+        "context before warmth: animal"
+      ],
+      "next": [
+        "context after warmth: care"
+      ],
+      "beforeWord": "animal",
+      "currentWord": "warmth",
+      "afterWord": "care"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 3,
+      "title": "care",
+      "cnt": 1,
+      "prev": [
+        "context before care: warmth"
+      ],
+      "next": [
+        "context after care: paper"
+      ],
+      "beforeWord": "warmth",
+      "currentWord": "care",
+      "afterWord": "paper"
+    }
+  ]
+}
+
+## Creative decision
+
+SOURCE TYPE: GENERATED GPT DECISION LAYER → visual event, body action, transformation, residue, nextWord, reason, camera move
+
+{
+  "visualEvent": "The visitor holds four private semantic impulses as one warm paper signal.",
+  "personAction": "The visitor cups both hands around the paper.",
+  "transformation": "The semantic material becomes one physical paper change.",
+  "residue": {
+    "description": "Warm paper remains held at the chest.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "cameraMove": "Stable selfiebox."
+}
+
+## Residue
+
+SOURCE TYPE: GENERATED GPT CONTINUITY STATE → must survive into next scene
+
+{
+  "description": "Warm paper remains held at the chest.",
+  "mustSurvive": true
+}
+
+- GENERATED GPT interaction: The visitor cups both hands around the paper.
+
+## Raw semantic cue for this scene
+
+SOURCE TYPE: RAW SEMANTIC INPUT — planner material, not image wording
+
+love | animal | warmth | care
+
+## Camera cue
+
+SOURCE TYPE: GENERATED GPT CAMERA DIRECTION → story-motivated perspective and movement
+
+Stable selfiebox frame.
+
+## Still-frame prompt
+
+SOURCE TYPE: GENERATED GPT SCENE PROMPT → one visible image state; not a video prompt
+
+One final visible destination state.
+
+## Image description
+
+SOURCE TYPE: GENERATED GPT VISUAL DESCRIPTION → continuity/image input
+
+The visitor holds four private semantic impulses as one warm paper signal.
+
+## Image render prompt
+
+SOURCE TYPE: GENERATED GPT PROMPT → image-only render plan
+
+Render one still image: The visitor holds four private semantic impulses as one warm paper signal. The visitor cups both hands around the paper.
+
+## Media mode
+
+SOURCE TYPE: RUNTIME DECISION → no video call is made
+
+{
+  "mode": "image-only",
+  "stillImageRender": "enabled",
+  "videoGeneration": "disabled",
+  "videoPromptSent": false,
+  "videoPromptTraceOnly": true
+}
+
+## AFTER → carried to next scene
+
+SOURCE TYPE: GENERATED/RUNTIME OUTPUT → this scene becomes the next scene input
+
+{
+  "residue": {
+    "description": "Warm paper remains held at the chest.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "visibleEndState": "The visitor holds four private semantic impulses as one warm paper signal."
+}
+
+### Scene 2: A pause
+
+FIELD ORIGIN:
+
+- GENERATED GPT: title, beat, interaction, story event, and image wording.
+
+- RUNTIME/STATIC: duration=2 seconds; frameSource=lastFrame; videoMode=singleImage; freshImage=false; useCameraShot=true.
+
+- GENERATED GPT / FIFO: current lead only
+
+## BEFORE → planner input
+
+SOURCE TYPE: RUNTIME INPUT → state carried into this scene; semantic fragments remain planner-only
+
+{
+  "previousScene": {
+    "title": "A held signal",
+    "residue": {
+      "description": "Warm paper remains held at the chest.",
+      "mustSurvive": true
+    },
+    "imageDescription": "The visitor holds four private semantic impulses as one warm paper signal."
+  },
+  "sourceCueBatch": [
+    "paper"
+  ],
+  "rawSceneCue": "paper"
+}
+
+## Semantic stream getNext: BEFORE → CURRENT → AFTER
+
+SOURCE TYPE: GENERATED SEMANTIC STREAM TRACE → actual stream.getNext() context; not the Taktmuster count
+
+{
+  "plannerUse": "title identifies the current item; prev and next provide local context; cnt indicates occurrence weight. These fields guide the scene planner and are not copied verbatim into image prompts.",
+  "records": [
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 4,
+      "title": "paper",
+      "cnt": 1,
+      "prev": [
+        "context before paper: care"
+      ],
+      "next": [
+        "context after paper: gesture"
+      ],
+      "beforeWord": "care",
+      "currentWord": "paper",
+      "afterWord": "gesture"
+    }
+  ]
+}
+
+## Creative decision
+
+SOURCE TYPE: GENERATED GPT DECISION LAYER → visual event, body action, transformation, residue, nextWord, reason, camera move
+
+{
+  "visualEvent": "The visitor pauses; the warm signal remains visible between both hands.",
+  "personAction": "The visitor holds still and watches the paper.",
+  "transformation": "The semantic material becomes one physical paper change.",
+  "residue": {
+    "description": "The held paper remains centered.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "cameraMove": "Subtle handheld settle."
+}
+
+## Residue
+
+SOURCE TYPE: GENERATED GPT CONTINUITY STATE → must survive into next scene
+
+{
+  "description": "The held paper remains centered.",
+  "mustSurvive": true
+}
+
+- GENERATED GPT interaction: The visitor holds still and watches the paper.
+
+## Raw semantic cue for this scene
+
+SOURCE TYPE: RAW SEMANTIC INPUT — planner material, not image wording
+
+paper
+
+## Camera cue
+
+SOURCE TYPE: GENERATED GPT CAMERA DIRECTION → story-motivated perspective and movement
+
+Small continuous handheld settle.
+
+## Still-frame prompt
+
+SOURCE TYPE: GENERATED GPT SCENE PROMPT → one visible image state; not a video prompt
+
+One final visible destination state.
+
+## Image description
+
+SOURCE TYPE: GENERATED GPT VISUAL DESCRIPTION → continuity/image input
+
+The visitor pauses; the warm signal remains visible between both hands.
+
+## Image render prompt
+
+SOURCE TYPE: GENERATED GPT PROMPT → image-only render plan
+
+Render one still image: The visitor pauses; the warm signal remains visible between both hands. The visitor holds still and watches the paper.
+
+## Media mode
+
+SOURCE TYPE: RUNTIME DECISION → no video call is made
+
+{
+  "mode": "image-only",
+  "stillImageRender": "enabled",
+  "videoGeneration": "disabled",
+  "videoPromptSent": false,
+  "videoPromptTraceOnly": true
+}
+
+## AFTER → carried to next scene
+
+SOURCE TYPE: GENERATED/RUNTIME OUTPUT → this scene becomes the next scene input
+
+{
+  "residue": {
+    "description": "The held paper remains centered.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "visibleEndState": "The visitor pauses; the warm signal remains visible between both hands."
+}
+
+### Scene 3: A folded animal
+
+FIELD ORIGIN:
+
+- GENERATED GPT: title, beat, interaction, story event, and image wording.
+
+- RUNTIME/STATIC: duration=2 seconds; frameSource=lastFrame; videoMode=singleImage; freshImage=false; useCameraShot=true.
+
+- GENERATED GPT / FIFO: current lead only
+
+## BEFORE → planner input
+
+SOURCE TYPE: RUNTIME INPUT → state carried into this scene; semantic fragments remain planner-only
+
+{
+  "previousScene": {
+    "title": "A pause",
+    "residue": {
+      "description": "The held paper remains centered.",
+      "mustSurvive": true
+    },
+    "imageDescription": "The visitor pauses; the warm signal remains visible between both hands."
+  },
+  "sourceCueBatch": [
+    "gesture",
+    "shelter"
+  ],
+  "rawSceneCue": "gesture | shelter"
+}
+
+## Semantic stream getNext: BEFORE → CURRENT → AFTER
+
+SOURCE TYPE: GENERATED SEMANTIC STREAM TRACE → actual stream.getNext() context; not the Taktmuster count
+
+{
+  "plannerUse": "title identifies the current item; prev and next provide local context; cnt indicates occurrence weight. These fields guide the scene planner and are not copied verbatim into image prompts.",
+  "records": [
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 5,
+      "title": "gesture",
+      "cnt": 1,
+      "prev": [
+        "context before gesture: paper"
+      ],
+      "next": [
+        "context after gesture: shelter"
+      ],
+      "beforeWord": "paper",
+      "currentWord": "gesture",
+      "afterWord": "shelter"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 6,
+      "title": "shelter",
+      "cnt": 1,
+      "prev": [
+        "context before shelter: gesture"
+      ],
+      "next": [
+        "context after shelter: belonging"
+      ],
+      "beforeWord": "gesture",
+      "currentWord": "shelter",
+      "afterWord": "belonging"
+    }
+  ]
+}
+
+## Creative decision
+
+SOURCE TYPE: GENERATED GPT DECISION LAYER → visual event, body action, transformation, residue, nextWord, reason, camera move
+
+{
+  "visualEvent": "Two folds turn the paper signal into a small animal shape.",
+  "personAction": "The visitor folds the paper twice.",
+  "transformation": "The semantic material becomes one physical paper change.",
+  "residue": {
+    "description": "A small paper animal remains in both hands.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "cameraMove": "Subtle handheld settle."
+}
+
+## Residue
+
+SOURCE TYPE: GENERATED GPT CONTINUITY STATE → must survive into next scene
+
+{
+  "description": "A small paper animal remains in both hands.",
+  "mustSurvive": true
+}
+
+- GENERATED GPT interaction: The visitor folds the paper twice.
+
+## Raw semantic cue for this scene
+
+SOURCE TYPE: RAW SEMANTIC INPUT — planner material, not image wording
+
+gesture | shelter
+
+## Camera cue
+
+SOURCE TYPE: GENERATED GPT CAMERA DIRECTION → story-motivated perspective and movement
+
+Small continuous handheld settle.
+
+## Still-frame prompt
+
+SOURCE TYPE: GENERATED GPT SCENE PROMPT → one visible image state; not a video prompt
+
+One final visible destination state.
+
+## Image description
+
+SOURCE TYPE: GENERATED GPT VISUAL DESCRIPTION → continuity/image input
+
+Two folds turn the paper signal into a small animal shape.
+
+## Image render prompt
+
+SOURCE TYPE: GENERATED GPT PROMPT → image-only render plan
+
+Render one still image: Two folds turn the paper signal into a small animal shape. The visitor folds the paper twice.
+
+## Media mode
+
+SOURCE TYPE: RUNTIME DECISION → no video call is made
+
+{
+  "mode": "image-only",
+  "stillImageRender": "enabled",
+  "videoGeneration": "disabled",
+  "videoPromptSent": false,
+  "videoPromptTraceOnly": true
+}
+
+## AFTER → carried to next scene
+
+SOURCE TYPE: GENERATED/RUNTIME OUTPUT → this scene becomes the next scene input
+
+{
+  "residue": {
+    "description": "A small paper animal remains in both hands.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "visibleEndState": "Two folds turn the paper signal into a small animal shape."
+}
+
+### Scene 4: A threshold
+
+FIELD ORIGIN:
+
+- GENERATED GPT: title, beat, interaction, story event, and image wording.
+
+- RUNTIME/STATIC: duration=2 seconds; frameSource=lastFrame; videoMode=singleImage; freshImage=false; useCameraShot=true.
+
+- GENERATED GPT / FIFO: current lead only
+
+## BEFORE → planner input
+
+SOURCE TYPE: RUNTIME INPUT → state carried into this scene; semantic fragments remain planner-only
+
+{
+  "previousScene": {
+    "title": "A folded animal",
+    "residue": {
+      "description": "A small paper animal remains in both hands.",
+      "mustSurvive": true
+    },
+    "imageDescription": "Two folds turn the paper signal into a small animal shape."
+  },
+  "sourceCueBatch": [
+    "belonging"
+  ],
+  "rawSceneCue": "belonging"
+}
+
+## Semantic stream getNext: BEFORE → CURRENT → AFTER
+
+SOURCE TYPE: GENERATED SEMANTIC STREAM TRACE → actual stream.getNext() context; not the Taktmuster count
+
+{
+  "plannerUse": "title identifies the current item; prev and next provide local context; cnt indicates occurrence weight. These fields guide the scene planner and are not copied verbatim into image prompts.",
+  "records": [
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 7,
+      "title": "belonging",
+      "cnt": 1,
+      "prev": [
+        "context before belonging: shelter"
+      ],
+      "next": [
+        "context after belonging: threshold"
+      ],
+      "beforeWord": "shelter",
+      "currentWord": "belonging",
+      "afterWord": "threshold"
+    }
+  ]
+}
+
+## Creative decision
+
+SOURCE TYPE: GENERATED GPT DECISION LAYER → visual event, body action, transformation, residue, nextWord, reason, camera move
+
+{
+  "visualEvent": "The animal shape rests at the doorway edge as a threshold marker.",
+  "personAction": "The visitor places the animal shape near the doorway.",
+  "transformation": "The semantic material becomes one physical paper change.",
+  "residue": {
+    "description": "The animal remains at the threshold.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "cameraMove": "Subtle handheld settle."
+}
+
+## Residue
+
+SOURCE TYPE: GENERATED GPT CONTINUITY STATE → must survive into next scene
+
+{
+  "description": "The animal remains at the threshold.",
+  "mustSurvive": true
+}
+
+- GENERATED GPT interaction: The visitor places the animal shape near the doorway.
+
+## Raw semantic cue for this scene
+
+SOURCE TYPE: RAW SEMANTIC INPUT — planner material, not image wording
+
+belonging
+
+## Camera cue
+
+SOURCE TYPE: GENERATED GPT CAMERA DIRECTION → story-motivated perspective and movement
+
+Small continuous handheld settle.
+
+## Still-frame prompt
+
+SOURCE TYPE: GENERATED GPT SCENE PROMPT → one visible image state; not a video prompt
+
+One final visible destination state.
+
+## Image description
+
+SOURCE TYPE: GENERATED GPT VISUAL DESCRIPTION → continuity/image input
+
+The animal shape rests at the doorway edge as a threshold marker.
+
+## Image render prompt
+
+SOURCE TYPE: GENERATED GPT PROMPT → image-only render plan
+
+Render one still image: The animal shape rests at the doorway edge as a threshold marker. The visitor places the animal shape near the doorway.
+
+## Media mode
+
+SOURCE TYPE: RUNTIME DECISION → no video call is made
+
+{
+  "mode": "image-only",
+  "stillImageRender": "enabled",
+  "videoGeneration": "disabled",
+  "videoPromptSent": false,
+  "videoPromptTraceOnly": true
+}
+
+## AFTER → carried to next scene
+
+SOURCE TYPE: GENERATED/RUNTIME OUTPUT → this scene becomes the next scene input
+
+{
+  "residue": {
+    "description": "The animal remains at the threshold.",
+    "mustSurvive": true
+  },
+  "nextWord": "",
+  "nextWordReason": "",
+  "visibleEndState": "The animal shape rests at the doorway edge as a threshold marker."
+}
+
+### Scene 5: An offered return
+
+FIELD ORIGIN:
+
+- GENERATED GPT: title, beat, interaction, story event, and image wording.
+
+- RUNTIME/STATIC: duration=2 seconds; frameSource=lastFrame; videoMode=singleImage; freshImage=false; useCameraShot=true.
+
+- GENERATED GPT / FIFO: current lead only
+
+## BEFORE → planner input
+
+SOURCE TYPE: RUNTIME INPUT → state carried into this scene; semantic fragments remain planner-only
+
+{
+  "previousScene": {
+    "title": "A threshold",
+    "residue": {
+      "description": "The animal remains at the threshold.",
+      "mustSurvive": true
+    },
+    "imageDescription": "The animal shape rests at the doorway edge as a threshold marker."
+  },
+  "sourceCueBatch": [
+    "threshold",
+    "offer",
+    "return"
+  ],
+  "rawSceneCue": "threshold | offer | return"
+}
+
+## Semantic stream getNext: BEFORE → CURRENT → AFTER
+
+SOURCE TYPE: GENERATED SEMANTIC STREAM TRACE → actual stream.getNext() context; not the Taktmuster count
+
+{
+  "plannerUse": "title identifies the current item; prev and next provide local context; cnt indicates occurrence weight. These fields guide the scene planner and are not copied verbatim into image prompts.",
+  "records": [
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 8,
+      "title": "threshold",
+      "cnt": 1,
+      "prev": [
+        "context before threshold: belonging"
+      ],
+      "next": [
+        "context after threshold: offer"
+      ],
+      "beforeWord": "belonging",
+      "currentWord": "threshold",
+      "afterWord": "offer"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 9,
+      "title": "offer",
+      "cnt": 1,
+      "prev": [
+        "context before offer: threshold"
+      ],
+      "next": [
+        "context after offer: return"
+      ],
+      "beforeWord": "threshold",
+      "currentWord": "offer",
+      "afterWord": "return"
+    },
+    {
+      "call": "semanticStream.getNext()",
+      "streamIndex": 0,
+      "cueIndex": 10,
+      "title": "return",
+      "cnt": 1,
+      "prev": [
+        "context before return: offer"
+      ],
+      "next": [],
+      "beforeWord": "offer",
+      "currentWord": "return",
+      "afterWord": ""
+    }
+  ]
+}
+
+## Creative decision
+
+SOURCE TYPE: GENERATED GPT DECISION LAYER → visual event, body action, transformation, residue, nextWord, reason, camera move
+
+{
+  "visualEvent": "The visitor offers the small animal back toward the camera.",
+  "personAction": "The visitor extends the animal shape toward the camera.",
+  "transformation": "The semantic material becomes one physical paper change.",
+  "residue": {
+    "description": "The offered animal remains at the frame edge.",
+    "mustSurvive": true
+  },
+  "nextWord": "return",
+  "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+  "cameraMove": "Subtle handheld settle."
+}
+
+## Residue
+
+SOURCE TYPE: GENERATED GPT CONTINUITY STATE → must survive into next scene
+
+{
+  "description": "The offered animal remains at the frame edge.",
+  "mustSurvive": true
+}
+
+- GENERATED GPT interaction: The visitor extends the animal shape toward the camera.
+
+## Raw semantic cue for this scene
+
+SOURCE TYPE: RAW SEMANTIC INPUT — planner material, not image wording
+
+threshold | offer | return
+
+## Camera cue
+
+SOURCE TYPE: GENERATED GPT CAMERA DIRECTION → story-motivated perspective and movement
+
+Small continuous handheld settle.
+
+## Still-frame prompt
+
+SOURCE TYPE: GENERATED GPT SCENE PROMPT → one visible image state; not a video prompt
+
+One final visible destination state.
+
+## Image description
+
+SOURCE TYPE: GENERATED GPT VISUAL DESCRIPTION → continuity/image input
+
+The visitor offers the small animal back toward the camera.
+
+## Image render prompt
+
+SOURCE TYPE: GENERATED GPT PROMPT → image-only render plan
+
+Render one still image: The visitor offers the small animal back toward the camera. The visitor extends the animal shape toward the camera.
+
+## Media mode
+
+SOURCE TYPE: RUNTIME DECISION → no video call is made
+
+{
+  "mode": "image-only",
+  "stillImageRender": "enabled",
+  "videoGeneration": "disabled",
+  "videoPromptSent": false,
+  "videoPromptTraceOnly": true
+}
+
+## AFTER → carried to next scene
+
+SOURCE TYPE: GENERATED/RUNTIME OUTPUT → this scene becomes the next scene input
+
+{
+  "residue": {
+    "description": "The offered animal remains at the frame edge.",
+    "mustSurvive": true
+  },
+  "nextWord": "return",
+  "nextWordReason": "The offered return is the visible final consequence and next bridge.",
+  "visibleEndState": "The visitor offers the small animal back toward the camera."
+}
+
