@@ -90,7 +90,7 @@ export FRESHWEB_REALITY_INTRUSION_MODE=${FRESHWEB_REALITY_INTRUSION_MODE:-semant
 
 # Build the narrated opening scene from the real camera shot through Runware
 # image-to-image. This is the proven trailer path; no FAL image edit is used.
-export FRESHWEB_OPENING_START_ENABLED=1
+export FRESHWEB_OPENING_START_ENABLED=${FRESHWEB_OPENING_START_ENABLED:-1}
 export FRESHWEB_OPENING_START_MODE=fluxContext
 export FRESHWEB_OPENING_START_INTERVAL=1
 export FRESHWEB_OPENING_START_PROVIDER=runware
