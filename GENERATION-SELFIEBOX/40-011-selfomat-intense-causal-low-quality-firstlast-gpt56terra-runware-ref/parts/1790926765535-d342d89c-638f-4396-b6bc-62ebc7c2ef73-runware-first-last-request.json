@@ -1,0 +1,28 @@
+{
+  "provider": "runware",
+  "model": "alibaba:wan@2.7",
+  "submittedAt": "2026-10-02T07:39:25.645Z",
+  "payload": {
+    "frameImages": [
+      {
+        "frame": "first"
+      },
+      {
+        "frame": "last"
+      }
+    ],
+    "prompt": " Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement. ",
+    "duration": 5,
+    "width": 1088,
+    "height": 832,
+    "resolution": "720p",
+    "seed": 0,
+    "inputFramePaths": {
+      "sourceStartImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926736476-runware-image-video-last-frame.png",
+      "sourceEndImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926756586-image-actor-in-scene.png",
+      "renderedStartImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/input-img/1790926765535-d342d89c-638f-4396-b6bc-62ebc7c2ef73-start.png",
+      "renderedEndImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/input-img/1790926765535-d342d89c-638f-4396-b6bc-62ebc7c2ef73-end.png"
+    }
+  },
+  "timestamp": "2026-10-02T07:39:25.645Z"
+}

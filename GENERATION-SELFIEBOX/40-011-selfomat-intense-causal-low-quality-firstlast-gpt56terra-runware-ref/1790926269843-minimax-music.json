@@ -1,0 +1,14 @@
+{
+  "adapter": "minimax-music3",
+  "status": "completed",
+  "space": "MiniMaxAI/MiniMax-Music3",
+  "model": "o4-mini",
+  "iteration": 1,
+  "durationSeconds": 16.125,
+  "sourceVideo": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/merged/1790926269843-concat.mp4",
+  "audioPath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/story-music/iteration-0001.mp3",
+  "mergedFilePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/merged/1790926269843-with-minimax-sound.mp4",
+  "blueprintPath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/story-music/iteration-0001.music-blueprint.json",
+  "seed": 1234933030,
+  "timestamp": "2026-10-02T07:42:39.923Z"
+}

@@ -1,0 +1,665 @@
+{
+  "sceneCount": 6,
+  "totalTrackDuration": 16.125,
+  "concatenatedVideoPath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/merged/1790926269843-concat.mp4",
+  "mireloMode": "off",
+  "audioAdapter": "minimax",
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "love",
+    "topics": [
+      "love",
+      "animal",
+      "Casino"
+    ],
+    "semanticCues": [
+      "Shame",
+      "Amoebozoa",
+      "Semyon Dukach",
+      "Acute stress reaction",
+      "Anaeramoeba",
+      "Casinò di Campione",
+      "connection – Term in psychology referring to the Shyness",
+      "Apicomplexa"
+    ],
+    "sourceCueCount": 8,
+    "sourceCuePattern": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sourceCuePatternSource": "balanced-flat-count",
+    "sourceCuePatternTrace": [],
+    "sourceCueBatches": [
+      [
+        "Shame",
+        "Amoebozoa"
+      ],
+      [
+        "Semyon Dukach",
+        "Acute stress reaction"
+      ],
+      [
+        "Anaeramoeba"
+      ],
+      [
+        "Casinò di Campione"
+      ],
+      [
+        "connection – Term in psychology referring to the Shyness"
+      ],
+      [
+        "Apicomplexa"
+      ]
+    ],
+    "sourceCueStreamTrace": [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 0,
+        "title": "Shame",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 1,
+        "cueIndex": 1,
+        "title": "Amoebozoa",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 2,
+        "cueIndex": 2,
+        "title": "Semyon Dukach",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 3,
+        "title": "Acute stress reaction",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 1,
+        "cueIndex": 4,
+        "title": "Anaeramoeba",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 2,
+        "cueIndex": 5,
+        "title": "Casinò di Campione",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 6,
+        "title": "Shyness",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": [
+          "connection – Term in psychology referring to the"
+        ]
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 1,
+        "cueIndex": 7,
+        "title": "Apicomplexa",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      }
+    ],
+    "sourceCueStreamTraceBatches": [
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 0,
+          "cueIndex": 0,
+          "title": "Shame",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        },
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 1,
+          "cueIndex": 1,
+          "title": "Amoebozoa",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 2,
+          "cueIndex": 2,
+          "title": "Semyon Dukach",
+          "linkWord": "",
+          "cnt": 1,
+          "prev": [],
+          "next": []
+        },
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 0,
+          "cueIndex": 3,
+          "title": "Acute stress reaction",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 1,
+          "cueIndex": 4,
+          "title": "Anaeramoeba",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 2,
+          "cueIndex": 5,
+          "title": "Casinò di Campione",
+          "linkWord": "",
+          "cnt": 1,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 0,
+          "cueIndex": 6,
+          "title": "Shyness",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": [
+            "connection – Term in psychology referring to the"
+          ]
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 1,
+          "cueIndex": 7,
+          "title": "Apicomplexa",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ]
+    ],
+    "sceneAspectCues": [
+      "Sorrow (emotion)",
+      "Bigyra",
+      "Lugano",
+      "Suffering",
+      "Caelestes",
+      "Italy"
+    ],
+    "sceneAspectTrace": [
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 0,
+        "cueIndex": 0,
+        "title": "Sorrow (emotion)",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [
+          "of Art.History of Love, Internet Encyclopedia of"
+        ],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 1,
+        "cueIndex": 1,
+        "title": "Bigyra",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 2,
+        "cueIndex": 2,
+        "title": "Lugano",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [],
+        "next": [
+          "origin, from the root word casa meaning \"house.\""
+        ]
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 0,
+        "cueIndex": 3,
+        "title": "Suffering",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 1,
+        "cueIndex": 4,
+        "title": "Caelestes",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 2,
+        "cueIndex": 5,
+        "title": "Italy",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [
+          "A Cultural History of Gambling. Cambridge University"
+        ],
+        "next": [
+          "origin, from the root word casa meaning \"house.\" Originally,"
+        ]
+      }
+    ],
+    "semanticStreamLinkWordPreview": "",
+    "people": {
+      "count": 1,
+      "actors": [
+        {
+          "reference": "the actor",
+          "description": "Woman",
+          "position": "",
+          "orientation": "",
+          "personaId": "cast-001",
+          "referenceImage": "/Users/eggermann/Projekte/dailydoase-selfomat/surprise_selfies_folder/surprise_selfie_01.jpg",
+          "firstSeenIteration": 1,
+          "lastSeenIteration": 1,
+          "status": "present"
+        }
+      ]
+    },
+    "location": "Art studio or workspace",
+    "previous": null,
+    "cast": {
+      "actorReferenceLimit": 10,
+      "actorReferences": [
+        {
+          "personaId": "cast-001",
+          "reference": "the actor",
+          "description": "Woman",
+          "position": "",
+          "orientation": "",
+          "referenceImage": "/Users/eggermann/Projekte/dailydoase-selfomat/surprise_selfies_folder/surprise_selfie_01.jpg",
+          "firstSeenIteration": 1,
+          "lastSeenIteration": 1,
+          "status": "present"
+        }
+      ],
+      "archivedActorReferences": []
+    },
+    "linkWord": "handprint",
+    "nextTopic": "handprint",
+    "nextWord": "handprint",
+    "nextWordSource": "planner-final-creative-decision",
+    "nextWordFallback": false,
+    "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+    "story": {
+      "openingBeat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "openingScene": {
+        "sceneIndex": 1,
+        "beat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+        "title": "The Spilled Rinse",
+        "semanticCue": "Shame",
+        "topic": "love",
+        "eventType": "actorOnly",
+        "actorsInteraction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+        "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+        "frameSource": "newImage",
+        "videoMode": "singleImage",
+        "cameraCue": "Slow handheld push-in from the wide studio view.",
+        "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+        "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+        "durationSeconds": 6.4,
+        "creativeDecision": {
+          "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+          "personAction": "She crouches to conceal the spill, then hesitates.",
+          "transformation": "A small puddle becomes a wide organic stain.",
+          "residue": {
+            "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+            "mustSurvive": true
+          },
+          "nextWord": "",
+          "nextWordReason": "",
+          "cameraMove": "Slow handheld push-in"
+        }
+      },
+      "finalBeat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "finalScene": {
+        "sceneIndex": 6,
+        "beat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+        "title": "The Palm Mark",
+        "semanticCue": "Casinò di Campione",
+        "topic": "love",
+        "eventType": "actorOnly",
+        "actorsInteraction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+        "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+        "frameSource": "lastFrame",
+        "videoMode": "singleImage",
+        "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+        "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+        "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+        "durationSeconds": 1.6,
+        "creativeDecision": {
+          "visualEvent": "A blue palm mark appears on the corridor glass.",
+          "personAction": "She presses her open hand to the window and meets her reflection.",
+          "transformation": "Carried moisture becomes a deliberate handprint.",
+          "residue": {
+            "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+            "mustSurvive": true
+          },
+          "nextWord": "handprint",
+          "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+          "cameraMove": "Slow arc to the reflected face"
+        },
+        "nextWord": "handprint",
+        "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass."
+      },
+      "scenes": [
+        {
+          "sceneIndex": 1,
+          "beat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+          "title": "The Spilled Rinse",
+          "semanticCue": "Shame",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+          "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+          "frameSource": "newImage",
+          "videoMode": "singleImage",
+          "cameraCue": "Slow handheld push-in from the wide studio view.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 6.4,
+          "creativeDecision": {
+            "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+            "personAction": "She crouches to conceal the spill, then hesitates.",
+            "transformation": "A small puddle becomes a wide organic stain.",
+            "residue": {
+              "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Slow handheld push-in"
+          }
+        },
+        {
+          "sceneIndex": 2,
+          "beat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+          "title": "The Sudden Clatter",
+          "semanticCue": "Amoebozoa",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+          "actorAction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+          "frameSource": "lastFrame",
+          "videoMode": "singleImage",
+          "cameraCue": "Brief whip-pan down from her startled face to the scattered tray.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens. Viewpoint follows: Brief whip-pan down from her startled face to the scattered tray. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. A sharp flinch, a quick grab, then a held breath as objects skitter to a stop. Camera movement: Brief whip-pan down from her startled face to the scattered tray. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 1.6,
+          "creativeDecision": {
+            "visualEvent": "A metal tray tumbles into the wet floor mess.",
+            "personAction": "She catches one falling brush and locks still.",
+            "transformation": "Loose studio materials form a ring in the spill.",
+            "residue": {
+              "description": "The blue floor stain, wet cuff, red bracelet, scattered circular chips, and one brush in her hand.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Whip-pan down"
+          }
+        },
+        {
+          "sceneIndex": 3,
+          "beat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+          "title": "The Low Sink Alcove",
+          "semanticCue": "Semyon Dukach",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+          "actorAction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+          "frameSource": "lastFrame",
+          "videoMode": "firstLast",
+          "cameraCue": "Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water. Viewpoint follows: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 3.2,
+          "creativeDecision": {
+            "visualEvent": "Blue rinse water and chips orbit the sink drain.",
+            "personAction": "She rinses the saved brush, then withdraws her hand.",
+            "transformation": "The dispersed spill condenses into a single rotating circle.",
+            "residue": {
+              "description": "Blue water, circular chips, wet cuff, red wrist thread, and the brush.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Follow through doorway into overhead tilt"
+          }
+        },
+        {
+          "sceneIndex": 4,
+          "beat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+          "title": "The Ring of Chances",
+          "semanticCue": "Acute stress reaction",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+          "actorAction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+          "frameSource": "lastFrame",
+          "videoMode": "singleImage",
+          "cameraCue": "Static overhead frame with a slight settling drift.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle. Viewpoint follows: Static overhead frame with a slight settling drift. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. The final droplets flick outward; she raises her hand, stops, and lets it fall. Camera movement: Static overhead frame with a slight settling drift. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 1.6,
+          "creativeDecision": {
+            "visualEvent": "The final water surge arranges the chips into a precise counter ring.",
+            "personAction": "She nearly touches the pattern, then withdraws.",
+            "transformation": "Random debris becomes an orderly circular arrangement.",
+            "residue": {
+              "description": "The blue ring of water, circular chips, brush, wet cuff, and red bracelet.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Static overhead settling drift"
+          }
+        },
+        {
+          "sceneIndex": 5,
+          "beat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+          "title": "The Lit Corridor",
+          "semanticCue": "Anaeramoeba",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+          "actorAction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+          "frameSource": "lastFrame",
+          "videoMode": "firstLast",
+          "cameraCue": "Sideways tracking move matching her walk from the dark doorway toward skylight.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression. Viewpoint follows: Sideways tracking move matching her walk from the dark doorway toward skylight. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 4.8,
+          "creativeDecision": {
+            "visualEvent": "A red bracelet thread becomes a cord holding the scattered chips.",
+            "personAction": "She knots the final chip and walks into brighter light.",
+            "transformation": "The ordered ring becomes a portable swinging chain.",
+            "residue": {
+              "description": "Blue-stained chips, red cord, wet cuff, brush, and the sink doorway behind her.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Sideways tracking move"
+          }
+        },
+        {
+          "sceneIndex": 6,
+          "beat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+          "title": "The Palm Mark",
+          "semanticCue": "Casinò di Campione",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+          "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+          "frameSource": "lastFrame",
+          "videoMode": "singleImage",
+          "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 1.6,
+          "creativeDecision": {
+            "visualEvent": "A blue palm mark appears on the corridor glass.",
+            "personAction": "She presses her open hand to the window and meets her reflection.",
+            "transformation": "Carried moisture becomes a deliberate handprint.",
+            "residue": {
+              "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+              "mustSurvive": true
+            },
+            "nextWord": "handprint",
+            "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+            "cameraMove": "Slow arc to the reflected face"
+          },
+          "nextWord": "handprint",
+          "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass."
+        }
+      ],
+      "summary": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain. -> Her startled movement strikes the table, turning private discomfort into a noisy physical mess. -> She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle. -> A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it. -> She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly. -> She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "linkWord": "handprint",
+      "nextTopic": "handprint",
+      "nextWord": "handprint",
+      "nextWordSource": "planner-final-creative-decision",
+      "nextWordFallback": false,
+      "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+      "nextOpeningObligation": "Continue from this consequence: She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact."
+    }
+  },
+  "clips": [
+    {
+      "index": 0,
+      "title": "The Spilled Rinse",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926381642-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926381642-runware-image-video.mp4",
+      "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "useSingleImage": true
+    },
+    {
+      "index": 1,
+      "title": "The Sudden Clatter",
+      "durationSeconds": 1.6,
+      "file": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926555613-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926555613-runware-image-video.mp4",
+      "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. A sharp flinch, a quick grab, then a held breath as objects skitter to a stop. Camera movement: Brief whip-pan down from her startled face to the scattered tray. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "useSingleImage": true
+    },
+    {
+      "index": 2,
+      "title": "The Low Sink Alcove",
+      "durationSeconds": 3.2,
+      "file": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926698808-runware-first-last.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926698808-runware-first-last.mp4",
+      "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "useSingleImage": false
+    },
+    {
+      "index": 3,
+      "title": "The Ring of Chances",
+      "durationSeconds": 1.6,
+      "file": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926736476-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926736476-runware-image-video.mp4",
+      "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. The final droplets flick outward; she raises her hand, stops, and lets it fall. Camera movement: Static overhead frame with a slight settling drift. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "useSingleImage": true
+    },
+    {
+      "index": 4,
+      "title": "The Lit Corridor",
+      "durationSeconds": 4.8,
+      "file": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926836768-runware-first-last.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926836768-runware-first-last.mp4",
+      "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "useSingleImage": false
+    },
+    {
+      "index": 5,
+      "title": "The Palm Mark",
+      "durationSeconds": 1.6,
+      "file": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926874349-runware-image-video.mp4",
+      "outputFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926874349-runware-image-video.mp4",
+      "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "useSingleImage": true
+    }
+  ],
+  "timestamp": "2026-10-02T07:41:15.491Z"
+}

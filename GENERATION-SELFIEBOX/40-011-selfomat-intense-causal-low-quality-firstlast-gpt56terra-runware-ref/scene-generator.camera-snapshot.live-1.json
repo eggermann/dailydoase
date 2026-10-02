@@ -1,0 +1,2010 @@
+{
+  "openAiVisionModel": "",
+  "openAiSceneModel": "gpt-5.6-terra",
+  "configMode": "reference-image-actor",
+  "visionPrompt": "Describe only the visible shot for continuity. Return concise labeled lines for Subject, Subject type, Setting, Framing, Lighting, Location, Actors, Description, Remarkable features, Animal analogy enabled, Animal analogy, Continuity person anchors, Continuity location anchors, and what should stay consistent for the next video shot. Subject type describes visible form only, such as single seated person, partial person, animal close-up, or no person visible. Remarkable features lists two to five concrete visible details that help distinguish this frame, including ordinary details when nothing unusual stands out; do not return none or an empty list while visible person, clothing, pose, object, color, or background details exist. Animal analogy enabled is true for the closest plausible visual analogy whenever a visible subject has a comparable posture, silhouette, or gesture; weak resemblance counts and low confidence is allowed. Set it false only when no visible form can reasonably be compared. Never invent a literal animal or infer personality, identity, ethnicity, age, profession, or biology. Continuity person anchors lists concrete visible person details useful for the next image: clothing, face, hair, pose, gaze, hands, or body position. Continuity location anchors lists concrete visible room details useful for the next image: frames, furniture, windows, lighting, colors, or background geometry. Continuity anchors are split into these two fields; do not merge person and location details. Actors must be a JSON array with one object per real visible person using keys reference, description, position, and orientation. Use position to report depth and frame placement, for example foreground left, midground center, background right, or top center. Use orientation to report front-facing, side-facing, or back-facing. If two people are visible, return two separate actor objects. Do not include people shown only in posters, artwork, screens, mirrors, or reflections.",
+  "visionProviders": [],
+  "scenePlanSystemPrompt": "You create short visual scene plans for image-to-video generation. Return only valid JSON. Build one causal visual story from the ordered source cues. Every next scene must visibly follow from the previous scene and retain a readable residue of it. Translate abstract or fragmentary cues into embodied events, not commentary, explanation, or topic summaries. castSelection is an optional list of cast ids from CAST MEMORY that a scene may recall, reintroduce, transform, or ignore. castUse says how that optional memory enters the scene. actorAction and actorsInteraction may describe body action or exchange when useful; leave either string empty when the scene works through room, atmosphere, transformation, or abstraction instead. Choose one eventType per scene: actorToLocation, locationToActor, actorToActor, or actorOnly. locationAction names a physical relation between an actor and an existing room feature. storyEvent names the visible cause and consequence that advances the story. Treat eventType as descriptive metadata, not a constraint on surreal scene invention. Vary dominant action and camera behavior across adjacent scenes. In every reference-image-actor story, intensify the selfie situation through at least two explicit room or location changes; with four or more scenes use at least three event types. Every scene must inherit visible residue and cause the next, never remain an isolated gesture. Translate every semantic cue into a stronger physical consequence in the person, object, or room. Let chance, care, movement, and attention sharpen existing room events through a surface, light, display, doorway, reflection, or path; semantic material is an intensifier, not a fixed prop list. Avoid logos or readable text. If Vision provides an enabled animal analogy, sharpen it one step as a recurring physical motif in posture, rhythm, silhouette, texture, or object relation. Preserve the person as the subject, do not insert a literal animal solely from the analogy, and keep low confidence as interpretation rather than certainty. stillPrompt describes one destination image. imageDescription describes its visible setup. creativeDecision is the explicit artistic decision layer: choose one visualEvent, one personAction, one main transformation, one residue that must survive, one concrete nextWord, a short nextWordReason, and one cameraMove. The final scene nextWord must be a concrete visual concept inferred from its visible consequence, must differ from the current topic, and must not be copied from raw cue wording. Earlier scenes may leave nextWord empty. motionCue describes physical subject movement; cameraCue describes one camera movement. videoPrompt and singleImagePrompt are production-ready prompts of 2-3 short sentences containing the actor action, visible consequence, and one camera move. Never include schema or meta instructions. realityIntrusion is false by default. Set it true only when a source cue deliberately breaks the fictional CCTV world into the live exhibition camera after this scene. It is a hard signal cut, never an interpolated camera move. frameSource is lastFrame or newImage. videoMode is firstLast or singleImage. durationSeconds is the exact requested duration. freshImage and useCameraShot must truthfully match the selected mode. REFERENCE IMAGE: Use detected people and room as visual source material. Identity, actor count, position, orientation, geometry, typography, objects, and transformations may drift when the story or surreal mode benefits. PRIVATE SEMANTIC MATERIAL: Source cues are internal brainstorming fragments only. Infer their meaning, but never quote or copy raw cue text, citation markers, identifiers, PMID, PMC, Bibcode, DOI, ISBN, or research metadata into any visible scene field. Visible fields must describe an observable physical or visual event. Use ordered source cues as causes. Their consequence may happen through people, room, objects, atmosphere, abstraction, typography, or transformation. Carry a readable residue into the next scene. MODE STATE MACHINE: Scene 1 is newImage + singleImage + freshImage=true + useCameraShot=true. Later continuation is lastFrame + singleImage + freshImage=false + useCameraShot=false. Later destination transition is lastFrame + firstLast + freshImage=false + useCameraShot=true. No other combination is valid. Default to continuation. Use destination transition only for a clear reachable end pose in the same room. FINAL CHECK: scene states are causal and distinct; mode tuple matches the state machine.",
+  "requestedSceneCount": 6,
+  "effectiveSceneCount": 6,
+  "imagePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/opening-persona-reference.jpg",
+  "openingPersonaReferencePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/opening-persona-reference.jpg",
+  "imageSource": "test-placeholder",
+  "sourceCues": [
+    "Shame",
+    "Amoebozoa",
+    "Semyon Dukach",
+    "Acute stress reaction",
+    "Anaeramoeba",
+    "Casinò di Campione",
+    "connection – Term in psychology referring to the Shyness",
+    "Apicomplexa"
+  ],
+  "visionStoryContext": "Location: Art studio or workspace. People: 1. Actors: [{\"reference\":\"the actor\",\"description\":\"Woman\"}]. Setup: Wide shot with midground emphasis on subject in Art studio or workspace",
+  "sceneLengths": [
+    6.4,
+    1.6,
+    3.2,
+    1.6,
+    4.8,
+    1.6
+  ],
+  "vision": {
+    "imagePath": "/Users/eggermann/Projekte/dailydoase-selfomat/surprise_selfies_folder/surprise_selfie_01.jpg",
+    "outputText": "```json { \"Subject\": \"Woman\", \"Subject type\": \"Single seated person\", \"Setting\": \"Indoor workshop/art studio\", \"Framing\": \"Wide shot with midground emphasis on subject\", \"Lighting\": \"Soft natural light + ambient indoor lighting (left-side illumination, slightly backlit), \"Location\": \"Art studio or workspace\", \"Actors\": [ { \"reference\": \"Subject\", \"description\": \"Woman with long blonde hair\", \"position\": \"Foreground center-left\", \"orientation\": \"Front-facing\" } ], \"Remarkable features\": Long wavy light blonde hair cascading over shoulder Light gray knitted sweater with subtle patterns Blue jeans with visible rolled-up cuffs Hand resting on cheek (light touch) Partial view of wooden frame and empty canvas behind her, \"Animal analogy enabled\": true, \"Animal analogy\": Weak resemblance to a mildly contemplative cat—similar relaxed pose with hand near face, but not a direct match. \"Continuity person anchors\": [ \"Light gray knitted sweater\", \"Blonde hair style (length and curl pattern)\", \"Blue jeans with rolled-up cuffs\", \"Hand resting on cheek (position & light touch)\", \"Gaze slightly upward/off-camera\" ], \"Continuity location anchors\": [ \"Wooden frames/art supplies stacked in background\", \"Unfinished canvas or blank surface near the frames\", \"Whitewashed wall with visible texture and imperfections\", \"Flooring appears light-colored (possibly wood or laminate)\", \"Natural light streaming from an unseen window behind her\" ], \"What should stay consistent for next video shot\": The woman’s hair style, sweater pattern, jeans rolled-up cuffs, and hand placement on cheek. The art studio ambiance",
+    "provider": "lmstudio",
+    "model": "mistralai/ministral-3-3b"
+  },
+  "storyRunIndex": 1,
+  "storyTransport": {
+    "schemaVersion": 1,
+    "iteration": 1,
+    "topic": "love",
+    "topics": [
+      "love",
+      "animal",
+      "Casino"
+    ],
+    "semanticCues": [
+      "Shame",
+      "Amoebozoa",
+      "Semyon Dukach",
+      "Acute stress reaction",
+      "Anaeramoeba",
+      "Casinò di Campione",
+      "connection – Term in psychology referring to the Shyness",
+      "Apicomplexa"
+    ],
+    "sourceCueCount": 8,
+    "sourceCuePattern": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sourceCuePatternSource": "balanced-flat-count",
+    "sourceCuePatternTrace": [],
+    "sourceCueBatches": [
+      [
+        "Shame",
+        "Amoebozoa"
+      ],
+      [
+        "Semyon Dukach",
+        "Acute stress reaction"
+      ],
+      [
+        "Anaeramoeba"
+      ],
+      [
+        "Casinò di Campione"
+      ],
+      [
+        "connection – Term in psychology referring to the Shyness"
+      ],
+      [
+        "Apicomplexa"
+      ]
+    ],
+    "sourceCueStreamTrace": [
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 0,
+        "title": "Shame",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 1,
+        "cueIndex": 1,
+        "title": "Amoebozoa",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 2,
+        "cueIndex": 2,
+        "title": "Semyon Dukach",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 3,
+        "title": "Acute stress reaction",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 1,
+        "cueIndex": 4,
+        "title": "Anaeramoeba",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 2,
+        "cueIndex": 5,
+        "title": "Casinò di Campione",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 0,
+        "cueIndex": 6,
+        "title": "Shyness",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": [
+          "connection – Term in psychology referring to the"
+        ]
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "streamIndex": 1,
+        "cueIndex": 7,
+        "title": "Apicomplexa",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      }
+    ],
+    "sourceCueStreamTraceBatches": [
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 0,
+          "cueIndex": 0,
+          "title": "Shame",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        },
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 1,
+          "cueIndex": 1,
+          "title": "Amoebozoa",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 2,
+          "cueIndex": 2,
+          "title": "Semyon Dukach",
+          "linkWord": "",
+          "cnt": 1,
+          "prev": [],
+          "next": []
+        },
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 0,
+          "cueIndex": 3,
+          "title": "Acute stress reaction",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 1,
+          "cueIndex": 4,
+          "title": "Anaeramoeba",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 2,
+          "cueIndex": 5,
+          "title": "Casinò di Campione",
+          "linkWord": "",
+          "cnt": 1,
+          "prev": [],
+          "next": []
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 0,
+          "cueIndex": 6,
+          "title": "Shyness",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": [
+            "connection – Term in psychology referring to the"
+          ]
+        }
+      ],
+      [
+        {
+          "call": "semanticStream.getNext()",
+          "streamIndex": 1,
+          "cueIndex": 7,
+          "title": "Apicomplexa",
+          "linkWord": "",
+          "cnt": 0.2,
+          "prev": [],
+          "next": []
+        }
+      ]
+    ],
+    "sceneAspectCues": [
+      "Sorrow (emotion)",
+      "Bigyra",
+      "Lugano",
+      "Suffering",
+      "Caelestes",
+      "Italy"
+    ],
+    "sceneAspectTrace": [
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 0,
+        "cueIndex": 0,
+        "title": "Sorrow (emotion)",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [
+          "of Art.History of Love, Internet Encyclopedia of"
+        ],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 1,
+        "cueIndex": 1,
+        "title": "Bigyra",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 2,
+        "cueIndex": 2,
+        "title": "Lugano",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [],
+        "next": [
+          "origin, from the root word casa meaning \"house.\""
+        ]
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 0,
+        "cueIndex": 3,
+        "title": "Suffering",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 1,
+        "cueIndex": 4,
+        "title": "Caelestes",
+        "linkWord": "",
+        "cnt": 0.2,
+        "prev": [],
+        "next": []
+      },
+      {
+        "call": "semanticStream.getNext()",
+        "role": "scene-aspect",
+        "streamIndex": 2,
+        "cueIndex": 5,
+        "title": "Italy",
+        "linkWord": "",
+        "cnt": 1,
+        "prev": [
+          "A Cultural History of Gambling. Cambridge University"
+        ],
+        "next": [
+          "origin, from the root word casa meaning \"house.\" Originally,"
+        ]
+      }
+    ],
+    "semanticStreamLinkWordPreview": "",
+    "people": {
+      "count": 1,
+      "actors": [
+        {
+          "reference": "the actor",
+          "description": "Woman",
+          "position": "",
+          "orientation": "",
+          "personaId": "cast-001",
+          "referenceImage": "/Users/eggermann/Projekte/dailydoase-selfomat/surprise_selfies_folder/surprise_selfie_01.jpg",
+          "firstSeenIteration": 1,
+          "lastSeenIteration": 1,
+          "status": "present"
+        }
+      ]
+    },
+    "location": "Art studio or workspace",
+    "previous": null,
+    "cast": {
+      "actorReferenceLimit": 10,
+      "actorReferences": [
+        {
+          "personaId": "cast-001",
+          "reference": "the actor",
+          "description": "Woman",
+          "position": "",
+          "orientation": "",
+          "referenceImage": "/Users/eggermann/Projekte/dailydoase-selfomat/surprise_selfies_folder/surprise_selfie_01.jpg",
+          "firstSeenIteration": 1,
+          "lastSeenIteration": 1,
+          "status": "present"
+        }
+      ],
+      "archivedActorReferences": []
+    },
+    "linkWord": "handprint",
+    "nextTopic": "handprint",
+    "nextWord": "handprint",
+    "nextWordSource": "planner-final-creative-decision",
+    "nextWordFallback": false,
+    "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+    "story": {
+      "openingBeat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "openingScene": {
+        "sceneIndex": 1,
+        "beat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+        "title": "The Spilled Rinse",
+        "semanticCue": "Shame",
+        "topic": "love",
+        "eventType": "actorOnly",
+        "actorsInteraction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+        "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+        "frameSource": "newImage",
+        "videoMode": "singleImage",
+        "cameraCue": "Slow handheld push-in from the wide studio view.",
+        "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+        "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+        "durationSeconds": 6.4,
+        "creativeDecision": {
+          "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+          "personAction": "She crouches to conceal the spill, then hesitates.",
+          "transformation": "A small puddle becomes a wide organic stain.",
+          "residue": {
+            "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+            "mustSurvive": true
+          },
+          "nextWord": "",
+          "nextWordReason": "",
+          "cameraMove": "Slow handheld push-in"
+        }
+      },
+      "finalBeat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "finalScene": {
+        "sceneIndex": 6,
+        "beat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+        "title": "The Palm Mark",
+        "semanticCue": "Casinò di Campione",
+        "topic": "love",
+        "eventType": "actorOnly",
+        "actorsInteraction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+        "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+        "frameSource": "lastFrame",
+        "videoMode": "singleImage",
+        "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+        "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+        "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+        "durationSeconds": 1.6,
+        "creativeDecision": {
+          "visualEvent": "A blue palm mark appears on the corridor glass.",
+          "personAction": "She presses her open hand to the window and meets her reflection.",
+          "transformation": "Carried moisture becomes a deliberate handprint.",
+          "residue": {
+            "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+            "mustSurvive": true
+          },
+          "nextWord": "handprint",
+          "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+          "cameraMove": "Slow arc to the reflected face"
+        },
+        "nextWord": "handprint",
+        "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass."
+      },
+      "scenes": [
+        {
+          "sceneIndex": 1,
+          "beat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+          "title": "The Spilled Rinse",
+          "semanticCue": "Shame",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+          "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+          "frameSource": "newImage",
+          "videoMode": "singleImage",
+          "cameraCue": "Slow handheld push-in from the wide studio view.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 6.4,
+          "creativeDecision": {
+            "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+            "personAction": "She crouches to conceal the spill, then hesitates.",
+            "transformation": "A small puddle becomes a wide organic stain.",
+            "residue": {
+              "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Slow handheld push-in"
+          }
+        },
+        {
+          "sceneIndex": 2,
+          "beat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+          "title": "The Sudden Clatter",
+          "semanticCue": "Amoebozoa",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+          "actorAction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+          "frameSource": "lastFrame",
+          "videoMode": "singleImage",
+          "cameraCue": "Brief whip-pan down from her startled face to the scattered tray.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens. Viewpoint follows: Brief whip-pan down from her startled face to the scattered tray. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. A sharp flinch, a quick grab, then a held breath as objects skitter to a stop. Camera movement: Brief whip-pan down from her startled face to the scattered tray. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 1.6,
+          "creativeDecision": {
+            "visualEvent": "A metal tray tumbles into the wet floor mess.",
+            "personAction": "She catches one falling brush and locks still.",
+            "transformation": "Loose studio materials form a ring in the spill.",
+            "residue": {
+              "description": "The blue floor stain, wet cuff, red bracelet, scattered circular chips, and one brush in her hand.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Whip-pan down"
+          }
+        },
+        {
+          "sceneIndex": 3,
+          "beat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+          "title": "The Low Sink Alcove",
+          "semanticCue": "Semyon Dukach",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+          "actorAction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+          "frameSource": "lastFrame",
+          "videoMode": "firstLast",
+          "cameraCue": "Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water. Viewpoint follows: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 3.2,
+          "creativeDecision": {
+            "visualEvent": "Blue rinse water and chips orbit the sink drain.",
+            "personAction": "She rinses the saved brush, then withdraws her hand.",
+            "transformation": "The dispersed spill condenses into a single rotating circle.",
+            "residue": {
+              "description": "Blue water, circular chips, wet cuff, red wrist thread, and the brush.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Follow through doorway into overhead tilt"
+          }
+        },
+        {
+          "sceneIndex": 4,
+          "beat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+          "title": "The Ring of Chances",
+          "semanticCue": "Acute stress reaction",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+          "actorAction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+          "frameSource": "lastFrame",
+          "videoMode": "singleImage",
+          "cameraCue": "Static overhead frame with a slight settling drift.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle. Viewpoint follows: Static overhead frame with a slight settling drift. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. The final droplets flick outward; she raises her hand, stops, and lets it fall. Camera movement: Static overhead frame with a slight settling drift. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 1.6,
+          "creativeDecision": {
+            "visualEvent": "The final water surge arranges the chips into a precise counter ring.",
+            "personAction": "She nearly touches the pattern, then withdraws.",
+            "transformation": "Random debris becomes an orderly circular arrangement.",
+            "residue": {
+              "description": "The blue ring of water, circular chips, brush, wet cuff, and red bracelet.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Static overhead settling drift"
+          }
+        },
+        {
+          "sceneIndex": 5,
+          "beat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+          "title": "The Lit Corridor",
+          "semanticCue": "Anaeramoeba",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+          "actorAction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+          "frameSource": "lastFrame",
+          "videoMode": "firstLast",
+          "cameraCue": "Sideways tracking move matching her walk from the dark doorway toward skylight.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression. Viewpoint follows: Sideways tracking move matching her walk from the dark doorway toward skylight. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 4.8,
+          "creativeDecision": {
+            "visualEvent": "A red bracelet thread becomes a cord holding the scattered chips.",
+            "personAction": "She knots the final chip and walks into brighter light.",
+            "transformation": "The ordered ring becomes a portable swinging chain.",
+            "residue": {
+              "description": "Blue-stained chips, red cord, wet cuff, brush, and the sink doorway behind her.",
+              "mustSurvive": true
+            },
+            "nextWord": "",
+            "nextWordReason": "",
+            "cameraMove": "Sideways tracking move"
+          }
+        },
+        {
+          "sceneIndex": 6,
+          "beat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+          "title": "The Palm Mark",
+          "semanticCue": "Casinò di Campione",
+          "topic": "love",
+          "eventType": "actorOnly",
+          "actorsInteraction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+          "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+          "frameSource": "lastFrame",
+          "videoMode": "singleImage",
+          "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+          "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+          "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+          "durationSeconds": 1.6,
+          "creativeDecision": {
+            "visualEvent": "A blue palm mark appears on the corridor glass.",
+            "personAction": "She presses her open hand to the window and meets her reflection.",
+            "transformation": "Carried moisture becomes a deliberate handprint.",
+            "residue": {
+              "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+              "mustSurvive": true
+            },
+            "nextWord": "handprint",
+            "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+            "cameraMove": "Slow arc to the reflected face"
+          },
+          "nextWord": "handprint",
+          "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass."
+        }
+      ],
+      "summary": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain. -> Her startled movement strikes the table, turning private discomfort into a noisy physical mess. -> She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle. -> A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it. -> She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly. -> She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "linkWord": "handprint",
+      "nextTopic": "handprint",
+      "nextWord": "handprint",
+      "nextWordSource": "planner-final-creative-decision",
+      "nextWordFallback": false,
+      "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+      "nextOpeningObligation": "Continue from this consequence: She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact."
+    }
+  },
+  "storyTransportArtifactPath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/story-transport/iteration-0001.json",
+  "openingStartMode": "cameraShot",
+  "openingStartEnabled": false,
+  "openingStartInterval": 3,
+  "openingFluxContextActive": false,
+  "openingFluxContextPrompt": "",
+  "rawScenePlan": [
+    {
+      "index": 1,
+      "title": "The Spilled Rinse",
+      "beat": "A private flush of embarrassment becomes a small, living-looking accident in the studio.",
+      "stillPrompt": "Documentary wide shot in a realistic art studio: the woman stands at a worktable with her shoulders drawn in, looking down as cloudy blue rinse water spreads across the concrete floor in soft branching puddles. A thin red thread bracelet is visible at her wrist, and a damp blue mark has reached the cuff of her sleeve.",
+      "imageDescription": "The visitor is alone in the midground of a daylight art workspace, facing a low worktable. Her lowered face, wet cuff, red bracelet, and the irregular blue floor puddle establish the first residue.",
+      "storyBeat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "eventType": "actorToLocation",
+      "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+      "actorsInteraction": "",
+      "locationAction": "Her rag drags a wet branching stain across the studio concrete.",
+      "storyEvent": "The attempted cleanup fans the spill into visible blue tendrils, leaving her cuff and shoe wet.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the current visitor remains the sole subject.",
+      "motionCue": "She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room.",
+      "cameraCue": "Slow handheld push-in from the wide studio view.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 6.4,
+      "videoPrompt": "A woman crouches beside a spreading blue rinse-water spill in a daylight art studio, trying to blot it with a rag. The puddle branches around her shoe and wets her sleeve cuff as she looks away in embarrassment. Slow handheld push-in.",
+      "singleImagePrompt": "Documentary wide shot of a woman caught mid-crouch beside a branching blue water spill in an art studio. Her wet cuff, red thread bracelet, rag, and downcast expression are sharply visible. Slow handheld push-in.",
+      "freshImage": true,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+        "personAction": "She crouches to conceal the spill, then hesitates.",
+        "transformation": "A small puddle becomes a wide organic stain.",
+        "residue": {
+          "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Slow handheld push-in"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 2,
+      "title": "The Sudden Clatter",
+      "beat": "Her retreat knocks loose the studio's small metal tools, making the hidden accident impossible to ignore.",
+      "stillPrompt": "Close documentary view of the same woman jerking upright beside the blue-stained floor. A shallow metal tray has tipped from the worktable, scattering blank circular color chips and wet brushes; blue droplets speckle her cuff and the red thread bracelet remains at her wrist.",
+      "imageDescription": "The woman stands rigid in profile at the worktable, eyes widened toward the fallen tray. The blue puddle remains underfoot while silver tools and unmarked round chips scatter across the concrete.",
+      "storyBeat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+      "eventType": "actorOnly",
+      "actorAction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+      "actorsInteraction": "",
+      "locationAction": "The worktable sheds a metal tray and its small circular contents onto the wet floor.",
+      "storyEvent": "The tray lands in the blue spill, sending round chips into a loose ring around her shoe.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the current visitor carries the earlier wet cuff and bracelet forward.",
+      "motionCue": "A sharp flinch, a quick grab, then a held breath as objects skitter to a stop.",
+      "cameraCue": "Brief whip-pan down from her startled face to the scattered tray.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "The woman flinches and knocks a metal tray from the worktable. Blank circular chips and brushes scatter through the existing blue water around her shoe while she clutches one brush to her chest. Brief whip-pan downward.",
+      "singleImagePrompt": "Tight documentary view of a startled woman beside a tipped metal tray in the same studio. Blue water surrounds scattered circular chips, and her wet cuff and red thread bracelet remain visible. Brief whip-pan downward.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A metal tray tumbles into the wet floor mess.",
+        "personAction": "She catches one falling brush and locks still.",
+        "transformation": "Loose studio materials form a ring in the spill.",
+        "residue": {
+          "description": "The blue floor stain, wet cuff, red bracelet, scattered circular chips, and one brush in her hand.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Whip-pan down"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 3,
+      "title": "The Low Sink Alcove",
+      "beat": "Following the drifting chips, she crosses into a dim wash alcove where the water seems to gather instead of drain.",
+      "stillPrompt": "Realistic documentary shot in a dim utility sink alcove reached through the studio doorway. The woman leans over a deep sink, holding the rescued brush; blue water gathers in a slow circular eddy beneath it while several damp blank chips cling to the sink rim, her cuff and red thread bracelet still visible.",
+      "imageDescription": "The former worktable is visible as a blurred blue-stained memory through the open doorway behind her. In the lower-lit wash alcove, her reflected face trembles in the sink water as the scattered chips have followed her there.",
+      "storyBeat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+      "eventType": "actorToLocation",
+      "actorAction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+      "actorsInteraction": "",
+      "locationAction": "At the deep utility sink, the drain draws blue water and damp chips into a slow central eddy.",
+      "storyEvent": "The scattered mess condenses into a rotating blue circle that catches her reflection.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor moves from the studio work area into its wash alcove.",
+      "motionCue": "She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists.",
+      "cameraCue": "Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3.2,
+      "videoPrompt": "The woman carries a wet brush through the studio doorway into a dim sink alcove and rinses it. Blue water and damp circular chips gather into a slow eddy that catches her reflection, while the earlier stained studio remains visible behind her. Shoulder-level follow with a gentle overhead tilt.",
+      "singleImagePrompt": "Documentary destination frame in a dim studio sink alcove: a woman leans over a deep sink holding a brush above a blue circular eddy. Damp blank chips cling to the rim, her wet cuff and red bracelet survive, and the original studio is visible through the open doorway. Gentle overhead tilt.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Blue rinse water and chips orbit the sink drain.",
+        "personAction": "She rinses the saved brush, then withdraws her hand.",
+        "transformation": "The dispersed spill condenses into a single rotating circle.",
+        "residue": {
+          "description": "Blue water, circular chips, wet cuff, red wrist thread, and the brush.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Follow through doorway into overhead tilt"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 4,
+      "title": "The Ring of Chances",
+      "beat": "The turning sink circle throws the chips across the counter in an unnervingly precise, chance-like pattern.",
+      "stillPrompt": "Overhead realistic documentary view of the utility alcove counter: blank circular chips have landed in a neat luminous ring around the sink, mixed with blue droplets and a single wet brush. The woman stands just outside the ring, one palm lifted, her anxious face reflected faintly in the dark water.",
+      "imageDescription": "The blue eddy is now quieter, but its round chips occupy a precise ring on the counter. Her red thread bracelet and wet blue cuff contrast with the grey metal sink and harsh overhead light.",
+      "storyBeat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+      "eventType": "locationToActor",
+      "actorAction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+      "actorsInteraction": "",
+      "locationAction": "The sink's last surge flicks the chips onto the counter in a clean ring around the basin.",
+      "storyEvent": "The water's force turns scattered tools into a polished circle, reflecting a fragile, watchful version of her face.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor remains alone with the transformed sink arrangement.",
+      "motionCue": "The final droplets flick outward; she raises her hand, stops, and lets it fall.",
+      "cameraCue": "Static overhead frame with a slight settling drift.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "The sink gives one last surge, flicking blank circular chips into a precise ring around the basin. The woman reaches toward the arrangement, then draws her hand back as blue droplets settle beside her wet cuff. Static overhead view with a slight settling drift.",
+      "singleImagePrompt": "Overhead documentary image of a woman hesitating beside a deep utility sink. Blank circular chips form a clean ring amid blue droplets and a wet brush; her red bracelet, wet cuff, and faint reflection remain visible. Static overhead with a slight settling drift.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "The final water surge arranges the chips into a precise counter ring.",
+        "personAction": "She nearly touches the pattern, then withdraws.",
+        "transformation": "Random debris becomes an orderly circular arrangement.",
+        "residue": {
+          "description": "The blue ring of water, circular chips, brush, wet cuff, and red bracelet.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Static overhead settling drift"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 5,
+      "title": "The Lit Corridor",
+      "beat": "She chooses care over avoidance, gathering the ring with a red thread and carrying it into a brighter passage.",
+      "stillPrompt": "Documentary tracking shot in a bright skylit corridor beyond the studio: the woman walks slowly with the wet brush and several blue-stained circular chips threaded together on a thin red cord from her bracelet. The dim sink alcove is visible behind her through the open doorway, and blue damp marks remain on her cuff.",
+      "imageDescription": "The visitor has left the enclosed wash alcove for a long white corridor with daylight from high windows. The earlier circular ring has become a small hanging chain in her hands, while the blue stain and wet cuff remain unmistakable.",
+      "storyBeat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+      "eventType": "actorToLocation",
+      "actorAction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+      "actorsInteraction": "",
+      "locationAction": "At the doorway threshold, she pulls the ring of chips from the sink counter into the skylit corridor.",
+      "storyEvent": "The circular arrangement becomes a dangling chain that swings against her wrist as she enters the light.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor alone moves into a second distinct location within the studio building.",
+      "motionCue": "Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her.",
+      "cameraCue": "Sideways tracking move matching her walk from the dark doorway toward skylight.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 4.8,
+      "videoPrompt": "The woman unties part of her red wrist thread and uses it to gather the blue-stained circular chips into a dangling chain. She walks from the dim sink doorway into a bright skylit corridor, the chain swinging beside her wet cuff as her expression softens. Sideways tracking move.",
+      "singleImagePrompt": "Realistic documentary destination frame in a bright skylit corridor: a woman walks away from the dim sink alcove holding a red-thread chain of blue-stained circular chips and a wet brush. Her wet cuff and the open doorway behind her preserve the journey. Sideways tracking move.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A red bracelet thread becomes a cord holding the scattered chips.",
+        "personAction": "She knots the final chip and walks into brighter light.",
+        "transformation": "The ordered ring becomes a portable swinging chain.",
+        "residue": {
+          "description": "Blue-stained chips, red cord, wet cuff, brush, and the sink doorway behind her.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Sideways tracking move"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 6,
+      "title": "The Palm Mark",
+      "beat": "At the corridor glass, the carried chain settles into a final imprint that makes her presence visible rather than hidden.",
+      "stillPrompt": "Close realistic documentary shot at the skylit corridor window: the woman presses her open palm to the glass, blue moisture transferring into a soft hand-shaped mark. The red-thread chip chain hangs from her wrist beside the mark, the wet brush rests in her other hand, and her calm face appears in the window reflection.",
+      "imageDescription": "The bright corridor window holds her reflection and a fresh blue palm mark. The blue-stained chips, red cord, wet cuff, and brush have survived every change of room, now gathered near her hand.",
+      "storyBeat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "eventType": "actorOnly",
+      "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+      "actorsInteraction": "",
+      "locationAction": "Her damp palm transfers blue pigment onto the corridor window beside her reflection.",
+      "storyEvent": "The blue moisture becomes a clear handprint on glass, while the red-thread chain settles motionless against her wrist.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor closes the progression alone in the bright corridor.",
+      "motionCue": "She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest.",
+      "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "At a bright corridor window, the woman presses her damp palm to the glass and leaves a blue hand-shaped mark. Her red-thread chain of circular chips settles against her wrist as she exhales at her own reflection. Slow camera arc to the reflection.",
+      "singleImagePrompt": "Close documentary image of a woman pressing a blue damp palm mark onto a skylit corridor window. Her calm reflected face, wet cuff, brush, and red-thread chain of blue-stained circular chips are visible beside the mark. Slow camera arc to the reflection.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A blue palm mark appears on the corridor glass.",
+        "personAction": "She presses her open hand to the window and meets her reflection.",
+        "transformation": "Carried moisture becomes a deliberate handprint.",
+        "residue": {
+          "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+          "mustSurvive": true
+        },
+        "nextWord": "handprint",
+        "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+        "cameraMove": "Slow arc to the reflected face"
+      },
+      "castReferences": []
+    }
+  ],
+  "validatedScenePlan": [
+    {
+      "index": 1,
+      "title": "The Spilled Rinse",
+      "beat": "A private flush of embarrassment becomes a small, living-looking accident in the studio.",
+      "stillPrompt": "Documentary wide shot in a realistic art studio: the woman stands at a worktable with her shoulders drawn in, looking down as cloudy blue rinse water spreads across the concrete floor in soft branching puddles. A thin red thread bracelet is visible at her wrist, and a damp blue mark has reached the cuff of her sleeve.",
+      "imageDescription": "The visitor is alone in the midground of a daylight art workspace, facing a low worktable. Her lowered face, wet cuff, red bracelet, and the irregular blue floor puddle establish the first residue.",
+      "storyBeat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "eventType": "actorToLocation",
+      "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+      "actorsInteraction": "",
+      "locationAction": "Her rag drags a wet branching stain across the studio concrete.",
+      "storyEvent": "The attempted cleanup fans the spill into visible blue tendrils, leaving her cuff and shoe wet.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the current visitor remains the sole subject.",
+      "motionCue": "She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room.",
+      "cameraCue": "Slow handheld push-in from the wide studio view.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 6.4,
+      "videoPrompt": "A woman crouches beside a spreading blue rinse-water spill in a daylight art studio, trying to blot it with a rag. The puddle branches around her shoe and wets her sleeve cuff as she looks away in embarrassment. Slow handheld push-in.",
+      "singleImagePrompt": "Documentary wide shot of a woman caught mid-crouch beside a branching blue water spill in an art studio. Her wet cuff, red thread bracelet, rag, and downcast expression are sharply visible. Slow handheld push-in.",
+      "freshImage": true,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+        "personAction": "She crouches to conceal the spill, then hesitates.",
+        "transformation": "A small puddle becomes a wide organic stain.",
+        "residue": {
+          "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Slow handheld push-in"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 2,
+      "title": "The Sudden Clatter",
+      "beat": "Her retreat knocks loose the studio's small metal tools, making the hidden accident impossible to ignore.",
+      "stillPrompt": "Close documentary view of the same woman jerking upright beside the blue-stained floor. A shallow metal tray has tipped from the worktable, scattering blank circular color chips and wet brushes; blue droplets speckle her cuff and the red thread bracelet remains at her wrist.",
+      "imageDescription": "The woman stands rigid in profile at the worktable, eyes widened toward the fallen tray. The blue puddle remains underfoot while silver tools and unmarked round chips scatter across the concrete.",
+      "storyBeat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+      "eventType": "actorOnly",
+      "actorAction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+      "actorsInteraction": "",
+      "locationAction": "The worktable sheds a metal tray and its small circular contents onto the wet floor.",
+      "storyEvent": "The tray lands in the blue spill, sending round chips into a loose ring around her shoe.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the current visitor carries the earlier wet cuff and bracelet forward.",
+      "motionCue": "A sharp flinch, a quick grab, then a held breath as objects skitter to a stop.",
+      "cameraCue": "Brief whip-pan down from her startled face to the scattered tray.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "The woman flinches and knocks a metal tray from the worktable. Blank circular chips and brushes scatter through the existing blue water around her shoe while she clutches one brush to her chest. Brief whip-pan downward.",
+      "singleImagePrompt": "Tight documentary view of a startled woman beside a tipped metal tray in the same studio. Blue water surrounds scattered circular chips, and her wet cuff and red thread bracelet remain visible. Brief whip-pan downward.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A metal tray tumbles into the wet floor mess.",
+        "personAction": "She catches one falling brush and locks still.",
+        "transformation": "Loose studio materials form a ring in the spill.",
+        "residue": {
+          "description": "The blue floor stain, wet cuff, red bracelet, scattered circular chips, and one brush in her hand.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Whip-pan down"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 3,
+      "title": "The Low Sink Alcove",
+      "beat": "Following the drifting chips, she crosses into a dim wash alcove where the water seems to gather instead of drain.",
+      "stillPrompt": "Realistic documentary shot in a dim utility sink alcove reached through the studio doorway. The woman leans over a deep sink, holding the rescued brush; blue water gathers in a slow circular eddy beneath it while several damp blank chips cling to the sink rim, her cuff and red thread bracelet still visible.",
+      "imageDescription": "The former worktable is visible as a blurred blue-stained memory through the open doorway behind her. In the lower-lit wash alcove, her reflected face trembles in the sink water as the scattered chips have followed her there.",
+      "storyBeat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+      "eventType": "actorToLocation",
+      "actorAction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+      "actorsInteraction": "",
+      "locationAction": "At the deep utility sink, the drain draws blue water and damp chips into a slow central eddy.",
+      "storyEvent": "The scattered mess condenses into a rotating blue circle that catches her reflection.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor moves from the studio work area into its wash alcove.",
+      "motionCue": "She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists.",
+      "cameraCue": "Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3.2,
+      "videoPrompt": "The woman carries a wet brush through the studio doorway into a dim sink alcove and rinses it. Blue water and damp circular chips gather into a slow eddy that catches her reflection, while the earlier stained studio remains visible behind her. Shoulder-level follow with a gentle overhead tilt.",
+      "singleImagePrompt": "Documentary destination frame in a dim studio sink alcove: a woman leans over a deep sink holding a brush above a blue circular eddy. Damp blank chips cling to the rim, her wet cuff and red bracelet survive, and the original studio is visible through the open doorway. Gentle overhead tilt.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Blue rinse water and chips orbit the sink drain.",
+        "personAction": "She rinses the saved brush, then withdraws her hand.",
+        "transformation": "The dispersed spill condenses into a single rotating circle.",
+        "residue": {
+          "description": "Blue water, circular chips, wet cuff, red wrist thread, and the brush.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Follow through doorway into overhead tilt"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 4,
+      "title": "The Ring of Chances",
+      "beat": "The turning sink circle throws the chips across the counter in an unnervingly precise, chance-like pattern.",
+      "stillPrompt": "Overhead realistic documentary view of the utility alcove counter: blank circular chips have landed in a neat luminous ring around the sink, mixed with blue droplets and a single wet brush. The woman stands just outside the ring, one palm lifted, her anxious face reflected faintly in the dark water.",
+      "imageDescription": "The blue eddy is now quieter, but its round chips occupy a precise ring on the counter. Her red thread bracelet and wet blue cuff contrast with the grey metal sink and harsh overhead light.",
+      "storyBeat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+      "eventType": "locationToActor",
+      "actorAction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+      "actorsInteraction": "",
+      "locationAction": "The sink's last surge flicks the chips onto the counter in a clean ring around the basin.",
+      "storyEvent": "The water's force turns scattered tools into a polished circle, reflecting a fragile, watchful version of her face.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor remains alone with the transformed sink arrangement.",
+      "motionCue": "The final droplets flick outward; she raises her hand, stops, and lets it fall.",
+      "cameraCue": "Static overhead frame with a slight settling drift.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "The sink gives one last surge, flicking blank circular chips into a precise ring around the basin. The woman reaches toward the arrangement, then draws her hand back as blue droplets settle beside her wet cuff. Static overhead view with a slight settling drift.",
+      "singleImagePrompt": "Overhead documentary image of a woman hesitating beside a deep utility sink. Blank circular chips form a clean ring amid blue droplets and a wet brush; her red bracelet, wet cuff, and faint reflection remain visible. Static overhead with a slight settling drift.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "The final water surge arranges the chips into a precise counter ring.",
+        "personAction": "She nearly touches the pattern, then withdraws.",
+        "transformation": "Random debris becomes an orderly circular arrangement.",
+        "residue": {
+          "description": "The blue ring of water, circular chips, brush, wet cuff, and red bracelet.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Static overhead settling drift"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 5,
+      "title": "The Lit Corridor",
+      "beat": "She chooses care over avoidance, gathering the ring with a red thread and carrying it into a brighter passage.",
+      "stillPrompt": "Documentary tracking shot in a bright skylit corridor beyond the studio: the woman walks slowly with the wet brush and several blue-stained circular chips threaded together on a thin red cord from her bracelet. The dim sink alcove is visible behind her through the open doorway, and blue damp marks remain on her cuff.",
+      "imageDescription": "The visitor has left the enclosed wash alcove for a long white corridor with daylight from high windows. The earlier circular ring has become a small hanging chain in her hands, while the blue stain and wet cuff remain unmistakable.",
+      "storyBeat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+      "eventType": "actorToLocation",
+      "actorAction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+      "actorsInteraction": "",
+      "locationAction": "At the doorway threshold, she pulls the ring of chips from the sink counter into the skylit corridor.",
+      "storyEvent": "The circular arrangement becomes a dangling chain that swings against her wrist as she enters the light.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor alone moves into a second distinct location within the studio building.",
+      "motionCue": "Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her.",
+      "cameraCue": "Sideways tracking move matching her walk from the dark doorway toward skylight.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 4.8,
+      "videoPrompt": "The woman unties part of her red wrist thread and uses it to gather the blue-stained circular chips into a dangling chain. She walks from the dim sink doorway into a bright skylit corridor, the chain swinging beside her wet cuff as her expression softens. Sideways tracking move.",
+      "singleImagePrompt": "Realistic documentary destination frame in a bright skylit corridor: a woman walks away from the dim sink alcove holding a red-thread chain of blue-stained circular chips and a wet brush. Her wet cuff and the open doorway behind her preserve the journey. Sideways tracking move.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A red bracelet thread becomes a cord holding the scattered chips.",
+        "personAction": "She knots the final chip and walks into brighter light.",
+        "transformation": "The ordered ring becomes a portable swinging chain.",
+        "residue": {
+          "description": "Blue-stained chips, red cord, wet cuff, brush, and the sink doorway behind her.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Sideways tracking move"
+      },
+      "castReferences": []
+    },
+    {
+      "index": 6,
+      "title": "The Palm Mark",
+      "beat": "At the corridor glass, the carried chain settles into a final imprint that makes her presence visible rather than hidden.",
+      "stillPrompt": "Close realistic documentary shot at the skylit corridor window: the woman presses her open palm to the glass, blue moisture transferring into a soft hand-shaped mark. The red-thread chip chain hangs from her wrist beside the mark, the wet brush rests in her other hand, and her calm face appears in the window reflection.",
+      "imageDescription": "The bright corridor window holds her reflection and a fresh blue palm mark. The blue-stained chips, red cord, wet cuff, and brush have survived every change of room, now gathered near her hand.",
+      "storyBeat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "eventType": "actorOnly",
+      "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+      "actorsInteraction": "",
+      "locationAction": "Her damp palm transfers blue pigment onto the corridor window beside her reflection.",
+      "storyEvent": "The blue moisture becomes a clear handprint on glass, while the red-thread chain settles motionless against her wrist.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor closes the progression alone in the bright corridor.",
+      "motionCue": "She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest.",
+      "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "At a bright corridor window, the woman presses her damp palm to the glass and leaves a blue hand-shaped mark. Her red-thread chain of circular chips settles against her wrist as she exhales at her own reflection. Slow camera arc to the reflection.",
+      "singleImagePrompt": "Close documentary image of a woman pressing a blue damp palm mark onto a skylit corridor window. Her calm reflected face, wet cuff, brush, and red-thread chain of blue-stained circular chips are visible beside the mark. Slow camera arc to the reflection.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A blue palm mark appears on the corridor glass.",
+        "personAction": "She presses her open hand to the window and meets her reflection.",
+        "transformation": "Carried moisture becomes a deliberate handprint.",
+        "residue": {
+          "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+          "mustSurvive": true
+        },
+        "nextWord": "handprint",
+        "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+        "cameraMove": "Slow arc to the reflected face"
+      },
+      "castReferences": []
+    }
+  ],
+  "runtimeScenePlan": [
+    {
+      "index": 1,
+      "title": "The Spilled Rinse",
+      "beat": "A private flush of embarrassment becomes a small, living-looking accident in the studio.",
+      "stillPrompt": "Documentary wide shot in a realistic art studio: the woman stands at a worktable with her shoulders drawn in, looking down as cloudy blue rinse water spreads across the concrete floor in soft branching puddles. A thin red thread bracelet is visible at her wrist, and a damp blue mark has reached the cuff of her sleeve.",
+      "imageDescription": "The visitor is alone in the midground of a daylight art workspace, facing a low worktable. Her lowered face, wet cuff, red bracelet, and the irregular blue floor puddle establish the first residue.",
+      "storyBeat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "eventType": "actorToLocation",
+      "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+      "actorsInteraction": "",
+      "locationAction": "Her rag drags a wet branching stain across the studio concrete.",
+      "storyEvent": "The attempted cleanup fans the spill into visible blue tendrils, leaving her cuff and shoe wet.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the current visitor remains the sole subject.",
+      "motionCue": "She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room.",
+      "cameraCue": "Slow handheld push-in from the wide studio view.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 6.4,
+      "videoPrompt": "A woman crouches beside a spreading blue rinse-water spill in a daylight art studio, trying to blot it with a rag. The puddle branches around her shoe and wets her sleeve cuff as she looks away in embarrassment. Slow handheld push-in.",
+      "singleImagePrompt": "Documentary wide shot of a woman caught mid-crouch beside a branching blue water spill in an art studio. Her wet cuff, red thread bracelet, rag, and downcast expression are sharply visible. Slow handheld push-in.",
+      "freshImage": true,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+        "personAction": "She crouches to conceal the spill, then hesitates.",
+        "transformation": "A small puddle becomes a wide organic stain.",
+        "residue": {
+          "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Slow handheld push-in"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 2,
+      "title": "The Sudden Clatter",
+      "beat": "Her retreat knocks loose the studio's small metal tools, making the hidden accident impossible to ignore.",
+      "stillPrompt": "Close documentary view of the same woman jerking upright beside the blue-stained floor. A shallow metal tray has tipped from the worktable, scattering blank circular color chips and wet brushes; blue droplets speckle her cuff and the red thread bracelet remains at her wrist.",
+      "imageDescription": "The woman stands rigid in profile at the worktable, eyes widened toward the fallen tray. The blue puddle remains underfoot while silver tools and unmarked round chips scatter across the concrete.",
+      "storyBeat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+      "eventType": "actorOnly",
+      "actorAction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+      "actorsInteraction": "",
+      "locationAction": "The worktable sheds a metal tray and its small circular contents onto the wet floor.",
+      "storyEvent": "The tray lands in the blue spill, sending round chips into a loose ring around her shoe.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the current visitor carries the earlier wet cuff and bracelet forward.",
+      "motionCue": "A sharp flinch, a quick grab, then a held breath as objects skitter to a stop.",
+      "cameraCue": "Brief whip-pan down from her startled face to the scattered tray.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "The woman flinches and knocks a metal tray from the worktable. Blank circular chips and brushes scatter through the existing blue water around her shoe while she clutches one brush to her chest. Brief whip-pan downward.",
+      "singleImagePrompt": "Tight documentary view of a startled woman beside a tipped metal tray in the same studio. Blue water surrounds scattered circular chips, and her wet cuff and red thread bracelet remain visible. Brief whip-pan downward.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A metal tray tumbles into the wet floor mess.",
+        "personAction": "She catches one falling brush and locks still.",
+        "transformation": "Loose studio materials form a ring in the spill.",
+        "residue": {
+          "description": "The blue floor stain, wet cuff, red bracelet, scattered circular chips, and one brush in her hand.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Whip-pan down"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 3,
+      "title": "The Low Sink Alcove",
+      "beat": "Following the drifting chips, she crosses into a dim wash alcove where the water seems to gather instead of drain.",
+      "stillPrompt": "Realistic documentary shot in a dim utility sink alcove reached through the studio doorway. The woman leans over a deep sink, holding the rescued brush; blue water gathers in a slow circular eddy beneath it while several damp blank chips cling to the sink rim, her cuff and red thread bracelet still visible.",
+      "imageDescription": "The former worktable is visible as a blurred blue-stained memory through the open doorway behind her. In the lower-lit wash alcove, her reflected face trembles in the sink water as the scattered chips have followed her there.",
+      "storyBeat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+      "eventType": "actorToLocation",
+      "actorAction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+      "actorsInteraction": "",
+      "locationAction": "At the deep utility sink, the drain draws blue water and damp chips into a slow central eddy.",
+      "storyEvent": "The scattered mess condenses into a rotating blue circle that catches her reflection.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor moves from the studio work area into its wash alcove.",
+      "motionCue": "She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists.",
+      "cameraCue": "Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3.2,
+      "videoPrompt": "The woman carries a wet brush through the studio doorway into a dim sink alcove and rinses it. Blue water and damp circular chips gather into a slow eddy that catches her reflection, while the earlier stained studio remains visible behind her. Shoulder-level follow with a gentle overhead tilt.",
+      "singleImagePrompt": "Documentary destination frame in a dim studio sink alcove: a woman leans over a deep sink holding a brush above a blue circular eddy. Damp blank chips cling to the rim, her wet cuff and red bracelet survive, and the original studio is visible through the open doorway. Gentle overhead tilt.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Blue rinse water and chips orbit the sink drain.",
+        "personAction": "She rinses the saved brush, then withdraws her hand.",
+        "transformation": "The dispersed spill condenses into a single rotating circle.",
+        "residue": {
+          "description": "Blue water, circular chips, wet cuff, red wrist thread, and the brush.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Follow through doorway into overhead tilt"
+      },
+      "castReferences": [],
+      "originalVideoMode": "firstLast"
+    },
+    {
+      "index": 4,
+      "title": "The Ring of Chances",
+      "beat": "The turning sink circle throws the chips across the counter in an unnervingly precise, chance-like pattern.",
+      "stillPrompt": "Overhead realistic documentary view of the utility alcove counter: blank circular chips have landed in a neat luminous ring around the sink, mixed with blue droplets and a single wet brush. The woman stands just outside the ring, one palm lifted, her anxious face reflected faintly in the dark water.",
+      "imageDescription": "The blue eddy is now quieter, but its round chips occupy a precise ring on the counter. Her red thread bracelet and wet blue cuff contrast with the grey metal sink and harsh overhead light.",
+      "storyBeat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+      "eventType": "locationToActor",
+      "actorAction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+      "actorsInteraction": "",
+      "locationAction": "The sink's last surge flicks the chips onto the counter in a clean ring around the basin.",
+      "storyEvent": "The water's force turns scattered tools into a polished circle, reflecting a fragile, watchful version of her face.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor remains alone with the transformed sink arrangement.",
+      "motionCue": "The final droplets flick outward; she raises her hand, stops, and lets it fall.",
+      "cameraCue": "Static overhead frame with a slight settling drift.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "The sink gives one last surge, flicking blank circular chips into a precise ring around the basin. The woman reaches toward the arrangement, then draws her hand back as blue droplets settle beside her wet cuff. Static overhead view with a slight settling drift.",
+      "singleImagePrompt": "Overhead documentary image of a woman hesitating beside a deep utility sink. Blank circular chips form a clean ring amid blue droplets and a wet brush; her red bracelet, wet cuff, and faint reflection remain visible. Static overhead with a slight settling drift.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "The final water surge arranges the chips into a precise counter ring.",
+        "personAction": "She nearly touches the pattern, then withdraws.",
+        "transformation": "Random debris becomes an orderly circular arrangement.",
+        "residue": {
+          "description": "The blue ring of water, circular chips, brush, wet cuff, and red bracelet.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Static overhead settling drift"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage"
+    },
+    {
+      "index": 5,
+      "title": "The Lit Corridor",
+      "beat": "She chooses care over avoidance, gathering the ring with a red thread and carrying it into a brighter passage.",
+      "stillPrompt": "Documentary tracking shot in a bright skylit corridor beyond the studio: the woman walks slowly with the wet brush and several blue-stained circular chips threaded together on a thin red cord from her bracelet. The dim sink alcove is visible behind her through the open doorway, and blue damp marks remain on her cuff.",
+      "imageDescription": "The visitor has left the enclosed wash alcove for a long white corridor with daylight from high windows. The earlier circular ring has become a small hanging chain in her hands, while the blue stain and wet cuff remain unmistakable.",
+      "storyBeat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+      "eventType": "actorToLocation",
+      "actorAction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+      "actorsInteraction": "",
+      "locationAction": "At the doorway threshold, she pulls the ring of chips from the sink counter into the skylit corridor.",
+      "storyEvent": "The circular arrangement becomes a dangling chain that swings against her wrist as she enters the light.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor alone moves into a second distinct location within the studio building.",
+      "motionCue": "Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her.",
+      "cameraCue": "Sideways tracking move matching her walk from the dark doorway toward skylight.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 4.8,
+      "videoPrompt": "The woman unties part of her red wrist thread and uses it to gather the blue-stained circular chips into a dangling chain. She walks from the dim sink doorway into a bright skylit corridor, the chain swinging beside her wet cuff as her expression softens. Sideways tracking move.",
+      "singleImagePrompt": "Realistic documentary destination frame in a bright skylit corridor: a woman walks away from the dim sink alcove holding a red-thread chain of blue-stained circular chips and a wet brush. Her wet cuff and the open doorway behind her preserve the journey. Sideways tracking move.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A red bracelet thread becomes a cord holding the scattered chips.",
+        "personAction": "She knots the final chip and walks into brighter light.",
+        "transformation": "The ordered ring becomes a portable swinging chain.",
+        "residue": {
+          "description": "Blue-stained chips, red cord, wet cuff, brush, and the sink doorway behind her.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Sideways tracking move"
+      },
+      "castReferences": [],
+      "originalVideoMode": "firstLast"
+    },
+    {
+      "index": 6,
+      "title": "The Palm Mark",
+      "beat": "At the corridor glass, the carried chain settles into a final imprint that makes her presence visible rather than hidden.",
+      "stillPrompt": "Close realistic documentary shot at the skylit corridor window: the woman presses her open palm to the glass, blue moisture transferring into a soft hand-shaped mark. The red-thread chip chain hangs from her wrist beside the mark, the wet brush rests in her other hand, and her calm face appears in the window reflection.",
+      "imageDescription": "The bright corridor window holds her reflection and a fresh blue palm mark. The blue-stained chips, red cord, wet cuff, and brush have survived every change of room, now gathered near her hand.",
+      "storyBeat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "eventType": "actorOnly",
+      "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+      "actorsInteraction": "",
+      "locationAction": "Her damp palm transfers blue pigment onto the corridor window beside her reflection.",
+      "storyEvent": "The blue moisture becomes a clear handprint on glass, while the red-thread chain settles motionless against her wrist.",
+      "castSelection": [],
+      "castUse": "No recalled cast; the visitor closes the progression alone in the bright corridor.",
+      "motionCue": "She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest.",
+      "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "At a bright corridor window, the woman presses her damp palm to the glass and leaves a blue hand-shaped mark. Her red-thread chain of circular chips settles against her wrist as she exhales at her own reflection. Slow camera arc to the reflection.",
+      "singleImagePrompt": "Close documentary image of a woman pressing a blue damp palm mark onto a skylit corridor window. Her calm reflected face, wet cuff, brush, and red-thread chain of blue-stained circular chips are visible beside the mark. Slow camera arc to the reflection.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A blue palm mark appears on the corridor glass.",
+        "personAction": "She presses her open hand to the window and meets her reflection.",
+        "transformation": "Carried moisture becomes a deliberate handprint.",
+        "residue": {
+          "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+          "mustSurvive": true
+        },
+        "nextWord": "handprint",
+        "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+        "cameraMove": "Slow arc to the reflected face"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage"
+    }
+  ],
+  "appliedScenePlan": [
+    {
+      "index": 1,
+      "title": "The Spilled Rinse",
+      "beat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "imageDescription": "The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+      "storyBeat": "She tries to hide a spill, but the water spreads farther than her careful footwork can contain.",
+      "eventType": "actorOnly",
+      "actorAction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+      "actorsInteraction": "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe.",
+      "locationAction": "Her rag drags a wet branching stain across the studio concrete.",
+      "storyEvent": "The attempted cleanup fans the spill into visible blue tendrils, leaving her cuff and shoe wet.",
+      "castSelection": [],
+      "castUse": "",
+      "motionCue": "She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room.",
+      "cameraCue": "Slow handheld push-in from the wide studio view.",
+      "frameSource": "newImage",
+      "videoMode": "singleImage",
+      "durationSeconds": 6.4,
+      "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "singleImagePrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "freshImage": true,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Cloudy blue rinse water escapes the cleaning rag in branching paths.",
+        "personAction": "She crouches to conceal the spill, then hesitates.",
+        "transformation": "A small puddle becomes a wide organic stain.",
+        "residue": {
+          "description": "Blue water on the floor and her wet blue cuff, plus the red wrist thread.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Slow handheld push-in"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage",
+      "selfomat": true,
+      "peopleChain": [],
+      "topic": "love",
+      "semanticCue": "Shame",
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 2,
+      "title": "The Sudden Clatter",
+      "beat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+      "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens. Viewpoint follows: Brief whip-pan down from her startled face to the scattered tray. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "imageDescription": "The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+      "storyBeat": "Her startled movement strikes the table, turning private discomfort into a noisy physical mess.",
+      "eventType": "actorOnly",
+      "actorAction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+      "actorsInteraction": "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens.",
+      "locationAction": "The worktable sheds a metal tray and its small circular contents onto the wet floor.",
+      "storyEvent": "The tray lands in the blue spill, sending round chips into a loose ring around her shoe.",
+      "castSelection": [],
+      "castUse": "",
+      "motionCue": "A sharp flinch, a quick grab, then a held breath as objects skitter to a stop.",
+      "cameraCue": "Brief whip-pan down from her startled face to the scattered tray.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. A sharp flinch, a quick grab, then a held breath as objects skitter to a stop. Camera movement: Brief whip-pan down from her startled face to the scattered tray. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "singleImagePrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens. Viewpoint follows: Brief whip-pan down from her startled face to the scattered tray. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A metal tray tumbles into the wet floor mess.",
+        "personAction": "She catches one falling brush and locks still.",
+        "transformation": "Loose studio materials form a ring in the spill.",
+        "residue": {
+          "description": "The blue floor stain, wet cuff, red bracelet, scattered circular chips, and one brush in her hand.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Whip-pan down"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage",
+      "selfomat": true,
+      "peopleChain": [],
+      "topic": "love",
+      "semanticCue": "Amoebozoa",
+      "requestedDurationSeconds": 1.6
+    },
+    {
+      "index": 3,
+      "title": "The Low Sink Alcove",
+      "beat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+      "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water. Viewpoint follows: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "imageDescription": "The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+      "storyBeat": "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle.",
+      "eventType": "actorOnly",
+      "actorAction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+      "actorsInteraction": "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water.",
+      "locationAction": "At the deep utility sink, the drain draws blue water and damp chips into a slow central eddy.",
+      "storyEvent": "The scattered mess condenses into a rotating blue circle that catches her reflection.",
+      "castSelection": [],
+      "castUse": "",
+      "motionCue": "She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists.",
+      "cameraCue": "Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 3.2,
+      "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "singleImagePrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water. Viewpoint follows: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "Blue rinse water and chips orbit the sink drain.",
+        "personAction": "She rinses the saved brush, then withdraws her hand.",
+        "transformation": "The dispersed spill condenses into a single rotating circle.",
+        "residue": {
+          "description": "Blue water, circular chips, wet cuff, red wrist thread, and the brush.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Follow through doorway into overhead tilt"
+      },
+      "castReferences": [],
+      "originalVideoMode": "firstLast",
+      "selfomat": true,
+      "peopleChain": [],
+      "topic": "love",
+      "semanticCue": "Semyon Dukach",
+      "requestedDurationSeconds": 3.2
+    },
+    {
+      "index": 4,
+      "title": "The Ring of Chances",
+      "beat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+      "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle. Viewpoint follows: Static overhead frame with a slight settling drift. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "imageDescription": "The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+      "storyBeat": "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it.",
+      "eventType": "actorOnly",
+      "actorAction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+      "actorsInteraction": "She starts to reach for a chip, then curls her fingers back and watches the pattern settle.",
+      "locationAction": "The sink's last surge flicks the chips onto the counter in a clean ring around the basin.",
+      "storyEvent": "The water's force turns scattered tools into a polished circle, reflecting a fragile, watchful version of her face.",
+      "castSelection": [],
+      "castUse": "",
+      "motionCue": "The final droplets flick outward; she raises her hand, stops, and lets it fall.",
+      "cameraCue": "Static overhead frame with a slight settling drift.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. The final droplets flick outward; she raises her hand, stops, and lets it fall. Camera movement: Static overhead frame with a slight settling drift. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "singleImagePrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle. Viewpoint follows: Static overhead frame with a slight settling drift. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "The final water surge arranges the chips into a precise counter ring.",
+        "personAction": "She nearly touches the pattern, then withdraws.",
+        "transformation": "Random debris becomes an orderly circular arrangement.",
+        "residue": {
+          "description": "The blue ring of water, circular chips, brush, wet cuff, and red bracelet.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Static overhead settling drift"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage",
+      "selfomat": true,
+      "peopleChain": [],
+      "topic": "love",
+      "semanticCue": "Acute stress reaction",
+      "requestedDurationSeconds": 1.6
+    },
+    {
+      "index": 5,
+      "title": "The Lit Corridor",
+      "beat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+      "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression. Viewpoint follows: Sideways tracking move matching her walk from the dark doorway toward skylight. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "imageDescription": "The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+      "storyBeat": "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly.",
+      "eventType": "actorOnly",
+      "actorAction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+      "actorsInteraction": "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression.",
+      "locationAction": "At the doorway threshold, she pulls the ring of chips from the sink counter into the skylit corridor.",
+      "storyEvent": "The circular arrangement becomes a dangling chain that swings against her wrist as she enters the light.",
+      "castSelection": [],
+      "castUse": "",
+      "motionCue": "Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her.",
+      "cameraCue": "Sideways tracking move matching her walk from the dark doorway toward skylight.",
+      "frameSource": "lastFrame",
+      "videoMode": "firstLast",
+      "durationSeconds": 4.8,
+      "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "singleImagePrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression. Viewpoint follows: Sideways tracking move matching her walk from the dark doorway toward skylight. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "freshImage": false,
+      "useCameraShot": true,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A red bracelet thread becomes a cord holding the scattered chips.",
+        "personAction": "She knots the final chip and walks into brighter light.",
+        "transformation": "The ordered ring becomes a portable swinging chain.",
+        "residue": {
+          "description": "Blue-stained chips, red cord, wet cuff, brush, and the sink doorway behind her.",
+          "mustSurvive": true
+        },
+        "nextWord": "",
+        "nextWordReason": "",
+        "cameraMove": "Sideways tracking move"
+      },
+      "castReferences": [],
+      "originalVideoMode": "firstLast",
+      "selfomat": true,
+      "peopleChain": [],
+      "topic": "love",
+      "semanticCue": "Anaeramoeba",
+      "requestedDurationSeconds": 4.8
+    },
+    {
+      "index": 6,
+      "title": "The Palm Mark",
+      "beat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "stillPrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "imageDescription": "The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+      "storyBeat": "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact.",
+      "eventType": "actorOnly",
+      "actorAction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+      "actorsInteraction": "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile.",
+      "locationAction": "Her damp palm transfers blue pigment onto the corridor window beside her reflection.",
+      "storyEvent": "The blue moisture becomes a clear handprint on glass, while the red-thread chain settles motionless against her wrist.",
+      "castSelection": [],
+      "castUse": "",
+      "motionCue": "She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest.",
+      "cameraCue": "Slow arc from her shoulder to the reflected face and palm mark.",
+      "frameSource": "lastFrame",
+      "videoMode": "singleImage",
+      "durationSeconds": 1.6,
+      "videoPrompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+      "singleImagePrompt": "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting.",
+      "freshImage": false,
+      "useCameraShot": false,
+      "realityIntrusion": false,
+      "creativeDecision": {
+        "visualEvent": "A blue palm mark appears on the corridor glass.",
+        "personAction": "She presses her open hand to the window and meets her reflection.",
+        "transformation": "Carried moisture becomes a deliberate handprint.",
+        "residue": {
+          "description": "The blue palm mark, red-thread chip chain, wet cuff, brush, and reflected face.",
+          "mustSurvive": true
+        },
+        "nextWord": "handprint",
+        "nextWordReason": "Her deliberate contact leaves a clear physical trace on the glass.",
+        "cameraMove": "Slow arc to the reflected face"
+      },
+      "castReferences": [],
+      "originalVideoMode": "singleImage",
+      "selfomat": true,
+      "peopleChain": [],
+      "topic": "love",
+      "semanticCue": "Casinò di Campione",
+      "requestedDurationSeconds": 1.6
+    }
+  ],
+  "scenePlanTransforms": [
+    {
+      "scene": 1,
+      "stage": "runtime",
+      "changes": {
+        "originalVideoMode": [
+          null,
+          "singleImage"
+        ]
+      }
+    },
+    {
+      "scene": 2,
+      "stage": "runtime",
+      "changes": {
+        "originalVideoMode": [
+          null,
+          "singleImage"
+        ]
+      }
+    },
+    {
+      "scene": 3,
+      "stage": "runtime",
+      "changes": {
+        "originalVideoMode": [
+          null,
+          "firstLast"
+        ]
+      }
+    },
+    {
+      "scene": 4,
+      "stage": "runtime",
+      "changes": {
+        "originalVideoMode": [
+          null,
+          "singleImage"
+        ]
+      }
+    },
+    {
+      "scene": 5,
+      "stage": "runtime",
+      "changes": {
+        "originalVideoMode": [
+          null,
+          "firstLast"
+        ]
+      }
+    },
+    {
+      "scene": 6,
+      "stage": "runtime",
+      "changes": {
+        "originalVideoMode": [
+          null,
+          "singleImage"
+        ]
+      }
+    },
+    {
+      "scene": 1,
+      "stage": "applied",
+      "changes": {
+        "beat": [
+          "A private flush of embarrassment becomes a small, living-looking accident in the studio.",
+          "She tries to hide a spill, but the water spreads farther than her careful footwork can contain."
+        ],
+        "stillPrompt": [
+          "Documentary wide shot in a realistic art studio: the woman stands at a worktable with her shoulders drawn in, looking down as cloudy blue rinse water spreads across the concrete floor in soft branching puddles. A thin red thread bracelet is visible at her wrist, and a damp blue mark has reached the cuff of her sleeve.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "imageDescription": [
+          "The visitor is alone in the midground of a daylight art workspace, facing a low worktable. Her lowered face, wet cuff, red bracelet, and the irregular blue floor puddle establish the first residue.",
+          "The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe."
+        ],
+        "eventType": [
+          "actorToLocation",
+          "actorOnly"
+        ],
+        "actorsInteraction": [
+          "",
+          "She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe."
+        ],
+        "castUse": [
+          "No recalled cast; the current visitor remains the sole subject.",
+          ""
+        ],
+        "videoPrompt": [
+          "A woman crouches beside a spreading blue rinse-water spill in a daylight art studio, trying to blot it with a rag. The puddle branches around her shoe and wets her sleeve cuff as she looks away in embarrassment. Slow handheld push-in.",
+          "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement."
+        ],
+        "singleImagePrompt": [
+          "Documentary wide shot of a woman caught mid-crouch beside a branching blue water spill in an art studio. Her wet cuff, red thread bracelet, rag, and downcast expression are sharply visible. Slow handheld push-in.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She presses a rag to the floor, then freezes when the blue water slips around the rag and touches her shoe. Viewpoint follows: Slow handheld push-in from the wide studio view. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "selfomat": [
+          null,
+          true
+        ],
+        "peopleChain": [
+          null,
+          []
+        ],
+        "topic": [
+          null,
+          "love"
+        ],
+        "semanticCue": [
+          null,
+          "Shame"
+        ],
+        "requestedDurationSeconds": [
+          null,
+          3.2
+        ]
+      }
+    },
+    {
+      "scene": 2,
+      "stage": "applied",
+      "changes": {
+        "beat": [
+          "Her retreat knocks loose the studio's small metal tools, making the hidden accident impossible to ignore.",
+          "Her startled movement strikes the table, turning private discomfort into a noisy physical mess."
+        ],
+        "stillPrompt": [
+          "Close documentary view of the same woman jerking upright beside the blue-stained floor. A shallow metal tray has tipped from the worktable, scattering blank circular color chips and wet brushes; blue droplets speckle her cuff and the red thread bracelet remains at her wrist.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens. Viewpoint follows: Brief whip-pan down from her startled face to the scattered tray. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "imageDescription": [
+          "The woman stands rigid in profile at the worktable, eyes widened toward the fallen tray. The blue puddle remains underfoot while silver tools and unmarked round chips scatter across the concrete.",
+          "The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens."
+        ],
+        "actorsInteraction": [
+          "",
+          "She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens."
+        ],
+        "castUse": [
+          "No recalled cast; the current visitor carries the earlier wet cuff and bracelet forward.",
+          ""
+        ],
+        "videoPrompt": [
+          "The woman flinches and knocks a metal tray from the worktable. Blank circular chips and brushes scatter through the existing blue water around her shoe while she clutches one brush to her chest. Brief whip-pan downward.",
+          "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. A sharp flinch, a quick grab, then a held breath as objects skitter to a stop. Camera movement: Brief whip-pan down from her startled face to the scattered tray. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement."
+        ],
+        "singleImagePrompt": [
+          "Tight documentary view of a startled woman beside a tipped metal tray in the same studio. Blue water surrounds scattered circular chips, and her wet cuff and red thread bracelet remain visible. Brief whip-pan downward.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. She bumps the table with her hip, catches a falling brush, and holds it against her chest while her face tightens. Viewpoint follows: Brief whip-pan down from her startled face to the scattered tray. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "selfomat": [
+          null,
+          true
+        ],
+        "peopleChain": [
+          null,
+          []
+        ],
+        "topic": [
+          null,
+          "love"
+        ],
+        "semanticCue": [
+          null,
+          "Amoebozoa"
+        ],
+        "requestedDurationSeconds": [
+          null,
+          1.6
+        ]
+      }
+    },
+    {
+      "scene": 3,
+      "stage": "applied",
+      "changes": {
+        "beat": [
+          "Following the drifting chips, she crosses into a dim wash alcove where the water seems to gather instead of drain.",
+          "She carries the brush to rinse it, but the drain's weak swirl collects the blue water and chips into one concentrated circle."
+        ],
+        "stillPrompt": [
+          "Realistic documentary shot in a dim utility sink alcove reached through the studio doorway. The woman leans over a deep sink, holding the rescued brush; blue water gathers in a slow circular eddy beneath it while several damp blank chips cling to the sink rim, her cuff and red thread bracelet still visible.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water. Viewpoint follows: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "imageDescription": [
+          "The former worktable is visible as a blurred blue-stained memory through the open doorway behind her. In the lower-lit wash alcove, her reflected face trembles in the sink water as the scattered chips have followed her there.",
+          "The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water."
+        ],
+        "eventType": [
+          "actorToLocation",
+          "actorOnly"
+        ],
+        "actorsInteraction": [
+          "",
+          "She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water."
+        ],
+        "castUse": [
+          "No recalled cast; the visitor moves from the studio work area into its wash alcove.",
+          ""
+        ],
+        "videoPrompt": [
+          "The woman carries a wet brush through the studio doorway into a dim sink alcove and rinses it. Blue water and damp circular chips gather into a slow eddy that catches her reflection, while the earlier stained studio remains visible behind her. Shoulder-level follow with a gentle overhead tilt.",
+          "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement."
+        ],
+        "singleImagePrompt": [
+          "Documentary destination frame in a dim studio sink alcove: a woman leans over a deep sink holding a brush above a blue circular eddy. Damp blank chips cling to the rim, her wet cuff and red bracelet survive, and the original studio is visible through the open doorway. Gentle overhead tilt.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She walks through the doorway, lowers the brush under the tap, then pulls her hand back from the circling water. Viewpoint follows: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "selfomat": [
+          null,
+          true
+        ],
+        "peopleChain": [
+          null,
+          []
+        ],
+        "topic": [
+          null,
+          "love"
+        ],
+        "semanticCue": [
+          null,
+          "Semyon Dukach"
+        ],
+        "requestedDurationSeconds": [
+          null,
+          3.2
+        ]
+      }
+    },
+    {
+      "scene": 4,
+      "stage": "applied",
+      "changes": {
+        "beat": [
+          "The turning sink circle throws the chips across the counter in an unnervingly precise, chance-like pattern.",
+          "A final turn of water throws the chips outward, arranging the random debris into a ring that stops her from touching it."
+        ],
+        "stillPrompt": [
+          "Overhead realistic documentary view of the utility alcove counter: blank circular chips have landed in a neat luminous ring around the sink, mixed with blue droplets and a single wet brush. The woman stands just outside the ring, one palm lifted, her anxious face reflected faintly in the dark water.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle. Viewpoint follows: Static overhead frame with a slight settling drift. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "imageDescription": [
+          "The blue eddy is now quieter, but its round chips occupy a precise ring on the counter. Her red thread bracelet and wet blue cuff contrast with the grey metal sink and harsh overhead light.",
+          "The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle."
+        ],
+        "eventType": [
+          "locationToActor",
+          "actorOnly"
+        ],
+        "actorsInteraction": [
+          "",
+          "She starts to reach for a chip, then curls her fingers back and watches the pattern settle."
+        ],
+        "castUse": [
+          "No recalled cast; the visitor remains alone with the transformed sink arrangement.",
+          ""
+        ],
+        "videoPrompt": [
+          "The sink gives one last surge, flicking blank circular chips into a precise ring around the basin. The woman reaches toward the arrangement, then draws her hand back as blue droplets settle beside her wet cuff. Static overhead view with a slight settling drift.",
+          "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. The final droplets flick outward; she raises her hand, stops, and lets it fall. Camera movement: Static overhead frame with a slight settling drift. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement."
+        ],
+        "singleImagePrompt": [
+          "Overhead documentary image of a woman hesitating beside a deep utility sink. Blank circular chips form a clean ring amid blue droplets and a wet brush; her red bracelet, wet cuff, and faint reflection remain visible. Static overhead with a slight settling drift.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. She starts to reach for a chip, then curls her fingers back and watches the pattern settle. Viewpoint follows: Static overhead frame with a slight settling drift. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "selfomat": [
+          null,
+          true
+        ],
+        "peopleChain": [
+          null,
+          []
+        ],
+        "topic": [
+          null,
+          "love"
+        ],
+        "semanticCue": [
+          null,
+          "Acute stress reaction"
+        ],
+        "requestedDurationSeconds": [
+          null,
+          1.6
+        ]
+      }
+    },
+    {
+      "scene": 5,
+      "stage": "applied",
+      "changes": {
+        "beat": [
+          "She chooses care over avoidance, gathering the ring with a red thread and carrying it into a brighter passage.",
+          "She unties part of her bracelet and uses its red cord to gather the chips, converting the unsettling ring into something she can carry openly."
+        ],
+        "stillPrompt": [
+          "Documentary tracking shot in a bright skylit corridor beyond the studio: the woman walks slowly with the wet brush and several blue-stained circular chips threaded together on a thin red cord from her bracelet. The dim sink alcove is visible behind her through the open doorway, and blue damp marks remain on her cuff.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression. Viewpoint follows: Sideways tracking move matching her walk from the dark doorway toward skylight. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "imageDescription": [
+          "The visitor has left the enclosed wash alcove for a long white corridor with daylight from high windows. The earlier circular ring has become a small hanging chain in her hands, while the blue stain and wet cuff remain unmistakable.",
+          "The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression."
+        ],
+        "eventType": [
+          "actorToLocation",
+          "actorOnly"
+        ],
+        "actorsInteraction": [
+          "",
+          "She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression."
+        ],
+        "castUse": [
+          "No recalled cast; the visitor alone moves into a second distinct location within the studio building.",
+          ""
+        ],
+        "videoPrompt": [
+          "The woman unties part of her red wrist thread and uses it to gather the blue-stained circular chips into a dangling chain. She walks from the dim sink doorway into a bright skylit corridor, the chain swinging beside her wet cuff as her expression softens. Sideways tracking move.",
+          "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement."
+        ],
+        "singleImagePrompt": [
+          "Realistic documentary destination frame in a bright skylit corridor: a woman walks away from the dim sink alcove holding a red-thread chain of blue-stained circular chips and a wet brush. Her wet cuff and the open doorway behind her preserve the journey. Sideways tracking move.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. She threads the last chip, ties the cord with deliberate fingers, and walks toward the bright end of the corridor with a softened expression. Viewpoint follows: Sideways tracking move matching her walk from the dark doorway toward skylight. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "selfomat": [
+          null,
+          true
+        ],
+        "peopleChain": [
+          null,
+          []
+        ],
+        "topic": [
+          null,
+          "love"
+        ],
+        "semanticCue": [
+          null,
+          "Anaeramoeba"
+        ],
+        "requestedDurationSeconds": [
+          null,
+          4.8
+        ]
+      }
+    },
+    {
+      "scene": 6,
+      "stage": "applied",
+      "changes": {
+        "beat": [
+          "At the corridor glass, the carried chain settles into a final imprint that makes her presence visible rather than hidden.",
+          "She stops at the glass and deliberately leaves a blue palm mark, allowing the residue of the accident to become a quiet trace of contact."
+        ],
+        "stillPrompt": [
+          "Close realistic documentary shot at the skylit corridor window: the woman presses her open palm to the glass, blue moisture transferring into a soft hand-shaped mark. The red-thread chip chain hangs from her wrist beside the mark, the wet brush rests in her other hand, and her calm face appears in the window reflection.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "imageDescription": [
+          "The bright corridor window holds her reflection and a fresh blue palm mark. The blue-stained chips, red cord, wet cuff, and brush have survived every change of room, now gathered near her hand.",
+          "The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile."
+        ],
+        "actorsInteraction": [
+          "",
+          "She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile."
+        ],
+        "castUse": [
+          "No recalled cast; the visitor closes the progression alone in the bright corridor.",
+          ""
+        ],
+        "videoPrompt": [
+          "At a bright corridor window, the woman presses her damp palm to the glass and leaves a blue hand-shaped mark. Her red-thread chain of circular chips settles against her wrist as she exhales at her own reflection. Slow camera arc to the reflection.",
+          "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement."
+        ],
+        "singleImagePrompt": [
+          "Close documentary image of a woman pressing a blue damp palm mark onto a skylit corridor window. Her calm reflected face, wet cuff, brush, and red-thread chain of blue-stained circular chips are visible beside the mark. Slow camera arc to the reflection.",
+          "Ordinary, unplanned phone still of real visitors. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She lifts her palm to the window, presses firmly, then exhales and looks at her reflected face with a small relieved smile. Viewpoint follows: Slow arc from her shoulder to the reflected face and palm mark. Natural skin and clothing, available light, imperfect focus; no posed composition, collage, or cinematic lighting."
+        ],
+        "selfomat": [
+          null,
+          true
+        ],
+        "peopleChain": [
+          null,
+          []
+        ],
+        "topic": [
+          null,
+          "love"
+        ],
+        "semanticCue": [
+          null,
+          "Casinò di Campione"
+        ],
+        "requestedDurationSeconds": [
+          null,
+          1.6
+        ]
+      }
+    }
+  ]
+}

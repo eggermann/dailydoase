@@ -1,0 +1,17 @@
+{
+  "sceneIndex": 6,
+  "sceneTitle": "The Palm Mark",
+  "durationSeconds": 1.6,
+  "plannedDurationSeconds": 1.6,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A blue palm mark appears on the corridor glass. Carried moisture becomes a deliberate handprint. She raises her hand, presses it to glass, exhales, and lets the dangling chips come to rest. Camera movement: Slow arc from her shoulder to the reflected face and palm mark. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926836768-runware-first-last-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "transitionTargetPath": "",
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926874349-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926874349-runware-image-video.mp4",
+  "timestamp": "2026-10-02T07:41:15.394Z"
+}

@@ -1,0 +1,17 @@
+{
+  "sceneIndex": 2,
+  "sceneTitle": "The Sudden Clatter",
+  "durationSeconds": 1.6,
+  "plannedDurationSeconds": 1.6,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A metal tray tumbles into the wet floor mess. Loose studio materials form a ring in the spill. A sharp flinch, a quick grab, then a held breath as objects skitter to a stop. Camera movement: Brief whip-pan down from her startled face to the scattered tray. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926381642-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "transitionTargetPath": "",
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926555613-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926555613-runware-image-video.mp4",
+  "timestamp": "2026-10-02T07:35:56.479Z"
+}

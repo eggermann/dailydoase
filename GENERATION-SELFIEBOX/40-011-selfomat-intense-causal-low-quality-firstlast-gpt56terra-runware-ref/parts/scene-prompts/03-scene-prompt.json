@@ -1,0 +1,17 @@
+{
+  "sceneIndex": 3,
+  "sceneTitle": "The Low Sink Alcove",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 3.2,
+  "frameSource": "lastFrame",
+  "videoMode": "firstLast",
+  "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926555613-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "transitionTargetPath": "",
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926698808-runware-first-last-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926698808-runware-first-last.mp4",
+  "timestamp": "2026-10-02T07:38:20.448Z"
+}

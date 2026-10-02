@@ -1,0 +1,17 @@
+{
+  "sceneIndex": 5,
+  "sceneTitle": "The Lit Corridor",
+  "durationSeconds": 4.8,
+  "plannedDurationSeconds": 4.8,
+  "frameSource": "lastFrame",
+  "videoMode": "firstLast",
+  "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. A red bracelet thread becomes a cord holding the scattered chips. The ordered ring becomes a portable swinging chain. Her hands thread and knot the cord, then her gait becomes steadier as the chip chain swings beside her. Camera movement: Sideways tracking move matching her walk from the dark doorway toward skylight. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926736476-runware-image-video-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "transitionTargetPath": "",
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926836768-runware-first-last-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926836768-runware-first-last.mp4",
+  "timestamp": "2026-10-02T07:40:38.705Z"
+}

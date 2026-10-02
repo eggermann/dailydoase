@@ -1,0 +1,17 @@
+{
+  "sceneIndex": 1,
+  "sceneTitle": "The Spilled Rinse",
+  "durationSeconds": 3.2,
+  "plannedDurationSeconds": 6.4,
+  "frameSource": "cameraShot",
+  "videoMode": "singleImage",
+  "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Cloudy blue rinse water escapes the cleaning rag in branching paths. A small puddle becomes a wide organic stain. She crouches quickly, dabs at the puddle, recoils a half step, and glances toward the empty room. Camera movement: Slow handheld push-in from the wide studio view. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/opening-persona-reference.jpg",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "transitionTargetPath": "",
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926381642-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926381642-runware-image-video.mp4",
+  "timestamp": "2026-10-02T07:33:02.729Z"
+}

@@ -1,0 +1,28 @@
+{
+  "provider": "runware",
+  "model": "alibaba:wan@2.7",
+  "submittedAt": "2026-10-02T07:36:24.444Z",
+  "payload": {
+    "frameImages": [
+      {
+        "frame": "first"
+      },
+      {
+        "frame": "last"
+      }
+    ],
+    "prompt": " Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. Blue rinse water and chips orbit the sink drain. The dispersed spill condenses into a single rotating circle. She crosses the doorway, bends over the sink, rinses once, and recoils slightly as the swirl persists. Camera movement: Shoulder-level follow through the doorway ending in a gentle overhead tilt toward the sink. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement. ",
+    "duration": 3,
+    "width": 1088,
+    "height": 832,
+    "resolution": "720p",
+    "seed": 0,
+    "inputFramePaths": {
+      "sourceStartImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926555613-runware-image-video-last-frame.png",
+      "sourceEndImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926574583-image-actor-in-scene.png",
+      "renderedStartImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/input-img/1790926584335-2d0ed89b-391c-4cf3-aef2-be435791889d-start.png",
+      "renderedEndImage": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/input-img/1790926584335-2d0ed89b-391c-4cf3-aef2-be435791889d-end.png"
+    }
+  },
+  "timestamp": "2026-10-02T07:36:24.444Z"
+}

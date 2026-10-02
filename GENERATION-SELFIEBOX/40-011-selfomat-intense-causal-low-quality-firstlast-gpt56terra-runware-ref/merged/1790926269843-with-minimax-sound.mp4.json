@@ -1,0 +1,9 @@
+{
+  "endpoint": "/video-audio-mux",
+  "source_video": "1790926269843-concat.mp4",
+  "source_audio": "iteration-0001.mp3",
+  "options": {
+    "crf": 23,
+    "preset": "veryfast"
+  }
+}

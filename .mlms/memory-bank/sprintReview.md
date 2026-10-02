@@ -1,5 +1,28 @@
 # Sprint Review
 
+## Loop 6 Review — Real merged film
+
+### Result
+
+- [x] One real iteration completed with six Taktmuster scenes.
+- [x] `gpt-5.6-terra` generated planner output and causal scene prompts.
+- [x] First/Last stayed enabled; Cakegreen failed config resolution, Runware fallback rendered transitions.
+- [x] No local Emergency-Plan was used.
+- [x] MiniMax Music-3 was generated and muxed into final film.
+- [x] Colored HTML log exists at both root and `selfomat-prompt-log/` paths.
+
+### Artifact
+
+`GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/`
+
+### Verification
+
+Final MP4: 16.01s, 1088x832, 8fps, H.264 + AAC. Focused tests: 22 passed.
+
+### Note
+
+Cakegreen First/Last remains unavailable until its Gradio config is repaired; fallback use is recorded in run output.
+
 ## Loop 5 Review
 
 ### What Changed
@@ -45,6 +68,13 @@ Open any new `selfomat-prompt-log/iteration-NNNN.html`; the compact stage map ap
 ### Process Decision
 
 Stop at bounded loop budget; resume with artifact inspection.
+
+## Child 002 Handoff — Loop 1
+
+- Goal: produce one merged three-scene film.
+- State: initialized; render command prepared but not executed.
+- Blocker: explicit authorization is required for external upload of the test selfie/prompts and possible provider charges.
+- No code, credentials, media, or provider state changed.
 
 ## Loop 4 Review — One-iteration semantic decision trace
 

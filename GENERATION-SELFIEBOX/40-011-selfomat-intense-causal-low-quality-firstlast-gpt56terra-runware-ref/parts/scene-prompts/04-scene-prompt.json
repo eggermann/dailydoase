@@ -1,0 +1,17 @@
+{
+  "sceneIndex": 4,
+  "sceneTitle": "The Ring of Chances",
+  "durationSeconds": 1.6,
+  "plannedDurationSeconds": 1.6,
+  "frameSource": "lastFrame",
+  "videoMode": "singleImage",
+  "prompt": "Continue from the next frame. The current visitor (Woman) is closest to the camera and remains the main person. The final water surge arranges the chips into a precise counter ring. Random debris becomes an orderly circular arrangement. The final droplets flick outward; she raises her hand, stops, and lets it fall. Camera movement: Static overhead frame with a slight settling drift. Keep any visible camera consequence natural: uneven light, imperfect focus, motion blur, or an off-center frame only when motivated by that camera movement.",
+  "startFramePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926698808-runware-first-last-last-frame.png",
+  "sceneContextImagePath": "",
+  "sceneContextImageUrl": "",
+  "endFramePath": null,
+  "transitionTargetPath": "",
+  "nextStartFrameSourcePath": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926736476-runware-image-video-last-frame.png",
+  "videoFile": "/Users/eggermann/Projekte/dailydoase-selfomat/GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/parts/1790926736476-runware-image-video.mp4",
+  "timestamp": "2026-10-02T07:38:57.364Z"
+}

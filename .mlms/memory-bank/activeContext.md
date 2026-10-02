@@ -6,9 +6,9 @@ Implement and verify one Selfomat iteration end-to-end. Use local/reference inpu
 
 ## Current Loop
 
-Loop: 5
+Loop: 6
 
-Phase: Review -> iteration-structure trace slice green; max loop reached
+Phase: Real provider iteration completed and verified
 
 ## Shared Loop Budget
 
@@ -32,11 +32,14 @@ Before rendering each film, write a readable `selfomat-prompt-log/iteration-NNNN
 
 - External image/video generation can fail or take longer than local checks.
 - First iteration has no earlier FIFO visitor, so it is a one-person film; second iteration's new person stays lead while first FIFO person may return.
-- Previous video calls failed with Runware HTTP 400: insufficient credits; image-only mode now skips video and audio model initialization.
+- Cakegreen First/Last Space currently fails Gradio config resolution; configured fallbacks reached Runware First/Last successfully.
+- The real planner run uses `gpt-5.6-terra`; no local Emergency-Plan is passed by Selfomat runtime.
 
 ## Next Action
 
-Stop this bounded loop. Next run can inspect one real generated HTML/TXT artifact and decide whether GPT should propose rhythm intent.
+Verified artifact: `GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/`.
+
+Next action: inspect merged film and HTML log; commit only when explicitly requested.
 
 # Prior Goal Context (retained)
 

@@ -1,5 +1,22 @@
 # Progress — Selfomat
 
+## Loop 6 — Real one-iteration merged film
+
+### Done
+
+- Fixed runtime dotenv root resolution; explicit `FRESHWEB_DOTENV_PATH` is supported.
+- Removed Emergency-Plan from live Selfomat scene-loop calls; planner/provider failure now remains visible instead of inventing scenes.
+- Ran one real low-quality iteration with `gpt-5.6-terra`, Taktmuster scene rhythm, semantic words `love | animal | Casino`, First/Last enabled, Runware persona references, and MiniMax Music-3.
+- Generated six causal scenes; First/Last transitions rendered through Runware after Cakegreen config failure.
+- Generated merged H.264/AAC film with Music-3: `GENERATION-SELFIEBOX/40-011-selfomat-intense-causal-low-quality-firstlast-gpt56terra-runware-ref/merged/1790926269843-with-minimax-sound.mp4`.
+- Verified 16.01s duration, 1088x832, 8fps, H.264 video plus AAC audio.
+- Verified root and nested HTML logs, six scene prompt JSON files, StoryTransport, Music-3 MP3/blueprint, and final mux metadata.
+
+### Verification
+
+- Focused config, scene-generator, and prompt-log suites: 3 suites, 22 tests passed.
+- `git diff --check` passed.
+
 ## Loop 5 — Iteration structure trace
 
 ### Done
@@ -70,6 +87,10 @@
 
 - Image-only starter-photo preset and regression coverage.
 - Nested StoryTransport-to-MiniMax Music 3 slice is complete.
+
+## Current Blocker
+
+- Child subgoal `002-merged-film` has a real video run prepared, but it is paused before external egress. A genuine film requires sending the local test selfie and prompts to configured external vision/image/video providers and may incur provider charges. Explicit user authorization is required.
 
 ## Audio Slice Handoff
 
