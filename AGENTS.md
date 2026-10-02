@@ -30,6 +30,7 @@
 
 ## Commit & Pull Request Guidelines
 - Commits: Prefer Conventional Commits (e.g., `feat:`, `fix:`, `chore:`). Keep messages imperative and scoped.
+- Never commit generated generations or media artifacts. This includes run folders under `GENERATION-SELFIEBOX/`, `GENRATIONS-KAUFHAUF/`, or similar output directories, plus generated images, videos, audio, prompt logs, and provider response dumps. Commit source/config/tests only; keep generated output untracked.
 - PRs must include:
   - Summary of changes and rationale; link issues if applicable.
   - Steps to reproduce/verify (commands, sample input/output or assets under `lib/GENERATIONS/`).
