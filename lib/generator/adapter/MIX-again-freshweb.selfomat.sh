@@ -4,6 +4,7 @@ set -euo pipefail
 # First Selfomat prototype. The existing generator supplies live camera,
 # semantic stream, short clips, and cast-context rendering.
 export FRESHWEB_SELFOMAT_ENABLED=1
+export FRESHWEB_ADD_SELFIE_OPENER=${FRESHWEB_ADD_SELFIE_OPENER:-1}
 export FRESHWEB_SCENE_COUNT_MODE=${FRESHWEB_SCENE_COUNT_MODE:-taktmuster}
 export FRESHWEB_WORDS="${FRESHWEB_WORDS:-Celebration,en | memory,en | reunion,en}"
 export FRESHWEB_FOLDER=${FRESHWEB_FOLDER:-selfomat-first-test}
