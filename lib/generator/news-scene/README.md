@@ -47,9 +47,9 @@ Image references are resized proportionally with `sharp` when needed to satisfy 
 
 5. Each still is saved at the requested 1680×944 resolution. No video or sound API calls occur.
 
-## Recurring crocodile
+## Visual style, semantic influence and crocodile
 
-Director version 2 requires our fictional Guernica-style crocodile in at least one scene per iteration. Its long angular snout, jagged back, short legs, black/ivory planes and single worn-gold scale remain recognizable across stories. GPT derives its role and placement from the article and semantic stream, records them in `crocodileAppearance`, and describes it in the final image prompt. The validator rejects plans with no crocodile appearance; the HTML shows its planned role. The crocodile is an original character, not a figure in Picasso's original painting. Existing saved iterations retain their original plans and images.
+Director version 3 requires strongly abstracted hand-painted Guernica-inspired imagery. Human faces, bodies and objects must not look photographic; the image reference supplies broad composition only. GPT must omit recognizable identities, crests, logos, brands and legible lettering. It chooses relevant semantic fragments, gives each a distinctive motif, assigns scenes, and repeats that motif verbatim in the still prompt. Irrelevant fragments get a reason and do not get pasted into a scene. The validator checks relevance decisions and ensures each selected motif appears in its assigned prompt. The crocodile is optional: include the original recurring character only if it makes sense as a visible metaphor; it is never forced as decoration. Its long angular snout, jagged back, short legs, fractured charcoal/ivory planes and one worn-gold scale keep it recognizable when chosen. It is not a figure in Picasso's original painting. Existing saved image files remain as generated; HTML can attach a visual review.
 
 ## Audit and recovery
 
