@@ -45,6 +45,10 @@ node --env-file=.env scripts/run-news-scene-image-iteration.mjs --resume=/absolu
 4. GPT returns a strict JSON plan. Each `stillPrompt` is handed to Seedream unchanged. Image reference 1 is always the news photo; reference 2 is always that scene's selected catalog figure.
 5. Each still is saved at the requested 1680×944 resolution. No video or sound API calls occur.
 
+## Recurring crocodile
+
+Director version 2 requires our fictional Guernica-style crocodile in at least one scene per iteration. Its long angular snout, jagged back, short legs, black/ivory planes and single worn-gold scale remain recognizable across stories. GPT derives its role and placement from the article and semantic stream, records them in `crocodileAppearance`, and describes it in the final image prompt. The validator rejects plans with no crocodile appearance; the HTML shows its planned role. The crocodile is an original character, not a figure in Picasso's original painting. Existing saved iterations retain their original plans and images.
+
 ## Audit and recovery
 
 Every iteration includes `record.json`, `semantic-stream.json`, the exact `director.md` snapshot and SHA-256, sanitized `gpt-request.json` with local image paths, raw GPT response, `scene-plan.json`, image requests/responses, local reference images, generated first frames and a static `index.html`. The report works directly from a file URL. GPT token usage and provider-reported image costs are shown separately.
