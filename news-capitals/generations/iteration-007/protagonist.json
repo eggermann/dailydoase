@@ -1,0 +1,11 @@
+{
+  "werk": "Guernica",
+  "element": "Frau mit erhobenen Armen",
+  "sourceFile": "06_frau_im_brennenden_haus.png",
+  "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+  "euReference": [
+    "Schutz vor Gewalt",
+    "Frieden"
+  ],
+  "selection": "random from guernica_elemente.json"
+}

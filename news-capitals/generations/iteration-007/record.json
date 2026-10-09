@@ -1,0 +1,52 @@
+{
+  "iteration": 7,
+  "purpose": "Refine Seedream Flash output to integrate the Guernica protagonist into the article scene instead of reproducing a cutout.",
+  "model": "bytedance:seedream@5.0-flash",
+  "provider": "Runware API",
+  "comparison": {
+    "sameStoryAs": "../iteration-005/record.json",
+    "sameReferences": true,
+    "styleAndIntegrationPromptChanged": true,
+    "codexImageUsedAsReference": false
+  },
+  "randomSelection": {
+    "articleId": 472940932,
+    "articleTitle": "85 de ani de la deportarea primilor evrei în Transnistria: Ziua Națională de Comemorare a Victimelor Holocaustului din România",
+    "articleUrl": "http://www.tvr.ro/reportaj-analiza/85-de-ani-de-la-deportarea-primilor-evrei-in-transnistria-ziua-na-ionala-de-comemorare-a-victimelor-holocaustului_56351.html",
+    "publishDate": "2026-10-09 10:45:18",
+    "sourceCountry": "ro",
+    "language": "ro",
+    "articleImage": "http://mediatvr.tvr.ro/media-tvr/image/202610/w500/memorialul-victimelor-holocaustului-din-bucuresti_74718100.jpg",
+    "protagonist": "Frau mit erhobenen Armen",
+    "protagonistSource": "06_frau_im_brennenden_haus.png",
+    "protagonistInterpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung."
+  },
+  "storyPrompt": "European remembrance of victims deported from Romania during the Holocaust; a Guernica-inspired woman stands as a symbolic witness in a wreath-lined memorial hall. Tone: grief, dignity, witness, shared remembrance.",
+  "prompt": "Create one finished wide 16:9 dark editorial memorial painting about Romanian Holocaust remembrance. The scene is a solemn, humane tribute to Jewish and Roma victims; do not recreate violence. Compose a new scene inside the quiet stone memorial hall shown in reference image 1, with wreaths receding along the walls and reflective floor. Main protagonist is the woman from reference image 2, used ONLY as a guide to her anguished expression and raised-arm gesture. Redraw her completely as a fully integrated human-scale figure physically standing in the hall's central aisle, center-left, at the same depth and perspective as the wreaths. Preserve the recognizable raised arms and sorrowful open mouth, but invent her body, clothing, pose details, lighting and surface anew. Her feet meet the tiled floor and cast a soft contact shadow; wreaths and reflected light establish shared perspective around her. Her edges dissolve naturally into the hall's smoke and shadow. Paint the woman, walls, floor and wreaths with one continuous visual treatment: a dark, dirty Guernica-inspired cubist oil mural on aged, cracked plaster, rough charcoal and graphite strokes, dry-brush scumbling, scratched pigment, distressed grain, fractured angular anatomy and compressed space. Deep soot blacks, ash gray and stained ivory; narrow cold light on the witness, worn muted cobalt-blue stars reflected faintly on the floor. Emotional tone: grief, dignity, witness and shared European remembrance. At thumbnail size the woman must read as part of the memorial scene, not as a pasted image. Reference image 2 contributes no background, crop, border, lighting or surface texture. Do not copy its transparent cutout edges. No collage, photomontage, sticker, paper cutout, framed image, pasted figure, halo or hard outline. No bright white marble, clean polished illustration, blood, corpses, weapons, graphic violence, legible text, logos, flags, captions, panels or border.",
+  "references": [
+    {
+      "role": "memorial hall and wreaths",
+      "path": "media/article-image.jpg"
+    },
+    {
+      "role": "woman character cue: gesture and expression only",
+      "path": "media/protagonist-06_frau_im_brennenden_haus.png"
+    }
+  ],
+  "output": {
+    "path": "media/seedream-5-flash-integrated-witness.jpg",
+    "width": 1680,
+    "height": 944,
+    "cost": 0.01926,
+    "seed": 57278161,
+    "taskUUID": "d9bf3d64-d925-495e-acee-ca6fcd37e498",
+    "imageUUID": "2a60172f-456f-4523-8dce-c87c2a96f472",
+    "sha256": "d35687511fe2f87e4e479e8f5cc02db4aa6077fd57c9c1e79e994544e8d71440"
+  },
+  "previousSeedream": {
+    "path": "media/seedream-5-flash-collage-result.jpg",
+    "cost": 0.01926,
+    "seed": 54830738
+  },
+  "videoApiCalled": false
+}
