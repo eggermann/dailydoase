@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { buildPlanRequest, validatePlan, buildImageTask, defaultWords, imageModel, hash } from '../lib/generator/news-scene/planner.mjs';
 import { renderReport } from '../lib/generator/news-scene/report.mjs';
+import { prepareImageReference } from '../lib/generator/news-scene/reference-images.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { values: options } = parseArgs({ options: {
@@ -218,18 +219,18 @@ async function main() {
     }
     if (hash(JSON.stringify(record.plan)) !== record.planHash) throw new Error('Saved plan has changed; use a new iteration');
     if (!options['prompt-only']) {
-      const articleInput = await imageInput(directory, record.articleImage, 'article', 'article');
+      const articleInput = await prepareImageReference(directory, await imageInput(directory, record.articleImage, 'article', 'article'));
       for (const [index, scene] of record.plan.scenes.entries()) {
         if (record.results[index]?.path && await exists(join(directory, record.results[index].path))) continue;
         const figure = record.catalog.find((item) => item.id === scene.guernicaId);
-        const figureInput = await imageInput(directory, figure, figure.name, 'catalog');
+        const figureInput = await prepareImageReference(directory, await imageInput(directory, figure, figure.name, 'catalog'));
         const name = `scene-${scene.index}`;
         const requestPath = join(directory, `${name}-request.json`);
         let log = await exists(requestPath) ? await json(requestPath) : null;
         const referenceImages = [articleInput.dataUrl, figureInput.dataUrl];
         const task = log ? { ...log, inputs: { referenceImages } } : buildImageTask(scene, randomUUID(), referenceImages);
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
-        log ||= { ...task, inputs: { referenceImages: [record.articleImage.path, figure.path] } };
+        log = { ...task, inputs: { referenceImages: [articleInput.path, figureInput.path] } };
         await save(requestPath, log);
         console.log(`Scene ${scene.index}: GPT prompt → ${imageModel}`);
         const raw = await paidRequest(directory, name, 'https://api.runware.ai/v1', runwareKey, [task]);
@@ -237,7 +238,7 @@ async function main() {
         const result = raw.data?.find((item) => item.taskUUID === task.taskUUID && item.imageURL);
         if (!result) throw new Error('Runware returned no matching image; saved response retained');
         const output = await download(result.imageURL, directory, `scene-${scene.index}-first-frame`);
-        record.results[index] = { ...output, taskUUID: task.taskUUID, seed: result.seed, cost: result.cost ?? null, promptHash: hash(scene.stillPrompt), referencePaths: [record.articleImage.path, figure.path] };
+        record.results[index] = { ...output, taskUUID: task.taskUUID, seed: result.seed, cost: result.cost ?? null, promptHash: hash(scene.stillPrompt), referencePaths: [articleInput.path, figureInput.path], referenceMetadata: [articleInput, figureInput].map(({ dataUrl, ...metadata }) => metadata) };
         await persist();
       }
     }

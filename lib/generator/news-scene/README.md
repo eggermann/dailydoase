@@ -43,6 +43,8 @@ node --env-file=.env scripts/run-news-scene-image-iteration.mjs --resume=/absolu
 2. `semantic-stream.initStreams` initializes each configured seed. `getNext()` supplies a real linked fragment, including its surrounding sentences when available.
 3. GPT sees the article, photograph, stream snapshot, all catalog descriptions and all nine figure images. It explains the semantic associations and selects one Guernica figure for each scene.
 4. GPT returns a strict JSON plan. Each `stillPrompt` is handed to Seedream unchanged. Image reference 1 is always the news photo; reference 2 is always that scene's selected catalog figure.
+Image references are resized proportionally with `sharp` when needed to satisfy Runware’s 128–2048 pixel limits. Extreme aspect ratios receive transparent padding. Original files remain unchanged; API copies, hashes and paths are logged.
+
 5. Each still is saved at the requested 1680×944 resolution. No video or sound API calls occur.
 
 ## Recurring crocodile
