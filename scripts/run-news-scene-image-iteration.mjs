@@ -9,11 +9,15 @@ import { renderReport } from '../lib/generator/news-scene/report.mjs';
 import { prepareImageReference } from '../lib/generator/news-scene/reference-images.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const gitCommonDirectory = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: root, encoding: 'utf8' }).trim();
+const projectRoot = dirname(gitCommonDirectory);
+const generationsRoot = process.env.GENERATIONS_PATH || join(projectRoot, 'GENRATIONS-NEWS');
 const { values: options } = parseArgs({ options: {
   resume: { type: 'string' }, 'article-id': { type: 'string' }, scenes: { type: 'string', default: '3' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
   'news-dir': { type: 'string', default: join(root, 'news-capitals') },
+  'output-dir': { type: 'string', default: process.env.NEWS_OUTPUT_DIR || join(generationsRoot, 'eu-news-scenes') },
   'guernica-dir': { type: 'string', default: process.env.GUERNICA_DIRECTORY || '/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert' },
   'prompt-only': { type: 'boolean', default: false }, help: { type: 'boolean' },
 } });
@@ -43,14 +47,14 @@ function buildFilmPlan(record, directory) {
       index: scene.index, title: scene.title, beat: scene.storyBeat, storyBeat: scene.storyBeat,
       durationSeconds: scene.durationSeconds, requestedDurationSeconds: scene.durationSeconds,
       videoMode: 'singleImage', frameSource: 'providedStartImage',
-      startImagePath: record.results[index]?.path || null, stillPrompt: scene.stillPrompt,
+      startImagePath: record.results[index]?.path ? resolve(directory, record.results[index].path) : null, stillPrompt: scene.stillPrompt,
       videoPrompt: scene.videoPrompt, singleImagePrompt: scene.stillPrompt,
     })),
   };
 }
 
-async function allocateIteration(newsDirectory) {
-  const directory = join(newsDirectory, 'generations');
+async function allocateIteration(outputDirectory) {
+  const directory = resolve(outputDirectory);
   await mkdir(directory, { recursive: true });
   for (let index = 1; index < 10000; index += 1) {
     const path = join(directory, `iteration-${String(index).padStart(3, '0')}`);
@@ -143,7 +147,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault: latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes, 3 stills and a film-plan.json image-to-video handoff.');
+    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault: latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes, 3 stills and a film-plan.json image-to-video handoff.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -152,7 +156,7 @@ async function main() {
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   if (!openAiKey || (!options['prompt-only'] && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
-  const directory = options.resume ? resolve(options.resume) : await allocateIteration(resolve(options['news-dir']));
+  const directory = options.resume ? resolve(options.resume) : await allocateIteration(resolve(options['output-dir']));
   let record;
   try {
     if (options.resume) {

@@ -12,7 +12,7 @@ From the repository root, with Node 22+ and dependencies installed:
 npm run news:story
 ```
 
-This CLI command creates a random-article iteration with three scenes, generates one still for each scene, and prints the `index.html` path when done. Open that file to review the article, semantic decisions, prompts and images.
+This launcher uses the shared `$GENERATIONS_PATH/$NEWS_STORY_FOLDER` output folder (defaults: repository-root `GENRATIONS-NEWS/eu-news-scenes`). Set `GENERATIONS_PATH`, `NEWS_STORY_FOLDER`, or `NEWS_OUTPUT_DIR` to override it. Each run creates a numbered iteration directory there, generates one still for each of three scenes, and prints the `index.html` path when done. Source articles remain in the checkout's `news-capitals` directory. Open that file to review the article, semantic decisions, prompts and images.
 
 For the next Codex turn, use this instruction: “Run `npm run news:story`, open the generated HTML, and review the three start images. Keep the image-only API workflow, strong abstract Guernica-style painting, article-grounded story, meaningful relevant semantic motifs, and optional crocodile. Do not commit generated images or secrets.”
 
@@ -52,7 +52,7 @@ node --env-file=.env scripts/run-news-scene-image-iteration.mjs --prompt-only
 node --env-file=.env scripts/run-news-scene-image-iteration.mjs --resume=/absolute/path/to/iteration-008
 ```
 
-`--news-dir` selects another collection directory. `--stream-module` (or `NEWS_SEMANTIC_STREAM_MODULE`) can select the absolute entry point of an existing semantic-stream installation for a worktree without node_modules. Use the current semantic-stream package (3.0.5 was used for the live example). The package handles sequential Wikipedia requests and throttling.
+`--news-dir` selects another source collection directory. `--output-dir` selects the generation root directly. `--stream-module` (or `NEWS_SEMANTIC_STREAM_MODULE`) can select the absolute entry point of an existing semantic-stream installation for a worktree without node_modules. Use the current semantic-stream package (3.0.5 was used for the live example). The package handles sequential Wikipedia requests and throttling.
 
 `--stream-file=snapshot.json` accepts a saved `semantic-stream.json` from this generator (entries with unique `id`, `seed: [word, language]`, and `item.title`). This replays source fragments without another Wikipedia request; it does not replace them with an invented word list.
 
