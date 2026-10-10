@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "16726b73-ca79-40d7-8703-58861d82f47c",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "A dark, dirty cubist mural depicting a dense, complex assembly of 27 fractured cubist figures representing EU member states, arranged in an overlapping, tense network. The figures’ faces are asymmetrical masks with displaced eyes and mouths, embodying division and stalemate. The composition prominently features the motif phrase 'The 27-member EU bloc' as a visible large banner held or integrated into the figures’ gestures. The color palette uses deep soot black, ash gray, and stained ivory with sparse muted gold highlights symbolizing fragile unity. The 'Stier' figure from Guernica is reimagined centrally as a massive, aggressive abstract form, symbolizing internal conflict and resistance within the EU. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting. Reference image 1 is the original news photograph’s urban nighttime lighting and crowd composition abstracted for spatial cues. Reference image 2 is the 'Stier' figure guiding the shape and gesture of the central EU figure.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/02_stier-api.png"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "f387c801-07d2-4155-8b95-1bda0b431f03",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "A dark, dirty cubist mural depicting a single fractured cubist figure symbolizing Italy, its angular planes sharply divided and conflicted. The motif phrase 'Italy’s political stance' appears visibly integrated into the figure’s fractured body or held abstract banner shapes, expressing political opposition and paralysis. The figure’s asymmetrical mask-like face and raised arms convey entreaty and conflict. The palette is deep soot black, ash gray, and stained ivory with rough charcoal and dry brush textures. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting. Reference image 1 is the original news photograph’s urban nighttime lighting abstracted for spatial cues. Reference image 2 is the 'Frau mit erhobenen Armen' figure reinterpreted as Italy’s divided political stance figure.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/06_frau_im_brennenden_haus.png"
+    ]
+  }
+}
