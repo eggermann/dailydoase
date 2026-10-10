@@ -29,6 +29,26 @@ async function save(path, value) {
 const redact = (message) => [process.env.OPENAI_API_KEY, process.env.RUNWARE_API_KEY, process.env.RUNWARE_KEY]
   .filter(Boolean).reduce((text, key) => text.replaceAll(key, '[redacted]'), String(message));
 
+
+function buildFilmPlan(record, directory) {
+  return {
+    formatVersion: 1,
+    sourceIteration: directory,
+    sourceCommit: record.sourceVersion?.commit || null,
+    article: { title: record.article.title, url: record.article.url, publish_date: record.article.publish_date },
+    status: 'Film-Prompts bereit; keine Film-API aufgerufen',
+    promptOrigin: 'GPT-generated from article, semantic stream, story beat and still plan',
+    instructions: 'Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.',
+    scenePlan: record.plan.scenes.map((scene, index) => ({
+      index: scene.index, title: scene.title, beat: scene.storyBeat, storyBeat: scene.storyBeat,
+      durationSeconds: scene.durationSeconds, requestedDurationSeconds: scene.durationSeconds,
+      videoMode: 'singleImage', frameSource: 'providedStartImage',
+      startImagePath: record.results[index]?.path || null, stillPrompt: scene.stillPrompt,
+      videoPrompt: scene.videoPrompt, singleImagePrompt: scene.stillPrompt,
+    })),
+  };
+}
+
 async function allocateIteration(newsDirectory) {
   const directory = join(newsDirectory, 'generations');
   await mkdir(directory, { recursive: true });
@@ -123,7 +143,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault: latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes and 3 stills.');
+    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault: latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes, 3 stills and a film-plan.json image-to-video handoff.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -283,6 +303,8 @@ async function main() {
       }
     }
     record.status = options['prompt-only'] ? 'Prompts erstellt' : 'Abgeschlossen';
+    record.filmPlan = buildFilmPlan(record, directory);
+    await save(join(directory, 'film-plan.json'), record.filmPlan);
     record.finishedAt = new Date().toISOString();
     await persist();
     console.log(`HTML: ${join(directory, 'index.html')}`);
