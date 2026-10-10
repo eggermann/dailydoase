@@ -1,4 +1,5 @@
 import { randomInt, randomUUID } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve, basename } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -151,6 +152,11 @@ async function main() {
       const { article, index } = candidates[draw];
       record = {
         generator: 'semantic-news-v1', createdAt: new Date().toISOString(), status: 'preparing',
+        sourceVersion: {
+          commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
+          branch: execFileSync('git', ['branch', '--show-current'], { cwd: root, encoding: 'utf8' }).trim(),
+          clean: !execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: root, encoding: 'utf8' }).trim(),
+        },
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
         selection: { draw, candidateCount: candidates.length, aggregateIndex: index },
         article, sceneCount, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel,
