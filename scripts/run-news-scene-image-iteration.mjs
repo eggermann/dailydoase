@@ -11,6 +11,8 @@ import { prepareImageReference } from '../lib/generator/news-scene/reference-ima
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { values: options } = parseArgs({ options: {
   resume: { type: 'string' }, 'article-id': { type: 'string' }, scenes: { type: 'string', default: '3' },
+  iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
+  'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
   'news-dir': { type: 'string', default: join(root, 'news-capitals') },
@@ -70,8 +72,10 @@ function validateSemantic(semantic) {
   return semantic;
 }
 
-async function takeSemanticSnapshot() {
-  if (options['stream-file']) return validateSemantic(await json(resolve(options['stream-file'])));
+async function createSemanticSource() {
+  if (options['stream-file']) {
+    return { next: async () => validateSemantic(await json(resolve(options['stream-file']))) };
+  }
   const words = options['words-file'] ? await json(resolve(options['words-file']))
     : options.words ? options.words.split(',').map((word) => [word.trim(), 'de']) : defaultWords;
   if (!Array.isArray(words) || !words.length || words.length > 12 || words.some((entry) => !Array.isArray(entry) || entry.length !== 2 || !entry.every((value) => typeof value === 'string' && value.trim()) || !/^[a-z]{2,3}$/.test(entry[1]))) {
@@ -79,26 +83,35 @@ async function takeSemanticSnapshot() {
   }
   const modulePath = options['stream-module'] || process.env.NEWS_SEMANTIC_STREAM_MODULE;
   const module = await import(modulePath ? pathToFileURL(resolve(modulePath)).href : 'semantic-stream');
-  const entries = [];
-  // Sequential source requests respect the semantic-stream package's Wikipedia throttling.
+  const initStreams = module.initStreams || module.default?.initStreams;
+  if (!initStreams) throw new Error('semantic-stream does not export initStreams');
+  const streams = [];
+  // Keep each stream alive for the full run; getNext advances it between iterations.
   for (const [index, seed] of words.entries()) {
     console.log(`Semantic stream: ${seed.join(' / ')}`);
-    const initStreams = module.initStreams || module.default?.initStreams;
-    if (!initStreams) throw new Error('semantic-stream does not export initStreams');
     const [stream] = await initStreams([seed], {
       registerExitHandlers: false,
       wordStreamOptions: { requestPolicy: { maxAttempts: 2, minIntervalMs: 500 } },
     });
-    let item;
-    for (let attempt = 0; attempt < 20; attempt += 1) {
-      item = await stream.getNext();
-      if (item?.title && !/doi|isbn|pmid|webarchiv|wayback machine|internet archive/i.test(item.title)) break;
-      item = null;
-    }
-    if (!item) throw new Error(`No usable semantic fragment for ${seed.join('/')}`);
-    entries.push({ id: `stream-${index + 1}`, seed, item });
+    streams.push({ id: `stream-${index + 1}`, seed, stream });
   }
-  return validateSemantic({ provider: 'semantic-stream', capturedAt: new Date().toISOString(), words, entries });
+  return {
+    next: async () => {
+      const entries = [];
+      // Sequential reads respect semantic-stream's source throttling.
+      for (const { id, seed, stream } of streams) {
+        let item;
+        for (let attempt = 0; attempt < 20; attempt += 1) {
+          item = await stream.getNext();
+          if (item?.title && !/doi|isbn|pmid|webarchiv|wayback machine|internet archive/i.test(item.title)) break;
+          item = null;
+        }
+        if (!item) throw new Error(`No usable semantic fragment for ${seed.join('/')}`);
+        entries.push({ id, seed, item });
+      }
+      return validateSemantic({ provider: 'semantic-stream', capturedAt: new Date().toISOString(), words, entries });
+    },
+  };
 }
 
 async function download(url, directory, stem) {
@@ -144,10 +157,34 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault output: news-capitals/generations/iteration-NNN relative to the worktree root. Latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes, 3 stills and a film-plan.json image-to-video handoff.');
+    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\n0 or -1 iterations means endless. A live semantic-stream instance stays open across iterations and advances with getNext(). Output: news-capitals/generations/iteration-NNN relative to the worktree root.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
+  const iterationLimit = Number(options.iterations);
+  if (!Number.isInteger(iterationLimit) || iterationLimit < -1) throw new Error('Use --iterations=N, --iterations=0 or --iterations=-1');
+  const pauseMilliseconds = Number(options['pause-ms']);
+  if (!Number.isInteger(pauseMilliseconds) || pauseMilliseconds < 0) throw new Error('--pause-ms must be a non-negative integer');
+  if (options.resume && iterationLimit !== 1) throw new Error('--resume only supports one iteration');
+  const sceneCount = Number(options.scenes);
+  if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
+  const openAiKey = process.env.OPENAI_API_KEY;
+  const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
+  if (!openAiKey || (!options['prompt-only'] && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
+  const semanticSource = options.resume ? null : await createSemanticSource();
+  const endless = iterationLimit === 0 || iterationLimit === -1;
+  let completed = 0;
+  while (endless || completed < iterationLimit) {
+    console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
+    await runIteration(semanticSource);
+    completed += 1;
+    if (!endless && completed >= iterationLimit) break;
+    console.log(`Next article and semantic fragments in ${pauseMilliseconds} ms; streams remain open.`);
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, pauseMilliseconds));
+  }
+}
+
+async function runIteration(semanticSource) {
   const sceneCount = Number(options.scenes);
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
   const openAiKey = process.env.OPENAI_API_KEY;
@@ -196,7 +233,7 @@ async function main() {
     await persist();
     console.log(`Iteration: ${directory}\nArticle: ${record.article.title}`);
     if (!record.semantic) {
-      record.semantic = await takeSemanticSnapshot();
+      record.semantic = await semanticSource.next();
       await save(join(directory, 'semantic-stream.json'), record.semantic);
       await persist();
     }

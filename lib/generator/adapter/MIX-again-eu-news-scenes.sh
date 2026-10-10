@@ -18,9 +18,9 @@ NEWS_STREAM_FILE="${NEWS_STREAM_FILE:-}"
 NEWS_PROMPT_ONLY="${NEWS_PROMPT_ONLY:-0}"
 
 case "$NEWS_MAX_ITERATIONS" in
-  0|-1) endless=1 ;;
+  0|-1) ;;
   ''|*[!0-9]*) echo 'NEWS_MAX_ITERATIONS must be a positive integer, 0 or -1.' >&2; exit 2 ;;
-  *) endless=0 ;;
+  *) ;;
 esac
 case "$NEWS_SCENES" in
   1|2|3) ;;
@@ -44,6 +44,8 @@ has_option() {
 # Preserve the usual CLI flags; explicit command-line options override this block.
 if ! has_option --output-dir "$@"; then set -- --output-dir="$NEWS_OUTPUT_DIR" "$@"; fi
 if ! has_option --scenes "$@"; then set -- --scenes="$NEWS_SCENES" "$@"; fi
+if ! has_option --iterations "$@"; then set -- --iterations="$NEWS_MAX_ITERATIONS" "$@"; fi
+if ! has_option --pause-ms "$@"; then set -- --pause-ms="$NEWS_POLLING_TIME_MS" "$@"; fi
 if [ -n "$NEWS_ARTICLE_ID" ] && ! has_option --article-id "$@"; then set -- --article-id="$NEWS_ARTICLE_ID" "$@"; fi
 if [ -n "$NEWS_WORDS" ] && ! has_option --words "$@"; then set -- --words="$NEWS_WORDS" "$@"; fi
 if [ -n "$NEWS_WORDS_FILE" ] && ! has_option --words-file "$@"; then set -- --words-file="$NEWS_WORDS_FILE" "$@"; fi
@@ -53,15 +55,5 @@ if [ "$NEWS_PROMPT_ONLY" = 1 ] && ! has_option --prompt-only "$@"; then set -- -
 printf '[%s] output: %s\n' "$NEWS_PROFILE" "$NEWS_OUTPUT_DIR"
 printf '[%s] scenes/run: %s · max runs: %s · pause: %s ms\n' "$NEWS_PROFILE" "$NEWS_SCENES" "$NEWS_MAX_ITERATIONS" "$NEWS_POLLING_TIME_MS"
 
-iteration=0
-while :; do
-  iteration=$((iteration + 1))
-  printf '[%s] run %s%s\n' "$NEWS_PROFILE" "$iteration" "$([ "$endless" = 1 ] && printf '(endless mode)' || printf ' of %s' "$NEWS_MAX_ITERATIONS")"
-  node --env-file="$WORKTREE_ROOT/.env" \
-    "$WORKTREE_ROOT/scripts/run-news-scene-image-iteration.mjs" "$@"
-
-  if [ "$endless" = 0 ] && [ "$iteration" -ge "$NEWS_MAX_ITERATIONS" ]; then
-    break
-  fi
-  sleep "$(awk -v milliseconds="$NEWS_POLLING_TIME_MS" 'BEGIN { printf "%.3f", milliseconds / 1000 }')"
-done
+exec node --env-file="$WORKTREE_ROOT/.env" \
+  "$WORKTREE_ROOT/scripts/run-news-scene-image-iteration.mjs" "$@"
