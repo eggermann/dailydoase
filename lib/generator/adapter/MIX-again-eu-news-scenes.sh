@@ -11,6 +11,12 @@ NEWS_OUTPUT_DIR="${NEWS_OUTPUT_DIR:-$WORKTREE_ROOT/news-capitals/generations}"
 NEWS_SCENES="${NEWS_SCENES:-3}"
 NEWS_MAX_ITERATIONS="${NEWS_MAX_ITERATIONS:-1}" # 0 or -1 means endless; 1 means one report.
 NEWS_POLLING_TIME_MS="${NEWS_POLLING_TIME_MS:-5000}"
+NEWS_SCENE_LENGTH_TAKT="${NEWS_SCENE_LENGTH_TAKT:-3}"
+NEWS_SCENE_LENGTH_TYPE="${NEWS_SCENE_LENGTH_TYPE:-balanced}"
+NEWS_SCENE_LENGTH_MULTIPLIER="${NEWS_SCENE_LENGTH_MULTIPLIER:-3.5}" # Wider spread than the video preset.
+NEWS_SCENE_LENGTH_BIAS="${NEWS_SCENE_LENGTH_BIAS:-0}"
+NEWS_MIN_SCENE_DURATION_SECONDS="${NEWS_MIN_SCENE_DURATION_SECONDS:-5}"
+NEWS_MAX_SCENE_DURATION_SECONDS="${NEWS_MAX_SCENE_DURATION_SECONDS:-15}"
 NEWS_ARTICLE_ID="${NEWS_ARTICLE_ID:-}"       # Empty selects a random article.
 NEWS_WORDS="${NEWS_WORDS:-}"                 # Empty uses the default EU de/en/ru streams.
 NEWS_WORDS_FILE="${NEWS_WORDS_FILE:-}"
@@ -46,6 +52,12 @@ if ! has_option --output-dir "$@"; then set -- --output-dir="$NEWS_OUTPUT_DIR" "
 if ! has_option --scenes "$@"; then set -- --scenes="$NEWS_SCENES" "$@"; fi
 if ! has_option --iterations "$@"; then set -- --iterations="$NEWS_MAX_ITERATIONS" "$@"; fi
 if ! has_option --pause-ms "$@"; then set -- --pause-ms="$NEWS_POLLING_TIME_MS" "$@"; fi
+if ! has_option --scene-length-takt "$@"; then set -- --scene-length-takt="$NEWS_SCENE_LENGTH_TAKT" "$@"; fi
+if ! has_option --scene-length-type "$@"; then set -- --scene-length-type="$NEWS_SCENE_LENGTH_TYPE" "$@"; fi
+if ! has_option --scene-length-multiplier "$@"; then set -- --scene-length-multiplier="$NEWS_SCENE_LENGTH_MULTIPLIER" "$@"; fi
+if ! has_option --scene-length-bias "$@"; then set -- --scene-length-bias="$NEWS_SCENE_LENGTH_BIAS" "$@"; fi
+if ! has_option --min-scene-seconds "$@"; then set -- --min-scene-seconds="$NEWS_MIN_SCENE_DURATION_SECONDS" "$@"; fi
+if ! has_option --max-scene-seconds "$@"; then set -- --max-scene-seconds="$NEWS_MAX_SCENE_DURATION_SECONDS" "$@"; fi
 if [ -n "$NEWS_ARTICLE_ID" ] && ! has_option --article-id "$@"; then set -- --article-id="$NEWS_ARTICLE_ID" "$@"; fi
 if [ -n "$NEWS_WORDS" ] && ! has_option --words "$@"; then set -- --words="$NEWS_WORDS" "$@"; fi
 if [ -n "$NEWS_WORDS_FILE" ] && ! has_option --words-file "$@"; then set -- --words-file="$NEWS_WORDS_FILE" "$@"; fi
@@ -54,6 +66,7 @@ if [ "$NEWS_PROMPT_ONLY" = 1 ] && ! has_option --prompt-only "$@"; then set -- -
 
 printf '[%s] output: %s\n' "$NEWS_PROFILE" "$NEWS_OUTPUT_DIR"
 printf '[%s] scenes/run: %s · max runs: %s · pause: %s ms\n' "$NEWS_PROFILE" "$NEWS_SCENES" "$NEWS_MAX_ITERATIONS" "$NEWS_POLLING_TIME_MS"
+printf '[%s] Taktmuster: %s/%s · multiplier %s · duration %s–%s s\n' "$NEWS_PROFILE" "$NEWS_SCENE_LENGTH_TYPE" "$NEWS_SCENE_LENGTH_TAKT" "$NEWS_SCENE_LENGTH_MULTIPLIER" "$NEWS_MIN_SCENE_DURATION_SECONDS" "$NEWS_MAX_SCENE_DURATION_SECONDS"
 
 exec node --env-file="$WORKTREE_ROOT/.env" \
   "$WORKTREE_ROOT/scripts/run-news-scene-image-iteration.mjs" "$@"

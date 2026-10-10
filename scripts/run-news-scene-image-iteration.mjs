@@ -1,5 +1,6 @@
 import { randomInt, randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve, basename } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -13,6 +14,12 @@ const { values: options } = parseArgs({ options: {
   resume: { type: 'string' }, 'article-id': { type: 'string' }, scenes: { type: 'string', default: '3' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
+  'scene-length-takt': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TAKT || '3' },
+  'scene-length-type': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TYPE || 'balanced' },
+  'scene-length-multiplier': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_MULTIPLIER || '3.5' },
+  'scene-length-bias': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_BIAS || '0' },
+  'min-scene-seconds': { type: 'string', default: process.env.NEWS_MIN_SCENE_DURATION_SECONDS || '5' },
+  'max-scene-seconds': { type: 'string', default: process.env.NEWS_MAX_SCENE_DURATION_SECONDS || '15' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
   'news-dir': { type: 'string', default: join(root, 'news-capitals') },
@@ -60,6 +67,16 @@ async function allocateIteration(outputDirectory) {
     try { await mkdir(path); return path; } catch (error) { if (error.code !== 'EEXIST') throw error; }
   }
   throw new Error('No free iteration directory');
+}
+
+async function allocateRunDirectory(outputDirectory) {
+  const directory = resolve(outputDirectory);
+  await mkdir(directory, { recursive: true });
+  for (let index = 1; index < 10000; index += 1) {
+    const path = join(directory, `run-${String(index).padStart(3, '0')}`);
+    try { await mkdir(path); return path; } catch (error) { if (error.code !== 'EEXIST') throw error; }
+  }
+  throw new Error('No free run directory');
 }
 
 function validateSemantic(semantic) {
@@ -114,6 +131,42 @@ async function createSemanticSource() {
   };
 }
 
+function createSceneDurationStream() {
+  const localRequire = createRequire(import.meta.url);
+  let Taktmuster;
+  try {
+    ({ Taktmuster } = localRequire('taktmuster'));
+  } catch (error) {
+    if (error.code !== 'MODULE_NOT_FOUND') throw error;
+    const gitCommonDirectory = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: root, encoding: 'utf8' }).trim();
+    ({ Taktmuster } = createRequire(join(dirname(gitCommonDirectory), 'package.json'))('taktmuster'));
+  }
+  const takt = Number(options['scene-length-takt']);
+  const multiplier = Number(options['scene-length-multiplier']);
+  const bias = Number(options['scene-length-bias']);
+  const minimum = Number(options['min-scene-seconds']);
+  const maximum = Number(options['max-scene-seconds']);
+  if (!Number.isFinite(takt) || takt <= 0 || !Number.isFinite(multiplier) || multiplier <= 0 || !Number.isFinite(bias)) {
+    throw new Error('Invalid Taktmuster duration settings');
+  }
+  if (!Number.isInteger(minimum) || minimum < 5 || !Number.isInteger(maximum) || maximum < minimum || maximum > 15) {
+    throw new Error('Scene duration bounds must satisfy 5 <= minimum <= maximum <= 15 seconds');
+  }
+  const taktmuster = new Taktmuster();
+  taktmuster.setTakt(takt);
+  taktmuster.setType(options['scene-length-type']);
+  return {
+    next: () => {
+      const step = taktmuster.getNext();
+      const patternValue = Number(step?.patternValue ?? step);
+      const baseValue = Number.isFinite(patternValue) && patternValue > 0 ? Math.round(patternValue) : 1;
+      const shapedValue = baseValue * multiplier + bias;
+      return Math.max(minimum, Math.min(maximum, Math.round(shapedValue)));
+    },
+    settings: { provider: 'taktmuster', takt, type: options['scene-length-type'], multiplier, bias, minimum, maximum },
+  };
+}
+
 async function download(url, directory, stem) {
   if (!/^https?:\/\//i.test(url)) throw new Error('Image URL must use HTTP(S)');
   const response = await fetch(url, { signal: AbortSignal.timeout(60000) });
@@ -157,7 +210,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\n0 or -1 iterations means endless. A live semantic-stream instance stays open across iterations and advances with getNext(). Output: news-capitals/generations/iteration-NNN relative to the worktree root.');
+    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\n0 or -1 iterations means endless. A live semantic-stream instance stays open across iterations and advances with getNext(). A Taktmuster instance likewise advances across all scenes and iterations. Single-run output: news-capitals/generations/iteration-NNN. Multi-run output: news-capitals/generations/run-NNN/iteration-NNN, with run.json linking each HTML report.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -172,25 +225,54 @@ async function main() {
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   if (!openAiKey || (!options['prompt-only'] && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
   const semanticSource = options.resume ? null : await createSemanticSource();
+  const sceneDurations = createSceneDurationStream();
   const endless = iterationLimit === 0 || iterationLimit === -1;
+  const groupedRun = endless || iterationLimit > 1;
+  const iterationRoot = options.resume
+    ? null
+    : groupedRun
+      ? await allocateRunDirectory(resolve(options['output-dir']))
+      : resolve(options['output-dir']);
+  const runManifest = groupedRun ? {
+    profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
+    startedAt: new Date().toISOString(),
+    iterationLimit: endless ? 'endless' : iterationLimit,
+    pauseMilliseconds,
+    status: 'running',
+    iterations: [],
+  } : null;
+  if (runManifest) {
+    await save(join(iterationRoot, 'run.json'), runManifest);
+    console.log(`Run folder: ${iterationRoot}`);
+  }
   let completed = 0;
   while (endless || completed < iterationLimit) {
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
-    await runIteration(semanticSource);
+    const iterationDirectory = await runIteration(semanticSource, sceneDurations, iterationRoot);
     completed += 1;
+    if (runManifest) {
+      const relativeDirectory = iterationDirectory.slice(iterationRoot.length + 1);
+      runManifest.iterations.push({ index: completed, directory: relativeDirectory, report: `${relativeDirectory}/index.html` });
+      await save(join(iterationRoot, 'run.json'), runManifest);
+    }
     if (!endless && completed >= iterationLimit) break;
     console.log(`Next article and semantic fragments in ${pauseMilliseconds} ms; streams remain open.`);
     await new Promise((resolveDelay) => setTimeout(resolveDelay, pauseMilliseconds));
   }
+  if (runManifest) {
+    runManifest.status = 'completed';
+    runManifest.finishedAt = new Date().toISOString();
+    await save(join(iterationRoot, 'run.json'), runManifest);
+  }
 }
 
-async function runIteration(semanticSource) {
+async function runIteration(semanticSource, sceneDurationStream, iterationRoot) {
   const sceneCount = Number(options.scenes);
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   if (!openAiKey || (!options['prompt-only'] && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
-  const directory = options.resume ? resolve(options.resume) : await allocateIteration(resolve(options['output-dir']));
+  const directory = options.resume ? resolve(options.resume) : await allocateIteration(iterationRoot);
   let record;
   try {
     if (options.resume) {
@@ -225,6 +307,12 @@ async function runIteration(semanticSource) {
       };
     }
     await mkdir(join(directory, 'media'), { recursive: true });
+    if (!record.sceneDurations) {
+      record.sceneDurations = record.plan?.scenes?.map((scene) => scene.durationSeconds)
+        || Array.from({ length: sceneCount }, () => sceneDurationStream.next());
+      record.sceneDurationSettings = sceneDurationStream.settings;
+      await save(join(directory, 'record.json'), record);
+    }
     const persist = async () => {
       await save(join(directory, 'record.json'), record);
       await writeFile(join(directory, 'index.html'), renderReport(record));
@@ -310,6 +398,7 @@ async function runIteration(semanticSource) {
         record.planRevisionReason = error.message;
         finalResponse = revised;
       }
+      record.plan.scenes = record.plan.scenes.map((scene, index) => ({ ...scene, durationSeconds: record.sceneDurations[index] }));
       record.usage = finalResponse.usage;
       record.planHash = hash(JSON.stringify(record.plan));
       await save(join(directory, 'scene-plan.json'), record.plan);
@@ -347,6 +436,7 @@ async function runIteration(semanticSource) {
     await persist();
     console.log(`HTML: ${join(directory, 'index.html')}`);
     console.log(`Image cost USD: ${record.results.reduce((sum, item) => sum + (item?.cost || 0), 0)}; GPT tokens: ${record.usage?.total_tokens}`);
+    return directory;
   } catch (error) {
     if (record) {
       record.status = 'Unterbrochen'; record.error = redact(error.message);

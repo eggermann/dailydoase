@@ -12,7 +12,7 @@ From the repository root, with Node 22+ and dependencies installed:
 npm run news:story
 ```
 
-This launcher uses the shared `$GENERATIONS_PATH/$NEWS_STORY_FOLDER` output folder (defaults: repository-root `GENRATIONS-NEWS/eu-news-scenes`). Set `GENERATIONS_PATH`, `NEWS_STORY_FOLDER`, or `NEWS_OUTPUT_DIR` to override it. Each run creates a numbered iteration directory there, generates one still for each of three scenes, and prints the `index.html` path when done. Source articles remain in the checkout's `news-capitals` directory. Open that file to review the article, semantic decisions, prompts and images.
+The EU-RESKI shell starter writes under the worktree root at `news-capitals/generations/iteration-NNN`. Its editable settings block controls scene count, article/semantic inputs, iteration count, and Taktmuster timing. Each report contains one still per scene plus the film handoff. Source articles remain in the checkout's `news-capitals` directory.
 
 For the next Codex turn, use this instruction: “Run `npm run news:story`, open the generated HTML, and review the three start images. Keep the image-only API workflow, strong abstract Guernica-style painting, article-grounded story, meaningful relevant semantic motifs, and optional crocodile. Do not commit generated images or secrets.”
 
@@ -30,7 +30,7 @@ node --env-file=.env scripts/run-news-scene-image-iteration.mjs
 
 Requires `OPENAI_API_KEY`, `RUNWARE_API_KEY` (or `RUNWARE_KEY`), a saved `news-capitals/all-*.json` collection, and the Guernica PNG catalog. `GUERNICA_DIRECTORY` or `--guernica-dir=/path` overrides the local asset directory. `NEWS_STORY_MODEL` overrides `gpt-4.1-mini`; the replacement must support vision, Chat Completions structured output and the supplied sampling parameters.
 
-Default: newest saved aggregate by filename, random article with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one Seedream 5.0 Flash still per scene. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
+Default: newest saved aggregate by filename, random article with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one Seedream 5.0 Flash still per scene. One Taktmuster rhythm instance stays alive for the whole process, advancing once per scene across iteration boundaries. Default balanced takt is 3 with a 3.5 multiplier; durations are rounded and clamped to 5–15 seconds. The news starter defaults to one run; set `NEWS_MAX_ITERATIONS=0` or `-1` for an endless run. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
 
 ```sh
 # One scene / one image for a small iteration
