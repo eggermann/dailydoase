@@ -211,8 +211,39 @@ async function main() {
       }
       const raw = await paidRequest(directory, 'gpt', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
       if (raw.error) throw new Error(`GPT error: ${raw.error.message}`);
-      record.plan = validatePlan(raw, record);
-      record.usage = raw.usage;
+      let finalResponse = raw;
+      try {
+        record.plan = validatePlan(raw, record);
+      } catch (error) {
+        if (!/semantic|motif|crocodile/i.test(error.message)) throw error;
+        const revisionRequest = {
+          ...request,
+          messages: [
+            ...request.messages,
+            { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' },
+            { role: 'user', content: [{ type: 'text', text: [
+              `Your plan failed validation: ${error.message}`,
+              'Revise the whole plan once. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
+              'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
+              'Make the image clearly hand-painted and strongly abstracted: no photorealistic faces, real-person likeness, crests, logos, brand marks, or readable lettering.',
+              'Here is the complete previous JSON plan to correct:',
+              raw.choices?.[0]?.message?.content || '',
+            ].join('\n') }] },
+          ],
+        };
+        const revisionLog = structuredClone(revisionRequest);
+        let imageIndex = 0;
+        for (const part of revisionLog.messages[1].content) {
+          if (part.type === 'image_url') part.image_url.url = `local:${images[imageIndex++].path}`;
+        }
+        await save(join(directory, 'gpt-revision-request.json'), revisionLog);
+        const revised = await paidRequest(directory, 'gpt-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, revisionRequest);
+        if (revised.error) throw new Error(`GPT revision failed: ${revised.error.message}`);
+        record.plan = validatePlan(revised, record);
+        record.planRevisionReason = error.message;
+        finalResponse = revised;
+      }
+      record.usage = finalResponse.usage;
       record.planHash = hash(JSON.stringify(record.plan));
       await save(join(directory, 'scene-plan.json'), record.plan);
       await persist();
