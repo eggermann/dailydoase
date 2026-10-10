@@ -10,7 +10,7 @@ import { prepareImageReference } from '../lib/generator/news-scene/reference-ima
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { values: options } = parseArgs({ options: {
-  resume: { type: 'string' }, scenes: { type: 'string', default: '3' },
+  resume: { type: 'string' }, 'article-id': { type: 'string' }, scenes: { type: 'string', default: '3' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
   'news-dir': { type: 'string', default: join(root, 'news-capitals') },
@@ -123,10 +123,10 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault: latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes and 3 stills.');
+    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--scenes=1..3] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nDefault: latest saved news JSON, random article, live EU de/en/ru semantic streams, 3 scenes and 3 stills.');
     return;
   }
-  if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module'].some((key) => options[key])) throw new Error('Resume reuses saved semantic inputs; do not override them');
+  if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
   const sceneCount = Number(options.scenes);
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
   const openAiKey = process.env.OPENAI_API_KEY;
@@ -148,7 +148,10 @@ async function main() {
       const candidates = aggregate.news.map((article, index) => ({ article, index }))
         .filter(({ article }) => /^https?:\/\//i.test(article.image || '') && (article.text || article.summary));
       if (!candidates.length) throw new Error('No news article with text and image');
-      const draw = randomInt(candidates.length);
+      const draw = options['article-id']
+        ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
+        : randomInt(candidates.length);
+      if (draw < 0) throw new Error('Requested article is missing or has no usable text and image');
       const { article, index } = candidates[draw];
       record = {
         generator: 'semantic-news-v1', createdAt: new Date().toISOString(), status: 'preparing',
@@ -158,7 +161,7 @@ async function main() {
           clean: !execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: root, encoding: 'utf8' }).trim(),
         },
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
-        selection: { draw, candidateCount: candidates.length, aggregateIndex: index },
+        selection: { method: options['article-id'] ? 'article-id' : 'random', draw, candidateCount: candidates.length, aggregateIndex: index },
         article, sceneCount, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel,
         guernicaDirectory: resolve(options['guernica-dir']), results: [],
       };

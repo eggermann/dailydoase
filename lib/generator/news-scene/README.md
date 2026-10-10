@@ -36,6 +36,9 @@ Default: newest saved aggregate by filename, random article with text and an ima
 # One scene / one image for a small iteration
 node --env-file=.env scripts/run-news-scene-image-iteration.mjs --scenes=1
 
+# Reuse a particular eligible article from the newest saved aggregate
+node --env-file=.env scripts/run-news-scene-image-iteration.mjs --article-id=472860428
+
 # Different semantic seeds (comma-separated words use German)
 node --env-file=.env scripts/run-news-scene-image-iteration.mjs --words=EU,Frieden,Erinnerung
 
