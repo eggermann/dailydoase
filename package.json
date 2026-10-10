@@ -91,13 +91,17 @@
   "project": {},
   "scripts": {
     "test": "cross-env WATCHMAN_DISABLE=1 JEST_USE_POLLING=1 NODE_OPTIONS=--experimental-vm-modules jest --env=node --watchman=false",
+    "news:capitals:today": "node --env-file=.env scripts/fetch-eu-capitals-news-today.mjs",
+    "news:capitals:html": "node scripts/build-eu-capitals-news-html.mjs",
+    "news:story:first-image": "node --env-file=.env scripts/run-news-scene-image-iteration.mjs --scenes=1",
     "demo:mirelo:v2v": "node lib/generator/mireloAI/demo-video-to-video.js",
     "start": "cross-env APP_ENV=development npm-run-all -p server webpack:watch",
     "webpack:build": "webpack --config webpack.config.cjs",
     "webpack:watch": "npm run webpack:build && webpack --config webpack.config.cjs --watch",
     "server": "node --watch lib/server/continuous-player.cjs",
     "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
-    "deploy:upload": "node ./deploy/SSH-upload.cjs"
+    "deploy:upload": "node ./deploy/SSH-upload.cjs",
+    "news:story": "node --env-file=.env scripts/run-news-scene-image-iteration.mjs --scenes=3"
   },
   "keywords": [],
   "author": "",

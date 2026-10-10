@@ -9,6 +9,22 @@ The generator writes every image prompt through a multimodal GPT API request. No
 From the repository root, with Node 22+ and dependencies installed:
 
 ```sh
+npm run news:story
+```
+
+This CLI command creates a random-article iteration with three scenes, generates one still for each scene, and prints the `index.html` path when done. Open that file to review the article, semantic decisions, prompts and images.
+
+For the next Codex turn, use this instruction: “Run `npm run news:story`, open the generated HTML, and review the three start images. Keep the image-only API workflow, strong abstract Guernica-style painting, article-grounded story, meaningful relevant semantic motifs, and optional crocodile. Do not commit generated images or secrets.”
+
+The three-scene command can be narrowed without changing the npm script:
+
+```sh
+npm run news:story -- --scenes=1
+```
+
+For direct control of flags and resume behavior, use the Node command below.
+
+```sh
 node --env-file=.env scripts/run-news-scene-image-iteration.mjs
 ```
 
@@ -64,3 +80,11 @@ Implementation references: [OpenAI structured outputs](https://developers.openai
 ## Recorded live run
 
 `iteration-009` selected a Latvian storm warning from the 2026-10-09 aggregate. Live stream fragments were Italien, Member state of the European Union, and Франция. GPT selected figure 6 and created the final coastal image prompt. That exact prompt produced one Seedream still, with a provider-reported image cost of $0.01926 and 7,351 GPT tokens (billed separately). The image was inspected: the figure is redrawn in the coastal scene; the requested raised-arm gesture was not preserved. Prompt adherence and artistic quality remain reviewable in the HTML.
+
+## Commit message
+
+For changes to this workflow, use a scoped Conventional Commit, for example:
+
+```text
+feat(news): generate three-scene HTML iterations
+```
