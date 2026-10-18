@@ -1,0 +1,33 @@
+{
+  "prompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. The fractured cubist figures cluster around a bright, cracked glowing orb in the center representing the auction platform struggling under immense digital load. Sharp triangular planes fracture the scene, conveying tension and instability. The light from the orb casts stark shadows and fragmented reflections on the figures' angular masks and limbs, emphasizing confusion and technical failure. The background is an abstract digital web of broken lines and fragmented surfaces, transforming the gallery space into a symbolic digital battleground. The visual motif \"Member state unity under stress\" is visible as fragmented figures united despite chaos. Reference image 1 shows the art exhibition wall with diverse artworks, used for spatial and compositional cues. Reference image 2 is the 'Eye / Lightbulb' cubist figure, repainted fully with new pose and surface integrated into the digital chaos environment.",
+  "input_images": [
+    {
+      "image": {
+        "path": "/tmp/gradio/9b364c3d4faab77068bccd3be1a97a48ac40c52c85f8ca050ed2e97365941946/article.jpg",
+        "meta": {
+          "_type": "gradio.FileData"
+        },
+        "orig_name": "article.jpg"
+      },
+      "caption": null
+    },
+    {
+      "image": {
+        "path": "/tmp/gradio/de9dea7f34bb6f10b8e1c33130b163688085505217baab6f0a26301317c5eac9/03_auge_gluehbirne-api.png",
+        "meta": {
+          "_type": "gradio.FileData"
+        },
+        "orig_name": "03_auge_gluehbirne-api.png"
+      },
+      "caption": null
+    }
+  ],
+  "mode_choice": "Distilled (16 steps)",
+  "randomize_seed": false,
+  "width": 1680,
+  "height": 944,
+  "num_inference_steps": 16,
+  "guidance_scale": 1,
+  "prompt_upsampling": true,
+  "seed": 59435674
+}

@@ -1,0 +1,574 @@
+{
+  "generator": "semantic-news-v1",
+  "createdAt": "2026-10-18T11:26:49.503Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "5f2b2b9320920e06cfad3ff0bce1f5f369af7115",
+    "branch": "eu-reski-scene-generator",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/news-capitals/all-2026-10-09T19-52-32-992Z.json",
+  "aggregateHash": "bf010ea22c586e48e8f5d903b55ec8ed7610c3cd23ed2267392f5eafeaf6ff53",
+  "selection": {
+    "method": "article-id",
+    "order": "linear",
+    "draw": 713,
+    "candidateCount": 2418,
+    "aggregateIndex": 733
+  },
+  "article": {
+    "id": 472926984,
+    "title": "Kunstnike liidu toetusoksjon jätkub reedel",
+    "text": "EKO juhatuse liikme Andres Veske sõnul tekkis tõrge EKO oksjonirakenduses. Esialgne kahtlus küberrünnakule kinnitust ei leidnud. Tõrke põhjustas oksjonikeskkonna erakordselt suur koormus, kuigi korraldajad olid suureks huviks valmistunud, ei pidanud üks osa oksjonirakendusest koormusele vastu. Zone'i poolt pakutav serveriteenus toimis tõrgeteta. \n\n\"Vabandame kõigi kunstihuviliste ees. Oleme eilsest õhtust peale tegelenud rikke põhjuse väljaselgitamisega ja kaasanud eksperte, et oksjonikeskkond peaks koormusele vastu. Leidsime tõrke põhjuse, parandasime selle ja testisime süsteemi põhjalikult,\" ütles Veske. \n\n\"Saime neljapäeval esimese töö müüdud, kui algasid tõrked oskjonikeskkonnas. Me alguses ei teadnud ju, miks ta ei tööta. Siis arvasime, et on küberrünnak. Pärast selgus, et pole. Tõrke põhjustas hoopis üks rakenduse osa, mis oli meie enda oma,\" sõnas Veske.\n\n\"Oleme kaasanud eksperte mitmest kohast, ka riiklikul tasemel. Oleme keskkonda testinud ja kõik töötab tõrgeteta,\" lisas Veske. \"Ükski meie eelnev oksjon pole selliseid tõrkeid kogenud. Nüüd, kus me võimendasime tulemüüre ja turvalisust, oli see meie rakenduse jaoks liig. See on kahetstsväärne ja me vabandame kõigi ees, kes ei saanud neljapäeval pakkumist teha,\" lausus ta.\n\nKuna tehnilise tõrke tõttu ei pruukinud kõik pakkumised süsteemi jõuda või tehtud pakkumised võisid kustuda, palutakse kõigil oksjonikeskkonnas enda pakkumised üle kontrollida ja vajadusel pakkumised uuesti teha. See puudutab nii tava- kui ka automaatpakkumisi.\n\nNeljapäevasel oksjonil müüdi üks teos, Jüri Arraku \"Tiiger\". EKO esindaja ja oksjoni läbiviija Reigo Kuivjõgi sõnul on ostjaga ühendust võetud ja alustatud tavapäraste müügidetailide täpsustamist. \n\n\"Töö müüdi kõrge hinnaga. Ostja oli päris inimene, mitte võtlskonto,\" lisas Veske.\n\nReedel jätkub oksjon Arraku teosega \"Mängud ümber puu\" (1. päev, 2. teos) ja kestab kuni Viktor Karruse teoseni \"Legend\" (2. päev, 26. teos). Laupäevane oksjon algab kell 15 Flo Kasearu teosega \"Homne on seljas\" (2. päev 27. teos).\n\n\"On äärmiselt kahetsusväärne, et EKO oksjonikeskkond ei pidanud vastu. Suurt huvi me ootasime, kuid tehniline tõrge oli ebameeldiv üllatus. Oleme saanud oksjoni korraldajalt kinnituse, et oksjonikeskkond on parandatud ja testitud,\" ütles EKLi president Maarin Ektermann.\n\nOksjon toimub reedel ja laupäeval ARS-i kunstilinnakus (Pärnu mnt 154, Tallinn). Saal avatakse kell 17. Oksjonil saab osaleda ka veebis aadressil eestikunstioksjonid.ee. Oksjoni viib läbi Reigo Kuivjõgi Eesti Kunsti Oksjonitest.\n\nEesti Kunstnike Liit korraldab erakorralise kunstioksjoni, kus läheb müüki 162 teost. Oksjoni eesmärk on katta ligi 700 000 euro suurune kahju, mis tekkis liidule kevadel kelmuse tagajärjel.",
+    "url": "https://www.err.ee/1610162110/kunstnike-liidu-toetusoksjon-jatkub-reedel",
+    "image": "https://s.err.ee/photo/crop/2026/09/18/3810757h87aat2.jpg",
+    "video": null,
+    "publish_date": "2026-10-09 11:58:00",
+    "author": "Uudised | Err",
+    "authors": [
+      "Uudised | Err"
+    ],
+    "language": "et",
+    "source_country": "ee",
+    "capitalMatches": [
+      "Tallinn"
+    ]
+  },
+  "sceneCount": 3,
+  "imageProvider": "hf-flux-klein",
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "15f4b916257ad1414522aaaaeff68bf25c25ec30883a711a65b10a6bef4e1c66",
+      "bytes": 3173332,
+      "provider": "hf-flux-klein",
+      "taskUUID": "67e5d2b0d391427ea71125cc00ce4a40",
+      "seed": 59435674,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "64cfb2d4c8f571073e40b1ad0dec53a6a819944206fce6a6be368be079294d95",
+      "referencePaths": [
+        "media/article.jpg",
+        "media/03_auge_gluehbirne-api.png"
+      ],
+      "referenceMetadata": [
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "942ea0dbcbeebfe1109452b3cddf915ae5af735bb5209ed9258ade09e22321a9",
+          "bytes": 454457,
+          "label": "article",
+          "role": "article"
+        },
+        {
+          "id": 3,
+          "name": "Auge / Glühbirne",
+          "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+          "eu_bezug": [
+            "Aufklärung",
+            "Beobachtung",
+            "Ambivalenz moderner Technik"
+          ],
+          "path": "media/03_auge_gluehbirne-api.png",
+          "mimeType": "image/png",
+          "sha256": "342dd3b00429e6b0d76cbfa7bd6035570be44d97c9216697dae6c2c4487c9d8f",
+          "label": "Auge / Glühbirne",
+          "role": "catalog",
+          "sourcePath": "media/03_auge_gluehbirne.png",
+          "sourceSha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723",
+          "bytes": 41810,
+          "width": 277,
+          "height": 128
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "e46cc5a9bc355109983c719dd90aead50181595283fb66d0e1f6e1dce5482e39",
+      "bytes": 3179443,
+      "provider": "hf-flux-klein",
+      "taskUUID": "4040ee424e3b4e8f9650ee4e54d411c7",
+      "seed": 1796406690,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "7e7bcebf906784e9beebf6816672dc70cae59d31acdd8f73563668568674174a",
+      "referencePaths": [
+        "media/article.jpg",
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "942ea0dbcbeebfe1109452b3cddf915ae5af735bb5209ed9258ade09e22321a9",
+          "bytes": 454457,
+          "label": "article",
+          "role": "article"
+        },
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Frau mit Lampe",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "66fcf15101b0ca5d704024d1c0f25b09a0aef4ec6f102266ca70051437d80add",
+      "bytes": 3091843,
+      "provider": "hf-flux-klein",
+      "taskUUID": "86c70dfa61634216a440cc1f6c7b90f0",
+      "seed": 1984800155,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "fb6350587048d185e6c1c48c241a5f88c2a1f1a1b8bae183dd9f73cae2b91520",
+      "referencePaths": [
+        "media/article.jpg",
+        "media/01_mutter_mit_kind.png"
+      ],
+      "referenceMetadata": [
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "942ea0dbcbeebfe1109452b3cddf915ae5af735bb5209ed9258ade09e22321a9",
+          "bytes": 454457,
+          "label": "article",
+          "role": "article"
+        },
+        {
+          "id": 1,
+          "name": "Mutter mit totem Kind",
+          "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+          "eu_bezug": [
+            "Frieden",
+            "Menschenwürde",
+            "Schutz der Zivilbevölkerung"
+          ],
+          "path": "media/01_mutter_mit_kind.png",
+          "mimeType": "image/png",
+          "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2",
+          "label": "Mutter mit totem Kind",
+          "role": "catalog"
+        }
+      ]
+    }
+  ],
+  "sceneDurations": [
+    14,
+    5,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "taktmuster",
+    "takt": 3,
+    "type": "balanced",
+    "multiplier": 3.5,
+    "bias": 0,
+    "minimum": 5,
+    "maximum": 15
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-18T10:07:07.275Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.7,
+          "urlLink": "Italien",
+          "title": "Italien",
+          "text": "Italien",
+          "sentences": {
+            "prev": [
+              "und",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "und Frankreich in einer Höhe von 4805 m am Mont Blanc, der",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU „einen"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 2,
+          "urlLink": "Member_state_of_the_European_Union",
+          "title": "Member state of the European Union",
+          "text": "27 members",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "regulations, which are immediately enforceable in all member",
+              "or from €4,600 to €92,600. EU member states own",
+              "when the Maastricht Treaty came into force in"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.8,
+          "urlLink": "%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%8F",
+          "title": "Франция",
+          "text": "Франция",
+          "sentences": {
+            "prev": [],
+            "next": [
+              "вышедшая из состава союза 31 января 2020 года."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "942ea0dbcbeebfe1109452b3cddf915ae5af735bb5209ed9258ade09e22321a9",
+    "bytes": 454457
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "74d48abf1250864ff4c79fe2c611a629f0cac17db770730881d3293ef7a225ac",
+  "semanticIndexCorrections": [
+    {
+      "streamId": "stream-2",
+      "motif": "Member state unity under stress",
+      "from": [
+        1,
+        2
+      ],
+      "to": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "plan": {
+    "visionAnalysis": "Das Foto zeigt eine weiße Galeriewand mit einer Vielzahl von Kunstwerken unterschiedlicher Stile und Größen, darunter Gemälde und Skulpturen auf Podesten. Die Beleuchtung ist neutral und hell, es sind keine Personen zu sehen. Das Bild dient als authentischer Kontext für die Berichterstattung über die Kunstauktion und deren technische Schwierigkeiten.",
+    "articleFacts": [
+      "Der Kunstverein EKO erlitt eine technische Störung in seiner Online-Auktionsplattform, die zunächst als möglicher Cyberangriff vermutet wurde, sich aber als Überlastung durch hohe Nutzerzahlen herausstellte.",
+      "Die Auktionssoftware hielt der großen Last nicht stand, obwohl Serverdienste von Drittanbietern fehlerfrei funktionierten.",
+      "Experten auf mehreren Ebenen wurden hinzugezogen, um die Fehlerquelle zu finden, die Störung wurde behoben und das System mehrfach getestet.",
+      "Am ersten Auktionsabend wurde ein Kunstwerk verkauft, der Käufer ist eine reale Person, keine Betrugsaccount.",
+      "Die Auktion wird am folgenden Tag fortgesetzt, sowohl vor Ort im ARS-Kunstzentrum in Tallinn als auch online.",
+      "Ziel der Auktion ist es, finanzielle Verluste der Künstlerorganisation aufgrund eines Betrugsfalls auszugleichen.",
+      "Der Präsident des Künstlerverbands bedauert die Störung und bestätigt die Wiederherstellung der Plattform.",
+      "Teilnehmer werden gebeten, ihre Gebote zu überprüfen und erneut abzugeben, falls sie durch die Störung nicht registriert wurden."
+    ],
+    "storyPremise": "Die Szene stellt den dramatischen technischen Ausfall einer hochfrequentierten Online-Kunstauktion dar, der trotz sorgfältiger Vorbereitung auftrat. Die Erzählung fokussiert auf die Spannungen und Verunsicherung durch den Systemausfall, die darauffolgende Fehlerbehebung und den hoffnungsvollen Neustart der Auktion.",
+    "fictionBoundary": "Die Umsetzung nutzt eine stark abstrahierte, kubistische Bildsprache, um technische Überforderung und Wiederherstellung als symbolische Handlung darzustellen. Die Figuren sind maskenhaft und fragmentiert, die Szenerie vermittelt Spannung und Hoffnung ohne realistische Porträts oder konkrete technische Details. Semantische Einträge werden als bildliche Metaphern verwendet, nicht als faktische Informationen. Der Krokodil-Charakter wird nicht eingesetzt, da er keinen sinnvollen metaphorischen Beitrag leistet.",
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "Der Eintrag \"Italien\" hat keine erkennbare Verbindung zur Auktion oder deren technischen Problemen und wird daher nicht verwendet."
+      },
+      "stream-2": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          1,
+          2,
+          3
+        ],
+        "visualMotif": "Member state unity under stress",
+        "visibleConsequence": "Das Motiv \"Member state unity under stress\" wird in Szene 1 und 2 thematisch umgesetzt, indem fragmentierte Figuren in einem zerbrochenen Raum zusammenfinden, um die kollektive Anstrengung und Belastung während der technischen Störung und der Wiederherstellung der Auktionsplattform zu symbolisieren."
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "Der Eintrag \"France\" steht in keinem direkten Zusammenhang mit dem Thema der Auktion oder der technischen Störung und wird nicht verwendet."
+      }
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Technical Overload and Chaos in the Auction Platform",
+        "storyBeat": "This scene portrays the dramatic overload and failure of the auction software as a fractured cubist environment. Fragmented, mask-like figures cluster around a glowing, cracked orb symbolizing the auction platform struggling under immense digital load. The composition conveys tension and instability through sharp, broken planes and erratic light.",
+        "durationSeconds": 14,
+        "videoPrompt": "Start with fragmented cubist figures clustered around a glowing cracked orb representing the auction platform under stress. Over 14 seconds, the orb pulses unevenly, figures reach out and recoil, expressing confusion and overload. The fractured environment shifts subtly with widening cracks, then slowly begins to stabilize as the light steadies.",
+        "guernicaId": 3,
+        "selectionReason": "The 'Eye / Lightbulb' figure symbolizes technological observation and the ambivalence of modern technology, fitting the theme of digital overload and system failure.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. The fractured cubist figures cluster around a bright, cracked glowing orb in the center representing the auction platform struggling under immense digital load. Sharp triangular planes fracture the scene, conveying tension and instability. The light from the orb casts stark shadows and fragmented reflections on the figures' angular masks and limbs, emphasizing confusion and technical failure. The background is an abstract digital web of broken lines and fragmented surfaces, transforming the gallery space into a symbolic digital battleground. The visual motif \"Member state unity under stress\" is visible as fragmented figures united despite chaos. Reference image 1 shows the art exhibition wall with diverse artworks, used for spatial and compositional cues. Reference image 2 is the 'Eye / Lightbulb' cubist figure, repainted fully with new pose and surface integrated into the digital chaos environment."
+      },
+      {
+        "index": 2,
+        "title": "Restoration and Control after the Failure",
+        "storyBeat": "This scene depicts concentrated and cooperative figures focused on an abstract shield-like form symbolizing firewall protection and system security. The composition is calmer and more ordered, with fractured planes realigning to represent regained stability and control.",
+        "durationSeconds": 5,
+        "videoPrompt": "Begin with cubist figures surrounding an abstract shield symbolizing firewall and protection. Figures move deliberately, reinforcing and stabilizing the shield. Light steadies and the environment becomes less fragmented, symbolizing system repair and regained security.",
+        "guernicaId": 5,
+        "selectionReason": "The 'Woman with Lamp' figure represents the search for truth, hope, and guidance amid destruction, fitting the scene of technical repair and security restoration.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Figures cluster around a strong, abstract shield form representing firewalls and protection. Their angular hands and arms reach to reinforce and stabilize it. The fractured planes realign, suggesting regained order and security. Light is steady and focused, casting sharp shadows that emphasize cooperation and control. The visual motif \"Member state unity under stress\" is present as figures unite to reinforce the shield. Reference image 1 provides compositional context from the art gallery wall. Reference image 2 is the 'Woman with Lamp' cubist figure, fully reimagined and integrated as the central figure guiding the repair."
+      },
+      {
+        "index": 3,
+        "title": "Auction Continuation and Hope for Success",
+        "storyBeat": "The final scene shows upright cubist figures standing in a gallery space where fragmented planes from earlier chaos fade into the background. Gestures express cautious hope and readiness. The composition conveys stability and a fresh start for the auction event.",
+        "durationSeconds": 7,
+        "videoPrompt": "Start with upright cubist figures standing amid a gallery space where fractured planes from previous chaos recede. Figures express hope and preparedness through gesture. Over 7 seconds, soft light shifts illuminate artworks, symbolizing renewed trust and continuation of the auction. The scene settles into calm order.",
+        "guernicaId": 1,
+        "selectionReason": "The 'Mother with Dead Child' figure symbolizes grief, loss, and desire for peace, fitting the aftermath of disruption and hopeful renewal of the auction.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Upright cubist figures stand in a gallery space transformed by the auction event. Fragmented planes from previous chaos recede into the background. The main figure, inspired by the 'Mother with Dead Child', conveys grief and hope for peace and renewal. Artworks float abstractly behind them, symbolizing the ongoing auction. Light is soft and focused, creating calm shadows and an atmosphere of fragile optimism. The visual motif \"Member state unity under stress\" subtly underlies the composition as figures stand together in renewed stability. Reference image 1 is the art exhibition wall for spatial cues. Reference image 2 is the 'Mother with Dead Child' cubist figure, fully reinterpreted for this hopeful scene."
+      }
+    ]
+  },
+  "planRevisionReason": "The assigned semantic motif must appear in that scene prompt verbatim",
+  "usage": {
+    "prompt_tokens": 14106,
+    "completion_tokens": 2099,
+    "total_tokens": 16205,
+    "prompt_tokens_details": {
+      "cached_tokens": 9216,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "planHash": "99b1b116d2e67a5e0067f29b5cf9bc0aefef72430574c7c90f029807177ae05e",
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-018",
+    "sourceCommit": "5f2b2b9320920e06cfad3ff0bce1f5f369af7115",
+    "article": {
+      "title": "Kunstnike liidu toetusoksjon jätkub reedel",
+      "url": "https://www.err.ee/1610162110/kunstnike-liidu-toetusoksjon-jatkub-reedel",
+      "publish_date": "2026-10-09 11:58:00"
+    },
+    "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Technical Overload and Chaos in the Auction Platform",
+        "beat": "This scene portrays the dramatic overload and failure of the auction software as a fractured cubist environment. Fragmented, mask-like figures cluster around a glowing, cracked orb symbolizing the auction platform struggling under immense digital load. The composition conveys tension and instability through sharp, broken planes and erratic light.",
+        "storyBeat": "This scene portrays the dramatic overload and failure of the auction software as a fractured cubist environment. Fragmented, mask-like figures cluster around a glowing, cracked orb symbolizing the auction platform struggling under immense digital load. The composition conveys tension and instability through sharp, broken planes and erratic light.",
+        "durationSeconds": 14,
+        "requestedDurationSeconds": 14,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-018/media/scene-1-first-frame.png",
+        "stillPrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. The fractured cubist figures cluster around a bright, cracked glowing orb in the center representing the auction platform struggling under immense digital load. Sharp triangular planes fracture the scene, conveying tension and instability. The light from the orb casts stark shadows and fragmented reflections on the figures' angular masks and limbs, emphasizing confusion and technical failure. The background is an abstract digital web of broken lines and fragmented surfaces, transforming the gallery space into a symbolic digital battleground. The visual motif \"Member state unity under stress\" is visible as fragmented figures united despite chaos. Reference image 1 shows the art exhibition wall with diverse artworks, used for spatial and compositional cues. Reference image 2 is the 'Eye / Lightbulb' cubist figure, repainted fully with new pose and surface integrated into the digital chaos environment.",
+        "videoPrompt": "Start with fragmented cubist figures clustered around a glowing cracked orb representing the auction platform under stress. Over 14 seconds, the orb pulses unevenly, figures reach out and recoil, expressing confusion and overload. The fractured environment shifts subtly with widening cracks, then slowly begins to stabilize as the light steadies.",
+        "singleImagePrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. The fractured cubist figures cluster around a bright, cracked glowing orb in the center representing the auction platform struggling under immense digital load. Sharp triangular planes fracture the scene, conveying tension and instability. The light from the orb casts stark shadows and fragmented reflections on the figures' angular masks and limbs, emphasizing confusion and technical failure. The background is an abstract digital web of broken lines and fragmented surfaces, transforming the gallery space into a symbolic digital battleground. The visual motif \"Member state unity under stress\" is visible as fragmented figures united despite chaos. Reference image 1 shows the art exhibition wall with diverse artworks, used for spatial and compositional cues. Reference image 2 is the 'Eye / Lightbulb' cubist figure, repainted fully with new pose and surface integrated into the digital chaos environment."
+      },
+      {
+        "index": 2,
+        "title": "Restoration and Control after the Failure",
+        "beat": "This scene depicts concentrated and cooperative figures focused on an abstract shield-like form symbolizing firewall protection and system security. The composition is calmer and more ordered, with fractured planes realigning to represent regained stability and control.",
+        "storyBeat": "This scene depicts concentrated and cooperative figures focused on an abstract shield-like form symbolizing firewall protection and system security. The composition is calmer and more ordered, with fractured planes realigning to represent regained stability and control.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-018/media/scene-2-first-frame.png",
+        "stillPrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Figures cluster around a strong, abstract shield form representing firewalls and protection. Their angular hands and arms reach to reinforce and stabilize it. The fractured planes realign, suggesting regained order and security. Light is steady and focused, casting sharp shadows that emphasize cooperation and control. The visual motif \"Member state unity under stress\" is present as figures unite to reinforce the shield. Reference image 1 provides compositional context from the art gallery wall. Reference image 2 is the 'Woman with Lamp' cubist figure, fully reimagined and integrated as the central figure guiding the repair.",
+        "videoPrompt": "Begin with cubist figures surrounding an abstract shield symbolizing firewall and protection. Figures move deliberately, reinforcing and stabilizing the shield. Light steadies and the environment becomes less fragmented, symbolizing system repair and regained security.",
+        "singleImagePrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Figures cluster around a strong, abstract shield form representing firewalls and protection. Their angular hands and arms reach to reinforce and stabilize it. The fractured planes realign, suggesting regained order and security. Light is steady and focused, casting sharp shadows that emphasize cooperation and control. The visual motif \"Member state unity under stress\" is present as figures unite to reinforce the shield. Reference image 1 provides compositional context from the art gallery wall. Reference image 2 is the 'Woman with Lamp' cubist figure, fully reimagined and integrated as the central figure guiding the repair."
+      },
+      {
+        "index": 3,
+        "title": "Auction Continuation and Hope for Success",
+        "beat": "The final scene shows upright cubist figures standing in a gallery space where fragmented planes from earlier chaos fade into the background. Gestures express cautious hope and readiness. The composition conveys stability and a fresh start for the auction event.",
+        "storyBeat": "The final scene shows upright cubist figures standing in a gallery space where fragmented planes from earlier chaos fade into the background. Gestures express cautious hope and readiness. The composition conveys stability and a fresh start for the auction event.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-018/media/scene-3-first-frame.png",
+        "stillPrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Upright cubist figures stand in a gallery space transformed by the auction event. Fragmented planes from previous chaos recede into the background. The main figure, inspired by the 'Mother with Dead Child', conveys grief and hope for peace and renewal. Artworks float abstractly behind them, symbolizing the ongoing auction. Light is soft and focused, creating calm shadows and an atmosphere of fragile optimism. The visual motif \"Member state unity under stress\" subtly underlies the composition as figures stand together in renewed stability. Reference image 1 is the art exhibition wall for spatial cues. Reference image 2 is the 'Mother with Dead Child' cubist figure, fully reinterpreted for this hopeful scene.",
+        "videoPrompt": "Start with upright cubist figures standing amid a gallery space where fractured planes from previous chaos recede. Figures express hope and preparedness through gesture. Over 7 seconds, soft light shifts illuminate artworks, symbolizing renewed trust and continuation of the auction. The scene settles into calm order.",
+        "singleImagePrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Upright cubist figures stand in a gallery space transformed by the auction event. Fragmented planes from previous chaos recede into the background. The main figure, inspired by the 'Mother with Dead Child', conveys grief and hope for peace and renewal. Artworks float abstractly behind them, symbolizing the ongoing auction. Light is soft and focused, creating calm shadows and an atmosphere of fragile optimism. The visual motif \"Member state unity under stress\" subtly underlies the composition as figures stand together in renewed stability. Reference image 1 is the art exhibition wall for spatial cues. Reference image 2 is the 'Mother with Dead Child' cubist figure, fully reinterpreted for this hopeful scene."
+      }
+    ]
+  },
+  "finishedAt": "2026-10-18T11:28:51.294Z"
+}

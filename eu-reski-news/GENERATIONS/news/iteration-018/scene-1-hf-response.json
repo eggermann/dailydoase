@@ -1,0 +1,19 @@
+{
+  "eventId": "67e5d2b0d391427ea71125cc00ce4a40",
+  "data": [
+    {
+      "path": "/tmp/gradio/b571fa7711979cc288cb4d633394bca8a4f98f777f9e257b63126e9e383f6b19/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/b571fa7711979cc288cb4d633394bca8a4f98f777f9e257b63126e9e383f6b19/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    59435674,
+    "Create an original dark Guernica-like cubist mural as a compressed horizontal frieze filling the entire image, using the first reference only as a compositional cue for its broad gallery-wall arrangement while replacing the gallery, artworks, frames, pedestals, and room entirely with shallow fractured space. Build everything from large interlocking black, ash-gray, and stained-ivory planes, sharp charcoal contours, rough oil scumbling, scratches, and exposed plaster. Across the frieze, arrange distorted human faces as blunt masks with mismatched eyes, noses, and mouths, their bodies, hands, clothing, and objects reduced to flat angular signs and broken silhouettes. Cluster these strained figures around a bright cracked ivory orb at the center, glowing like a failing digital auction platform under immense load. Use the second reference’s eye-and-lightbulb motif as the central symbolic source: transform its eye into a fractured angular mask surrounding the orb, with the lightbulb motif split into jagged rays and embedded within the orb’s core. Radiant triangular shards cast stark graphic shadows and fragmented reflections across the masks and limbs. Surround them with an abstract digital web of broken lines, severed nodes, and fractured surfaces. Unite several opposing figures through linked hands and interlocked silhouettes to express “Member state unity under stress,” while their strained poses convey collective failure. Keep the palette near-monochrome, with no saturated color, photographic detail, natural anatomy, realistic perspective, or dimensional room effects."
+  ],
+  "completedAt": "2026-10-18T11:28:04.540Z"
+}

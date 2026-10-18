@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "9f9fba21-8752-489f-bd40-fd3a7597d396",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. The fractured cubist figures cluster around a bright, cracked glowing orb in the center representing the auction platform struggling under immense digital load. Sharp triangular planes fracture the scene, conveying tension and instability. The light from the orb casts stark shadows and fragmented reflections on the figures' angular masks and limbs, emphasizing confusion and technical failure. The background is an abstract digital web of broken lines and fragmented surfaces, transforming the gallery space into a symbolic digital battleground. The visual motif \"Member state unity under stress\" is visible as fragmented figures united despite chaos. Reference image 1 shows the art exhibition wall with diverse artworks, used for spatial and compositional cues. Reference image 2 is the 'Eye / Lightbulb' cubist figure, repainted fully with new pose and surface integrated into the digital chaos environment.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/03_auge_gluehbirne-api.png"
+    ]
+  }
+}

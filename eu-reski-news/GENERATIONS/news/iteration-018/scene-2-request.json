@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "3518ccc1-5158-48fa-b73d-9780394076fc",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Figures cluster around a strong, abstract shield form representing firewalls and protection. Their angular hands and arms reach to reinforce and stabilize it. The fractured planes realign, suggesting regained order and security. Light is steady and focused, casting sharp shadows that emphasize cooperation and control. The visual motif \"Member state unity under stress\" is present as figures unite to reinforce the shield. Reference image 1 provides compositional context from the art gallery wall. Reference image 2 is the 'Woman with Lamp' cubist figure, fully reimagined and integrated as the central figure guiding the repair.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/05_frau_mit_lampe.png"
+    ]
+  }
+}

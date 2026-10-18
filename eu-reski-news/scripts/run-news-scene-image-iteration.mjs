@@ -12,7 +12,7 @@ import { generateFluxKleinImage } from '../news-scene/huggingface-flux-klein.mjs
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
-  resume: { type: 'string' }, 'article-id': { type: 'string' }, scenes: { type: 'string', default: '3' },
+  resume: { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   'scene-length-takt': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TAKT || '3' },
@@ -23,7 +23,7 @@ const { values: options } = parseArgs({ options: {
   'max-scene-seconds': { type: 'string', default: process.env.NEWS_MAX_SCENE_DURATION_SECONDS || '15' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
-  'news-dir': { type: 'string', default: join(root, 'eu-reski-news', 'news-capitals') },
+  'news-dir': { type: 'string', default: join(root, 'eu-reski-news', 'news', 'A') },
   'output-dir': { type: 'string', default: process.env.NEWS_OUTPUT_DIR || join(root, 'eu-reski-news', 'GENERATIONS', 'news') },
   'guernica-dir': { type: 'string', default: process.env.GUERNICA_DIRECTORY || '/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
@@ -245,7 +245,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\n0 or -1 iterations means endless. A live semantic-stream instance stays open across iterations and advances with getNext(). A Taktmuster instance likewise advances across all scenes and iterations. Single-run output: eu-reski-news/GENERATIONS/news/iteration-NNN. Multi-run output: eu-reski-news/GENERATIONS/news/run-NNN/iteration-NNN, with run.json linking each HTML report.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -256,6 +256,7 @@ async function main() {
   if (options.resume && iterationLimit !== 1) throw new Error('--resume only supports one iteration');
   const sceneCount = Number(options.scenes);
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
+  if (!['linear', 'random'].includes(options['article-order'])) throw new Error('Use --article-order=linear or --article-order=random');
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   const imageProvider = options['image-provider'];
@@ -286,7 +287,7 @@ async function main() {
   let completed = 0;
   while (endless || completed < iterationLimit) {
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
-    const iterationDirectory = await runIteration(semanticSource, sceneDurations, iterationRoot);
+    const iterationDirectory = await runIteration(semanticSource, sceneDurations, iterationRoot, completed);
     completed += 1;
     if (runManifest) {
       const relativeDirectory = iterationDirectory.slice(iterationRoot.length + 1);
@@ -304,7 +305,7 @@ async function main() {
   }
 }
 
-async function runIteration(semanticSource, sceneDurationStream, iterationRoot) {
+async function runIteration(semanticSource, sceneDurationStream, iterationRoot, iterationIndex) {
   const sceneCount = Number(options.scenes);
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
   const openAiKey = process.env.OPENAI_API_KEY;
@@ -328,9 +329,12 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
       const candidates = aggregate.news.map((article, index) => ({ article, index }))
         .filter(({ article }) => /^https?:\/\//i.test(article.image || '') && (article.text || article.summary));
       if (!candidates.length) throw new Error('No news article with text and image');
+      const order = options['article-order'];
       const draw = options['article-id']
         ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
-        : randomInt(candidates.length);
+        : order === 'random'
+          ? randomInt(candidates.length)
+          : iterationIndex % candidates.length;
       if (draw < 0) throw new Error('Requested article is missing or has no usable text and image');
       const { article, index } = candidates[draw];
       record = {
@@ -341,7 +345,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
           clean: !execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: root, encoding: 'utf8' }).trim(),
         },
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
-        selection: { method: options['article-id'] ? 'article-id' : 'random', draw, candidateCount: candidates.length, aggregateIndex: index },
+        selection: { method: options['article-id'] ? 'article-id' : order, order, draw, candidateCount: candidates.length, aggregateIndex: index },
         article, sceneCount, imageProvider, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
         guernicaDirectory: resolve(options['guernica-dir']), results: [],
       };

@@ -4,8 +4,19 @@ EU-News-Code ist hier gebündelt:
 
 - `scripts/`: Abruf, HTML-Erstellung und EU-RESKI-Startskript samt Iterationsgenerator.
 - `news-scene/`: Regieanweisung, Planung, Bildreferenzen, Provider und HTML-Bericht.
+- `news/A/`: Sammlung und JEV-EU-Relevanzbewertung.
 - `news-capitals/`: News-Quelldaten.
 - `GENERATIONS/news/`: generierte Szenenläufe und HTML-Berichte.
+
+## News-Sammlung A und JEV
+
+Die separate JEV-Pipeline liegt ebenfalls hier. Die gespeicherte Sammlung befindet sich unter `eu-reski-news/news/A/`.
+
+```sh
+npm run news:eu:today # aktuelle EU-News abrufen
+npm run news:eu:jev   # gespeicherte Artikel mit JEV nach EU-Bezug bewerten
+npm run news:html     # HTML-Liste nach EU-Relevanz bauen
+```
 
 `Article + article photo + semantic-stream fragments + Guernica catalog → GPT story, still and motion prompts → Seedream first frames → film-plan.json → HTML audit report`.
 
@@ -19,7 +30,17 @@ From the repository root, with Node 22+ and dependencies installed:
 npm run news:story
 ```
 
-The EU-RESKI shell starter writes under `eu-reski-news/GENERATIONS/news/iteration-NNN`. Its editable settings block controls scene count, article/semantic inputs, iteration count, and Taktmuster timing. Each report contains one still per scene plus the film handoff. Source articles remain in `eu-reski-news/news-capitals`.
+The EU-RESKI shell starter writes under `eu-reski-news/GENERATIONS/news/iteration-NNN`. Its editable settings block controls scene count, article order, article/semantic inputs, iteration count, and Taktmuster timing. Each report contains one still per scene plus the film handoff. Source articles come from `eu-reski-news/news/A` by default.
+
+Article order defaults to `linear`: each new run starts with the first eligible article in the latest aggregate and advances one article per iteration, wrapping at the end. A new invocation starts at the beginning again. Use `--article-order=random` to draw randomly each iteration; `--article-id=ID` pins one article.
+
+```sh
+# Three articles in collection order
+npm run news:story -- --iterations=3
+
+# Three randomly selected articles
+npm run news:story -- --iterations=3 --article-order=random
+```
 
 For the next Codex turn, use this instruction: “Run `npm run news:story`, open the generated HTML, and review the three start images. Keep the image-only API workflow, strong abstract Guernica-style painting, article-grounded story, meaningful relevant semantic motifs, and optional crocodile. Do not commit generated images or secrets.”
 
@@ -35,11 +56,11 @@ For direct control of flags and resume behavior, use the Node command below.
 node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs
 ```
 
-Requires `OPENAI_API_KEY`, `RUNWARE_API_KEY` (or `RUNWARE_KEY`), a saved `eu-reski-news/news-capitals/all-*.json` collection, and the Guernica PNG catalog. `GUERNICA_DIRECTORY` or `--guernica-dir=/path` overrides the local asset directory. `NEWS_STORY_MODEL` overrides `gpt-4.1-mini`; the replacement must support vision, Chat Completions structured output and the supplied sampling parameters.
+Requires `OPENAI_API_KEY`, `RUNWARE_API_KEY` (or `RUNWARE_KEY`), a saved `eu-reski-news/news/A/all-*.json` collection, and the Guernica PNG catalog. `--news-dir=PATH` selects another collection directory. `GUERNICA_DIRECTORY` or `--guernica-dir=/path` overrides the local asset directory. `NEWS_STORY_MODEL` overrides `gpt-4.1-mini`; the replacement must support vision, Chat Completions structured output and the supplied sampling parameters.
 
 For the separate Hugging Face adapter, set `HF_TOKEN` in `.env`, then run `npm run news:story -- --image-provider=hf-flux-klein`. It uses the Space's `/generate` endpoint, distilled 16-step mode, 1680×944 output and both article/figure references. Runware remains unchanged and default. Hugging Face ZeroGPU consumes account GPU quota or prepaid credits; the Space does not report per-image GPU seconds, so exact per-image dollar cost is not recorded. Do not commit `.env` or tokens.
 
-Default: newest saved aggregate by filename, random article with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one Seedream 5.0 Flash still per scene. One Taktmuster rhythm instance stays alive for the whole process, advancing once per scene across iteration boundaries. Default balanced takt is 3 with a 3.5 multiplier; durations are rounded and clamped to 5–15 seconds. The news starter defaults to one run; set `NEWS_MAX_ITERATIONS=0` or `-1` for an endless run. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
+Default: newest saved aggregate by filename in `news/A`, linear article order with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one still per scene. One Taktmuster rhythm instance stays alive for the whole process, advancing once per scene across iteration boundaries. Default balanced takt is 3 with a 3.5 multiplier; durations are rounded and clamped to 5–15 seconds. The news starter defaults to one run; set `NEWS_MAX_ITERATIONS=0` or `-1` for an endless run. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
 
 ```sh
 # One scene / one image for a small iteration
@@ -67,7 +88,7 @@ node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --
 
 ## What is automatic
 
-1. A random eligible article is drawn from the newest saved aggregate.
+1. An eligible article is selected from the newest saved aggregate in the configured order: linear by default, or random with `--article-order=random`.
 2. `semantic-stream.initStreams` initializes each configured seed. `getNext()` supplies a real linked fragment, including its surrounding sentences when available.
 3. GPT sees the article, photograph, stream snapshot, all catalog descriptions and all nine figure images. It explains the semantic associations and selects one Guernica figure for each scene.
 4. GPT returns a strict JSON plan. Each `stillPrompt` is handed to Seedream unchanged. Image reference 1 is always the news photo; reference 2 is always that scene's selected catalog figure.

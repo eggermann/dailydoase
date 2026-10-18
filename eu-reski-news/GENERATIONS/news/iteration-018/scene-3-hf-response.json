@@ -1,0 +1,19 @@
+{
+  "eventId": "86c70dfa61634216a440cc1f6c7b90f0",
+  "data": [
+    {
+      "path": "/tmp/gradio/a767095a1a8c9e9b19fb2c61e7ad8c4dda7a86a5dfc6e77ecabc38dfa22b1f50/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/a767095a1a8c9e9b19fb2c61e7ad8c4dda7a86a5dfc6e77ecabc38dfa22b1f50/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1984800155,
+    "Create an original dark Guernica-like cubist mural as a compressed horizontal frieze filling the entire image, replacing the photographed gallery wall with a shallow fractured space. Build everything from large interlocking black, ash-gray, and stained-ivory planes, sharp charcoal contours, rough oil scumbling, scraped edges, and scratched plaster. Reinterpret the auction exhibition from the first image as fragmented abstract planes: its wall, framed artworks, and display pedestals dissolve behind the frieze as floating angular silhouettes of auction pictures and small geometric placards, suggesting the ongoing auction without photographic detail or saturated color. At the center, reinterpret the Mother with Dead Child from the second image as the dominant upright cubist figure, preserving its protective maternal pose while transforming her into a fractured ivory silhouette holding a limp, broken child close against her chest. Her bowed head, one hand supporting the child, and the other arm extending toward a small ivory sprout or rising bird convey grief and fragile hope for peace and renewal. Surround them with upright cubist figures standing shoulder to shoulder in renewed stability, their faces reduced to blunt masks with mismatched eyes, noses, and mouths. Arrange fragmented auction artworks, severed hands, broken columns, and linked circular forms behind them as restrained symbols of member-state unity under stress. Keep the palette near-monochrome, with no realistic anatomy, smooth volume, natural perspective, neon, or cinematic lighting; use only soft, even illumination and calm shallow shadows within the painted frieze."
+  ],
+  "completedAt": "2026-10-18T11:28:50.575Z"
+}

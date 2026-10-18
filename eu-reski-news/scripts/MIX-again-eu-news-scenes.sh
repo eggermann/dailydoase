@@ -17,7 +17,8 @@ NEWS_SCENE_LENGTH_MULTIPLIER="${NEWS_SCENE_LENGTH_MULTIPLIER:-3.5}" # Wider spre
 NEWS_SCENE_LENGTH_BIAS="${NEWS_SCENE_LENGTH_BIAS:-0}"
 NEWS_MIN_SCENE_DURATION_SECONDS="${NEWS_MIN_SCENE_DURATION_SECONDS:-5}"
 NEWS_MAX_SCENE_DURATION_SECONDS="${NEWS_MAX_SCENE_DURATION_SECONDS:-15}"
-NEWS_ARTICLE_ID="${NEWS_ARTICLE_ID:-}"       # Empty selects a random article.
+NEWS_ARTICLE_ORDER="${NEWS_ARTICLE_ORDER:-linear}" # Start at the first article per run, then advance.
+NEWS_ARTICLE_ID="${NEWS_ARTICLE_ID:-}"       # Overrides article order when set.
 NEWS_WORDS="${NEWS_WORDS:-}"                 # Empty uses the default EU de/en/ru streams.
 NEWS_WORDS_FILE="${NEWS_WORDS_FILE:-}"
 NEWS_STREAM_FILE="${NEWS_STREAM_FILE:-}"
@@ -31,6 +32,10 @@ esac
 case "$NEWS_SCENES" in
   1|2|3) ;;
   *) echo 'NEWS_SCENES must be 1, 2 or 3.' >&2; exit 2 ;;
+esac
+case "$NEWS_ARTICLE_ORDER" in
+  linear|random) ;;
+  *) echo 'NEWS_ARTICLE_ORDER must be linear or random.' >&2; exit 2 ;;
 esac
 case "$NEWS_POLLING_TIME_MS" in
   ''|*[!0-9]*) echo 'NEWS_POLLING_TIME_MS must be a non-negative integer.' >&2; exit 2 ;;
@@ -50,6 +55,7 @@ has_option() {
 # Preserve the usual CLI flags; explicit command-line options override this block.
 if ! has_option --output-dir "$@"; then set -- --output-dir="$NEWS_OUTPUT_DIR" "$@"; fi
 if ! has_option --scenes "$@"; then set -- --scenes="$NEWS_SCENES" "$@"; fi
+if ! has_option --article-order "$@"; then set -- --article-order="$NEWS_ARTICLE_ORDER" "$@"; fi
 if ! has_option --iterations "$@"; then set -- --iterations="$NEWS_MAX_ITERATIONS" "$@"; fi
 if ! has_option --pause-ms "$@"; then set -- --pause-ms="$NEWS_POLLING_TIME_MS" "$@"; fi
 if ! has_option --scene-length-takt "$@"; then set -- --scene-length-takt="$NEWS_SCENE_LENGTH_TAKT" "$@"; fi

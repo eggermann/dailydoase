@@ -1,0 +1,20 @@
+{
+  "provider": "huggingface-zerogpu",
+  "space": "black-forest-labs/flux-3-image-klein",
+  "endpoint": "/generate",
+  "prompt": "One original, dark Guernica-like cubist mural, painted as a compressed horizontal frieze in shallow, fractured space. Build the whole image from large interlocking black, ash-gray and stained-ivory planes, sharp charcoal contours, rough oil-paint scumbling and scratched plaster. Distort every human face into a blunt mask with mismatched, displaced features; reduce bodies, hands, clothing and objects to flat angular signs and broken silhouettes. Show emotion through pose and symbolic gesture, never realistic facial expression or anatomy. Keep the image near-monochrome; no saturated color, neon screens, photographic detail, naturalistic skin, smooth volume, realistic perspective, cinematic lighting or 3D depth. Upright cubist figures stand in a gallery space transformed by the auction event. Fragmented planes from previous chaos recede into the background. The main figure, inspired by the 'Mother with Dead Child', conveys grief and hope for peace and renewal. Artworks float abstractly behind them, symbolizing the ongoing auction. Light is soft and focused, creating calm shadows and an atmosphere of fragile optimism. The visual motif \"Member state unity under stress\" subtly underlies the composition as figures stand together in renewed stability. Reference image 1 is the art exhibition wall for spatial cues. Reference image 2 is the 'Mother with Dead Child' cubist figure, fully reinterpreted for this hopeful scene.",
+  "referencePaths": [
+    "media/article.jpg",
+    "media/01_mutter_mit_kind.png"
+  ],
+  "settings": {
+    "mode_choice": "Distilled (16 steps)",
+    "randomize_seed": false,
+    "width": 1680,
+    "height": 944,
+    "num_inference_steps": 16,
+    "guidance_scale": 1,
+    "prompt_upsampling": true,
+    "seed": 1984800155
+  }
+}
