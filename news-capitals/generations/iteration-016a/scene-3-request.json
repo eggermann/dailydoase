@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "a79b05d6-81c4-4b11-8f1a-be7676da25de",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "A cubist mural portraying a group of fractured, mask-like figures symbolizing artists, buyers, and organizers in an abstract space filled with symbolic artworks and sculptures. The figures are connected by angular gestures and shared planes of stained ivory and ash gray, with subtle warm muted gold accents highlighting cultural value and hope. One figure holds a fractured child-like form symbolizing loss and dignity, while others reach out to support and connect. The background suggests an abstract gallery with layered textures and shadows. Reference image 1 is the original art exhibition wall, transformed into an emotional communal space. Reference image 2 is the 'Mutter mit totem Kind' figure, redrawn as a central figure holding the symbolic child, integrated into the scene's emotional core. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/01_mutter_mit_kind.png"
+    ]
+  }
+}

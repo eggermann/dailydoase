@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "a3a0114a-a636-4944-97c7-3e4177ed41bd",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "A cubist mural showing an auction scene where fractured, angular figures with asymmetrical mask faces gather around an abstract digital podium and screens, representing the auction platform. One central figure holds a stylized lamp emitting soft, muted cobalt-blue light, symbolizing hope and guidance amidst the fractured environment. The digital interface is composed of broken, interlocking planes in stained ivory and ash gray, with charcoal-black outlines suggesting repaired connections and protective barriers. Reference image 1 is the original calm gallery wall, reinterpreted as the auction scene with digital elements. Reference image 2 is the 'Frau mit Lampe' figure, redrawn as the central auctioneer holding the lamp, integrated harmoniously into the scene. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/05_frau_mit_lampe.png"
+    ]
+  }
+}

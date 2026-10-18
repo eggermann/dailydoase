@@ -1,0 +1,11 @@
+{
+  "data": [],
+  "errors": [
+    {
+      "code": "insufficientCredits",
+      "message": "Insufficient credits, please add your credit card and top-up your balance at https://my.runware.ai/wallet",
+      "taskType": "imageInference",
+      "taskUUID": "4ef4449b-08b4-452c-a311-395950870d19"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "4ef4449b-08b4-452c-a311-395950870d19",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "A dark, abstract cubist mural depicting a tense control room where fractured, mask-like figures with angular faces and elongated limbs gather around glowing, broken digital panels emitting fractured light and glitch patterns. The figures' faces show concern and concentrated effort, their hands pointing and gesturing toward the flickering screens. Jagged, intersecting planes of stained ivory and ash gray form the room, with charcoal-black shadows emphasizing technological tension. The fractured digital motifs float and overlap with the figures, blending human and machine. Reference image 1 shows the auction exhibition's calm gallery wall, reimagined here as an abstract control space with fragmented light. Reference image 2 is the cubist 'Auge / Glühbirne' figure, redrawn as a central expert figure with a glowing eye, integrated into the scene's fractured digital environment. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/article.jpg",
+      "media/03_auge_gluehbirne-api.png"
+    ]
+  }
+}

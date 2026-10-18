@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "taskType": "imageInference",
+      "imageUUID": "6f491de5-4873-48bc-8f00-436a2efe0083",
+      "taskUUID": "a3a0114a-a636-4944-97c7-3e4177ed41bd",
+      "cost": 0.01926,
+      "seed": 480841996,
+      "imageURL": "https://im.runware.ai/image/os/a07dlim3/ws/3/ii/6f491de5-4873-48bc-8f00-436a2efe0083.jpg"
+    }
+  ]
+}

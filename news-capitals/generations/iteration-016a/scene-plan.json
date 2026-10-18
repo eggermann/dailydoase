@@ -1,0 +1,83 @@
+{
+  "visionAnalysis": "The news photograph shows a well-lit modern art gallery wall with various paintings and sculptures displayed in a clean, orderly manner. The artworks range from abstract to figurative, with a mix of colors and styles. There are no people visible in the image. The setting is a calm indoor space with neutral walls and minimal distractions, focusing attention on the displayed art pieces. The photograph is a straightforward documentation of the exhibition space, not a logo, stock photo or illustration.",
+  "articleFacts": [
+    "Eesti Kunstnike Liit (Estonian Artists' Union) is organizing an extraordinary art auction to recover nearly 700,000 euros of loss caused by fraud earlier this year.",
+    "The auction platform experienced a technical failure due to extremely high load, initially suspected as a cyberattack but later confirmed to be a failure in one part of their own auction application.",
+    "Experts including state-level ones were involved to identify and fix the problem; the system was tested thoroughly and now works without errors.",
+    "On Thursday, only one artwork was sold before the technical issues started.",
+    "Buyers are asked to check their bids and re-submit if necessary, as some bids may have been lost or not registered due to the glitch.",
+    "The auction continues on Friday and Saturday at ARS Art Complex in Tallinn, with both physical and online participation.",
+    "The auction features 162 artworks, including works by Jüri Arrak and Viktor Karrus.",
+    "The auction is important for the union's financial recovery and has attracted significant interest, but the technical failure was an unfortunate surprise.",
+    "The photograph shows the art exhibition space with various artworks arranged on a white wall and pedestals, corresponding to the auction setting."
+  ],
+  "storyPremise": "An extraordinary art auction by the Estonian Artists' Union faces a critical technical failure due to overwhelming demand, threatening the event's success and the union's financial recovery. Experts intervene to resolve the problem, restore trust, and enable continuation of the auction both online and in person, highlighting the tension between cultural value, technological vulnerability, and human dedication in crisis.",
+  "fictionBoundary": "The semantic stream entries mention EU, Italy, France but these countries or EU institutions are not involved in the article's actual events. These are not relevant to the story and do not influence the visual narrative. The story is about a local Estonian art auction technical problem and recovery, no international political or geographical themes apply. The crocodile character is not relevant here as the story is about technology and art, not conflict or war metaphors.",
+  "semanticUse": {
+    "stream-1": {
+      "relevance": "not_relevant",
+      "relatedSceneIndices": [],
+      "visualMotif": "",
+      "visibleConsequence": ": The mention of Italy and EU historical archives does not connect to the auction story and will not be used."
+    },
+    "stream-2": {
+      "relevance": "not_relevant",
+      "relatedSceneIndices": [],
+      "visualMotif": "",
+      "visibleConsequence": "The reference to EU member states and regulations is unrelated to the local Estonian auction and technical issues."
+    },
+    "stream-3": {
+      "relevance": "not_relevant",
+      "relatedSceneIndices": [],
+      "visualMotif": "",
+      "visibleConsequence": "France leaving the EU is unrelated and does not influence the auction or art event."
+    }
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "title": "The Technical Breakdown and Expert Intervention",
+      "storyBeat": "The first scene depicts the moment when the auction system fails under heavy load. Abstract cubist figures represent the organizers and experts analyzing the problem, surrounded by fractured digital motifs symbolizing the glitch and data flow. The tension between human effort and technological failure is central. The setting is a darkened abstract control room blending with the auction environment.",
+      "durationSeconds": 14,
+      "videoPrompt": "The scene opens with fractured cubist figures gathered around abstract digital panels flickering with glitch patterns. The main figure representing the organizer gestures urgently, while others point to broken data streams. The glitch motifs pulse and distort, then experts start stabilizing the digital shapes as the tension eases slightly by the end.",
+      "guernicaId": 3,
+      "selectionReason": "The 'Auge / Glühbirne' figure symbolizes technical modernity, observation, and the ambivalence of technology, fitting the theme of a system failure and expert investigation.",
+      "crocodileAppearance": {
+        "present": false,
+        "role": "",
+        "placement": ""
+      },
+      "stillPrompt": "A dark, abstract cubist mural depicting a tense control room where fractured, mask-like figures with angular faces and elongated limbs gather around glowing, broken digital panels emitting fractured light and glitch patterns. The figures' faces show concern and concentrated effort, their hands pointing and gesturing toward the flickering screens. Jagged, intersecting planes of stained ivory and ash gray form the room, with charcoal-black shadows emphasizing technological tension. The fractured digital motifs float and overlap with the figures, blending human and machine. Reference image 1 shows the auction exhibition's calm gallery wall, reimagined here as an abstract control space with fragmented light. Reference image 2 is the cubist 'Auge / Glühbirne' figure, redrawn as a central expert figure with a glowing eye, integrated into the scene's fractured digital environment. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting."
+    },
+    {
+      "index": 2,
+      "title": "The Auction Resumes with Caution",
+      "storyBeat": "This scene captures the cautious resumption of the auction, with fractured cubist figures representing auctioneers and bidders interacting with a fragmented digital interface symbolizing the repaired system. The atmosphere is still tense but hopeful, with visual motifs of protective barriers and renewed connectivity.",
+      "durationSeconds": 5,
+      "videoPrompt": "The scene begins with a fractured auctioneer figure raising a hand to signal resumption. Digital shards reassemble into clearer forms representing restored connectivity. Bidders appear as fragmented figures cautiously engaging with the interface. The digital environment stabilizes, reflecting growing confidence by the end.",
+      "guernicaId": 5,
+      "selectionReason": "The 'Frau mit Lampe' figure, symbolizing hope, truth, and guidance, suits the theme of renewed trust and careful continuation of the auction.",
+      "crocodileAppearance": {
+        "present": false,
+        "role": "",
+        "placement": ""
+      },
+      "stillPrompt": "A cubist mural showing an auction scene where fractured, angular figures with asymmetrical mask faces gather around an abstract digital podium and screens, representing the auction platform. One central figure holds a stylized lamp emitting soft, muted cobalt-blue light, symbolizing hope and guidance amidst the fractured environment. The digital interface is composed of broken, interlocking planes in stained ivory and ash gray, with charcoal-black outlines suggesting repaired connections and protective barriers. Reference image 1 is the original calm gallery wall, reinterpreted as the auction scene with digital elements. Reference image 2 is the 'Frau mit Lampe' figure, redrawn as the central auctioneer holding the lamp, integrated harmoniously into the scene. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting."
+    },
+    {
+      "index": 3,
+      "title": "Art and Community Resilience",
+      "storyBeat": "The final scene expresses the resilience of the artistic community. Fractured figures representing artists, buyers, and organizers connect through abstract symbolic artworks and physical sculptures, emphasizing human dignity, cultural value, and collaborative recovery. The atmosphere is more open and hopeful, with warm muted gold accents.",
+      "durationSeconds": 7,
+      "videoPrompt": "The scene starts with fractured figures reaching out to one another, exchanging abstract artworks and gestures of solidarity. Sculptures and paintings glow faintly with warm gold highlights. The connections between figures strengthen visually, culminating in a stable, harmonious composition by the end.",
+      "guernicaId": 1,
+      "selectionReason": "The 'Mutter mit totem Kind' figure symbolizes human dignity, loss, and hope for peace, reflecting the community's recovery and cultural resilience despite hardship.",
+      "crocodileAppearance": {
+        "present": false,
+        "role": "",
+        "placement": ""
+      },
+      "stillPrompt": "A cubist mural portraying a group of fractured, mask-like figures symbolizing artists, buyers, and organizers in an abstract space filled with symbolic artworks and sculptures. The figures are connected by angular gestures and shared planes of stained ivory and ash gray, with subtle warm muted gold accents highlighting cultural value and hope. One figure holds a fractured child-like form symbolizing loss and dignity, while others reach out to support and connect. The background suggests an abstract gallery with layered textures and shadows. Reference image 1 is the original art exhibition wall, transformed into an emotional communal space. Reference image 2 is the 'Mutter mit totem Kind' figure, redrawn as a central figure holding the symbolic child, integrated into the scene's emotional core. One continuous dirty cubist mural: faces, hands, bodies, clothing and surroundings share the same aggressively fractured angular planes, coarse charcoal marks, scratched pigment and rough dry-brush texture on aged cracked plaster. Faces are displaced asymmetrical masks; skin is stained ivory and ash-gray paint. Flatten all anatomy into broken painted planes, with the same abstraction and brushstroke scale throughout the sequence. Deep soot black, ash gray and stained ivory bind every figure to its setting."
+    }
+  ]
+}
