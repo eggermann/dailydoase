@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const CAPITALS = [
   { code: 'at', country: 'Austria', city: 'Vienna', latitude: 48.2082, longitude: 16.3738 },
@@ -33,7 +33,8 @@ const CAPITALS = [
 ];
 
 const RADIUS_KM = 100;
-const NEWS_DIRECTORY = './news-capitals';
+const PROJECT_DIRECTORY = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const NEWS_DIRECTORY = join(PROJECT_DIRECTORY, 'eu-reski-news', 'news-capitals');
 
 function getLocalDate(date) {
   const parts = new Intl.DateTimeFormat('en-CA', {

@@ -15,7 +15,7 @@ export function renderReport(record) {
       <p><b>Figurenwahl:</b> ${escapeHtml(scene.selectionReason)}</p>
       ${scene.crocodileAppearance ? `<p><b>Krokodil:</b> ${scene.crocodileAppearance.present ? `${escapeHtml(scene.crocodileAppearance.role)} · ${escapeHtml(scene.crocodileAppearance.placement)}` : 'Weggelassen; passt hier nicht als Metapher.'}</p>` : ''}
       ${figure ? `<div class="reference">${photo(figure.path, 'Figurenreferenz – für diese Szene neu gezeichnet')}</div>` : ''}
-      ${details('Unveränderter GPT-Bildprompt → Seedream', scene.stillPrompt)}
+      ${details(`Unveränderter GPT-Bildprompt → ${record.imageModel || 'Bild-API'}`, scene.stillPrompt)}
       ${filmScene?.videoPrompt ? `<p>Filmstartbild: <a href="${escapeHtml(filmScene.startImagePath)}">${escapeHtml(filmScene.startImagePath)}</a> · ${escapeHtml(filmScene.durationSeconds)} s · image-to-video</p>${details('Video-Prompt für die Film-Generierung', filmScene.videoPrompt)}` : ''}
       ${result ? details('Bild-API · Kosten, Seed, Prompt-Hash', result) : ''}</section>`;
   }).join('');
@@ -24,7 +24,7 @@ export function renderReport(record) {
   *{box-sizing:border-box}body{margin:0;background:#181918;color:#e5e1d7;font:17px/1.6 system-ui}main{max-width:1120px;margin:auto;padding:30px 20px}h1,h2{line-height:1.2}section{background:#252623;border:1px solid #47473e;border-radius:12px;padding:24px;margin:24px 0}img{display:block;max-width:100%;height:auto;margin:auto}figure{margin:16px 0}figcaption{color:#bbb7ab;font-size:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}summary{cursor:pointer;color:#dfc987}details{margin:16px 0}.reference{max-width:230px}a{color:#dfc987}.error{color:#ffa292}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:700px){.grid{grid-template-columns:1fr}}
   </style></head><body><main><h1>Artikel + Semantic Stream → Szenenbild und Filmplan</h1>
   <p>${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)} · ${escapeHtml(record.imageModel)}</p>
-  <p>Gemeldete Bildkosten: $${costs.reduce((a, b) => a + b, 0).toFixed(5)} · GPT separat: ${escapeHtml(record.usage?.total_tokens ?? '–')} Tokens</p>
+  <p>${record.imageProvider === 'hf-flux-klein' ? 'Hugging Face ZeroGPU: GPU-Zeit wird vom Tageskontingent oder Guthaben abgezogen; Space meldet keine GPU-Sekunden.' : `Gemeldete Bildkosten: $${costs.reduce((a, b) => a + b, 0).toFixed(5)}`} · GPT separat: ${escapeHtml(record.usage?.total_tokens ?? '–')} Tokens</p>
   ${record.filmPlan ? `<p>${escapeHtml(record.filmPlan.status)}</p>` : ''}
   ${record.error ? `<p class="error">${escapeHtml(record.error)}</p>` : ''}
   ${record.visualReview ? `<section><h2>Bildprüfung</h2><p>${escapeHtml(record.visualReview.summary)}</p><ul>${record.visualReview.scenes.map((item) => `<li><b>Szene ${item.index}:</b> ${escapeHtml(item.assessment)}</li>`).join('')}</ul></section>` : ''}
@@ -36,7 +36,7 @@ export function renderReport(record) {
   ${(semantic?.entries || []).map((entry) => `<p><b>${escapeHtml(entry.seed.join(' · '))} → ${escapeHtml(entry.item.title)}</b></p>`).join('')}
   ${details('GPT: relevante Begriffe, Szenen und wörtliche Bildmotive', plan?.semanticUse || [])}</section>
   ${plan ? `<section><h2>Automatisch entwickelte Geschichte</h2><p>${escapeHtml(plan.storyPremise)}</p><h3>Bildbeobachtung</h3><p>${escapeHtml(plan.visionAnalysis)}</p><h3>Fakten laut Artikel</h3><ul>${plan.articleFacts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('')}</ul><p><b>Fiktionsgrenze:</b> ${escapeHtml(plan.fictionBoundary)}</p></section>` : ''}
-  ${scenes}<section><h2>Nachvollziehbarkeit</h2><p>GPT erstellt jeden Bildprompt aus den gespeicherten Eingaben. Der Generator übergibt ihn unverändert an die Bild-API.</p>
+  ${scenes}<section><h2>Nachvollziehbarkeit</h2><p>${escapeHtml(record.promptOrigin || 'GPT erstellt jeden Bildprompt aus den gespeicherten Eingaben. Der Generator übergibt ihn unverändert an die Bild-API.')}</p>
   ${record.sourceVersion ? `<p>Generator-Commit: ${escapeHtml(record.sourceVersion.commit)} · Branch: ${escapeHtml(record.sourceVersion.branch || 'detached HEAD')} · ${record.sourceVersion.clean ? 'Code unverändert beim Start' : 'Lokale Codeänderungen beim Start'}</p>` : ''}
   <p>Versionierter Regieprompt: ${escapeHtml(record.directorHash || 'noch nicht geladen')}</p>
   <p><a href="record.json">Laufprotokoll</a> · <a href="semantic-stream.json">Stream-Snapshot</a> · <a href="scene-plan.json">Szenenplan</a> · ${record.filmPlan ? '<a href="film-plan.json">Film-Übergabeplan</a> · ' : ''}${record.filmPlan ? '<a href="film-agent-prompt.md">Anweisung für den Film-Generator</a> · ' : ''}<a href="gpt-request.json">GPT-Eingabe</a> · <a href="gpt-response.json">GPT-Antwort</a> · <a href="director.md">Regieprompt</a></p>

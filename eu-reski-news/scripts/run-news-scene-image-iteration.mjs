@@ -5,11 +5,12 @@ import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:
 import { dirname, join, resolve, basename } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { buildPlanRequest, validatePlan, buildImageTask, defaultWords, imageModel, hash } from '../lib/generator/news-scene/planner.mjs';
-import { renderReport } from '../lib/generator/news-scene/report.mjs';
-import { prepareImageReference } from '../lib/generator/news-scene/reference-images.mjs';
+import { buildPlanRequest, validatePlan, buildImageTask, defaultWords, imageModel, hash } from '../news-scene/planner.mjs';
+import { renderReport } from '../news-scene/report.mjs';
+import { prepareImageReference } from '../news-scene/reference-images.mjs';
+import { generateFluxKleinImage } from '../news-scene/huggingface-flux-klein.mjs';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
   resume: { type: 'string' }, 'article-id': { type: 'string' }, scenes: { type: 'string', default: '3' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
@@ -22,9 +23,10 @@ const { values: options } = parseArgs({ options: {
   'max-scene-seconds': { type: 'string', default: process.env.NEWS_MAX_SCENE_DURATION_SECONDS || '15' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
-  'news-dir': { type: 'string', default: join(root, 'news-capitals') },
-  'output-dir': { type: 'string', default: process.env.NEWS_OUTPUT_DIR || join(root, 'news-capitals', 'generations') },
+  'news-dir': { type: 'string', default: join(root, 'eu-reski-news', 'news-capitals') },
+  'output-dir': { type: 'string', default: process.env.NEWS_OUTPUT_DIR || join(root, 'eu-reski-news', 'GENERATIONS', 'news') },
   'guernica-dir': { type: 'string', default: process.env.GUERNICA_DIRECTORY || '/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert' },
+  'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'prompt-only': { type: 'boolean', default: false }, help: { type: 'boolean' },
 } });
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
@@ -36,7 +38,7 @@ async function save(path, value) {
   await writeFile(temporary, JSON.stringify(value, null, 2) + '\n');
   await rename(temporary, path);
 }
-const redact = (message) => [process.env.OPENAI_API_KEY, process.env.RUNWARE_API_KEY, process.env.RUNWARE_KEY]
+const redact = (message) => [process.env.OPENAI_API_KEY, process.env.RUNWARE_API_KEY, process.env.RUNWARE_KEY, process.env.HF_TOKEN, process.env.HF_API_TOKEN, process.env.HUGGINGFACEHUB_API_TOKEN]
   .filter(Boolean).reduce((text, key) => text.replaceAll(key, '[redacted]'), String(message));
 
 
@@ -56,6 +58,39 @@ function buildFilmPlan(record, directory) {
       startImagePath: record.results[index]?.path ? resolve(directory, record.results[index].path) : null, stillPrompt: scene.stillPrompt,
       videoPrompt: scene.videoPrompt, singleImagePrompt: scene.stillPrompt,
     })),
+  };
+}
+
+function alignSemanticSceneAssignments(response) {
+  const content = response.choices?.[0]?.message?.content;
+  if (typeof content !== 'string') return { response, corrections: [] };
+
+  let plan;
+  try { plan = JSON.parse(content); } catch { return { response, corrections: [] }; }
+
+  const corrections = [];
+  for (const [streamId, entry] of Object.entries(plan.semanticUse || {})) {
+    if (entry.relevance !== 'relevant' || !entry.visualMotif?.trim()) continue;
+    const motif = entry.visualMotif.trim().toLocaleLowerCase();
+    const actualSceneIndices = (plan.scenes || [])
+      .filter((scene) => scene.stillPrompt?.toLocaleLowerCase().includes(motif))
+      .map((scene) => scene.index);
+    const assignedSceneIndices = entry.relatedSceneIndices || [];
+    if (actualSceneIndices.length && actualSceneIndices.join(',') !== assignedSceneIndices.join(',')) {
+      corrections.push({ streamId, motif: entry.visualMotif, from: assignedSceneIndices, to: actualSceneIndices });
+      entry.relatedSceneIndices = actualSceneIndices;
+    }
+  }
+
+  if (!corrections.length) return { response, corrections };
+  return {
+    response: {
+      ...response,
+      choices: response.choices.map((choice, index) => index === 0
+        ? { ...choice, message: { ...choice.message, content: JSON.stringify(plan) } }
+        : choice),
+    },
+    corrections,
   };
 }
 
@@ -210,7 +245,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\n0 or -1 iterations means endless. A live semantic-stream instance stays open across iterations and advances with getNext(). A Taktmuster instance likewise advances across all scenes and iterations. Single-run output: news-capitals/generations/iteration-NNN. Multi-run output: news-capitals/generations/run-NNN/iteration-NNN, with run.json linking each HTML report.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..3] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\n0 or -1 iterations means endless. A live semantic-stream instance stays open across iterations and advances with getNext(). A Taktmuster instance likewise advances across all scenes and iterations. Single-run output: eu-reski-news/GENERATIONS/news/iteration-NNN. Multi-run output: eu-reski-news/GENERATIONS/news/run-NNN/iteration-NNN, with run.json linking each HTML report.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -223,7 +258,10 @@ async function main() {
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
-  if (!openAiKey || (!options['prompt-only'] && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
+  const imageProvider = options['image-provider'];
+  if (!['runware', 'hf-flux-klein'].includes(imageProvider)) throw new Error('Use --image-provider=runware or --image-provider=hf-flux-klein');
+  if (!openAiKey || (!options['prompt-only'] && imageProvider === 'runware' && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
+  if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
   const semanticSource = options.resume ? null : await createSemanticSource();
   const sceneDurations = createSceneDurationStream();
   const endless = iterationLimit === 0 || iterationLimit === -1;
@@ -271,7 +309,9 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 3) throw new Error('Use --scenes=1, 2 or 3');
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
-  if (!openAiKey || (!options['prompt-only'] && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
+  const imageProvider = options['image-provider'];
+  if (!openAiKey || (!options['prompt-only'] && imageProvider === 'runware' && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
+  if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
   const directory = options.resume ? resolve(options.resume) : await allocateIteration(iterationRoot);
   let record;
   try {
@@ -302,7 +342,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
         },
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
         selection: { method: options['article-id'] ? 'article-id' : 'random', draw, candidateCount: candidates.length, aggregateIndex: index },
-        article, sceneCount, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel,
+        article, sceneCount, imageProvider, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
         guernicaDirectory: resolve(options['guernica-dir']), results: [],
       };
     }
@@ -368,7 +408,9 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
       if (raw.error) throw new Error(`GPT error: ${raw.error.message}`);
       let finalResponse = raw;
       try {
-        record.plan = validatePlan(raw, record);
+        const aligned = alignSemanticSceneAssignments(raw);
+        record.semanticIndexCorrections = aligned.corrections;
+        record.plan = validatePlan(aligned.response, record);
       } catch (error) {
         if (!/semantic|motif|crocodile/i.test(error.message)) throw error;
         const revisionRequest = {
@@ -378,7 +420,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
             { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' },
             { role: 'user', content: [{ type: 'text', text: [
               `Your plan failed validation: ${error.message}`,
-              'Revise the whole plan once. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
+              'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English. Translate source-language article details and semantic words; never copy foreign-language terms into model prompts. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
               'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
               'Make the image clearly hand-painted and strongly abstracted: no photorealistic faces, real-person likeness, crests, logos, brand marks, or readable lettering.',
               'Here is the complete previous JSON plan to correct:',
@@ -394,7 +436,9 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
         await save(join(directory, 'gpt-revision-request.json'), revisionLog);
         const revised = await paidRequest(directory, 'gpt-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, revisionRequest);
         if (revised.error) throw new Error(`GPT revision failed: ${revised.error.message}`);
-        record.plan = validatePlan(revised, record);
+        const aligned = alignSemanticSceneAssignments(revised);
+        record.semanticIndexCorrections = aligned.corrections;
+        record.plan = validatePlan(aligned.response, record);
         record.planRevisionReason = error.message;
         finalResponse = revised;
       }
@@ -419,13 +463,20 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot) 
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
         log = { ...task, inputs: { referenceImages: [articleInput.path, figureInput.path] } };
         await save(requestPath, log);
-        console.log(`Scene ${scene.index}: GPT prompt → ${imageModel}`);
-        const raw = await paidRequest(directory, name, 'https://api.runware.ai/v1', runwareKey, [task]);
-        if (raw.errors?.length) throw new Error(`Runware: ${raw.errors.map((error) => error.message || error.code).join('; ')}`);
-        const result = raw.data?.find((item) => item.taskUUID === task.taskUUID && item.imageURL);
-        if (!result) throw new Error('Runware returned no matching image; saved response retained');
-        const output = await download(result.imageURL, directory, `scene-${scene.index}-first-frame`);
-        record.results[index] = { ...output, taskUUID: task.taskUUID, seed: result.seed, cost: result.cost ?? null, promptHash: hash(scene.stillPrompt), referencePaths: [articleInput.path, figureInput.path], referenceMetadata: [articleInput, figureInput].map(({ dataUrl, ...metadata }) => metadata) };
+        console.log(`Scene ${scene.index}: GPT prompt → ${record.imageModel}`);
+        let output;
+        let result;
+        if (imageProvider === 'hf-flux-klein') {
+          result = await generateFluxKleinImage({ prompt: scene.stillPrompt, referencePaths: [join(directory, articleInput.path), join(directory, figureInput.path)], token: process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN, directory, name, seed: randomInt(2_147_483_647) });
+          output = await download(result.imageUrl, directory, `scene-${scene.index}-first-frame`);
+        } else {
+          const raw = await paidRequest(directory, name, 'https://api.runware.ai/v1', runwareKey, [task]);
+          if (raw.errors?.length) throw new Error(`Runware: ${raw.errors.map((error) => error.message || error.code).join('; ')}`);
+          result = raw.data?.find((item) => item.taskUUID === task.taskUUID && item.imageURL);
+          if (!result) throw new Error('Runware returned no matching image; saved response retained');
+          output = await download(result.imageURL, directory, `scene-${scene.index}-first-frame`);
+        }
+        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths: [articleInput.path, figureInput.path], referenceMetadata: [articleInput, figureInput].map(({ dataUrl, ...metadata }) => metadata) };
         await persist();
       }
     }

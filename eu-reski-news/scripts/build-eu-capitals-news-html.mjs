@@ -2,15 +2,15 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const projectDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const newsDirectory = join(projectDirectory, 'news-capitals');
+const projectDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const newsDirectory = join(projectDirectory, 'eu-reski-news', 'news-capitals');
 const aggregateFiles = (await readdir(newsDirectory))
   .filter((file) => /^all-.*\.json$/.test(file))
   .sort()
   .reverse();
 
 if (aggregateFiles.length === 0) {
-  throw new Error('Keine Hauptstadt-Gesamtdatei in ./news-capitals gefunden.');
+  throw new Error('Keine Hauptstadt-Gesamtdatei in ./eu-reski-news/news-capitals gefunden.');
 }
 
 const aggregate = JSON.parse(await readFile(join(newsDirectory, aggregateFiles[0]), 'utf8'));

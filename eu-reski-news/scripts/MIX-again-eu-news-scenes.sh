@@ -2,12 +2,12 @@
 set -eu
 
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
-WORKTREE_ROOT="$(git -C "$SCRIPT_DIR/../../.." rev-parse --show-toplevel)"
+WORKTREE_ROOT="$(git -C "$SCRIPT_DIR/../.." rev-parse --show-toplevel)"
 
 # EU-RESKI · AUSSTELLUNG — news scene image starter
 # Edit this block for the exhibition run, or override values in the environment.
 NEWS_PROFILE="${NEWS_PROFILE:-EU-RESKI Ausstellung}"
-NEWS_OUTPUT_DIR="${NEWS_OUTPUT_DIR:-$WORKTREE_ROOT/news-capitals/generations}"
+NEWS_OUTPUT_DIR="${NEWS_OUTPUT_DIR:-$WORKTREE_ROOT/eu-reski-news/GENERATIONS/news}"
 NEWS_SCENES="${NEWS_SCENES:-3}"
 NEWS_MAX_ITERATIONS="${NEWS_MAX_ITERATIONS:-1}" # 0 or -1 means endless; 1 means one report.
 NEWS_POLLING_TIME_MS="${NEWS_POLLING_TIME_MS:-5000}"
@@ -69,4 +69,4 @@ printf '[%s] scenes/run: %s · max runs: %s · pause: %s ms\n' "$NEWS_PROFILE" "
 printf '[%s] Taktmuster: %s/%s · multiplier %s · duration %s–%s s\n' "$NEWS_PROFILE" "$NEWS_SCENE_LENGTH_TYPE" "$NEWS_SCENE_LENGTH_TAKT" "$NEWS_SCENE_LENGTH_MULTIPLIER" "$NEWS_MIN_SCENE_DURATION_SECONDS" "$NEWS_MAX_SCENE_DURATION_SECONDS"
 
 exec node --env-file="$WORKTREE_ROOT/.env" \
-  "$WORKTREE_ROOT/scripts/run-news-scene-image-iteration.mjs" "$@"
+  "$SCRIPT_DIR/run-news-scene-image-iteration.mjs" "$@"

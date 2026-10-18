@@ -1,8 +1,15 @@
 # Automatic EU news scene generation
 
+EU-News-Code ist hier gebündelt:
+
+- `scripts/`: Abruf, HTML-Erstellung und EU-RESKI-Startskript samt Iterationsgenerator.
+- `news-scene/`: Regieanweisung, Planung, Bildreferenzen, Provider und HTML-Bericht.
+- `news-capitals/`: News-Quelldaten.
+- `GENERATIONS/news/`: generierte Szenenläufe und HTML-Berichte.
+
 `Article + article photo + semantic-stream fragments + Guernica catalog → GPT story, still and motion prompts → Seedream first frames → film-plan.json → HTML audit report`.
 
-The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph.
+The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API.
 
 ## Run
 
@@ -12,7 +19,7 @@ From the repository root, with Node 22+ and dependencies installed:
 npm run news:story
 ```
 
-The EU-RESKI shell starter writes under the worktree root at `news-capitals/generations/iteration-NNN`. Its editable settings block controls scene count, article/semantic inputs, iteration count, and Taktmuster timing. Each report contains one still per scene plus the film handoff. Source articles remain in the checkout's `news-capitals` directory.
+The EU-RESKI shell starter writes under `eu-reski-news/GENERATIONS/news/iteration-NNN`. Its editable settings block controls scene count, article/semantic inputs, iteration count, and Taktmuster timing. Each report contains one still per scene plus the film handoff. Source articles remain in `eu-reski-news/news-capitals`.
 
 For the next Codex turn, use this instruction: “Run `npm run news:story`, open the generated HTML, and review the three start images. Keep the image-only API workflow, strong abstract Guernica-style painting, article-grounded story, meaningful relevant semantic motifs, and optional crocodile. Do not commit generated images or secrets.”
 
@@ -25,31 +32,33 @@ npm run news:story -- --scenes=1
 For direct control of flags and resume behavior, use the Node command below.
 
 ```sh
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs
 ```
 
-Requires `OPENAI_API_KEY`, `RUNWARE_API_KEY` (or `RUNWARE_KEY`), a saved `news-capitals/all-*.json` collection, and the Guernica PNG catalog. `GUERNICA_DIRECTORY` or `--guernica-dir=/path` overrides the local asset directory. `NEWS_STORY_MODEL` overrides `gpt-4.1-mini`; the replacement must support vision, Chat Completions structured output and the supplied sampling parameters.
+Requires `OPENAI_API_KEY`, `RUNWARE_API_KEY` (or `RUNWARE_KEY`), a saved `eu-reski-news/news-capitals/all-*.json` collection, and the Guernica PNG catalog. `GUERNICA_DIRECTORY` or `--guernica-dir=/path` overrides the local asset directory. `NEWS_STORY_MODEL` overrides `gpt-4.1-mini`; the replacement must support vision, Chat Completions structured output and the supplied sampling parameters.
+
+For the separate Hugging Face adapter, set `HF_TOKEN` in `.env`, then run `npm run news:story -- --image-provider=hf-flux-klein`. It uses the Space's `/generate` endpoint, distilled 16-step mode, 1680×944 output and both article/figure references. Runware remains unchanged and default. Hugging Face ZeroGPU consumes account GPU quota or prepaid credits; the Space does not report per-image GPU seconds, so exact per-image dollar cost is not recorded. Do not commit `.env` or tokens.
 
 Default: newest saved aggregate by filename, random article with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one Seedream 5.0 Flash still per scene. One Taktmuster rhythm instance stays alive for the whole process, advancing once per scene across iteration boundaries. Default balanced takt is 3 with a 3.5 multiplier; durations are rounded and clamped to 5–15 seconds. The news starter defaults to one run; set `NEWS_MAX_ITERATIONS=0` or `-1` for an endless run. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
 
 ```sh
 # One scene / one image for a small iteration
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs --scenes=1
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --scenes=1
 
 # Reuse a particular eligible article from the newest saved aggregate
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs --article-id=472860428
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --article-id=472860428
 
 # Different semantic seeds (comma-separated words use German)
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs --words=EU,Frieden,Erinnerung
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --words=EU,Frieden,Erinnerung
 
 # Multilingual seeds file: [["EU","de"],["Europe","en"],["Европа","ru"]]
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs --words-file=words.json
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --words-file=words.json
 
 # Generate GPT prompts and HTML first, with no image API calls
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs --prompt-only
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --prompt-only
 
 # Continue that exact iteration, retaining article, semantic snapshot and GPT plan
-node --env-file=.env scripts/run-news-scene-image-iteration.mjs --resume=/absolute/path/to/iteration-008
+node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --resume=/absolute/path/to/iteration-008
 ```
 
 `--news-dir` selects another source collection directory. `--output-dir` selects the generation root directly. `--stream-module` (or `NEWS_SEMANTIC_STREAM_MODULE`) can select the absolute entry point of an existing semantic-stream installation for a worktree without node_modules. Use the current semantic-stream package (3.0.5 was used for the live example). The package handles sequential Wikipedia requests and throttling.

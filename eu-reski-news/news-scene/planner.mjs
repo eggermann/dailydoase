@@ -4,6 +4,12 @@ import { createHash } from 'node:crypto';
 export const imageModel = 'bytedance:seedream@5.0-flash';
 export const defaultWords = [['EU', 'de'], ['EU', 'en'], ['EU', 'ru']];
 export const hash = (value) => createHash('sha256').update(value).digest('hex');
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const containsUntranslatedStreamTerm = (text, entry) => {
+  const [word, language] = entry.seed || [];
+  if (!word || language === 'en' || word.length < 4 || /^[A-Z]{2,}$/.test(word)) return false;
+  return new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRegex(word)}([^\\p{L}\\p{N}]|$)`, 'iu').test(text);
+};
 const string = { type: 'string' };
 const list = (items) => ({ type: 'array', items });
 const object = (properties) => ({ type: 'object', additionalProperties: false, required: Object.keys(properties), properties });
@@ -66,6 +72,11 @@ export function validatePlan(response, { sceneCount, catalog, semantic }) {
     if (!Number.isInteger(scene.durationSeconds) || scene.durationSeconds < 5 || scene.durationSeconds > 15) throw new Error('Invalid scene duration');
     if (typeof scene.stillPrompt !== 'string' || scene.stillPrompt.length < 200 || scene.stillPrompt.length > 10000) throw new Error('Invalid still prompt length');
     if (typeof scene.videoPrompt !== 'string' || scene.videoPrompt.length < 80 || scene.videoPrompt.length > 5000) throw new Error('Invalid scene video prompt');
+    for (const streamEntry of semantic.entries) {
+      if (containsUntranslatedStreamTerm(scene.stillPrompt, streamEntry) || containsUntranslatedStreamTerm(scene.videoPrompt, streamEntry)) {
+        throw new Error('Image and video prompts must be English; translate semantic-stream terms instead of copying source-language words');
+      }
+    }
     if (!scene.crocodileAppearance?.present && (scene.crocodileAppearance?.role || scene.crocodileAppearance?.placement)) throw new Error('An absent crocodile must not have a role or placement');
     if (scene.crocodileAppearance?.present && (!/\bcrocodile\b/i.test(scene.stillPrompt) || !scene.crocodileAppearance.role.trim() || !scene.crocodileAppearance.placement.trim())) throw new Error('A chosen crocodile requires a meaningful role and visible description in the image prompt');
   }
@@ -74,7 +85,6 @@ export function validatePlan(response, { sceneCount, catalog, semantic }) {
   if (JSON.stringify(expected) !== JSON.stringify(actual)) throw new Error('GPT must assess each semantic entry exactly once');
   const relevantEntries = Object.values(plan.semanticUse);
   const relevant = relevantEntries.filter((entry) => entry.relevance === 'relevant');
-  if (!relevant.length) throw new Error('No semantic word was judged relevant to this story');
   for (const entry of relevant) {
     if (!entry.relatedSceneIndices.length || !entry.visualMotif.trim() || entry.visibleConsequence.trim().length < 30) throw new Error('A relevant semantic word needs a concrete visual motif and scene');
     for (const sceneIndex of entry.relatedSceneIndices) {
