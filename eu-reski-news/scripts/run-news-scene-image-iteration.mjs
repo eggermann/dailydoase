@@ -77,7 +77,7 @@ const sceneStaging = {
 function addDistinctSceneStaging(scenes) {
   return scenes.map((scene) => ({
     ...scene,
-    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence.${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for broad visual orientation only; do not reproduce identifiable people, exact composition, logos or text.' : ''}`,
+    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence.${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.' : ''}`,
   }));
 }
 
