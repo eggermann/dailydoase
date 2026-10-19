@@ -117,7 +117,12 @@ function alignSemanticSceneAssignments(response) {
 async function allocateIteration(outputDirectory) {
   const directory = resolve(outputDirectory);
   await mkdir(directory, { recursive: true });
-  for (let index = 1; index < 10000; index += 1) {
+  const existing = await readdir(directory);
+  const highest = existing.reduce((maximum, name) => {
+    const match = /^iteration-(\d+)$/.exec(name);
+    return match ? Math.max(maximum, Number(match[1])) : maximum;
+  }, 0);
+  for (let index = highest + 1; index < 10000; index += 1) {
     const path = join(directory, `iteration-${String(index).padStart(3, '0')}`);
     try { await mkdir(path); return path; } catch (error) { if (error.code !== 'EEXIST') throw error; }
   }
