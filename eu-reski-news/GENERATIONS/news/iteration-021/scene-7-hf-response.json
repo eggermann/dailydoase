@@ -1,0 +1,19 @@
+{
+  "eventId": "acb8ed7ecd894fcb91570066d3e4068e",
+  "data": [
+    {
+      "path": "/tmp/gradio/4fa6b16c49f05aa1aa1a172be5c46e6e93e5bef8a0f9345bd48b2840754b3383/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/4fa6b16c49f05aa1aa1a172be5c46e6e93e5bef8a0f9345bd48b2840754b3383/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    590192208,
+    "Create an original severe monochrome cubist protest mural filling the entire frame, using the first image only as a style and identity cue for Alexandre: preserve his angular profile identity through a recurring figure seen over the shoulder, but transform him into an anonymous, fragmented presence rather than a portrait. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, and hard black. Alexandre’s shoulder anchors the off-center lower-right area while his broken torso twists into the unstable composition; both arms rise slightly above it in a cautious, open gesture, hands divided into blunt angular shards. Surround him with colliding, overlapping figures whose limbs, torsos, and faces break across one another. Every face is a split mask: one eye frontal, the other in profile, with displaced noses and mouths occupying opposing planes. Render no naturalistic anatomy, hair, or recognizable people. Build the surrounding fractured space from rough black charcoal strokes, blunt brush smears, raw hatching, uneven ink contours, scraped plaster, and deliberate gaps. Swirling shards, jagged architectural slabs, and compressed silhouettes spiral around Alexandre as symbols of instability and unresolved conflict. Use almost no color, with no blue, red, flags, stars, stripes, maps, emblems, logos, or readable text. Avoid smooth gradients, clean geometry, vector edges, realistic volume, and polished illustration."
+  ],
+  "completedAt": "2026-10-19T12:24:53.203Z"
+}

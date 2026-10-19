@@ -1,0 +1,19 @@
+{
+  "eventId": "e47d2bb243094777949a39b10f39505b",
+  "data": [
+    {
+      "path": "/tmp/gradio/8b615cfee62282f5762698044911af52bb1e357fd186f7ff9b464f52c936e7a4/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/8b615cfee62282f5762698044911af52bb1e357fd186f7ff9b464f52c936e7a4/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1488415950,
+    "Create an original severe monochrome cubist protest mural filling the entire frame, using the first image only as a style and identity cue for Alexandre’s profile silhouette, never as a copied composition. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, rough black charcoal strokes, blunt smears, raw hatching, uneven ink contours, and deliberate gaps. Build an unstable, off-center entanglement in which two enormous fractured human forms collide and pull apart: one mass at frame-left and another at frame-right, their opposing shoulders, arms, and broken limbs straining against each other like opposing forces. Make the left mass symbolize the US and the right mass symbolize China only through anonymous angular anatomy, with no flags, stars, stripes, maps, emblems, or readable text. Their bodies split into interlocking black and ivory planes that pull outward, expressing hostile division. Alexandre recoils slightly near the center, integrated into the fracture, his raised hand thrust upward and his profile silhouette derived from the first image’s profile crop. His mask-like face is split across opposing planes, with one eye frontal, the other in profile, and nose and mouth displaced. Surround him with repeated angular echoes of his profile, but no naturalistic features. Every face is a collision of split masks, distorted limbs, and architecture. Use only hard black and dirty ivory, with no blue, red, gradients, polished geometry, or smooth vector edges."
+  ],
+  "completedAt": "2026-10-19T12:23:38.489Z"
+}

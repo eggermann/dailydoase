@@ -1,0 +1,17 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "9a5ef080-aa61-4ed0-8cd4-56920ccdf3b1",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "An original, severe monochrome cubist protest mural, not a portrait or polished illustration. Flatten space into one crowded, shallow plane; figures collide and overlap with architecture, limbs broken into angular fragments and proportions deliberately distorted. Every face is a split mask: one eye frontal, the other in profile, nose and mouth shifted onto opposing planes. No naturalistic skin, hair, handsome faces or recognizable people. Use rough black charcoal strokes, blunt brush smears, scratched dirty ivory and soot gray, uneven ink contours, scraped plaster, raw hatching and deliberate gaps. Hard black-and-ivory contrast; almost no color. No blue or red national fields, flags, stars, stripes, maps, emblems, logos or readable text. Keep Alexandre a recurring angular figure, integrated into the same broken surface, recognizable by the selected figure crop only. No full-painting image reference is supplied; derive style from these words. Do not copy any source figure, story, symbol or layout. Let the scene action drive an off-center, entangled, unstable composition. Avoid clean geometric polish, cinematic lighting, smooth gradients, realistic anatomy, 3D volume, vector edges and portrait likeness. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/05_frau_mit_lampe.png"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "eventId": "f8faad6d75c94595811d9f39d545b630",
+  "data": [
+    {
+      "path": "/tmp/gradio/95cfc08d147234d92553ba4f3454ddb4fda5f166223cc5d3068af8d95ef50378/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/95cfc08d147234d92553ba4f3454ddb4fda5f166223cc5d3068af8d95ef50378/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    93811959,
+    "Create an original severe monochrome cubist protest mural filling the entire frame, using the first image only as a style and identity cue for Alexandre’s recurring angular face, never as a copied composition. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, and rough black charcoal. At center, two enormous abstracted figures collide in a tense handshake, their interlocked hands split across opposing planes and their bodies reduced to jagged limbs, blunt smears, and fractured black masses representing the US and China without any national symbols. Alexandre stands off-center, large and unmistakable, cautiously observing them with a restrained, tense posture; derive his identity from the first image’s selected profile crop, but transform him into a split mask with one eye frontal and the other in profile, nose and mouth displaced onto opposing planes. His face is asymmetrical, mask-like, and anonymous, with no naturalistic features. Surround the handshake with overlapping figures, broken limbs, and architecture fused into the same unstable surface. Behind them, opposing soot-black and dirty-ivory masses collide like a fractured wall. Use uneven ink contours, raw hatching, scratched plaster, deliberate gaps, and rough charcoal strokes. Almost no color; no blue, red, flags, stars, stripes, maps, emblems, logos, or readable text."
+  ],
+  "completedAt": "2026-10-19T12:23:23.744Z"
+}

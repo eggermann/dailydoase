@@ -1,0 +1,19 @@
+{
+  "eventId": "27644b0c805c4c0eac2873a043322177",
+  "data": [
+    {
+      "path": "/tmp/gradio/d9213bb75c54a47bd4779554a62126ade41f456aac94b20d7a19b7e7910a2d22/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/d9213bb75c54a47bd4779554a62126ade41f456aac94b20d7a19b7e7910a2d22/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    264897608,
+    "Create an original severe monochrome cubist protest mural filling the frame, using the first image only as a style and identity cue for Alexandre’s recurring angular presence, never as a copied portrait or layout. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, rough black charcoal strokes, blunt smears, raw hatching, uneven ink contours, and deliberate gaps. Alexandre appears high above the center as a tense, anxious figure compressed into an off-center, unstable tangle, his body reduced to broken limbs and jagged planes that collide with anonymous figures and fractured architectural slabs. His face is a split mask: one eye frontal, the other in profile, with the nose and mouth displaced across opposing planes, conveying concern without naturalistic features. Surround him with repeated partial mask fragments of Alexandre, all anonymous and distorted, with no recognizable people. Make the Taiwan flashpoint only a small jagged island-shaped shard of dirty ivory near the lower center, embedded within the narrowing black field rather than a literal map. A single small dirty-ochre scar cuts diagonally through this shard, the only color accent. Keep the composition almost entirely black and ivory, with no blue, red, flags, stars, stripes, maps, emblems, logos, or readable text; avoid smooth gradients, realistic anatomy, polished geometry, and vector edges."
+  ],
+  "completedAt": "2026-10-19T12:24:24.309Z"
+}

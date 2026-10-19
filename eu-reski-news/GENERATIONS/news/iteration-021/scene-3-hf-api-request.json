@@ -1,0 +1,23 @@
+{
+  "prompt": "An original, severe monochrome cubist protest mural, not a portrait or polished illustration. Flatten space into one crowded, shallow plane; figures collide and overlap with architecture, limbs broken into angular fragments and proportions deliberately distorted. Every face is a split mask: one eye frontal, the other in profile, nose and mouth shifted onto opposing planes. No naturalistic skin, hair, handsome faces or recognizable people. Use rough black charcoal strokes, blunt brush smears, scratched dirty ivory and soot gray, uneven ink contours, scraped plaster, raw hatching and deliberate gaps. Hard black-and-ivory contrast; almost no color. No blue or red national fields, flags, stars, stripes, maps, emblems, logos or readable text. Keep Alexandre a recurring angular figure, integrated into the same broken surface, recognizable by the selected figure crop only. No full-painting image reference is supplied; derive style from these words. Do not copy any source figure, story, symbol or layout. Let the scene action drive an off-center, entangled, unstable composition. Avoid clean geometric polish, cinematic lighting, smooth gradients, realistic anatomy, 3D volume, vector edges and portrait likeness. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world.",
+  "input_images": [
+    {
+      "image": {
+        "path": "/tmp/gradio/818f1cf1cb07c273f51990c390051cb8b28b84fbf116393bedbe05e4fa6980a0/05_frau_mit_lampe.png",
+        "meta": {
+          "_type": "gradio.FileData"
+        },
+        "orig_name": "05_frau_mit_lampe.png"
+      },
+      "caption": null
+    }
+  ],
+  "mode_choice": "Distilled (16 steps)",
+  "randomize_seed": false,
+  "width": 1680,
+  "height": 944,
+  "num_inference_steps": 16,
+  "guidance_scale": 1,
+  "prompt_upsampling": true,
+  "seed": 1049068161
+}

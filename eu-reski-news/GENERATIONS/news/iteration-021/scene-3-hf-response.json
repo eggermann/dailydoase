@@ -1,0 +1,19 @@
+{
+  "eventId": "6b85f0267d1e4e3ba068a2be4057b7bd",
+  "data": [
+    {
+      "path": "/tmp/gradio/e51f701e3c023835fb52a374d91accbd1b62bcb999220b2775bc80fe28323019/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/e51f701e3c023835fb52a374d91accbd1b62bcb999220b2775bc80fe28323019/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1049068161,
+    "Create an original severe monochrome cubist protest mural filling the frame, using the first image only as a style and identity cue for Alexandre’s recurring angular presence, never reproducing its portrait or layout. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, and rough black charcoal. Build an unstable composition on a dynamic oblique diagonal: fragmented soldiers, anonymous bodies, broken limbs, and architectural slabs collide and overlap without conventional depth. Alexandre rises off-center, recognizable only through the selected profile crop from the first image, his face transformed into a split mask with one eye frontal and the other in profile, nose and mouth displaced across opposing planes. He raises an abstracted lamp overhead, its angular body assembled from jagged shards; a faint muted ivory glow spreads through the surrounding fractures. Around it, opposing ranks of distorted figures press against blocky, anonymous architectural masses symbolizing rising military tension and power struggles between the US and China, without flags, maps, emblems, or national fields. Render every face as a fractured mask, with limbs reduced to blunt wedges and raw hatching. Use uneven ink contours, charcoal smears, scratches, deliberate gaps, and scraped plaster. Include no blue, red, text, logos, stars, or readable symbols; keep the entire image hard black-and-ivory, raw, severe, and unstable."
+  ],
+  "completedAt": "2026-10-19T12:23:53.062Z"
+}

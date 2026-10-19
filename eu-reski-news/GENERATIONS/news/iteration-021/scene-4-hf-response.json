@@ -1,0 +1,19 @@
+{
+  "eventId": "cdd4d018875f499b9836db4b90622a2f",
+  "data": [
+    {
+      "path": "/tmp/gradio/099cd89f927b892478532ed3d3defa26bd675354a9416cea9ed7d88155cf8d0e/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/099cd89f927b892478532ed3d3defa26bd675354a9416cea9ed7d88155cf8d0e/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1756745422,
+    "Create an original severe monochrome cubist protest mural filling the entire frame, using the first image only as a style and identity cue for Alexandre’s recurring angular presence, never reproducing its portrait layout. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, rough black charcoal strokes, blunt smears, raw hatching, uneven ink contours, and deliberate gaps. Alexandre stands low in the composition, reduced to a recurring fractured figure with the selected profile crop suggested only through a split mask: one eye frontal, the other in profile, nose and mouth displaced across opposing planes. He thrusts both outstretched hands upward and outward, trying to mediate between jagged tariff barriers, broken columns, tilted slabs, and interlocking wedges that collide like economic walls. Surround him with anonymous split faces, severed limbs, bent hands, and distorted bodies pressed into the same unstable surface. Make the barriers rise as sharp black wedges, serrated ramps, and compressed blocks that crush the figures around them, conveying escalating trade-war conflict and fragile diplomacy. Use almost no color, only hard black and dirty ivory. Exclude blue, red, national fields, flags, stars, stripes, maps, emblems, logos, and readable text. Avoid smooth gradients, realistic anatomy, polished geometry, vector edges, cinematic lighting, and any isolated portrait presentation."
+  ],
+  "completedAt": "2026-10-19T12:24:08.118Z"
+}

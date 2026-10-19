@@ -1,0 +1,17 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "f83152f3-6765-496e-8253-89217298ee44",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "An original, severe monochrome cubist protest mural, not a portrait or polished illustration. Flatten space into one crowded, shallow plane; figures collide and overlap with architecture, limbs broken into angular fragments and proportions deliberately distorted. Every face is a split mask: one eye frontal, the other in profile, nose and mouth shifted onto opposing planes. No naturalistic skin, hair, handsome faces or recognizable people. Use rough black charcoal strokes, blunt brush smears, scratched dirty ivory and soot gray, uneven ink contours, scraped plaster, raw hatching and deliberate gaps. Hard black-and-ivory contrast; almost no color. No blue or red national fields, flags, stars, stripes, maps, emblems, logos or readable text. Keep Alexandre a recurring angular figure, integrated into the same broken surface, recognizable by the selected figure crop only. No full-painting image reference is supplied; derive style from these words. Do not copy any source figure, story, symbol or layout. Let the scene action drive an off-center, entangled, unstable composition. Avoid clean geometric polish, cinematic lighting, smooth gradients, realistic anatomy, 3D volume, vector edges and portrait likeness. Alexandre stands low-angle framed among jagged, intersecting planes representing tariffs and economic barriers of the trade war. He gestures with outstretched hands as if trying to mediate between the fractured spaces. The scene conveys escalating conflict and fragile diplomacy through sharp contrasts and angular fractures.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/05_frau_mit_lampe.png"
+    ]
+  }
+}

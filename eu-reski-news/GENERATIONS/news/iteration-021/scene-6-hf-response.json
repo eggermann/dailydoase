@@ -1,0 +1,19 @@
+{
+  "eventId": "6fe08186f9d84e968a8efeb8c9c65357",
+  "data": [
+    {
+      "path": "/tmp/gradio/b3bf69eda55fb22fb1133d0ac5b22b856320fbc297483a1034ee28fce7e23faf/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/b3bf69eda55fb22fb1133d0ac5b22b856320fbc297483a1034ee28fce7e23faf/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1419863093,
+    "Create an original severe monochrome cubist protest mural filling the entire frame, using the first image only as a style and identity cue for Alexandre’s recurring angular presence, never reproducing its source composition. Flatten space into one crowded, shallow plane of scraped dirty-ivory plaster, soot gray, rough black charcoal strokes, blunt smears, raw hatching, uneven ink contours, and deliberate gaps. In the foreground, place Alexandre as a fragmented mask-like figure derived from the selected profile crop in the reference, but transform him into an off-center, unstable face with one eye frontal and the other in profile, nose and mouth displaced across opposing planes; his brow angles upward in apprehension as he observes the mass. Surround him with broken limbs, bent hands, and shards of his body colliding with a towering anonymous leader-shaped mass rising from fractured ground, an immense black-and-ivory silhouette with a broad chest, severe shoulders, and an indistinct head that suggests reasserted state power without resembling any real person. Radiate sharp angular planes around this mass like force and determination. Every other face is a split mask with conflicting frontal and profile features. Use no natural anatomy, color, flags, stars, stripes, maps, emblems, logos, or readable text; only hard black and dirty ivory, with no smooth gradients or polished geometry."
+  ],
+  "completedAt": "2026-10-19T12:24:38.750Z"
+}
