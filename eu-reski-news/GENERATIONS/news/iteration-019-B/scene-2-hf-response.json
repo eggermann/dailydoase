@@ -1,0 +1,19 @@
+{
+  "eventId": "0bbe9f75e3294d3584651ef742ef486b",
+  "data": [
+    {
+      "path": "/tmp/gradio/85897b0415464ec711c0d5e752ebb3398c7cd2ad271c6079f01751d1368fbd68/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/85897b0415464ec711c0d5e752ebb3398c7cd2ad271c6079f01751d1368fbd68/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    2036532211,
+    "Create an original dark cubist mural, hand-painted across a full-frame field of fractured shallow space, with no border and no pasted reference image. Use the first image only as a guide for Alexandre’s abstract profile identity and recoiling gesture, fully redrawing him rather than reproducing it. Alexandre appears near the center as a charcoal-black profile silhouette recoiling slightly, his mask-like stained-ivory face turned toward frame-left, with a tense brow, compressed mouth, and one angular hand raised defensively. Interlock his head, neck, and raised arm into irregular planes of charcoal black, ash gray, and stained ivory bounded by sharp dry-charcoal contours. Surround him with two enormous fractured symbolic figures representing the US and China, pulling apart in opposite directions: the frame-left figure bears an abstract angular suggestion of a fractured eagle and star-like geometry, while the frame-right figure carries a broken dragon and mountain-like geometry, both reduced to equally abstract shards without literal flags. Their opposing bodies strain away from each other, connected only by snapped diagonal fissures and taut triangular planes. Express rising hostility through jagged separation, opposing thrusts, and compressed negative space. Cover the entire surface with rough oil scumbling, scraped aged plaster, chipped edges, and uneven pigment absorption. Keep the palette near-monochrome, with no additional colors and no text."
+  ],
+  "completedAt": "2026-10-19T11:39:34.809Z"
+}

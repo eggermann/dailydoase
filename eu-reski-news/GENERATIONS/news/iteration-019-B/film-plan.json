@@ -1,0 +1,57 @@
+{
+  "formatVersion": 1,
+  "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-019-B",
+  "sourceCommit": "a52d3184d08a3338e9d0332ca7601289882d94c1",
+  "article": {
+    "title": "Etats-Unis - Chine : le clash des superpuissances",
+    "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+    "publish_date": "2026-10-18 16:00:00"
+  },
+  "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+  "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+  "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+  "scenePlan": [
+    {
+      "index": 1,
+      "title": "Cold Confrontation",
+      "beat": "Alexandre stands between two imposing fractured flag planes of the US and China, witnessing a tense handshake that barely conceals hostility and distrust between the two leaders.",
+      "storyBeat": "Alexandre stands between two imposing fractured flag planes of the US and China, witnessing a tense handshake that barely conceals hostility and distrust between the two leaders.",
+      "durationSeconds": 14,
+      "requestedDurationSeconds": 14,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-019-B/media/scene-1-first-frame.png",
+      "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Keep the fictional protagonist large and unmistakable. No photorealism, smooth digital rendering, copied symbols or composition. Alexandre stands cautiously observing a tense handshake between two large abstracted figures representing the US and China. Behind them are fractured, interlocking planes of their respective flags. Alexandre's face is mask-like and asymmetrical, his posture restrained and tense. The scene conveys fragile diplomacy and mutual distrust through angular gestures and stark contrasts.",
+      "videoPrompt": "The scene begins with Alexandre standing centered between two abstracted, fractured flag forms representing the US and China. The handshake of two large, angular, masked figures takes place front and center, tense and controlled. Alexandre shifts his gaze slowly from one figure to the other, his body subtly contracting in cautious observation. The camera slowly zooms in, emphasizing the spatial tension between the figures and the protagonist, then holds steady as the handshake ends with unresolved hostility.",
+      "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Keep the fictional protagonist large and unmistakable. No photorealism, smooth digital rendering, copied symbols or composition. Alexandre stands cautiously observing a tense handshake between two large abstracted figures representing the US and China. Behind them are fractured, interlocking planes of their respective flags. Alexandre's face is mask-like and asymmetrical, his posture restrained and tense. The scene conveys fragile diplomacy and mutual distrust through angular gestures and stark contrasts."
+    },
+    {
+      "index": 2,
+      "title": "Rising Hostility",
+      "beat": "The diplomatic facade cracks as Alexandre witnesses a cold, distant meeting symbolized by sharp, fragmented planes separating the two figures, emphasizing growing hostility and mistrust.",
+      "storyBeat": "The diplomatic facade cracks as Alexandre witnesses a cold, distant meeting symbolized by sharp, fragmented planes separating the two figures, emphasizing growing hostility and mistrust.",
+      "durationSeconds": 5,
+      "requestedDurationSeconds": 5,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-019-B/media/scene-2-first-frame.png",
+      "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment.",
+      "videoPrompt": "The camera profile shifts to show Alexandre in silhouette reacting with a subtle recoil and raised hand. The two abstracted figures representing US and China move slightly apart, their fractured planes sharpening and darkening, increasing the visual tension. Alexandre's body language tightens in response, then slowly steadies as the cold encounter persists. The camera holds on this tense spatial relationship until the scene ends.",
+      "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment."
+    },
+    {
+      "index": 3,
+      "title": "Approaching Confrontation",
+      "beat": "As military tensions rise, Alexandre stands amid fragmented symbols of power and conflict, embodying the fragile hope for peace amid looming confrontation.",
+      "storyBeat": "As military tensions rise, Alexandre stands amid fragmented symbols of power and conflict, embodying the fragile hope for peace amid looming confrontation.",
+      "durationSeconds": 7,
+      "requestedDurationSeconds": 7,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-019-B/media/scene-3-first-frame.png",
+      "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world.",
+      "videoPrompt": "The camera moves diagonally upward across the scene, focusing on Alexandre who raises a small abstracted lamp. The fragmented planes around him shift subtly, some darkening while others light up with muted color. Alexandre’s upward gesture and faint glowing light suggest hope and illumination despite the fractured, tense environment. The camera slowly pulls back, showing the expanding, unstable space as the scene ends.",
+      "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world."
+    }
+  ]
+}

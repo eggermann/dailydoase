@@ -19,9 +19,12 @@ export const planSchema = object({
   articleFacts: list(string),
   storyPremise: string,
   fictionBoundary: string,
+  protagonist: object({ name: string, role: string, visualIdentity: string, guernicaId: { type: 'integer', minimum: 1, maximum: 9 } }),
   semanticUse: object({}), // Filled with one relevance decision per stream entry.
   scenes: list(object({
     index: { type: 'integer', minimum: 1, maximum: 3 }, title: string, storyBeat: string,
+    protagonistAction: string,
+    composition: { type: 'string', enum: ['wide_establishing', 'intimate_close_up', 'oblique_diagonal', 'high_angle', 'low_angle', 'profile_silhouette', 'over_the_shoulder', 'foreground_frame', 'top_down'] },
     durationSeconds: { type: 'integer', minimum: 5, maximum: 15 },
     videoPrompt: { type: 'string', minLength: 80, maxLength: 5000 },
     guernicaId: { type: 'integer', minimum: 1, maximum: 9 },
@@ -39,7 +42,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   const content = [{ type: 'text', text: JSON.stringify(data) }];
   for (const image of images) {
     content.push({ type: 'text', text: image.label });
-    content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: image.role === 'article' ? 'high' : 'low' } });
+    content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: image.role === 'article' || image.role === 'style' ? 'high' : 'low' } });
   }
   const schema = structuredClone(planSchema);
   schema.properties.scenes.items.properties.index.maximum = sceneCount;
@@ -66,9 +69,13 @@ export function validatePlan(response, { sceneCount, catalog, semantic }) {
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return a complete plan');
   const plan = JSON.parse(choice.message.content);
   if (!Array.isArray(plan.scenes) || plan.scenes.length !== sceneCount) throw new Error('Incorrect scene count');
-  const ids = new Set(catalog.map((item) => item.id));
+  const figureIds = new Set(catalog.map((item) => item.id));
+  if (!plan.protagonist?.name?.trim() || !plan.protagonist.role?.trim() || !plan.protagonist.visualIdentity?.trim() || !figureIds.has(plan.protagonist.guernicaId)) {
+    throw new Error('The story needs one named protagonist with a valid Guernica character reference');
+  }
   for (const [index, scene] of plan.scenes.entries()) {
-    if (scene.index !== index + 1 || !ids.has(scene.guernicaId)) throw new Error('Invalid scene index or Guernica id');
+    if (scene.index !== index + 1 || scene.guernicaId !== plan.protagonist.guernicaId || !scene.protagonistAction?.toLocaleLowerCase().includes(plan.protagonist.name.toLocaleLowerCase()) || !scene.selectionReason?.trim()) throw new Error('Every scene must show the same named main character and selected figure reference');
+    if (!scene.composition || new Set(plan.scenes.slice(0, index).map((item) => item.composition)).has(scene.composition)) throw new Error('Each scene needs a distinct composition');
     if (!Number.isInteger(scene.durationSeconds) || scene.durationSeconds < 5 || scene.durationSeconds > 15) throw new Error('Invalid scene duration');
     if (typeof scene.stillPrompt !== 'string' || scene.stillPrompt.length < 200 || scene.stillPrompt.length > 10000) throw new Error('Invalid still prompt length');
     if (typeof scene.videoPrompt !== 'string' || scene.videoPrompt.length < 80 || scene.videoPrompt.length > 5000) throw new Error('Invalid scene video prompt');
@@ -99,7 +106,7 @@ export function validatePlan(response, { sceneCount, catalog, semantic }) {
 }
 
 export function buildImageTask(scene, taskUUID, referenceImages) {
-  if (referenceImages.length !== 2) throw new Error('Expected news photo and selected Guernica figure');
+  if (referenceImages.length < 1 || referenceImages.length > 2) throw new Error('Expected protagonist figure reference, optionally with full-painting style reference');
   return {
     taskType: 'imageInference', taskUUID, model: imageModel,
     positivePrompt: scene.stillPrompt,

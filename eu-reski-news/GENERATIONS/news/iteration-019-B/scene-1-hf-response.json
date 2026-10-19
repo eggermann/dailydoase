@@ -1,0 +1,19 @@
+{
+  "eventId": "b1757f5bee7f45f2b18952835249c744",
+  "data": [
+    {
+      "path": "/tmp/gradio/d7586a51b5d57dd359e3268988b68bcb56883cb4f51c4308596dfdeb3204141e/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/d7586a51b5d57dd359e3268988b68bcb56883cb4f51c4308596dfdeb3204141e/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1951832519,
+    "Create an original dark cubist mural, hand-painted across a full-frame field of fractured shallow space, with no photographic setting or smooth digital finish. Interlock charcoal-black, ash-gray, and stained-ivory planes using sharp dry-charcoal contours, rough oil scumbling, scraped edges, hairline cracks, and aged plaster texture. Alexandre from the first image is the fictional protagonist, redrawn large at frame-left with his recognizable cautious profile gesture transformed into a mask-like asymmetrical face: one eye displaced, nose elongated into an angular wedge, jaw offset, and restrained posture held rigidly. He watches tensely at the center, where two enormous abstract figures representing the US and China clasp hands in a tense handshake. Their bodies are equally fragmented, the US figure built from angular charcoal and stained-ivory planes with muted faded red and blue accents, while the China figure uses charcoal and stained-ivory planes with muted faded red and ochre accents. Behind them, interlock fractured, displaced fields derived from their respective flags, reduced to jagged stripes and blocky stars rather than literal flags. Keep Alexandre’s face near-monochrome and unmistakably dominant. Use the first image only to guide Alexandre’s abstract identity and guarded profile gesture; do not reproduce its composition, symbols, or pasted fragment. Convey fragile diplomacy and mutual distrust through compressed spacing, opposing diagonals, and stark hand-painted contrast."
+  ],
+  "completedAt": "2026-10-19T11:39:19.710Z"
+}
