@@ -1,0 +1,19 @@
+{
+  "eventId": "25eab163b1be4f748084f430e141791e",
+  "data": [
+    {
+      "path": "/tmp/gradio/fc424bb81efc9918cc1f8be6a6ff132cf83845e906fcea3b44202607e61011be/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/fc424bb81efc9918cc1f8be6a6ff132cf83845e906fcea3b44202607e61011be/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1619256173,
+    "Create an original, severely abstract dark cubist mural in compressed shallow space, painted directly as one rough, full-frame surface using only charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as an invented fictional protagonist in strict side profile facing right, with no trace of the real people, flags, curtains, emblems, or photographic composition. Form the profile from a few large, rounded, swelling masses: a broad white and gray head silhouette, a projecting nose, and one small angular eye mark, all fused into a right-facing profile. Keep both arms lowered and compressed into the torso as two heavy, bent charcoal forms rather than raised limbs. Separate the profile from the background with one dirty-ivory crescent rendered entirely in chalk white. Use the first image only as a style cue for the protagonist’s abstract identity and gestural energy, never reproducing its raised-arm figure. Surround the profile with interlocking crescent masses, broad curved contours, sweeping bands, and sharp fractured breaks that suggest the compressed handshake-event setting without depicting it literally. Suggest the second figure only through a displaced, anonymous black-and-gray mask fragment embedded behind the profile, with mismatched eye, cheek, and jaw shapes. Build everything from raw charcoal, broken brush marks, scraped pigment, worn plaster, and broad tonal transitions. Strictly monochrome, with no red, blue, yellow, ochre, brown, beige, sepia, readable text, logos, or glossy finish."
+  ],
+  "completedAt": "2026-10-19T14:06:46.680Z"
+}

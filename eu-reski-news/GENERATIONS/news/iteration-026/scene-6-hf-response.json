@@ -1,0 +1,19 @@
+{
+  "eventId": "4a92c5ad147e423e80f8630ad1fd8f82",
+  "data": [
+    {
+      "path": "/tmp/gradio/97409bff25fcc2d883e7e5ea1a16c7ab5efb387547bad832d1c23a22fe71ca7a/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/97409bff25fcc2d883e7e5ea1a16c7ab5efb387547bad832d1c23a22fe71ca7a/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    173675582,
+    "Create an original, severely abstract dark cubist mural painted directly across one rough, worn-plaster surface, using only charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as a compressed, shallow-space confrontation, but discard both men, the flags, curtains, emblems, and all photographic detail. Depict only the underlying identity of the two principal figures as one invented fictional protagonist: a tight close-up of a fractured face and one broad shoulder filling nearly the entire frame, with the head turned into a forceful three-quarter view. Use the second image solely to suggest the presence of the two opposing statesmen, transforming that relationship into a single dominant figure whose identity is reduced to the recognizable swept-back hairline, heavy brow, nose, and stern profile of the man on the left in the article photograph, without reproducing him. Split that identity into displaced angular masks, mismatched eyes, a hooked nose, and a compressed mouth. Build the head and shoulder from huge rounded swelling masses, crescent forms, bent arcs, sweeping bands, and sharp black breaks. Use the first image only as a style cue for its rough masked abstraction and irregular silhouette, never as a pasted figure. Render raw charcoal, scraped pigment, broken brush marks, and broad tonal transitions. Keep hands and all other figures absent. Include no red, blue, yellow, ochre, brown, beige, sepia, text, symbols, or glossy effects."
+  ],
+  "completedAt": "2026-10-19T14:08:09.201Z"
+}

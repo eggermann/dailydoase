@@ -1,0 +1,19 @@
+{
+  "eventId": "2d8883e8a4be431d8c7ef35a27f2bf67",
+  "data": [
+    {
+      "path": "/tmp/gradio/065b14b54112573a13f5ea5a0776929d2c49c915edd6f085980941a52b4e6693/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/065b14b54112573a13f5ea5a0776929d2c49c915edd6f085980941a52b4e6693/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    198971576,
+    "Create an original, severely abstract dark cubist mural as a wide panoramic tableau, painted directly across one rough, unstable surface using only charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as a fictional compressed political encounter: in the left third, place a large head-to-waist protagonist derived only from the masked profile identity in the first image, preserving the recognizable side-facing profile and bowed head as an invented fractured mask rather than a pasted face. Render the figure as a swollen white and gray head with a long angular nose, displaced eye, broken jaw, and mismatched facial planes, all fused into broad interlocking forms; keep both arms below shoulder level. Across the center and right, suggest the second figure solely through a second compressed profile and a broad sweeping gesture of two hands meeting far below the shoulder line, reduced to a few dark hooked masses. A huge crescent-shaped political divide sweeps from the center toward frame-right, bending into overlapping arcs, swollen lobes, and sharp fractured wedges. Use raw charcoal, scraped pigment, broken brush marks, worn plaster, and broad tonal transitions. Keep the entire scene strictly monochrome, with no flags, maps, emblems, symbols, readable text, natural anatomy, realistic skin, glossy finish, or copied photographic layout."
+  ],
+  "completedAt": "2026-10-19T14:06:27.410Z"
+}

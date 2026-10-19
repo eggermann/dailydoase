@@ -1,0 +1,19 @@
+{
+  "eventId": "0640af77de294002bc31beeb50adcc13",
+  "data": [
+    {
+      "path": "/tmp/gradio/48b8b572275b5af01820e2fda7a38b82d548038f41123e74dc3b6fb38ee042cc/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/48b8b572275b5af01820e2fda7a38b82d548038f41123e74dc3b6fb38ee042cc/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    804476078,
+    "Create an original, severely abstract dark cubist mural painted directly across one rough, unstable surface in only charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as a fictional compressed-space encounter: a monumental protagonist derived only from the second image’s two-person diplomatic meeting, but replace both men entirely with an invented figure whose identity is suggested by the first image’s masked, angular facial abstraction and extended-hand motif. Build a steep diagonal composition with the torso leaning hard across the frame, its head reduced to a fractured mask, and one broad arm thrust sideways along the diagonal into a forceful handshake-like interlock with a second displaced mask. Do not reproduce either person’s exact pose. Make the arm extend laterally along the diagonal rather than raising both arms overhead. Surround the figures with large rounded, swelling, crescent-shaped masses that overlap and interlock, broad curved contours, bent arcs, sweeping bands, and abrupt knife-like breaks. Fuse the two figures into one shallow, unstable field of black, white, and gray, with the handshake implied through two mismatched angular hands meeting near the diagonal center. Use raw charcoal, broken brush marks, scraped pigment, worn plaster, and broad tonal transitions. Include no flags, maps, emblems, readable text, red, blue, yellow, ochre, brown, beige, sepia, naturalistic anatomy, or photographic detail."
+  ],
+  "completedAt": "2026-10-19T14:07:05.986Z"
+}

@@ -1,0 +1,19 @@
+{
+  "eventId": "afa7ddb81f954659adff291142ba38e9",
+  "data": [
+    {
+      "path": "/tmp/gradio/dc3722588fda37e859be851c6245dd9af57c38a2b1d397925bd960d526c01b6d/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/dc3722588fda37e859be851c6245dd9af57c38a2b1d397925bd960d526c01b6d/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    201697968,
+    "Create an original, severely abstract dark cubist mural in compressed shallow space, painted directly as one rough surface using only charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as the fictional subject: depict the two principal figures as one anonymous, fused protagonist seated or crouched diagonally across the ground plane, viewed from above, with the body compressed into a broad angular silhouette and both hands held close to the torso in a tense, inward-curled gesture. Preserve the first image only as the source for the protagonist’s abstract identity: translate its large eye motif into a fractured, mask-like white eye form embedded within the crouched figure, but do not reproduce the eye as a copied symbol. Build the figure from displaced facial planes, broken mask fragments, and mismatched features that suggest the two men of the second image without becoming identifiable people. Surround the crouched body with enormous rounded, swelling, crescent-shaped masses that interlock like heavy organic shells, crossed by bent arcs and sweeping bands. Use sharp breaks to imply the original handshake action through two compressed, opposing hand forms near the chest. Render everything with raw charcoal, scraped pigment, broken brush marks, worn plaster, and broad tonal transitions. Include no flags, maps, emblems, readable text, red, blue, yellow, ochre, brown, beige, sepia, or any other color."
+  ],
+  "completedAt": "2026-10-19T14:08:29.015Z"
+}

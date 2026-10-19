@@ -1,0 +1,19 @@
+{
+  "eventId": "737e6cdc137d4998a4debc9513440b72",
+  "data": [
+    {
+      "path": "/tmp/gradio/00548d01f0049e388507d57087d35011f90acb2803914b1b005e9ce2780c3b7a/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/00548d01f0049e388507d57087d35011f90acb2803914b1b005e9ce2780c3b7a/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    148910216,
+    "Create an original, severely abstract dark cubist mural in compressed shallow space, painted directly as one rough, full-frame surface using only charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as an invented fictional protagonist, completely replacing both men, the flags, curtains, emblems, and photographic setting. Use the first image only as a style cue for the compressed, mask-like abstraction: do not reproduce its figure or layout. Place the protagonist off-center behind a large curved foreground barrier, pressing one hand firmly against it at chest height while the other body dissolves into overlapping forms. Suggest the second man’s identity solely through a broad, recognizable head silhouette fractured into displaced angular masks, a heavy brow, compressed nose, and mismatched eye shapes, without depicting a real face. Build the figure from large rounded, swelling, crescent-shaped masses that interlock with bent arcs and sweeping bands. Make the barrier a thick white-and-gray crescent sweeping across the foreground, with the protagonist’s torso compressed behind it. Use raw charcoal, broken brush marks, scraped pigment, worn plaster, and broad tonal transitions. Keep the handshake-event theme recognizable only through the pressure gesture and fused opposing mask fragments, never through literal anatomy. Include no red, blue, yellow, ochre, brown, beige, sepia, flags, maps, emblems, or readable text."
+  ],
+  "completedAt": "2026-10-19T14:07:49.204Z"
+}

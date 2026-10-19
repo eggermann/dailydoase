@@ -1,0 +1,19 @@
+{
+  "eventId": "e5ae11f2737e49d1a0830976a00d3d69",
+  "data": [
+    {
+      "path": "/tmp/gradio/c396280bca96c23c251b9fb951331756c82cba7f6f01004ba5ff55b5582c6eb2/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/c396280bca96c23c251b9fb951331756c82cba7f6f01004ba5ff55b5582c6eb2/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    237410973,
+    "Create an original, severely abstract dark cubist mural painted as one rough, full-frame surface in strictly monochrome charcoal-black, chalk white, and ash gray. Reimagine the handshake event from the second image as the fictional protagonist from the first image, but discard that image’s exact figure, pose, scale, and layout entirely. From a near-ground viewpoint, show the protagonist stepping forward in a firm side stance, large and unmistakable, with one arm crossing the chest and the other thrust into the compressed space; preserve only the first image’s horned, masklike identity as an invented abstract head with two long curved horns, an angular muzzle, and displaced eye shapes. Build the body from broad overlapping masses rather than a literal suit. Use a tall crescent-shaped backdrop rising behind the figure, with sweeping bands, swollen rounded forms, bent arcs, and interlocking organic silhouettes suggesting the underlying meeting and forward movement. Fracture the face into mismatched masks, offset eyes, broken noses, and displaced mouth planes. Render raw charcoal, scraped pigment, broken brush marks, worn plaster, and broad tonal transitions across black, white, and gray. Keep the entire scene fused into unstable shallow space with no flags, maps, emblems, readable text, naturalistic anatomy, realistic skin, photographic texture, or additional colors."
+  ],
+  "completedAt": "2026-10-19T14:07:29.630Z"
+}

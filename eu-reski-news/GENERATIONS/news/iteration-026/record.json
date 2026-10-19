@@ -1,0 +1,860 @@
+{
+  "generator": "semantic-news-v1",
+  "createdAt": "2026-10-19T14:05:23.514Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "96d987e8d8f436e1c45c3cd31d470e40ec953a93",
+    "branch": "codex/eu-reski-guernica-abstract",
+    "clean": true
+  },
+  "sourceAggregate": "/Users/eggermann/Projekte/dailydoase/news/A/all-2026-10-18T10-06-21-802Z.json",
+  "aggregateHash": "3d74b4cce2f2079ac0f36085abee0ad466d7053a77a3ec1ee2725543eefa0ad9",
+  "selection": {
+    "method": "article-id",
+    "order": "linear",
+    "draw": 0,
+    "candidateCount": 2145,
+    "aggregateIndex": 0
+  },
+  "article": {
+    "id": 474719518,
+    "title": "Etats-Unis - Chine : le clash des superpuissances",
+    "text": "En 2017, le président Trump promet de \"faire payer la Chine\" et bouleverse les relations entre les Etats-Unis et Pékin. Le gouvernement de Xi Jinping place de grands espoirs dans son successeur, Joe Biden, mais ceux-ci sont anéantis par une rencontre glaciale en Alaska. La visite de la présidente de la Chambre des représentants Nancy Pelosi à Taïwan rapproche plus que jamais les deux superpuissances d'une confrontation militaire. Face à un Washington de plus en plus hostile, Xi Jinping entend restaurer la puissance chinoise. Alors que le retour de Donald Trump ouvre une nouvelle phase d'incertitude qui commence par sa guerre du droit de douane, hauts responsables américains, proches du pouvoir chinois et acteurs internationaux racontent les confrontations des dirigeants des deux pays les plus puissants au monde.",
+    "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+    "image": "https://i.f1g.fr/media/ext/1200x630_crop/api-tvmag.lefigaro.fr/img/v2/000/093/f85c463a881a72c26bdb0ae61c2bd7f0.jpg",
+    "video": null,
+    "publish_date": "2026-10-18 16:00:00",
+    "author": null,
+    "language": "fr",
+    "category": "politics",
+    "source_country": "fr"
+  },
+  "sceneCount": 7,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": true,
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "253822c16ed49be6d06fb29d3a1dbe7a6628fda35a5b18ccad0b6a98b5405182",
+      "bytes": 2925847,
+      "provider": "hf-flux-klein",
+      "taskUUID": "2d8883e8a4be431d8c7ef35a27f2bf67",
+      "seed": 198971576,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "826260551d9650c829eb2d440bddabfbe7c8f3bca8508a7d9c82de90d5f65956",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "db9c6b704cc899f797102df835dce9161e57b6fc161f995dc2ba34488183e7c4",
+      "bytes": 2750004,
+      "provider": "hf-flux-klein",
+      "taskUUID": "25eab163b1be4f748084f430e141791e",
+      "seed": 1619256173,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "675bedc6e8248738a2d4a7658d7cf859e7a4f2c1692e2ae051344b9f87779ffe",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "b90cf7e0024ecf096756d9600fe7df6c4fa7985f517f29aca24eb097c940cae8",
+      "bytes": 3114855,
+      "provider": "hf-flux-klein",
+      "taskUUID": "0640af77de294002bc31beeb50adcc13",
+      "seed": 804476078,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "82ca952f0a7476912bc796c51ebac4ec907464aa3fd7a320f6e11e3f8c6f46d2",
+      "referencePaths": [
+        "media/08_schreiende_frau.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 8,
+          "name": "Schreiende / fliehende Frau",
+          "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+          "eu_bezug": [
+            "Schutz von Zivilisten",
+            "Sicherheit",
+            "Frieden"
+          ],
+          "path": "media/08_schreiende_frau.png",
+          "mimeType": "image/png",
+          "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13",
+          "label": "Protagonist character reference: Schreiende / fliehende Frau; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-4-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "607d2ab310e0faa2d6fac3ceee6bf6b455ef611e780b087b15a5c2fc5a96b5f8",
+      "bytes": 3017506,
+      "provider": "hf-flux-klein",
+      "taskUUID": "e5ae11f2737e49d1a0830976a00d3d69",
+      "seed": 237410973,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "5ffe4f191f36cd5d416fafd5efca5e545209e54517eca3765362531e2a36bde2",
+      "referencePaths": [
+        "media/02_stier-api.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 2,
+          "name": "Stier",
+          "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+          "eu_bezug": [
+            "Gewalt und Krieg als historische Erfahrung"
+          ],
+          "path": "media/02_stier-api.png",
+          "mimeType": "image/png",
+          "sha256": "abe991af20a0ef4a1834837ed8f42523ca658ec6c975f253f73d96eaea9ad25a",
+          "label": "Protagonist character reference: Stier; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/02_stier.png",
+          "sourceSha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21",
+          "bytes": 28716,
+          "width": 128,
+          "height": 161
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-5-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "e1836e5e7bd0f020761000e0cc241d137b87df2e02f129b1a9d95c2bdc5eda10",
+      "bytes": 3062123,
+      "provider": "hf-flux-klein",
+      "taskUUID": "737e6cdc137d4998a4debc9513440b72",
+      "seed": 148910216,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "be2d6c20c6f5d1d101efb9c47ae75e663a493ed9a910b2e325f859787386e4f7",
+      "referencePaths": [
+        "media/07_gefallener_soldat-api.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 7,
+          "name": "Gefallener Soldat",
+          "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+          "eu_bezug": [
+            "Frieden",
+            "Menschenwürde",
+            "Ablehnung von Krieg"
+          ],
+          "path": "media/07_gefallener_soldat-api.png",
+          "mimeType": "image/png",
+          "sha256": "61d0f70ac0db8aa1258c5d0966fd7b08acf4ac65de76a1693f4e4654a8449a10",
+          "label": "Protagonist character reference: Gefallener Soldat; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/07_gefallener_soldat.png",
+          "sourceSha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572",
+          "bytes": 77684,
+          "width": 480,
+          "height": 128
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-6-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "8aae3d2cee05ab57f0d35670b4badbe472cb90ef2c04fc81fd790da725e52ae4",
+      "bytes": 2793967,
+      "provider": "hf-flux-klein",
+      "taskUUID": "4a92c5ad147e423e80f8630ad1fd8f82",
+      "seed": 173675582,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "3c89327314f75699b27a8e6ac8e4edb51350ad4af0089bd12e8537b4ad42d905",
+      "referencePaths": [
+        "media/01_mutter_mit_kind.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 1,
+          "name": "Mutter mit totem Kind",
+          "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+          "eu_bezug": [
+            "Frieden",
+            "Menschenwürde",
+            "Schutz der Zivilbevölkerung"
+          ],
+          "path": "media/01_mutter_mit_kind.png",
+          "mimeType": "image/png",
+          "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2",
+          "label": "Protagonist character reference: Mutter mit totem Kind; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-7-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "a331c929cdef243229cf2ff8c9f013973d64f98f743aa12042943af01073fe88",
+      "bytes": 3017299,
+      "provider": "hf-flux-klein",
+      "taskUUID": "afa7ddb81f954659adff291142ba38e9",
+      "seed": 201697968,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "578ef6fe5c578e1a7e5b6e65b96b14ba68dcdd5cfd4011acec8c4d36eb8382fc",
+      "referencePaths": [
+        "media/03_auge_gluehbirne-api.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 3,
+          "name": "Auge / Glühbirne",
+          "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+          "eu_bezug": [
+            "Aufklärung",
+            "Beobachtung",
+            "Ambivalenz moderner Technik"
+          ],
+          "path": "media/03_auge_gluehbirne-api.png",
+          "mimeType": "image/png",
+          "sha256": "342dd3b00429e6b0d76cbfa7bd6035570be44d97c9216697dae6c2c4487c9d8f",
+          "label": "Protagonist character reference: Auge / Glühbirne; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/03_auge_gluehbirne.png",
+          "sourceSha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723",
+          "bytes": 41810,
+          "width": 277,
+          "height": 128
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+          "bytes": 95399,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    }
+  ],
+  "sceneDurations": [
+    14,
+    5,
+    7,
+    5,
+    11,
+    5,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "taktmuster",
+    "takt": 3,
+    "type": "balanced",
+    "multiplier": 3.5,
+    "bias": 0,
+    "minimum": 5,
+    "maximum": 15
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-18T12:42:15.052Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.7,
+          "urlLink": "Italien",
+          "title": "Italien",
+          "text": "Italien",
+          "sentences": {
+            "prev": [
+              "und",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "und Frankreich in einer Höhe von 4805 m am Mont Blanc, der",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU „einen"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 2,
+          "urlLink": "Member_state_of_the_European_Union",
+          "title": "Member state of the European Union",
+          "text": "27 members",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "regulations, which are immediately enforceable in all member",
+              "or from €4,600 to €92,600. EU member states own",
+              "when the Maastricht Treaty came into force in"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.8,
+          "urlLink": "%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%8F",
+          "title": "Франция",
+          "text": "Франция",
+          "sentences": {
+            "prev": [],
+            "next": [
+              "вышедшая из состава союза 31 января 2020 года."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+    "bytes": 95399
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "ce84260ad2a01c0e5b358a5aeffa7c189ec01c18431efc0dd1b0affa3c8dcf7b",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "Das Foto zeigt zwei männliche Politiker in formeller Kleidung, die sich vor einem Hintergrund mit den Flaggen der USA und Chinas die Hand schütteln. Die Szene ist eine inszenierte diplomatische Begegnung mit klarer Symbolik der Machtbeziehungen zwischen den beiden Ländern. Die Lichtführung ist neutral, der Raum ist eng gefasst und die Körperhaltung zeigt einen formellen, aber angespannten Dialog. Es handelt sich um ein dokumentarisches Bild, keine Illustration oder Logo.",
+    "articleFacts": [
+      "2017 kündigt Präsident Trump an, China für verschiedene Probleme \"bezahlen zu lassen\" und ändert damit die Beziehungen zwischen den USA und China grundlegend.",
+      "Die chinesische Führung unter Xi Jinping setzt große Hoffnungen in den Nachfolger Joe Biden, die jedoch durch ein kaltes Treffen in Alaska enttäuscht werden.",
+      "Der Besuch von Nancy Pelosi in Taiwan verschärft die Konfrontation zwischen den Supermächten und bringt sie näher an eine militärische Auseinandersetzung.",
+      "Xi Jinping will angesichts wachsender Feindseligkeit aus Washington die chinesische Macht wiederherstellen.",
+      "Die Rückkehr Donald Trumps bringt eine neue Phase der Unsicherheit mit sich, inklusive eines Handelskriegs durch Zölle.",
+      "Hochrangige US-Beamte, chinesische Machtnahe und internationale Akteure berichten über die Spannungen zwischen den beiden mächtigsten Ländern der Welt."
+    ],
+    "storyPremise": "Die Szene zeigt eine fiktive, stark abstrahierte Darstellung des eskalierenden Machtkonflikts zwischen den USA und China, in der der fiktive Diplomat Eliot Crane als Symbol für die fragile Balance und die eskalierenden Spannungen agiert. Die Geschichte verfolgt den Verlauf von der anfänglichen Konfrontation über diplomatische Hoffnungen bis zur drohenden militärischen Eskalation und wirtschaftlichen Auseinandersetzungen.",
+    "fictionBoundary": "Die Figur Eliot Crane ist eine fiktive Person, die symbolisch für die diplomatischen Akteure im Konflikt zwischen USA und China steht. Die dargestellten Szenen sind künstlerisch abstrahiert und stellen keine realen Personen oder Ereignisse dar, sondern metaphorisch den Verlauf und die Dynamik der politischen Spannungen. Die semantic-stream-Einträge dienen als kreative Metaphern, nicht als faktische Berichte.",
+    "protagonist": {
+      "name": "Eliot Crane",
+      "role": "fiktiver Diplomat und Vermittler im USA-China-Konflikt",
+      "visualIdentity": "stabiler schwarzer Anzug mit asymmetrisch gebrochener Krawatte als Erkennungsmerkmal",
+      "guernicaId": 5
+    },
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "/- Nicht relevant, da EU-Themen und Italien keine Verbindung zum Artikelkonflikt haben."
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "/- Nicht relevant, da EU-Mitgliedstaaten im Artikel nicht thematisiert werden."
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "/- Nicht relevant, da Frankreich oder russische Bezüge im Artikel nicht vorkommen."
+      }
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Beginn des Konflikts",
+        "storyBeat": "Eliot Crane beobachtet die eskalierende Konfrontation zwischen Trump und Xi Jinping, symbolisiert durch eine angespannte Handreichung vor den Flaggen der USA und Chinas.",
+        "protagonistAction": "Eliot Crane steht fest und beobachtet mit kritischem Blick die symbolische Handreichung zwischen den Supermächten.",
+        "composition": "wide_establishing",
+        "durationSeconds": 14,
+        "videoPrompt": "The scene starts with Eliot Crane standing still in the foreground, observing two large abstracted figures symbolizing Trump and Xi Jinping shaking hands tensely. Slowly, Eliot's gaze shifts to a distant horizon as the handshake tightens, conveying growing tension. The camera pulls back slightly to reveal the complex overlapping shapes of the flags, emphasizing the looming conflict. By the end, Eliot remains steady, the handshake frozen, highlighting the fragile peace.",
+        "guernicaId": 5,
+        "selectionReason": "Die 'Frau mit Lampe' symbolisiert Hoffnung und Suche nach Wahrheit, passend für einen Diplomaten, der Beobachter und Vermittler ist.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 2,
+        "title": "Kalter Empfang in Alaska",
+        "storyBeat": "Eliot Crane erfährt von der frostigen Begegnung zwischen Biden und Xi Jinping in Alaska, die Hoffnungen auf Entspannung zerschlägt.",
+        "protagonistAction": "Eliot Crane steht mit einer abgewandten, angespannten Haltung, die die eisige Atmosphäre und gescheiterte Verhandlungen widerspiegelt.",
+        "composition": "profile_silhouette",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene begins with Eliot Crane's profile silhouetted against a stark, fractured background symbolizing the cold environment of Alaska. The air seems to freeze around him as his posture tightens, turning slightly away as if recoiling from the failed dialogue. Subtle shifts in light accentuate the sharp fractures of the setting, reinforcing the chill of diplomatic failure. The movement settles with Eliot firmly holding his tense stance, embodying the frozen relations.",
+        "guernicaId": 6,
+        "selectionReason": "Die 'Frau mit erhobenen Armen' symbolisiert Entsetzen und Hilflosigkeit, passend für die gescheiterte Begegnung und enttäuschte Hoffnungen.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 3,
+        "title": "Pelosis Taiwan-Besuch",
+        "storyBeat": "Die Provokation durch den Besuch von Nancy Pelosi in Taiwan spitzt die Konfrontation zu, Eliot Crane spürt die Gefahr einer militärischen Eskalation.",
+        "protagonistAction": "Eliot Crane bewegt sich angespannt vorwärts, als Symbol für die wachsende Bedrohung und die virtuelle Annäherung an einen Konflikt.",
+        "composition": "oblique_diagonal",
+        "durationSeconds": 7,
+        "videoPrompt": "The scene opens with Eliot Crane advancing diagonally across a fractured, abstracted space filled with overlapping sharp and curved forms that represent rising tension. His movement is cautious but determined, the fractured planes around him pulsing with energy and threat. The camera subtly tilts to enhance the diagonal motion, creating a dynamic sense of impending confrontation. By the end, Eliot pauses, gaze fixed ahead, embodying the looming military danger.",
+        "guernicaId": 8,
+        "selectionReason": "Die 'Schreiende / fliehende Frau' vermittelt Angst und die Suche nach einem Ausweg, passend zur drohenden militärischen Eskalation und Spannung.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a steep diagonal composition. Lean the torso across the frame and extend one arm sideways along the diagonal; do not lift both arms overhead. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 4,
+        "title": "Xi Jinpings Machtanspruch",
+        "storyBeat": "Eliot Crane nimmt Xi Jinpings Entschlossenheit wahr, die chinesische Macht angesichts der US-Feindseligkeit wiederherzustellen.",
+        "protagonistAction": "Eliot Crane steht vor einer großen, kraftvollen, abstrakten Form, die die aufsteigende Macht Chinas symbolisiert, und wirkt nachdenklich und angespannt.",
+        "composition": "low_angle",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene begins with Eliot Crane at a low angle view, looking up at a towering, abstracted form representing rising Chinese power. The form pulses with energy, shifting slowly in overlapping black and white planes. Eliot's figure remains grounded but tense, his gaze following the upward motion. The camera subtly rises with the power form, emphasizing its growing dominance. By the end, Eliot's posture tightens, reflecting the weight of the challenge ahead.",
+        "guernicaId": 2,
+        "selectionReason": "Der 'Stier' symbolisiert Macht, Brutalität und Widerstand, passend zur Machtanspruch-Darstellung von Xi Jinping.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look upward from near ground level. Show the protagonist stepping forward in a firm side stance, one arm crossing the chest; keep the head and body distinct against a tall curved backdrop. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 5,
+        "title": "Trumps Rückkehr und Handelskrieg",
+        "storyBeat": "Eliot Crane beobachtet die Rückkehr Trumps und die erneute Eskalation durch Zölle und Handelskonflikte.",
+        "protagonistAction": "Eliot Crane steht angespannt inmitten einer chaotischen, fragmentierten Szene, die wirtschaftliche Spannungen und Unsicherheit symbolisiert.",
+        "composition": "foreground_frame",
+        "durationSeconds": 11,
+        "videoPrompt": "The scene opens with Eliot Crane framed tightly in the foreground, surrounded by fractured, jagged shapes symbolizing tariffs and economic turmoil. The abstract forms pulse and shift erratically, reflecting instability. Eliot's figure remains steady but his posture is tense, hands clenched subtly. The camera slowly zooms out to reveal the chaotic environment, emphasizing the overwhelming pressure. By the end, Eliot remains the solitary calm center amid the turmoil.",
+        "guernicaId": 7,
+        "selectionReason": "Der 'Gefallene Soldat' symbolisiert Zerstörung und Niederlage, passend zur wirtschaftlichen und politischen Unsicherheit durch Trumps Rückkehr und Handelskrieg.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Frame the protagonist through a large curved foreground barrier. Place them off-center, pressing one hand against the barrier at chest height; do not use a raised-arms gesture. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 6,
+        "title": "Internationale Berichte und Analysen",
+        "storyBeat": "Eliot Crane reflektiert die vielen Stimmen und Berichte von internationalen Akteuren über den eskalierenden Konflikt.",
+        "protagonistAction": "Eliot Crane sitzt nachdenklich, die Hände vor dem Gesicht verschränkt, umgeben von fragmentierten, abstrakten Figuren, die die Vielfalt der Perspektiven symbolisieren.",
+        "composition": "intimate_close_up",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with a close-up of Eliot Crane sitting, hands folded before his face, lost in thought. Around him, abstract fragmented shapes representing diverse voices and perspectives swirl slowly. The camera holds steady, focusing on Eliot's masked, fractured face as the surrounding forms pulse gently, signifying the complexity of international reports. The movement calms to a quiet stillness by the end.",
+        "guernicaId": 1,
+        "selectionReason": "Die 'Mutter mit totem Kind' symbolisiert Leid und den Wunsch nach Frieden, passend zur Reflexion humanitärer Folgen und internationaler Stimmen.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a tight close-up of the fractured face and one shoulder, filling most of the frame. Turn the head into a strong three-quarter view; keep hands and other figures out of the foreground. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 7,
+        "title": "Die fragile Balance der Supermächte",
+        "storyBeat": "Eliot Crane versucht, die fragile Balance zwischen den USA und China aufrechtzuerhalten, während die Welt den Atem anhält.",
+        "protagonistAction": "Eliot Crane steht mit ausgestreckten Armen zwischen zwei abstrakten, gegeneinander gerichteten Formen, die die Supermächte symbolisieren, und kämpft um Stabilität.",
+        "composition": "high_angle",
+        "durationSeconds": 7,
+        "videoPrompt": "The scene opens with a high angle view of Eliot Crane standing between two large opposing abstract shapes representing the USA and China. Eliot stretches his arms wide, trying to hold the balance. The shapes sway slowly, threatening to collide. The camera slowly descends, intensifying the tension as Eliot strains to maintain peace. By the end, the forms pause, suspended, and Eliot remains the fragile center of this precarious equilibrium.",
+        "guernicaId": 3,
+        "selectionReason": "Das 'Auge / Glühbirne' symbolisiert Beobachtung und Ambivalenz moderner Technik, passend zur Überwachung und fragilen Machtbalance.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 7428,
+    "completion_tokens": 4419,
+    "total_tokens": 11847,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "planHash": "fc427e1c8bfbbc89eb551485986ba0140cbf26b5485ac107897ea5da0b67dc47",
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026",
+    "sourceCommit": "96d987e8d8f436e1c45c3cd31d470e40ec953a93",
+    "article": {
+      "title": "Etats-Unis - Chine : le clash des superpuissances",
+      "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+      "publish_date": "2026-10-18 16:00:00"
+    },
+    "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Beginn des Konflikts",
+        "beat": "Eliot Crane beobachtet die eskalierende Konfrontation zwischen Trump und Xi Jinping, symbolisiert durch eine angespannte Handreichung vor den Flaggen der USA und Chinas.",
+        "storyBeat": "Eliot Crane beobachtet die eskalierende Konfrontation zwischen Trump und Xi Jinping, symbolisiert durch eine angespannte Handreichung vor den Flaggen der USA und Chinas.",
+        "durationSeconds": 14,
+        "requestedDurationSeconds": 14,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene starts with Eliot Crane standing still in the foreground, observing two large abstracted figures symbolizing Trump and Xi Jinping shaking hands tensely. Slowly, Eliot's gaze shifts to a distant horizon as the handshake tightens, conveying growing tension. The camera pulls back slightly to reveal the complex overlapping shapes of the flags, emphasizing the looming conflict. By the end, Eliot remains steady, the handshake frozen, highlighting the fragile peace.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 2,
+        "title": "Kalter Empfang in Alaska",
+        "beat": "Eliot Crane erfährt von der frostigen Begegnung zwischen Biden und Xi Jinping in Alaska, die Hoffnungen auf Entspannung zerschlägt.",
+        "storyBeat": "Eliot Crane erfährt von der frostigen Begegnung zwischen Biden und Xi Jinping in Alaska, die Hoffnungen auf Entspannung zerschlägt.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene begins with Eliot Crane's profile silhouetted against a stark, fractured background symbolizing the cold environment of Alaska. The air seems to freeze around him as his posture tightens, turning slightly away as if recoiling from the failed dialogue. Subtle shifts in light accentuate the sharp fractures of the setting, reinforcing the chill of diplomatic failure. The movement settles with Eliot firmly holding his tense stance, embodying the frozen relations.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 3,
+        "title": "Pelosis Taiwan-Besuch",
+        "beat": "Die Provokation durch den Besuch von Nancy Pelosi in Taiwan spitzt die Konfrontation zu, Eliot Crane spürt die Gefahr einer militärischen Eskalation.",
+        "storyBeat": "Die Provokation durch den Besuch von Nancy Pelosi in Taiwan spitzt die Konfrontation zu, Eliot Crane spürt die Gefahr einer militärischen Eskalation.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a steep diagonal composition. Lean the torso across the frame and extend one arm sideways along the diagonal; do not lift both arms overhead. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene opens with Eliot Crane advancing diagonally across a fractured, abstracted space filled with overlapping sharp and curved forms that represent rising tension. His movement is cautious but determined, the fractured planes around him pulsing with energy and threat. The camera subtly tilts to enhance the diagonal motion, creating a dynamic sense of impending confrontation. By the end, Eliot pauses, gaze fixed ahead, embodying the looming military danger.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a steep diagonal composition. Lean the torso across the frame and extend one arm sideways along the diagonal; do not lift both arms overhead. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 4,
+        "title": "Xi Jinpings Machtanspruch",
+        "beat": "Eliot Crane nimmt Xi Jinpings Entschlossenheit wahr, die chinesische Macht angesichts der US-Feindseligkeit wiederherzustellen.",
+        "storyBeat": "Eliot Crane nimmt Xi Jinpings Entschlossenheit wahr, die chinesische Macht angesichts der US-Feindseligkeit wiederherzustellen.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-4-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look upward from near ground level. Show the protagonist stepping forward in a firm side stance, one arm crossing the chest; keep the head and body distinct against a tall curved backdrop. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene begins with Eliot Crane at a low angle view, looking up at a towering, abstracted form representing rising Chinese power. The form pulses with energy, shifting slowly in overlapping black and white planes. Eliot's figure remains grounded but tense, his gaze following the upward motion. The camera subtly rises with the power form, emphasizing its growing dominance. By the end, Eliot's posture tightens, reflecting the weight of the challenge ahead.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look upward from near ground level. Show the protagonist stepping forward in a firm side stance, one arm crossing the chest; keep the head and body distinct against a tall curved backdrop. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 5,
+        "title": "Trumps Rückkehr und Handelskrieg",
+        "beat": "Eliot Crane beobachtet die Rückkehr Trumps und die erneute Eskalation durch Zölle und Handelskonflikte.",
+        "storyBeat": "Eliot Crane beobachtet die Rückkehr Trumps und die erneute Eskalation durch Zölle und Handelskonflikte.",
+        "durationSeconds": 11,
+        "requestedDurationSeconds": 11,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-5-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Frame the protagonist through a large curved foreground barrier. Place them off-center, pressing one hand against the barrier at chest height; do not use a raised-arms gesture. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene opens with Eliot Crane framed tightly in the foreground, surrounded by fractured, jagged shapes symbolizing tariffs and economic turmoil. The abstract forms pulse and shift erratically, reflecting instability. Eliot's figure remains steady but his posture is tense, hands clenched subtly. The camera slowly zooms out to reveal the chaotic environment, emphasizing the overwhelming pressure. By the end, Eliot remains the solitary calm center amid the turmoil.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Frame the protagonist through a large curved foreground barrier. Place them off-center, pressing one hand against the barrier at chest height; do not use a raised-arms gesture. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 6,
+        "title": "Internationale Berichte und Analysen",
+        "beat": "Eliot Crane reflektiert die vielen Stimmen und Berichte von internationalen Akteuren über den eskalierenden Konflikt.",
+        "storyBeat": "Eliot Crane reflektiert die vielen Stimmen und Berichte von internationalen Akteuren über den eskalierenden Konflikt.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-6-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a tight close-up of the fractured face and one shoulder, filling most of the frame. Turn the head into a strong three-quarter view; keep hands and other figures out of the foreground. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene opens with a close-up of Eliot Crane sitting, hands folded before his face, lost in thought. Around him, abstract fragmented shapes representing diverse voices and perspectives swirl slowly. The camera holds steady, focusing on Eliot's masked, fractured face as the surrounding forms pulse gently, signifying the complexity of international reports. The movement calms to a quiet stillness by the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a tight close-up of the fractured face and one shoulder, filling most of the frame. Turn the head into a strong three-quarter view; keep hands and other figures out of the foreground. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 7,
+        "title": "Die fragile Balance der Supermächte",
+        "beat": "Eliot Crane versucht, die fragile Balance zwischen den USA und China aufrechtzuerhalten, während die Welt den Atem anhält.",
+        "storyBeat": "Eliot Crane versucht, die fragile Balance zwischen den USA und China aufrechtzuerhalten, während die Welt den Atem anhält.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-026/media/scene-7-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene opens with a high angle view of Eliot Crane standing between two large opposing abstract shapes representing the USA and China. Eliot stretches his arms wide, trying to hold the balance. The shapes sway slowly, threatening to collide. The camera slowly descends, intensifying the tension as Eliot strains to maintain peace. By the end, the forms pause, suspended, and Eliot remains the fragile center of this precarious equilibrium.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      }
+    ]
+  },
+  "finishedAt": "2026-10-19T14:08:30.661Z"
+}

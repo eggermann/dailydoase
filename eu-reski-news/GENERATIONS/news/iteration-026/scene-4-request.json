@@ -1,0 +1,18 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "4a9d91ce-017e-4353-8b79-ac416361d7d5",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and story action large and unmistakable. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look upward from near ground level. Show the protagonist stepping forward in a firm side stance, one arm crossing the chest; keep the head and body distinct against a tall curved backdrop. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/02_stier-api.png",
+      "media/article.jpg"
+    ]
+  }
+}
