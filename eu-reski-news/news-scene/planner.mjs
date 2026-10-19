@@ -89,7 +89,7 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
     throw new Error('An expanded plan must preserve the original protagonist and figure reference');
   }
   for (const [index, scene] of plan.scenes.entries()) {
-    if (scene.index !== index + 1 || scene.guernicaId !== plan.protagonist.guernicaId || !scene.protagonistAction?.toLocaleLowerCase().includes(plan.protagonist.name.toLocaleLowerCase()) || !scene.selectionReason?.trim()) throw new Error('Every scene must show the same named main character and selected figure reference');
+    if (scene.index !== index + 1 || !figureIds.has(scene.guernicaId) || !scene.protagonistAction?.toLocaleLowerCase().includes(plan.protagonist.name.toLocaleLowerCase()) || !scene.selectionReason?.trim()) throw new Error('Every scene needs the same named protagonist and a valid, justified figure reference');
     if (!scene.composition || new Set(plan.scenes.slice(0, index).map((item) => item.composition)).has(scene.composition)) throw new Error('Each scene needs a distinct composition');
     if (!Number.isInteger(scene.durationSeconds) || scene.durationSeconds < 5 || scene.durationSeconds > 15) throw new Error('Invalid scene duration');
     if (typeof scene.stillPrompt !== 'string' || scene.stillPrompt.length < 200 || scene.stillPrompt.length > 10000) throw new Error('Invalid still prompt length');
@@ -101,6 +101,10 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
     }
     if (!scene.crocodileAppearance?.present && (scene.crocodileAppearance?.role || scene.crocodileAppearance?.placement)) throw new Error('An absent crocodile must not have a role or placement');
     if (scene.crocodileAppearance?.present && (!/\bcrocodile\b/i.test(scene.stillPrompt) || !scene.crocodileAppearance.role.trim() || !scene.crocodileAppearance.placement.trim())) throw new Error('A chosen crocodile requires a meaningful role and visible description in the image prompt');
+  }
+  const sceneFigureIds = plan.scenes.map((scene) => scene.guernicaId);
+  if (new Set(sceneFigureIds).size < Math.min(sceneCount, 3) || sceneFigureIds.some((id, index) => index > 0 && id === sceneFigureIds[index - 1])) {
+    throw new Error('Choose multiple scene-specific figure references and avoid repeating the same one in neighboring scenes');
   }
   const expected = semantic.entries.map((entry) => entry.id).sort();
   const actual = Object.keys(plan.semanticUse || {}).sort();

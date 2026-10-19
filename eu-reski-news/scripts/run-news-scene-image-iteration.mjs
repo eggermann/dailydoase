@@ -62,6 +62,25 @@ function buildFilmPlan(record, directory) {
   };
 }
 
+const sceneStaging = {
+  wide_establishing: 'Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level.',
+  intimate_close_up: 'Use a tight close-up of the fractured face and one shoulder, filling most of the frame. Turn the head into a strong three-quarter view; keep hands and other figures out of the foreground.',
+  oblique_diagonal: 'Use a steep diagonal composition. Lean the torso across the frame and extend one arm sideways along the diagonal; do not lift both arms overhead.',
+  high_angle: 'Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them.',
+  low_angle: 'Look upward from near ground level. Show the protagonist stepping forward in a firm side stance, one arm crossing the chest; keep the head and body distinct against a tall curved backdrop.',
+  profile_silhouette: 'Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose.',
+  over_the_shoulder: 'View from behind one shoulder. Let the back of the protagonist occupy one foreground corner while their gaze leads toward the main event; do not show a frontal full-body pose.',
+  foreground_frame: 'Frame the protagonist through a large curved foreground barrier. Place them off-center, pressing one hand against the barrier at chest height; do not use a raised-arms gesture.',
+  top_down: 'Use a near-vertical overhead view. Arrange the protagonist as a compact diagonal figure amid broad circular and crescent forms; keep the face turned away from the viewer.',
+};
+
+function addDistinctSceneStaging(scenes) {
+  return scenes.map((scene) => ({
+    ...scene,
+    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence.`,
+  }));
+}
+
 function alignSemanticSceneAssignments(response) {
   const content = response.choices?.[0]?.message?.content;
   if (typeof content !== 'string') return { response, corrections: [] };
@@ -438,7 +457,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         record.semanticIndexCorrections = aligned.corrections;
         record.plan = validatePlan(aligned.response, { ...record, continuationPlan: record.continuationPlan || null });
       } catch (error) {
-        if (!/semantic|motif|crocodile|protagonist|composition/i.test(error.message)) throw error;
+        if (!/semantic|motif|crocodile|protagonist|composition|figure|reference/i.test(error.message)) throw error;
         const revisionRequest = {
           ...request,
           messages: [
@@ -447,7 +466,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
             { role: 'user', content: [{ type: 'text', text: [
               `Your plan failed validation: ${error.message}`,
               'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English. Translate source-language article details and semantic words; never copy foreign-language terms into model prompts. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
-              'Keep one invented protagonist name, visual identity, and Guernica figure id for the entire scene sequence. Every protagonistAction must include the exact protagonist name and every scene must keep the same figure id. Every selectionReason must explain visual fit without importing the figure source story. Assign a different composition choice to each scene, and change camera angle, distance, framing, and main action.',
+              'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. Choose a valid masked figure reference separately for each scene to match its unique gesture and body shape; avoid repeating a reference in neighboring scenes and use at least three different references across the sequence. Every selectionReason must explain visual fit without importing the figure source story. Assign a different composition choice to each scene, and change camera angle, distance, framing, body silhouette, and main action. The image model must ignore each reference crop’s exact pose, scale and placement.',
               'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
               options['no-style-reference']
                 ? 'The image API receives only reference image 1: the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
@@ -471,7 +490,8 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         record.planRevisionReason = error.message;
         finalResponse = revised;
       }
-      record.plan.scenes = record.plan.scenes.map((scene, index) => ({ ...scene, durationSeconds: record.sceneDurations[index] }));
+      record.plan.scenes = addDistinctSceneStaging(record.plan.scenes)
+        .map((scene, index) => ({ ...scene, durationSeconds: record.sceneDurations[index] }));
       record.usage = finalResponse.usage;
       record.planHash = hash(JSON.stringify(record.plan));
       await save(join(directory, 'scene-plan.json'), record.plan);
