@@ -1,0 +1,113 @@
+{
+  "formatVersion": 1,
+  "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022",
+  "sourceCommit": "7837bad89486d931df18f82562e3311541fb25f1",
+  "article": {
+    "title": "Etats-Unis - Chine : le clash des superpuissances",
+    "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+    "publish_date": "2026-10-18 16:00:00"
+  },
+  "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+  "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+  "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+  "scenePlan": [
+    {
+      "index": 1,
+      "title": "Versprechen und Konfrontation",
+      "beat": "Liu beobachtet die Ankündigung von Trump 2017, China zur Rechenschaft zu ziehen, die den diplomatischen Ton zwischen den Supermächten verschärft.",
+      "storyBeat": "Liu beobachtet die Ankündigung von Trump 2017, China zur Rechenschaft zu ziehen, die den diplomatischen Ton zwischen den Supermächten verschärft.",
+      "durationSeconds": 14,
+      "requestedDurationSeconds": 14,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-1-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate the frame. Use bent arcs, bulbous shapes and sweeping bands alongside sharp breaks, so the composition feels forceful, fluid and hand-painted rather than like a field of small shards. Fracture faces into displaced profiles and mismatched features; distort bodies into broad overlapping forms with deliberate discontinuity. The protagonist Liu appears large and central, with raised arms expressing shock and helplessness, standing amid fractured abstract forms symbolizing political turmoil. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions from deep soot-black through warm dirty ivory to smoke-gray; keep visible mid-tones and several distinct gray values instead of flat black-and-white. Keep the color restrained, with no flags, national color fields, stars, stripes, maps, emblems or readable text. Figures and setting fuse into one unstable painted surface.",
+      "videoPrompt": "The scene begins with Liu standing still in a fractured political space; slowly, his arms rise as the fragmented environment sharpens around him, emphasizing a growing tension that settles into a frozen moment of looming confrontation by the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate the frame. Use bent arcs, bulbous shapes and sweeping bands alongside sharp breaks, so the composition feels forceful, fluid and hand-painted rather than like a field of small shards. Fracture faces into displaced profiles and mismatched features; distort bodies into broad overlapping forms with deliberate discontinuity. The protagonist Liu appears large and central, with raised arms expressing shock and helplessness, standing amid fractured abstract forms symbolizing political turmoil. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions from deep soot-black through warm dirty ivory to smoke-gray; keep visible mid-tones and several distinct gray values instead of flat black-and-white. Keep the color restrained, with no flags, national color fields, stars, stripes, maps, emblems or readable text. Figures and setting fuse into one unstable painted surface."
+    },
+    {
+      "index": 2,
+      "title": "Zerbrochene Hoffnungen",
+      "beat": "Liu erlebt das frostige Treffen zwischen Xi Jinping und Joe Biden in Alaska, das die Hoffnungen Chinas auf Entspannung zerstört.",
+      "storyBeat": "Liu erlebt das frostige Treffen zwischen Xi Jinping und Joe Biden in Alaska, das die Hoffnungen Chinas auf Entspannung zerstört.",
+      "durationSeconds": 5,
+      "requestedDurationSeconds": 5,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-2-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, rounded, swelling and crescent-shaped masses overlapping with sharp angular breaks to create a cold, tense atmosphere. The protagonist Liu is shown in profile silhouette, his face fragmented and distorted, turning away in disillusionment. Surrounding forms evoke distance and frosty separation. Raw charcoal and worn plaster textures dominate with a muted palette, no national symbols or readable text. The figure and environment merge into one unstable painted surface.",
+      "videoPrompt": "Starting with Liu's fragmented profile turning away from the scene, abstract cold shapes and sharp angular forms emerge to emphasize the growing emotional and political distance, as the motion slows to a still, tense posture at the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, rounded, swelling and crescent-shaped masses overlapping with sharp angular breaks to create a cold, tense atmosphere. The protagonist Liu is shown in profile silhouette, his face fragmented and distorted, turning away in disillusionment. Surrounding forms evoke distance and frosty separation. Raw charcoal and worn plaster textures dominate with a muted palette, no national symbols or readable text. The figure and environment merge into one unstable painted surface."
+    },
+    {
+      "index": 3,
+      "title": "Die Provokation von Taiwan",
+      "beat": "Liu beobachtet die Eskalation durch Pelosis Besuch in Taiwan, der die Supermächte weiter an die Schwelle eines militärischen Konflikts bringt.",
+      "storyBeat": "Liu beobachtet die Eskalation durch Pelosis Besuch in Taiwan, der die Supermächte weiter an die Schwelle eines militärischen Konflikts bringt.",
+      "durationSeconds": 7,
+      "requestedDurationSeconds": 7,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-3-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, interlocking crescent shapes and jagged angular forms to convey aggression and confrontation. The protagonist Liu is central, raising one hand in a warning gesture. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. The composition is oblique diagonal to suggest movement and tension. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No national symbols or readable text. Figures and setting fused into one unstable painted surface.",
+      "videoPrompt": "The scene opens with Liu raising his hand in warning; jagged, aggressive shapes shift diagonally across the frame, creating a dynamic tension that intensifies before settling into a charged stillness at the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, interlocking crescent shapes and jagged angular forms to convey aggression and confrontation. The protagonist Liu is central, raising one hand in a warning gesture. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. The composition is oblique diagonal to suggest movement and tension. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No national symbols or readable text. Figures and setting fused into one unstable painted surface."
+    },
+    {
+      "index": 4,
+      "title": "Chinas Machtanspruch",
+      "beat": "Liu steht vor Xi Jinpings Entschlossenheit zur Wiederherstellung der chinesischen Macht in einer zunehmend feindseligen Welt.",
+      "storyBeat": "Liu steht vor Xi Jinpings Entschlossenheit zur Wiederherstellung der chinesischen Macht in einer zunehmend feindseligen Welt.",
+      "durationSeconds": 5,
+      "requestedDurationSeconds": 5,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-4-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, bulbous, and imposing crescent shapes overlapping with sharp breaks to symbolize power and threat. The protagonist Liu is depicted from a high angle with his head bowed, expressing Unterwerfung und Belastung. Faces are fractured and distorted, bodies broad and overlapping, with deliberate discontinuity. Raw charcoal and scraped pigment textures dominate. No flags, national colors or text. Figures and environment fuse into one unstable painted surface.",
+      "videoPrompt": "The scene begins with a high angle looking down on Liu, his head bowed. Massive, looming abstract shapes representing power and threat shift slowly around him, settling into a tense, oppressive atmosphere by the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, bulbous, and imposing crescent shapes overlapping with sharp breaks to symbolize power and threat. The protagonist Liu is depicted from a high angle with his head bowed, expressing Unterwerfung und Belastung. Faces are fractured and distorted, bodies broad and overlapping, with deliberate discontinuity. Raw charcoal and scraped pigment textures dominate. No flags, national colors or text. Figures and environment fuse into one unstable painted surface."
+    },
+    {
+      "index": 5,
+      "title": "Neue Unsicherheit durch Trumps Rückkehr",
+      "beat": "Liu erlebt die Unsicherheit und Spannungen, die durch die Rückkehr Trumps und seinen Zollkrieg ausgelöst werden.",
+      "storyBeat": "Liu erlebt die Unsicherheit und Spannungen, die durch die Rückkehr Trumps und seinen Zollkrieg ausgelöst werden.",
+      "durationSeconds": 11,
+      "requestedDurationSeconds": 11,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-5-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, rounded and angular overlapping shapes that build up like walls and barriers around the protagonist Liu. Liu is central, holding his hands protectively forward. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Composition uses a foreground frame to enclose the figure. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface.",
+      "videoPrompt": "The scene opens with Liu holding his hands protectively forward as abstract shapes resembling walls and barriers rise around him. These forms move slowly, growing in height and enclosing the space, before settling into a claustrophobic stillness at the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, rounded and angular overlapping shapes that build up like walls and barriers around the protagonist Liu. Liu is central, holding his hands protectively forward. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Composition uses a foreground frame to enclose the figure. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface."
+    },
+    {
+      "index": 6,
+      "title": "Berichte von Konfrontationen",
+      "beat": "Liu reflektiert die Berichte von hochrangigen Beamten und internationalen Akteuren über die Konfrontationen zwischen den Supermächten.",
+      "storyBeat": "Liu reflektiert die Berichte von hochrangigen Beamten und internationalen Akteuren über die Konfrontationen zwischen den Supermächten.",
+      "durationSeconds": 5,
+      "requestedDurationSeconds": 5,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-6-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use fragmented, flickering overlapping shapes to symbolize voices and reports around the protagonist Liu, who sits with bowed head in an over-the-shoulder composition. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface.",
+      "videoPrompt": "The scene starts with an over-the-shoulder view of Liu sitting with bowed head. Fragmented, flickering abstract shapes representing voices and reports move lightly around before settling into a quiet, contemplative stillness at the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use fragmented, flickering overlapping shapes to symbolize voices and reports around the protagonist Liu, who sits with bowed head in an over-the-shoulder composition. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface."
+    },
+    {
+      "index": 7,
+      "title": "Drohende Eskalation",
+      "beat": "Liu steht am Rande einer möglichen militärischen Eskalation zwischen USA und China, gefangen zwischen Hoffnung und Verzweiflung.",
+      "storyBeat": "Liu steht am Rande einer möglichen militärischen Eskalation zwischen USA und China, gefangen zwischen Hoffnung und Verzweiflung.",
+      "durationSeconds": 7,
+      "requestedDurationSeconds": 7,
+      "videoMode": "singleImage",
+      "frameSource": "providedStartImage",
+      "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-7-first-frame.png",
+      "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the image with large, rounded and jagged interlocking forms that clash aggressively. The protagonist Liu is central, arms outstretched, face distorted with fear and helplessness. Faces fractured and displaced, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No national symbols or text. Figures and setting fused into one unstable painted surface.",
+      "videoPrompt": "The scene opens from a low angle, emphasizing Liu's outstretched arms and distorted fearful face. Aggressive, sharp abstract shapes clash violently around him, moving dynamically before settling into a tense, frozen confrontation at the end.",
+      "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the image with large, rounded and jagged interlocking forms that clash aggressively. The protagonist Liu is central, arms outstretched, face distorted with fear and helplessness. Faces fractured and displaced, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No national symbols or text. Figures and setting fused into one unstable painted surface."
+    }
+  ]
+}

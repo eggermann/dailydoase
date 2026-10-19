@@ -1,0 +1,19 @@
+{
+  "eventId": "f3597a9e906144039d44bf45ddd3c16d",
+  "data": [
+    {
+      "path": "/tmp/gradio/b7f78ab27a3c2eddfc28be70b5a7586850c7f5a0cbd6b315d23f99ef8253a92e/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/b7f78ab27a3c2eddfc28be70b5a7586850c7f5a0cbd6b315d23f99ef8253a92e/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1016693811,
+    "Create an original, severely abstract dark cubist mural painted as one rough, full-frame surface, using the first reference image as the composition and style guide for Liu’s central figure, raised arms, compressed spatial depth, and fractured monochrome treatment. Build the entire image from charcoal-black, dirty ivory, warm chalk, ash-gray, and smoke-gray. Place Liu centrally, broad and distorted, with both arms thrust outward and upward, hands reduced to angular, irregular gestures. Preserve the reference’s fear-stricken face as a displaced, elongated mask: an open mouth, hollow eyes, and a strained brow split into conflicting planes, expressing fear and helplessness. Construct Liu’s body from large rounded and jagged interlocking forms that overlap, collide, and break apart without conventional anatomy. Surround the figure with compressed architectural slabs, looming black wedges, crooked rectangles, and smoke-gray cavities fused into the body and setting. Scatter raw charcoal strokes, scraped pigment, chipped edges, rubbed patches, and worn plaster texture throughout. Let fragments of Liu’s face recur at conflicting angles within the surrounding forms, while the limbs dissolve into broad blocks and abrupt voids. Keep the space shallow and unstable, with no horizon, no separate background, no national symbols, and no text."
+  ],
+  "completedAt": "2026-10-19T12:42:55.063Z"
+}

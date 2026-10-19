@@ -1,0 +1,19 @@
+{
+  "eventId": "401caf358ef04859ba409029f910fece",
+  "data": [
+    {
+      "path": "/tmp/gradio/2311433e095749e3fd0c2824d125bdf1454a1df024e0aa7f37b82054ab1a31af/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/2311433e095749e3fd0c2824d125bdf1454a1df024e0aa7f37b82054ab1a31af/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1698507109,
+    "Create an original, severely abstract dark cubist mural as one rough painted surface, using the first reference image as the composition and texture guide for its compressed shallow space, irregular silhouette, charcoal-black field, dirty-ivory figure, and fractured geometric structure. Replace the reference figure with Liu as a profile silhouette turning toward frame-left and away in disillusionment, his face fragmented into displaced angular shards, swollen rounded planes, and crescent-like slivers. His nose, brow, cheek, and receding jaw remain identifiable only as a severe profile silhouette, with no detailed features. Build the surrounding space from large rounded, swelling masses in warm chalk and ash-gray that overlap sharp wedges, broken diagonals, and smoke-gray voids. Suggest distance and frosty separation through pale crescent arcs, hollow oval recesses, and thin ivory fissures that push the figure outward while collapsing it back into the same unstable surface. Echo the reference image’s raised, gestural limbs as distorted charcoal strokes and blunt ivory shapes, but submerge them into Liu’s body and the surrounding darkness. Let raw charcoal smears, rubbed edges, worn plaster, scratches, and chipped patches dominate the entire mural. Use only charcoal-black, dirty ivory, warm chalk, ash-gray, and smoke-gray, with no national symbols, borders, or readable text."
+  ],
+  "completedAt": "2026-10-19T12:41:32.956Z"
+}

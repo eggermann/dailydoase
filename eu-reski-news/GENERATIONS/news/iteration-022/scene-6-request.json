@@ -1,0 +1,17 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "bdc406a1-1338-49ee-ad32-d0562cb034d9",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use fragmented, flickering overlapping shapes to symbolize voices and reports around the protagonist Liu, who sits with bowed head in an over-the-shoulder composition. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/06_frau_im_brennenden_haus.png"
+    ]
+  }
+}

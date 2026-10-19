@@ -1,0 +1,19 @@
+{
+  "eventId": "6c197dd4fb47439d810f4c7bf2347cbe",
+  "data": [
+    {
+      "path": "/tmp/gradio/8523aeab2aada0bc345ecf2fecd8ab538aff2d909e25a6fe2cf9252f913aa475/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/8523aeab2aada0bc345ecf2fecd8ab538aff2d909e25a6fe2cf9252f913aa475/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    963683208,
+    "Create an original, severely abstract dark cubist mural in compressed shallow space, painted directly as one rough, irregular surface in charcoal-black, dirty ivory, warm chalk, ash-gray, and smoke-gray. Use the first reference image as the composition and style guide: preserve its cramped, asymmetrical arrangement, angular silhouette, raised gestural limbs, and stark monochrome contrast, but transform the central figure into Liu, seated with his head bowed in an over-the-shoulder composition. His bowed head and one shoulder emerge from the lower foreground while fragmented faces, hands, and bodies crowd around him. Surround Liu with flickering, overlapping shards that suggest many anonymous voices and reports: repeated open mouths, broken profiles, staring eyes, pointing hands, tilted heads, and compressed silhouettes dissolve into one another without forming a conventional room. Faces are fractured into misaligned planes, with doubled eyes, split noses, and abrupt gaps; bodies are broad, heavy, and deliberately discontinuous, their arms and torsos crossing through neighboring forms. Build the entire scene from raw charcoal, broken brush marks, scraped pigment, smudged smears, chipped edges, and worn plaster textures. Keep the palette muted and smoke-dark, with no flags, national symbols, lettering, or readable text; figures and setting remain fused into a single unstable painted surface."
+  ],
+  "completedAt": "2026-10-19T12:42:39.702Z"
+}

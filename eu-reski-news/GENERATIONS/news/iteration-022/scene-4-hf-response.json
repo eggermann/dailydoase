@@ -1,0 +1,19 @@
+{
+  "eventId": "a76e72d09c344e509bbdde2c27758d15",
+  "data": [
+    {
+      "path": "/tmp/gradio/34334fbdd4d011a11c3cc8e4cad6d284fd0016486be7cd494c099967b4af1c78/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/34334fbdd4d011a11c3cc8e4cad6d284fd0016486be7cd494c099967b4af1c78/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    996580573,
+    "Create an original, severely abstract dark cubist mural as one rough painted surface, using the first reference image as the composition and texture guide for its compressed shallow space, irregular silhouette, charcoal-black ground, dirty-ivory forms, and stark hand-painted discontinuity. Fill the entire frame with charcoal-black, dirty ivory, warm chalk, ash-gray, and smoke-gray. From a steep high angle, depict Liu as the bowed protagonist, his head hanging low between massive overlapping forms, shoulders compressed and body folded beneath the weight of the surrounding structure. His face is fractured into angular, distorted planes, with a small bowed head and broken features emerging from the darkness. Build the scene from enormous bulbous crescent shapes that curve inward like imposing moons or crushing jaws, their thick arcs intersecting with knife-like breaks, wedges, and abrupt voids to symbolize power and threat. Liu’s broad body stretches across the lower center in several overlapping, discontinuous sections, with elongated arms and heavy limbs dissolving into the environment. Use raw charcoal smears, scraped pigment, rubbed edges, exposed underlayers, and dry-brushed chalk marks throughout. Fuse figure and setting into one unstable surface with no flags, national colors, lettering, symbols, or text."
+  ],
+  "completedAt": "2026-10-19T12:42:02.262Z"
+}

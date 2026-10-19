@@ -1,0 +1,19 @@
+{
+  "eventId": "c60b7ace65214213ad86c9f5c9e9004e",
+  "data": [
+    {
+      "path": "/tmp/gradio/0c3fd96dc2fa7049fece185401c953577089372d6d4855a79df2e401d6f06ec2/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/0c3fd96dc2fa7049fece185401c953577089372d6d4855a79df2e401d6f06ec2/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1275257419,
+    "Create an original, severely abstract dark cubist mural as one rough painted surface, using the first reference image as the composition and style guide for its compressed shallow space, irregular silhouette, charcoal-black field, dirty-ivory figure, and fractured geometric construction. Place Liu centrally within a heavy foreground frame of overlapping angular slabs, rounded masses, and broken wall-like barriers. Preserve Liu as the protagonist but transform him into a broad, distorted figure with both hands thrust protectively forward, palms facing outward and fingers spread like blunt shields. Build his head, shoulders, arms, and torso from large rounded and angular shapes that collide and overlap with deliberate discontinuity. Fracture his face into asymmetrical planes, hollow sockets, crooked eyes, and displaced features while keeping Liu recognizable only through the central placement and forward gesture. Surround him with compressed charcoal-black, dirty-ivory, warm chalk, ash-gray, and smoke-gray forms that rise like walls and press inward. Use raw charcoal strokes, scraped pigment, chipped edges, smudged transitions, broken brush marks, and worn plaster textures. Fuse Liu and the setting into one unstable surface with no separate background. Include no flags, national symbols, lettering, or text."
+  ],
+  "completedAt": "2026-10-19T12:42:21.271Z"
+}

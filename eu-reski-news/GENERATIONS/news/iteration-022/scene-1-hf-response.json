@@ -1,0 +1,19 @@
+{
+  "eventId": "9a255f96bfa34c44b426a815ad69ec1b",
+  "data": [
+    {
+      "path": "/tmp/gradio/b0411bcf8f26ce2bfc259839ce743f9c82ea7701c3057de826eb32c980368f7d/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/b0411bcf8f26ce2bfc259839ce743f9c82ea7701c3057de826eb32c980368f7d/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1610810372,
+    "Create an original, severely abstract dark cubist mural painted directly across one rough, worn-plaster surface, using the first reference image as the composition and figure guide for Liu’s central placement, raised arms, and distorted anatomy. Fill the entire frame with charcoal-black, dirty ivory, warm chalk, ash-gray, and smoke-gray. Build Liu large and central as a swollen, interlocking figure with both arms thrust upward in shock and helplessness, the hands reduced to broad, irregular gestures. Fracture the face into displaced profiles, mismatched eyes, a crooked nose, and separated mouth forms while preserving Liu’s recognizable upward-reaching silhouette. Surround the figure with a few enormous rounded masses: bulbous crescents, swelling lobes, bent arcs, sweeping bands, and irregular organic contours that overlap and interlock in compressed shallow space. Replace the reference’s angular shards with broad curved forms interrupted by abrupt knife-like breaks and scraped passages. Suggest political turmoil only through unstable pressure, fractured bodies, and turbulent bands of soot, never through literal symbols. Use raw charcoal, broken brush marks, dragged pigment, scumbling, scratches, and exposed plaster texture. Maintain distinct mid-tones and broad transitions from deep soot-black through warm dirty ivory to smoke-gray. Include no flags, national color fields, stars, stripes, maps, emblems, or readable text; figures and setting fuse into one forceful, fluid, hand-painted surface."
+  ],
+  "completedAt": "2026-10-19T12:41:14.587Z"
+}

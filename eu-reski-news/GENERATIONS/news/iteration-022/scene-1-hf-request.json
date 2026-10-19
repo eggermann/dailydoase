@@ -1,0 +1,19 @@
+{
+  "provider": "huggingface-zerogpu",
+  "space": "black-forest-labs/flux-3-image-klein",
+  "endpoint": "/generate",
+  "prompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate the frame. Use bent arcs, bulbous shapes and sweeping bands alongside sharp breaks, so the composition feels forceful, fluid and hand-painted rather than like a field of small shards. Fracture faces into displaced profiles and mismatched features; distort bodies into broad overlapping forms with deliberate discontinuity. The protagonist Liu appears large and central, with raised arms expressing shock and helplessness, standing amid fractured abstract forms symbolizing political turmoil. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions from deep soot-black through warm dirty ivory to smoke-gray; keep visible mid-tones and several distinct gray values instead of flat black-and-white. Keep the color restrained, with no flags, national color fields, stars, stripes, maps, emblems or readable text. Figures and setting fuse into one unstable painted surface.",
+  "referencePaths": [
+    "media/06_frau_im_brennenden_haus.png"
+  ],
+  "settings": {
+    "mode_choice": "Distilled (16 steps)",
+    "randomize_seed": false,
+    "width": 1680,
+    "height": 944,
+    "num_inference_steps": 16,
+    "guidance_scale": 1,
+    "prompt_upsampling": true,
+    "seed": 1610810372
+  }
+}

@@ -1,0 +1,778 @@
+{
+  "generator": "semantic-news-v1",
+  "createdAt": "2026-10-19T12:37:27.810Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "7837bad89486d931df18f82562e3311541fb25f1",
+    "branch": "codex/eu-reski-guernica-abstract",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/Projekte/dailydoase/news/A/all-2026-10-18T10-06-21-802Z.json",
+  "aggregateHash": "3d74b4cce2f2079ac0f36085abee0ad466d7053a77a3ec1ee2725543eefa0ad9",
+  "selection": {
+    "method": "article-id",
+    "order": "linear",
+    "draw": 0,
+    "candidateCount": 2145,
+    "aggregateIndex": 0
+  },
+  "article": {
+    "id": 474719518,
+    "title": "Etats-Unis - Chine : le clash des superpuissances",
+    "text": "En 2017, le président Trump promet de \"faire payer la Chine\" et bouleverse les relations entre les Etats-Unis et Pékin. Le gouvernement de Xi Jinping place de grands espoirs dans son successeur, Joe Biden, mais ceux-ci sont anéantis par une rencontre glaciale en Alaska. La visite de la présidente de la Chambre des représentants Nancy Pelosi à Taïwan rapproche plus que jamais les deux superpuissances d'une confrontation militaire. Face à un Washington de plus en plus hostile, Xi Jinping entend restaurer la puissance chinoise. Alors que le retour de Donald Trump ouvre une nouvelle phase d'incertitude qui commence par sa guerre du droit de douane, hauts responsables américains, proches du pouvoir chinois et acteurs internationaux racontent les confrontations des dirigeants des deux pays les plus puissants au monde.",
+    "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+    "image": "https://i.f1g.fr/media/ext/1200x630_crop/api-tvmag.lefigaro.fr/img/v2/000/093/f85c463a881a72c26bdb0ae61c2bd7f0.jpg",
+    "video": null,
+    "publish_date": "2026-10-18 16:00:00",
+    "author": null,
+    "language": "fr",
+    "category": "politics",
+    "source_country": "fr"
+  },
+  "sceneCount": 7,
+  "imageProvider": "hf-flux-klein",
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "141ec6df8aedca88654b2d4dc56f20f8fb8383dfcfaa10c035ee1ef1551ceeee",
+      "bytes": 2915917,
+      "provider": "hf-flux-klein",
+      "taskUUID": "9a255f96bfa34c44b426a815ad69ec1b",
+      "seed": 1610810372,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "5c1908df4b31c1281ce595e70fd021ab910962a4e48d9105b8475bf9e051cf41",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "7a6c801a0b60a80fcb4571ad32d172344f4869fec4f978bf44c5ca64ba137def",
+      "bytes": 2903077,
+      "provider": "hf-flux-klein",
+      "taskUUID": "401caf358ef04859ba409029f910fece",
+      "seed": 1698507109,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "942d5f8592bcff7b1a462cda89bb955fc8b3f8fb53475811896f65209f3ef8b9",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "3c4e6d6da7375d9e4ec09d32059c8ce70fed7cfcb57d6c3ab34f71e0fabeb5dc",
+      "bytes": 2933181,
+      "provider": "hf-flux-klein",
+      "taskUUID": "539e954c04fb4670893d1b68c21372a3",
+      "seed": 1900634245,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "f29d89d1062bde8928329d50f945f8347c87bbf943e253c5eef6c26d2262ba7f",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-4-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "cbd1272f9350a076119a7c40b40b98ba3365f9cdcc2bac250866008aa1f33fb7",
+      "bytes": 3039932,
+      "provider": "hf-flux-klein",
+      "taskUUID": "a76e72d09c344e509bbdde2c27758d15",
+      "seed": 996580573,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "40bda8a4a4c99ee888bc52187265a9d42203fbcd72e4a0b5845a48177c59836c",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-5-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "dddbb52bc6da38e2acdacf2126972d89ee669f8c7b13ea2d4435738e83fee447",
+      "bytes": 2923605,
+      "provider": "hf-flux-klein",
+      "taskUUID": "c60b7ace65214213ad86c9f5c9e9004e",
+      "seed": 1275257419,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "5c85da53a99e8ecf5aff0caf4a4cf670a1b14411c033d94a087e6b437245fb20",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-6-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "937653763fc56c9a64d438ad1ffe48d6ed01e5c26fccf327ef0a3731d9eef4a8",
+      "bytes": 3074839,
+      "provider": "hf-flux-klein",
+      "taskUUID": "6c197dd4fb47439d810f4c7bf2347cbe",
+      "seed": 963683208,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "e227f211f9128b8b5ef5ce494fad2aed23dd18bfa62ec313613df4220e1bbe19",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-7-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "0dd348886bb54a562413927e8c9eb45fe0b430dce2c33978a6e0429993252523",
+      "bytes": 2967838,
+      "provider": "hf-flux-klein",
+      "taskUUID": "f3597a9e906144039d44bf45ddd3c16d",
+      "seed": 1016693811,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "6181cd168e0cee2cfc1b655c65cd41a0cef5b58e2cfd6664d4423d2f0f4b3753",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    }
+  ],
+  "sceneDurations": [
+    14,
+    5,
+    7,
+    5,
+    11,
+    5,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "taktmuster",
+    "takt": 3,
+    "type": "balanced",
+    "multiplier": 3.5,
+    "bias": 0,
+    "minimum": 5,
+    "maximum": 15
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-18T12:42:15.052Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.7,
+          "urlLink": "Italien",
+          "title": "Italien",
+          "text": "Italien",
+          "sentences": {
+            "prev": [
+              "und",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "und Frankreich in einer Höhe von 4805 m am Mont Blanc, der",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU „einen"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 2,
+          "urlLink": "Member_state_of_the_European_Union",
+          "title": "Member state of the European Union",
+          "text": "27 members",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "regulations, which are immediately enforceable in all member",
+              "or from €4,600 to €92,600. EU member states own",
+              "when the Maastricht Treaty came into force in"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.8,
+          "urlLink": "%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%8F",
+          "title": "Франция",
+          "text": "Франция",
+          "sentences": {
+            "prev": [],
+            "next": [
+              "вышедшая из состава союза 31 января 2020 года."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+    "bytes": 95399
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "e1ac9021bc923ba427b5a8ffbded4ad932f5a162f54a9cad4453873853f9eb35",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "Das Foto zeigt zwei männliche Politiker, die sich vor einem Hintergrund mit den Flaggen der USA und Chinas die Hände schütteln. Die Bildkomposition ist symmetrisch mit starken Kontrasten zwischen den dunklen Vorhängen und den farbigen Flaggen. Die Gestik ist formell, der Blickkontakt konzentriert und ernst. Es handelt sich um ein dokumentarisches Pressefoto, das eine diplomatische Begegnung symbolisiert. Es ist keine Illustration oder Logo, sondern ein realer Ausschnitt politischer Interaktion.",
+    "articleFacts": [
+      "2017 kündigte Präsident Trump an, China zur Rechenschaft zu ziehen und veränderte damit die Beziehungen zwischen den USA und China.",
+      "Xi Jinping setzte große Hoffnungen in Joe Biden, die jedoch durch ein frostiges Treffen in Alaska enttäuscht wurden.",
+      "Der Besuch von Nancy Pelosi in Taiwan führte zu einer starken Annäherung der USA und China an eine militärische Konfrontation.",
+      "Xi Jinping strebt angesichts der zunehmenden Feindseligkeit Washingtons die Wiederherstellung der chinesischen Macht an.",
+      "Die Rückkehr von Donald Trump verursacht eine neue Phase der Unsicherheit, beginnend mit einem Zollkrieg.",
+      "Hochrangige US-Beamte, chinesische Regierungsnahe und internationale Akteure berichten über die Konfrontationen der beiden Supermächte.",
+      "Die Situation ist von wachsender Spannung und einer drohenden militärischen Eskalation geprägt."
+    ],
+    "storyPremise": "Im Spannungsfeld der geopolitischen Rivalität zwischen den USA und China steht der fiktive Vermittler Liu, ein erfahrener Diplomat, der versucht, die eskalierende Konfrontation zwischen den Supermächten zu entschärfen. Er navigiert durch politische Machtspiele, enttäuschte Hoffnungen und drohende militärische Konflikte, während er nach Wegen zur Stabilisierung sucht.",
+    "fictionBoundary": "Die Geschichte ist eine fiktionale Darstellung basierend auf realen geopolitischen Spannungen zwischen den USA und China. Die Figur Liu und seine Handlungen sind erfunden und dienen der bildlichen Umsetzung der Konfliktdynamik. Die symbolischen Elemente stammen aus der Guernica-Ikonographie und sind metaphorisch zu verstehen, nicht als historische Berichte.",
+    "protagonist": {
+      "name": "Liu",
+      "role": "Erfahrener Diplomat und Vermittler",
+      "visualIdentity": "Maskierte Figur mit erhobenen Armen, Ausdruck von Entsetzen und Hilflosigkeit, symbolisiert durch Guernicas 'Frau mit erhobenen Armen' (Figur 6)",
+      "guernicaId": 6
+    },
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "/ Keine relevante Verbindung zur Geschichte des USA-China-Konflikts /"
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "/ Keine relevante Verbindung zur Geschichte des USA-China-Konflikts /"
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "/ Keine relevante Verbindung zur Geschichte des USA-China-Konflikts /"
+      }
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Versprechen und Konfrontation",
+        "storyBeat": "Liu beobachtet die Ankündigung von Trump 2017, China zur Rechenschaft zu ziehen, die den diplomatischen Ton zwischen den Supermächten verschärft.",
+        "protagonistAction": "Liu steht mit erhobenen Armen inmitten eines zerklüfteten politischen Raumes, der von scharfen Linien und fragmentierten Formen dominiert wird, seine Haltung drückt Entsetzen über den drohenden Konflikt aus.",
+        "composition": "wide_establishing",
+        "durationSeconds": 14,
+        "videoPrompt": "The scene begins with Liu standing still in a fractured political space; slowly, his arms rise as the fragmented environment sharpens around him, emphasizing a growing tension that settles into a frozen moment of looming confrontation by the end.",
+        "guernicaId": 6,
+        "selectionReason": "Die 'Frau mit erhobenen Armen' vermittelt am besten die emotionale Spannung und Hilflosigkeit angesichts eskalierender Konflikte, passend zu Liu als Vermittler.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate the frame. Use bent arcs, bulbous shapes and sweeping bands alongside sharp breaks, so the composition feels forceful, fluid and hand-painted rather than like a field of small shards. Fracture faces into displaced profiles and mismatched features; distort bodies into broad overlapping forms with deliberate discontinuity. The protagonist Liu appears large and central, with raised arms expressing shock and helplessness, standing amid fractured abstract forms symbolizing political turmoil. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions from deep soot-black through warm dirty ivory to smoke-gray; keep visible mid-tones and several distinct gray values instead of flat black-and-white. Keep the color restrained, with no flags, national color fields, stars, stripes, maps, emblems or readable text. Figures and setting fuse into one unstable painted surface."
+      },
+      {
+        "index": 2,
+        "title": "Zerbrochene Hoffnungen",
+        "storyBeat": "Liu erlebt das frostige Treffen zwischen Xi Jinping und Joe Biden in Alaska, das die Hoffnungen Chinas auf Entspannung zerstört.",
+        "protagonistAction": "Liu wendet sich ab, sein Gesicht fragmentiert und verzerrt, während kalte, scharfe Formen die Distanz und Kälte zwischen den Mächten symbolisieren.",
+        "composition": "profile_silhouette",
+        "durationSeconds": 5,
+        "videoPrompt": "Starting with Liu's fragmented profile turning away from the scene, abstract cold shapes and sharp angular forms emerge to emphasize the growing emotional and political distance, as the motion slows to a still, tense posture at the end.",
+        "guernicaId": 6,
+        "selectionReason": "Das Profil eignet sich, um die Distanz und Enttäuschung sichtbar zu machen, Liu bleibt emotional präsent durch die verzerrte Gestalt.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, rounded, swelling and crescent-shaped masses overlapping with sharp angular breaks to create a cold, tense atmosphere. The protagonist Liu is shown in profile silhouette, his face fragmented and distorted, turning away in disillusionment. Surrounding forms evoke distance and frosty separation. Raw charcoal and worn plaster textures dominate with a muted palette, no national symbols or readable text. The figure and environment merge into one unstable painted surface."
+      },
+      {
+        "index": 3,
+        "title": "Die Provokation von Taiwan",
+        "storyBeat": "Liu beobachtet die Eskalation durch Pelosis Besuch in Taiwan, der die Supermächte weiter an die Schwelle eines militärischen Konflikts bringt.",
+        "protagonistAction": "Liu hebt eine Hand als Warnung, während scharfe, aggressive Formen und fragmentierte Massen die drohende Konfrontation symbolisieren.",
+        "composition": "oblique_diagonal",
+        "durationSeconds": 7,
+        "videoPrompt": "The scene opens with Liu raising his hand in warning; jagged, aggressive shapes shift diagonally across the frame, creating a dynamic tension that intensifies before settling into a charged stillness at the end.",
+        "guernicaId": 6,
+        "selectionReason": "Die diagonale Komposition bringt Dynamik und Spannung, die Handgeste des Protagonisten visualisiert Warnung und Alarm.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, interlocking crescent shapes and jagged angular forms to convey aggression and confrontation. The protagonist Liu is central, raising one hand in a warning gesture. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. The composition is oblique diagonal to suggest movement and tension. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No national symbols or readable text. Figures and setting fused into one unstable painted surface."
+      },
+      {
+        "index": 4,
+        "title": "Chinas Machtanspruch",
+        "storyBeat": "Liu steht vor Xi Jinpings Entschlossenheit zur Wiederherstellung der chinesischen Macht in einer zunehmend feindseligen Welt.",
+        "protagonistAction": "Liu schaut mit gesenktem Kopf, umgeben von massiven, fast bedrohlichen Formen, die Xi Jinpings Machtambitionen symbolisieren.",
+        "composition": "high_angle",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene begins with a high angle looking down on Liu, his head bowed. Massive, looming abstract shapes representing power and threat shift slowly around him, settling into a tense, oppressive atmosphere by the end.",
+        "guernicaId": 6,
+        "selectionReason": "Die Vogelperspektive zeigt Liu als verletzlichen Vermittler unter dem Druck von Xi Jinpings Machtanspruch.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, bulbous, and imposing crescent shapes overlapping with sharp breaks to symbolize power and threat. The protagonist Liu is depicted from a high angle with his head bowed, expressing Unterwerfung und Belastung. Faces are fractured and distorted, bodies broad and overlapping, with deliberate discontinuity. Raw charcoal and scraped pigment textures dominate. No flags, national colors or text. Figures and environment fuse into one unstable painted surface."
+      },
+      {
+        "index": 5,
+        "title": "Neue Unsicherheit durch Trumps Rückkehr",
+        "storyBeat": "Liu erlebt die Unsicherheit und Spannungen, die durch die Rückkehr Trumps und seinen Zollkrieg ausgelöst werden.",
+        "protagonistAction": "Liu hält die Hände schützend vor sich, als abstrakte Formen von Zöllen und Barrieren sich um ihn herum aufbauen.",
+        "composition": "foreground_frame",
+        "durationSeconds": 11,
+        "videoPrompt": "The scene opens with Liu holding his hands protectively forward as abstract shapes resembling walls and barriers rise around him. These forms move slowly, growing in height and enclosing the space, before settling into a claustrophobic stillness at the end.",
+        "guernicaId": 6,
+        "selectionReason": "Die Vordergrundrahmung gibt Liu eine beschützende Haltung, während die abstrakten Barrieren die wirtschaftlichen Spannungen visualisieren.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, rounded and angular overlapping shapes that build up like walls and barriers around the protagonist Liu. Liu is central, holding his hands protectively forward. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Composition uses a foreground frame to enclose the figure. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface."
+      },
+      {
+        "index": 6,
+        "title": "Berichte von Konfrontationen",
+        "storyBeat": "Liu reflektiert die Berichte von hochrangigen Beamten und internationalen Akteuren über die Konfrontationen zwischen den Supermächten.",
+        "protagonistAction": "Liu sitzt mit gesenktem Kopf, umgeben von fragmentierten, flackernden Formen, die Stimmen und Berichte symbolisieren.",
+        "composition": "over_the_shoulder",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene starts with an over-the-shoulder view of Liu sitting with bowed head. Fragmented, flickering abstract shapes representing voices and reports move lightly around before settling into a quiet, contemplative stillness at the end.",
+        "guernicaId": 6,
+        "selectionReason": "Die über-die-Schulter-Perspektive zeigt Liu in Reflexion, unterstützt durch fragmentierte Formen als Metapher für Berichte und Stimmen.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use fragmented, flickering overlapping shapes to symbolize voices and reports around the protagonist Liu, who sits with bowed head in an over-the-shoulder composition. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface."
+      },
+      {
+        "index": 7,
+        "title": "Drohende Eskalation",
+        "storyBeat": "Liu steht am Rande einer möglichen militärischen Eskalation zwischen USA und China, gefangen zwischen Hoffnung und Verzweiflung.",
+        "protagonistAction": "Liu steht zentral, die Arme ausgestreckt, das Gesicht verzerrt in einem Ausdruck von Angst und Hilflosigkeit, während um ihn herum aggressive, scharfe Formen aufeinanderprallen.",
+        "composition": "low_angle",
+        "durationSeconds": 7,
+        "videoPrompt": "The scene opens from a low angle, emphasizing Liu's outstretched arms and distorted fearful face. Aggressive, sharp abstract shapes clash violently around him, moving dynamically before settling into a tense, frozen confrontation at the end.",
+        "guernicaId": 6,
+        "selectionReason": "Die Froschperspektive verstärkt die Dramatik von Liu's Verzweiflung und die Gefahr einer Eskalation, passend zum letzten Höhepunkt.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the image with large, rounded and jagged interlocking forms that clash aggressively. The protagonist Liu is central, arms outstretched, face distorted with fear and helplessness. Faces fractured and displaced, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No national symbols or text. Figures and setting fused into one unstable painted surface."
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 7219,
+    "completion_tokens": 3065,
+    "total_tokens": 10284,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "planHash": "7caff53db19339b94b8f03066c397a70000375672bae11853ff0c5d3f1472dbb",
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022",
+    "sourceCommit": "7837bad89486d931df18f82562e3311541fb25f1",
+    "article": {
+      "title": "Etats-Unis - Chine : le clash des superpuissances",
+      "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+      "publish_date": "2026-10-18 16:00:00"
+    },
+    "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Versprechen und Konfrontation",
+        "beat": "Liu beobachtet die Ankündigung von Trump 2017, China zur Rechenschaft zu ziehen, die den diplomatischen Ton zwischen den Supermächten verschärft.",
+        "storyBeat": "Liu beobachtet die Ankündigung von Trump 2017, China zur Rechenschaft zu ziehen, die den diplomatischen Ton zwischen den Supermächten verschärft.",
+        "durationSeconds": 14,
+        "requestedDurationSeconds": 14,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate the frame. Use bent arcs, bulbous shapes and sweeping bands alongside sharp breaks, so the composition feels forceful, fluid and hand-painted rather than like a field of small shards. Fracture faces into displaced profiles and mismatched features; distort bodies into broad overlapping forms with deliberate discontinuity. The protagonist Liu appears large and central, with raised arms expressing shock and helplessness, standing amid fractured abstract forms symbolizing political turmoil. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions from deep soot-black through warm dirty ivory to smoke-gray; keep visible mid-tones and several distinct gray values instead of flat black-and-white. Keep the color restrained, with no flags, national color fields, stars, stripes, maps, emblems or readable text. Figures and setting fuse into one unstable painted surface.",
+        "videoPrompt": "The scene begins with Liu standing still in a fractured political space; slowly, his arms rise as the fragmented environment sharpens around him, emphasizing a growing tension that settles into a frozen moment of looming confrontation by the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Build the image from a few large, rounded, swelling and crescent-shaped masses that overlap and interlock; let broad curved contours and irregular organic silhouettes dominate the frame. Use bent arcs, bulbous shapes and sweeping bands alongside sharp breaks, so the composition feels forceful, fluid and hand-painted rather than like a field of small shards. Fracture faces into displaced profiles and mismatched features; distort bodies into broad overlapping forms with deliberate discontinuity. The protagonist Liu appears large and central, with raised arms expressing shock and helplessness, standing amid fractured abstract forms symbolizing political turmoil. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and broad tonal transitions from deep soot-black through warm dirty ivory to smoke-gray; keep visible mid-tones and several distinct gray values instead of flat black-and-white. Keep the color restrained, with no flags, national color fields, stars, stripes, maps, emblems or readable text. Figures and setting fuse into one unstable painted surface."
+      },
+      {
+        "index": 2,
+        "title": "Zerbrochene Hoffnungen",
+        "beat": "Liu erlebt das frostige Treffen zwischen Xi Jinping und Joe Biden in Alaska, das die Hoffnungen Chinas auf Entspannung zerstört.",
+        "storyBeat": "Liu erlebt das frostige Treffen zwischen Xi Jinping und Joe Biden in Alaska, das die Hoffnungen Chinas auf Entspannung zerstört.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, rounded, swelling and crescent-shaped masses overlapping with sharp angular breaks to create a cold, tense atmosphere. The protagonist Liu is shown in profile silhouette, his face fragmented and distorted, turning away in disillusionment. Surrounding forms evoke distance and frosty separation. Raw charcoal and worn plaster textures dominate with a muted palette, no national symbols or readable text. The figure and environment merge into one unstable painted surface.",
+        "videoPrompt": "Starting with Liu's fragmented profile turning away from the scene, abstract cold shapes and sharp angular forms emerge to emphasize the growing emotional and political distance, as the motion slows to a still, tense posture at the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, rounded, swelling and crescent-shaped masses overlapping with sharp angular breaks to create a cold, tense atmosphere. The protagonist Liu is shown in profile silhouette, his face fragmented and distorted, turning away in disillusionment. Surrounding forms evoke distance and frosty separation. Raw charcoal and worn plaster textures dominate with a muted palette, no national symbols or readable text. The figure and environment merge into one unstable painted surface."
+      },
+      {
+        "index": 3,
+        "title": "Die Provokation von Taiwan",
+        "beat": "Liu beobachtet die Eskalation durch Pelosis Besuch in Taiwan, der die Supermächte weiter an die Schwelle eines militärischen Konflikts bringt.",
+        "storyBeat": "Liu beobachtet die Eskalation durch Pelosis Besuch in Taiwan, der die Supermächte weiter an die Schwelle eines militärischen Konflikts bringt.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, interlocking crescent shapes and jagged angular forms to convey aggression and confrontation. The protagonist Liu is central, raising one hand in a warning gesture. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. The composition is oblique diagonal to suggest movement and tension. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No national symbols or readable text. Figures and setting fused into one unstable painted surface.",
+        "videoPrompt": "The scene opens with Liu raising his hand in warning; jagged, aggressive shapes shift diagonally across the frame, creating a dynamic tension that intensifies before settling into a charged stillness at the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, interlocking crescent shapes and jagged angular forms to convey aggression and confrontation. The protagonist Liu is central, raising one hand in a warning gesture. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. The composition is oblique diagonal to suggest movement and tension. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No national symbols or readable text. Figures and setting fused into one unstable painted surface."
+      },
+      {
+        "index": 4,
+        "title": "Chinas Machtanspruch",
+        "beat": "Liu steht vor Xi Jinpings Entschlossenheit zur Wiederherstellung der chinesischen Macht in einer zunehmend feindseligen Welt.",
+        "storyBeat": "Liu steht vor Xi Jinpings Entschlossenheit zur Wiederherstellung der chinesischen Macht in einer zunehmend feindseligen Welt.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-4-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, bulbous, and imposing crescent shapes overlapping with sharp breaks to symbolize power and threat. The protagonist Liu is depicted from a high angle with his head bowed, expressing Unterwerfung und Belastung. Faces are fractured and distorted, bodies broad and overlapping, with deliberate discontinuity. Raw charcoal and scraped pigment textures dominate. No flags, national colors or text. Figures and environment fuse into one unstable painted surface.",
+        "videoPrompt": "The scene begins with a high angle looking down on Liu, his head bowed. Massive, looming abstract shapes representing power and threat shift slowly around him, settling into a tense, oppressive atmosphere by the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use large, bulbous, and imposing crescent shapes overlapping with sharp breaks to symbolize power and threat. The protagonist Liu is depicted from a high angle with his head bowed, expressing Unterwerfung und Belastung. Faces are fractured and distorted, bodies broad and overlapping, with deliberate discontinuity. Raw charcoal and scraped pigment textures dominate. No flags, national colors or text. Figures and environment fuse into one unstable painted surface."
+      },
+      {
+        "index": 5,
+        "title": "Neue Unsicherheit durch Trumps Rückkehr",
+        "beat": "Liu erlebt die Unsicherheit und Spannungen, die durch die Rückkehr Trumps und seinen Zollkrieg ausgelöst werden.",
+        "storyBeat": "Liu erlebt die Unsicherheit und Spannungen, die durch die Rückkehr Trumps und seinen Zollkrieg ausgelöst werden.",
+        "durationSeconds": 11,
+        "requestedDurationSeconds": 11,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-5-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, rounded and angular overlapping shapes that build up like walls and barriers around the protagonist Liu. Liu is central, holding his hands protectively forward. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Composition uses a foreground frame to enclose the figure. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface.",
+        "videoPrompt": "The scene opens with Liu holding his hands protectively forward as abstract shapes resembling walls and barriers rise around him. These forms move slowly, growing in height and enclosing the space, before settling into a claustrophobic stillness at the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the scene with large, rounded and angular overlapping shapes that build up like walls and barriers around the protagonist Liu. Liu is central, holding his hands protectively forward. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Composition uses a foreground frame to enclose the figure. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface."
+      },
+      {
+        "index": 6,
+        "title": "Berichte von Konfrontationen",
+        "beat": "Liu reflektiert die Berichte von hochrangigen Beamten und internationalen Akteuren über die Konfrontationen zwischen den Supermächten.",
+        "storyBeat": "Liu reflektiert die Berichte von hochrangigen Beamten und internationalen Akteuren über die Konfrontationen zwischen den Supermächten.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-6-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use fragmented, flickering overlapping shapes to symbolize voices and reports around the protagonist Liu, who sits with bowed head in an over-the-shoulder composition. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface.",
+        "videoPrompt": "The scene starts with an over-the-shoulder view of Liu sitting with bowed head. Fragmented, flickering abstract shapes representing voices and reports move lightly around before settling into a quiet, contemplative stillness at the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Use fragmented, flickering overlapping shapes to symbolize voices and reports around the protagonist Liu, who sits with bowed head in an over-the-shoulder composition. Faces fractured and distorted, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment, worn plaster textures with muted colors. No flags, national symbols or text. Figures and setting fused into one unstable painted surface."
+      },
+      {
+        "index": 7,
+        "title": "Drohende Eskalation",
+        "beat": "Liu steht am Rande einer möglichen militärischen Eskalation zwischen USA und China, gefangen zwischen Hoffnung und Verzweiflung.",
+        "storyBeat": "Liu steht am Rande einer möglichen militärischen Eskalation zwischen USA und China, gefangen zwischen Hoffnung und Verzweiflung.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-022/media/scene-7-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the image with large, rounded and jagged interlocking forms that clash aggressively. The protagonist Liu is central, arms outstretched, face distorted with fear and helplessness. Faces fractured and displaced, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No national symbols or text. Figures and setting fused into one unstable painted surface.",
+        "videoPrompt": "The scene opens from a low angle, emphasizing Liu's outstretched arms and distorted fearful face. Aggressive, sharp abstract shapes clash violently around him, moving dynamically before settling into a tense, frozen confrontation at the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface in charcoal-black, dirty ivory, warm chalk, ash-gray and smoke-gray. Construct the image with large, rounded and jagged interlocking forms that clash aggressively. The protagonist Liu is central, arms outstretched, face distorted with fear and helplessness. Faces fractured and displaced, bodies broad and overlapping with deliberate discontinuity. Use raw charcoal, broken brush marks, scraped pigment and worn plaster textures with muted colors. No national symbols or text. Figures and setting fused into one unstable painted surface."
+      }
+    ]
+  },
+  "finishedAt": "2026-10-19T12:42:56.187Z"
+}
