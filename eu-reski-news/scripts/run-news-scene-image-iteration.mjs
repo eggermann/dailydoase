@@ -28,7 +28,7 @@ const { values: options } = parseArgs({ options: {
   'guernica-dir': { type: 'string', default: process.env.GUERNICA_DIRECTORY || '/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert' },
   'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
-  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, help: { type: 'boolean' },
+  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, help: { type: 'boolean' },
 } });
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
 async function exists(path) {
@@ -77,7 +77,7 @@ const sceneStaging = {
 function addDistinctSceneStaging(scenes) {
   return scenes.map((scene) => ({
     ...scene,
-    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence.`,
+    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence.${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for broad visual orientation only; do not reproduce identifiable people, exact composition, logos or text.' : ''}`,
   }));
 }
 
@@ -265,7 +265,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. Article photo goes to GPT, not the image API. Output: eu-reski-news/GENERATIONS/news/.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -277,6 +277,7 @@ async function main() {
   const sceneCount = Number(options.scenes);
   if (!Number.isInteger(sceneCount) || sceneCount < 1 || sceneCount > 7) throw new Error('Use --scenes=1 through 7');
   if (!['linear', 'random'].includes(options['article-order'])) throw new Error('Use --article-order=linear or --article-order=random');
+  if (options['article-image-reference'] && !options['no-style-reference']) throw new Error('Use --article-image-reference together with --no-style-reference; FLUX receives figure and article photo references');
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   const imageProvider = options['image-provider'];
@@ -377,7 +378,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         },
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
         selection: { method: options['article-id'] ? 'article-id' : order, order, draw, candidateCount: candidates.length, aggregateIndex: index },
-        article, sceneCount, imageProvider, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
+        article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
         guernicaDirectory: resolve(options['guernica-dir']), results: [],
       };
     }
@@ -430,7 +431,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
       }
       const images = [await imageInput(directory, record.articleImage, 'Article photograph for factual and visual analysis only; never reproduce its identifiable people.', 'article')];
       for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, sceneDurations: record.sceneDurations, sceneDurationSettings: record.sceneDurationSettings, images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], continuationPlan: record.continuationPlan || null });
+      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, sceneDurations: record.sceneDurations, sceneDurationSettings: record.sceneDurationSettings, images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, continuationPlan: record.continuationPlan || null });
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
       const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
@@ -468,9 +469,11 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
               'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English. Translate source-language article details and semantic words; never copy foreign-language terms into model prompts. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
               'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. Choose a valid masked figure reference separately for each scene to match its unique gesture and body shape; avoid repeating a reference in neighboring scenes and use at least three different references across the sequence. Every selectionReason must explain visual fit without importing the figure source story. Assign a different composition choice to each scene, and change camera angle, distance, framing, body silhouette, and main action. The image model must ignore each reference crop’s exact pose, scale and placement.',
               'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
-              options['no-style-reference']
-                ? 'The image API receives only reference image 1: the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
-                : 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the complete painting, used only for style. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. Reference 2 contributes painterly style only. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.',
+              record.articleImageReference
+                ? 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the original article photo, used only for broad visual orientation. Do not reproduce its identifiable people, exact composition, logos, or text. No complete painting reference is supplied; follow the written style description. Redraw reference 1 into the scene; never paste either reference. Do not import the figure’s original story, props, or symbols. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
+                : options['no-style-reference']
+                  ? 'The image API receives only reference image 1: the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
+                  : 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the complete painting, used only for style. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. Reference 2 contributes painterly style only. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.',
               'Here is the complete previous JSON plan to correct:',
               raw.choices?.[0]?.message?.content || '',
             ].join('\n') }] },
@@ -508,10 +511,13 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         const name = `scene-${scene.index}`;
         const requestPath = join(directory, `${name}-request.json`);
         let log = await exists(requestPath) ? await json(requestPath) : null;
-        const referenceImages = [figureInput.dataUrl, ...(styleInput ? [styleInput.dataUrl] : [])];
+        const articleInput = record.articleImageReference
+          ? await prepareImageReference(directory, await imageInput(directory, record.articleImage, 'Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text', 'article'))
+          : null;
+        const referenceImages = [figureInput.dataUrl, ...(articleInput ? [articleInput.dataUrl] : styleInput ? [styleInput.dataUrl] : [])];
         const task = log ? { ...log, inputs: { referenceImages } } : buildImageTask(scene, randomUUID(), referenceImages);
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
-        const referencePaths = [figureInput.path, ...(styleInput ? [styleInput.path] : [])];
+        const referencePaths = [figureInput.path, ...(articleInput ? [articleInput.path] : styleInput ? [styleInput.path] : [])];
         log = { ...task, inputs: { referenceImages: referencePaths } };
         await save(requestPath, log);
         console.log(`Scene ${scene.index}: GPT prompt → ${record.imageModel}`);
@@ -527,7 +533,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
           if (!result) throw new Error('Runware returned no matching image; saved response retained');
           output = await download(result.imageURL, directory, `scene-${scene.index}-first-frame`);
         }
-        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths, referenceMetadata: [figureInput, ...(styleInput ? [styleInput] : [])].map(({ dataUrl, ...metadata }) => metadata) };
+        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths, referenceMetadata: [figureInput, ...(articleInput ? [articleInput] : styleInput ? [styleInput] : [])].map(({ dataUrl, ...metadata }) => metadata) };
         await persist();
       }
     }

@@ -34,12 +34,16 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, images, model, styleReferenceProvided = true, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
   const referenceInstructions = styleReferenceProvided
     ? 'The image API receives two references: reference image 1 is the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture; reference image 2 is the complete painting, used only for painterly style. Do not import story content from either reference.'
     : 'The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1.';
+  const articleImageReferenceInstructions = articleImageReferenceProvided
+    ? 'The image API also receives the original article photograph as reference image 2 for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.'
+    : 'The article photo is for GPT visual analysis only and is never sent to the image API.';
   const director = (await readFile(new URL('./director.md', import.meta.url), 'utf8'))
-    .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions);
+    .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
+    .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions);
   const articleInput = Object.fromEntries(['id', 'title', 'publish_date', 'url', 'source_country', 'language', 'summary', 'text']
     .map((key) => [key, String(article[key] ?? '').slice(0, key === 'text' ? 18000 : 4000)]));
   const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, continuationPlan };
