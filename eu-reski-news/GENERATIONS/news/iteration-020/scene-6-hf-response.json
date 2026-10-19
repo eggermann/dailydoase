@@ -1,0 +1,19 @@
+{
+  "eventId": "0e1e43b30ef64de69320bca2c35da597",
+  "data": [
+    {
+      "path": "/tmp/gradio/811a8f03472861f7a1df015deeb8c68d4a87eeba2b619f96be548bf7fd7c6117/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/811a8f03472861f7a1df015deeb8c68d4a87eeba2b619f96be548bf7fd7c6117/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    587771694,
+    "Create an original dark cubist mural, hand-painted across a full-frame field of fractured shallow space, with no border or surrounding room. Interlock charcoal-black, ash-gray, and stained-ivory planes using sharp dry-charcoal contours, rough oil scumbling, scraped aged plaster, hairline cracks, and irregular patches of exposed ground. In the foreground, place Alexandre as a mask-like figure derived only from the first image’s fictional visual identity and profile gesture: preserve the elongated profile, bowed head, and tense side-facing orientation, but redraw him as an entirely new abstract presence. His face is assembled from asymmetrical ivory and gray facets, with a widened eye, raised brow, and compressed mouth conveying apprehension and recognition. He observes a much larger fractured figure emerging resolutely behind him, representing Xi Jinping’s power reassertion without literal portrait details. Build that dominant figure from radiating charcoal-black wedges, ash-gray shoulders, and stained-ivory planes, with an angular forward thrust, squared stance, and an abstract mask-like head projecting strength and determination. Make every limb, garment, and object equally abstract, breaking them into displaced geometric shards. Sharp triangular planes fan outward around the larger figure like force lines, while the near-monochrome field remains dense, severe, and aged."
+  ],
+  "completedAt": "2026-10-19T12:02:55.951Z"
+}

@@ -1,0 +1,23 @@
+{
+  "prompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment.",
+  "input_images": [
+    {
+      "image": {
+        "path": "/tmp/gradio/818f1cf1cb07c273f51990c390051cb8b28b84fbf116393bedbe05e4fa6980a0/05_frau_mit_lampe.png",
+        "meta": {
+          "_type": "gradio.FileData"
+        },
+        "orig_name": "05_frau_mit_lampe.png"
+      },
+      "caption": null
+    }
+  ],
+  "mode_choice": "Distilled (16 steps)",
+  "randomize_seed": false,
+  "width": 1680,
+  "height": 944,
+  "num_inference_steps": 16,
+  "guidance_scale": 1,
+  "prompt_upsampling": true,
+  "seed": 1127422712
+}

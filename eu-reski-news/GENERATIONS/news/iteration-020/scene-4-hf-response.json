@@ -1,0 +1,19 @@
+{
+  "eventId": "2f96bc11fe4e4a7d87d26c60b321c98f",
+  "data": [
+    {
+      "path": "/tmp/gradio/5e3a640b22d24d6bbe9b5fb281fbad04567771fd138f2ae74a22fecbae6de543/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/5e3a640b22d24d6bbe9b5fb281fbad04567771fd138f2ae74a22fecbae6de543/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1272622424,
+    "Create an original dark cubist mural, hand-painted across the full frame in fractured shallow space, with no border or surrounding room. Redraw Alexandre from the first image only as a fictional abstract protagonist, preserving its mask-like profile, elongated nose, angular brow, and solemn gesture while replacing the entire reference composition. Place Alexandre low in the composition, seen from below, his head and torso assembled from interlocking charcoal-black, ash-gray, and stained-ivory planes. His face is mask-like and asymmetrical, with one eye displaced, a doubled cheek, and a long angular nose; both hands extend outward at opposing angles as if mediating between the fractured spaces. Surround him with jagged tariff barriers, broken columns, tilted scales, severed arrows, and abstract trade blocks reduced to sharp wedges, wedges, and intersecting slabs. Make every figure and object equally abstract: opposing mask-like faces emerge from the barriers, while raised hands, ledger-like grids, and fractured trade symbols dissolve into the same geometry. Use dry-charcoal contours, rough oil scumbling, scraped aged plaster, chipped edges, and visible abrasions. Keep the palette near-monochrome, with only faint umber staining in a few seams. Convey escalating conflict through compressed diagonals, abrupt overlaps, and narrow ivory gaps between dense black masses."
+  ],
+  "completedAt": "2026-10-19T12:02:24.908Z"
+}

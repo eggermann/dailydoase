@@ -30,8 +30,8 @@ case "$NEWS_MAX_ITERATIONS" in
   *) ;;
 esac
 case "$NEWS_SCENES" in
-  1|2|3) ;;
-  *) echo 'NEWS_SCENES must be 1, 2 or 3.' >&2; exit 2 ;;
+  1|2|3|4|5|6|7) ;;
+  *) echo 'NEWS_SCENES must be between 1 and 7.' >&2; exit 2 ;;
 esac
 case "$NEWS_ARTICLE_ORDER" in
   linear|random) ;;

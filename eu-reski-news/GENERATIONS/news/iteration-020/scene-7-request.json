@@ -1,0 +1,17 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "7c9953e4-a916-439b-a19f-4c300bd4adf1",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is shown over the shoulder amid swirling fractured planes symbolizing instability and unresolved conflict. His arms are slightly raised in a cautious, open gesture of uncertainty and fragile hope. The scene conveys a dynamic but unresolved tension in the fractured space.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/05_frau_mit_lampe.png"
+    ]
+  }
+}

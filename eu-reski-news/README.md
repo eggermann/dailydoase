@@ -20,7 +20,7 @@ npm run news:html     # HTML-Liste nach EU-Relevanz bauen
 
 `Article + article photo + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; full painting for style) → cumulative HTML audit report`.
 
-The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API.
+The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API. `--scenes` accepts 1–7 scenes; default remains 3.
 
 ## Run
 
@@ -44,10 +44,13 @@ npm run news:story -- --iterations=3 --article-order=random
 
 For the next Codex turn, use this instruction: “Run `npm run news:story`, open the generated HTML, and review the three start images. Keep the image-only API workflow, strong abstract Guernica-style painting, article-grounded story, meaningful relevant semantic motifs, and optional crocodile. Do not commit generated images or secrets.”
 
-The three-scene command can be narrowed without changing the npm script:
+Scene count can be changed without editing the npm script (1–7):
 
 ```sh
 npm run news:story -- --scenes=1
+
+# Seven scenes
+npm run news:story -- --scenes=7
 ```
 
 For direct control of flags and resume behavior, use the Node command below.
@@ -58,9 +61,9 @@ node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs
 
 Requires `OPENAI_API_KEY`, `RUNWARE_API_KEY` (or `RUNWARE_KEY`), a saved `eu-reski-news/news/A/all-*.json` collection, the full-painting style reference, and the masked figure catalog. `--style-reference=PATH` selects the style image. `GUERNICA_DIRECTORY` or `--guernica-dir=PATH` selects the masked figure catalog. `--news-dir=PATH` selects another article collection. `NEWS_STORY_MODEL` overrides `gpt-4.1-mini`; the replacement must support vision, Chat Completions structured output and the supplied sampling parameters.
 
-For the separate Hugging Face adapter, set `HF_TOKEN` in `.env`, then run `npm run news:story -- --image-provider=hf-flux-klein`. It uses the Space's `/generate` endpoint, distilled 16-step mode, 1680×944 output, selected figure reference and full-painting style reference. Runware remains unchanged and default. Hugging Face ZeroGPU consumes account GPU quota or prepaid credits; the Space does not report per-image GPU seconds, so exact per-image dollar cost is not recorded. Do not commit `.env` or tokens.
+For the separate Hugging Face adapter, set `HF_TOKEN` in `.env`, then run `npm run news:story -- --image-provider=hf-flux-klein`. It uses the Space's `/generate` endpoint, distilled 16-step mode, 1680×944 output, selected figure reference and, by default, full-painting style reference. Add `--no-style-reference` to send only the selected figure crop. Runware remains unchanged and default. Hugging Face ZeroGPU consumes account GPU quota or prepaid credits; the Space does not report per-image GPU seconds, so exact per-image dollar cost is not recorded. Do not commit `.env` or tokens.
 
-Default: newest saved aggregate by filename in `news/A`, linear article order with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one still per scene. One Taktmuster rhythm instance stays alive for the whole process, advancing once per scene across iteration boundaries. Default balanced takt is 3 with a 3.5 multiplier; durations are rounded and clamped to 5–15 seconds. The news starter defaults to one run; set `NEWS_MAX_ITERATIONS=0` or `-1` for an endless run. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
+Default: newest saved aggregate by filename in `news/A`, linear article order with text and an image, live semantic-stream seeds `EU/de`, `EU/en`, `EU/ru`, three scenes and one still per scene. Set `--scenes=7` for seven scenes. One Taktmuster rhythm instance stays alive for the whole process, advancing once per scene across iteration boundaries. Default balanced takt is 3 with a 3.5 multiplier; durations are rounded and clamped to 5–15 seconds. The news starter defaults to one run; set `NEWS_MAX_ITERATIONS=0` or `-1` for an endless run. A saved collection may be older than today; the report records its exact path, hash and article date. The generator does not fetch fresh news.
 
 ```sh
 # One scene / one image for a small iteration

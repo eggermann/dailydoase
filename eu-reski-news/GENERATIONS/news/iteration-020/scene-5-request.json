@@ -1,0 +1,17 @@
+{
+  "taskType": "imageInference",
+  "taskUUID": "23a47d1f-a42d-4e19-9a23-05cc23c004ca",
+  "model": "bytedance:seedream@5.0-flash",
+  "positivePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands in high angle view amid fractured map-like planes converging sharply toward a central point symbolizing Taiwan. His posture is tense and anxious, his mask-like face showing concern. Muted red tones pulse in the fractured space, evoking escalating military tensions and looming confrontation.",
+  "width": 1680,
+  "height": 944,
+  "numberResults": 1,
+  "outputType": "URL",
+  "outputFormat": "JPG",
+  "includeCost": true,
+  "inputs": {
+    "referenceImages": [
+      "media/05_frau_mit_lampe.png"
+    ]
+  }
+}

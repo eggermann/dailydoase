@@ -1,0 +1,19 @@
+{
+  "eventId": "044a091b764f4b25882e71e44f729782",
+  "data": [
+    {
+      "path": "/tmp/gradio/feeff5f1be6a7e724e5f4fc1d5223148121594054081844ed063f2a3d22077d6/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/feeff5f1be6a7e724e5f4fc1d5223148121594054081844ed063f2a3d22077d6/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    77610143,
+    "Create an original dark cubist mural, hand-painted across a full-frame field of fractured shallow space. Redraw the fictional protagonist Alexandre from the first image without pasting or reproducing it: use that reference only to guide his mask-like profile, angular identity, and tense side-facing gesture. Place Alexandre high above the composition, leaning over an abstracted landscape, his shoulders rigid and his body compressed into interlocking charcoal-black, ash-gray, and stained-ivory planes. His mask-like face turns toward frame-right with concern, one brow raised and the mouth pulled into a tense angular line, while his displaced eyes, nose, jaw, and neck form visibly conflicting anatomical fragments. At the center, make Taiwan a small fractured ivory landmass symbol surrounded by converging map-like wedges, route lines, and sharp directional planes. Muted red pulses through selected fissures around Taiwan and along several narrow seams, suggesting escalating military tension without becoming a conventional map. Surround Alexandre with equally abstract fragments of ships, arrows, coastlines, and looming geometric silhouettes, all reduced to the same near-monochrome palette. Build every form from sharp dry-charcoal contours, rough oil scumbling, scraped aged plaster, chipped edges, and irregular hand-painted transitions. Keep the surrounding field charcoal-black, with no border, text, or representational scenery beyond the mural itself."
+  ],
+  "completedAt": "2026-10-19T12:02:42.200Z"
+}

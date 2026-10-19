@@ -22,7 +22,7 @@ export const planSchema = object({
   protagonist: object({ name: string, role: string, visualIdentity: string, guernicaId: { type: 'integer', minimum: 1, maximum: 9 } }),
   semanticUse: object({}), // Filled with one relevance decision per stream entry.
   scenes: list(object({
-    index: { type: 'integer', minimum: 1, maximum: 3 }, title: string, storyBeat: string,
+    index: { type: 'integer', minimum: 1, maximum: 7 }, title: string, storyBeat: string,
     protagonistAction: string,
     composition: { type: 'string', enum: ['wide_establishing', 'intimate_close_up', 'oblique_diagonal', 'high_angle', 'low_angle', 'profile_silhouette', 'over_the_shoulder', 'foreground_frame', 'top_down'] },
     durationSeconds: { type: 'integer', minimum: 5, maximum: 15 },
@@ -34,18 +34,30 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, images, model }) {
-  const director = await readFile(new URL('./director.md', import.meta.url), 'utf8');
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, images, model, styleReferenceProvided = true, continuationPlan = null }) {
+  const referenceInstructions = styleReferenceProvided
+    ? 'The image API receives two references: reference image 1 is the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture; reference image 2 is the complete painting, used only for painterly style. Do not import story content from either reference.'
+    : 'The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1.';
+  const director = (await readFile(new URL('./director.md', import.meta.url), 'utf8'))
+    .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions);
   const articleInput = Object.fromEntries(['id', 'title', 'publish_date', 'url', 'source_country', 'language', 'summary', 'text']
     .map((key) => [key, String(article[key] ?? '').slice(0, key === 'text' ? 18000 : 4000)]));
-  const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings };
-  const content = [{ type: 'text', text: JSON.stringify(data) }];
+  const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, continuationPlan };
+  const continuationInstruction = continuationPlan
+    ? `Expand the supplied ${continuationPlan.scenes.length}-scene continuationPlan into exactly ${sceneCount} scenes. Preserve its central premise and exact protagonist. Treat prior scene beats as anchors, but add distinct causal beats around them; do not return the old scene count.`
+    : `Return exactly ${sceneCount} scenes.`;
+  const content = [
+    { type: 'text', text: `Required scene count: exactly ${sceneCount}. ${continuationInstruction}` },
+    { type: 'text', text: JSON.stringify(data) },
+  ];
   for (const image of images) {
     content.push({ type: 'text', text: image.label });
     content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: image.role === 'article' || image.role === 'style' ? 'high' : 'low' } });
   }
   const schema = structuredClone(planSchema);
   schema.properties.scenes.items.properties.index.maximum = sceneCount;
+  schema.properties.scenes.minItems = sceneCount;
+  schema.properties.scenes.maxItems = sceneCount;
   const relevance = { type: 'string', enum: ['relevant', 'not_relevant'] };
   schema.properties.semanticUse = object(Object.fromEntries(semantic.entries.map((entry) => [entry.id, object({
     relevance, relatedSceneIndices: list({ type: 'integer', minimum: 1, maximum: sceneCount }), visualMotif: string, visibleConsequence: { type: 'string', minLength: 20 },
@@ -53,7 +65,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   const request = {
     model, messages: [{ role: 'system', content: director }, { role: 'user', content }],
     response_format: { type: 'json_schema', json_schema: { name: 'eu_news_scene_plan', strict: true, schema } },
-    temperature: 0.65, max_completion_tokens: 7000,
+    temperature: 0.65, max_completion_tokens: 14000,
   };
   const log = structuredClone(request);
   let index = 0;
@@ -63,7 +75,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   return { request, log, director, directorHash: hash(director) };
 }
 
-export function validatePlan(response, { sceneCount, catalog, semantic }) {
+export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null }) {
   const choice = response.choices?.[0];
   if (choice?.message?.refusal) throw new Error(`GPT refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return a complete plan');
@@ -72,6 +84,9 @@ export function validatePlan(response, { sceneCount, catalog, semantic }) {
   const figureIds = new Set(catalog.map((item) => item.id));
   if (!plan.protagonist?.name?.trim() || !plan.protagonist.role?.trim() || !plan.protagonist.visualIdentity?.trim() || !figureIds.has(plan.protagonist.guernicaId)) {
     throw new Error('The story needs one named protagonist with a valid Guernica character reference');
+  }
+  if (continuationPlan && (plan.protagonist.name !== continuationPlan.protagonist?.name || plan.protagonist.guernicaId !== continuationPlan.protagonist?.guernicaId)) {
+    throw new Error('An expanded plan must preserve the original protagonist and figure reference');
   }
   for (const [index, scene] of plan.scenes.entries()) {
     if (scene.index !== index + 1 || scene.guernicaId !== plan.protagonist.guernicaId || !scene.protagonistAction?.toLocaleLowerCase().includes(plan.protagonist.name.toLocaleLowerCase()) || !scene.selectionReason?.trim()) throw new Error('Every scene must show the same named main character and selected figure reference');

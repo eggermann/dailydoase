@@ -1,0 +1,19 @@
+{
+  "eventId": "34373f0cb52549dfb1c5a42327b94b86",
+  "data": [
+    {
+      "path": "/tmp/gradio/7805e992ea53750015275ec4f045f42bd674afcece1f5d030d80e3fc50bda1b9/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/7805e992ea53750015275ec4f045f42bd674afcece1f5d030d80e3fc50bda1b9/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1418526091,
+    "Create an original dark cubist mural, hand-painted across the full frame in fractured shallow space, using the first image only as a guide for Alexandre’s abstract visual identity and profile gesture while redrawing everything from scratch. Show Alexandre over the shoulder, his back and one angular shoulder forming the foreground anchor, with his head turned into a mask-like profile derived from the reference’s long nose, narrow mouth, and solemn gaze. His face is divided into asymmetrical charcoal-black, ash-gray, and stained-ivory facets, with one eye displaced, the brow split, and the jaw offset into interlocking planes. Raise both arms slightly above shoulder level in a cautious, open gesture of uncertainty and fragile hope, hands reduced to angular, incomplete forms. Surround him with swirling fractured planes that twist, overlap, and collide like unstable currents, symbolizing instability and unresolved conflict without importing any literal narrative objects. Build every figure and plane with sharp dry-charcoal contours, rough oil scumbling, scraped aged plaster, hairline cracks, rubbed edges, and exposed plaster texture. Keep the palette near-monochrome, with no decorative color and only faint umber undertones in the stained-ivory areas. Maintain a dynamic but unresolved tension throughout the mural, with no border, text, or representational scenery."
+  ],
+  "completedAt": "2026-10-19T12:03:10.286Z"
+}

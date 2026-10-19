@@ -1,0 +1,890 @@
+{
+  "generator": "semantic-news-v1",
+  "createdAt": "2026-10-19T11:58:41.196Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "5d174b65fb49edac179a92df89bdc140aaf38e6c",
+    "branch": "eu-reski-scene-generator",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/news/A/all-2026-10-18T10-06-21-802Z.json",
+  "aggregateHash": "3d74b4cce2f2079ac0f36085abee0ad466d7053a77a3ec1ee2725543eefa0ad9",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "draw": 0,
+    "candidateCount": 2145,
+    "aggregateIndex": 0
+  },
+  "article": {
+    "id": 474719518,
+    "title": "Etats-Unis - Chine : le clash des superpuissances",
+    "text": "En 2017, le président Trump promet de \"faire payer la Chine\" et bouleverse les relations entre les Etats-Unis et Pékin. Le gouvernement de Xi Jinping place de grands espoirs dans son successeur, Joe Biden, mais ceux-ci sont anéantis par une rencontre glaciale en Alaska. La visite de la présidente de la Chambre des représentants Nancy Pelosi à Taïwan rapproche plus que jamais les deux superpuissances d'une confrontation militaire. Face à un Washington de plus en plus hostile, Xi Jinping entend restaurer la puissance chinoise. Alors que le retour de Donald Trump ouvre une nouvelle phase d'incertitude qui commence par sa guerre du droit de douane, hauts responsables américains, proches du pouvoir chinois et acteurs internationaux racontent les confrontations des dirigeants des deux pays les plus puissants au monde.",
+    "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+    "image": "https://i.f1g.fr/media/ext/1200x630_crop/api-tvmag.lefigaro.fr/img/v2/000/093/f85c463a881a72c26bdb0ae61c2bd7f0.jpg",
+    "video": null,
+    "publish_date": "2026-10-18 16:00:00",
+    "author": null,
+    "language": "fr",
+    "category": "politics",
+    "source_country": "fr"
+  },
+  "sceneCount": 7,
+  "imageProvider": "hf-flux-klein",
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "90470d2441e4bd7057a9bbe5b287c501b8b85dd8e2b9667f310e723cd140d782",
+      "bytes": 3188104,
+      "provider": "hf-flux-klein",
+      "taskUUID": "f1691fd318e740ec81767b1681e89c6b",
+      "seed": 1139780107,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "8d1916e268c296ea06a73b1a008a11101ed16f62e73513185eb99b7c53d47508",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "5eb0e8d6519205cd3ec88478dcc45bde74746fb7648b2a3d90dc3049f3af1436",
+      "bytes": 3023135,
+      "provider": "hf-flux-klein",
+      "taskUUID": "a1e9d283365d4b2e992d30c774b8db99",
+      "seed": 1127422712,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "d8386ee25f650825590f3571acfa4378443fe594195862e20460348583a95c87",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "fc0c4d081fad479d913767e4ea18bfca1271b1b7453fb457a16f405bda0810f7",
+      "bytes": 3137641,
+      "provider": "hf-flux-klein",
+      "taskUUID": "ab44190261194868a9b8945462571fdd",
+      "seed": 2147355548,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "0dbe8c390e06ba51b6261b24852bce0d1f8ae04f5d04827502cfa9f60cb20196",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-4-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "21d60967846b91d212d970604cb9b360a512060c5b3239dd9992763f9731e63f",
+      "bytes": 3095725,
+      "provider": "hf-flux-klein",
+      "taskUUID": "2f96bc11fe4e4a7d87d26c60b321c98f",
+      "seed": 1272622424,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "825dcb5efb49641b5f0f8a688875e704045b4dfaf6151cae4390adc2ab005533",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-5-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "fc92ff33372b0a9390c60c54e358a125eddae40ced96b24575f745f01c6de308",
+      "bytes": 3011388,
+      "provider": "hf-flux-klein",
+      "taskUUID": "044a091b764f4b25882e71e44f729782",
+      "seed": 77610143,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "261229e6f85d60c2993772de7ac01a1e57c48d8b86ac62644e8514d3c07a1ef0",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-6-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "4604999c700d2e00cd5e0877f2da4f8236ee306158f26eb4e8f032d55a7cd44b",
+      "bytes": 3053780,
+      "provider": "hf-flux-klein",
+      "taskUUID": "0e1e43b30ef64de69320bca2c35da597",
+      "seed": 587771694,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "b9f380e627a653accac042b224fcf8a0b7ec399b79ee6b66968a2e04f3abfbe5",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-7-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "7848dbd060a7fd2b220af533eeda92ee301d1a23d0a705aa4ed4e03cc4ea2236",
+      "bytes": 3091378,
+      "provider": "hf-flux-klein",
+      "taskUUID": "34373f0cb52549dfb1c5a42327b94b86",
+      "seed": 1418526091,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "ee429c4378b5a9bb1b6c88f49345b62ad4d40c54aae06c4e4cc807ce75afc7e2",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        }
+      ]
+    }
+  ],
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-18T12:42:15.052Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.7,
+          "urlLink": "Italien",
+          "title": "Italien",
+          "text": "Italien",
+          "sentences": {
+            "prev": [
+              "und",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "und Frankreich in einer Höhe von 4805 m am Mont Blanc, der",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU „einen"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 2,
+          "urlLink": "Member_state_of_the_European_Union",
+          "title": "Member state of the European Union",
+          "text": "27 members",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "regulations, which are immediately enforceable in all member",
+              "or from €4,600 to €92,600. EU member states own",
+              "when the Maastricht Treaty came into force in"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.8,
+          "urlLink": "%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%8F",
+          "title": "Франция",
+          "text": "Франция",
+          "sentences": {
+            "prev": [],
+            "next": [
+              "вышедшая из состава союза 31 января 2020 года."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "5745b5304d3954b6daf1e933b01d82611f155b7c7bc0becaa4a6204d9900e8f8",
+    "bytes": 95399
+  },
+  "styleReference": null,
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "variant": {
+    "label": "Sieben Szenen · Figurenreferenz only",
+    "description": "Erweiterung der Storybasis aus Iteration 019-B auf sieben Szenen. Gleicher Artikel und Semantic Stream; Hauptfigur und Figurenreferenz bleiben gleich. Kein vollständiges Gemälde an FLUX.",
+    "promptOrigin": "GPT erweitert den gespeicherten 3-Szenen-Plan aus Iteration 019-B auf sieben aufeinanderfolgende Storybeats. Artikel, Semantic-Stream-Snapshot und Hauptfigur bleiben erhalten. FLUX erhält pro Szene nur den maskierten Figurenausschnitt; Stil entsteht aus dem textlichen Bildprompt."
+  },
+  "continuationPlan": {
+    "visionAnalysis": "The photograph shows two men in dark suits shaking hands in front of alternating flags of the United States and China. The setting is formal and neutral, with a dark blue curtain in the background. The handshake gesture is central, symbolizing diplomatic interaction or confrontation. The lighting is even and clear, emphasizing the figures and their interaction. This is a real-world diplomatic meeting image, not a logo or illustration.",
+    "articleFacts": [
+      "In 2017, President Trump vowed to take a tough stance on China, disrupting US-China relations.",
+      "The Chinese government hoped for better relations under Joe Biden, but the Alaska meeting was cold and tense.",
+      "Nancy Pelosi's visit to Taiwan increased tensions between the US and China, pushing them closer to military confrontation.",
+      "Xi Jinping aims to restore Chinese power amid growing hostility from Washington.",
+      "The return of Donald Trump introduces new uncertainty, including renewed trade war measures.",
+      "The article discusses confrontations and power struggles between the two global superpowers, the US and China."
+    ],
+    "storyPremise": "The story visualizes the escalating tensions and confrontations between the US and China from 2017 onwards, highlighting diplomatic clashes, power struggles, and looming military threats. The protagonist embodies a diplomatic mediator caught amidst these superpower conflicts, witnessing the fragile and hostile interactions that define this era.",
+    "fictionBoundary": "The semantic stream entries referencing the European Union (Italy, member states, France) are unrelated to the US-China conflict and do not influence the story's visual or narrative elements. The painted scenes will focus solely on the US-China power struggle and diplomatic tensions, avoiding any unrelated European Union symbolism or themes.",
+    "protagonist": {
+      "name": "Alexandre",
+      "role": "Diplomatic mediator witnessing US-China tensions",
+      "visualIdentity": "An abstracted figure with a mask-like asymmetrical face and angular, displaced anatomy, embodying cautious observation and emotional restraint in a fractured cubist style",
+      "guernicaId": 5
+    },
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ". The mention of Italy and European cultural politics is unrelated to the US-China conflict."
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "References to EU member states and regulations do not relate to the superpower clash and are excluded from the visual narrative."
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "The mention of France leaving the EU is unrelated and does not impact the story or visuals."
+      }
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Cold Confrontation",
+        "storyBeat": "Alexandre stands between two imposing fractured flag planes of the US and China, witnessing a tense handshake that barely conceals hostility and distrust between the two leaders.",
+        "protagonistAction": "Alexandre observes the handshake with a cautious, restrained gesture, embodying the fragile nature of diplomacy amid rising tensions.",
+        "composition": "wide_establishing",
+        "durationSeconds": 14,
+        "videoPrompt": "The scene begins with Alexandre standing centered between two abstracted, fractured flag forms representing the US and China. The handshake of two large, angular, masked figures takes place front and center, tense and controlled. Alexandre shifts his gaze slowly from one figure to the other, his body subtly contracting in cautious observation. The camera slowly zooms in, emphasizing the spatial tension between the figures and the protagonist, then holds steady as the handshake ends with unresolved hostility.",
+        "guernicaId": 5,
+        "selectionReason": "The figure with a lamp in Guernica suggests searching for truth and hope amid chaos, fitting Alexandre's role as a cautious observer and mediator in a hostile diplomatic encounter.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Keep the fictional protagonist large and unmistakable. No photorealism, smooth digital rendering, copied symbols or composition. Alexandre stands cautiously observing a tense handshake between two large abstracted figures representing the US and China. Behind them are fractured, interlocking planes of their respective flags. Alexandre's face is mask-like and asymmetrical, his posture restrained and tense. The scene conveys fragile diplomacy and mutual distrust through angular gestures and stark contrasts."
+      },
+      {
+        "index": 2,
+        "title": "Rising Hostility",
+        "storyBeat": "The diplomatic facade cracks as Alexandre witnesses a cold, distant meeting symbolized by sharp, fragmented planes separating the two figures, emphasizing growing hostility and mistrust.",
+        "protagonistAction": "Alexandre recoils slightly, raising a hand as if to shield himself from the escalating coldness and division between the two powers.",
+        "composition": "profile_silhouette",
+        "durationSeconds": 5,
+        "videoPrompt": "The camera profile shifts to show Alexandre in silhouette reacting with a subtle recoil and raised hand. The two abstracted figures representing US and China move slightly apart, their fractured planes sharpening and darkening, increasing the visual tension. Alexandre's body language tightens in response, then slowly steadies as the cold encounter persists. The camera holds on this tense spatial relationship until the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The lamp-bearing figure's gesture translates well into an expressive silhouette of cautious defense and searching awareness, reinforcing the protagonist’s emotional response to growing hostility.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment."
+      },
+      {
+        "index": 3,
+        "title": "Approaching Confrontation",
+        "storyBeat": "As military tensions rise, Alexandre stands amid fragmented symbols of power and conflict, embodying the fragile hope for peace amid looming confrontation.",
+        "protagonistAction": "Alexandre raises the lamp upward, casting a muted glow that tries to illuminate the fractured space, symbolizing hope and the search for truth amid chaos.",
+        "composition": "oblique_diagonal",
+        "durationSeconds": 7,
+        "videoPrompt": "The camera moves diagonally upward across the scene, focusing on Alexandre who raises a small abstracted lamp. The fragmented planes around him shift subtly, some darkening while others light up with muted color. Alexandre’s upward gesture and faint glowing light suggest hope and illumination despite the fractured, tense environment. The camera slowly pulls back, showing the expanding, unstable space as the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The woman with the lamp in Guernica is a perfect metaphor for hope and illumination amid destruction, matching Alexandre's gesture and the story's tension between confrontation and fragile peace.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world."
+      }
+    ]
+  },
+  "sceneDurations": [
+    14,
+    5,
+    7,
+    5,
+    11,
+    5,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "taktmuster",
+    "takt": 3,
+    "type": "balanced",
+    "multiplier": 3.5,
+    "bias": 0,
+    "minimum": 5,
+    "maximum": 15
+  },
+  "directorHash": "d2fa4bbb4e6892a509520452e8bb338f7c68b185ab1110fd7e81808eba83359d",
+  "semanticIndexCorrections": [],
+  "planAttempts": [
+    {
+      "attempt": 1,
+      "returnedSceneCount": 3,
+      "requestedSceneCount": 7,
+      "outcome": "Rejected by scene-count validation; no image API calls made."
+    }
+  ],
+  "plan": {
+    "visionAnalysis": "The photograph shows two men in dark suits shaking hands in front of alternating flags of the United States and China. The setting is formal and neutral, with a dark blue curtain in the background. The handshake gesture is central, symbolizing diplomatic interaction or confrontation. The lighting is even and clear, emphasizing the figures and their interaction. This is a real-world diplomatic meeting image, not a logo or illustration.",
+    "articleFacts": [
+      "In 2017, President Trump vowed to take a tough stance on China, disrupting US-China relations.",
+      "The Chinese government hoped for better relations under Joe Biden, but the Alaska meeting was cold and tense.",
+      "Nancy Pelosi's visit to Taiwan increased tensions between the US and China, pushing them closer to military confrontation.",
+      "Xi Jinping aims to restore Chinese power amid growing hostility from Washington.",
+      "The return of Donald Trump introduces new uncertainty, including renewed trade war measures.",
+      "The article discusses confrontations and power struggles between the two global superpowers, the US and China."
+    ],
+    "storyPremise": "The story visualizes the escalating tensions and confrontations between the US and China from 2017 onwards, highlighting diplomatic clashes, power struggles, and looming military threats. The protagonist embodies a diplomatic mediator caught amidst these superpower conflicts, witnessing the fragile and hostile interactions that define this era.",
+    "fictionBoundary": "The semantic stream entries referencing the European Union (Italy, member states, France) are unrelated to the US-China conflict and do not influence the story's visual or narrative elements. The painted scenes will focus solely on the US-China power struggle and diplomatic tensions, avoiding any unrelated European Union symbolism or themes.",
+    "protagonist": {
+      "name": "Alexandre",
+      "role": "Diplomatic mediator witnessing US-China tensions",
+      "visualIdentity": "An abstracted figure with a mask-like asymmetrical face and angular, displaced anatomy, embodying cautious observation and emotional restraint in a fractured cubist style",
+      "guernicaId": 5
+    },
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ". The mention of Italy and European cultural politics is unrelated to the US-China conflict."
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "References to EU member states and regulations do not relate to the superpower clash and are excluded from the visual narrative."
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "The mention of France leaving the EU is unrelated and does not impact the story or visuals."
+      }
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Cold Confrontation",
+        "storyBeat": "Alexandre stands between two imposing fractured flag planes of the US and China, witnessing a tense handshake that barely conceals hostility and distrust between the two leaders.",
+        "protagonistAction": "Alexandre observes the handshake with a cautious, restrained gesture, embodying the fragile nature of diplomacy amid rising tensions.",
+        "composition": "wide_establishing",
+        "durationSeconds": 14,
+        "videoPrompt": "The scene begins with Alexandre standing centered between two abstracted, fractured flag forms representing the US and China. The handshake of two large, angular, masked figures takes place front and center, tense and controlled. Alexandre shifts his gaze slowly from one figure to the other, his body subtly contracting in cautious observation. The camera slowly zooms in, emphasizing the spatial tension between the figures and the protagonist, then holds steady as the handshake ends with unresolved hostility.",
+        "guernicaId": 5,
+        "selectionReason": "The figure with a lamp in Guernica suggests searching for truth and hope amid chaos, fitting Alexandre's role as a cautious observer and mediator in a hostile diplomatic encounter.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Keep the fictional protagonist large and unmistakable. No photorealism, smooth digital rendering, copied symbols or composition. Alexandre stands cautiously observing a tense handshake between two large abstracted figures representing the US and China. Behind them are fractured, interlocking planes of their respective flags. Alexandre's face is mask-like and asymmetrical, his posture restrained and tense. The scene conveys fragile diplomacy and mutual distrust through angular gestures and stark contrasts."
+      },
+      {
+        "index": 2,
+        "title": "Rising Hostility",
+        "storyBeat": "The diplomatic facade cracks as Alexandre witnesses a cold, distant meeting symbolized by sharp, fragmented planes separating the two figures, emphasizing growing hostility and mistrust.",
+        "protagonistAction": "Alexandre recoils slightly, raising a hand as if to shield himself from the escalating coldness and division between the two powers.",
+        "composition": "profile_silhouette",
+        "durationSeconds": 5,
+        "videoPrompt": "The camera profile shifts to show Alexandre in silhouette reacting with a subtle recoil and raised hand. The two abstracted figures representing US and China move slightly apart, their fractured planes sharpening and darkening, increasing the visual tension. Alexandre's body language tightens in response, then slowly steadies as the cold encounter persists. The camera holds on this tense spatial relationship until the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The lamp-bearing figure's gesture translates well into an expressive silhouette of cautious defense and searching awareness, reinforcing the protagonist’s emotional response to growing hostility.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment."
+      },
+      {
+        "index": 3,
+        "title": "Approaching Confrontation",
+        "storyBeat": "As military tensions rise, Alexandre stands amid fragmented symbols of power and conflict, embodying the fragile hope for peace amid looming confrontation.",
+        "protagonistAction": "Alexandre raises the lamp upward, casting a muted glow that tries to illuminate the fractured space, symbolizing hope and the search for truth amid chaos.",
+        "composition": "oblique_diagonal",
+        "durationSeconds": 7,
+        "videoPrompt": "The camera moves diagonally upward across the scene, focusing on Alexandre who raises a small abstracted lamp. The fragmented planes around him shift subtly, some darkening while others light up with muted color. Alexandre’s upward gesture and faint glowing light suggest hope and illumination despite the fractured, tense environment. The camera slowly pulls back, showing the expanding, unstable space as the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The woman with the lamp in Guernica is a perfect metaphor for hope and illumination amid destruction, matching Alexandre's gesture and the story's tension between confrontation and fragile peace.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world."
+      },
+      {
+        "index": 4,
+        "title": "Economic Warfare",
+        "storyBeat": "The trade war intensifies, depicted by jagged, intersecting planes symbolizing tariffs and economic barriers, as Alexandre navigates the escalating conflict.",
+        "protagonistAction": "Alexandre gestures with outstretched hands, attempting to mediate and bridge the sharp economic divides represented by fractured planes.",
+        "composition": "low_angle",
+        "durationSeconds": 5,
+        "videoPrompt": "The camera takes a low angle looking up at Alexandre who stands amid jagged, intersecting planes symbolizing economic barriers and tariffs. Alexandre moves his hands in a bridging gesture, trying to connect the fractured spaces. The planes shift slightly, some edges clashing while others hesitate, reflecting the unstable and aggressive nature of the trade war. The camera slowly circles Alexandre, emphasizing his central mediating role before the scene fades out.",
+        "guernicaId": 5,
+        "selectionReason": "The lamp figure’s symbolic search for clarity and mediation fits Alexandre’s attempt to intervene amid the sharp economic fractures and trade conflict.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands low-angle framed among jagged, intersecting planes representing tariffs and economic barriers of the trade war. He gestures with outstretched hands as if trying to mediate between the fractured spaces. The scene conveys escalating conflict and fragile diplomacy through sharp contrasts and angular fractures."
+      },
+      {
+        "index": 5,
+        "title": "Taiwan Visit Tensions",
+        "storyBeat": "The visit to Taiwan increases military tensions, symbolized by fractured maps and sharp lines converging toward confrontation, with Alexandre caught in the growing crisis.",
+        "protagonistAction": "Alexandre looks anxiously toward the converging fractured maps, his posture tense as he tries to foresee the looming military clash.",
+        "composition": "high_angle",
+        "durationSeconds": 11,
+        "videoPrompt": "The camera looks down from a high angle on Alexandre standing amid fractured map-like planes converging sharply toward a central point, symbolizing Taiwan and the military flashpoint. Alexandre’s figure shifts uneasily, his gaze scanning the assembling fractures. The planes pulse subtly with muted red tones, highlighting danger and tension. The camera slowly pulls back slightly as Alexandre’s anxiety grows, emphasizing the precariousness of the situation before the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The lamp figure’s searching light metaphorically fits Alexandre’s anxious gaze amid the converging tensions and the threat of military conflict.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands in high angle view amid fractured map-like planes converging sharply toward a central point symbolizing Taiwan. His posture is tense and anxious, his mask-like face showing concern. Muted red tones pulse in the fractured space, evoking escalating military tensions and looming confrontation."
+      },
+      {
+        "index": 6,
+        "title": "Power Reassertion",
+        "storyBeat": "Xi Jinping’s determination to restore Chinese power is depicted by a large fractured figure emerging resolutely amid sharp angular planes, as Alexandre witnesses this reassertion of strength.",
+        "protagonistAction": "Alexandre steps back slightly, eyes fixed on the emerging figure, reflecting both apprehension and recognition of the shifting power dynamic.",
+        "composition": "foreground_frame",
+        "durationSeconds": 5,
+        "videoPrompt": "The camera frames Alexandre in the foreground as a large fractured figure symbolizing Xi Jinping rises in the middle distance, composed of sharp angular planes that radiate strength and determination. Alexandre’s eyes follow the figure, his posture slightly recoiling but attentive. The planes shift dynamically, emphasizing the power reassertion. The camera holds steady on this tense spatial relationship until the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The lamp figure’s contemplative and searching nature fits Alexandre’s witness role to the emerging power struggle and Xi Jinping’s assertiveness.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is framed in the foreground observing a large fractured figure emerging resolutely, representing Xi Jinping’s power reassertion. Sharp angular planes radiate strength and determination. Alexandre’s mask-like face shows apprehension and recognition of the shifting power dynamic."
+      },
+      {
+        "index": 7,
+        "title": "Uncertain Future",
+        "storyBeat": "The return of Donald Trump and the renewed trade war cast a shadow of uncertainty over the future, with Alexandre caught amid fractured planes symbolizing instability and unresolved conflict.",
+        "protagonistAction": "Alexandre stands at the center, arms slightly raised in a gesture of uncertainty and cautious hope, facing a fractured, unstable space that seems to shift around him.",
+        "composition": "over_the_shoulder",
+        "durationSeconds": 7,
+        "videoPrompt": "The camera moves over Alexandre’s shoulder, showing the fractured, unstable planes swirling around him, symbolizing the uncertain future amid renewed tensions. Alexandre’s arms rise slowly in a cautious, open gesture, embodying both uncertainty and a fragile hope for resolution. The planes shift subtly, some edges clashing while others hesitate, creating a dynamic but unresolved spatial tension. The camera slowly pulls back slightly as the scene ends.",
+        "guernicaId": 5,
+        "selectionReason": "The lamp figure’s symbolism of hope amid darkness complements Alexandre’s uncertain but resilient posture facing the ongoing conflict and instability.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is shown over the shoulder amid swirling fractured planes symbolizing instability and unresolved conflict. His arms are slightly raised in a cautious, open gesture of uncertainty and fragile hope. The scene conveys a dynamic but unresolved tension in the fractured space."
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 8723,
+    "completion_tokens": 3435,
+    "total_tokens": 12158,
+    "prompt_tokens_details": {
+      "cached_tokens": 2816,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "planHash": "facc18d61837ab55f3ef3761c4803d2b3542907f5fb99f6439d49540074f829d",
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020",
+    "sourceCommit": "5d174b65fb49edac179a92df89bdc140aaf38e6c",
+    "article": {
+      "title": "Etats-Unis - Chine : le clash des superpuissances",
+      "url": "https://tvmag.lefigaro.fr/programme-tv/programme/etats-unis-chine-le-clash-des-superpuissances-f1438472179",
+      "publish_date": "2026-10-18 16:00:00"
+    },
+    "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Cold Confrontation",
+        "beat": "Alexandre stands between two imposing fractured flag planes of the US and China, witnessing a tense handshake that barely conceals hostility and distrust between the two leaders.",
+        "storyBeat": "Alexandre stands between two imposing fractured flag planes of the US and China, witnessing a tense handshake that barely conceals hostility and distrust between the two leaders.",
+        "durationSeconds": 14,
+        "requestedDurationSeconds": 14,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-1-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Keep the fictional protagonist large and unmistakable. No photorealism, smooth digital rendering, copied symbols or composition. Alexandre stands cautiously observing a tense handshake between two large abstracted figures representing the US and China. Behind them are fractured, interlocking planes of their respective flags. Alexandre's face is mask-like and asymmetrical, his posture restrained and tense. The scene conveys fragile diplomacy and mutual distrust through angular gestures and stark contrasts.",
+        "videoPrompt": "The scene begins with Alexandre standing centered between two abstracted, fractured flag forms representing the US and China. The handshake of two large, angular, masked figures takes place front and center, tense and controlled. Alexandre shifts his gaze slowly from one figure to the other, his body subtly contracting in cautious observation. The camera slowly zooms in, emphasizing the spatial tension between the figures and the protagonist, then holds steady as the handshake ends with unresolved hostility.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Keep the fictional protagonist large and unmistakable. No photorealism, smooth digital rendering, copied symbols or composition. Alexandre stands cautiously observing a tense handshake between two large abstracted figures representing the US and China. Behind them are fractured, interlocking planes of their respective flags. Alexandre's face is mask-like and asymmetrical, his posture restrained and tense. The scene conveys fragile diplomacy and mutual distrust through angular gestures and stark contrasts."
+      },
+      {
+        "index": 2,
+        "title": "Rising Hostility",
+        "beat": "The diplomatic facade cracks as Alexandre witnesses a cold, distant meeting symbolized by sharp, fragmented planes separating the two figures, emphasizing growing hostility and mistrust.",
+        "storyBeat": "The diplomatic facade cracks as Alexandre witnesses a cold, distant meeting symbolized by sharp, fragmented planes separating the two figures, emphasizing growing hostility and mistrust.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-2-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment.",
+        "videoPrompt": "The camera profile shifts to show Alexandre in silhouette reacting with a subtle recoil and raised hand. The two abstracted figures representing US and China move slightly apart, their fractured planes sharpening and darkening, increasing the visual tension. Alexandre's body language tightens in response, then slowly steadies as the cold encounter persists. The camera holds on this tense spatial relationship until the scene ends.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre appears in profile silhouette, recoiling slightly with a raised hand as two large fractured figures symbolizing the US and China pull apart. Sharp angular planes fracture the space, visually expressing rising hostility and division. Alexandre’s mask-like face shows tension and cautious awareness in this abstracted moment."
+      },
+      {
+        "index": 3,
+        "title": "Approaching Confrontation",
+        "beat": "As military tensions rise, Alexandre stands amid fragmented symbols of power and conflict, embodying the fragile hope for peace amid looming confrontation.",
+        "storyBeat": "As military tensions rise, Alexandre stands amid fragmented symbols of power and conflict, embodying the fragile hope for peace amid looming confrontation.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-3-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world.",
+        "videoPrompt": "The camera moves diagonally upward across the scene, focusing on Alexandre who raises a small abstracted lamp. The fragmented planes around him shift subtly, some darkening while others light up with muted color. Alexandre’s upward gesture and faint glowing light suggest hope and illumination despite the fractured, tense environment. The camera slowly pulls back, showing the expanding, unstable space as the scene ends.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre raises an abstracted lamp upward, casting a faint muted glow amid fractured angular planes symbolizing rising military tensions and power struggles between the US and China. The scene is composed in a dynamic oblique diagonal, emphasizing instability and the fragile hope for peace in a fractured world."
+      },
+      {
+        "index": 4,
+        "title": "Economic Warfare",
+        "beat": "The trade war intensifies, depicted by jagged, intersecting planes symbolizing tariffs and economic barriers, as Alexandre navigates the escalating conflict.",
+        "storyBeat": "The trade war intensifies, depicted by jagged, intersecting planes symbolizing tariffs and economic barriers, as Alexandre navigates the escalating conflict.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-4-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands low-angle framed among jagged, intersecting planes representing tariffs and economic barriers of the trade war. He gestures with outstretched hands as if trying to mediate between the fractured spaces. The scene conveys escalating conflict and fragile diplomacy through sharp contrasts and angular fractures.",
+        "videoPrompt": "The camera takes a low angle looking up at Alexandre who stands amid jagged, intersecting planes symbolizing economic barriers and tariffs. Alexandre moves his hands in a bridging gesture, trying to connect the fractured spaces. The planes shift slightly, some edges clashing while others hesitate, reflecting the unstable and aggressive nature of the trade war. The camera slowly circles Alexandre, emphasizing his central mediating role before the scene fades out.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands low-angle framed among jagged, intersecting planes representing tariffs and economic barriers of the trade war. He gestures with outstretched hands as if trying to mediate between the fractured spaces. The scene conveys escalating conflict and fragile diplomacy through sharp contrasts and angular fractures."
+      },
+      {
+        "index": 5,
+        "title": "Taiwan Visit Tensions",
+        "beat": "The visit to Taiwan increases military tensions, symbolized by fractured maps and sharp lines converging toward confrontation, with Alexandre caught in the growing crisis.",
+        "storyBeat": "The visit to Taiwan increases military tensions, symbolized by fractured maps and sharp lines converging toward confrontation, with Alexandre caught in the growing crisis.",
+        "durationSeconds": 11,
+        "requestedDurationSeconds": 11,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-5-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands in high angle view amid fractured map-like planes converging sharply toward a central point symbolizing Taiwan. His posture is tense and anxious, his mask-like face showing concern. Muted red tones pulse in the fractured space, evoking escalating military tensions and looming confrontation.",
+        "videoPrompt": "The camera looks down from a high angle on Alexandre standing amid fractured map-like planes converging sharply toward a central point, symbolizing Taiwan and the military flashpoint. Alexandre’s figure shifts uneasily, his gaze scanning the assembling fractures. The planes pulse subtly with muted red tones, highlighting danger and tension. The camera slowly pulls back slightly as Alexandre’s anxiety grows, emphasizing the precariousness of the situation before the scene ends.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre stands in high angle view amid fractured map-like planes converging sharply toward a central point symbolizing Taiwan. His posture is tense and anxious, his mask-like face showing concern. Muted red tones pulse in the fractured space, evoking escalating military tensions and looming confrontation."
+      },
+      {
+        "index": 6,
+        "title": "Power Reassertion",
+        "beat": "Xi Jinping’s determination to restore Chinese power is depicted by a large fractured figure emerging resolutely amid sharp angular planes, as Alexandre witnesses this reassertion of strength.",
+        "storyBeat": "Xi Jinping’s determination to restore Chinese power is depicted by a large fractured figure emerging resolutely amid sharp angular planes, as Alexandre witnesses this reassertion of strength.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-6-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is framed in the foreground observing a large fractured figure emerging resolutely, representing Xi Jinping’s power reassertion. Sharp angular planes radiate strength and determination. Alexandre’s mask-like face shows apprehension and recognition of the shifting power dynamic.",
+        "videoPrompt": "The camera frames Alexandre in the foreground as a large fractured figure symbolizing Xi Jinping rises in the middle distance, composed of sharp angular planes that radiate strength and determination. Alexandre’s eyes follow the figure, his posture slightly recoiling but attentive. The planes shift dynamically, emphasizing the power reassertion. The camera holds steady on this tense spatial relationship until the scene ends.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is framed in the foreground observing a large fractured figure emerging resolutely, representing Xi Jinping’s power reassertion. Sharp angular planes radiate strength and determination. Alexandre’s mask-like face shows apprehension and recognition of the shifting power dynamic."
+      },
+      {
+        "index": 7,
+        "title": "Uncertain Future",
+        "beat": "The return of Donald Trump and the renewed trade war cast a shadow of uncertainty over the future, with Alexandre caught amid fractured planes symbolizing instability and unresolved conflict.",
+        "storyBeat": "The return of Donald Trump and the renewed trade war cast a shadow of uncertainty over the future, with Alexandre caught amid fractured planes symbolizing instability and unresolved conflict.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/GENERATIONS/news/iteration-020/media/scene-7-first-frame.png",
+        "stillPrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is shown over the shoulder amid swirling fractured planes symbolizing instability and unresolved conflict. His arms are slightly raised in a cautious, open gesture of uncertainty and fragile hope. The scene conveys a dynamic but unresolved tension in the fractured space.",
+        "videoPrompt": "The camera moves over Alexandre’s shoulder, showing the fractured, unstable planes swirling around him, symbolizing the uncertain future amid renewed tensions. Alexandre’s arms rise slowly in a cautious, open gesture, embodying both uncertainty and a fragile hope for resolution. The planes shift subtly, some edges clashing while others hesitate, creating a dynamic but unresolved spatial tension. The camera slowly pulls back slightly as the scene ends.",
+        "singleImagePrompt": "An original dark cubist mural, hand-painted in fractured shallow space. Interlock charcoal-black, ash-gray and stained-ivory planes with sharp dry-charcoal contours, rough oil scumbling and scraped aged plaster. Use mask-like asymmetrical faces and angular, visibly displaced anatomy; make every figure and object equally abstract. Keep the palette near-monochrome, with muted color only when the story requires it. Reference image 1 guides only the fictional protagonist's abstract visual identity and gesture; redraw it fully, never paste it. No full-painting reference is supplied in variant B. Do not import story content from reference image 1. Alexandre is shown over the shoulder amid swirling fractured planes symbolizing instability and unresolved conflict. His arms are slightly raised in a cautious, open gesture of uncertainty and fragile hope. The scene conveys a dynamic but unresolved tension in the fractured space."
+      }
+    ]
+  },
+  "finishedAt": "2026-10-19T12:03:11.651Z"
+}
