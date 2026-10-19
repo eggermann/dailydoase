@@ -1,0 +1,569 @@
+{
+  "generator": "semantic-news-v1",
+  "createdAt": "2026-10-19T14:54:34.003Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "eacb84ab263eccfa14b02a14d0b91546165a788a",
+    "branch": "codex/eu-reski-guernica-abstract",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/eu-capital-news/dailydoase/eu-reski-news/news/A/all-2026-10-18T10-06-21-802Z.json",
+  "aggregateHash": "3d74b4cce2f2079ac0f36085abee0ad466d7053a77a3ec1ee2725543eefa0ad9",
+  "selection": {
+    "method": "random",
+    "order": "random",
+    "draw": 1589,
+    "candidateCount": 2145,
+    "aggregateIndex": 1596
+  },
+  "article": {
+    "id": 474711326,
+    "title": "Orbán Viktor beszédet mond Lakiteleken, a DPK-táborban – élőben az Origón!",
+    "text": "Vasárnap 10 órától meglepetésvendégként Orbán Viktor, a Fidesz elnöke beszédet mond Lakiteleken, a Digitális Polgári Körök (DPK) országos táborában. Szombaton többek között Bóka János Fidesz-frakcióvezető, Schmidt Mária, a Terror Háza korábbi főigazgatója tartott előadást, Bayer Zsolt publicista Rákay Philip kommunikációs szakember és producer, valamint Deutsch Tamás fideszes EP-képviselő vett részt pódiumbeszélgetésen. A kétnapos rendezvényen mintegy ezren vesznek részt. \n\nA DPK-kat még 2025-ben hívta életre Orbán Viktor\n\nDeák Dániel politikai elemző a rendezvényről úgy vélekedett, annak nagy politikai jelentősége van: ez a Digitális Polgári Körök első országos tábora az áprilisi országgyűlési választás óta. A DPK-kat még Orbán Viktor hívta életre 2025 nyarán, és a kezdeményezés azóta országos hálózattá alakult. Szerinte a helyszínválasztása sem véletlen: Lakitelek a rendszerváltoztatás egyik meghatározó helyszíne, ahol 1987-ben megtartották a későbbi Magyar Demokrata Fórum megalakulásához vezető lakiteleki találkozót. \n\nOrbán Viktor vasárnapi beszéde azért is tarthat számot kiemelt figyelemre, mert a választási vereség után a Fidesz politikai újjászervezése, a jobboldali közösség jövője és az ellenzéki politizálás iránya egyaránt napirenden van\n\n– hangsúlyozta Deák Dániel. \n\nCikkünk frissül!",
+    "summary": "A Fidesz elnökének beszédéről lapunk élőben, frissülő cikkben számol be.",
+    "url": "https://www.origo.hu/belpol/2026/10/orban-viktor-dpk-tabor-lakitelek",
+    "image": "https://cdn.origo.hu/2026/10/XcUKvoraV0hiywqVxSPuivk5anxrcSNfsoCEA09m4C0/fill/1347/758/no/1/aHR0cHM6Ly9jbXNjZG4uYXBwLmNvbnRlbnQucHJpdmF0ZS9jb250ZW50L2M0YjgxM2MwZDM3MjQ2MGViMDNhOTg2NmM4MTFmYmJl.webp",
+    "video": null,
+    "publish_date": "2026-10-18 07:44:56",
+    "author": "Kőházi János",
+    "authors": [
+      "Kőházi János"
+    ],
+    "language": "hu",
+    "source_country": "hu"
+  },
+  "sceneCount": 3,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": true,
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "3bd1d2722d63e2453c05fb9bfae0eb7311d1971a01216622bd180d6a7fa5f001",
+      "bytes": 3088861,
+      "provider": "hf-flux-klein",
+      "taskUUID": "5502eb24b7154d80b1c2f49bd7edd167",
+      "seed": 1484871388,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "0a6b08a778267fd8897feff6b4f64caf166294f1cff9401f01230167c7074e15",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.webp"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.webp",
+          "mimeType": "image/webp",
+          "sha256": "42c6818a5f03d5111bb7d29b1cea816c3a3199959cb027dd8c4d6a3a75ae61e8",
+          "bytes": 51348,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "59939e06a0e58697ae7c1a8b9bd4dc9aaf40906cd5e5271e2032e09ec3533dfa",
+      "bytes": 3179253,
+      "provider": "hf-flux-klein",
+      "taskUUID": "8179276bd5214e88affa1f15118d30db",
+      "seed": 929742283,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "96e385bfbdc634405f1392dc0414da8fc99a49090a1f1892406c33136272d194",
+      "referencePaths": [
+        "media/08_schreiende_frau.png",
+        "media/article.webp"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 8,
+          "name": "Schreiende / fliehende Frau",
+          "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+          "eu_bezug": [
+            "Schutz von Zivilisten",
+            "Sicherheit",
+            "Frieden"
+          ],
+          "path": "media/08_schreiende_frau.png",
+          "mimeType": "image/png",
+          "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13",
+          "label": "Protagonist character reference: Schreiende / fliehende Frau; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.webp",
+          "mimeType": "image/webp",
+          "sha256": "42c6818a5f03d5111bb7d29b1cea816c3a3199959cb027dd8c4d6a3a75ae61e8",
+          "bytes": 51348,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "5159f528f44c37c1393745c359ec2d1bb3426f3ce7c29e4d6a1e41779973d99b",
+      "bytes": 3106511,
+      "provider": "hf-flux-klein",
+      "taskUUID": "e3b92ea60d7740ef8ecb707c2fc5294f",
+      "seed": 1193719531,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "9814dcd28efe4c2a4675545f4050402fd7e7575587649f89d0a7a4519135ffd6",
+      "referencePaths": [
+        "media/03_auge_gluehbirne-api.png",
+        "media/article.webp"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 3,
+          "name": "Auge / Glühbirne",
+          "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+          "eu_bezug": [
+            "Aufklärung",
+            "Beobachtung",
+            "Ambivalenz moderner Technik"
+          ],
+          "path": "media/03_auge_gluehbirne-api.png",
+          "mimeType": "image/png",
+          "sha256": "342dd3b00429e6b0d76cbfa7bd6035570be44d97c9216697dae6c2c4487c9d8f",
+          "label": "Protagonist character reference: Auge / Glühbirne; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/03_auge_gluehbirne.png",
+          "sourceSha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723",
+          "bytes": 41810,
+          "width": 277,
+          "height": 128
+        },
+        {
+          "path": "media/article.webp",
+          "mimeType": "image/webp",
+          "sha256": "42c6818a5f03d5111bb7d29b1cea816c3a3199959cb027dd8c4d6a3a75ae61e8",
+          "bytes": 51348,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    }
+  ],
+  "sceneDurations": [
+    8,
+    5,
+    6
+  ],
+  "sceneDurationSettings": {
+    "provider": "taktmuster",
+    "takt": 3,
+    "type": "balanced",
+    "multiplier": 1.15,
+    "bias": 3.85,
+    "minimum": 5,
+    "maximum": 8
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-19T14:54:34.051Z",
+    "words": [
+      [
+        "euro-vision",
+        "en"
+      ],
+      [
+        "1981",
+        "en"
+      ],
+      [
+        "European Union",
+        "en"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "euro-vision",
+          "en"
+        ],
+        "item": {
+          "cnt": 0.8,
+          "urlLink": "Telex_(band)",
+          "title": "Telex (band)",
+          "text": "Telex",
+          "sentences": {
+            "prev": [
+              "\"Euro-Vision\". TELEX-MUSIC.COM Telex - Euro-Vision -",
+              "\"Euro-Vision\". TELEX-MUSIC.COM Telex - Euro-Vision -",
+              "performed from behind synthesisers and in a robotic manner.",
+              "- Euro-Vision -"
+            ],
+            "next": [
+              "It received 14 points, placing it 17th in a field of 19. Lead",
+              "performed from behind synthesisers and in a robotic manner.",
+              "released the song in French and English language versions and",
+              "pronunciation: [øʁo vizjɔ̃]) was the Belgian entry in",
+              "spot\". The song was the first entry ever to mention the"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "1981",
+          "en"
+        ],
+        "item": {
+          "cnt": 0.5,
+          "urlLink": "Ronald_Reagan",
+          "title": "Ronald Reagan",
+          "text": "Ronald Reagan",
+          "sentences": {
+            "prev": [],
+            "next": []
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "European Union",
+          "en"
+        ],
+        "item": {
+          "cnt": 2,
+          "urlLink": "Member_state_of_the_European_Union",
+          "title": "Member state of the European Union",
+          "text": "27 members",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "regulations, which are immediately enforceable in all member",
+              "or from €4,600 to €92,600. EU member states own",
+              "when the Maastricht Treaty came into force in"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.webp",
+    "mimeType": "image/webp",
+    "sha256": "42c6818a5f03d5111bb7d29b1cea816c3a3199959cb027dd8c4d6a3a75ae61e8",
+    "bytes": 51348
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "0958e7420ac50fee1e1bf9c789df03148a6dc979656fe3d8ac714f2af77635e3",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "Das Artikelbild zeigt Orbán Viktor, der bei einer politischen Veranstaltung salutiert, umgeben von Fotografen. Die Szene ist eine politische Versammlung mit einer Bühne und Publikum, in natürlichem Licht. Es handelt sich um ein dokumentarisches Foto, keine Illustration oder Logo.",
+    "articleFacts": [
+      "Orbán Viktor, Vorsitzender der Fidesz, hält eine Rede beim DPK-Lager in Lakitelek.",
+      "Das DPK-Lager ist eine landesweite politische Veranstaltung mit etwa tausend Teilnehmern.",
+      "Das DPK-Netzwerk wurde 2025 von Orbán Viktor gegründet und ist seitdem gewachsen.",
+      "Die Veranstaltung umfasst Reden und Podiumsdiskussionen mit weiteren bekannten Persönlichkeiten.",
+      "Lakitelek hat historische Bedeutung als Ort der Gründung des Ungarischen Demokratischen Forums 1987.",
+      "Die Rede findet nach einer Wahlniederlage statt und behandelt die politische Neuordnung der Fidesz und die Zukunft der rechten Gemeinschaft.",
+      "Der Artikel wird live aktualisiert und berichtet über die aktuelle Rede."
+    ],
+    "storyPremise": "Die Bildfolge zeigt den politischen Auftakt und die Rede von Orbán Viktor beim ersten DPK-Lager nach der Wahlniederlage, mit Fokus auf die symbolische Bedeutung des Ortes und die politische Neuorientierung der rechten Gemeinschaft in Ungarn.",
+    "fictionBoundary": "Die Szenen sind stark abstrahierte, kubistische Interpretationen der realen politischen Veranstaltung. Die verwendeten Guernica-Figuren und Motive sind metaphorisch und verstärken politische und gesellschaftliche Dynamiken, ohne historische Dokumentation zu ersetzen. Die Handlung ist fiktional im Ausdruck, bleibt aber eng an den berichteten Fakten und Kontext gebunden.",
+    "protagonist": {
+      "name": "Márton Kádár",
+      "role": "Politischer Aktivist und Beobachter des DPK-Lagers",
+      "visualIdentity": "Abstrakte, kantige Gestalt mit asymmetrischem Gesicht, dunklem, gebrochenem Anzug, markanter Maske und dynamischer Haltung, die Rede und Engagement symbolisiert",
+      "guernicaId": 6
+    },
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "Euro-Vision und Telex-Musik sind thematisch nicht verbunden mit dem Artikelinhalt."
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": "Ronald Reagan hat keine thematische Verbindung zum Artikel."
+      },
+      "stream-3": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          3
+        ],
+        "visualMotif": "European Union member states as a network symbolizing political union and regulation",
+        "visibleConsequence": "Das Motiv der Europäischen Union symbolisiert die politische Einbindung Ungarns und die Herausforderung der politischen Neuordnung und Zukunftssicherung im europäischen Kontext, sichtbar im letzten Bild."
+      }
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Arrival and Salute at the DPK Camp",
+        "storyBeat": "Márton Kádár witnesses Orbán Viktor's arrival and salute, symbolizing the resumption of political leadership and public presence.",
+        "protagonistAction": "Márton Kádár raises his arm in a determined salute towards the crowd and stage, embodying political engagement and readiness.",
+        "composition": "wide_establishing",
+        "durationSeconds": 8,
+        "videoPrompt": "The scene begins with Márton Kádár standing prominently in the foreground, raising his arm in a firm salute. Around him, abstracted crowd forms and photographers move subtly. Orbán Viktor appears in the background saluting the audience. The camera slowly zooms in on Márton's decisive gesture, emphasizing political tension and focus as the scene settles.",
+        "guernicaId": 6,
+        "selectionReason": "The figure 'Woman with raised arms' matches the protagonist's energetic, resolute gesture symbolizing political action and public engagement, fitting the scene's atmosphere.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising his arm decisively in a salute, a secondary figure of a photographer reacting by lifting a camera, and the setting showing a compressed crowd and stage structures symbolizing political gathering. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 2,
+        "title": "Orbán Viktor's Speech and Political Resolve",
+        "storyBeat": "During Orbán Viktor's speech, Márton Kádár listens attentively, raising his hand in determination and hope, symbolizing political renewal and struggle after defeat.",
+        "protagonistAction": "Márton Kádár raises his hand firmly, showing resolve and engagement as abstracted audience and stage elements surround him.",
+        "composition": "profile_silhouette",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Márton Kádár in profile, raising his hand with determination as Orbán Viktor's abstract figure delivers a speech on stage behind. The camera slowly pans horizontally capturing the emotional tension and crowd's subtle reactions. Movements settle into a quiet resolve by scene end.",
+        "guernicaId": 8,
+        "selectionReason": "The figure 'Screaming/fleeing woman' visually conveys emotional intensity and urgency, fitting Márton Kádár's resolute and engaged posture during the speech, distinct from the first scene's figure.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising a hand with resolve, a secondary figure of an abstract audience member reacting with attentive posture, and the setting showing a compressed stage and crowd shapes symbolizing political discourse. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 3,
+        "title": "Reflection on Hungary's European Union Membership",
+        "storyBeat": "Márton Kádár contemplates Hungary's integration in the European Union and the political challenges of reorganization and future direction.",
+        "protagonistAction": "Márton Kádár stands thoughtfully, gazing at abstract network shapes representing the EU member states as a political union and regulation system.",
+        "composition": "high_angle",
+        "durationSeconds": 6,
+        "videoPrompt": "The scene opens with Márton Kádár in a contemplative pose looking down on an abstract interlocking network representing the European Union. The camera slowly rises to reveal the complex shapes and Márton’s thoughtful expression. The motion gradually slows and settles into reflection by the end.",
+        "guernicaId": 3,
+        "selectionReason": "The figure 'Eye / Light bulb' symbolizes observation, modernity, and the ambivalence of European integration, visually matching the political theme of EU membership and reflection in this scene.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár in a contemplative pose, a secondary figure of an abstract network symbol reacting as light or observation, and the setting showing compressed interlocking shapes symbolizing the European Union member states as a network symbolizing political union and regulation. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      }
+    ]
+  },
+  "planRevisionReason": "Choose multiple scene-specific figure references and avoid repeating the same one in neighboring scenes",
+  "usage": {
+    "prompt_tokens": 13750,
+    "completion_tokens": 2340,
+    "total_tokens": 16090,
+    "prompt_tokens_details": {
+      "cached_tokens": 8320,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "planHash": "77e6052ef2ef22dd6ea4647378f4c70e4e7fb4a1007e39c582bfdfd38511ab0f",
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-028",
+    "sourceCommit": "eacb84ab263eccfa14b02a14d0b91546165a788a",
+    "article": {
+      "title": "Orbán Viktor beszédet mond Lakiteleken, a DPK-táborban – élőben az Origón!",
+      "url": "https://www.origo.hu/belpol/2026/10/orban-viktor-dpk-tabor-lakitelek",
+      "publish_date": "2026-10-18 07:44:56"
+    },
+    "status": "Film-Prompts bereit; keine Film-API aufgerufen",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. For every entry, use startImagePath as the image-to-video input and videoPrompt as its motion prompt.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Arrival and Salute at the DPK Camp",
+        "beat": "Márton Kádár witnesses Orbán Viktor's arrival and salute, symbolizing the resumption of political leadership and public presence.",
+        "storyBeat": "Márton Kádár witnesses Orbán Viktor's arrival and salute, symbolizing the resumption of political leadership and public presence.",
+        "durationSeconds": 8,
+        "requestedDurationSeconds": 8,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-028/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising his arm decisively in a salute, a secondary figure of a photographer reacting by lifting a camera, and the setting showing a compressed crowd and stage structures symbolizing political gathering. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene begins with Márton Kádár standing prominently in the foreground, raising his arm in a firm salute. Around him, abstracted crowd forms and photographers move subtly. Orbán Viktor appears in the background saluting the audience. The camera slowly zooms in on Márton's decisive gesture, emphasizing political tension and focus as the scene settles.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising his arm decisively in a salute, a secondary figure of a photographer reacting by lifting a camera, and the setting showing a compressed crowd and stage structures symbolizing political gathering. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 2,
+        "title": "Orbán Viktor's Speech and Political Resolve",
+        "beat": "During Orbán Viktor's speech, Márton Kádár listens attentively, raising his hand in determination and hope, symbolizing political renewal and struggle after defeat.",
+        "storyBeat": "During Orbán Viktor's speech, Márton Kádár listens attentively, raising his hand in determination and hope, symbolizing political renewal and struggle after defeat.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-028/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising a hand with resolve, a secondary figure of an abstract audience member reacting with attentive posture, and the setting showing a compressed stage and crowd shapes symbolizing political discourse. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene opens with Márton Kádár in profile, raising his hand with determination as Orbán Viktor's abstract figure delivers a speech on stage behind. The camera slowly pans horizontally capturing the emotional tension and crowd's subtle reactions. Movements settle into a quiet resolve by scene end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising a hand with resolve, a secondary figure of an abstract audience member reacting with attentive posture, and the setting showing a compressed stage and crowd shapes symbolizing political discourse. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a strict side profile facing right. Keep both arms lowered, separate the profile silhouette from the background with one dirty-ivory crescent, and avoid a frontal pose. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      },
+      {
+        "index": 3,
+        "title": "Reflection on Hungary's European Union Membership",
+        "beat": "Márton Kádár contemplates Hungary's integration in the European Union and the political challenges of reorganization and future direction.",
+        "storyBeat": "Márton Kádár contemplates Hungary's integration in the European Union and the political challenges of reorganization and future direction.",
+        "durationSeconds": 6,
+        "requestedDurationSeconds": 6,
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/iteration-028/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár in a contemplative pose, a secondary figure of an abstract network symbol reacting as light or observation, and the setting showing compressed interlocking shapes symbolizing the European Union member states as a network symbolizing political union and regulation. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+        "videoPrompt": "The scene opens with Márton Kádár in a contemplative pose looking down on an abstract interlocking network representing the European Union. The camera slowly rises to reveal the complex shapes and Márton’s thoughtful expression. The motion gradually slows and settles into reflection by the end.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár in a contemplative pose, a secondary figure of an abstract network symbol reacting as light or observation, and the setting showing compressed interlocking shapes symbolizing the European Union member states as a network symbolizing political union and regulation. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Look down from above. Show the protagonist seated or crouched and arranged diagonally across the ground plane, with hands close to the body and large curved masses around them. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text."
+      }
+    ]
+  },
+  "finishedAt": "2026-10-19T14:56:43.397Z"
+}

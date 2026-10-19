@@ -1,0 +1,33 @@
+{
+  "prompt": "An original, severely abstract dark cubist mural in compressed shallow space, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across foreground, middle ground and background; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Márton Kádár raising his arm decisively in a salute, a secondary figure of a photographer reacting by lifting a camera, and the setting showing a compressed crowd and stage structures symbolizing political gathering. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Márton Kádár and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives only reference image 1: the selected masked character crop, used only for Márton Kádár’s abstract appearance and gesture. No complete painting reference is supplied. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nScene-specific staging: Use a wide, panoramic tableau. Place the protagonist in the left third, large enough to read clearly from head to waist; let one broad curved political divide sweep across the remaining space. Keep both arms below shoulder level. The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.",
+  "input_images": [
+    {
+      "image": {
+        "path": "/tmp/gradio/ca0cc3d9d12bf468e61dda8a42f30eacc9287b87db2120406d5938a07ac9a82d/06_frau_im_brennenden_haus.png",
+        "meta": {
+          "_type": "gradio.FileData"
+        },
+        "orig_name": "06_frau_im_brennenden_haus.png"
+      },
+      "caption": null
+    },
+    {
+      "image": {
+        "path": "/tmp/gradio/e15ab19c13608a56a8be9626fa6a426413352d4724bb947a643845be31ce6e9e/article.webp",
+        "meta": {
+          "_type": "gradio.FileData"
+        },
+        "orig_name": "article.webp"
+      },
+      "caption": null
+    }
+  ],
+  "mode_choice": "Distilled (16 steps)",
+  "randomize_seed": false,
+  "width": 1680,
+  "height": 944,
+  "num_inference_steps": 16,
+  "guidance_scale": 1,
+  "prompt_upsampling": true,
+  "seed": 1484871388
+}

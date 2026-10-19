@@ -1,0 +1,19 @@
+{
+  "eventId": "8179276bd5214e88affa1f15118d30db",
+  "data": [
+    {
+      "path": "/tmp/gradio/5c80bb0e1f80c6a572e2075003e3314f4acceca1ed42462285b22528ef926dbc/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/5c80bb0e1f80c6a572e2075003e3314f4acceca1ed42462285b22528ef926dbc/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    929742283,
+    "Create an original, severely abstract dark cubist mural painted as one rough, full-frame surface in strict monochrome charcoal-black, white, chalk, and ash-gray. Use the second image only as the source for Márton Kádár’s identity and political-discourse subject matter; discard the photograph, its colors, lighting, framing, and all identifiable details. Redraw him as a large, unmistakable fictional protagonist in strict side profile facing right, with one arm raised in a decisive gesture of resolve while the other arm remains lowered. Form his profile from a dirty-ivory crescent rendered entirely in chalk white, surrounded by a black silhouette and fractured into displaced angular masks. Use the first image only as a style cue for compressed, interlocking cubist construction, replacing its complete figure and layout with broad rounded masses. Show Márton’s profile as the dominant form, with one sweeping white crescent separating it from the background. Across the same shallow space, show a secondary abstract audience figure leaning forward in attentive posture, and a compressed stage suggested by bent arcs, broken platforms, and a crowd of overlapping crescent and wedge-shaped silhouettes. Fuse all three actions into one unstable surface: raised hand, attentive figure, and stage crowd press, pull, and flow together. Use raw charcoal, scraped pigment, broken brush marks, worn plaster, and layered black-gray transitions. No frontal pose, flags, maps, emblems, logos, readable text, or any color beyond the specified monochrome palette."
+  ],
+  "completedAt": "2026-10-19T14:56:01.709Z"
+}

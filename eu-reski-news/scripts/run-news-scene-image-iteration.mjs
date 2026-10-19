@@ -17,10 +17,10 @@ const { values: options } = parseArgs({ options: {
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   'scene-length-takt': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TAKT || '3' },
   'scene-length-type': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TYPE || 'balanced' },
-  'scene-length-multiplier': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_MULTIPLIER || '3.5' },
-  'scene-length-bias': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_BIAS || '0' },
+  'scene-length-multiplier': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_MULTIPLIER || '1.15' },
+  'scene-length-bias': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_BIAS || '3.85' },
   'min-scene-seconds': { type: 'string', default: process.env.NEWS_MIN_SCENE_DURATION_SECONDS || '5' },
-  'max-scene-seconds': { type: 'string', default: process.env.NEWS_MAX_SCENE_DURATION_SECONDS || '15' },
+  'max-scene-seconds': { type: 'string', default: process.env.NEWS_MAX_SCENE_DURATION_SECONDS || '8' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
   'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
   'news-dir': { type: 'string', default: join(root, 'eu-reski-news', 'news', 'A') },
@@ -270,7 +270,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=3.5] [--scene-length-bias=0] [--min-scene-seconds=5] [--max-scene-seconds=15] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Output: eu-reski-news/GENERATIONS/news/.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');

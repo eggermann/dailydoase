@@ -1,0 +1,91 @@
+{
+  "provider": "semantic-stream",
+  "capturedAt": "2026-10-19T14:54:34.051Z",
+  "words": [
+    [
+      "euro-vision",
+      "en"
+    ],
+    [
+      "1981",
+      "en"
+    ],
+    [
+      "European Union",
+      "en"
+    ]
+  ],
+  "entries": [
+    {
+      "id": "stream-1",
+      "seed": [
+        "euro-vision",
+        "en"
+      ],
+      "item": {
+        "cnt": 0.8,
+        "urlLink": "Telex_(band)",
+        "title": "Telex (band)",
+        "text": "Telex",
+        "sentences": {
+          "prev": [
+            "\"Euro-Vision\". TELEX-MUSIC.COM Telex - Euro-Vision -",
+            "\"Euro-Vision\". TELEX-MUSIC.COM Telex - Euro-Vision -",
+            "performed from behind synthesisers and in a robotic manner.",
+            "- Euro-Vision -"
+          ],
+          "next": [
+            "It received 14 points, placing it 17th in a field of 19. Lead",
+            "performed from behind synthesisers and in a robotic manner.",
+            "released the song in French and English language versions and",
+            "pronunciation: [øʁo vizjɔ̃]) was the Belgian entry in",
+            "spot\". The song was the first entry ever to mention the"
+          ]
+        }
+      }
+    },
+    {
+      "id": "stream-2",
+      "seed": [
+        "1981",
+        "en"
+      ],
+      "item": {
+        "cnt": 0.5,
+        "urlLink": "Ronald_Reagan",
+        "title": "Ronald Reagan",
+        "text": "Ronald Reagan",
+        "sentences": {
+          "prev": [],
+          "next": []
+        }
+      }
+    },
+    {
+      "id": "stream-3",
+      "seed": [
+        "European Union",
+        "en"
+      ],
+      "item": {
+        "cnt": 2,
+        "urlLink": "Member_state_of_the_European_Union",
+        "title": "Member state of the European Union",
+        "text": "27 members",
+        "sentences": {
+          "prev": [
+            "Union at the Internet Archive European Union on",
+            "Union at the Internet Archive European Union on",
+            "Union at the Internet Archive European Union on",
+            "Union at the Internet Archive European Union on"
+          ],
+          "next": [
+            "regulations, which are immediately enforceable in all member",
+            "or from €4,600 to €92,600. EU member states own",
+            "when the Maastricht Treaty came into force in"
+          ]
+        }
+      }
+    }
+  ]
+}

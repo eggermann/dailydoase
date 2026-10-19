@@ -1,0 +1,19 @@
+{
+  "eventId": "5502eb24b7154d80b1c2f49bd7edd167",
+  "data": [
+    {
+      "path": "/tmp/gradio/5fbf2005997088ffe37476d7f45050e746df7852aae6385c4eabbe36dd0a3edb/image.png",
+      "url": "https://black-forest-labs-flux-3-image-klein.hf.space/gradio_api/file=/tmp/gradio/5fbf2005997088ffe37476d7f45050e746df7852aae6385c4eabbe36dd0a3edb/image.png",
+      "size": null,
+      "orig_name": "image.png",
+      "mime_type": null,
+      "is_stream": false,
+      "meta": {
+        "_type": "gradio.FileData"
+      }
+    },
+    1484871388,
+    "Create an original, severely abstract dark cubist mural as a wide panoramic tableau, painted directly across one rough, unstable surface using only charcoal-black, chalk white, and ash gray. Use the first image solely as a style cue for the protagonist’s abstract identity and raised-arm gesture, never reproducing it. In the left third, depict Márton Kádár from the second image as a large, unmistakable fictional figure, preserving only his broad identity through a fractured near-frontal mask: a heavy brow, short swept hair suggested by angular white strokes, and a decisive salute formed by one arm rising from below shoulder level, its hand reduced to a broad angular gesture. His other arm remains below shoulder level. Across the center, merge him into several swelling rounded masses, crescent forms, and sweeping bands as he raises the saluting arm decisively. In the middle distance, show a secondary photographer lifting a camera toward the protagonist, its body compressed into a bent crescent and its camera reduced to a dark circular mass. Fill the remaining space with a compressed crowd of overlapping masks, leaning torsos, and stage structures reduced to broken arches, tilted platforms, and sweeping charcoal bands. Let every form press, collide, and flow into the next. Use raw charcoal, scraped pigment, broken brush marks, worn plaster, and layered tonal transitions. Include no color, flags, maps, emblems, logos, or readable text."
+  ],
+  "completedAt": "2026-10-19T14:55:31.669Z"
+}
