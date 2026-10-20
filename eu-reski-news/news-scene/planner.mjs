@@ -34,7 +34,7 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions = { symbolic: true, roomDeepness: false }, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
   const referenceInstructions = styleReferenceProvided
     ? 'The image API receives two references: reference image 1 is the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture; reference image 2 is the complete painting, used only for painterly style. Do not import story content from either reference.'
     : 'The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1.';
@@ -43,15 +43,16 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
     : 'The article photo is for GPT visual analysis only and is never sent to the image API.';
   const director = (await readFile(new URL('./director.md', import.meta.url), 'utf8'))
     .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
-    .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions);
+    .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)
+    .replaceAll('{{VISUAL_STYLE_CONTROLS}}', `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}. Follow these controls in every scene and stillPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. These are independent controls.`);
   const articleInput = Object.fromEntries(['id', 'title', 'publish_date', 'url', 'source_country', 'language', 'summary', 'text']
     .map((key) => [key, String(article[key] ?? '').slice(0, key === 'text' ? 18000 : 4000)]));
-  const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, continuationPlan };
+  const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions, continuationPlan };
   const continuationInstruction = continuationPlan
     ? `Expand the supplied ${continuationPlan.scenes.length}-scene continuationPlan into exactly ${sceneCount} scenes. Preserve its central premise and exact protagonist. Treat prior scene beats as anchors, but add distinct causal beats around them; do not return the old scene count.`
     : `Return exactly ${sceneCount} scenes.`;
   const content = [
-    { type: 'text', text: `Required scene count: exactly ${sceneCount}. ${continuationInstruction}` },
+    { type: 'text', text: `Required scene count: exactly ${sceneCount}. ${continuationInstruction} Follow the visual controls embedded in the director instructions and JSON input.` },
     { type: 'text', text: JSON.stringify(data) },
   ];
   for (const image of images) {

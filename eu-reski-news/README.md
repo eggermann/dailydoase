@@ -128,3 +128,19 @@ For changes to this workflow, use a scoped Conventional Commit, for example:
 ```text
 feat(news): generate three-scene HTML iterations
 ```
+# Bildvarianten: Symbolik und Raumtiefe
+
+Der Szenenbildgenerator hat zwei unabhängige Schalter. Sie steuern sowohl GPTs Szenenentwurf als auch die Bildanweisung an FLUX:
+
+- `--symbolic` / `--no-symbolic`: artikelbezogene, sichtbare Metaphern an oder aus.
+- `--room-deepness` / `--no-room-deepness`: gemalte Vorder-, Mittel- und Ferne an oder aus.
+
+Standard: Symbolik an, Raumtiefe aus. Pro Paar darf nur ein Schalter gesetzt sein. Jeder Bericht protokolliert die aktiven Werte; ein Resume behält Werte aus dem gespeicherten Lauf.
+
+Die drei gespeicherten Vergleichsvarianten lassen sich mit einem Starter neu erzeugen. Er kopiert den gespeicherten Artikel-Aggregat und Semantic-Stream-Snapshot in einen neuen Laufordner und schreibt wieder einen gemeinsamen HTML-Bericht:
+
+```sh
+./eu-reski-news/scripts/replay-ab-depth-symbolism-001.sh
+```
+
+Optionalen Laufordnernamen als einziges Argument übergeben. Der Starter bricht ab, falls dieser Ordner bereits existiert.

@@ -43,6 +43,11 @@ Before returning the plan, compare all stillPrompts. Rewrite any prompt that inc
 
 For each `videoPrompt`, state what moves first, how the selected character or significant object responds, and how the motion settles by the end. Keep visible lettering already present in a start image frozen and unchanged; do not ask the video model to add, replace, or animate text.
 
+## Independent visual controls
+
+{{VISUAL_STYLE_CONTROLS}}
+These settings override any conflicting default language above. Keep every other style rule intact: symbolic treatment changes meaning and action, room depth changes spatial construction. Neither switch changes protagonist scale, monochrome palette, or anti-realism.
+
 
 ## Required Guernica visual grammar
 
