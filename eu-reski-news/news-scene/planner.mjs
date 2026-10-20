@@ -34,7 +34,7 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions = { symbolic: true, roomDeepness: false }, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
   const referenceInstructions = styleReferenceProvided
     ? 'The image API receives two references: reference image 1 is the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture; reference image 2 is the complete painting, used only for painterly style. Do not import story content from either reference.'
     : 'The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1.';
@@ -44,7 +44,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   const director = (await readFile(new URL('./director.md', import.meta.url), 'utf8'))
     .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
     .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)
-    .replaceAll('{{VISUAL_STYLE_CONTROLS}}', `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}. Follow these controls in every scene and stillPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. These are independent controls.`);
+    .replaceAll('{{VISUAL_STYLE_CONTROLS}}', `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}; layering=${visualStyleOptions.layering ?? 0} (integer 0–7). Follow each control in every scene, stillPrompt and videoPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. Layering N above zero means build exactly N distinct, article-grounded spatial planes with different spatial roles, then unify them with one final merge-paint layer of shared marks, pigment and contours; zero means no deliberate stacked planes. Make video camera motion vision-driven: derive its path from the generated start frame, visible focal action and existing spatial planes, then settle on the protagonist or event. Do not invent off-frame content. These controls work independently.`);
   const articleInput = Object.fromEntries(['id', 'title', 'publish_date', 'url', 'source_country', 'language', 'summary', 'text']
     .map((key) => [key, String(article[key] ?? '').slice(0, key === 'text' ? 18000 : 4000)]));
   const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions, continuationPlan };
@@ -80,7 +80,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   return { request, log, director, directorHash: hash(director) };
 }
 
-export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null }) {
+export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null, visualStyleOptions = null }) {
   const choice = response.choices?.[0];
   if (choice?.message?.refusal) throw new Error(`GPT refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return a complete plan');
@@ -103,6 +103,9 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
       if (containsUntranslatedStreamTerm(scene.stillPrompt, streamEntry) || containsUntranslatedStreamTerm(scene.videoPrompt, streamEntry)) {
         throw new Error('Image and video prompts must be English; translate semantic-stream terms instead of copying source-language words');
       }
+    }
+    if (scene.crocodileAppearance?.present && visualStyleOptions?.symbolic === false && !/\bcrocodile\b/i.test(scene.stillPrompt)) {
+      scene.crocodileAppearance = { present: false, role: '', placement: '' };
     }
     if (!scene.crocodileAppearance?.present && (scene.crocodileAppearance?.role || scene.crocodileAppearance?.placement)) throw new Error('An absent crocodile must not have a role or placement');
     if (scene.crocodileAppearance?.present && (!/\bcrocodile\b/i.test(scene.stillPrompt) || !scene.crocodileAppearance.role.trim() || !scene.crocodileAppearance.placement.trim())) throw new Error('A chosen crocodile requires a meaningful role and visible description in the image prompt');

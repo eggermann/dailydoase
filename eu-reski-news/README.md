@@ -134,8 +134,15 @@ Der Szenenbildgenerator hat zwei unabhängige Schalter. Sie steuern sowohl GPTs 
 
 - `--symbolic` / `--no-symbolic`: artikelbezogene, sichtbare Metaphern an oder aus.
 - `--room-deepness` / `--no-room-deepness`: gemalte Vorder-, Mittel- und Ferne an oder aus.
+- `--layering=0..7`: Zahl klar unterscheidbarer, inhaltlich begründeter Raumschichten. `0` schaltet zusätzliche Ebenen aus. Bei Werten 1–7 fügt der Prompt zum Schluss eine verbindende Malschicht hinzu, die Pigment, Konturen und Schatten zu einer einzigen Bildfläche zusammenführt.
 
-Standard: Symbolik an, Raumtiefe aus. Pro Paar darf nur ein Schalter gesetzt sein. Jeder Bericht protokolliert die aktiven Werte; ein Resume behält Werte aus dem gespeicherten Lauf.
+Standard: Symbolik an, Raumtiefe aus, Layering 0. Pro Paar darf nur ein Schalter gesetzt sein. Jeder Bericht protokolliert die aktiven Werte; ein Resume behält Werte aus dem gespeicherten Lauf. Video-Kamerabewegungen leitet GPT aus dem tatsächlichen Startbild und dessen sichtbarer Raumstruktur ab.
+
+Beispiel für vier Ebenen plus verbindenden Malpass:
+
+```sh
+npm run news:story -- --layering=4 --room-deepness
+```
 
 Die drei gespeicherten Vergleichsvarianten lassen sich mit einem Starter neu erzeugen. Er kopiert den gespeicherten Artikel-Aggregat und Semantic-Stream-Snapshot in einen neuen Laufordner und schreibt wieder einen gemeinsamen HTML-Bericht:
 

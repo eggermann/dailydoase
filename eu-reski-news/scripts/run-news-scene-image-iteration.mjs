@@ -32,12 +32,16 @@ const { values: options } = parseArgs({ options: {
   'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false },
   symbolic: { type: 'boolean', default: false }, 'no-symbolic': { type: 'boolean', default: false },
   'room-deepness': { type: 'boolean', default: false }, 'no-room-deepness': { type: 'boolean', default: false }, help: { type: 'boolean' },
+  layering: { type: 'string', default: '0' },
 } });
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
+const layering = Number(options.layering);
+if (!Number.isInteger(layering) || layering < 0 || layering > 7) throw new Error('--layering must be an integer from 0 through 7');
 const recordStyleOptions = {
   symbolic: options['no-symbolic'] ? false : true,
   roomDeepness: options['room-deepness'] ? true : false,
+  layering,
 };
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
 async function exists(path) {
@@ -84,13 +88,20 @@ const sceneStaging = {
 };
 
 function addDistinctSceneStaging(scenes, visualStyleOptions) {
+  const layeringInstruction = visualStyleOptions.layering > 0
+    ? `LAYERING ${visualStyleOptions.layering}: build exactly ${visualStyleOptions.layering} readable spatial planes from foreground to far setting. Give each plane a distinct spatial role and article-grounded feature, such as a near threshold, the protagonist's active middle space, or receding architecture or terrain. Separate planes through overlap, changing scale, occlusion and tonal shifts, never borders or panels. Then apply one final unifying paint layer: shared charcoal marks, pigment, shadow bands and broken contours weave all planes into one coherent mural surface. This merge-paint pass must not look like stacked cut-outs or a collage.`
+    : 'LAYERING 0: add no deliberate multi-plane room stack or extra spatial planes. Keep the existing composition simple; the room-deepness switch alone controls whether ordinary foreground, middle distance and far space appear. Use one unified painted surface, without a separate layer effect.';
+  const cameraInstruction = visualStyleOptions.layering > 0
+    ? `VISION-DRIVEN CAMERA: inspect the actual generated start image and derive one restrained, continuous camera path from its visible focal action and ${visualStyleOptions.layering} spatial planes. Let camera movement reveal or travel gently across those existing planes, then settle on the protagonist or central event. Follow visible perspective, occlusion, scale and direction; invent no off-frame setting, objects or actors.`
+    : 'VISION-DRIVEN CAMERA: inspect the actual generated start image and derive one restrained, continuous camera move from its visible focal action, framing and directional lines. Do not assume hidden spatial planes or invent off-frame setting, objects or actors; settle on the protagonist or central event.';
   return scenes.map((scene) => ({
     ...scene,
-    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. ${visualStyleOptions.symbolic
+    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. ${layeringInstruction} ${visualStyleOptions.symbolic
       ? 'SYMBOLISM ON: build one or two concrete, article-grounded visual metaphors into the action and spatial relationships. Make each metaphor legible through objects or forms changing, pressing, dividing or connecting the scene; avoid generic decoration, flags, maps, labels or arbitrary allegory.'
       : 'SYMBOLISM OFF: use no allegorical overlays, coded emblems or invented symbolic props. Show the article situation directly through concrete action, gesture, objects and relationships; keep cubist distortion in form and paint only.'} ${visualStyleOptions.roomDeepness
       ? 'ROOM DEEPNESS ON: create convincing painterly spatial depth with a near foreground, active middle distance and clearly receding far plane. Use overlapping architecture, floor or terrain, thresholds and changing scale to lead the eye inward; keep the room or setting relevant to this article. Depth stays hand-painted and cubist, never photographic.'
       : 'ROOM DEEPNESS OFF: keep the scene as a shallow mural plane with overlapping forms and compressed space. Avoid corridors, vanishing points, deep rooms and receding realistic backgrounds.'}${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.' : ''}`,
+    videoPrompt: `${scene.videoPrompt}\n\n${cameraInstruction}`,
   }));
 }
 
@@ -291,7 +302,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--symbolic|--no-symbolic] [--room-deepness|--no-room-deepness] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Symbolism defaults on; room depth defaults off. Saved settings stay fixed when resuming. Output: eu-reski-news/GENERATIONS/news/.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--symbolic|--no-symbolic] [--room-deepness|--no-room-deepness] [--layering=0..7] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Symbolism defaults on; room depth defaults off; layering defaults to 0. Saved settings stay fixed when resuming. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
   if (options.resume && options['resume-run']) throw new Error('Use either --resume or --resume-run, not both');
