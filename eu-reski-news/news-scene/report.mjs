@@ -53,10 +53,12 @@ export function renderRunReport(run, iterations) {
     const prefix = `${directory}/`;
     const scenes = (record.plan?.scenes || []).map((scene, sceneIndex) => {
       const result = record.results?.[sceneIndex];
+      const filmScene = record.filmPlan?.scenePlan?.[sceneIndex];
       return `<article class="scene"><h3>Szene ${scene.index}: ${escapeHtml(scene.title)}</h3>
         <p><b>Hauptfigur:</b> ${escapeHtml(record.plan?.protagonist?.name || 'Noch nicht festgelegt')} · ${escapeHtml(scene.protagonistAction || scene.storyBeat)}</p>
         <p>${escapeHtml(scene.storyBeat)} · ${escapeHtml(scene.durationSeconds)} s</p>
         ${result?.path ? photo(`${prefix}${result.path}`, 'API-generiertes Startbild') : '<p>Startbild noch nicht gespeichert.</p>'}
+        ${filmScene?.videoPrompt ? `<section class="video-guide"><h4>Video-Modell-Anweisung</h4><dl><dt>Modus</dt><dd>Image-to-video · Einzelnes Startbild</dd><dt>Startbild</dt><dd>${result?.path ? `<a href="${escapeHtml(`${prefix}${result.path}`)}">${escapeHtml(result.path)}</a>` : 'Noch nicht erstellt'}</dd><dt>Dauer</dt><dd>${escapeHtml(filmScene.durationSeconds)} Sekunden</dd><dt>Bewegungsanweisung</dt><dd>${escapeHtml(filmScene.videoPrompt)}</dd></dl></section>` : ''}
         ${record.catalog?.find((item) => item.id === scene.guernicaId) ? photo(`${prefix}${record.catalog.find((item) => item.id === scene.guernicaId).path}`, 'Figurenreferenz für die Hauptfigur') : ''}
         ${details('Bildprompt', scene.stillPrompt || '')}</article>`;
     }).join('');
@@ -74,8 +76,9 @@ export function renderRunReport(run, iterations) {
   return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EU-RESKI · Run-Bericht</title><style>
   *{box-sizing:border-box}body{margin:0;background:#181918;color:#e5e1d7;font:17px/1.6 system-ui}main{max-width:1120px;margin:auto;padding:30px 20px}h1,h2,h3{line-height:1.2}.iteration{background:#252623;border:1px solid #47473e;border-radius:12px;padding:24px;margin:24px 0}.scene{border-top:1px solid #47473e;margin-top:28px;padding-top:20px}img{display:block;max-width:100%;height:auto;margin:auto}figure{margin:16px 0}figcaption{color:#bbb7ab;font-size:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}summary{cursor:pointer;color:#dfc987}details{margin:16px 0}a{color:#dfc987}
+  .video-guide{margin:20px 0;padding:16px;border:1px solid #47473e;border-radius:8px;background:#20211f}.video-guide h4{margin:0 0 10px}.video-guide dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:8px;margin:0}.video-guide dt{color:#dfc987}.video-guide dd{margin:0;overflow-wrap:anywhere}.video-guide a{color:#dfc987}@media(max-width:700px){.video-guide dl{grid-template-columns:1fr;gap:2px}.video-guide dd{margin-bottom:8px}}
   </style></head><body><main><h1>EU-RESKI · linearer Run</h1>
   <p>${escapeHtml(run.status)} · ${iterations.length} von ${escapeHtml(run.iterationLimit)} Iterationen · ${escapeHtml(run.startedAt)}</p>
-  <p>Artikelreihenfolge: linear · Jede Iteration verwendet den nächsten Artikel und den nächsten Semantic-Stream-Ausschnitt. GPT nutzt Artikeltext, Nachrichtenfoto und Figurenkatalog. Die Bild-API erhält die gewählte Figur als abstrakte Protagonistenreferenz${record.styleReference ? ' und das vollständige Gemälde ausschließlich als Stilreferenz' : '; ein vollständiges Gemälde wird nicht übergeben'}; das Nachrichtenfoto wird nicht gesendet.</p>
+  <p>Artikelreihenfolge: linear · Jede Iteration verwendet den nächsten Artikel und den nächsten Semantic-Stream-Ausschnitt. GPT nutzt Artikeltext, Nachrichtenfoto und Figurenkatalog. Die Bild-API erhält die gewählte Figur als abstrakte Protagonistenreferenz; ein vollständiges Gemälde wird nicht übergeben. Das Nachrichtenfoto dient der Bild-Orientierung.</p>
   ${reports}</main></body></html>`;
 }

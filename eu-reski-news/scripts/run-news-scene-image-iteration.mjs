@@ -6,16 +6,17 @@ import { dirname, join, resolve, basename, extname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { buildPlanRequest, validatePlan, buildImageTask, defaultWords, imageModel, hash } from '../news-scene/planner.mjs';
+import { resolveSceneLengthsInput } from '../../lib/generator/adapter/helpers/scene-generator.js';
 import { renderReport, renderRunReport } from '../news-scene/report.mjs';
 import { prepareImageReference } from '../news-scene/reference-images.mjs';
 import { generateFluxKleinImage } from '../news-scene/huggingface-flux-klein.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
-  resume: { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
+  resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
-  'scene-length-takt': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TAKT || '3' },
+  'scene-length-takt': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TAKT || '4' },
   'scene-length-type': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_TYPE || 'balanced' },
   'scene-length-multiplier': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_MULTIPLIER || '1.15' },
   'scene-length-bias': { type: 'string', default: process.env.NEWS_SCENE_LENGTH_BIAS || '3.85' },
@@ -213,17 +214,25 @@ function createSceneDurationStream() {
     throw new Error('Scene duration bounds must satisfy 5 <= minimum <= maximum <= 15 seconds');
   }
   const taktmuster = new Taktmuster();
-  taktmuster.setTakt(takt);
+  taktmuster.setTakt(takt, 4, 4);
   taktmuster.setType(options['scene-length-type']);
+  const nextPatternLength = () => {
+    const step = taktmuster.getNext();
+    const value = Number(step?.patternValue ?? step);
+    return Number.isFinite(value) && value > 0 ? value : 3;
+  };
   return {
-    next: () => {
-      const step = taktmuster.getNext();
-      const patternValue = Number(step?.patternValue ?? step);
-      const baseValue = Number.isFinite(patternValue) && patternValue > 0 ? Math.round(patternValue) : 1;
-      const shapedValue = baseValue * multiplier + bias;
-      return Math.max(minimum, Math.min(maximum, Math.round(shapedValue)));
+    next: nextPatternLength,
+    generate: async (sceneCount) => {
+      const pattern = await resolveSceneLengthsInput(nextPatternLength, sceneCount, 3);
+      return pattern.map((value) => {
+        const selfomatFloor = Math.max(1, Number(value) || 3);
+        const scaled = Number((selfomatFloor * multiplier).toFixed(2));
+        const biased = Number((scaled + bias).toFixed(2));
+        return Math.max(minimum, Math.min(maximum, Math.round(biased)));
+      });
     },
-    settings: { provider: 'taktmuster', takt, type: options['scene-length-type'], multiplier, bias, minimum, maximum },
+    settings: { provider: 'Selfomat Taktmuster scene-length generator', takt, meter: '4/4', type: options['scene-length-type'], scaler: 'quality floor → multiplier → bias → duration clamp', multiplier, bias, minimum, maximum },
   };
 }
 
@@ -270,9 +279,10 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=3] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Output: eu-reski-news/GENERATIONS/news/.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
+  if (options.resume && options['resume-run']) throw new Error('Use either --resume or --resume-run, not both');
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
   const iterationLimit = Number(options.iterations);
   if (!Number.isInteger(iterationLimit) || iterationLimit < -1) throw new Error('Use --iterations=N, --iterations=0 or --iterations=-1');
@@ -292,13 +302,15 @@ async function main() {
   const semanticSource = options.resume ? null : await createSemanticSource();
   const sceneDurations = createSceneDurationStream();
   const endless = iterationLimit === 0 || iterationLimit === -1;
-  const groupedRun = endless || iterationLimit > 1;
+  const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1;
   const iterationRoot = options.resume
     ? null
+    : options['resume-run']
+      ? resolve(options['resume-run'])
     : groupedRun
       ? await allocateRunDirectory(resolve(options['output-dir']))
       : resolve(options['output-dir']);
-  const runManifest = groupedRun ? {
+  const runManifest = options['resume-run'] ? await json(join(iterationRoot, 'run.json')) : groupedRun ? {
     profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
     startedAt: new Date().toISOString(),
     iterationLimit: endless ? 'endless' : iterationLimit,
@@ -306,11 +318,24 @@ async function main() {
     status: 'running',
     iterations: [],
   } : null;
+  const previouslyCompleted = runManifest?.iterations.length || 0;
+  if (options['resume-run'] && (!Array.isArray(runManifest.iterations) || previouslyCompleted >= iterationLimit)) {
+    throw new Error('Run already has requested iterations or has invalid manifest');
+  }
+  if (runManifest) {
+    runManifest.iterationLimit = endless ? 'endless' : iterationLimit;
+    runManifest.status = 'running';
+    delete runManifest.finishedAt;
+  }
   if (runManifest) {
     await save(join(iterationRoot, 'run.json'), runManifest);
     console.log(`Run folder: ${iterationRoot}`);
   }
-  let completed = 0;
+  for (let iteration = 0; iteration < previouslyCompleted; iteration += 1) {
+    await semanticSource?.next();
+    for (let scene = 0; scene < sceneCount; scene += 1) sceneDurations.next();
+  }
+  let completed = previouslyCompleted;
   while (endless || completed < iterationLimit) {
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
     const iterationDirectory = await runIteration(semanticSource, sceneDurations, iterationRoot, completed);
@@ -390,7 +415,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
     await mkdir(join(directory, 'media'), { recursive: true });
     if (!record.sceneDurations) {
       record.sceneDurations = record.plan?.scenes?.map((scene) => scene.durationSeconds)
-        || Array.from({ length: sceneCount }, () => sceneDurationStream.next());
+        || await sceneDurationStream.generate(sceneCount);
       record.sceneDurationSettings = sceneDurationStream.settings;
       await save(join(directory, 'record.json'), record);
     }
