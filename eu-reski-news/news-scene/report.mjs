@@ -19,6 +19,7 @@ export function renderReport(record) {
       ${scene.crocodileAppearance ? `<p><b>Krokodil:</b> ${scene.crocodileAppearance.present ? `${escapeHtml(scene.crocodileAppearance.role)} · ${escapeHtml(scene.crocodileAppearance.placement)}` : 'Weggelassen; passt hier nicht als Metapher.'}</p>` : ''}
       ${details(`Unveränderter GPT-Bildprompt → ${record.imageModel || 'Bild-API'}`, scene.stillPrompt)}
       ${filmScene?.videoPrompt ? videoGuide(scene, filmScene) : ''}
+      ${record.sceneTiming?.scenes?.[index] ? `<p><b>Dauerbegründung:</b> ${escapeHtml(record.sceneTiming.scenes[index].reason)}</p>` : ''}
       ${result ? details('Bild-API · Kosten, Seed, Prompt-Hash', result) : ''}</section>`;
   }).join('');
   return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -27,6 +28,8 @@ export function renderReport(record) {
   </style></head><body><main><h1>Artikel + Semantic Stream → Szenenbild und Filmplan</h1>
   <p>${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)} · ${escapeHtml(record.imageModel)}</p>
   ${record.visualStyleOptions ? `<p>Symbolik: ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe: ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering: ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
+  ${record.sceneDurationSettings ? `<p>Szenenlänge: ${escapeHtml(record.sceneDurationSettings.provider)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
+  ${record.planningVersion === 2 ? '<p>Bildplanung und Zeitwahl getrennt: Der fertige Bildplan bleibt bei der Dauer- und Videoplanung unverändert.</p>' : ''}
   ${record.variant ? `<p><b>${escapeHtml(record.variant.label)}</b> · ${escapeHtml(record.variant.description)}</p>` : ''}
   <p>${record.imageProvider === 'hf-flux-klein' ? 'Hugging Face ZeroGPU: GPU-Zeit wird vom Tageskontingent oder Guthaben abgezogen; Space meldet keine GPU-Sekunden.' : `Gemeldete Bildkosten: $${costs.reduce((a, b) => a + b, 0).toFixed(5)}`} · GPT separat: ${escapeHtml(record.usage?.total_tokens ?? '–')} Tokens</p>
   ${record.filmPlan ? `<p>${escapeHtml(record.filmPlan.status)}</p>` : ''}
@@ -44,6 +47,7 @@ export function renderReport(record) {
   ${scenes}<section><h2>Nachvollziehbarkeit</h2><p>${escapeHtml(record.variant?.promptOrigin || record.promptOrigin || `GPT nutzt Artikeltext und Nachrichtenfoto für Fakten und Szenenplanung. Die Bild-API erhält die gewählte maskierte Figurenreferenz als Protagonistenreferenz${record.styleReference ? ' und das vollständige Gemälde ausschließlich als Stilreferenz' : '; ein vollständiges Gemälde wird nicht übergeben'}. Das Nachrichtenfoto geht nicht an die Bild-API.`)}</p>
   ${record.sourceVersion ? `<p>Generator-Commit: ${escapeHtml(record.sourceVersion.commit)} · Branch: ${escapeHtml(record.sourceVersion.branch || 'detached HEAD')} · ${record.sourceVersion.clean ? 'Code unverändert beim Start' : 'Lokale Codeänderungen beim Start'}</p>` : ''}
   <p>Versionierter Regieprompt: ${escapeHtml(record.directorHash || 'noch nicht geladen')}</p>
+  ${record.visualPlanHash ? `<p>Fixierter Bildplan: <a href="visual-plan.json">Bildplan vor Zeitwahl</a> · SHA-256 ${escapeHtml(record.visualPlanHash)}${record.sceneTiming ? ' · <a href="timing-request.json">Zeitplanung: Eingabe</a> · <a href="timing-response.json">Zeitplanung: Antwort</a>' : ''}</p>` : ''}
   <p><a href="record.json">Laufprotokoll</a> · <a href="semantic-stream.json">Stream-Snapshot</a> · <a href="scene-plan.json">Szenenplan</a> · ${record.filmPlan ? '<a href="film-plan.json">Film-Übergabeplan</a> · ' : ''}${record.filmPlan ? '<a href="film-agent-prompt.md">Anweisung für den Film-Generator</a> · ' : ''}<a href="gpt-request.json">GPT-Eingabe</a> · <a href="gpt-response.json">GPT-Antwort</a> · <a href="director.md">Regieprompt</a></p>
   ${(plan?.scenes || []).map((scene) => `<p>Szene ${scene.index}: <a href="scene-${scene.index}-request.json">Bild-Request</a> · <a href="scene-${scene.index}-response.json">Bild-Response</a></p>`).join('')}
   ${details('Vollständiges Laufprotokoll', record)}</section></main></body></html>`;
@@ -66,6 +70,7 @@ export function renderRunReport(run, iterations) {
     const semantic = (record.semantic?.entries || []).map((entry) => `<li><b>${escapeHtml(entry.seed.join(' · '))}</b> → ${escapeHtml(entry.item.title)}</li>`).join('');
     return `<section class="iteration"><header><p>Iteration ${String(iterationIndex + 1).padStart(2, '0')} · ${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)}</p>
       ${record.visualStyleOptions ? `<p><b>Symbolik:</b> ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · <b>Raumtiefe:</b> ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · <b>Layering:</b> ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
+      ${record.sceneDurationSettings ? `<p><b>Szenenlänge:</b> ${escapeHtml(record.sceneDurationSettings.provider)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
       <h2>${escapeHtml(record.article?.title)}</h2><p>${escapeHtml(record.article?.publish_date)} · ${escapeHtml(record.article?.source_country)}</p>
       <p>${escapeHtml(record.plan?.storyPremise || '')}</p>
       <p><b>Hauptfigur:</b> ${escapeHtml(record.plan?.protagonist?.name || 'Noch nicht festgelegt')} · ${escapeHtml(record.plan?.protagonist?.role || '')}</p>

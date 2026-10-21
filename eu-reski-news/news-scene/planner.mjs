@@ -25,8 +25,6 @@ export const planSchema = object({
     index: { type: 'integer', minimum: 1, maximum: 7 }, title: string, storyBeat: string,
     protagonistAction: string,
     composition: { type: 'string', enum: ['wide_establishing', 'intimate_close_up', 'oblique_diagonal', 'high_angle', 'low_angle', 'profile_silhouette', 'over_the_shoulder', 'foreground_frame', 'top_down'] },
-    durationSeconds: { type: 'integer', minimum: 5, maximum: 15 },
-    videoPrompt: { type: 'string', minLength: 80, maxLength: 5000 },
     guernicaId: { type: 'integer', minimum: 1, maximum: 9 },
     selectionReason: string,
     crocodileAppearance: object({ present: { type: 'boolean' }, role: string, placement: string }),
@@ -34,7 +32,7 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
   const referenceInstructions = styleReferenceProvided
     ? 'The image API receives two references: reference image 1 is the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture; reference image 2 is the complete painting, used only for painterly style. Do not import story content from either reference.'
     : 'The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1.';
@@ -44,10 +42,16 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   const director = (await readFile(new URL('./director.md', import.meta.url), 'utf8'))
     .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
     .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)
-    .replaceAll('{{VISUAL_STYLE_CONTROLS}}', `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}; layering=${visualStyleOptions.layering ?? 0} (integer 0–7). Follow each control in every scene, stillPrompt and videoPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. Layering N above zero means build exactly N distinct, article-grounded spatial planes with different spatial roles, then unify them with one final merge-paint layer of shared marks, pigment and contours; zero means no deliberate stacked planes. Make video camera motion vision-driven: derive its path from the generated start frame, visible focal action and existing spatial planes, then settle on the protagonist or event. Do not invent off-frame content. These controls work independently.`);
+    .replaceAll('{{VISUAL_STYLE_CONTROLS}}', `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}; layering=${visualStyleOptions.layering ?? 0} (integer 0–7). Follow each control in every scene and stillPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. Layering N above zero means build exactly N distinct, article-grounded spatial planes with different spatial roles, then unify them with one final merge-paint layer of shared marks, pigment and contours; zero means no deliberate stacked planes. These controls work independently.`);
   const articleInput = Object.fromEntries(['id', 'title', 'publish_date', 'url', 'source_country', 'language', 'summary', 'text']
     .map((key) => [key, String(article[key] ?? '').slice(0, key === 'text' ? 18000 : 4000)]));
-  const data = { article: articleInput, semantic, catalog, sceneCount, sceneDurations, sceneDurationSettings, visualStyleOptions, continuationPlan };
+  // Timing never enters the visual request, including when expanding a saved plan.
+  const visualContinuation = continuationPlan ? structuredClone(continuationPlan) : null;
+  for (const scene of visualContinuation?.scenes || []) {
+    delete scene.durationSeconds;
+    delete scene.videoPrompt;
+  }
+  const data = { article: articleInput, semantic, catalog, sceneCount, visualStyleOptions, continuationPlan: visualContinuation };
   const continuationInstruction = continuationPlan
     ? `Expand the supplied ${continuationPlan.scenes.length}-scene continuationPlan into exactly ${sceneCount} scenes. Preserve its central premise and exact protagonist. Treat prior scene beats as anchors, but add distinct causal beats around them; do not return the old scene count.`
     : `Return exactly ${sceneCount} scenes.`;
@@ -80,7 +84,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   return { request, log, director, directorHash: hash(director) };
 }
 
-export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null, visualStyleOptions = null }) {
+export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null, visualStyleOptions = null, sceneDurationSettings = null, visualOnly = false }) {
   const choice = response.choices?.[0];
   if (choice?.message?.refusal) throw new Error(`GPT refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return a complete plan');
@@ -96,11 +100,17 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
   for (const [index, scene] of plan.scenes.entries()) {
     if (scene.index !== index + 1 || !figureIds.has(scene.guernicaId) || !scene.protagonistAction?.toLocaleLowerCase().includes(plan.protagonist.name.toLocaleLowerCase()) || !scene.selectionReason?.trim()) throw new Error('Every scene needs the same named protagonist and a valid, justified figure reference');
     if (!scene.composition || new Set(plan.scenes.slice(0, index).map((item) => item.composition)).has(scene.composition)) throw new Error('Each scene needs a distinct composition');
-    if (!Number.isInteger(scene.durationSeconds) || scene.durationSeconds < 5 || scene.durationSeconds > 15) throw new Error('Invalid scene duration');
+    if (visualOnly) {
+      if (Object.hasOwn(scene, 'durationSeconds') || Object.hasOwn(scene, 'videoPrompt')) throw new Error('Visual planning must not assign timing or video prompts');
+    } else {
+      const minimumSceneSeconds = sceneDurationSettings?.minimum ?? 5;
+      const maximumSceneSeconds = sceneDurationSettings?.maximum ?? 15;
+      if (!Number.isInteger(scene.durationSeconds) || scene.durationSeconds < minimumSceneSeconds || scene.durationSeconds > maximumSceneSeconds) throw new Error('Invalid scene duration');
+      if (typeof scene.videoPrompt !== 'string' || scene.videoPrompt.length < 80 || scene.videoPrompt.length > 5000) throw new Error('Invalid scene video prompt');
+    }
     if (typeof scene.stillPrompt !== 'string' || scene.stillPrompt.length < 200 || scene.stillPrompt.length > 10000) throw new Error('Invalid still prompt length');
-    if (typeof scene.videoPrompt !== 'string' || scene.videoPrompt.length < 80 || scene.videoPrompt.length > 5000) throw new Error('Invalid scene video prompt');
     for (const streamEntry of semantic.entries) {
-      if (containsUntranslatedStreamTerm(scene.stillPrompt, streamEntry) || containsUntranslatedStreamTerm(scene.videoPrompt, streamEntry)) {
+      if (containsUntranslatedStreamTerm(scene.stillPrompt, streamEntry) || (!visualOnly && containsUntranslatedStreamTerm(scene.videoPrompt, streamEntry))) {
         throw new Error('Image and video prompts must be English; translate semantic-stream terms instead of copying source-language words');
       }
     }

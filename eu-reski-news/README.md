@@ -97,7 +97,7 @@ node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --
 4. GPT returns a strict JSON plan. Each `stillPrompt` is handed to the image API unchanged. The API receives the selected figure for protagonist appearance and gesture, plus the complete painting for painterly style. Do not import the reference figures' original stories or context. The article photo is never sent to the image API.
 Image references are resized proportionally with `sharp` when needed to satisfy Runware’s 128–2048 pixel limits. Extreme aspect ratios receive transparent padding. Original files remain unchanged; API copies, hashes and paths are logged.
 
-5. Each still is saved at 1680×944. GPT writes one `videoPrompt` per scene into the same iteration. `film-plan.json` exposes `videoPrompt`, `durationSeconds`, and `startImagePath`; use that image as the image-to-video input and the prompt as its motion direction. This prepares film generation without calling a video API. Prompts animate only their own scene: the current plan does not capture a clip's final frame or chain it into the next scene. For true visual continuity, the film runner must capture each last frame and use it as the next clip's input.
+5. The visual plan is locked before a separate GPT timing request writes `durationSeconds` and `videoPrompt`. The visual request contains no timing mode, duration values, timing bounds or video prompts. Both timing modes use this same visual planning path. The timing response can only assign duration and motion, and a SHA-256 check rejects any change to the locked visual plan. Each still is saved at 1680×944. `film-plan.json` exposes `videoPrompt`, `durationSeconds`, and `startImagePath`; use that image as the image-to-video input and the prompt as its motion direction. This prepares film generation without calling a video API. Prompts animate only their own scene: the current plan does not capture a clip's final frame or chain it into the next scene. For true visual continuity, the film runner must capture each last frame and use it as the next clip's input.
 
 Scene durations use Selfomat's `resolveSceneLengthsInput` + Taktmuster pipeline. Pattern values are normalized, then scaled with `round(patternValue × multiplier + bias)` and clamped to the configured minimum and maximum. Defaults: balanced 4/4, multiplier 1.15, bias 3.85 seconds, range 5–8 seconds. Override with `NEWS_SCENE_LENGTH_MULTIPLIER`, `NEWS_SCENE_LENGTH_BIAS`, `NEWS_MIN_SCENE_DURATION_SECONDS`, and `NEWS_MAX_SCENE_DURATION_SECONDS`, or matching CLI flags.
 
@@ -128,20 +128,24 @@ For changes to this workflow, use a scoped Conventional Commit, for example:
 ```text
 feat(news): generate three-scene HTML iterations
 ```
-# Bildvarianten: Symbolik und Raumtiefe
+# Bild- und Szenensteuerung
 
-Der Szenenbildgenerator hat zwei unabhängige Schalter. Sie steuern sowohl GPTs Szenenentwurf als auch die Bildanweisung an FLUX:
+Die visuellen Einstellungen steuern GPTs Szenenentwurf und die Bildanweisung an FLUX:
 
 - `--symbolic` / `--no-symbolic`: artikelbezogene, sichtbare Metaphern an oder aus.
 - `--room-deepness` / `--no-room-deepness`: gemalte Vorder-, Mittel- und Ferne an oder aus.
 - `--layering=0..7`: Zahl klar unterscheidbarer, inhaltlich begründeter Raumschichten. `0` schaltet zusätzliche Ebenen aus. Bei Werten 1–7 fügt der Prompt zum Schluss eine verbindende Malschicht hinzu, die Pigment, Konturen und Schatten zu einer einzigen Bildfläche zusammenführt.
 
-Standard: Symbolik an, Raumtiefe aus, Layering 0. Pro Paar darf nur ein Schalter gesetzt sein. Jeder Bericht protokolliert die aktiven Werte; ein Resume behält Werte aus dem gespeicherten Lauf. Video-Kamerabewegungen leitet GPT aus dem tatsächlichen Startbild und dessen sichtbarer Raumstruktur ab.
+Standard: Symbolik an, Raumtiefe aus, Layering 0. Pro Paar darf nur ein Schalter gesetzt sein. Jeder Bericht protokolliert die aktiven Werte; ein Resume behält Werte aus dem gespeicherten Lauf. Video-Kamerabewegungen leitet GPT aus dem fixierten Bildplan und dessen beschriebener Raumstruktur ab. Die Zeitplanung analysiert keine bereits gerenderten Bildpixel.
+
+Für Szenenlängen kann `--scene-length-takt=-1` den Selfomat-Taktmuster-Scaler umgehen. GPT legt dann in einem separaten Schritt jede Dauer passend zum bereits fixierten Spannungsbogen fest. Dauer bleibt standardmäßig zwischen 5 und 8 Sekunden; mit `--min-scene-seconds` und `--max-scene-seconds` lässt sich dieser Bereich anpassen (zulässig: 5–15 Sekunden). Bei positivem Takt übernimmt derselbe separate Schritt die vorgegebenen Selfomat-Dauern unverändert und schreibt passende Videobewegungen. Der Zeitmodus gelangt nie in die Bildplanung. Bildprompts, Figurenwahl, Komposition und Handlung können von der Zeitantwort nicht überschrieben werden.
+
+Neue Läufe speichern `planningVersion: 2`, `visual-plan.json`, dessen `visualPlanHash` und `timing-request.json` / `timing-response.json`. `scene-plan.json` enthält anschließend den unveränderten Bildplan plus Sekunden und Videoprompts. Der Bericht zeigt Dauerbegründungen und beide Planungsstufen. Dieser zusätzliche GPT-Aufruf wird in der Tokenbilanz mitgerechnet. Ein Resume eines alten Laufs verwendet weiter dessen gespeicherte kombinierte Planung; es schreibt keine alten Bilder oder Prompts um. Frisch gestartete Läufe bleiben unabhängig stochastisch: identische Bildplanungs-Eingaben garantieren keine identischen generierten Bilder.
 
 Beispiel für vier Ebenen plus verbindenden Malpass:
 
 ```sh
-npm run news:story -- --layering=4 --room-deepness
+npm run news:story -- --layering=4 --room-deepness --scene-length-takt=-1 --max-scene-seconds=15
 ```
 
 Die drei gespeicherten Vergleichsvarianten lassen sich mit einem Starter neu erzeugen. Er kopiert den gespeicherten Artikel-Aggregat und Semantic-Stream-Snapshot in einen neuen Laufordner und schreibt wieder einen gemeinsamen HTML-Bericht:
@@ -151,3 +155,11 @@ Die drei gespeicherten Vergleichsvarianten lassen sich mit einem Starter neu erz
 ```
 
 Optionalen Laufordnernamen als einziges Argument übergeben. Der Starter bricht ab, falls dieser Ordner bereits existiert.
+
+Für einen echten Vergleich vollständiger linearer Dreierläufe:
+
+```sh
+./eu-reski-news/scripts/compare-news-scene-flags.sh --iterations=3 --scenes=5 --layerings=3,7 --scene-length-takt=-1 --news-dir=/path/to/news/A
+```
+
+Dieser Starter speichert die gemeinsame Nachrichtenquelle und einmalig drei aufeinanderfolgende `getNext`-Snapshots. Jede Flagkombination spielt mit `--stream-sequence-file` genau diese Folge ab Anfang ab und durchläuft alle drei Artikel. Getestet werden Symbolik an/Tiefe aus, an/an und aus/an, jeweils für beide Layering-Werte: sechs Varianten, 18 Iterationen, 90 Bilder. Die Bild-Seeds sind pro Iteration und Szene in allen Varianten gleich. Der gemeinsame HTML-Bericht wächst während des Laufs. Zum Fortsetzen denselben Starter mit `--resume=/absolute/comparison-folder` aufrufen; gespeicherte Eingaben und abgeschlossene Iterationen werden wiederverwendet. Ein Archiv der verwendeten Quelltexte und deren Hashes liegt unter `input/source`.

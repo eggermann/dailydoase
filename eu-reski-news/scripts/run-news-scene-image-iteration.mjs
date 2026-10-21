@@ -3,13 +3,15 @@ import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve, basename, extname } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { buildPlanRequest, validatePlan, buildImageTask, defaultWords, imageModel, hash } from '../news-scene/planner.mjs';
+import { buildPlanRequest, validatePlan, buildImageTask, imageModel, hash } from '../news-scene/planner.mjs';
 import { resolveSceneLengthsInput } from '../../lib/generator/adapter/helpers/scene-generator.js';
 import { renderReport, renderRunReport } from '../news-scene/report.mjs';
 import { prepareImageReference } from '../news-scene/reference-images.mjs';
 import { generateFluxKleinImage } from '../news-scene/huggingface-flux-klein.mjs';
+import { buildTimingRequest, applySceneTiming, visualPlanSnapshot } from '../news-scene/scene-timing.mjs';
+import { createSemanticSource } from '../news-scene/semantic-source.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
@@ -23,12 +25,13 @@ const { values: options } = parseArgs({ options: {
   'min-scene-seconds': { type: 'string', default: process.env.NEWS_MIN_SCENE_DURATION_SECONDS || '5' },
   'max-scene-seconds': { type: 'string', default: process.env.NEWS_MAX_SCENE_DURATION_SECONDS || '8' },
   words: { type: 'string' }, 'words-file': { type: 'string' },
-  'stream-module': { type: 'string' }, 'stream-file': { type: 'string' },
+  'stream-module': { type: 'string' }, 'stream-file': { type: 'string' }, 'stream-sequence-file': { type: 'string' },
   'news-dir': { type: 'string', default: join(root, 'eu-reski-news', 'news', 'A') },
   'output-dir': { type: 'string', default: process.env.NEWS_OUTPUT_DIR || join(root, 'eu-reski-news', 'GENERATIONS', 'news') },
   'guernica-dir': { type: 'string', default: process.env.GUERNICA_DIRECTORY || '/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert' },
   'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
+  'image-seed': { type: 'string' },
   'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false },
   symbolic: { type: 'boolean', default: false }, 'no-symbolic': { type: 'boolean', default: false },
   'room-deepness': { type: 'boolean', default: false }, 'no-room-deepness': { type: 'boolean', default: false }, help: { type: 'boolean' },
@@ -38,6 +41,8 @@ if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
 const layering = Number(options.layering);
 if (!Number.isInteger(layering) || layering < 0 || layering > 7) throw new Error('--layering must be an integer from 0 through 7');
+const imageSeedBase = options['image-seed'] === undefined ? null : Number(options['image-seed']);
+if (imageSeedBase !== null && (!Number.isInteger(imageSeedBase) || imageSeedBase < 0 || imageSeedBase >= 2_147_483_647)) throw new Error('--image-seed must be an integer from 0 through 2147483646');
 const recordStyleOptions = {
   symbolic: options['no-symbolic'] ? false : true,
   roomDeepness: options['room-deepness'] ? true : false,
@@ -101,7 +106,7 @@ function addDistinctSceneStaging(scenes, visualStyleOptions) {
       : 'SYMBOLISM OFF: use no allegorical overlays, coded emblems or invented symbolic props. Show the article situation directly through concrete action, gesture, objects and relationships; keep cubist distortion in form and paint only.'} ${visualStyleOptions.roomDeepness
       ? 'ROOM DEEPNESS ON: create convincing painterly spatial depth with a near foreground, active middle distance and clearly receding far plane. Use overlapping architecture, floor or terrain, thresholds and changing scale to lead the eye inward; keep the room or setting relevant to this article. Depth stays hand-painted and cubist, never photographic.'
       : 'ROOM DEEPNESS OFF: keep the scene as a shallow mural plane with overlapping forms and compressed space. Avoid corridors, vanishing points, deep rooms and receding realistic backgrounds.'}${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.' : ''}`,
-    videoPrompt: `${scene.videoPrompt}\n\n${cameraInstruction}`,
+    ...(scene.videoPrompt ? { videoPrompt: `${scene.videoPrompt}\n\n${cameraInstruction}` } : {}),
   }));
 }
 
@@ -120,6 +125,14 @@ function alignSemanticSceneAssignments(response) {
       .filter((scene) => scene.stillPrompt?.toLocaleLowerCase().includes(motif))
       .map((scene) => scene.index);
     const assignedSceneIndices = entry.relatedSceneIndices || [];
+    if (!actualSceneIndices.length) {
+      corrections.push({ streamId, motif: entry.visualMotif, from: assignedSceneIndices, to: [], reason: 'Motif absent from all still prompts; mark stream entry not relevant.' });
+      entry.relevance = 'not_relevant';
+      entry.relatedSceneIndices = [];
+      entry.visualMotif = '';
+      entry.visibleConsequence = `The proposed visual motif “${entry.visualMotif || motif}” is absent from every scene prompt, so it is omitted rather than presented as visible.`;
+      continue;
+    }
     if (actualSceneIndices.length && actualSceneIndices.join(',') !== assignedSceneIndices.join(',')) {
       corrections.push({ streamId, motif: entry.visualMotif, from: assignedSceneIndices, to: actualSceneIndices });
       entry.relatedSceneIndices = actualSceneIndices;
@@ -163,59 +176,25 @@ async function allocateRunDirectory(outputDirectory) {
   throw new Error('No free run directory');
 }
 
-function validateSemantic(semantic) {
-  if (!Array.isArray(semantic.entries) || semantic.entries.length < 1 || semantic.entries.length > 12) throw new Error('Expected 1–12 semantic entries');
-  const ids = new Set();
-  for (const entry of semantic.entries) {
-    if (!entry.id || ids.has(entry.id) || !Array.isArray(entry.seed) || !entry.item?.title) throw new Error('Invalid semantic entry');
-    ids.add(entry.id);
-  }
-  return semantic;
-}
-
-async function createSemanticSource() {
-  if (options['stream-file']) {
-    return { next: async () => validateSemantic(await json(resolve(options['stream-file']))) };
-  }
-  const words = options['words-file'] ? await json(resolve(options['words-file']))
-    : options.words ? options.words.split(',').map((word) => [word.trim(), 'de']) : defaultWords;
-  if (!Array.isArray(words) || !words.length || words.length > 12 || words.some((entry) => !Array.isArray(entry) || entry.length !== 2 || !entry.every((value) => typeof value === 'string' && value.trim()) || !/^[a-z]{2,3}$/.test(entry[1]))) {
-    throw new Error('Words must be [["EU","de"],["EU","en"],["EU","ru"]], at most 12 pairs');
-  }
-  const modulePath = options['stream-module'] || process.env.NEWS_SEMANTIC_STREAM_MODULE;
-  const module = await import(modulePath ? pathToFileURL(resolve(modulePath)).href : 'semantic-stream');
-  const initStreams = module.initStreams || module.default?.initStreams;
-  if (!initStreams) throw new Error('semantic-stream does not export initStreams');
-  const streams = [];
-  // Keep each stream alive for the full run; getNext advances it between iterations.
-  for (const [index, seed] of words.entries()) {
-    console.log(`Semantic stream: ${seed.join(' / ')}`);
-    const [stream] = await initStreams([seed], {
-      registerExitHandlers: false,
-      wordStreamOptions: { requestPolicy: { maxAttempts: 2, minIntervalMs: 500 } },
-    });
-    streams.push({ id: `stream-${index + 1}`, seed, stream });
-  }
-  return {
-    next: async () => {
-      const entries = [];
-      // Sequential reads respect semantic-stream's source throttling.
-      for (const { id, seed, stream } of streams) {
-        let item;
-        for (let attempt = 0; attempt < 20; attempt += 1) {
-          item = await stream.getNext();
-          if (item?.title && !/doi|isbn|pmid|webarchiv|wayback machine|internet archive/i.test(item.title)) break;
-          item = null;
-        }
-        if (!item) throw new Error(`No usable semantic fragment for ${seed.join('/')}`);
-        entries.push({ id, seed, item });
-      }
-      return validateSemantic({ provider: 'semantic-stream', capturedAt: new Date().toISOString(), words, entries });
-    },
-  };
-}
-
 function createSceneDurationStream() {
+  const takt = Number(options['scene-length-takt']);
+  const minimum = Number(options['min-scene-seconds']);
+  const maximum = Number(options['max-scene-seconds']);
+  if (!Number.isInteger(minimum) || minimum < 5 || !Number.isInteger(maximum) || maximum < minimum || maximum > 15) {
+    throw new Error('Scene duration bounds must satisfy 5 <= minimum <= maximum <= 15 seconds');
+  }
+  if (takt === -1) {
+    return {
+      next: () => null,
+      generate: async () => null,
+      settings: { provider: 'GPT dramatic pacing', takt: -1, minimum, maximum, type: 'dramatic-arc', scaler: 'GPT chooses scene duration from story tension and dramatic progression' },
+    };
+  }
+  const multiplier = Number(options['scene-length-multiplier']);
+  const bias = Number(options['scene-length-bias']);
+  if (!Number.isFinite(takt) || takt <= 0 || !Number.isFinite(multiplier) || multiplier <= 0 || !Number.isFinite(bias)) {
+    throw new Error('Invalid Taktmuster duration settings; use --scene-length-takt=-1 for GPT dramatic pacing');
+  }
   const localRequire = createRequire(import.meta.url);
   let Taktmuster;
   try {
@@ -224,17 +203,6 @@ function createSceneDurationStream() {
     if (error.code !== 'MODULE_NOT_FOUND') throw error;
     const gitCommonDirectory = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: root, encoding: 'utf8' }).trim();
     ({ Taktmuster } = createRequire(join(dirname(gitCommonDirectory), 'package.json'))('taktmuster'));
-  }
-  const takt = Number(options['scene-length-takt']);
-  const multiplier = Number(options['scene-length-multiplier']);
-  const bias = Number(options['scene-length-bias']);
-  const minimum = Number(options['min-scene-seconds']);
-  const maximum = Number(options['max-scene-seconds']);
-  if (!Number.isFinite(takt) || takt <= 0 || !Number.isFinite(multiplier) || multiplier <= 0 || !Number.isFinite(bias)) {
-    throw new Error('Invalid Taktmuster duration settings');
-  }
-  if (!Number.isInteger(minimum) || minimum < 5 || !Number.isInteger(maximum) || maximum < minimum || maximum > 15) {
-    throw new Error('Scene duration bounds must satisfy 5 <= minimum <= maximum <= 15 seconds');
   }
   const taktmuster = new Taktmuster();
   taktmuster.setTakt(takt, 4, 4);
@@ -302,11 +270,12 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--symbolic|--no-symbolic] [--room-deepness|--no-room-deepness] [--layering=0..7] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Symbolism defaults on; room depth defaults off; layering defaults to 0. Saved settings stay fixed when resuming. Output: eu-reski-news/GENERATIONS/news/.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4|-1] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--symbolic|--no-symbolic] [--room-deepness|--no-room-deepness] [--layering=0..7] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--stream-sequence-file=sequence.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. --scene-length-takt=-1 lets GPT choose each scene duration from the dramatic arc, bounded by --min-scene-seconds and --max-scene-seconds; positive takt values keep the Selfomat Taktmuster scaler. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Symbolism defaults on; room depth defaults off; layering defaults to 0. Saved settings stay fixed when resuming. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
+  if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
   if (options.resume && options['resume-run']) throw new Error('Use either --resume or --resume-run, not both');
-  if (options.resume && ['words', 'words-file', 'stream-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
+  if (options.resume && ['words', 'words-file', 'stream-file', 'stream-sequence-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
   const iterationLimit = Number(options.iterations);
   if (!Number.isInteger(iterationLimit) || iterationLimit < -1) throw new Error('Use --iterations=N, --iterations=0 or --iterations=-1');
   const pauseMilliseconds = Number(options['pause-ms']);
@@ -322,7 +291,7 @@ async function main() {
   if (!['runware', 'hf-flux-klein'].includes(imageProvider)) throw new Error('Use --image-provider=runware or --image-provider=hf-flux-klein');
   if (!openAiKey || (!options['prompt-only'] && imageProvider === 'runware' && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
   if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
-  const semanticSource = options.resume ? null : await createSemanticSource();
+  const semanticSource = options.resume ? null : await createSemanticSource(options);
   const sceneDurations = createSceneDurationStream();
   const endless = iterationLimit === 0 || iterationLimit === -1;
   const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1;
@@ -423,7 +392,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
       if (draw < 0) throw new Error('Requested article is missing or has no usable text and image');
       const { article, index } = candidates[draw];
       record = {
-        generator: 'semantic-news-v1', createdAt: new Date().toISOString(), status: 'preparing',
+        generator: 'semantic-news-v1', planningVersion: 2, createdAt: new Date().toISOString(), status: 'preparing',
         sourceVersion: {
           commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
           branch: execFileSync('git', ['branch', '--show-current'], { cwd: root, encoding: 'utf8' }).trim(),
@@ -433,10 +402,13 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         selection: { method: options['article-id'] ? 'article-id' : order, order, draw, candidateCount: candidates.length, aggregateIndex: index },
         article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], visualStyleOptions: recordStyleOptions, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
         guernicaDirectory: resolve(options['guernica-dir']), results: [],
+        imageSeed: imageSeedBase === null ? null : (imageSeedBase + iterationIndex * sceneCount) % 2_147_483_647,
       };
     }
     await mkdir(join(directory, 'media'), { recursive: true });
-    if (!record.sceneDurations) {
+    // Old saved requests retain their original combined planning path on resume.
+    if (!record.planningVersion && !record.plan && !await exists(join(directory, 'gpt-request.json'))) record.planningVersion = 2;
+    if (!Object.hasOwn(record, 'sceneDurations')) {
       record.sceneDurations = record.plan?.scenes?.map((scene) => scene.durationSeconds)
         || await sceneDurationStream.generate(sceneCount);
       record.sceneDurationSettings = sceneDurationStream.settings;
@@ -484,7 +456,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
       }
       const images = [await imageInput(directory, record.articleImage, 'Article photograph for factual and visual analysis only; never reproduce its identifiable people.', 'article')];
       for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, sceneDurations: record.sceneDurations, sceneDurationSettings: record.sceneDurationSettings, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, continuationPlan: record.continuationPlan || null });
+      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, continuationPlan: record.continuationPlan || null });
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
       const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
@@ -509,7 +481,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
       try {
         const aligned = alignSemanticSceneAssignments(raw);
         record.semanticIndexCorrections = aligned.corrections;
-        record.plan = validatePlan(aligned.response, { ...record, continuationPlan: record.continuationPlan || null });
+        record.plan = validatePlan(aligned.response, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null });
       } catch (error) {
         if (!/semantic|motif|crocodile|protagonist|composition|figure|reference/i.test(error.message)) throw error;
         const revisionRequest = {
@@ -519,7 +491,10 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
             { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' },
             { role: 'user', content: [{ type: 'text', text: [
               `Your plan failed validation: ${error.message}`,
-              'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English. Translate source-language article details and semantic words; never copy foreign-language terms into model prompts. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
+              record.planningVersion === 2
+                ? 'Revise the visual plan once. Do not assign durations or write video prompts. Every stillPrompt must be entirely natural English.'
+                : 'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English.',
+              'Translate source-language article details and semantic words; never copy foreign-language terms into model prompts. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
               'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. Choose a valid masked figure reference separately for each scene to match its unique gesture and body shape; avoid repeating a reference in neighboring scenes and use at least three different references across the sequence. Every selectionReason must explain visual fit without importing the figure source story. Assign a different composition choice to each scene, and change camera angle, distance, framing, body silhouette, and main action. The image model must ignore each reference crop’s exact pose, scale and placement.',
               'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
               record.articleImageReference
@@ -542,18 +517,52 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         if (revised.error) throw new Error(`GPT revision failed: ${revised.error.message}`);
         const aligned = alignSemanticSceneAssignments(revised);
         record.semanticIndexCorrections = aligned.corrections;
-        record.plan = validatePlan(aligned.response, { ...record, continuationPlan: record.continuationPlan || null });
+        record.plan = validatePlan(aligned.response, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null });
         record.planRevisionReason = error.message;
         finalResponse = revised;
       }
-      record.plan.scenes = addDistinctSceneStaging(record.plan.scenes, record.visualStyleOptions || recordStyleOptions)
-        .map((scene, index) => ({ ...scene, durationSeconds: record.sceneDurations[index] }));
+      record.plan.scenes = addDistinctSceneStaging(record.plan.scenes, record.visualStyleOptions || recordStyleOptions);
+      if (record.planningVersion === 2) {
+        const visualPlan = visualPlanSnapshot(record.plan);
+        record.visualPlanHash = hash(JSON.stringify(visualPlan));
+        await save(join(directory, 'visual-plan.json'), visualPlan);
+      } else {
+        record.plan.scenes = record.plan.scenes.map((scene, index) => ({ ...scene, durationSeconds: record.sceneDurations ? record.sceneDurations[index] : scene.durationSeconds }));
+      }
       record.usage = finalResponse.usage;
       record.planHash = hash(JSON.stringify(record.plan));
       await save(join(directory, 'scene-plan.json'), record.plan);
       await persist();
     }
     if (hash(JSON.stringify(record.plan)) !== record.planHash) throw new Error('Saved plan has changed; use a new iteration');
+    if (record.planningVersion === 2) {
+      if (hash(JSON.stringify(visualPlanSnapshot(record.plan))) !== record.visualPlanHash) throw new Error('Locked visual plan has changed');
+      if (!record.sceneTiming) {
+        const timingPath = join(directory, 'timing-request.json');
+        if (!await exists(timingPath)) {
+          await save(timingPath, buildTimingRequest({
+            plan: record.plan, sceneDurations: record.sceneDurations,
+            sceneDurationSettings: record.sceneDurationSettings,
+            visualStyleOptions: record.visualStyleOptions, model: record.storyModel,
+          }));
+        }
+        console.log('Visual plan locked; generating scene durations and video prompts separately.');
+        const timingResponse = await paidRequest(directory, 'timing', 'https://api.openai.com/v1/chat/completions', openAiKey, await json(timingPath));
+        if (timingResponse.error) throw new Error(`GPT timing error: ${timingResponse.error.message}`);
+        const timed = applySceneTiming(record.plan, timingResponse, record);
+        const checkedPlan = validatePlan({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(timed.plan) } }] }, record);
+        if (hash(JSON.stringify(visualPlanSnapshot(checkedPlan))) !== record.visualPlanHash) throw new Error('Timing changed the locked visual plan');
+        record.plan = checkedPlan;
+        record.sceneTiming = timed.timing;
+        record.sceneDurations = record.plan.scenes.map((scene) => scene.durationSeconds);
+        record.storyUsage = record.usage;
+        record.timingUsage = timingResponse.usage;
+        record.usage = Object.fromEntries(['prompt_tokens', 'completion_tokens', 'total_tokens'].map((key) => [key, (record.storyUsage?.[key] || 0) + (record.timingUsage?.[key] || 0)]));
+        record.planHash = hash(JSON.stringify(record.plan));
+        await save(join(directory, 'scene-plan.json'), record.plan);
+        await persist();
+      }
+    }
     if (!options['prompt-only']) {
       const styleInput = options['no-style-reference'] ? null : await prepareImageReference(directory, await imageInput(directory, record.styleReference, 'Full-painting style reference only; no depicted content may be used', 'style'));
       for (const [index, scene] of record.plan.scenes.entries()) {
@@ -569,6 +578,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
           : null;
         const referenceImages = [figureInput.dataUrl, ...(articleInput ? [articleInput.dataUrl] : styleInput ? [styleInput.dataUrl] : [])];
         const task = log ? { ...log, inputs: { referenceImages } } : buildImageTask(scene, randomUUID(), referenceImages);
+        if (!log && record.imageSeed !== null && record.imageSeed !== undefined) task.seed = (record.imageSeed + index) % 2_147_483_647;
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
         const referencePaths = [figureInput.path, ...(articleInput ? [articleInput.path] : styleInput ? [styleInput.path] : [])];
         log = { ...task, inputs: { referenceImages: referencePaths } };
@@ -577,7 +587,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         let output;
         let result;
         if (imageProvider === 'hf-flux-klein') {
-          result = await generateFluxKleinImage({ prompt: scene.stillPrompt, referencePaths: referencePaths.map((path) => join(directory, path)), token: process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN, directory, name, seed: randomInt(2_147_483_647) });
+          result = await generateFluxKleinImage({ prompt: scene.stillPrompt, referencePaths: referencePaths.map((path) => join(directory, path)), token: process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN, directory, name, seed: task.seed ?? randomInt(2_147_483_647) });
           output = await download(result.imageUrl, directory, `scene-${scene.index}-first-frame`);
         } else {
           const raw = await paidRequest(directory, name, 'https://api.runware.ai/v1', runwareKey, [task]);
