@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EU-RESKI · Parameter-Merkliste</title>
+  <style>
+    :root { color-scheme: dark; --bg:#181918; --card:#252623; --line:#45483f; --text:#e8e5db; --muted:#bcbcaf; --accent:#e0c984; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.55 system-ui,sans-serif; }
+    main { max-width:1040px; margin:auto; padding:28px 20px 60px; }
+    h1 { margin:0; font-size:30px; } h2 { margin:0 0 12px; font-size:21px; }
+    p { margin:10px 0; } section,details { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; margin:20px 0; }
+    .muted { color:var(--muted); } .badge { display:inline-block; padding:3px 9px; border-radius:6px; background:#354438; font-size:13px; }
+    .planned { background:#554332; } .scroll { overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font-size:14px; } th,td { text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:10px 9px; }
+    th { color:var(--accent); } td:first-child { min-width:200px; }
+    code { color:var(--accent); overflow-wrap:anywhere; } pre { margin:10px 0 0; padding:14px; background:#191b19; border-radius:8px; white-space:pre-wrap; overflow-wrap:anywhere; font-size:14px; }
+    summary { cursor:pointer; color:var(--accent); font-weight:650; } a { color:var(--accent); }
+    .flow { font-size:18px; } @media print { :root { color-scheme:light; --bg:white; --card:white; --line:#bbb; --text:#111; --muted:#444; --accent:#333; } details { display:block; } }
+  </style>
+</head>
+<body><main>
+  <h1>EU-RESKI · Parameter-Merkliste</h1>
+  <p class="muted">Stand: 22.10.2026 · Feature-Branch <code>codex/eu-reski-scene-count-takt</code> · Worktree <code>/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase</code></p>
+  <p class="flow"><strong>Iteration = eine Nachricht → mehrere Szenen → ein Startbild pro Szene.</strong></p>
+
+  <section>
+    <h2>Die drei Entscheidungen</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Was?</th><th>Wer entscheidet aktuell?</th><th>Steuerung</th></tr></thead>
+      <tbody>
+        <tr><td>Szenenzahl je Iteration</td><td>Fester Wert oder Taktmuster · <span class="badge">vorhanden</span></td><td><code>--scene-count-mode=fixed --scenes=1..12</code> oder <code>--scene-count-mode=taktmuster</code></td></tr>
+        <tr><td>Szenenzahl durch Taktmuster</td><td>Ein neuer Taktwert je Iteration · <span class="badge">vorhanden</span></td><td><code>--min-scenes=1 --max-scenes=12</code>; Takt-, Bias- und Grenzwerte lassen sich konfigurieren.</td></tr>
+        <tr><td>Szenenzahl durch GPT</td><td><span class="badge planned">im News-Generator noch nicht eingebaut</span></td><td>Gewünschter Modus: GPT wählt nach Handlung, etwa innerhalb 3–7 Szenen, mit Begründung. Noch kein CLI-Parameter dafür.</td></tr>
+        <tr><td>Dauer jeder Szene</td><td>Taktmuster oder GPT · <span class="badge">vorhanden</span></td><td><code>--scene-length-takt=4</code> = Taktmuster; <code>--scene-length-takt=-1</code> = GPT</td></tr>
+        <tr><td>Symbolik, Tiefe, Ebenen</td><td>Standardmäßig GPT pro Szene · <span class="badge">vorhanden</span></td><td><code>--scene-visual-controls</code></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Iterationen und Rhythmus</h2>
+    <p class="muted">Code-Standardwerte; Starter und Umgebungsvariablen können andere Werte setzen.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Parameter</th><th>Werte / Standard</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><code>--iterations</code></td><td>1, 2, 3 … · Standard 1</td><td>Zahl der Nachrichten-Durchgänge. <code>0</code> oder <code>-1</code> läuft endlos.</td></tr>
+        <tr><td><code>--scene-count-mode</code></td><td><code>fixed</code> oder <code>taktmuster</code> · Standard <code>fixed</code></td><td>Fester Wert oder ein Taktmusterwert pro Iteration. Der Stream bleibt über Iterationen geöffnet.</td></tr>
+        <tr><td><code>--scenes</code></td><td>1–12 · Standard 3</td><td>Feste Szenenzahl im Modus <code>fixed</code>.</td></tr>
+        <tr><td><code>--scene-count-takt</code></td><td>1–64 · Standard 2</td><td>Taktmuster für die Szenenzahl.</td></tr>
+        <tr><td><code>--scene-count-numerator</code> / <code>--scene-count-denominator</code></td><td>Zähler 1–32 · Nenner 1, 2, 4, 8, 16 oder 32</td><td>Rhythmuswerte für das Szenenzahl-Taktmuster.</td></tr>
+        <tr><td><code>--scene-count-type</code></td><td><code>balanced</code> oder <code>classic</code> · Standard <code>balanced</code></td><td>Taktmuster-Typ.</td></tr>
+        <tr><td><code>--scene-count-bias</code></td><td>Ganzzahl · Standard 2</td><td>Wird zum gerundeten Rohwert addiert; danach wird auf Min./Max. begrenzt.</td></tr>
+        <tr><td><code>--min-scenes</code> / <code>--max-scenes</code></td><td>1–12 · Standard 1–12</td><td>Grenzen im Taktmuster-Modus. <code>--scenes</code> wird dort ignoriert.</td></tr>
+        <tr><td><code>--pause-ms</code></td><td>Ab 0 · Standard 5000</td><td>Pause zwischen Iterationen in Millisekunden.</td></tr>
+        <tr><td><code>--scene-length-takt</code></td><td>Positive Zahl · Standard 4<br><code>-1</code> = GPT</td><td>Positiv: Taktmuster gibt Dauerwerte vor. Bei <code>-1</code> wählt GPT die Sekunden aus dem fixierten Handlungsbogen.</td></tr>
+        <tr><td><code>--scene-length-type</code></td><td>Standard <code>balanced</code></td><td>Muster-Typ des Taktmuster-Pakets; gilt im Taktmuster-Zeitmodus.</td></tr>
+        <tr><td><code>--scene-length-multiplier</code></td><td>Positiv · Standard 1.15</td><td>Multipliziert die Taktmuster-Dauerwerte.</td></tr>
+        <tr><td><code>--scene-length-bias</code></td><td>Zahl · Standard 3.85</td><td>Addiert einen Sekundenversatz nach dem Multiplikator.</td></tr>
+        <tr><td><code>--min-scene-seconds</code></td><td>Mindestens 5 · Standard 5</td><td>Untergrenze für die Szenendauer in beiden Zeitmodi.</td></tr>
+        <tr><td><code>--max-scene-seconds</code></td><td>Bis 15 · Standard 8</td><td>Obergrenze; muss mindestens so groß wie die Untergrenze sein.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>News-Takt-Skalierung:</strong> Rohwert → Mindestwert 1 → × Multiplikator → + Bias → auf ganze Sekunden runden → auf Min./Max. begrenzen.</p>
+    <p><strong>Bei GPT-Zeitwahl:</strong> Multiplikator, Bias und Muster-Typ werden für die Dauerwahl nicht verwendet. Die Sekunden-Grenzen gelten weiter.</p>
+  </section>
+
+  <section>
+    <h2>Bildparameter</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Parameter</th><th>Werte</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><code>--scene-visual-controls</code></td><td>Standardmäßig aktiv</td><td>GPT wählt je Szene Symbolik, Raumtiefe und Layering. Werte und Begründung erscheinen im HTML.</td></tr>
+        <tr><td><code>--fixed-visual-controls</code></td><td>Fester Modus</td><td>Verwendet die folgenden CLI-Werte für alle Szenen, etwa für A/B-Vergleiche.</td></tr>
+        <tr><td><code>--symbolic</code><br><code>--no-symbolic</code></td><td>AN / AUS · fester Standard AN</td><td>Sichtbare, inhaltlich begründete Metaphern. Zum Erzwingen zusammen mit <code>--fixed-visual-controls</code> verwenden.</td></tr>
+        <tr><td><code>--room-deepness</code><br><code>--no-room-deepness</code></td><td>AN / AUS · fester Standard AUS</td><td>Gemalte räumliche Tiefe oder komprimierte, flache Bildfläche.</td></tr>
+        <tr><td><code>--layering</code></td><td>0–7 · fester Standard 0</td><td>Anzahl ausdrücklich angelegter Raumebenen. 0 = aus. Positive Werte erhalten einen abschließenden verbindenden Malpass.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Raumtiefe und Layering sind getrennt: mehrere überlagerte Ebenen können auch in flachem Raum liegen. Bildplanung wird vor der Zeitplanung fixiert.</p>
+  </section>
+
+  <section>
+    <h2>Argumente zum Merken</h2>
+    <p>Diese Argumentgruppen an den vorhandenen Generator-Aufruf anhängen:</p>
+    <p><strong>Vier Nachrichten; Taktmuster wählt Szenenzahl, GPT wählt Dauer und Bildparameter:</strong></p>
+    <pre>--iterations=4 --scene-count-mode=taktmuster --min-scenes=1 --max-scenes=12
+--scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=8
+--scene-visual-controls</pre>
+    <p><strong>Vier Nachrichten, je fünf Szenen; Taktmuster wählt Dauer:</strong></p>
+    <pre>--iterations=4 --scenes=5 --scene-length-takt=4 --scene-length-type=balanced
+--scene-length-multiplier=1.15 --scene-length-bias=3.85
+--min-scene-seconds=5 --max-scene-seconds=8</pre>
+    <p><strong>Feste Bildparameter für einen Vergleich:</strong></p>
+    <pre>--fixed-visual-controls --symbolic --room-deepness --layering=3</pre>
+  </section>
+
+  <details>
+    <summary>Weitere vorhandene Parameter: Quellen, Ausgabe und Fortsetzen</summary>
+    <div class="scroll"><table>
+      <thead><tr><th>Parameter</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><code>--article-order=linear|random</code></td><td>Nachrichten nacheinander oder zufällig auswählen.</td></tr>
+        <tr><td><code>--article-id=ID</code></td><td>Bestimmten Artikel auswählen; hat Vorrang vor der Reihenfolge.</td></tr>
+        <tr><td><code>--news-dir=PFAD</code></td><td>Ordner mit gespeicherten <code>all-*.json</code>-Nachrichten.</td></tr>
+        <tr><td><code>--words=EU,Frieden</code></td><td>Startwörter für deutsche Semantic-Streams.</td></tr>
+        <tr><td><code>--words-file=PFAD</code></td><td>JSON-Startwort-/Sprachpaare, z. B. <code>[["Volk","de"],["EU","en"],["EU","ru"]]</code>. Pro Iteration holt jeder Stream sein nächstes Fragment mit <code>getNext()</code>.</td></tr>
+        <tr><td><code>--stream-module=PFAD</code></td><td>Eigenes Semantic-Stream-Modul mit <code>initStreams</code>.</td></tr>
+        <tr><td><code>--stream-file=PFAD</code></td><td>Denselben gespeicherten Begriffssatz wiederverwenden.</td></tr>
+        <tr><td><code>--stream-sequence-file=PFAD</code></td><td>Gespeicherte Folge: je Iteration der nächste Snapshot. Erlaubt identische Vergleichseingaben.</td></tr>
+        <tr><td><code>--output-dir=PFAD</code></td><td>Zielordner; mehrere Iterationen erhalten einen gemeinsamen Run-Bericht.</td></tr>
+        <tr><td><code>--guernica-dir=PFAD</code></td><td>Maskierte Figuren samt Katalog.</td></tr>
+        <tr><td><code>--style-reference=PFAD</code></td><td>Vollständiges Gemälde als zusätzliche Stilreferenz.</td></tr>
+        <tr><td><code>--no-style-reference</code></td><td>Vollständiges Gemälde weglassen; gewählte Figurenreferenz bleibt.</td></tr>
+        <tr><td><code>--article-image-reference</code></td><td>Nachrichtenfoto zusätzlich an die Bild-API senden. Zusammen mit <code>--no-style-reference</code>.</td></tr>
+        <tr><td><code>--image-provider=hf-flux-klein|runware</code></td><td>Bildanbieter. Code-Standard: Runware; letzter Lauf: HF-FLUX.</td></tr>
+        <tr><td><code>--image-seed=ZAHL</code></td><td>Basis-Seed; für jede Szene weitergezählt. Bereich 0–2147483646.</td></tr>
+        <tr><td><code>--prompt-only</code></td><td>Erstellt Prompts ohne Startbilder. GPT-Aufrufe bleiben aktiv.</td></tr>
+        <tr><td><code>--resume=PFAD</code></td><td>Eine gespeicherte Iteration fortsetzen; verwendet gespeicherte Eingaben und Entscheidungen.</td></tr>
+        <tr><td><code>--resume-run=PFAD</code></td><td>Mehrteiligen Run fortsetzen; gespeicherter Bildparameter-Modus bleibt erhalten.</td></tr>
+        <tr><td><code>--help</code></td><td>CLI-Hilfe anzeigen.</td></tr>
+      </tbody>
+    </table></div>
+  </details>
+  <section>
+    <h2>Letzter Testlauf · Startwort Volk/de</h2>
+    <p>Vier lineare Iterationen mit denselben vier Artikeln wie im Vergleichslauf. Geändert wurde das deutsche Stream-Startwort <code>EU/de → Volk/de</code>; <code>EU/en</code> und <code>EU/ru</code> blieben gleich. Alle Fragmente wurden live mit <code>getNext()</code> gezogen.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Iteration</th><th>Szenenzahl</th><th>Szenenlängen</th><th>Volk/de-Fragment</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>5</td><td>7, 6, 8, 7, 6 s</td><td>Nation</td></tr>
+        <tr><td>2</td><td>3</td><td>7, 8, 6 s</td><td>Staatsbürgerschaft</td></tr>
+        <tr><td>3</td><td>3</td><td>7, 6, 8 s</td><td>Stamm (Gesellschaftswissenschaften)</td></tr>
+        <tr><td>4</td><td>4</td><td>7, 6, 7, 8 s</td><td>Staatsvolk</td></tr>
+      </tbody>
+    </table></div>
+    <p><a href="/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/run-001/index.html">HTML-Bericht ansehen</a> · <a href="/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/start-command.txt">Startbefehl und Laufparameter</a>.</p>
+  </section>
+  <p class="muted">Quelle: <code>eu-reski-news/scripts/run-news-scene-image-iteration.mjs</code> im Worktree <code>codex/eu-reski-scene-count-takt</code>. Merkliste dokumentiert vorhandene CLI-Parameter.</p>
+</main></body>
+</html>
