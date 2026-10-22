@@ -8,6 +8,21 @@ const visualControls = (scene, fallback) => {
   if (!options) return '';
   return `<p><b>Bildparameter:</b> Symbolik ${options.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${options.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(options.layering ?? 0)} / 7${scene.visualControlReason ? ` · ${escapeHtml(scene.visualControlReason)}` : ''}</p>`;
 };
+const sceneTimingSummary = (record) => {
+  const scenes = record.plan?.scenes || [];
+  const knownDuration = (scene) => Number.isFinite(scene.durationSeconds) && scene.durationSeconds > 0;
+  return {
+    count: scenes.length || `${record.sceneCount ?? 0} geplant`,
+    durations: scenes.length ? scenes.map((scene, index) => `S${index + 1}: ${knownDuration(scene) ? `${scene.durationSeconds} s` : 'offen'}`).join(' · ') : 'Noch offen',
+    total: scenes.length && scenes.every(knownDuration) ? `${scenes.reduce((sum, scene) => sum + scene.durationSeconds, 0)} s` : 'Noch offen',
+  };
+};
+const timingSummaryStyles = '.timing-summary{margin:24px 0;padding:20px;background:#252623;border:1px solid #47473e;border-radius:12px;overflow-x:auto}.timing-summary h2{margin:0 0 14px}.timing-summary table{border-collapse:collapse;width:100%;font-size:15px}.timing-summary th,.timing-summary td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid #47473e}.timing-summary th{color:#dfc987}.timing-summary th:first-child,.timing-summary td:first-child,.timing-summary td:last-child{white-space:nowrap}';
+const renderTimingSummary = (iterations, linkIterations = false) => `<section class="timing-summary"><h2>Szenenübersicht</h2><table><thead><tr><th>Iteration</th><th>Szenen</th><th>Szenenlängen</th><th>Gesamtdauer</th></tr></thead><tbody>${iterations.map(({ record }, index) => {
+  const summary = sceneTimingSummary(record);
+  const label = linkIterations ? `<a href="#iteration-${index + 1}">Iteration ${index + 1}</a>` : 'Diese Iteration';
+  return `<tr><td>${label}</td><td>${escapeHtml(summary.count)}</td><td>${escapeHtml(summary.durations)}</td><td>${escapeHtml(summary.total)}</td></tr>`;
+}).join('')}</tbody></table></section>`;
 
 export function renderReport(record) {
   const { article, semantic, plan, results = [], catalog = [] } = record;
@@ -30,9 +45,11 @@ export function renderReport(record) {
   }).join('');
   return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EU · automatische Bildkomposition</title><style>
+  ${timingSummaryStyles}
   *{box-sizing:border-box}body{margin:0;background:#181918;color:#e5e1d7;font:17px/1.6 system-ui}main{max-width:1120px;margin:auto;padding:30px 20px}h1,h2{line-height:1.2}section{background:#252623;border:1px solid #47473e;border-radius:12px;padding:24px;margin:24px 0}img{display:block;max-width:100%;height:auto;margin:auto}figure{margin:16px 0}figcaption{color:#bbb7ab;font-size:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}summary{cursor:pointer;color:#dfc987}details{margin:16px 0}.reference{max-width:230px}.reference-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.reference-option{margin:0;padding:10px;border:1px solid #47473e;border-radius:8px}.reference-option img{width:100%;height:90px;object-fit:contain}.reference-option.selected{border-color:#dfc987}.reference-option figcaption{font-size:12px}.video-guide{margin:20px 0;padding:16px;border:1px solid #47473e;border-radius:8px;background:#20211f}.video-guide h3{margin:0 0 10px}.video-guide dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:8px;margin:0}.video-guide dt{color:#dfc987}.video-guide dd{margin:0;overflow-wrap:anywhere}.video-guide a{overflow-wrap:anywhere}a{color:#dfc987}.error{color:#ffa292}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:700px){.grid{grid-template-columns:1fr}.video-guide dl{grid-template-columns:1fr;gap:2px}.video-guide dd{margin-bottom:8px}}
   </style></head><body><main><h1>Artikel + Semantic Stream → Szenenbild und Filmplan</h1>
   <p>${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)} · ${escapeHtml(record.imageModel)}</p>
+  ${renderTimingSummary([{ record }])}
   ${record.sceneVisualControls ? '<p>Bildparameter werden pro Szene aus Handlung und Raum gewählt.</p>' : record.visualStyleOptions ? `<p>Feste Bildparameter für alle Szenen: Symbolik ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
   ${record.sceneDurationSettings ? `<p>Szenenlänge: ${escapeHtml(record.sceneDurationSettings.provider)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
   ${record.planningVersion === 2 ? '<p>Bildplanung und Zeitwahl getrennt: Der fertige Bildplan bleibt bei der Dauer- und Videoplanung unverändert.</p>' : ''}
@@ -75,7 +92,7 @@ export function renderRunReport(run, iterations) {
         ${details('Bildprompt', scene.stillPrompt || '')}</article>`;
     }).join('');
     const semantic = (record.semantic?.entries || []).map((entry) => `<li><b>${escapeHtml(entry.seed.join(' · '))}</b> → ${escapeHtml(entry.item.title)}</li>`).join('');
-    return `<section class="iteration"><header><p>Iteration ${String(iterationIndex + 1).padStart(2, '0')} · ${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)}</p>
+    return `<section class="iteration" id="iteration-${iterationIndex + 1}"><header><p>Iteration ${String(iterationIndex + 1).padStart(2, '0')} · ${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)}</p>
       ${record.sceneVisualControls ? '<p>GPT wählt Bildparameter für jede Szene passend zu Handlung und Raum.</p>' : record.visualStyleOptions ? `<p><b>Feste Bildparameter:</b> Symbolik ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
       ${record.sceneDurationSettings ? `<p><b>Szenenlänge:</b> ${escapeHtml(record.sceneDurationSettings.provider)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
       <h2>${escapeHtml(record.article?.title)}</h2><p>${escapeHtml(record.article?.publish_date)} · ${escapeHtml(record.article?.source_country)}</p>
@@ -89,10 +106,12 @@ export function renderRunReport(run, iterations) {
   }).join('');
   return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EU-RESKI · Run-Bericht</title><style>
+  ${timingSummaryStyles}
   *{box-sizing:border-box}body{margin:0;background:#181918;color:#e5e1d7;font:17px/1.6 system-ui}main{max-width:1120px;margin:auto;padding:30px 20px}h1,h2,h3{line-height:1.2}.iteration{background:#252623;border:1px solid #47473e;border-radius:12px;padding:24px;margin:24px 0}.scene{border-top:1px solid #47473e;margin-top:28px;padding-top:20px}img{display:block;max-width:100%;height:auto;margin:auto}figure{margin:16px 0}figcaption{color:#bbb7ab;font-size:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}summary{cursor:pointer;color:#dfc987}details{margin:16px 0}a{color:#dfc987}
   .video-guide{margin:20px 0;padding:16px;border:1px solid #47473e;border-radius:8px;background:#20211f}.video-guide h4{margin:0 0 10px}.video-guide dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:8px;margin:0}.video-guide dt{color:#dfc987}.video-guide dd{margin:0;overflow-wrap:anywhere}.video-guide a{color:#dfc987}@media(max-width:700px){.video-guide dl{grid-template-columns:1fr;gap:2px}.video-guide dd{margin-bottom:8px}}
   </style></head><body><main><h1>EU-RESKI · ${escapeHtml(run.profile || 'linearer Run')}</h1>
   <p>${escapeHtml(run.status)} · ${iterations.length} von ${escapeHtml(run.iterationLimit)} Iterationen · ${escapeHtml(run.startedAt)}</p>
+  ${renderTimingSummary(iterations, true)}
   <p>${escapeHtml(run.description || 'Artikelreihenfolge: linear · Jede Iteration verwendet den nächsten Artikel und den nächsten Semantic-Stream-Ausschnitt. GPT nutzt Artikeltext, Nachrichtenfoto und Figurenkatalog. Die Bild-API erhält die gewählte Figur als abstrakte Protagonistenreferenz; ein vollständiges Gemälde wird nicht übergeben. Das Nachrichtenfoto dient der Bild-Orientierung.')}</p>
   ${reports}</main></body></html>`;
 }

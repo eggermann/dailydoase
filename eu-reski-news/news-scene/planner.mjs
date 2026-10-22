@@ -39,7 +39,8 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   const articleImageReferenceInstructions = articleImageReferenceProvided
     ? 'The image API also receives the original article photograph as reference image 2 for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.'
     : 'The article photo is for GPT visual analysis only and is never sent to the image API.';
-  const director = (await readFile(new URL('./director.md', import.meta.url), 'utf8'))
+  const directorFile = sceneVisualControls ? './director.md' : './director-fixed-controls.md';
+  const director = (await readFile(new URL(directorFile, import.meta.url), 'utf8'))
     .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
     .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)
     .replaceAll('{{VISUAL_STYLE_CONTROLS}}', sceneVisualControls
@@ -55,8 +56,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   }
   const data = {
     article: articleInput, semantic, catalog, sceneCount,
-    visualControlMode: sceneVisualControls ? 'scene-specific' : 'run-wide',
-    ...(sceneVisualControls ? {} : { visualStyleOptions }),
+    ...(sceneVisualControls ? { visualControlMode: 'scene-specific' } : { visualStyleOptions }),
     continuationPlan: visualContinuation,
   };
   const continuationInstruction = continuationPlan
