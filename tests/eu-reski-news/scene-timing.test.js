@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { buildPlanRequest, hash, validatePlan } from '../../eu-reski-news/news-scene/planner.mjs';
@@ -43,6 +43,29 @@ describe('scene timing cannot influence locked visual planning', () => {
     expect(data).not.toHaveProperty('sceneDurations');
     expect(gpt.request.response_format.json_schema.schema.properties.scenes.items.properties).not.toHaveProperty('durationSeconds');
     expect(gpt.request.response_format.json_schema.schema.properties.scenes.items.properties).not.toHaveProperty('videoPrompt');
+  });
+
+  test('per-scene controls are requested and validated independently', async () => {
+    const input = { article: { title: 'Workshop', text: 'A workshop opens.' }, semantic, catalog, sceneCount: 3, images: [], model: 'gpt-4.1-mini', sceneVisualControls: true };
+    const built = await buildPlanRequest(input);
+    const sceneSchema = built.request.response_format.json_schema.schema.properties.scenes.items;
+    expect(sceneSchema.required).toContain('visualStyleOptions');
+    expect(sceneSchema.required).toContain('visualControlReason');
+    expect(JSON.parse(built.request.messages[1].content[1].text).visualControlMode).toBe('scene-specific');
+    expect(built.director).toContain('Each scene chooses its own visual controls');
+    expect(built.director).not.toContain('mural in compressed shallow space');
+    expect(built.director).not.toContain('Layer a near foreground, an active middle ground');
+
+    const variedPlan = structuredClone(plan);
+    variedPlan.scenes[0].visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 2 };
+    variedPlan.scenes[1].visualStyleOptions = { symbolic: false, roomDeepness: true, layering: 7 };
+    variedPlan.scenes[2].visualStyleOptions = { symbolic: true, roomDeepness: true, layering: 4 };
+    variedPlan.scenes.forEach((scene) => { scene.visualControlReason = 'The chosen settings match this scene action and space.'; });
+    expect(validatePlan(response(variedPlan), { sceneCount: 3, catalog, semantic, visualOnly: true, sceneVisualControls: true })).toEqual(variedPlan);
+
+    const invalidPlan = structuredClone(variedPlan);
+    invalidPlan.scenes[1].visualStyleOptions.layering = 8;
+    expect(() => validatePlan(response(invalidPlan), { sceneCount: 3, catalog, semantic, visualOnly: true, sceneVisualControls: true })).toThrow('visual controls');
   });
 
   test('a continuation cannot leak its previous timing into image planning', async () => {
@@ -92,6 +115,31 @@ describe('scene timing cannot influence locked visual planning', () => {
 });
 
 describe('generator recovery with separate timing', () => {
+  test.each([false, true])('group resume preserves scene-specific mode %s from the previous iteration', (sceneSpecific) => {
+    const directory = mkdtempSync(join(tmpdir(), 'eu-reski-run-controls-'));
+    try {
+      const previous = join(directory, 'iteration-001');
+      const news = join(directory, 'news');
+      mkdirSync(previous);
+      mkdirSync(news);
+      const defaults = { symbolic: false, roomDeepness: true, layering: 7 };
+      writeFileSync(join(previous, 'record.json'), JSON.stringify({ sceneVisualControls: sceneSpecific, visualStyleOptions: defaults }));
+      writeFileSync(join(directory, 'run.json'), JSON.stringify({ iterations: [{ directory: 'iteration-001' }] }));
+      writeFileSync(join(news, 'all-test.json'), JSON.stringify({ news: [{ id: 1, title: 'Workshop', text: 'A workshop opens.', image: 'https://fixture.invalid/article.png' }] }));
+      writeFileSync(join(directory, 'semantic.json'), JSON.stringify(semantic));
+      writeFileSync(join(directory, 'stop-fetch.mjs'), "globalThis.fetch = async () => { throw new Error('STOP_BEFORE_API'); };\n");
+      const args = ['--import', join(directory, 'stop-fetch.mjs'), resolve('eu-reski-news/scripts/run-news-scene-image-iteration.mjs'), `--resume-run=${directory}`, '--iterations=2', '--scenes=3', '--scene-length-takt=-1', '--prompt-only', '--no-style-reference', `--stream-file=${join(directory, 'semantic.json')}`, `--news-dir=${news}`];
+      expect(() => execFileSync(process.execPath, args, { env: { ...process.env, OPENAI_API_KEY: 'offline-fixture' }, stdio: 'pipe' })).toThrow();
+      const saved = JSON.parse(readFileSync(join(directory, 'iteration-002/record.json')));
+      expect(saved.error).toContain('STOP_BEFORE_API');
+      expect(saved.sceneVisualControls).toBe(sceneSpecific);
+      expect(saved.visualStyleOptions).toEqual(defaults);
+      expect(JSON.parse(readFileSync(join(directory, 'run.json'))).visualControls).toEqual({ sceneSpecific, defaults });
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
+
   test.each(['GPT dramatic pacing', 'Selfomat'])('%s creates visual and timing plans in separate API calls', (provider) => {
     const directory = mkdtempSync(join(tmpdir(), 'eu-reski-planning-'));
     try {
@@ -99,16 +147,27 @@ describe('generator recovery with separate timing', () => {
       writeFileSync(join(directory, 'image.png'), image);
       const imageInfo = { path: 'image.png', mimeType: 'image/png', sha256: hash(image) };
       const fixedDurations = provider === 'Selfomat' ? [8, 5, 6] : null;
+      const scenePlan = structuredClone(plan);
+      const sceneOptions = [
+        { symbolic: true, roomDeepness: false, layering: 2 },
+        { symbolic: false, roomDeepness: true, layering: 7 },
+        { symbolic: true, roomDeepness: true, layering: 4 },
+      ];
+      scenePlan.scenes.forEach((scene, index) => {
+        scene.visualStyleOptions = sceneOptions[index];
+        scene.visualControlReason = `These controls fit the visible action in scene ${index + 1}.`;
+      });
       const record = {
         generator: 'semantic-news-v1', planningVersion: 2, createdAt: '2026-10-21T00:00:00Z',
         status: 'preparing', article: { title: 'Workshop', text: 'A workshop opens.' },
         articleImage: imageInfo, semantic, catalog: catalog.map((entry) => ({ ...entry, ...imageInfo })),
         results: [], sceneCount: 3, storyModel: 'gpt-4.1-mini',
+        sceneVisualControls: true,
         visualStyleOptions: { symbolic: true, roomDeepness: false, layering: 3 },
         sceneDurations: fixedDurations, sceneDurationSettings: { ...settings, provider },
       };
       writeFileSync(join(directory, 'record.json'), JSON.stringify(record));
-      writeFileSync(join(directory, 'visual-fixture.json'), JSON.stringify(response(plan)));
+      writeFileSync(join(directory, 'visual-fixture.json'), JSON.stringify(response(scenePlan)));
       writeFileSync(join(directory, 'timing-fixture.json'), JSON.stringify(response(timing(fixedDurations || [5, 7, 8]))));
       writeFileSync(join(directory, 'mock-fetch.mjs'), `import fs from 'node:fs';
 globalThis.fetch = async (url, init) => {
@@ -129,7 +188,12 @@ globalThis.fetch = async (url, init) => {
       expect(readFileSync(join(directory, 'calls'), 'utf8')).toBe('eu_news_scene_plan\neu_news_scene_timing\n');
       expect(visualPlanSnapshot(saved.plan)).toEqual(visual);
       expect(hash(JSON.stringify(visual))).toBe(saved.visualPlanHash);
+      expect(saved.plan.scenes.map((scene) => scene.visualStyleOptions)).toEqual(sceneOptions);
+      expect(saved.plan.scenes[0].stillPrompt).toContain('LAYERING 2');
+      expect(saved.plan.scenes[1].stillPrompt).toContain('SYMBOLISM OFF');
+      expect(saved.plan.scenes[1].stillPrompt).toContain('ROOM DEEPNESS ON');
       expect(visual.scenes.every((scene) => !Object.hasOwn(scene, 'durationSeconds') && !Object.hasOwn(scene, 'videoPrompt'))).toBe(true);
+      expect(JSON.parse(request.messages[1].content[1].text)).toMatchObject({ visualControlMode: 'scene-specific' });
       expect(JSON.parse(request.messages[1].content[1].text)).not.toHaveProperty('sceneDurationSettings');
       expect(saved.plan.scenes.map((scene) => scene.durationSeconds)).toEqual(fixedDurations || [5, 7, 8]);
       expect(saved.usage.total_tokens).toBe(30);

@@ -149,7 +149,7 @@ async function executeVariant(variant) {
     `--iterations=${manifest.iterations}`, `--scenes=${manifest.scenes}`, '--pause-ms=0', '--article-order=linear',
     `--output-dir=${variantRoot}`, `--news-dir=${join(output, 'input/news')}`,
     `--stream-sequence-file=${join(output, 'input/semantic-sequence.json')}`,
-    '--image-provider=hf-flux-klein', '--no-style-reference', '--article-image-reference',
+    '--image-provider=hf-flux-klein', '--no-style-reference', '--article-image-reference', '--fixed-visual-controls',
     `--scene-length-takt=${manifest.takt}`, '--min-scene-seconds=5', '--max-scene-seconds=8',
     `--image-seed=${manifest.imageSeed}`, ...variant.flags,
   ];

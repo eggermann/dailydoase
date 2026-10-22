@@ -30,7 +30,7 @@ cp "$NEWS_FILE" "$OUTPUT_DIR/input/"
 cp "$SOURCE_STREAM" "$OUTPUT_DIR/semantic-stream.json"
 
 GENERATOR="$SCRIPT_DIR/run-news-scene-image-iteration.mjs"
-COMMON="--iterations=1 --scenes=5 --pause-ms=0 --output-dir=$OUTPUT_DIR --news-dir=$OUTPUT_DIR/input --article-id=474719518 --stream-file=$OUTPUT_DIR/semantic-stream.json --image-provider=hf-flux-klein --no-style-reference --article-image-reference --layering=0"
+COMMON="--iterations=1 --scenes=5 --pause-ms=0 --output-dir=$OUTPUT_DIR --news-dir=$OUTPUT_DIR/input --article-id=474719518 --stream-file=$OUTPUT_DIR/semantic-stream.json --image-provider=hf-flux-klein --no-style-reference --article-image-reference --fixed-visual-controls --layering=0"
 
 node --env-file="$ENV_FILE" "$GENERATOR" $COMMON --symbolic --no-room-deepness
 node --env-file="$ENV_FILE" "$GENERATOR" $COMMON --symbolic --room-deepness

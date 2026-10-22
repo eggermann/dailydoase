@@ -3,6 +3,11 @@ const details = (title, value) => `<details><summary>${escapeHtml(title)}</summa
 const photo = (path, label) => `<figure><img src="${escapeHtml(path)}" alt="${escapeHtml(label)}"><figcaption>${escapeHtml(label)}</figcaption></figure>`;
 const referenceGallery = (catalog, selectedId, prefix = '') => `<section class="reference-options"><h3>Mögliche Figurenreferenzen · ${catalog.length}</h3><div class="reference-gallery">${catalog.map((item) => `<figure class="reference-option${item.id === selectedId ? ' selected' : ''}"><img src="${escapeHtml(`${prefix}${item.path}`)}" alt="${escapeHtml(item.name)}"><figcaption>${escapeHtml(item.name)}${item.id === selectedId ? ' · ausgewählt' : ''}</figcaption></figure>`).join('')}</div></section>`;
 const videoGuide = (scene, filmScene) => `<section class="video-guide"><h3>Video-Modell-Anweisung</h3><dl><dt>Modus</dt><dd>Image-to-video · Einzelnes Startbild</dd><dt>Startbild</dt><dd><a href="${escapeHtml(filmScene.startImagePath)}">${escapeHtml(filmScene.startImagePath)}</a></dd><dt>Dauer</dt><dd>${escapeHtml(filmScene.durationSeconds)} Sekunden</dd><dt>Bewegungsanweisung</dt><dd>${escapeHtml(filmScene.videoPrompt)}</dd></dl></section>`;
+const visualControls = (scene, fallback) => {
+  const options = scene.visualStyleOptions || fallback;
+  if (!options) return '';
+  return `<p><b>Bildparameter:</b> Symbolik ${options.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${options.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(options.layering ?? 0)} / 7${scene.visualControlReason ? ` · ${escapeHtml(scene.visualControlReason)}` : ''}</p>`;
+};
 
 export function renderReport(record) {
   const { article, semantic, plan, results = [], catalog = [] } = record;
@@ -14,6 +19,7 @@ export function renderReport(record) {
     return `<section><h2>${scene.index}. ${escapeHtml(scene.title)}</h2>
       <p><b>Hauptfigur:</b> ${escapeHtml(record.plan?.protagonist?.name || 'Noch nicht festgelegt')} · ${escapeHtml(scene.protagonistAction || scene.storyBeat)}</p>
       <p>${escapeHtml(scene.storyBeat)}</p><p>${escapeHtml(scene.durationSeconds)} s geplant · ${escapeHtml(scene.composition)}</p>
+      ${visualControls(scene, record.visualStyleOptions)}
       ${result?.path ? photo(result.path, 'API-generiertes Startbild') : '<p>Startbild noch nicht gespeichert.</p>'}
       ${figure ? `<p><b>Figurenreferenz:</b> ${escapeHtml(figure.name)} · ${escapeHtml(scene.selectionReason)}</p><div class="reference">${photo(figure.path, 'Figurenreferenz für die Hauptfigur')}</div>` : ''}
       ${scene.crocodileAppearance ? `<p><b>Krokodil:</b> ${scene.crocodileAppearance.present ? `${escapeHtml(scene.crocodileAppearance.role)} · ${escapeHtml(scene.crocodileAppearance.placement)}` : 'Weggelassen; passt hier nicht als Metapher.'}</p>` : ''}
@@ -27,7 +33,7 @@ export function renderReport(record) {
   *{box-sizing:border-box}body{margin:0;background:#181918;color:#e5e1d7;font:17px/1.6 system-ui}main{max-width:1120px;margin:auto;padding:30px 20px}h1,h2{line-height:1.2}section{background:#252623;border:1px solid #47473e;border-radius:12px;padding:24px;margin:24px 0}img{display:block;max-width:100%;height:auto;margin:auto}figure{margin:16px 0}figcaption{color:#bbb7ab;font-size:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}summary{cursor:pointer;color:#dfc987}details{margin:16px 0}.reference{max-width:230px}.reference-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.reference-option{margin:0;padding:10px;border:1px solid #47473e;border-radius:8px}.reference-option img{width:100%;height:90px;object-fit:contain}.reference-option.selected{border-color:#dfc987}.reference-option figcaption{font-size:12px}.video-guide{margin:20px 0;padding:16px;border:1px solid #47473e;border-radius:8px;background:#20211f}.video-guide h3{margin:0 0 10px}.video-guide dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:8px;margin:0}.video-guide dt{color:#dfc987}.video-guide dd{margin:0;overflow-wrap:anywhere}.video-guide a{overflow-wrap:anywhere}a{color:#dfc987}.error{color:#ffa292}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:700px){.grid{grid-template-columns:1fr}.video-guide dl{grid-template-columns:1fr;gap:2px}.video-guide dd{margin-bottom:8px}}
   </style></head><body><main><h1>Artikel + Semantic Stream → Szenenbild und Filmplan</h1>
   <p>${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)} · ${escapeHtml(record.imageModel)}</p>
-  ${record.visualStyleOptions ? `<p>Symbolik: ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe: ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering: ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
+  ${record.sceneVisualControls ? '<p>Bildparameter werden pro Szene aus Handlung und Raum gewählt.</p>' : record.visualStyleOptions ? `<p>Feste Bildparameter für alle Szenen: Symbolik ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
   ${record.sceneDurationSettings ? `<p>Szenenlänge: ${escapeHtml(record.sceneDurationSettings.provider)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
   ${record.planningVersion === 2 ? '<p>Bildplanung und Zeitwahl getrennt: Der fertige Bildplan bleibt bei der Dauer- und Videoplanung unverändert.</p>' : ''}
   ${record.variant ? `<p><b>${escapeHtml(record.variant.label)}</b> · ${escapeHtml(record.variant.description)}</p>` : ''}
@@ -62,6 +68,7 @@ export function renderRunReport(run, iterations) {
       return `<article class="scene"><h3>Szene ${scene.index}: ${escapeHtml(scene.title)}</h3>
         <p><b>Hauptfigur:</b> ${escapeHtml(record.plan?.protagonist?.name || 'Noch nicht festgelegt')} · ${escapeHtml(scene.protagonistAction || scene.storyBeat)}</p>
         <p>${escapeHtml(scene.storyBeat)} · ${escapeHtml(scene.durationSeconds)} s</p>
+        ${visualControls(scene, record.visualStyleOptions)}
         ${result?.path ? photo(`${prefix}${result.path}`, 'API-generiertes Startbild') : '<p>Startbild noch nicht gespeichert.</p>'}
         ${filmScene?.videoPrompt ? `<section class="video-guide"><h4>Video-Modell-Anweisung</h4><dl><dt>Modus</dt><dd>Image-to-video · Einzelnes Startbild</dd><dt>Startbild</dt><dd>${result?.path ? `<a href="${escapeHtml(`${prefix}${result.path}`)}">${escapeHtml(result.path)}</a>` : 'Noch nicht erstellt'}</dd><dt>Dauer</dt><dd>${escapeHtml(filmScene.durationSeconds)} Sekunden</dd><dt>Bewegungsanweisung</dt><dd>${escapeHtml(filmScene.videoPrompt)}</dd></dl></section>` : ''}
         ${record.catalog?.find((item) => item.id === scene.guernicaId) ? photo(`${prefix}${record.catalog.find((item) => item.id === scene.guernicaId).path}`, 'Figurenreferenz für die Hauptfigur') : ''}
@@ -69,7 +76,7 @@ export function renderRunReport(run, iterations) {
     }).join('');
     const semantic = (record.semantic?.entries || []).map((entry) => `<li><b>${escapeHtml(entry.seed.join(' · '))}</b> → ${escapeHtml(entry.item.title)}</li>`).join('');
     return `<section class="iteration"><header><p>Iteration ${String(iterationIndex + 1).padStart(2, '0')} · ${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)}</p>
-      ${record.visualStyleOptions ? `<p><b>Symbolik:</b> ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · <b>Raumtiefe:</b> ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · <b>Layering:</b> ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
+      ${record.sceneVisualControls ? '<p>GPT wählt Bildparameter für jede Szene passend zu Handlung und Raum.</p>' : record.visualStyleOptions ? `<p><b>Feste Bildparameter:</b> Symbolik ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
       ${record.sceneDurationSettings ? `<p><b>Szenenlänge:</b> ${escapeHtml(record.sceneDurationSettings.provider)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
       <h2>${escapeHtml(record.article?.title)}</h2><p>${escapeHtml(record.article?.publish_date)} · ${escapeHtml(record.article?.source_country)}</p>
       <p>${escapeHtml(record.plan?.storyPremise || '')}</p>

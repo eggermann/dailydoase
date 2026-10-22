@@ -1,0 +1,43 @@
+{
+  "name": "scene-auto-4-20261021-001/run-001",
+  "createdAt": "2026-10-21T16:32:39.479Z",
+  "startedAt": "2026-10-21T16:33:17.969Z",
+  "finishedAt": "2026-10-21T16:43:27.857Z",
+  "branch": "codex/eu-reski-scene-visual-controls",
+  "report": "eu-reski-news/GENERATIONS/news/scene-auto-4-20261021-001/run-001/index.html",
+  "starter": "eu-reski-news/GENERATIONS/news/scene-auto-4-20261021-001/start.sh",
+  "configuration": {
+    "iterations": 4,
+    "scenesPerIteration": 5,
+    "articleOrder": "linear",
+    "sceneVisualControls": true,
+    "sceneLengthTakt": -1,
+    "minSceneSeconds": 5,
+    "maxSceneSeconds": 8,
+    "imageProvider": "hf-flux-klein",
+    "fullPaintingReference": false,
+    "figureReference": true,
+    "articlePhotoReference": true
+  },
+  "verification": {
+    "status": "verified",
+    "images": 20,
+    "distinctArticles": 4,
+    "distinctSemanticSnapshots": 4,
+    "parameterCombinations": 8,
+    "exactPromptDelivery": true,
+    "sourceSnapshotMatches": true
+  },
+  "sourceHashes": {
+    "eu-reski-news/scripts/run-news-scene-image-iteration.mjs": "8d1ef52f41be48867d4dc773bf58f9b40da2aca4b8344bad7bdec4fed060ca5d",
+    "lib/generator/adapter/helpers/scene-generator.js": "216665f1dd7899caa8a05b005d39d1d1acabc96ae545c556966db941bda266ca",
+    "eu-reski-news/news-scene/director.md": "da020c1dfcbb0ca6426c1d195e9f4b1b42347b92522ed7f74d472bbe70bf30f0",
+    "eu-reski-news/news-scene/huggingface-flux-klein.mjs": "2edf4650d420b0de506273db3b4b4097f2d6d8b3f69385b73eccff44e9ae490b",
+    "eu-reski-news/news-scene/planner.mjs": "adf0c3d6c00cb2bababd689784e080c4cecddd26a15095289841f7b91d3e9cf0",
+    "eu-reski-news/news-scene/reference-images.mjs": "d51e070c3301580c65550eb6c3f95346c704f79ebb4f8a4d04d6f1e13b1fcbf1",
+    "eu-reski-news/news-scene/report.mjs": "1ce45ab241524c22c25178ac95d08011482981af5949941c0ab21ba4b3e2d5f4",
+    "eu-reski-news/news-scene/scene-timing.mjs": "82d03cc61b5bd6217a78d11c29947d103e84a7f0fa890fcf5309284574ffc9ac",
+    "eu-reski-news/news-scene/semantic-source.mjs": "a5a3208b4dc8d160fe6550f8d894173e5ce143abf97721f20af0f888c195607b",
+    "eu-reski-news/news-scene/semantic-stream-adapter.mjs": "ac2bb83c06906f4e89e37e15f68b830dde11d93712d565cfd01a3dc32c9a9e79"
+  }
+}

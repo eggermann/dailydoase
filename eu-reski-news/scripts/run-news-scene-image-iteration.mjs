@@ -33,6 +33,7 @@ const { values: options } = parseArgs({ options: {
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
   'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false },
+  'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   symbolic: { type: 'boolean', default: false }, 'no-symbolic': { type: 'boolean', default: false },
   'room-deepness': { type: 'boolean', default: false }, 'no-room-deepness': { type: 'boolean', default: false }, help: { type: 'boolean' },
   layering: { type: 'string', default: '0' },
@@ -73,6 +74,8 @@ function buildFilmPlan(record, directory) {
     scenePlan: record.plan.scenes.map((scene, index) => ({
       index: scene.index, title: scene.title, beat: scene.storyBeat, storyBeat: scene.storyBeat,
       durationSeconds: scene.durationSeconds, requestedDurationSeconds: scene.durationSeconds,
+      visualStyleOptions: scene.visualStyleOptions || record.visualStyleOptions,
+      visualControlReason: scene.visualControlReason || null,
       videoMode: 'singleImage', frameSource: 'providedStartImage',
       startImagePath: record.results[index]?.path ? resolve(directory, record.results[index].path) : null, stillPrompt: scene.stillPrompt,
       videoPrompt: scene.videoPrompt, singleImagePrompt: scene.stillPrompt,
@@ -92,22 +95,25 @@ const sceneStaging = {
   top_down: 'Use a near-vertical overhead view. Arrange the protagonist as a compact diagonal figure amid broad circular and crescent forms; keep the face turned away from the viewer.',
 };
 
-function addDistinctSceneStaging(scenes, visualStyleOptions) {
-  const layeringInstruction = visualStyleOptions.layering > 0
-    ? `LAYERING ${visualStyleOptions.layering}: build exactly ${visualStyleOptions.layering} readable spatial planes from foreground to far setting. Give each plane a distinct spatial role and article-grounded feature, such as a near threshold, the protagonist's active middle space, or receding architecture or terrain. Separate planes through overlap, changing scale, occlusion and tonal shifts, never borders or panels. Then apply one final unifying paint layer: shared charcoal marks, pigment, shadow bands and broken contours weave all planes into one coherent mural surface. This merge-paint pass must not look like stacked cut-outs or a collage.`
-    : 'LAYERING 0: add no deliberate multi-plane room stack or extra spatial planes. Keep the existing composition simple; the room-deepness switch alone controls whether ordinary foreground, middle distance and far space appear. Use one unified painted surface, without a separate layer effect.';
-  const cameraInstruction = visualStyleOptions.layering > 0
-    ? `VISION-DRIVEN CAMERA: inspect the actual generated start image and derive one restrained, continuous camera path from its visible focal action and ${visualStyleOptions.layering} spatial planes. Let camera movement reveal or travel gently across those existing planes, then settle on the protagonist or central event. Follow visible perspective, occlusion, scale and direction; invent no off-frame setting, objects or actors.`
-    : 'VISION-DRIVEN CAMERA: inspect the actual generated start image and derive one restrained, continuous camera move from its visible focal action, framing and directional lines. Do not assume hidden spatial planes or invent off-frame setting, objects or actors; settle on the protagonist or central event.';
-  return scenes.map((scene) => ({
-    ...scene,
-    stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. ${layeringInstruction} ${visualStyleOptions.symbolic
-      ? 'SYMBOLISM ON: build one or two concrete, article-grounded visual metaphors into the action and spatial relationships. Make each metaphor legible through objects or forms changing, pressing, dividing or connecting the scene; avoid generic decoration, flags, maps, labels or arbitrary allegory.'
-      : 'SYMBOLISM OFF: use no allegorical overlays, coded emblems or invented symbolic props. Show the article situation directly through concrete action, gesture, objects and relationships; keep cubist distortion in form and paint only.'} ${visualStyleOptions.roomDeepness
-      ? 'ROOM DEEPNESS ON: create convincing painterly spatial depth with a near foreground, active middle distance and clearly receding far plane. Use overlapping architecture, floor or terrain, thresholds and changing scale to lead the eye inward; keep the room or setting relevant to this article. Depth stays hand-painted and cubist, never photographic.'
-      : 'ROOM DEEPNESS OFF: keep the scene as a shallow mural plane with overlapping forms and compressed space. Avoid corridors, vanishing points, deep rooms and receding realistic backgrounds.'}${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.' : ''}`,
-    ...(scene.videoPrompt ? { videoPrompt: `${scene.videoPrompt}\n\n${cameraInstruction}` } : {}),
-  }));
+function addDistinctSceneStaging(scenes, defaultVisualStyleOptions) {
+  return scenes.map((scene) => {
+    const visualStyleOptions = scene.visualStyleOptions || defaultVisualStyleOptions;
+    const layeringInstruction = visualStyleOptions.layering > 0
+      ? `LAYERING ${visualStyleOptions.layering}: build exactly ${visualStyleOptions.layering} readable spatial planes from foreground to far setting. Give each plane a distinct spatial role and article-grounded feature, such as a near threshold, the protagonist's active middle space, or receding architecture or terrain. Separate planes through overlap, changing scale, occlusion and tonal shifts, never borders or panels. Then apply one final unifying paint layer: shared charcoal marks, pigment, shadow bands and broken contours weave all planes into one coherent mural surface. This merge-paint pass must not look like stacked cut-outs or a collage.`
+      : 'LAYERING 0: add no deliberate multi-plane room stack or extra spatial planes. Keep the existing composition simple; the room-deepness switch alone controls whether ordinary foreground, middle distance and far space appear. Use one unified painted surface, without a separate layer effect.';
+    const cameraInstruction = visualStyleOptions.layering > 0
+      ? `VISION-DRIVEN CAMERA: inspect the actual generated start image and derive one restrained, continuous camera path from its visible focal action and ${visualStyleOptions.layering} spatial planes. Let camera movement reveal or travel gently across those existing planes, then settle on the protagonist or central event. Follow visible perspective, occlusion, scale and direction; invent no off-frame setting, objects or actors.`
+      : 'VISION-DRIVEN CAMERA: inspect the actual generated start image and derive one restrained, continuous camera move from its visible focal action, framing and directional lines. Do not assume hidden spatial planes or invent off-frame setting, objects or actors; settle on the protagonist or central event.';
+    return {
+      ...scene,
+      stillPrompt: `${scene.stillPrompt}\n\nScene-specific staging: ${sceneStaging[scene.composition]} The protagonist reference supplies identity only: ignore its exact pose, raised arms, body silhouette, scale and placement. Make this pose and camera view clearly different from every other scene in this sequence. ${layeringInstruction} ${visualStyleOptions.symbolic
+        ? 'SYMBOLISM ON: build one or two concrete, article-grounded visual metaphors into the action and spatial relationships. Make each metaphor legible through objects or forms changing, pressing, dividing or connecting the scene; avoid generic decoration, flags, maps, labels or arbitrary allegory.'
+        : 'SYMBOLISM OFF: use no allegorical overlays, coded emblems or invented symbolic props. Show the article situation directly through concrete action, gesture, objects and relationships; keep cubist distortion in form and paint only.'} ${visualStyleOptions.roomDeepness
+        ? 'ROOM DEEPNESS ON: create convincing painterly spatial depth with a near foreground, active middle distance and clearly receding far plane. Use overlapping architecture, floor or terrain, thresholds and changing scale to lead the eye inward; keep the room or setting relevant to this article. Depth stays hand-painted and cubist, never photographic.'
+        : 'ROOM DEEPNESS OFF: keep the scene as a shallow mural plane with overlapping forms and compressed space. Avoid corridors, vanishing points, deep rooms and receding realistic backgrounds.'}${options['article-image-reference'] ? ' Reference image 1 is the selected masked figure; redraw its abstract protagonist identity, never paste it. Reference image 2 is the article photograph for subject matter only; ignore its colors, realism, lighting, photographic texture, framing, poses and identifiable faces. Redraw the underlying event as fictional cubist forms using only black, white and gray; never reproduce a real person, photo composition, logos or text.' : ''}`,
+      ...(scene.videoPrompt ? { videoPrompt: `${scene.videoPrompt}\n\n${cameraInstruction}` } : {}),
+    };
+  });
 }
 
 function alignSemanticSceneAssignments(response) {
@@ -270,7 +276,7 @@ async function paidRequest(directory, name, url, key, request) {
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4|-1] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--symbolic|--no-symbolic] [--room-deepness|--no-room-deepness] [--layering=0..7] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--stream-sequence-file=sequence.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. --scene-length-takt=-1 lets GPT choose each scene duration from the dramatic arc, bounded by --min-scene-seconds and --max-scene-seconds; positive takt values keep the Selfomat Taktmuster scaler. Semantic and Taktmuster streams stay open across iterations. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Symbolism defaults on; room depth defaults off; layering defaults to 0. Saved settings stay fixed when resuming. Output: eu-reski-news/GENERATIONS/news/.');
+    console.log('node --env-file=.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs [--iterations=1|0|-1] [--pause-ms=5000] [--scenes=1..7] [--article-order=linear|random] [--news-dir=PATH] [--scene-length-takt=4|-1] [--scene-length-type=balanced] [--scene-length-multiplier=1.15] [--scene-length-bias=3.85] [--min-scene-seconds=5] [--max-scene-seconds=8] [--output-dir=PATH] [--article-id=ID] [--style-reference=PATH] [--no-style-reference] [--article-image-reference] [--symbolic|--no-symbolic] [--room-deepness|--no-room-deepness] [--layering=0..7] [--scene-visual-controls|--fixed-visual-controls] [--words=EU,Frieden] [--words-file=words.json] [--stream-file=snapshot.json] [--stream-sequence-file=sequence.json] [--prompt-only] [--resume=/absolute/iteration-path] [--resume-run=/absolute/run-path]\nLinear starts at the first eligible article for each new run and advances once per iteration, wrapping at the end. Random draws a new eligible article each iteration. --article-id overrides either mode. 0 or -1 iterations means endless. --scene-length-takt=-1 lets GPT choose each scene duration from the dramatic arc, bounded by --min-scene-seconds and --max-scene-seconds; positive takt values keep the Selfomat Taktmuster scaler. Semantic and Taktmuster streams stay open across iterations. By default GPT independently chooses symbolism, room depth and layering for each scene; --fixed-visual-controls applies the CLI settings uniformly. Every scene sends the selected masked figure for protagonist identity; the complete painting is optional and supplies style only. --article-image-reference (with --no-style-reference) also sends news photo for visual orientation only. Saved settings stay fixed when resuming. Output: eu-reski-news/GENERATIONS/news/.');
     return;
   }
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
@@ -313,6 +319,25 @@ async function main() {
   const previouslyCompleted = runManifest?.iterations.length || 0;
   if (options['resume-run'] && (!Array.isArray(runManifest.iterations) || previouslyCompleted >= iterationLimit)) {
     throw new Error('Run already has requested iterations or has invalid manifest');
+  }
+  if (runManifest) {
+    if (!runManifest.visualControls && options['resume-run'] && previouslyCompleted > 0) {
+      const previous = await json(join(iterationRoot, runManifest.iterations[0].directory, 'record.json'));
+      runManifest.visualControls = {
+        sceneSpecific: previous.sceneVisualControls ?? false,
+        defaults: previous.visualStyleOptions || recordStyleOptions,
+      };
+    }
+    if (runManifest.visualControls) {
+      options['scene-visual-controls'] = runManifest.visualControls.sceneSpecific;
+      options['fixed-visual-controls'] = !runManifest.visualControls.sceneSpecific;
+      Object.assign(recordStyleOptions, runManifest.visualControls.defaults);
+    } else {
+      runManifest.visualControls = {
+        sceneSpecific: options['scene-visual-controls'] && !options['fixed-visual-controls'],
+        defaults: { ...recordStyleOptions },
+      };
+    }
   }
   if (runManifest) {
     runManifest.iterationLimit = endless ? 'endless' : iterationLimit;
@@ -401,6 +426,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
         selection: { method: options['article-id'] ? 'article-id' : order, order, draw, candidateCount: candidates.length, aggregateIndex: index },
         article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], visualStyleOptions: recordStyleOptions, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
+        sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
         guernicaDirectory: resolve(options['guernica-dir']), results: [],
         imageSeed: imageSeedBase === null ? null : (imageSeedBase + iterationIndex * sceneCount) % 2_147_483_647,
       };
@@ -456,7 +482,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
       }
       const images = [await imageInput(directory, record.articleImage, 'Article photograph for factual and visual analysis only; never reproduce its identifiable people.', 'article')];
       for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, continuationPlan: record.continuationPlan || null });
+      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, continuationPlan: record.continuationPlan || null });
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
       const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
@@ -481,9 +507,9 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
       try {
         const aligned = alignSemanticSceneAssignments(raw);
         record.semanticIndexCorrections = aligned.corrections;
-        record.plan = validatePlan(aligned.response, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null });
+        record.plan = validatePlan(aligned.response, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null, sceneVisualControls: record.sceneVisualControls ?? false });
       } catch (error) {
-        if (!/semantic|motif|crocodile|protagonist|composition|figure|reference/i.test(error.message)) throw error;
+        if (!/semantic|motif|crocodile|protagonist|composition|figure|reference|visual control/i.test(error.message)) throw error;
         const revisionRequest = {
           ...request,
           messages: [
@@ -496,6 +522,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
                 : 'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English.',
               'Translate source-language article details and semantic words; never copy foreign-language terms into model prompts. For each relevant semantic entry, use a short, concrete English visualMotif phrase, repeat that exact phrase verbatim in every assigned stillPrompt, and show it as a visible action or object. Do not claim a word matters just because it repeats an article fact. Mark unrelated entries not_relevant with a concise reason.',
               'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. Choose a valid masked figure reference separately for each scene to match its unique gesture and body shape; avoid repeating a reference in neighboring scenes and use at least three different references across the sequence. Every selectionReason must explain visual fit without importing the figure source story. Assign a different composition choice to each scene, and change camera angle, distance, framing, body silhouette, and main action. The image model must ignore each reference crop’s exact pose, scale and placement.',
+              record.sceneVisualControls ? 'For every scene, include its own visualStyleOptions object (symbolic boolean, roomDeepness boolean, layering integer 0–7) and visualControlReason of at least 20 characters. Decide values from that scene’s story beat, action and setting; do not repeat one run-wide setting without a scene-specific reason. The stillPrompt must implement those choices.' : '',
               'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
               record.articleImageReference
                 ? 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the original article photo, used only for broad visual orientation. Do not reproduce its identifiable people, exact composition, logos, or text. No complete painting reference is supplied; follow the written style description. Redraw reference 1 into the scene; never paste either reference. Do not import the figure’s original story, props, or symbols. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
@@ -517,7 +544,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
         if (revised.error) throw new Error(`GPT revision failed: ${revised.error.message}`);
         const aligned = alignSemanticSceneAssignments(revised);
         record.semanticIndexCorrections = aligned.corrections;
-        record.plan = validatePlan(aligned.response, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null });
+        record.plan = validatePlan(aligned.response, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null, sceneVisualControls: record.sceneVisualControls ?? false });
         record.planRevisionReason = error.message;
         finalResponse = revised;
       }
@@ -543,7 +570,7 @@ async function runIteration(semanticSource, sceneDurationStream, iterationRoot, 
           await save(timingPath, buildTimingRequest({
             plan: record.plan, sceneDurations: record.sceneDurations,
             sceneDurationSettings: record.sceneDurationSettings,
-            visualStyleOptions: record.visualStyleOptions, model: record.storyModel,
+            visualStyleOptions: record.visualStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, model: record.storyModel,
           }));
         }
         console.log('Visual plan locked; generating scene durations and video prompts separately.');
