@@ -296,6 +296,7 @@ Für Iterationen 1–5 zwischen jedem benachbarten Szenenclip eine neue 5-Sekund
 
 ```sh
 RUN="eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001"
+export DAILYDOASE_ENV_FILE="/Users/eggermann/Projekte/dailydoase/.env"
 npm run news:glue-scenes -- --run="$RUN" --iterations=5
 npm run news:assemble-film -- \
   --run-dir="$RUN" --scene-glue-dir="$RUN/glue-vids" --limit=5
