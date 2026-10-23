@@ -98,13 +98,21 @@ const requestedLimit = limitArgument ? Number(limitArgument.slice('--limit='.len
 if (!(requestedLimit > 0)) throw new Error('--limit muss positive Zahl sein');
 const selectedArticles = articles.slice(0, requestedLimit);
 const dateTag = String(aggregate.date || sourceFile).replace(/[^a-zA-Z0-9-]/g, '-');
-const checkpointPath = join(newsDirectory, `eu-relevance-${dateTag}-checkpoint.json`);
-const resultsPath = join(newsDirectory, `eu-relevance-${dateTag}.json`);
+const sourceTag = sourceFile.replace(/^all-/, '').replace(/\.json$/, '');
+const checkpointPath = join(newsDirectory, `eu-relevance-${sourceTag}-checkpoint.json`);
+const resultsPath = join(newsDirectory, `eu-relevance-${sourceTag}.json`);
+const legacyCheckpointPath = join(newsDirectory, `eu-relevance-${dateTag}-checkpoint.json`);
 await mkdir(newsDirectory, { recursive: true });
 
-let checkpoint = await readJson(checkpointPath).catch((error) => {
+let checkpoint = await readJson(checkpointPath).catch(async (error) => {
   if (error.code !== 'ENOENT') throw error;
-  return { sourceFile, startedAt: new Date().toISOString(), completed: {}, errors: {}, pending: {} };
+  const legacyCheckpoint = await readJson(legacyCheckpointPath).catch((legacyError) => {
+    if (legacyError.code !== 'ENOENT') throw legacyError;
+    return null;
+  });
+  return legacyCheckpoint?.sourceFile === sourceFile
+    ? legacyCheckpoint
+    : { sourceFile, startedAt: new Date().toISOString(), completed: {}, errors: {}, pending: {} };
 });
 if (checkpoint.sourceFile !== sourceFile) throw new Error('Checkpoint belongs to another news collection');
 

@@ -16,6 +16,7 @@ import { loadTaktmuster } from '../news-scene/taktmuster.mjs';
 import { buildVideoVisionRequest, validateVideoVisionResponse, videoVisionPromptVersion } from '../news-scene/video-vision.mjs';
 import { buildGrokVideoPrompt, buildVideoDirectionRequest, validateVideoDirectionResponse, videoDirectionInputHash, videoDirectorPromptVersion } from '../news-scene/video-director.mjs';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
+import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
@@ -150,6 +151,32 @@ function currentFeatureSettings() {
     videoVision: options['video-vision'],
     videoAudioDirection: options['video-audio-direction'],
     videoMaxZoom: getMaxVideoZoom(),
+  };
+}
+
+function currentGenerationSettings() {
+  return {
+    articleOrder: options['article-order'],
+    sceneTiming: {
+      takt: Number(options['scene-length-takt']),
+      type: options['scene-length-type'],
+      multiplier: Number(options['scene-length-multiplier']),
+      bias: Number(options['scene-length-bias']),
+      minimum: Number(options['min-scene-seconds']),
+      maximum: Number(options['max-scene-seconds']),
+    },
+    imageProvider: options['image-provider'],
+    imageModel,
+    storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini',
+    articleImageReference: options['article-image-reference'],
+    styleReferencePath: options['no-style-reference'] ? null : options['style-reference'],
+    guernicaDirectory: resolve(options['guernica-dir']),
+    sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
+    visualStyleOptions: { ...recordStyleOptions },
+    videosAfterEachIteration: options['videos-after-each-iteration'],
+    videoModel: options['video-model'],
+    videoResolution: options['video-resolution'],
+    videoSettingsMode: options['video-settings-mode'],
   };
 }
 
@@ -623,6 +650,8 @@ async function main() {
     pauseMilliseconds,
     status: 'running',
     featureSettings: currentFeatureSettings(),
+    generationSettings: currentGenerationSettings(),
+    articleProgress: null,
     iterations: [],
   } : null;
   let pendingIterationDirectory = null;
@@ -658,6 +687,7 @@ async function main() {
     }
     runManifest.sceneCountSettings = sceneCountSettings;
     runManifest.featureSettings ||= currentFeatureSettings();
+    runManifest.generationSettings ||= currentGenerationSettings();
     if (!runManifest.visualControls && options['resume-run'] && previouslyCompleted > 0) {
       const previous = await json(join(iterationRoot, runManifest.iterations[0].directory, 'record.json'));
       runManifest.visualControls = {
@@ -701,13 +731,31 @@ async function main() {
     imageSeedOffset += count;
   }
   let completed = previouslyCompleted;
+  if (runManifest && completed > 0) {
+    const latestDirectory = runManifest.iterations[completed - 1].directory;
+    const latestRecord = await json(join(iterationRoot, latestDirectory, 'record.json'));
+    if (latestRecord.selection?.method === 'linear' && latestRecord.selection.ranking === 'jev-eu-relevance') {
+      runManifest.articleProgress = {
+        sourceAggregate: latestRecord.sourceAggregate,
+        nextDraw: latestRecord.selection.draw + 1,
+      };
+      await save(join(iterationRoot, 'run.json'), runManifest);
+    }
+  }
   while (endless || completed < iterationLimit) {
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
-    const iterationDirectory = await runIteration(semanticSource, sceneDurations, sceneCounts, iterationRoot, completed, imageSeedOffset, runImageSeedBase, pendingIterationDirectory);
+    const iterationDirectory = await runIteration(semanticSource, sceneDurations, sceneCounts, iterationRoot, completed, imageSeedOffset, runImageSeedBase, pendingIterationDirectory, runManifest?.articleProgress || null);
     pendingIterationDirectory = null;
-    imageSeedOffset += (await json(join(iterationDirectory, 'record.json'))).sceneCount;
+    const completedRecord = await json(join(iterationDirectory, 'record.json'));
+    imageSeedOffset += completedRecord.sceneCount;
     completed += 1;
     if (runManifest) {
+      if (completedRecord.selection?.method === 'linear' && completedRecord.selection.ranking === 'jev-eu-relevance') {
+        runManifest.articleProgress = {
+          sourceAggregate: completedRecord.sourceAggregate,
+          nextDraw: completedRecord.selection.draw + 1,
+        };
+      }
       const relativeDirectory = iterationDirectory.slice(iterationRoot.length + 1);
       runManifest.iterations.push({ index: completed, directory: relativeDirectory, report: `${relativeDirectory}/index.html` });
       await save(join(iterationRoot, 'run.json'), runManifest);
@@ -745,7 +793,7 @@ async function main() {
   }
 }
 
-async function runIteration(semanticSource, sceneDurationStream, sceneCountStream, iterationRoot, iterationIndex, imageSeedOffset, runImageSeedBase, pendingDirectory) {
+async function runIteration(semanticSource, sceneDurationStream, sceneCountStream, iterationRoot, iterationIndex, imageSeedOffset, runImageSeedBase, pendingDirectory, articleProgress) {
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   const imageProvider = options['image-provider'];
@@ -775,21 +823,21 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       }
     } else {
       const newsDirectory = resolve(options['news-dir']);
-      const files = (await readdir(newsDirectory)).filter((name) => /^all-.*\.json$/.test(name)).sort();
-      if (!files.length) throw new Error('No all-*.json news collection found');
-      const sourceAggregate = join(newsDirectory, files.at(-1));
-      const aggregate = await json(sourceAggregate);
-      const candidates = aggregate.news.map((article, index) => ({ article, index }))
-        .filter(({ article }) => /^https?:\/\//i.test(article.image || '') && (article.text || article.summary));
-      if (!candidates.length) throw new Error('No news article with text and image');
+      const rankedCollections = await findRankedNewsCollections(newsDirectory);
+      if (!rankedCollections.length) throw new Error('No EU-scored news collection found; fetch news and finish Jev classification first');
+      const rankedCollection = rankedCollections[0];
+      const { aggregate, aggregatePath: sourceAggregate, candidates } = rankedCollection;
       const order = options['article-order'];
       const draw = options['article-id']
         ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
         : order === 'random'
           ? randomInt(candidates.length)
-          : iterationIndex % candidates.length;
+          : articleProgress?.sourceAggregate === rankedCollection.aggregatePath
+            ? articleProgress.nextDraw % candidates.length
+            : 0;
       if (draw < 0) throw new Error('Requested article is missing or has no usable text and image');
-      const { article, index } = candidates[draw];
+      const { article, aggregateIndex, score } = candidates[draw];
+      console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
       const sceneCountSelection = sceneCountStream.next();
       const sceneCount = sceneCountSelection.count;
       console.log(`Scene count: ${sceneCount} (${sceneCountSelection.settings.mode}${sceneCountSelection.rawValue === undefined ? '' : `; raw ${sceneCountSelection.rawValue}, bias ${sceneCountSelection.settings.bias}`})`);
@@ -801,8 +849,18 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           clean: !execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: root, encoding: 'utf8' }).trim(),
         },
         sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
-        selection: { method: options['article-id'] ? 'article-id' : order, order, draw, candidateCount: candidates.length, aggregateIndex: index },
+        selection: {
+          method: options['article-id'] ? 'article-id' : order,
+          order,
+          ranking: 'jev-eu-relevance',
+          euRelevance: Number.isFinite(score) ? score : null,
+          relevancePath: rankedCollection.relevancePath,
+          draw,
+          candidateCount: candidates.length,
+          aggregateIndex,
+        },
         article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], visualStyleOptions: recordStyleOptions, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-4.1-mini', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
+        generationSettings: currentGenerationSettings(),
         featureSettings: currentFeatureSettings(),
         sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
         sceneCountSelection,

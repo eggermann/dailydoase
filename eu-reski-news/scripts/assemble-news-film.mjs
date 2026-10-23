@@ -1,4 +1,5 @@
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, stat, unlink, writeFile } from 'node:fs/promises';
 import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -9,6 +10,8 @@ const { values: options } = parseArgs({
     'scene-glue-dir': { type: 'string' },
     limit: { type: 'string' },
     'bridge-limit': { type: 'string' },
+    'bridge-random-threshold': { type: 'string' },
+    'bridge-random-seed': { type: 'string' },
     output: { type: 'string' },
     'card-seconds': { type: 'string', default: '4' },
     'fade-seconds': { type: 'string', default: '0' },
@@ -18,7 +21,7 @@ const { values: options } = parseArgs({
 });
 
 if (options.help) {
-  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--bridge-limit=2] [--fade-seconds=0.25] [--output=PATH]');
+  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--bridge-limit=2 | --bridge-random-threshold=0.7] [--fade-seconds=0.25] [--output=PATH]');
   process.exit(0);
 }
 
@@ -36,6 +39,11 @@ const ffprobe = process.env.FFPROBE_BIN || 'ffprobe';
 const magick = process.env.MAGICK_BIN || 'magick';
 const iterationLimit = options.limit === undefined ? Infinity : Number(options.limit);
 const bridgeLimit = options['bridge-limit'] === undefined ? null : Number(options['bridge-limit']);
+const bridgeRandomThreshold = options['bridge-random-threshold'] === undefined
+  ? null
+  : Number(options['bridge-random-threshold']);
+const bridgeRandomSeed = options['bridge-random-seed'] || basename(runDirectory);
+const bridgeSelectionEnabled = bridgeLimit !== null || bridgeRandomThreshold !== null;
 
 async function exists(path) {
   try {
@@ -61,6 +69,15 @@ if (bridgeLimit !== null && (!Number.isInteger(bridgeLimit) || bridgeLimit < 0))
 }
 if (bridgeLimit !== null && !sceneGlueDirectory) {
   throw new Error('--bridge-limit requires --scene-glue-dir');
+}
+if (bridgeRandomThreshold !== null && (!Number.isFinite(bridgeRandomThreshold) || bridgeRandomThreshold < 0 || bridgeRandomThreshold >= 1)) {
+  throw new Error('--bridge-random-threshold must be from 0 inclusive to 1 exclusive');
+}
+if (bridgeRandomThreshold !== null && !sceneGlueDirectory) {
+  throw new Error('--bridge-random-threshold requires --scene-glue-dir');
+}
+if (bridgeRandomThreshold !== null && bridgeLimit !== null) {
+  throw new Error('Use either --bridge-limit or --bridge-random-threshold, not both');
 }
 
 function run(command, args, label) {
@@ -121,7 +138,13 @@ async function renderTitleCard(iterationDirectory, number, font) {
   const titleImagePath = join(cardsDirectory, `title-${iterationId}.png`);
   const textLayerPath = join(cardsDirectory, `.text-${iterationId}.png`);
   const titleVideoPath = join(cardsDirectory, `title-${iterationId}.mp4`);
-  await writeFile(titleTextPath, `${title}\n`, 'utf8');
+  const expectedTitleText = `${title}\n`;
+  const savedTitleText = await readFile(titleTextPath, 'utf8').catch((error) => {
+    if (error.code !== 'ENOENT') throw error;
+    return null;
+  });
+  if (savedTitleText === expectedTitleText && await exists(titleVideoPath)) return titleVideoPath;
+  await writeFile(titleTextPath, expectedTitleText, 'utf8');
 
   runWithOutput(magick, [
     '-size', '760x320', '-background', 'none', '-fill', 'white', '-font', font,
@@ -148,7 +171,7 @@ const iterations = await getIterations();
 if (!iterations.length) throw new Error(`No iteration-NNN folders found in ${runDirectory}`);
 const selectedBridgePaths = new Set();
 let allBridgeCandidates = [];
-if (bridgeLimit !== null) {
+if (bridgeLimit !== null || bridgeRandomThreshold !== null) {
   for (const iterationDirectory of iterations) {
     const iterationNumber = Number(iterationDirectory.match(/iteration-(\d+)/)?.[1]);
     const iterationId = padIteration(iterationNumber);
@@ -171,10 +194,19 @@ if (bridgeLimit !== null) {
   if (allBridgeCandidates.some((candidate) => !Number.isFinite(candidate.duration))) {
     throw new Error('Bridge request is missing numeric duration');
   }
-  const chosen = [...allBridgeCandidates]
-    .sort((left, right) => right.duration - left.duration || left.order - right.order)
-    .slice(0, bridgeLimit);
-  for (const candidate of chosen) selectedBridgePaths.add(candidate.path);
+  if (bridgeLimit !== null) {
+    const chosen = [...allBridgeCandidates]
+      .sort((left, right) => right.duration - left.duration || left.order - right.order)
+      .slice(0, bridgeLimit);
+    for (const candidate of chosen) selectedBridgePaths.add(candidate.path);
+  } else {
+    for (const candidate of allBridgeCandidates) {
+      const digest = createHash('sha256').update(`${bridgeRandomSeed}:${candidate.path}`).digest();
+      const randomValue = digest.readUInt32BE(0) / 0x1_0000_0000;
+      candidate.randomValue = Number(randomValue.toFixed(8));
+      if (randomValue > bridgeRandomThreshold) selectedBridgePaths.add(candidate.path);
+    }
+  }
   allBridgeCandidates = allBridgeCandidates.map((candidate) => ({
     ...candidate,
     selected: selectedBridgePaths.has(candidate.path),
@@ -217,7 +249,7 @@ for (let index = 0; index < iterations.length; index += 1) {
       const previousBridge = index > 0
         ? join(sceneGlueDirectory, `iteration-${iterationId}`, `scene-${padIteration(scenes[index - 1].index)}-to-${padIteration(scene.index)}.mp4`)
         : null;
-      const keepPreviousBridge = previousBridge && (bridgeLimit === null || selectedBridgePaths.has(previousBridge));
+      const keepPreviousBridge = previousBridge && (!bridgeSelectionEnabled || selectedBridgePaths.has(previousBridge));
       addMedia(sceneVideo, keepPreviousBridge ? fadeDuration : 0);
       if (index < scenes.length - 1) {
         const nextScene = scenes[index + 1];
@@ -227,7 +259,7 @@ for (let index = 0; index < iterations.length; index += 1) {
           `scene-${padIteration(scene.index)}-to-${padIteration(nextScene.index)}.mp4`,
         );
         if (!await exists(bridge)) throw new Error(`Missing scene bridge: ${bridge}`);
-        if (bridgeLimit === null || selectedBridgePaths.has(bridge)) addMedia(bridge);
+        if (!bridgeSelectionEnabled || selectedBridgePaths.has(bridge)) addMedia(bridge);
       }
     }
   } else {
@@ -237,11 +269,14 @@ for (let index = 0; index < iterations.length; index += 1) {
 }
 
 await writeFile(manifestPath, `${manifestEntries.join('\n')}\n`, 'utf8');
-if (bridgeLimit !== null) {
+if (bridgeSelectionEnabled) {
   await writeFile(join(outputDirectory, `${outputStem}.assembly.json`), `${JSON.stringify({
     outputPath,
     iterationCount: iterations.length,
     bridgeLimit,
+    bridgeSelection: bridgeRandomThreshold === null ? (bridgeLimit === null ? 'all' : 'longest') : 'seeded-random-threshold',
+    bridgeRandomThreshold,
+    bridgeRandomSeed: bridgeRandomThreshold === null ? null : bridgeRandomSeed,
     selectedBridgeCount: selectedBridgePaths.size,
     omittedBridgeCount: allBridgeCandidates.length - selectedBridgePaths.size,
     fadeSeconds: fadeDuration,

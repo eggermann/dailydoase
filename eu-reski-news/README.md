@@ -18,6 +18,23 @@ npm run news:eu:jev   # gespeicherte Artikel mit JEV nach EU-Bezug bewerten
 npm run news:html     # HTML-Liste nach EU-Relevanz bauen
 ```
 
+## Ausstellung dauerhaft starten
+
+`npm run news:exhibition` startet `scripts/EU-reski-mix-arg-and-camera-moovs.start.sh`. Der Shell-Starter lädt standardmäßig `.env` aus dem Main-Repository; mit `NEWS_ENV_FILE=/absoluter/pfad/.env` lässt sich das überschreiben. Der Node-Supervisor übernimmt Szenen- und Feature-Settings aus dem zuletzt geänderten `record.json` außerhalb des Ausstellungsordners und speichert seine Startkonfiguration in `GENERATIONS/news/exhibition/exhibition-state.json`. CLI-Flags nach `npm run news:exhibition -- ...` überschreiben passende Vorgaben.
+
+News-Fetch läuft beim Start im Hintergrund, sobald Collection älter als 24 Stunden ist; Jev bewertet danach den EU-Bezug. Solange ein neues Ranking entsteht, generiert der Film weiter mit der letzten fertig bewerteten Collection. Auswahl läuft linear durch höchste Jev-Scores abwärts. Jede Iteration erzeugt Szenenvideos. Sobald alle Clips fertig sind, generiert der Supervisor First-Last-Frame-Brücken innerhalb der Iteration; zwischen Iterationen gibt es keine Brücke. Derselbe Prozess aktualisiert zwei Filme mit 0,25-s-Übergängen:
+
+- `glue-vids/eu-reski-live-full.mp4`: alle Brücken.
+- `glue-vids/eu-reski-live-random-bridges.mp4`: nur Brücken mit reproduzierbarem Zufallswert `> 0.7`.
+
+Übergangsdauern laufen zyklisch `9,5,7,5,8` Sekunden; Frames entstehen bei `Ende − 0,25 s` und `Start + 0,25 s`. `--no-first-last-glue` schaltet Brückengenerierung aus; Standard ist an. Requests, Frames, Jev-Scores, Montage-Reihenfolge und Zufalls-Auswahl bleiben als Reproduktionsdaten erhalten. Ctrl-C beendet den Supervisor; erneuter Start setzt denselben Run fort.
+
+```sh
+npm run news:exhibition
+```
+
+Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAST_GLUE=0`, `EXHIBITION_GLUE_DURATION_PATTERN=9,5,7,5,8` und `EXHIBITION_RANDOM_BRIDGE_THRESHOLD=0.7`.
+
 `Article + article photo + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; full painting for style) → cumulative HTML audit report`.
 
 The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API. `--scenes` accepts 1–7 scenes; default remains 3.

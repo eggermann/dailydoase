@@ -2,6 +2,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articleKey } from './news-eu-relevance.mjs';
+import { relevanceFileName } from '../news-scene/news-ranking.mjs';
 
 const projectDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const newsDirectory = join(projectDirectory, 'news', 'A');
@@ -16,14 +17,17 @@ if (aggregateFiles.length === 0) {
 
 const aggregatePath = join(newsDirectory, aggregateFiles[0]);
 const aggregate = JSON.parse(await readFile(aggregatePath, 'utf8'));
-const relevanceDateTag = String(aggregate.date || aggregateFiles[0]).replace(/[^a-zA-Z0-9-]/g, '-');
-const relevancePath = join(newsDirectory, `eu-relevance-${relevanceDateTag}.json`);
+const relevancePaths = relevanceFileName(aggregate, aggregateFiles[0]).map((name) => join(newsDirectory, name));
 let relevance = null;
-try {
-  relevance = JSON.parse(await readFile(relevancePath, 'utf8'));
-} catch (error) {
-  if (error.code !== 'ENOENT') throw error;
+for (const relevancePath of relevancePaths) {
+  try {
+    relevance = JSON.parse(await readFile(relevancePath, 'utf8'));
+    break;
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
 }
+if (relevance?.sourceFile !== aggregateFiles[0]) relevance = null;
 const relevanceEntries = new Map(Object.entries(relevance?.entries ?? {}));
 
 function escapeHtml(value) {
