@@ -843,7 +843,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const rankedCollections = await findRankedNewsCollections(newsDirectory);
       if (!rankedCollections.length) throw new Error('No EU-scored news collection found; fetch news and finish Jev classification first');
       const rankedCollection = rankedCollections[0];
-      const { aggregate, aggregatePath: sourceAggregate, candidates } = rankedCollection;
+      const { aggregate, aggregatePath: sourceAggregate, aggregateHash, candidates } = rankedCollection;
       const order = options['article-order'];
       const requestedDraw = options['article-id']
         ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
@@ -878,7 +878,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           branch: execFileSync('git', ['branch', '--show-current'], { cwd: root, encoding: 'utf8' }).trim(),
           clean: !execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: root, encoding: 'utf8' }).trim(),
         },
-        sourceAggregate, aggregateHash: hash(await readFile(sourceAggregate)),
+        sourceAggregate, aggregateHash,
         selection: {
           method: options['article-id'] ? 'article-id' : order,
           order,

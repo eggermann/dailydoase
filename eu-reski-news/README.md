@@ -27,7 +27,7 @@ News-Fetch läuft beim Start im Hintergrund, sobald Collection älter als 24 Stu
 - `glue-vids/eu-reski-live-full.mp4`: alle Brücken.
 - `glue-vids/eu-reski-live-random-bridges.mp4`: nur Brücken mit reproduzierbarem Zufallswert `> 0.7`.
 
-Übergangsdauern laufen zyklisch `9,5,7,5,8` Sekunden; Frames entstehen bei `Ende − 0,25 s` und `Start + 0,25 s`. `--no-first-last-glue` schaltet Brückengenerierung aus; Standard ist an. Requests, Frames, Jev-Scores, Montage-Reihenfolge und Zufalls-Auswahl bleiben als Reproduktionsdaten erhalten. Ctrl-C beendet den Supervisor; erneuter Start setzt denselben Run fort.
+Jede Iterationskarte zeigt die Überschrift „Geschichte“ und darunter `record.json → article.title`. Übergangsdauern laufen zyklisch `9,5,7,5,8` Sekunden; Frames entstehen bei `Ende − 0,25 s` und `Start + 0,25 s`. `--no-first-last-glue` schaltet Brückengenerierung aus; Standard ist an. Requests, Frames, Jev-Scores, Montage-Reihenfolge und Zufalls-Auswahl bleiben als Reproduktionsdaten erhalten. Ctrl-C beendet den Supervisor; erneuter Start setzt denselben Run fort.
 
 ```sh
 npm run news:exhibition

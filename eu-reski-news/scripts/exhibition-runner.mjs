@@ -70,6 +70,55 @@ async function listAggregateFiles() {
     .reverse();
 }
 
+function isNewsJsonFile(name) {
+  return /^all-.*\.json$/.test(name)
+    || /^eu-relevance-.*\.json$/.test(name)
+    || /^[a-z]{2}-.*\.json$/.test(name);
+}
+
+function europeanTimestamp(date = new Date()) {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
+  }).formatToParts(date).map(({ type, value }) => [type, value]));
+  const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
+  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}-${parts.minute}-${parts.second}-${milliseconds}`;
+}
+
+async function archivePreviousNewsJsons(activeCollection) {
+  const activeAggregateFile = basename(activeCollection.aggregatePath);
+  const sourceTag = activeAggregateFile.replace(/^all-/, '').replace(/\.json$/, '');
+  const activeFiles = new Set([
+    activeAggregateFile,
+    basename(activeCollection.relevancePath),
+  ]);
+  let entries;
+  try {
+    entries = await readdir(newsDirectory, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === 'ENOENT') return;
+    throw error;
+  }
+  const previousFiles = entries
+    .filter((entry) => entry.isFile() && isNewsJsonFile(entry.name))
+    .filter((entry) => !activeFiles.has(entry.name) && !entry.name.endsWith(`-${sourceTag}.json`))
+    .map((entry) => entry.name);
+  if (!previousFiles.length) return;
+
+  const backupDirectory = join(newsDirectory, '_bak', europeanTimestamp());
+  await mkdir(backupDirectory, { recursive: true });
+  let archived = 0;
+  for (const file of previousFiles) {
+    try {
+      await rename(join(newsDirectory, file), join(backupDirectory, file));
+      archived += 1;
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+    }
+  }
+  if (archived) log(`Archivierte ${archived} ältere News-/Ranking-JSONs nach ${backupDirectory}.`);
+}
+
 function runCommand(label, command, args, { onLine = null, inheritStdin = false } = {}) {
   return new Promise((resolveCommand, rejectCommand) => {
     const child = spawn(command, args, {
@@ -265,6 +314,12 @@ async function refreshNewsIfNeeded() {
     await runCommand('Jev-EU-Bewertung', process.execPath, [classifyScript]);
   } else if (latestIsRanked && ageMs < refreshIntervalMs) {
     log(`News aktuell (${(ageMs / 3_600_000).toFixed(1)} h); Jev-Ranking vorhanden.`);
+  }
+
+  const completedRankings = await findRankedNewsCollections(newsDirectory);
+  const completedLatest = completedRankings[0];
+  if (completedLatest?.aggregateFile === afterFetch?.file && isFullyClassified(completedLatest)) {
+    await archivePreviousNewsJsons(completedLatest);
   }
 }
 

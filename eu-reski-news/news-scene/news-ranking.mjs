@@ -1,8 +1,27 @@
-import { readFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { articleKey } from '../scripts/news-eu-relevance.mjs';
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+const rankedCollectionCache = new Map();
+
+async function getCollectionFileVersion(newsDirectory, directoryEntries) {
+  const relevantFiles = directoryEntries
+    .filter((name) => /^all-.*\.json$/.test(name)
+      || (/^eu-relevance-.*\.json$/.test(name) && !name.endsWith('-checkpoint.json')))
+    .sort();
+  const versions = await Promise.all(relevantFiles.map(async (name) => {
+    try {
+      const fileStats = await stat(join(newsDirectory, name));
+      return `${name}:${fileStats.mtimeMs}:${fileStats.size}:${fileStats.ino}`;
+    } catch (error) {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    }
+  }));
+  return versions.filter(Boolean).join('|');
+}
 
 export function relevanceFileName(aggregate, aggregateFile) {
   const sourceSpecificName = `eu-relevance-${aggregateFile.replace(/^all-/, '').replace(/\.json$/, '')}.json`;
@@ -18,6 +37,10 @@ export async function findRankedNewsCollections(newsDirectory) {
     if (error.code === 'ENOENT') return [];
     throw error;
   }
+  const version = await getCollectionFileVersion(newsDirectory, directoryEntries);
+  const cached = rankedCollectionCache.get(newsDirectory);
+  if (cached?.version === version) return cached.collections;
+
   const files = directoryEntries
     .filter((name) => /^all-.*\.json$/.test(name))
     .sort()
@@ -26,7 +49,16 @@ export async function findRankedNewsCollections(newsDirectory) {
 
   for (const aggregateFile of files) {
     const aggregatePath = join(newsDirectory, aggregateFile);
-    const aggregate = await readJson(aggregatePath);
+    let aggregate;
+    let aggregateHash;
+    try {
+      const contents = await readFile(aggregatePath);
+      aggregate = JSON.parse(contents.toString('utf8'));
+      aggregateHash = createHash('sha256').update(contents).digest('hex');
+    } catch (error) {
+      if (error.code === 'ENOENT') continue;
+      throw error;
+    }
     let relevance = null;
     let relevancePath = null;
     for (const fileName of relevanceFileName(aggregate, aggregateFile)) {
@@ -71,6 +103,7 @@ export async function findRankedNewsCollections(newsDirectory) {
       aggregate,
       aggregateFile,
       aggregatePath,
+      aggregateHash,
       relevance,
       relevancePath,
       candidates,
@@ -78,5 +111,6 @@ export async function findRankedNewsCollections(newsDirectory) {
     });
   }
 
+  rankedCollectionCache.set(newsDirectory, { version, collections: rankedCollections });
   return rankedCollections;
 }
