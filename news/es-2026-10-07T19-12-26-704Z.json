@@ -1,0 +1,10 @@
+{
+  "country": {
+    "code": "es",
+    "name": "Spain"
+  },
+  "fetchedAt": "2026-10-07T19:12:31.613Z",
+  "requestDate": "2026-10-07",
+  "error": "World News API antwortet mit HTTP 402",
+  "news": []
+}

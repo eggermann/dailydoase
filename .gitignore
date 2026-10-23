@@ -73,7 +73,14 @@ folder-cntr.txt
 exemplar-cntr.txt
 generation-by-commit.txt
 
-GENERATIONS/
+# Generated content (including historical spelling variants).
+/GENERATIONS/
+/GENERATIONS*/
+/GENERATION*/
+/GENRATIONS*/
+**/GENERATIONS*/
+**/GENERATION*/
+**/GENRATIONS*/
 data/
 .history
 .roorules-*

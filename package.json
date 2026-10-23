@@ -91,6 +91,9 @@
   "project": {},
   "scripts": {
     "test": "cross-env WATCHMAN_DISABLE=1 JEST_USE_POLLING=1 NODE_OPTIONS=--experimental-vm-modules jest --env=node --watchman=false",
+    "news:eu:today": "node scripts/fetch-eu-news-today.mjs",
+    "news:html": "node scripts/build-news-html.mjs",
+    "news:assemble-film": "node eu-reski-news/scripts/assemble-news-film.mjs",
     "demo:mirelo:v2v": "node lib/generator/mireloAI/demo-video-to-video.js",
     "start": "cross-env APP_ENV=development npm-run-all -p server webpack:watch",
     "webpack:build": "webpack --config webpack.config.cjs",
