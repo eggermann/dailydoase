@@ -320,3 +320,14 @@ npm run news:assemble-film -- --run-dir="$RUN" \
 ```
 
 Der zyklische `getNext()`-Strom weist den acht Übergängen `9,5,7,5,8,9,5,7` Sekunden zu. Vorheriges Endbild wird bei `Ende − 0,25 s`, nächstes Startbild bei `Start + 0,25 s` extrahiert. FFmpeg blendet beide Clipkanten mit demselben 0,25-s-Fade und Audio-Crossfade ein. Szenenanfang nach einer Brücke wird dafür um 0,25 s versetzt; es wird weiterhin keine Brücke zwischen Iterationen erzeugt. Ergebnis und Referenzen liegen in `glue-vids-long/`; `glue-run.json`, `film-order.txt` und `fade-filter.txt` protokollieren Muster, Reihenfolge und Filter.
+
+Eine zweite Montageversion behält nur die zwei längsten generierten Übergänge und blendet alle übrigen Szenengrenzen direkt mit 0,25 Sekunden über:
+
+```sh
+npm run news:assemble-film -- --run-dir="$RUN" \
+  --scene-glue-dir="$RUN/glue-vids-long" --limit=2 \
+  --bridge-limit=2 --fade-seconds=0.25 \
+  --output="$RUN/glue-vids-long/eu-reski-iterations-001-002-two-bridges-fade-025.mp4"
+```
+
+`--bridge-limit=2` wählt längste Brücken, bei Gleichstand zuerst chronologisch. Auswahl steht in der zum Film benannten `*.assembly.json`; Reihenfolge und Filtergraph haben ebenfalls filmbezogene Dateinamen und überschreiben andere Montageversionen nicht.

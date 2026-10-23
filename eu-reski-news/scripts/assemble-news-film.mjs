@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, readdir, stat, unlink, writeFile } from 'node:fs/promises';
-import { dirname, join, relative, resolve, sep } from 'node:path';
+import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { parseArgs } from 'node:util';
 
 const { values: options } = parseArgs({
@@ -8,6 +8,7 @@ const { values: options } = parseArgs({
     'run-dir': { type: 'string' },
     'scene-glue-dir': { type: 'string' },
     limit: { type: 'string' },
+    'bridge-limit': { type: 'string' },
     output: { type: 'string' },
     'card-seconds': { type: 'string', default: '4' },
     'fade-seconds': { type: 'string', default: '0' },
@@ -17,7 +18,7 @@ const { values: options } = parseArgs({
 });
 
 if (options.help) {
-  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--fade-seconds=0.25] [--output=PATH]');
+  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--bridge-limit=2] [--fade-seconds=0.25] [--output=PATH]');
   process.exit(0);
 }
 
@@ -28,13 +29,13 @@ const mergedDirectory = join(runDirectory, 'merged');
 const sceneGlueDirectory = options['scene-glue-dir'] ? resolve(options['scene-glue-dir']) : null;
 const outputDirectory = sceneGlueDirectory || mergedDirectory;
 const cardsDirectory = join(outputDirectory, 'title-cards');
-const manifestPath = join(outputDirectory, sceneGlueDirectory ? 'film-order.txt' : 'full-film.txt');
 const cardDuration = Number(options['card-seconds']);
 const fadeDuration = Number(options['fade-seconds']);
 const ffmpeg = process.env.FFMPEG_BIN || 'ffmpeg';
 const ffprobe = process.env.FFPROBE_BIN || 'ffprobe';
 const magick = process.env.MAGICK_BIN || 'magick';
 const iterationLimit = options.limit === undefined ? Infinity : Number(options.limit);
+const bridgeLimit = options['bridge-limit'] === undefined ? null : Number(options['bridge-limit']);
 
 async function exists(path) {
   try {
@@ -54,6 +55,12 @@ if (!Number.isFinite(fadeDuration) || fadeDuration < 0 || fadeDuration > 2) {
 }
 if (!(iterationLimit === Infinity || (Number.isInteger(iterationLimit) && iterationLimit > 0))) {
   throw new Error('--limit must be a positive integer');
+}
+if (bridgeLimit !== null && (!Number.isInteger(bridgeLimit) || bridgeLimit < 0)) {
+  throw new Error('--bridge-limit must be a non-negative integer');
+}
+if (bridgeLimit !== null && !sceneGlueDirectory) {
+  throw new Error('--bridge-limit requires --scene-glue-dir');
 }
 
 function run(command, args, label) {
@@ -139,10 +146,49 @@ async function renderTitleCard(iterationDirectory, number, font) {
 
 const iterations = await getIterations();
 if (!iterations.length) throw new Error(`No iteration-NNN folders found in ${runDirectory}`);
+const selectedBridgePaths = new Set();
+let allBridgeCandidates = [];
+if (bridgeLimit !== null) {
+  for (const iterationDirectory of iterations) {
+    const iterationNumber = Number(iterationDirectory.match(/iteration-(\d+)/)?.[1]);
+    const iterationId = padIteration(iterationNumber);
+    const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
+    const scenes = record.plan?.scenes || [];
+    for (let index = 0; index < scenes.length - 1; index += 1) {
+      const previous = scenes[index];
+      const next = scenes[index + 1];
+      const bridge = join(
+        sceneGlueDirectory,
+        `iteration-${iterationId}`,
+        `scene-${padIteration(previous.index)}-to-${padIteration(next.index)}.mp4`,
+      );
+      if (!await exists(bridge)) throw new Error(`Missing scene bridge: ${bridge}`);
+      const requestPath = bridge.replace(/\.mp4$/, '-request.json');
+      const request = JSON.parse(await readFile(requestPath, 'utf8'));
+      allBridgeCandidates.push({ path: bridge, duration: Number(request.duration), order: allBridgeCandidates.length });
+    }
+  }
+  if (allBridgeCandidates.some((candidate) => !Number.isFinite(candidate.duration))) {
+    throw new Error('Bridge request is missing numeric duration');
+  }
+  const chosen = [...allBridgeCandidates]
+    .sort((left, right) => right.duration - left.duration || left.order - right.order)
+    .slice(0, bridgeLimit);
+  for (const candidate of chosen) selectedBridgePaths.add(candidate.path);
+  allBridgeCandidates = allBridgeCandidates.map((candidate) => ({
+    ...candidate,
+    selected: selectedBridgePaths.has(candidate.path),
+  }));
+}
 const outputPath = resolve(options.output || join(
   outputDirectory,
   sceneGlueDirectory ? `eu-reski-first-${iterations.length}-glued.mp4` : 'eu-reski-gesamtfilm.mp4',
 ));
+const outputStem = basename(outputPath, '.mp4');
+const manifestFileName = sceneGlueDirectory
+  ? (options.output ? `${outputStem}.film-order.txt` : 'film-order.txt')
+  : 'full-film.txt';
+const manifestPath = join(outputDirectory, manifestFileName);
 await mkdir(outputDirectory, { recursive: true });
 await mkdir(cardsDirectory, { recursive: true });
 
@@ -168,7 +214,11 @@ for (let index = 0; index < iterations.length; index += 1) {
     for (let index = 0; index < scenes.length; index += 1) {
       const scene = scenes[index];
       const sceneVideo = join(runDirectory, iterationDirectory, 'media', `scene-${scene.index}-video.mp4`);
-      addMedia(sceneVideo, index > 0 ? fadeDuration : 0);
+      const previousBridge = index > 0
+        ? join(sceneGlueDirectory, `iteration-${iterationId}`, `scene-${padIteration(scenes[index - 1].index)}-to-${padIteration(scene.index)}.mp4`)
+        : null;
+      const keepPreviousBridge = previousBridge && (bridgeLimit === null || selectedBridgePaths.has(previousBridge));
+      addMedia(sceneVideo, keepPreviousBridge ? fadeDuration : 0);
       if (index < scenes.length - 1) {
         const nextScene = scenes[index + 1];
         const bridge = join(
@@ -177,7 +227,7 @@ for (let index = 0; index < iterations.length; index += 1) {
           `scene-${padIteration(scene.index)}-to-${padIteration(nextScene.index)}.mp4`,
         );
         if (!await exists(bridge)) throw new Error(`Missing scene bridge: ${bridge}`);
-        addMedia(bridge);
+        if (bridgeLimit === null || selectedBridgePaths.has(bridge)) addMedia(bridge);
       }
     }
   } else {
@@ -187,6 +237,17 @@ for (let index = 0; index < iterations.length; index += 1) {
 }
 
 await writeFile(manifestPath, `${manifestEntries.join('\n')}\n`, 'utf8');
+if (bridgeLimit !== null) {
+  await writeFile(join(outputDirectory, `${outputStem}.assembly.json`), `${JSON.stringify({
+    outputPath,
+    iterationCount: iterations.length,
+    bridgeLimit,
+    selectedBridgeCount: selectedBridgePaths.size,
+    omittedBridgeCount: allBridgeCandidates.length - selectedBridgePaths.size,
+    fadeSeconds: fadeDuration,
+    bridgeCandidates: allBridgeCandidates,
+  }, null, 2)}\n`, 'utf8');
+}
 await mkdir(dirname(outputPath), { recursive: true });
 
 if (fadeDuration > 0) {
@@ -222,7 +283,7 @@ if (fadeDuration > 0) {
     previousAudio = outputAudio;
   }
 
-  const filterPath = join(outputDirectory, 'fade-filter.txt');
+  const filterPath = join(outputDirectory, `${outputStem}.fade-filter.txt`);
   const filterGraph = filters.join(';');
   await writeFile(filterPath, `${filters.join(';\n')}\n`, 'utf8');
   const args = ['-hide_banner', '-y'];
