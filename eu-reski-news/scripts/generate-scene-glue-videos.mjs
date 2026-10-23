@@ -9,7 +9,8 @@ const { values: options } = parseArgs({ options: {
   run: { type: 'string' }, iterations: { type: 'string', default: '5' },
   'output-dir': { type: 'string' }, model: { type: 'string', default: 'prunaai:p-video@2-pro' },
   resolution: { type: 'string', default: '480p' }, 'settings-mode': { type: 'string', default: 'cost' },
-  duration: { type: 'string', default: '5' }, concurrency: { type: 'string', default: '4' },
+  duration: { type: 'string', default: '5' }, 'duration-pattern': { type: 'string' },
+  'frame-offset-seconds': { type: 'string', default: '0.25' }, concurrency: { type: 'string', default: '4' },
   'poll-timeout-seconds': { type: 'string', default: '600' }, help: { type: 'boolean', default: false },
 } });
 
@@ -25,10 +26,28 @@ if (options['settings-mode'] !== 'cost') throw new Error('--settings-mode must b
 
 const iterationLimit = Number(options.iterations);
 const duration = Number(options.duration);
+const frameOffsetSeconds = Number(options['frame-offset-seconds']);
+const durationPattern = options['duration-pattern']
+  ? options['duration-pattern'].split(',').map((value) => Number(value.trim()))
+  : null;
+const durationTaktmuster = durationPattern ? {
+  index: 0,
+  getNext() {
+    const patternIndex = this.index;
+    this.index += 1;
+    return { patternValue: durationPattern[patternIndex % durationPattern.length], patternIndex };
+  },
+} : null;
 const concurrency = Number(options.concurrency);
 const pollTimeoutSeconds = Number(options['poll-timeout-seconds']);
 if (!Number.isInteger(iterationLimit) || iterationLimit < 1) throw new Error('--iterations must be a positive integer');
-if (duration !== 5) throw new Error('P-Video-2-Pro minimum duration is 5 seconds; keep --duration=5 for short bridges');
+if (!Number.isInteger(duration) || duration < 5 || duration > 15) throw new Error('--duration must be an integer from 5 to 15');
+if (!Number.isFinite(frameOffsetSeconds) || frameOffsetSeconds <= 0 || frameOffsetSeconds > 1) {
+  throw new Error('--frame-offset-seconds must be greater than 0 and no more than 1');
+}
+if (durationPattern && (!durationPattern.length || durationPattern.some((value) => !Number.isInteger(value) || value < 5 || value > 15))) {
+  throw new Error('--duration-pattern must be comma-separated integer durations from 5 to 15 seconds');
+}
 if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 8) throw new Error('--concurrency must be an integer from 1 to 8');
 if (!Number.isInteger(pollTimeoutSeconds) || pollTimeoutSeconds < 10 || pollTimeoutSeconds > 1800) {
   throw new Error('--poll-timeout-seconds must be an integer from 10 to 1800');
@@ -68,16 +87,18 @@ async function getIterations() {
   return iterations.slice(0, iterationLimit);
 }
 
-async function extractFrame(videoPath, outputPath, endFrame) {
+async function extractFrame(videoPath, outputPath, offsetFromStart, offsetFromEnd = false) {
   if (await exists(outputPath)) return;
   await mkdir(dirname(outputPath), { recursive: true });
-  const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', videoPath];
-  if (endFrame) args.push('-vf', 'reverse');
+  const args = ['-hide_banner', '-loglevel', 'error', '-y'];
+  if (offsetFromEnd) args.push('-sseof', `-${offsetFromStart}`);
+  else args.push('-ss', String(offsetFromStart));
+  args.push('-i', videoPath);
   args.push('-frames:v', '1', '-q:v', '2', outputPath);
   runFfmpeg(args);
 }
 
-async function prepareTransition(iterationDirectory, previousScene, nextScene) {
+async function prepareTransition(iterationDirectory, previousScene, nextScene, transitionDuration, patternIndex) {
   const iterationNumber = Number(iterationDirectory.match(/iteration-(\d+)/)?.[1]);
   const previousNumber = Number(previousScene.index);
   const nextNumber = Number(nextScene.index);
@@ -92,15 +113,15 @@ async function prepareTransition(iterationDirectory, previousScene, nextScene) {
   const nextVideo = join(runDirectory, iterationDirectory, 'media', `scene-${nextNumber}-video.mp4`);
   const firstFramePath = join(directory, `${transitionId}-first.jpg`);
   const lastFramePath = join(directory, `${transitionId}-last.jpg`);
-  await extractFrame(previousVideo, firstFramePath, true);
-  await extractFrame(nextVideo, lastFramePath, false);
+  await extractFrame(previousVideo, firstFramePath, frameOffsetSeconds, true);
+  await extractFrame(nextVideo, lastFramePath, frameOffsetSeconds);
 
   const before = previousScene.storyBeat || previousScene.title || '';
   const after = nextScene.storyBeat || nextScene.title || '';
   const articleTitle = (await json(join(runDirectory, iterationDirectory, 'record.json'))).article.title;
   const prompt = [
-    `Create a single continuous ${duration}-second bridge shot for the article story "${articleTitle}".`,
-    'The supplied first frame is the exact last frame of scene before. The supplied last frame is the exact first frame of the next scene.',
+    `Create a single continuous ${transitionDuration}-second bridge shot for the article story "${articleTitle}".`,
+    `The supplied first frame is from ${frameOffsetSeconds} seconds before the previous scene ends. The supplied last frame is from ${frameOffsetSeconds} seconds into the next scene.`,
     'Begin on the first frame and finish on the last frame. Let movement connect the two compositions naturally; no cut, fade, title, or new scene.',
     'Preserve the existing dark, nearly monochrome cubist mural style, charcoal, chalk-white and ash-gray palette, rough brushwork and shallow space.',
     'Keep the same people and visual motifs recognizable. Do not add readable text, logos, photorealism, or new characters.',
@@ -129,7 +150,7 @@ async function prepareTransition(iterationDirectory, previousScene, nextScene) {
       ],
     },
     resolution: options.resolution,
-    duration,
+    duration: transitionDuration,
     numberResults: 1,
     deliveryMethod: 'async',
     includeCost: true,
@@ -139,6 +160,8 @@ async function prepareTransition(iterationDirectory, previousScene, nextScene) {
   if (!savedRequest) await save(requestPath, {
     ...task,
     taskUUID,
+    durationPatternIndex: patternIndex,
+    frameOffsetSeconds,
     renderStartedAt: new Date().toISOString(),
     inputs: { frameImages: [
       { image: firstFramePath, frame: 'first' },
@@ -146,7 +169,10 @@ async function prepareTransition(iterationDirectory, previousScene, nextScene) {
     ] },
   });
 
-  return { task, taskUUID, requestPath, pendingPath, submissionPath, responsePath, videoPath, firstFramePath, lastFramePath };
+  return {
+    task, taskUUID, requestPath, pendingPath, submissionPath, responsePath, videoPath,
+    firstFramePath, lastFramePath, transitionDuration, patternIndex,
+  };
 }
 
 async function apiRequest(body, timeoutMs = 240_000) {
@@ -278,7 +304,15 @@ for (const iterationDirectory of iterations) {
   const scenes = iterationRecord.plan?.scenes || [];
   if (scenes.length < 2) throw new Error(`${iterationDirectory} has fewer than two planned scenes`);
   for (let index = 0; index < scenes.length - 1; index += 1) {
-    jobs.push(await prepareTransition(iterationDirectory, scenes[index], scenes[index + 1]));
+    const nextDuration = durationTaktmuster?.getNext();
+    const transitionDuration = nextDuration?.patternValue ?? duration;
+    jobs.push(await prepareTransition(
+      iterationDirectory,
+      scenes[index],
+      scenes[index + 1],
+      transitionDuration,
+      nextDuration?.patternIndex ?? jobs.length,
+    ));
   }
 }
 
@@ -303,7 +337,11 @@ const summary = {
   model: options.model,
   resolution: options.resolution,
   settingsMode: options['settings-mode'],
-  requestedDurationSeconds: duration,
+  requestedDurationSeconds: durationPattern ? null : duration,
+  durationPatternSeconds: durationPattern,
+  durationPatternType: durationPattern ? 'long cyclic getNext sequence' : null,
+  durationPatternStepsConsumed: durationTaktmuster?.index ?? 0,
+  frameOffsetSeconds,
   iterationCount: iterations.length,
   transitionCount: jobs.length,
   transitionsPerIteration: jobs.length / iterations.length,

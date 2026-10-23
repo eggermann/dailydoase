@@ -305,3 +305,18 @@ npm run news:assemble-film -- \
 Aus 5 Iterationen × 5 Szenen entstehen 20 Übergangsclips. Dateien landen unter `run-001/glue-vids/iteration-NNN/scene-NNN-to-NNN.mp4`; jeweilige `*-first.jpg` und `*-last.jpg`, API-Request/Response und `glue-run.json` bleiben dort als Referenz. Der Film-Merge legt die Titelkarten in `glue-vids/title-cards/` ab. Quelle je Karte: `iteration-NNN/record.json` → `article.title`. `glue-vids/film-order.txt` protokolliert Filmreihenfolge; Ausgabe heißt `glue-vids/eu-reski-first-5-glued.mp4`.
 
 Der Generator ist resumierbar: denselben Befehl erneut aufrufen. Vorhandene Übergänge werden übersprungen; angelegte Request-UUIDs werden erst über Runware abgefragt, damit ein Retry keinen neuen bezahlten Auftrag erzeugt. `glue-run.json` enthält tatsächlich gemeldete Kosten. Aktuelle Runware-Spezifikation und Tarif können sich ändern; siehe [P-Video-2-Pro API](https://runware.ai/docs/models/prunaai-p-video-2-pro) und [First/last-frame guide](https://runware.ai/docs/models/prunaai-p-video-2-pro/guides/first-and-last-frame).
+
+### Langtest mit zwei Iterationen und First-Last-Frames
+
+```sh
+RUN="eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001"
+export DAILYDOASE_ENV_FILE="/Users/eggermann/Projekte/dailydoase/.env"
+npm run news:glue-scenes -- --run="$RUN" --iterations=2 \
+  --duration-pattern=9,5,7,5,8 --frame-offset-seconds=0.25 \
+  --output-dir="$RUN/glue-vids-long" --concurrency=4
+npm run news:assemble-film -- --run-dir="$RUN" \
+  --scene-glue-dir="$RUN/glue-vids-long" --limit=2 --fade-seconds=0.25 \
+  --output="$RUN/glue-vids-long/eu-reski-iterations-001-002-long-pattern-fade-025.mp4"
+```
+
+Der zyklische `getNext()`-Strom weist den acht Übergängen `9,5,7,5,8,9,5,7` Sekunden zu. Vorheriges Endbild wird bei `Ende − 0,25 s`, nächstes Startbild bei `Start + 0,25 s` extrahiert. FFmpeg blendet beide Clipkanten mit demselben 0,25-s-Fade und Audio-Crossfade ein. Szenenanfang nach einer Brücke wird dafür um 0,25 s versetzt; es wird weiterhin keine Brücke zwischen Iterationen erzeugt. Ergebnis und Referenzen liegen in `glue-vids-long/`; `glue-run.json`, `film-order.txt` und `fade-filter.txt` protokollieren Muster, Reihenfolge und Filter.

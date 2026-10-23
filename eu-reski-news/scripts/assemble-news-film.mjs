@@ -10,13 +10,14 @@ const { values: options } = parseArgs({
     limit: { type: 'string' },
     output: { type: 'string' },
     'card-seconds': { type: 'string', default: '4' },
+    'fade-seconds': { type: 'string', default: '0' },
     font: { type: 'string' },
     help: { type: 'boolean', default: false },
   },
 });
 
 if (options.help) {
-  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--output=PATH]');
+  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--fade-seconds=0.25] [--output=PATH]');
   process.exit(0);
 }
 
@@ -29,7 +30,9 @@ const outputDirectory = sceneGlueDirectory || mergedDirectory;
 const cardsDirectory = join(outputDirectory, 'title-cards');
 const manifestPath = join(outputDirectory, sceneGlueDirectory ? 'film-order.txt' : 'full-film.txt');
 const cardDuration = Number(options['card-seconds']);
+const fadeDuration = Number(options['fade-seconds']);
 const ffmpeg = process.env.FFMPEG_BIN || 'ffmpeg';
+const ffprobe = process.env.FFPROBE_BIN || 'ffprobe';
 const magick = process.env.MAGICK_BIN || 'magick';
 const iterationLimit = options.limit === undefined ? Infinity : Number(options.limit);
 
@@ -45,6 +48,9 @@ async function exists(path) {
 
 if (!Number.isFinite(cardDuration) || cardDuration <= 0) {
   throw new Error('--card-seconds must be a positive number');
+}
+if (!Number.isFinite(fadeDuration) || fadeDuration < 0 || fadeDuration > 2) {
+  throw new Error('--fade-seconds must be from 0 to 2 seconds');
 }
 if (!(iterationLimit === Infinity || (Number.isInteger(iterationLimit) && iterationLimit > 0))) {
   throw new Error('--limit must be a positive integer');
@@ -142,6 +148,11 @@ await mkdir(cardsDirectory, { recursive: true });
 
 const font = findFont();
 const manifestEntries = [];
+const orderedFiles = [];
+function addMedia(path, trimStart = 0) {
+  manifestEntries.push(`file '${relative(dirname(manifestPath), path).split(sep).join('/')}'`);
+  orderedFiles.push({ path, trimStart });
+}
 for (let index = 0; index < iterations.length; index += 1) {
   const iterationDirectory = iterations[index];
   const iterationNumber = Number(iterationDirectory.match(/iteration-(\d+)/)?.[1]);
@@ -149,7 +160,7 @@ for (let index = 0; index < iterations.length; index += 1) {
   const iterationId = padIteration(iterationNumber);
   const titleVideoPath = await renderTitleCard(iterationDirectory, iterationNumber, font);
 
-  manifestEntries.push(`file '${relative(dirname(manifestPath), titleVideoPath).split(sep).join('/')}'`);
+  addMedia(titleVideoPath);
   if (sceneGlueDirectory) {
     const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
     const scenes = record.plan?.scenes || [];
@@ -157,7 +168,7 @@ for (let index = 0; index < iterations.length; index += 1) {
     for (let index = 0; index < scenes.length; index += 1) {
       const scene = scenes[index];
       const sceneVideo = join(runDirectory, iterationDirectory, 'media', `scene-${scene.index}-video.mp4`);
-      manifestEntries.push(`file '${relative(dirname(manifestPath), sceneVideo).split(sep).join('/')}'`);
+      addMedia(sceneVideo, index > 0 ? fadeDuration : 0);
       if (index < scenes.length - 1) {
         const nextScene = scenes[index + 1];
         const bridge = join(
@@ -166,23 +177,70 @@ for (let index = 0; index < iterations.length; index += 1) {
           `scene-${padIteration(scene.index)}-to-${padIteration(nextScene.index)}.mp4`,
         );
         if (!await exists(bridge)) throw new Error(`Missing scene bridge: ${bridge}`);
-        manifestEntries.push(`file '${relative(dirname(manifestPath), bridge).split(sep).join('/')}'`);
+        addMedia(bridge);
       }
     }
   } else {
     const mergedClip = join(mergedDirectory, `iteration-${iterationId}.mp4`);
-    manifestEntries.push(`file '${relative(dirname(manifestPath), mergedClip).split(sep).join('/')}'`);
+    addMedia(mergedClip);
   }
 }
 
 await writeFile(manifestPath, `${manifestEntries.join('\n')}\n`, 'utf8');
 await mkdir(dirname(outputPath), { recursive: true });
 
-runWithOutput(ffmpeg, [
-  '-hide_banner', '-y', '-f', 'concat', '-safe', '0', '-i', manifestPath,
-  '-vf', 'fps=24,format=yuv420p', '-af', 'aresample=async=1:first_pts=0',
-  '-c:v', 'libx264', '-preset', 'fast', '-crf', '18', '-c:a', 'aac', '-b:a', '160k',
-  '-ar', '32000', '-ac', '2', '-movflags', '+faststart', outputPath,
-], 'FFmpeg');
+if (fadeDuration > 0) {
+  if (orderedFiles.length < 2) throw new Error('At least two clips are required for an FFmpeg fade');
+  const durations = orderedFiles.map(({ path, trimStart }) => {
+    const rawDuration = Number(run(ffprobe, [
+      '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', path,
+    ], 'FFprobe').trim());
+    const duration = rawDuration - trimStart;
+    if (!Number.isFinite(duration) || duration <= fadeDuration) throw new Error(`Clip too short for fade: ${path}`);
+    return duration;
+  });
+
+  const filters = [];
+  orderedFiles.forEach(({ trimStart }, index) => {
+    const videoTrim = trimStart > 0 ? `trim=start=${trimStart},` : '';
+    const audioTrim = trimStart > 0 ? `atrim=start=${trimStart},` : '';
+    filters.push(`[${index}:v]${videoTrim}settb=AVTB,setpts=PTS-STARTPTS,scale=832:480:force_original_aspect_ratio=decrease,pad=832:480:(ow-iw)/2:(oh-ih)/2,fps=24,format=yuv420p[v${index}]`);
+    filters.push(`[${index}:a]${audioTrim}aresample=32000:async=1:first_pts=0,aformat=sample_fmts=fltp:channel_layouts=stereo,asetpts=PTS-STARTPTS[a${index}]`);
+  });
+
+  let accumulatedDuration = durations[0];
+  let previousVideo = 'v0';
+  let previousAudio = 'a0';
+  for (let index = 1; index < orderedFiles.length; index += 1) {
+    const outputVideo = `vx${index}`;
+    const outputAudio = `ax${index}`;
+    const offset = Number((accumulatedDuration - fadeDuration).toFixed(6));
+    filters.push(`[${previousVideo}][v${index}]xfade=transition=fade:duration=${fadeDuration}:offset=${offset}[${outputVideo}]`);
+    filters.push(`[${previousAudio}][a${index}]acrossfade=d=${fadeDuration}:c1=tri:c2=tri[${outputAudio}]`);
+    accumulatedDuration = offset + durations[index];
+    previousVideo = outputVideo;
+    previousAudio = outputAudio;
+  }
+
+  const filterPath = join(outputDirectory, 'fade-filter.txt');
+  const filterGraph = filters.join(';');
+  await writeFile(filterPath, `${filters.join(';\n')}\n`, 'utf8');
+  const args = ['-hide_banner', '-y'];
+  for (const { path } of orderedFiles) args.push('-i', path);
+  args.push(
+    '-filter_complex', filterGraph,
+    '-map', `[${previousVideo}]`, '-map', `[${previousAudio}]`,
+    '-c:v', 'libx264', '-preset', 'fast', '-crf', '18', '-pix_fmt', 'yuv420p',
+    '-c:a', 'aac', '-b:a', '160k', '-ar', '32000', '-ac', '2', '-movflags', '+faststart', outputPath,
+  );
+  runWithOutput(ffmpeg, args, 'FFmpeg');
+} else {
+  runWithOutput(ffmpeg, [
+    '-hide_banner', '-y', '-f', 'concat', '-safe', '0', '-i', manifestPath,
+    '-vf', 'fps=24,format=yuv420p', '-af', 'aresample=async=1:first_pts=0',
+    '-c:v', 'libx264', '-preset', 'fast', '-crf', '18', '-c:a', 'aac', '-b:a', '160k',
+    '-ar', '32000', '-ac', '2', '-movflags', '+faststart', outputPath,
+  ], 'FFmpeg');
+}
 
 console.log(`Film: ${outputPath}`);
