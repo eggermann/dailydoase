@@ -289,3 +289,18 @@ npm run news:assemble-film -- --run-dir="$OUT_ROOT/run-001"
 ```
 
 Für diesen Lauf kosteten Runware-Bilder und -Videos zusammen $3.9005 (GPT separat). Der fertige Film ist 5:34 Minuten lang. Die Karten zeigen Artikelüberschriften in Originalsprache, jeweils vor dem passenden Iterationsfilm.
+
+### First-Last-Frame-Brücken innerhalb einer Iteration
+
+Für Iterationen 1–5 zwischen jedem benachbarten Szenenclip eine neue 5-Sekunden-Brücke erzeugen. Jede Brücke startet mit dem letzten decodierten Frame der vorherigen Szene und endet mit dem ersten Frame der nächsten Szene derselben Iteration. Es gibt keine Brücke über Iterationsgrenzen hinweg. Runware P-Video-2-Pro akzeptiert beide Endpunkte als `inputs.frameImages` (`frame: "first"` / `frame: "last"`); Mindestdauer beträgt fünf Sekunden.
+
+```sh
+RUN="eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001"
+npm run news:glue-scenes -- --run="$RUN" --iterations=5
+npm run news:assemble-film -- \
+  --run-dir="$RUN" --scene-glue-dir="$RUN/glue-vids" --limit=5
+```
+
+Aus 5 Iterationen × 5 Szenen entstehen 20 Übergangsclips. Dateien landen unter `run-001/glue-vids/iteration-NNN/scene-NNN-to-NNN.mp4`; jeweilige `*-first.jpg` und `*-last.jpg`, API-Request/Response und `glue-run.json` bleiben dort als Referenz. Der Film-Merge legt die Titelkarten in `glue-vids/title-cards/` ab. Quelle je Karte: `iteration-NNN/record.json` → `article.title`. `glue-vids/film-order.txt` protokolliert Filmreihenfolge; Ausgabe heißt `glue-vids/eu-reski-first-5-glued.mp4`.
+
+Der Generator ist resumierbar: denselben Befehl erneut aufrufen. Vorhandene Übergänge werden übersprungen; angelegte Request-UUIDs werden erst über Runware abgefragt, damit ein Retry keinen neuen bezahlten Auftrag erzeugt. `glue-run.json` enthält tatsächlich gemeldete Kosten. Aktuelle Runware-Spezifikation und Tarif können sich ändern; siehe [P-Video-2-Pro API](https://runware.ai/docs/models/prunaai-p-video-2-pro) und [First/last-frame guide](https://runware.ai/docs/models/prunaai-p-video-2-pro/guides/first-and-last-frame).

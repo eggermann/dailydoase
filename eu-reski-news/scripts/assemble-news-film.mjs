@@ -1,11 +1,13 @@
 import { execFileSync } from 'node:child_process';
-import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
-import { basename, dirname, join, resolve } from 'node:path';
+import { mkdir, readFile, readdir, stat, unlink, writeFile } from 'node:fs/promises';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { parseArgs } from 'node:util';
 
 const { values: options } = parseArgs({
   options: {
     'run-dir': { type: 'string' },
+    'scene-glue-dir': { type: 'string' },
+    limit: { type: 'string' },
     output: { type: 'string' },
     'card-seconds': { type: 'string', default: '4' },
     font: { type: 'string' },
@@ -14,7 +16,7 @@ const { values: options } = parseArgs({
 });
 
 if (options.help) {
-  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--output=PATH] [--card-seconds=4] [--font=PATH]');
+  console.log('Usage: npm run news:assemble-film -- --run-dir=PATH [--scene-glue-dir=PATH] [--limit=5] [--output=PATH]');
   process.exit(0);
 }
 
@@ -22,15 +24,30 @@ if (!options['run-dir']) throw new Error('--run-dir is required');
 
 const runDirectory = resolve(options['run-dir']);
 const mergedDirectory = join(runDirectory, 'merged');
-const cardsDirectory = join(mergedDirectory, 'title-cards');
-const manifestPath = join(mergedDirectory, 'full-film.txt');
-const outputPath = resolve(options.output || join(mergedDirectory, 'eu-reski-gesamtfilm.mp4'));
+const sceneGlueDirectory = options['scene-glue-dir'] ? resolve(options['scene-glue-dir']) : null;
+const outputDirectory = sceneGlueDirectory || mergedDirectory;
+const cardsDirectory = join(outputDirectory, 'title-cards');
+const manifestPath = join(outputDirectory, sceneGlueDirectory ? 'film-order.txt' : 'full-film.txt');
 const cardDuration = Number(options['card-seconds']);
 const ffmpeg = process.env.FFMPEG_BIN || 'ffmpeg';
 const magick = process.env.MAGICK_BIN || 'magick';
+const iterationLimit = options.limit === undefined ? Infinity : Number(options.limit);
+
+async function exists(path) {
+  try {
+    await stat(path);
+    return true;
+  } catch (error) {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  }
+}
 
 if (!Number.isFinite(cardDuration) || cardDuration <= 0) {
   throw new Error('--card-seconds must be a positive number');
+}
+if (!(iterationLimit === Infinity || (Number.isInteger(iterationLimit) && iterationLimit > 0))) {
+  throw new Error('--limit must be a positive integer');
 }
 
 function run(command, args, label) {
@@ -60,14 +77,15 @@ async function getIterations() {
   try {
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
     const iterations = manifest.iterations?.map((entry) => entry.directory).filter(Boolean);
-    if (iterations?.length) return iterations;
+    if (iterations?.length) return iterations.slice(0, iterationLimit);
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
   }
 
   return (await readdir(runDirectory))
     .filter((name) => /^iteration-\d+$/.test(name))
-    .sort((left, right) => left.localeCompare(right, 'en', { numeric: true }));
+    .sort((left, right) => left.localeCompare(right, 'en', { numeric: true }))
+    .slice(0, iterationLimit);
 }
 
 function findFont() {
@@ -115,7 +133,11 @@ async function renderTitleCard(iterationDirectory, number, font) {
 
 const iterations = await getIterations();
 if (!iterations.length) throw new Error(`No iteration-NNN folders found in ${runDirectory}`);
-await mkdir(mergedDirectory, { recursive: true });
+const outputPath = resolve(options.output || join(
+  outputDirectory,
+  sceneGlueDirectory ? `eu-reski-first-${iterations.length}-glued.mp4` : 'eu-reski-gesamtfilm.mp4',
+));
+await mkdir(outputDirectory, { recursive: true });
 await mkdir(cardsDirectory, { recursive: true });
 
 const font = findFont();
@@ -125,11 +147,32 @@ for (let index = 0; index < iterations.length; index += 1) {
   const iterationNumber = Number(iterationDirectory.match(/iteration-(\d+)/)?.[1]);
   if (!Number.isInteger(iterationNumber)) throw new Error(`Invalid iteration directory: ${iterationDirectory}`);
   const iterationId = padIteration(iterationNumber);
-  const mergedClip = join(mergedDirectory, `iteration-${iterationId}.mp4`);
   const titleVideoPath = await renderTitleCard(iterationDirectory, iterationNumber, font);
 
-  manifestEntries.push(`file 'title-cards/${basename(titleVideoPath)}'`);
-  manifestEntries.push(`file '${basename(mergedClip)}'`);
+  manifestEntries.push(`file '${relative(dirname(manifestPath), titleVideoPath).split(sep).join('/')}'`);
+  if (sceneGlueDirectory) {
+    const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
+    const scenes = record.plan?.scenes || [];
+    if (!scenes.length) throw new Error(`No scenes found in ${iterationDirectory}/record.json`);
+    for (let index = 0; index < scenes.length; index += 1) {
+      const scene = scenes[index];
+      const sceneVideo = join(runDirectory, iterationDirectory, 'media', `scene-${scene.index}-video.mp4`);
+      manifestEntries.push(`file '${relative(dirname(manifestPath), sceneVideo).split(sep).join('/')}'`);
+      if (index < scenes.length - 1) {
+        const nextScene = scenes[index + 1];
+        const bridge = join(
+          sceneGlueDirectory,
+          `iteration-${iterationId}`,
+          `scene-${padIteration(scene.index)}-to-${padIteration(nextScene.index)}.mp4`,
+        );
+        if (!await exists(bridge)) throw new Error(`Missing scene bridge: ${bridge}`);
+        manifestEntries.push(`file '${relative(dirname(manifestPath), bridge).split(sep).join('/')}'`);
+      }
+    }
+  } else {
+    const mergedClip = join(mergedDirectory, `iteration-${iterationId}.mp4`);
+    manifestEntries.push(`file '${relative(dirname(manifestPath), mergedClip).split(sep).join('/')}'`);
+  }
 }
 
 await writeFile(manifestPath, `${manifestEntries.join('\n')}\n`, 'utf8');
