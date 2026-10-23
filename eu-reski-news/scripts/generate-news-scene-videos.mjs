@@ -168,10 +168,11 @@ async function generateScene(directory, record, scene, index) {
   }
   const imagePath = record.results?.[index]?.path;
   if (!imagePath || !scene.videoPrompt) throw new Error(`Scene ${scene.index} needs a saved start image and video prompt`);
-  const duration = Number(scene.durationSeconds);
+  const plannedDuration = Number(scene.durationSeconds);
+  const duration = plannedDuration;
   const minimumDuration = usesPVideo2Pro ? 5 : 2;
-  const maximumDuration = usesPVideo2Pro ? 6 : 7;
-  if (!Number.isInteger(duration) || duration < minimumDuration || duration > maximumDuration) throw new Error(`Scene ${scene.index} duration ${scene.durationSeconds} is outside ${minimumDuration}–${maximumDuration} seconds`);
+  const maximumPlannedDuration = usesPVideo2Pro ? 15 : 7;
+  if (!Number.isInteger(plannedDuration) || plannedDuration < minimumDuration || plannedDuration > maximumPlannedDuration) throw new Error(`Scene ${scene.index} duration ${scene.durationSeconds} is outside ${minimumDuration}–${maximumPlannedDuration} seconds`);
 
   const name = `scene-${scene.index}-video`;
   const requestPath = join(directory, `${name}-request.json`);
@@ -290,7 +291,9 @@ async function generateScene(directory, record, scene, index) {
   record.videoResults ||= [];
   record.videoResults[index] = {
     provider: 'Runware', model: values.model, path: localPath,
-    durationSeconds: videoStream.duration, requestedDurationSeconds: duration, resolution: values.resolution,
+    durationSeconds: videoStream.duration, requestedDurationSeconds: duration,
+    ...(plannedDuration !== duration ? { plannedDurationSeconds: plannedDuration } : {}),
+    resolution: values.resolution,
     ...(usesPVideo2Pro ? { settings: { mode: settingsMode } } : { outputQuality }),
     renderStartedAt, renderedAt, savedAt: savedAt.toISOString(),
     renderSeconds: Number(((Date.parse(renderedAt) - Date.parse(renderStartedAt)) / 1000).toFixed(1)),
@@ -307,7 +310,7 @@ async function generateScene(directory, record, scene, index) {
   await saveHtml(directory, record);
   await safeSave(join(directory, 'film-plan.json'), record.filmPlan);
   await unlink(pendingPath).catch(() => {});
-  console.log(`VIDEO_READY ${resolve(directory, localPath)} · ${duration}s · ${values.resolution} · cost=${result.cost ?? 'n/a'}`);
+  console.log(`VIDEO_READY ${resolve(directory, localPath)} · ${duration}s P-Video${plannedDuration !== duration ? ` (plan ${plannedDuration}s)` : ''} · ${values.resolution} · cost=${result.cost ?? 'n/a'}`);
 }
 
 async function concatenateIteration(directory, record) {

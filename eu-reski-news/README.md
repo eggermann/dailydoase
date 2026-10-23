@@ -239,7 +239,7 @@ Der finale, tatsächlich an Grok gesendete Prompt ist pro Szene im Filmplan, im 
 
 ## Linearer P-Video-2-Pro-Lauf
 
-`--videos-after-each-iteration` startet nach der Bild- und Szenenplanung jeder Iteration direkt die passende Image-to-Video-Erzeugung und fügt die fertigen Clips in `merged/iteration-NNN.mp4` zusammen. Der Video-Starter sendet das erste Bild als `inputs.frameImages`, `resolution: "480p"`, eine ganzzahlige Dauer von 5 oder 6 Sekunden und `settings.mode: "cost"`; `outputQuality` bleibt weg. So bleibt API-Payload mit P-Video-2-Pro-Schema kompatibel. `--iteration=iteration-NNN` erlaubt gezieltes Fortsetzen einer einzelnen Iteration. Pro Clip und im Sammel-HTML stehen Anbieter-Kosten.
+`--videos-after-each-iteration` startet nach der Bild- und Szenenplanung jeder Iteration direkt die passende Image-to-Video-Erzeugung und fügt die fertigen Clips in `merged/iteration-NNN.mp4` zusammen. Der Video-Starter sendet das erste Bild als `inputs.frameImages`, `resolution: "480p"`, eine ganzzahlige Dauer von 5 bis 15 Sekunden und `settings.mode: "cost"`; `outputQuality` bleibt weg. So bleibt API-Payload mit P-Video-2-Pro-Schema kompatibel. `--iteration=iteration-NNN` erlaubt gezieltes Fortsetzen einer einzelnen Iteration. Pro Clip und im Sammel-HTML stehen Anbieter-Kosten.
 
 Beispiel für zehn lineare Iterationen mit je fünf Szenen:
 
