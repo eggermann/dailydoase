@@ -46,12 +46,26 @@ export async function findRankedNewsCollections(newsDirectory) {
       const score = Number(entry.euRelevance);
       return [key, Number.isFinite(score) ? score : undefined];
     }));
+    const seenStoryImages = new Set();
     const candidates = (aggregate.news || [])
       .map((article, index) => ({ article, aggregateIndex: index, score: scores.get(articleKey(article)) }))
       .filter(({ article }) => /^https?:\/\//i.test(article.image || '') && (article.text || article.summary))
       .sort((left, right) => (right.score ?? -1) - (left.score ?? -1)
         || (right.article.publish_date ?? '').localeCompare(left.article.publish_date ?? '')
-        || left.aggregateIndex - right.aggregateIndex);
+        || left.aggregateIndex - right.aggregateIndex)
+      .filter(({ article }) => {
+        let imageUrl;
+        try {
+          imageUrl = new URL(article.image);
+          imageUrl.hash = '';
+        } catch {
+          return false;
+        }
+        const storyImage = [article.source_country || '', article.publish_date || '', imageUrl.href].join('|');
+        if (seenStoryImages.has(storyImage)) return false;
+        seenStoryImages.add(storyImage);
+        return true;
+      });
 
     if (candidates.length) rankedCollections.push({
       aggregate,

@@ -80,6 +80,23 @@ const recordStyleOptions = {
   layering,
 };
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
+const articleImageChecks = new Map();
+async function hasUsableArticleImage(url) {
+  if (articleImageChecks.has(url)) return articleImageChecks.get(url);
+  const check = (async () => {
+    if (!/^https?:\/\//i.test(url || '')) return false;
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(15000) });
+      const mimeType = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase();
+      await response.body?.cancel().catch(() => {});
+      return response.ok && ['image/jpeg', 'image/png', 'image/webp'].includes(mimeType);
+    } catch {
+      return false;
+    }
+  })();
+  articleImageChecks.set(url, check);
+  return check;
+}
 async function exists(path) {
   try { await stat(path); return true; } catch (error) { if (error.code === 'ENOENT') return false; throw error; }
 }
@@ -828,14 +845,27 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const rankedCollection = rankedCollections[0];
       const { aggregate, aggregatePath: sourceAggregate, candidates } = rankedCollection;
       const order = options['article-order'];
-      const draw = options['article-id']
+      const requestedDraw = options['article-id']
         ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
         : order === 'random'
           ? randomInt(candidates.length)
           : articleProgress?.sourceAggregate === rankedCollection.aggregatePath
             ? articleProgress.nextDraw % candidates.length
             : 0;
-      if (draw < 0) throw new Error('Requested article is missing or has no usable text and image');
+      if (requestedDraw < 0) throw new Error('Requested article is missing or has no usable text and image');
+      let draw = -1;
+      const searchCount = options['article-id'] ? 1 : candidates.length;
+      for (let offset = 0; offset < searchCount; offset += 1) {
+        const candidateIndex = (requestedDraw + offset) % candidates.length;
+        const candidate = candidates[candidateIndex];
+        if (await hasUsableArticleImage(candidate.article.image)) {
+          draw = candidateIndex;
+          break;
+        }
+        console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
+        if (options['article-id']) break;
+      }
+      if (draw < 0) throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
       const { article, aggregateIndex, score } = candidates[draw];
       console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
       const sceneCountSelection = sceneCountStream.next();
