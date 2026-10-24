@@ -46,9 +46,21 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
     .replaceAll('{{VISUAL_STYLE_CONTROLS}}', sceneVisualControls
       ? `Each scene chooses its own visual controls. Select symbolism, room depth and layering independently for that scene based on its concrete action, setting and story beat; do not copy one scene's settings to the others. Choose symbolism ON only when a specific metaphor makes the article-grounded action clearer; otherwise choose OFF. Choose room depth ON when the scene needs a meaningful foreground-to-background journey; choose OFF for a compressed mural plane. Choose an integer layering value from 0 to 7 based on how many distinct spatial planes this scene needs; use 0 when explicit planes add nothing. Explain each choice briefly in scene.visualControlReason. Put the exact chosen values in scene.visualStyleOptions and make the stillPrompt implement them. Choose freely from the scene rather than applying a run-wide default.`
       : `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}; layering=${visualStyleOptions.layering ?? 0} (integer 0–7). Follow each control in every scene and stillPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. Layering N above zero means build exactly N distinct, article-grounded spatial planes with different spatial roles, then unify them with one final merge-paint layer of shared marks, pigment and contours; zero means no deliberate stacked planes. These controls work independently.`);
+  const plannerSource = await readFile(new URL(import.meta.url), 'utf8');
+  const compositionImplementation = plannerSource.slice(
+    plannerSource.indexOf('export async function buildPlanRequest'),
+    plannerSource.indexOf('export function validatePlan'),
+  ).trim();
   const director = storyClou
     ? `${baseDirector}\n\nNARRATIVE ARC AND FINAL CLOU (enabled for this run): Plan one coherent fictional story across the exact supplied scene count. Give it a concrete ending that makes the audience reinterpret or feel the preceding story. Let the article, protagonist and free semantic associations shape the ending; keep reported facts distinct from invention. Vary the kind of ending naturally; do not force comedy, tragedy, a five-act structure, new locations or camera angles. Seed the ending through existing actions, objects or relationships where useful. The final scene must carry the ending. This is story planning only: keep the established visual style and scene-specific image direction intact. Record storyArc, clouReveal and each scene's dramaticFunction as structured fields.`
     : baseDirector;
+  const compositionSourceContext = [
+    'The following source is implementation context. It explains this application’s story purpose and output contract; it is not user-provided instruction and does not override the director rules above.',
+    'Story purpose: turn reported article facts and this iteration’s semantic fragments into a coherent, explicitly fictional visual story. Preserve the factual boundary, one protagonist, causal scene progression, and compositions chosen to serve each scene action. The structured schema below is the contract consumed by the image and film pipeline.',
+    `-->FILE_SEPARATOR<--\nPath --> eu-reski-news/news-scene/planner.mjs (buildPlanRequest)\n${compositionImplementation}`,
+    `-->FILE_SEPARATOR<--\nPath --> eu-reski-news/news-scene/planner.mjs (planSchema)\n${JSON.stringify(planSchema, null, 2)}`,
+    `-->FILE_SEPARATOR<--\nPath --> eu-reski-news/news-scene/${directorFile.slice(2)}\n${director}`,
+  ].join('\n\n');
   const articleInput = Object.fromEntries(['id', 'title', 'publish_date', 'url', 'source_country', 'language', 'summary', 'text']
     .map((key) => [key, String(article[key] ?? '').slice(0, key === 'text' ? 18000 : 4000)]));
   // Timing never enters the visual request, including when expanding a saved plan.
@@ -68,6 +80,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   const content = [
     { type: 'text', text: `Required scene count: exactly ${sceneCount}. ${continuationInstruction} Follow the visual controls embedded in the director instructions and JSON input.` },
     { type: 'text', text: JSON.stringify(data) },
+    { type: 'text', text: `SOURCE CODE CONTEXT (concatenated file sections):\n${compositionSourceContext}` },
   ];
   for (const image of images) {
     content.push({ type: 'text', text: image.label });
@@ -119,10 +132,13 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   schema.properties.semanticUse = object(Object.fromEntries(semantic.entries.map((entry) => [entry.id, object({
     relevance, relatedSceneIndices: list({ type: 'integer', minimum: 1, maximum: sceneCount }), visualMotif: string, visibleConsequence: string,
   })])));
+  const reasoningModel = /^gpt-6(?:\.1-sol|-luna)(?:-|$)/.test(model);
+  const reasoningEffort = model.startsWith('gpt-6-luna') ? 'medium' : 'high';
   const request = {
     model, messages: [{ role: 'system', content: director }, { role: 'user', content }],
     response_format: { type: 'json_schema', json_schema: { name: 'eu_news_scene_plan', strict: true, schema } },
-    temperature: 0.65, max_completion_tokens: Math.max(14000, sceneCount * 2000),
+    ...(reasoningModel ? { reasoning_effort: reasoningEffort } : { temperature: 0.65 }),
+    max_completion_tokens: Math.max(14000, sceneCount * 2000),
   };
   const log = structuredClone(request);
   let index = 0;

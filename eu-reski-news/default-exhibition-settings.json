@@ -18,7 +18,7 @@
     "randomBridgeThreshold": 0.7
   },
   "generation": {
-    "storyModel": "gpt-4.1-mini",
+    "storyModel": "gpt-6-luna",
     "iterations": -1,
     "pauseMs": 0,
     "articleOrder": "linear",

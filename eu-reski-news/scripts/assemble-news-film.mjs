@@ -231,7 +231,7 @@ for (let index = 0; index < iterations.length; index += 1) {
   if (!Number.isInteger(iterationNumber)) throw new Error(`Invalid iteration directory: ${iterationDirectory}`);
   const iterationId = padIteration(iterationNumber);
   if (options['generate-title-cards']) {
-    const titleVideoPath = await renderTitleCard({
+    const titleCard = await renderTitleCard({
       runDirectory,
       iterationDirectory,
       iterationNumber,
@@ -239,7 +239,7 @@ for (let index = 0; index < iterations.length; index += 1) {
       font: options.font,
       titleCardDirectory: cardsDirectory,
     });
-    addMedia(titleVideoPath);
+    addMedia(resolve(runDirectory, titleCard.videoRunPath));
   }
   if (sceneGlueDirectory) {
     const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
