@@ -215,7 +215,7 @@ function defaultsFromExhibitionSettings() {
   };
 }
 
-function mergeRunnerArguments(defaults, userArguments) {
+function mergeRunnerArguments(defaults, userArguments, stopAfterIterations = null) {
   const merged = [];
   const oppositeFlags = new Map([
     ['--symbolic', '--no-symbolic'], ['--no-symbolic', '--symbolic'],
@@ -234,7 +234,12 @@ function mergeRunnerArguments(defaults, userArguments) {
   const suppliedIterations = userArguments.find((argument) => flagName(argument) === '--iterations');
   if (suppliedIterations) {
     const value = suppliedIterations.includes('=') ? suppliedIterations.split('=').at(-1) : userArguments[userArguments.indexOf(suppliedIterations) + 1];
-    if (!['0', '-1'].includes(value)) throw new Error('Exhibition runner requires --iterations=0 or --iterations=-1 for endless operation');
+    if (!['0', '-1'].includes(value)) {
+      const finiteCount = Number(value);
+      if (!Number.isSafeInteger(finiteCount) || finiteCount < 1 || finiteCount !== stopAfterIterations) {
+        throw new Error('Use --stop-after-iterations=N for a finite exhibition run');
+      }
+    }
   }
   addDefault(merged, userArguments, '--iterations', '-1');
   addDefault(merged, userArguments, '--pause-ms', '0');
@@ -497,7 +502,8 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
 
 async function exhibitionMain() {
   if (process.argv.includes('--help')) {
-    console.log('Start continuous exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
+    console.log('Start exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
+    console.log('Use --stop-after-iterations=N for a finite run; final First-Last glue and film merges finish before exit.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
     console.log('Environment: NEWS_ENV_FILE (in start script), NEWS_REFRESH_INTERVAL_MS.');
     return;
@@ -514,6 +520,17 @@ async function exhibitionMain() {
       state.exhibitionSettings = null;
     }
     const exhibitionArguments = process.argv.slice(2);
+    const stopAfterArgument = exhibitionArguments.find((argument) => flagName(argument) === '--stop-after-iterations');
+    let stopAfterIterations = null;
+    if (stopAfterArgument) {
+      const value = stopAfterArgument.includes('=')
+        ? stopAfterArgument.slice('--stop-after-iterations='.length)
+        : exhibitionArguments[exhibitionArguments.indexOf(stopAfterArgument) + 1];
+      stopAfterIterations = Number(value);
+      if (!Number.isSafeInteger(stopAfterIterations) || stopAfterIterations < 1) {
+        throw new Error('--stop-after-iterations must be a positive integer');
+      }
+    }
     if (exhibitionArguments.includes('--first-last-glue') && exhibitionArguments.includes('--no-first-last-glue')) {
       throw new Error('Choose either --first-last-glue or --no-first-last-glue');
     }
@@ -539,7 +556,21 @@ async function exhibitionMain() {
     if (!Number.isFinite(frameOffset) || frameOffset <= 0 || frameOffset > 1) throw new Error('EXHIBITION_FRAME_OFFSET_SECONDS must be greater than 0 and no more than 1');
     const fadeLength = Number(fadeSeconds);
     if (!Number.isFinite(fadeLength) || fadeLength < 0 || fadeLength > 2) throw new Error('EXHIBITION_FADE_SECONDS must be from 0 through 2');
-    const userArguments = exhibitionArguments.filter((argument) => !['--first-last-glue', '--no-first-last-glue'].includes(argument));
+    const userArguments = [];
+    for (let index = 0; index < exhibitionArguments.length; index += 1) {
+      const argument = exhibitionArguments[index];
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations'].includes(flagName(argument))) {
+        if (flagName(argument) === '--stop-after-iterations' && !argument.includes('=')) index += 1;
+        continue;
+      }
+      userArguments.push(argument);
+    }
+    if (stopAfterIterations !== null) {
+      for (let index = userArguments.length - 1; index >= 0; index -= 1) {
+        if (flagName(userArguments[index]) === '--iterations') userArguments.splice(index, 1);
+      }
+      userArguments.push(`--iterations=${stopAfterIterations}`);
+    }
     let defaults;
     if (state.runnerArguments?.length) {
       defaults = { args: state.runnerArguments, storyModel: state.storyModel, source: state.settingsSource || null };
@@ -549,7 +580,7 @@ async function exhibitionMain() {
       state.storyModel = defaults.storyModel;
       state.settingsSource = defaults.source;
     }
-    const runnerArguments = mergeRunnerArguments(defaults.args, userArguments);
+    const runnerArguments = mergeRunnerArguments(defaults.args, userArguments, stopAfterIterations);
     const videoSettings = {
       model: argumentValue(runnerArguments, '--video-model', defaultGeneration.videoModel),
       resolution: argumentValue(runnerArguments, '--video-resolution', defaultGeneration.videoResolution),
@@ -577,7 +608,9 @@ async function exhibitionMain() {
       fadeSeconds,
       randomBridgeThreshold: randomThreshold,
     })}`);
-    state.runnerArguments = runnerArguments.filter((argument) => flagName(argument) !== '--resume-run');
+    state.runnerArguments = runnerArguments
+      .filter((argument) => flagName(argument) !== '--resume-run')
+      .map((argument) => stopAfterIterations !== null && flagName(argument) === '--iterations' ? '--iterations=-1' : argument);
     state.storyModel = defaults.storyModel;
     state.settingsSource = defaults.source;
     state.settingsVersion = defaultSettings.version;
@@ -587,8 +620,14 @@ async function exhibitionMain() {
     await saveJson(statePath, state);
     if (state.storyModel) process.env.NEWS_STORY_MODEL = state.storyModel;
 
-    let runDirectory = state.runDirectory && resolve(state.runDirectory);
+    let runDirectory = stopAfterIterations === null && state.runDirectory ? resolve(state.runDirectory) : null;
     if (!runDirectory || !(await stat(join(runDirectory, 'run.json')).catch(() => null))) runDirectory = null;
+    if (stopAfterIterations !== null) {
+      state.runDirectory = null;
+      state.gluedThroughIteration = 0;
+      delete state.lastFilmBuildAt;
+      await saveJson(statePath, state);
+    }
 
     if (!await rankedCollectionAvailable()) {
       log('Noch kein Jev-Ranking vorhanden; initialer News-Refresh läuft vor der ersten Iteration.');
@@ -607,6 +646,24 @@ async function exhibitionMain() {
       const result = await running.closed;
       if (state.runDirectory) runDirectory = resolve(state.runDirectory);
       if (stopping) break;
+      if (stopAfterIterations !== null && result.code === 0) {
+        if (glueEnabled && runDirectory) {
+          log(`Iteration limit ${stopAfterIterations} reached; waiting for First-Last glue and final films.`);
+          while (!stopping) {
+            const latestState = await readState();
+            if (resolve(latestState.runDirectory || '') === runDirectory
+              && Number(latestState.gluedThroughIteration || 0) >= stopAfterIterations) break;
+            await delayOrStop(mergeCheckMs);
+          }
+        }
+        if (!stopping) {
+          stopping = true;
+          wakeForStop();
+          log(`Finite exhibition complete after ${stopAfterIterations} iterations; no next iteration started.`);
+          for (const child of children) child.kill('SIGTERM');
+        }
+        break;
+      }
       log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
       await delayOrStop(30_000);
     }

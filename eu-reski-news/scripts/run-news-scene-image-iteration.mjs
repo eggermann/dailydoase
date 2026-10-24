@@ -662,7 +662,7 @@ async function main() {
   const endless = iterationLimit === 0 || iterationLimit === -1;
   const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1;
   const iterationRoot = options.resume
-    ? null
+    ? dirname(resolve(options.resume))
     : options['resume-run']
       ? resolve(options['resume-run'])
     : groupedRun
