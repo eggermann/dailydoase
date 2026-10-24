@@ -22,6 +22,7 @@ import { renderTitleCard } from '../news-scene/title-card.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
+  'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   'scene-count-mode': { type: 'string', default: process.env.NEWS_SCENE_COUNT_MODE || 'taktmuster' },
@@ -65,6 +66,8 @@ if (options['generate-title-cards'] && options['no-generate-title-cards']) {
   throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
 }
 if (options['no-generate-title-cards']) options['generate-title-cards'] = false;
+const storyModel = options['story-model'].trim();
+if (!storyModel) throw new Error('--story-model must not be empty');
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
 for (const flag of ['story-clou', 'video-direction', 'video-vision']) {
@@ -191,7 +194,7 @@ function currentGenerationSettings() {
     },
     imageProvider: options['image-provider'],
     imageModel,
-    storyModel: process.env.NEWS_STORY_MODEL || 'gpt-6-luna',
+    storyModel,
     articleImageReference: options['article-image-reference'],
     styleReferencePath: options['no-style-reference'] ? null : options['style-reference'],
     guernicaDirectory: resolve(options['guernica-dir']),
@@ -899,7 +902,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           candidateCount: candidates.length,
           aggregateIndex,
         },
-        article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], visualStyleOptions: recordStyleOptions, storyModel: process.env.NEWS_STORY_MODEL || 'gpt-6-luna', imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
+        article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], visualStyleOptions: recordStyleOptions, storyModel, imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
         generationSettings: currentGenerationSettings(),
         featureSettings: currentFeatureSettings(),
         sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
