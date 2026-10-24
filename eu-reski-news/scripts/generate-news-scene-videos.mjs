@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { basename, dirname, join, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,6 +14,8 @@ const { values } = parseArgs({ options: {
   resolution: { type: 'string', default: process.env.NEWS_VIDEO_RESOLUTION || '480p' },
   iteration: { type: 'string' }, 'settings-mode': { type: 'string', default: process.env.NEWS_VIDEO_SETTINGS_MODE || '' },
   'output-quality': { type: 'string', default: process.env.NEWS_VIDEO_OUTPUT_QUALITY || '20' },
+  'video-concurrency': { type: 'string', default: process.env.NEWS_VIDEO_CONCURRENCY || '4' },
+  'audio-edge-fade-seconds': { type: 'string', default: process.env.NEWS_VIDEO_AUDIO_EDGE_FADE_SECONDS || '0.03' },
   'poll-timeout-seconds': { type: 'string', default: process.env.NEWS_VIDEO_POLL_TIMEOUT_SECONDS || '60' },
   help: { type: 'boolean', default: false },
 } });
@@ -21,10 +24,12 @@ const apiKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
 const outputQuality = Number(values['output-quality']);
 const usesPVideo2Pro = values.model === 'prunaai:p-video@2-pro';
 const settingsMode = values['settings-mode'];
+const videoConcurrency = Number(values['video-concurrency']);
+const audioEdgeFadeSeconds = Number(values['audio-edge-fade-seconds']);
 const pollTimeoutSeconds = Number(values['poll-timeout-seconds']);
 const pollTimeoutMs = pollTimeoutSeconds * 1000;
 if (values.help) {
-  console.log('node --env-file=.env eu-reski-news/scripts/generate-news-scene-videos.mjs --run=PATH [--iteration=iteration-001] [--model=prunaai:p-video@2-pro] [--resolution=480p] [--settings-mode=cost] [--poll-timeout-seconds=300]');
+  console.log('node --env-file=.env eu-reski-news/scripts/generate-news-scene-videos.mjs --run=PATH [--iteration=iteration-001] [--model=prunaai:p-video@2-pro] [--resolution=480p] [--settings-mode=cost] [--video-concurrency=4] [--audio-edge-fade-seconds=0.03] [--poll-timeout-seconds=300]');
   process.exit(0);
 }
 if (!values.run) throw new Error('Pass --run=PATH to an image-generation run directory');
@@ -33,6 +38,8 @@ if (usesPVideo2Pro && !['cost', 'speed', 'quality'].includes(settingsMode)) thro
 if (!usesPVideo2Pro && settingsMode) throw new Error('--settings-mode is supported here only for P-Video-2-Pro');
 if (!usesPVideo2Pro && (!Number.isInteger(outputQuality) || outputQuality < 20 || outputQuality > 99)) throw new Error('--output-quality must be an integer from 20 to 99');
 if (!Number.isInteger(pollTimeoutSeconds) || pollTimeoutSeconds < 10 || pollTimeoutSeconds > 600) throw new Error('--poll-timeout-seconds must be an integer from 10 to 600');
+if (!Number.isInteger(videoConcurrency) || videoConcurrency < 1 || videoConcurrency > 12) throw new Error('--video-concurrency must be an integer from 1 to 12');
+if (!Number.isFinite(audioEdgeFadeSeconds) || audioEdgeFadeSeconds < 0 || audioEdgeFadeSeconds > 0.5) throw new Error('--audio-edge-fade-seconds must be from 0 to 0.5');
 if (values.resolution !== '480p') throw new Error('This low-quality test starter only allows --resolution=480p');
 
 const runDirectory = resolve(values.run);
@@ -161,8 +168,6 @@ async function generateScene(directory, record, scene, index) {
       reason: 'GPT selected first_last_frame for this scene, but the current video request sends only one start frame. No API request was made.',
       skippedAt: new Date().toISOString(),
     };
-    record.filmPlan.status = 'Videos teilweise bereit · First-Last-Frame-Szenen benötigen Endbilder';
-    await saveHtml(directory, record);
     console.log(`VIDEO_SKIPPED ${directory} · scene ${scene.index} requires an end frame; no API request sent`);
     return;
   }
@@ -226,14 +231,6 @@ async function generateScene(directory, record, scene, index) {
         taskUUID, errorCode: moderationError.code, reason: moderationError.message,
         rejectedAt: new Date().toISOString(),
       };
-      record.videoGeneration = {
-        provider: 'Runware', model: values.model, resolution: values.resolution,
-        ...(usesPVideo2Pro ? { settings: { mode: settingsMode } } : { outputQuality }),
-        status: 'partial_provider_moderation_rejection', lastRejectedScene: scene.index,
-      };
-      record.filmPlan.status = `Video teilweise bereit · Szene ${scene.index} vom Videodienst abgewiesen`;
-      await safeSave(join(directory, 'film-plan.json'), record.filmPlan);
-      await saveHtml(directory, record);
       console.warn(`VIDEO_REJECTED ${directory} · scene ${scene.index} · ${moderationError.code}; continuing with remaining scenes`);
       return;
     }
@@ -253,17 +250,6 @@ async function generateScene(directory, record, scene, index) {
       status: error.code === 'VIDEO_STILL_PROCESSING' ? 'still_processing_resumable' : 'pending_provider_timeout',
       taskUUID, error: error.message,
     };
-    record.videoGeneration = {
-      provider: 'Runware', model: values.model, resolution: values.resolution,
-      ...(usesPVideo2Pro ? { settings: { mode: settingsMode } } : { outputQuality }),
-      status: error.code === 'VIDEO_STILL_PROCESSING' ? 'still_processing_resumable' : 'paused_on_provider_response', stoppedAt: new Date().toISOString(),
-      failedScene: scene.index, taskUUID, error: error.message,
-    };
-    record.filmPlan.status = error.code === 'VIDEO_STILL_PROCESSING'
-      ? `Pausiert · Szene ${scene.index} rendert weiter; mit derselben Task-ID fortsetzen`
-      : `Videoerzeugung pausiert · Szene ${scene.index} wartet auf die Provider-Antwort`;
-    await safeSave(join(directory, 'film-plan.json'), record.filmPlan);
-    await saveHtml(directory, record);
     throw error;
   }
   const renderedAt = new Date().toISOString();
@@ -303,12 +289,8 @@ async function generateScene(directory, record, scene, index) {
     taskUUID, sourceUrl: result.videoURL, bytes: buffer.length,
     audioStream: await probeAudioStream(join(directory, localPath)),
   };
-  record.videoGeneration = { provider: 'Runware', model: values.model, resolution: values.resolution, ...(usesPVideo2Pro ? { settings: { mode: settingsMode } } : { outputQuality }), completedAt: new Date().toISOString() };
-  record.filmPlan.status = 'Videos per API erzeugt';
   record.filmPlan.scenePlan[index].generatedVideoPath = resolve(directory, localPath);
   record.filmPlan.scenePlan[index].videoTaskUUID = taskUUID;
-  await saveHtml(directory, record);
-  await safeSave(join(directory, 'film-plan.json'), record.filmPlan);
   await unlink(pendingPath).catch(() => {});
   console.log(`VIDEO_READY ${resolve(directory, localPath)} · ${duration}s P-Video${plannedDuration !== duration ? ` (plan ${plannedDuration}s)` : ''} · ${values.resolution} · cost=${result.cost ?? 'n/a'}`);
 }
@@ -359,7 +341,7 @@ async function concatenateIteration(directory, record) {
     && JSON.stringify(record.concatenatedVideo.sourceTasks) === JSON.stringify(sourceTasks)
     && await exists(outputPath)) return;
 
-  await concatMp4Lossless(segmentPaths, outputPath, mergedDirectory);
+  await concatMp4Lossless(segmentPaths, outputPath, mergedDirectory, { audioFadeSeconds: audioEdgeFadeSeconds });
   const mergedVideo = await probeVideoStream(outputPath);
   record.concatenatedVideo = {
     path: iterationRelativePath,
@@ -370,13 +352,81 @@ async function concatenateIteration(directory, record) {
     durationSeconds: mergedVideo.duration,
     requestedDurationSeconds: scenes.reduce((total, scene) => total + Number(scene.durationSeconds || 0), 0),
     sourceTasks,
-    method: 'Selfomat ffmpeg concat · moderation gaps shown as black video',
+    method: `Selfomat ffmpeg concat · ${audioEdgeFadeSeconds}s audio fades at scene edges · moderation gaps shown as black video`,
+    audioEdgeFadeSeconds,
     audioStream: await probeAudioStream(outputPath),
     createdAt: new Date().toISOString(),
   };
   await saveHtml(directory, record);
   await safeSave(join(directory, 'film-plan.json'), record.filmPlan);
   console.log(`FILM_READY ${outputPath} · ${record.concatenatedVideo.durationSeconds}s · ${scenes.length} Szenen${gaps.length ? ` · ${gaps.length} black gap(s)` : ''}`);
+}
+
+async function assembleAllIterations(run, runDirectory) {
+  const entries = run.iterations || [];
+  if (entries.length <= 2) return;
+
+  const sourceIterations = [];
+  for (const entry of entries) {
+    const record = await json(join(runDirectory, entry.directory, 'record.json'));
+    const film = record.concatenatedVideo;
+    if (!film?.path) {
+      console.log(`ALL_ITERATIONS_FILM_WAITING · ${entry.directory} has no completed scene film yet`);
+      return;
+    }
+    const filmPath = resolve(runDirectory, film.runPath || join(entry.directory, film.path));
+    if (!await exists(filmPath)) {
+      console.log(`ALL_ITERATIONS_FILM_WAITING · missing ${filmPath}`);
+      return;
+    }
+    sourceIterations.push({
+      directory: entry.directory,
+      articleTitle: record.article?.title || '',
+      audioEdgeFadeSeconds: film.audioEdgeFadeSeconds ?? 0,
+      sourceTasks: film.sourceTasks,
+    });
+  }
+
+  const mergedDirectory = join(runDirectory, 'merged');
+  const outputPath = join(mergedDirectory, 'eu-reski-gesamtfilm.mp4');
+  const sourceSignature = JSON.stringify(sourceIterations);
+  if (run.assembledFilm?.path === relative(runDirectory, outputPath)
+    && JSON.stringify(run.assembledFilm.sourceIterations) === sourceSignature
+    && run.assembledFilm.audioEdgeFadeSeconds === 0.03
+    && await exists(outputPath)) return;
+
+  await mkdir(mergedDirectory, { recursive: true });
+  try {
+    execFileSync(process.execPath, [
+      join(root, 'eu-reski-news', 'scripts', 'assemble-news-film.mjs'),
+      `--run-dir=${runDirectory}`,
+      `--output=${outputPath}`,
+      '--fade-seconds=0.03',
+    ], { cwd: root, stdio: 'inherit' });
+    const assembledVideo = await probeVideoStream(outputPath);
+    run.assembledFilm = {
+      path: relative(runDirectory, outputPath),
+      iterations: entries.length,
+      durationSeconds: assembledVideo.duration,
+      sourceIterations,
+      method: 'FFmpeg assembler · article title cards · 0.03s audio/video fades',
+      audioEdgeFadeSeconds: 0.03,
+      audioStream: await probeAudioStream(outputPath),
+      createdAt: new Date().toISOString(),
+    };
+    await safeSave(join(runDirectory, 'run.json'), run);
+    console.log(`ALL_ITERATIONS_FILM_READY ${outputPath} · ${assembledVideo.duration}s · ${entries.length} iterations`);
+  } catch (error) {
+    run.assembledFilm = {
+      status: 'render_failed',
+      iterations: entries.length,
+      sourceIterations,
+      error: error.message || String(error),
+      failedAt: new Date().toISOString(),
+    };
+    await safeSave(join(runDirectory, 'run.json'), run);
+    console.error(`ALL_ITERATIONS_FILM_FAILED · ${error.message || error}; per-iteration films remain available`);
+  }
 }
 
 const runManifestPath = join(runDirectory, 'run.json');
@@ -391,18 +441,85 @@ const run = await json(runManifestPath);
   const record = await json(join(directory, 'record.json'));
   const filmPlanPath = join(directory, 'film-plan.json');
   record.filmPlan = await json(filmPlanPath);
-  for (const [index, scene] of record.filmPlan.scenePlan.entries()) {
-    await generateScene(directory, record, scene, index);
+  const scenes = record.filmPlan.scenePlan;
+  console.log(`Generating ${scenes.length} scene videos with concurrency ${videoConcurrency}; audio edge fade ${audioEdgeFadeSeconds}s.`);
+  let nextSceneIndex = 0;
+  const sceneErrors = [];
+  const workers = Array.from({ length: Math.min(videoConcurrency, scenes.length) }, async () => {
+    while (nextSceneIndex < scenes.length) {
+      const index = nextSceneIndex;
+      nextSceneIndex += 1;
+      try {
+        await generateScene(directory, record, scenes[index], index);
+      } catch (error) {
+        const scene = scenes[index];
+        const previousResult = record.videoResults?.[index] || {};
+        const { path: ignoredPath, ...savedResult } = previousResult;
+        const requestPath = join(directory, `scene-${scene.index}-video-request.json`);
+        const savedRequest = await json(requestPath).catch(() => null);
+        record.videoResults ||= [];
+        record.videoResults[index] = {
+          ...savedResult,
+          provider: 'Runware',
+          model: values.model,
+          status: previousResult.status || 'failed',
+          taskUUID: previousResult.taskUUID || savedRequest?.taskUUID || null,
+          error: error.message || String(error),
+          lastAttemptFailedAt: new Date().toISOString(),
+        };
+        sceneErrors.push({ sceneIndex: scene.index, error: error.message || String(error) });
+        console.error(`VIDEO_FAILED ${directory} · scene ${scene.index} · ${error.message || error}; remaining scenes continue`);
+      }
+    }
+  });
+  const workerOutcomes = await Promise.allSettled(workers);
+  for (const outcome of workerOutcomes) {
+    if (outcome.status === 'rejected') sceneErrors.push({ sceneIndex: null, error: outcome.reason?.message || String(outcome.reason) });
   }
   const missingFirstLastFrames = record.filmPlan.scenePlan.filter((scene, index) =>
     scene.videoMode === 'first_last_frame' && !record.videoResults?.[index]?.path,
   );
+  const failedScenes = scenes.filter((scene, index) =>
+    scene.videoMode !== 'first_last_frame'
+      && !record.videoResults?.[index]?.path
+      && record.videoResults?.[index]?.status !== 'rejected_by_provider_moderation',
+  );
   if (missingFirstLastFrames.length) {
     record.filmPlan.status = `Videos teilweise bereit · ${missingFirstLastFrames.length} First-Last-Frame-Szene(n) benötigen passende Endbilder`;
-    await safeSave(filmPlanPath, record.filmPlan);
-    await saveHtml(directory, record);
+  } else if (failedScenes.length) {
+    record.filmPlan.status = `Teilweise bereit · ${failedScenes.length} Szenenvideo(s) fehlgeschlagen; denselben Aufruf zum Fortsetzen wiederholen`;
+  } else {
+    const rejected = record.videoResults?.find((video) => video?.status === 'rejected_by_provider_moderation');
+    record.filmPlan.status = rejected ? 'Video teilweise bereit · Szene vom Videodienst abgewiesen' : 'Videos per API erzeugt';
   }
-  await concatenateIteration(directory, record);
+  if (failedScenes.length || missingFirstLastFrames.length) record.concatenatedVideo = null;
+  record.videoGeneration = {
+    provider: 'Runware', model: values.model, resolution: values.resolution,
+    ...(usesPVideo2Pro ? { settings: { mode: settingsMode } } : { outputQuality }),
+    ...(failedScenes.length || missingFirstLastFrames.length ? {
+      status: 'partial_scene_failures',
+      failedScenes: sceneErrors,
+      missingFirstLastFrameScenes: missingFirstLastFrames.map((scene) => scene.index),
+    } :
+      record.videoResults?.some((video) => video?.status === 'rejected_by_provider_moderation')
+        ? { status: 'partial_provider_moderation_rejection' }
+        : { completedAt: new Date().toISOString() }),
+    concurrency: videoConcurrency,
+    audioEdgeFadeSeconds,
+  };
+  await safeSave(filmPlanPath, record.filmPlan);
+  await saveHtml(directory, record);
+  if (!failedScenes.length && !missingFirstLastFrames.length) {
+    try {
+      await concatenateIteration(directory, record);
+    } catch (error) {
+      record.concatenatedVideo = null;
+      record.filmPlan.status = `Videos fertig · FFmpeg-Montage fehlgeschlagen: ${error.message || error}`;
+      record.videoGeneration.renderError = error.message || String(error);
+      await saveHtml(directory, record);
+      console.error(`ITERATION_RENDER_FAILED ${directory} · ${error.message || error}; videos remain saved for a render retry`);
+    }
+  }
 }
 const iterations = [];
 for (const entry of run.iterations || []) {
@@ -419,5 +536,6 @@ for (const entry of run.iterations || []) {
   await saveHtml(directory, record);
   iterations.push({ directory: entry.directory, record });
 }
+await assembleAllIterations(run, runDirectory);
 await writeFile(join(runDirectory, 'index.html'), renderRunReport(run, iterations));
 console.log(`HTML: ${join(runDirectory, 'index.html')}`);

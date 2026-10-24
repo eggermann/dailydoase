@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "paths": {
+    "newsDirectory": "eu-reski-news/news/A",
+    "outputDirectory": "eu-reski-news/GENERATIONS/news/exhibition"
+  },
+  "exhibition": {
+    "newsRefreshIntervalMs": 86400000,
+    "newsRefreshCheckMs": 900000,
+    "newsRefreshRetryMs": 900000,
+    "mergeCheckMs": 20000,
+    "mergeRetryMs": 60000,
+    "firstLastGlue": true,
+    "glueDurationPattern": [9, 5, 7, 5, 8],
+    "glueWaitPattern": "classic",
+    "frameOffsetSeconds": 0.25,
+    "fadeSeconds": 0.25,
+    "randomBridgeThreshold": 0.7
+  },
+  "generation": {
+    "storyModel": "gpt-4.1-mini",
+    "iterations": -1,
+    "pauseMs": 0,
+    "articleOrder": "linear",
+    "videosAfterEachIteration": true,
+    "sceneCount": {
+      "mode": "taktmuster",
+      "takt": 4,
+      "numerator": 4,
+      "denominator": 5,
+      "type": "balanced",
+      "bias": 4,
+      "minimum": 1,
+      "maximum": 12
+    },
+    "sceneLength": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 3.85,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "runware",
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "videoMode": "image_to_video",
+    "videoDirection": "off",
+    "storyClou": "off",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "videoMaxZoom": 0.08,
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  }
+}

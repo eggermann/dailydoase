@@ -4,18 +4,20 @@ import { mkdir, readFile, readdir, rename, stat, unlink, writeFile } from 'node:
 import { dirname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
+import { createTransitionWaitScheduler, parseTransitionWaitPattern } from '../news-scene/transition-wait-pattern.mjs';
 
 const { values: options } = parseArgs({ options: {
   run: { type: 'string' }, iterations: { type: 'string', default: '5' },
   'output-dir': { type: 'string' }, model: { type: 'string', default: 'prunaai:p-video@2-pro' },
   resolution: { type: 'string', default: '480p' }, 'settings-mode': { type: 'string', default: 'cost' },
   duration: { type: 'string', default: '5' }, 'duration-pattern': { type: 'string' },
+  'transition-wait-pattern': { type: 'string' },
   'frame-offset-seconds': { type: 'string', default: '0.25' }, concurrency: { type: 'string', default: '4' },
   'poll-timeout-seconds': { type: 'string', default: '600' }, help: { type: 'boolean', default: false },
 } });
 
 if (options.help) {
-  console.log('node --env-file=.env eu-reski-news/scripts/generate-scene-glue-videos.mjs --run=PATH [--iterations=5] [--output-dir=PATH]');
+  console.log('node --env-file=.env eu-reski-news/scripts/generate-scene-glue-videos.mjs --run=PATH [--iterations=5] [--transition-wait-pattern=LIST|all] [--output-dir=PATH]');
   process.exit(0);
 }
 
@@ -37,7 +39,8 @@ const durationTaktmuster = durationPattern ? {
     this.index += 1;
     return { patternValue: durationPattern[patternIndex % durationPattern.length], patternIndex };
   },
-} : null;
+  } : null;
+const transitionWaitPattern = parseTransitionWaitPattern(options['transition-wait-pattern']);
 const concurrency = Number(options.concurrency);
 const pollTimeoutSeconds = Number(options['poll-timeout-seconds']);
 if (!Number.isInteger(iterationLimit) || iterationLimit < 1) throw new Error('--iterations must be a positive integer');
@@ -299,11 +302,17 @@ async function processJob(job) {
 
 const iterations = await getIterations();
 const jobs = [];
+const transitionWaitScheduler = createTransitionWaitScheduler(transitionWaitPattern);
 for (const iterationDirectory of iterations) {
   const iterationRecord = await json(join(runDirectory, iterationDirectory, 'record.json'));
   const scenes = iterationRecord.plan?.scenes || [];
   if (scenes.length < 2) throw new Error(`${iterationDirectory} has fewer than two planned scenes`);
+  const scheduledBoundaries = transitionWaitPattern !== null
+    ? transitionWaitScheduler.scheduleForIteration(scenes)
+    : null;
   for (let index = 0; index < scenes.length - 1; index += 1) {
+    const boundaryKey = `${scenes[index].index}->${scenes[index + 1].index}`;
+    if (scheduledBoundaries && !scheduledBoundaries.has(boundaryKey)) continue;
     const nextDuration = durationTaktmuster?.getNext();
     const transitionDuration = nextDuration?.patternValue ?? duration;
     jobs.push(await prepareTransition(
@@ -341,6 +350,11 @@ const summary = {
   durationPatternSeconds: durationPattern,
   durationPatternType: durationPattern ? 'long cyclic getNext sequence' : null,
   durationPatternStepsConsumed: durationTaktmuster?.index ?? 0,
+  transitionWaitPattern: transitionWaitPattern ?? 'Taktmuster 2/4/4 classic',
+  transitionWaitPatternType: transitionWaitPattern === null
+    ? null
+    : 'Taktmuster.getNext().patternValue; persistent across iterations',
+  transitionWaitPatternStepsConsumed: transitionWaitScheduler?.boundariesScheduled ?? 0,
   frameOffsetSeconds,
   iterationCount: iterations.length,
   transitionCount: jobs.length,

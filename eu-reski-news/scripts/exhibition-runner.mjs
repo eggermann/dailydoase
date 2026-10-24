@@ -1,28 +1,39 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { mkdir, open, readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
-import { basename, dirname, join, relative, resolve, sep } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { basename, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
-const newsDirectory = resolve(process.env.NEWS_NEWS_DIR || join(repositoryRoot, 'eu-reski-news', 'news', 'A'));
-const outputDirectory = resolve(process.env.NEWS_OUTPUT_DIR || join(repositoryRoot, 'eu-reski-news', 'GENERATIONS', 'news', 'exhibition'));
-const settingsSearchDirectory = resolve(process.env.NEWS_SETTINGS_SEARCH_DIR || dirname(outputDirectory));
+const settingsPath = join(repositoryRoot, 'eu-reski-news', 'default-exhibition-settings.json');
+const defaultSettings = JSON.parse(readFileSync(settingsPath, 'utf8'));
+if (!Number.isInteger(defaultSettings.version) || defaultSettings.version < 1) {
+  throw new Error(`Invalid exhibition settings version in ${settingsPath}`);
+}
+const settingsFingerprint = createHash('sha256').update(JSON.stringify(defaultSettings)).digest('hex');
+const defaultExhibition = defaultSettings.exhibition;
+const defaultGeneration = defaultSettings.generation;
+const newsDirectory = resolve(repositoryRoot, process.env.NEWS_NEWS_DIR || defaultSettings.paths.newsDirectory);
+const outputDirectory = resolve(repositoryRoot, process.env.NEWS_OUTPUT_DIR || defaultSettings.paths.outputDirectory);
 const statePath = join(outputDirectory, 'exhibition-state.json');
 const lockPath = join(outputDirectory, '.exhibition-runner.lock');
-const refreshIntervalMs = positiveInteger(process.env.NEWS_REFRESH_INTERVAL_MS, 86_400_000);
-const refreshCheckMs = positiveInteger(process.env.NEWS_REFRESH_CHECK_MS, 900_000);
-const refreshRetryMs = positiveInteger(process.env.NEWS_REFRESH_RETRY_MS, 900_000);
-const mergeCheckMs = positiveInteger(process.env.EXHIBITION_MERGE_CHECK_MS, 20_000);
-const mergeRetryMs = positiveInteger(process.env.EXHIBITION_MERGE_RETRY_MS, 60_000);
-let glueEnabled = process.env.EXHIBITION_FIRST_LAST_GLUE !== '0';
-let gluePattern = process.env.EXHIBITION_GLUE_DURATION_PATTERN || '9,5,7,5,8';
-let glueFrameOffset = process.env.EXHIBITION_FRAME_OFFSET_SECONDS || '0.25';
-let fadeSeconds = process.env.EXHIBITION_FADE_SECONDS || '0.25';
-let randomThreshold = Number(process.env.EXHIBITION_RANDOM_BRIDGE_THRESHOLD || '0.7');
+const refreshIntervalMs = positiveInteger(process.env.NEWS_REFRESH_INTERVAL_MS, defaultExhibition.newsRefreshIntervalMs);
+const refreshCheckMs = positiveInteger(process.env.NEWS_REFRESH_CHECK_MS, defaultExhibition.newsRefreshCheckMs);
+const refreshRetryMs = positiveInteger(process.env.NEWS_REFRESH_RETRY_MS, defaultExhibition.newsRefreshRetryMs);
+const mergeCheckMs = positiveInteger(process.env.EXHIBITION_MERGE_CHECK_MS, defaultExhibition.mergeCheckMs);
+const mergeRetryMs = positiveInteger(process.env.EXHIBITION_MERGE_RETRY_MS, defaultExhibition.mergeRetryMs);
+let glueEnabled = process.env.EXHIBITION_FIRST_LAST_GLUE === undefined
+  ? defaultExhibition.firstLastGlue
+  : process.env.EXHIBITION_FIRST_LAST_GLUE !== '0';
+let gluePattern = process.env.EXHIBITION_GLUE_DURATION_PATTERN || defaultExhibition.glueDurationPattern.join(',');
+let glueWaitPattern = process.env.EXHIBITION_GLUE_WAIT_PATTERN || defaultExhibition.glueWaitPattern;
+let glueFrameOffset = process.env.EXHIBITION_FRAME_OFFSET_SECONDS || String(defaultExhibition.frameOffsetSeconds);
+let fadeSeconds = process.env.EXHIBITION_FADE_SECONDS || String(defaultExhibition.fadeSeconds);
+let randomThreshold = Number(process.env.EXHIBITION_RANDOM_BRIDGE_THRESHOLD ?? defaultExhibition.randomBridgeThreshold);
 const runnerScript = join(scriptDirectory, 'run-news-scene-image-iteration.mjs');
 const fetchScript = join(scriptDirectory, 'fetch-eu-news-today.mjs');
 const classifyScript = join(scriptDirectory, 'classify-eu-news-with-jev.mjs');
@@ -158,97 +169,48 @@ function addDefault(argumentsList, userArguments, flag, value = null) {
   else argumentsList.push(`${flag}=${value}`);
 }
 
-async function findLatestSettingsRecord(searchDirectory) {
-  const excludedRoot = `${outputDirectory}${sep}`;
-  const pendingDirectories = [searchDirectory];
-  let latest = null;
-
-  while (pendingDirectories.length) {
-    const directory = pendingDirectories.pop();
-    let entries;
-    try {
-      entries = await readdir(directory, { withFileTypes: true });
-    } catch (error) {
-      if (error.code === 'ENOENT') continue;
-      throw error;
-    }
-
-    for (const entry of entries) {
-      const path = join(directory, entry.name);
-      if (entry.isDirectory()) {
-        if (path === outputDirectory || path.startsWith(excludedRoot) || ['media', 'glue-vids', 'node_modules', '.git'].includes(entry.name)) continue;
-        pendingDirectories.push(path);
-      } else if (entry.isFile() && entry.name === 'record.json') {
-        const fileStats = await stat(path);
-        if (!latest || fileStats.mtimeMs > latest.mtimeMs) latest = { path, mtimeMs: fileStats.mtimeMs };
-      }
-    }
-  }
-
-  return latest?.path || null;
-}
-
-async function defaultsFromLastRun(recordPath) {
-  if (!recordPath) {
-    log('Kein voriger record.json gefunden; nutze feste Ausstellungsvorgaben.');
-    return {
-      args: [
-        '--scenes=5', '--scene-count-mode=fixed', '--scene-length-takt=-1', '--scene-length-type=balanced',
-        '--scene-length-multiplier=1.15', '--scene-length-bias=3.85', '--min-scene-seconds=5', '--max-scene-seconds=6',
-        '--image-provider=runware', '--video-mode=image_to_video', '--video-direction=off', '--story-clou=off',
-        '--video-vision=off', '--video-audio-direction=off', '--video-max-zoom=0.08', '--fixed-visual-controls',
-        '--symbolic', '--no-room-deepness', '--layering=3',
-      ],
-      storyModel: 'gpt-4.1-mini',
-      source: null,
-    };
-  }
-
-  const record = await readJson(recordPath);
-  const runManifestPath = join(dirname(dirname(recordPath)), 'run.json');
-  const runManifest = await readJson(runManifestPath).catch(() => ({}));
-  const sceneCountSettings = runManifest.sceneCountSettings || record.sceneCountSelection?.settings || { mode: 'fixed', count: record.sceneCount || 5 };
-  const style = runManifest.visualControls?.defaults || record.visualStyleOptions || { symbolic: true, roomDeepness: false, layering: 3 };
-  const features = record.featureSettings || {};
-  const generation = record.generationSettings || runManifest.generationSettings || {};
-  const sceneTiming = generation.sceneTiming || { takt: -1, minimum: 5, maximum: 6 };
+function defaultsFromExhibitionSettings() {
+  const { sceneCount, sceneLength, visualControls } = defaultGeneration;
   const defaults = [
-    `--scene-count-mode=${sceneCountSettings.mode || 'fixed'}`,
-    `--scenes=${sceneCountSettings.count || record.sceneCount || 5}`,
-    `--scene-count-takt=${sceneCountSettings.takt ?? 2}`,
-    `--scene-count-numerator=${sceneCountSettings.numerator ?? 3}`,
-    `--scene-count-denominator=${sceneCountSettings.denominator ?? 4}`,
-    `--scene-count-type=${sceneCountSettings.type || 'balanced'}`,
-    `--scene-count-bias=${sceneCountSettings.bias ?? 2}`,
-    `--min-scenes=${sceneCountSettings.minimum ?? 1}`,
-    `--max-scenes=${sceneCountSettings.maximum ?? 12}`,
-    `--scene-length-takt=${sceneTiming.takt ?? -1}`,
-    `--scene-length-type=${sceneTiming.type || 'balanced'}`,
-    `--scene-length-multiplier=${sceneTiming.multiplier ?? 1.15}`,
-    `--scene-length-bias=${sceneTiming.bias ?? 3.85}`,
-    `--min-scene-seconds=${sceneTiming.minimum ?? 5}`,
-    `--max-scene-seconds=${sceneTiming.maximum ?? 6}`,
-    `--image-provider=${record.imageProvider || 'runware'}`,
-    `--story-clou=${features.storyClou || 'off'}`,
-    `--video-direction=${features.videoDirection || 'off'}`,
-    `--video-mode=${features.videoMode || 'image_to_video'}`,
-    `--video-vision=${features.videoVision || 'off'}`,
-    `--video-audio-direction=${features.videoAudioDirection || 'off'}`,
-    `--video-max-zoom=${features.videoMaxZoom ?? 0.08}`,
-    `--layering=${style.layering ?? 3}`,
+    `--scene-count-mode=${sceneCount.mode}`,
+    ...(sceneCount.mode === 'fixed' && Number.isInteger(sceneCount.count) ? [`--scenes=${sceneCount.count}`] : []),
+    `--scene-count-takt=${sceneCount.takt}`,
+    `--scene-count-numerator=${sceneCount.numerator}`,
+    `--scene-count-denominator=${sceneCount.denominator}`,
+    `--scene-count-type=${sceneCount.type}`,
+    `--scene-count-bias=${sceneCount.bias}`,
+    `--min-scenes=${sceneCount.minimum}`,
+    `--max-scenes=${sceneCount.maximum}`,
+    `--scene-length-takt=${sceneLength.takt}`,
+    `--scene-length-type=${sceneLength.type}`,
+    `--scene-length-multiplier=${sceneLength.multiplier}`,
+    `--scene-length-bias=${sceneLength.bias}`,
+    `--min-scene-seconds=${sceneLength.minimum}`,
+    `--max-scene-seconds=${sceneLength.maximum}`,
+    `--image-provider=${defaultGeneration.imageProvider}`,
+    `--video-model=${defaultGeneration.videoModel}`,
+    `--video-resolution=${defaultGeneration.videoResolution}`,
+    `--video-settings-mode=${defaultGeneration.videoSettingsMode}`,
+    `--video-mode=${defaultGeneration.videoMode}`,
+    `--video-direction=${defaultGeneration.videoDirection}`,
+    `--story-clou=${defaultGeneration.storyClou}`,
+    `--video-vision=${defaultGeneration.videoVision}`,
+    `--video-audio-direction=${defaultGeneration.videoAudioDirection}`,
+    `--video-max-zoom=${defaultGeneration.videoMaxZoom}`,
+    `--layering=${visualControls.layering}`,
+    `--iterations=${defaultGeneration.iterations}`,
+    `--pause-ms=${defaultGeneration.pauseMs}`,
+    `--article-order=${defaultGeneration.articleOrder}`,
   ];
-  defaults.push(style.symbolic === false ? '--no-symbolic' : '--symbolic');
-  defaults.push(style.roomDeepness ? '--room-deepness' : '--no-room-deepness');
-  defaults.push(record.sceneVisualControls ? '--scene-visual-controls' : '--fixed-visual-controls');
-  if (record.articleImageReference) defaults.push('--article-image-reference', '--no-style-reference');
-  else if (!record.styleReference) defaults.push('--no-style-reference');
-  if (generation.styleReferencePath) defaults.push(`--style-reference=${generation.styleReferencePath}`);
-  if (generation.guernicaDirectory || record.guernicaDirectory) defaults.push(`--guernica-dir=${generation.guernicaDirectory || record.guernicaDirectory}`);
+  defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
+  defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
+  defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
+  if (defaultGeneration.videosAfterEachIteration) defaults.push('--videos-after-each-iteration');
 
   return {
     args: defaults,
-    storyModel: record.storyModel || 'gpt-4.1-mini',
-    source: recordPath,
+    storyModel: defaultGeneration.storyModel,
+    source: `${settingsPath} (version ${defaultSettings.version})`,
   };
 }
 
@@ -373,12 +335,13 @@ async function updateFilms(runDirectory, readyIterations) {
   if (!glueEnabled || !readyIterations.length) return;
   const glueDirectory = join(runDirectory, 'glue-vids');
   const iterationCount = readyIterations.length;
-  log(`Generate/resume First-Last-Frame bridges through iteration ${iterationCount}.`);
+  log(`Generate/resume First-Last-Frame bridges through iteration ${iterationCount}; wait source ${glueWaitPattern || 'Taktmuster 2/4/4 classic'}.`);
   await runCommand('First-Last-Frame-Glue', process.execPath, [
     glueScript,
     `--run=${runDirectory}`,
     `--iterations=${iterationCount}`,
     `--duration-pattern=${gluePattern}`,
+    `--transition-wait-pattern=${glueWaitPattern}`,
     `--frame-offset-seconds=${glueFrameOffset}`,
     `--output-dir=${glueDirectory}`,
   ]);
@@ -388,6 +351,8 @@ async function updateFilms(runDirectory, readyIterations) {
     `--run-dir=${runDirectory}`,
     `--scene-glue-dir=${glueDirectory}`,
     `--limit=${iterationCount}`,
+    `--transition-wait-pattern=${glueWaitPattern}`,
+    `--frame-offset-seconds=${glueFrameOffset}`,
     `--fade-seconds=${fadeSeconds}`,
   ];
   await runCommand('Full exhibition film', process.execPath, [
@@ -527,6 +492,15 @@ async function exhibitionMain() {
   }
   await withLock(async () => {
     state = await readState();
+    log(`News directory: ${newsDirectory}; output directory: ${outputDirectory}`);
+    if (state.settingsFingerprint !== settingsFingerprint) {
+      if (state.runDirectory) log(`Default settings changed; new run will use ${settingsPath} version ${defaultSettings.version}. Existing run files remain intact.`);
+      state.runnerArguments = null;
+      state.runDirectory = null;
+      state.storyModel = null;
+      state.settingsSource = null;
+      state.exhibitionSettings = null;
+    }
     const exhibitionArguments = process.argv.slice(2);
     if (exhibitionArguments.includes('--first-last-glue') && exhibitionArguments.includes('--no-first-last-glue')) {
       throw new Error('Choose either --first-last-glue or --no-first-last-glue');
@@ -538,6 +512,7 @@ async function exhibitionMain() {
     }
     if (state.exhibitionSettings) {
       gluePattern = state.exhibitionSettings.gluePattern;
+      glueWaitPattern = state.exhibitionSettings.glueWaitPattern || glueWaitPattern;
       glueFrameOffset = state.exhibitionSettings.glueFrameOffset;
       fadeSeconds = state.exhibitionSettings.fadeSeconds;
       randomThreshold = state.exhibitionSettings.randomThreshold;
@@ -556,8 +531,7 @@ async function exhibitionMain() {
     if (state.runnerArguments?.length) {
       defaults = { args: state.runnerArguments, storyModel: state.storyModel, source: state.settingsSource || null };
     } else {
-      const settingsRecord = await findLatestSettingsRecord(settingsSearchDirectory);
-      defaults = await defaultsFromLastRun(settingsRecord);
+      defaults = defaultsFromExhibitionSettings();
       state.runnerArguments = defaults.args;
       state.storyModel = defaults.storyModel;
       state.settingsSource = defaults.source;
@@ -576,7 +550,9 @@ async function exhibitionMain() {
     state.runnerArguments = runnerArguments.filter((argument) => flagName(argument) !== '--resume-run');
     state.storyModel = defaults.storyModel;
     state.settingsSource = defaults.source;
-    state.exhibitionSettings = { glueEnabled, gluePattern, glueFrameOffset, fadeSeconds, randomThreshold };
+    state.settingsVersion = defaultSettings.version;
+    state.settingsFingerprint = settingsFingerprint;
+    state.exhibitionSettings = { glueEnabled, gluePattern, glueWaitPattern, glueFrameOffset, fadeSeconds, randomThreshold };
     state.updatedAt = new Date().toISOString();
     await saveJson(statePath, state);
     if (state.storyModel) process.env.NEWS_STORY_MODEL = state.storyModel;

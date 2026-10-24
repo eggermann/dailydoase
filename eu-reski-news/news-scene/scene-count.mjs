@@ -20,7 +20,7 @@ export function resolveSceneCountSettings(options) {
   };
   if (!Number.isInteger(settings.takt) || settings.takt < 1 || settings.takt > 64
     || !Number.isInteger(settings.numerator) || settings.numerator < 1 || settings.numerator > 32
-    || ![1, 2, 4, 8, 16, 32].includes(settings.denominator)
+    || !Number.isInteger(settings.denominator) || settings.denominator < 1 || settings.denominator > 32
     || !['balanced', 'classic'].includes(settings.type) || !Number.isSafeInteger(settings.bias)
     || !Number.isInteger(settings.minimum) || !Number.isInteger(settings.maximum)
     || settings.minimum < 1 || settings.maximum > 12 || settings.maximum < settings.minimum) {

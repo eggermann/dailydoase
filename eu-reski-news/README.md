@@ -20,9 +20,11 @@ npm run news:html     # HTML-Liste nach EU-Relevanz bauen
 
 ## Ausstellung dauerhaft starten
 
-`npm run news:exhibition` startet `scripts/EU-reski-mix-arg-and-camera-moovs.start.sh`. Der Shell-Starter lädt standardmäßig `.env` aus dem Main-Repository; mit `NEWS_ENV_FILE=/absoluter/pfad/.env` lässt sich das überschreiben. Der Node-Supervisor übernimmt Szenen- und Feature-Settings aus dem zuletzt geänderten `record.json` außerhalb des Ausstellungsordners und speichert seine Startkonfiguration in `GENERATIONS/news/exhibition/exhibition-state.json`. CLI-Flags nach `npm run news:exhibition -- ...` überschreiben passende Vorgaben.
+`npm run news:exhibition` startet `scripts/EU-reski-mix-arg-and-camera-moovs.start.sh`. Der versionierte Startsatz liegt in [`default-exhibition-settings.json`](default-exhibition-settings.json); er enthält Pfade, News-Refresh, Glue und Generatorparameter. Szenenzahl startet mit `new Taktmuster` bei 4 Takten, 4/5, `balanced`, Bias 4. Videomodell: `prunaai:p-video@2-pro`, 480p, Kostenmodus. Der Runner speichert Startparameter und Versionsnummer in `GENERATIONS/news/exhibition/exhibition-state.json`. Ändert sich der Inhalt der JSON-Datei, startet der nächste Aufruf einen neuen Lauf mit den neuen Vorgaben; vorhandene Ausgaben bleiben erhalten. Pfad-, Refresh- und Glue-Umgebungsvariablen sowie CLI-Flags überschreiben passende Vorgaben. Der Shell-Starter lädt `.env` standardmäßig aus dem Main-Repository; mit `NEWS_ENV_FILE=/absoluter/pfad/.env` lässt sich das ändern.
 
-News-Fetch läuft beim Start im Hintergrund, sobald Collection älter als 24 Stunden ist; Jev bewertet danach den EU-Bezug. Solange ein neues Ranking entsteht, generiert der Film weiter mit der letzten fertig bewerteten Collection. Auswahl läuft linear durch höchste Jev-Scores abwärts. Jede Iteration erzeugt Szenenvideos. Sobald alle Clips fertig sind, generiert der Supervisor First-Last-Frame-Brücken innerhalb der Iteration; zwischen Iterationen gibt es keine Brücke. Derselbe Prozess aktualisiert zwei Filme mit 0,25-s-Übergängen:
+News-Fetch läuft beim Start im Hintergrund, sobald Collection älter als 24 Stunden ist; Jev bewertet danach den EU-Bezug. Solange ein neues Ranking entsteht, generiert der Film weiter mit der letzten fertig bewerteten Collection. Auswahl läuft linear durch höchste Jev-Scores abwärts. Jede Iteration erzeugt bis zu vier Szenenvideos parallel; nach `Promise.all` werden Report und Film aktualisiert. FFmpeg setzt standardmäßig 30-ms-Audio-Fades an jede Szenenkante, damit der Ton beim Schnitt nicht klickt (`NEWS_VIDEO_CONCURRENCY`, `NEWS_VIDEO_AUDIO_EDGE_FADE_SECONDS`). Sobald alle Clips fertig sind, generiert der Supervisor First-Last-Frame-Brücken innerhalb der Iteration; zwischen Iterationen gibt es keine Brücke. Derselbe Prozess aktualisiert zwei Filme mit 0,25-s-Übergängen:
+
+Nach dem Video-Prozess fügt `generate-news-scene-videos.mjs` bei mehr als zwei vollständig gerenderten Iterationen zusätzlich den Gesamtfilm `merged/eu-reski-gesamtfilm.mp4` zusammen. Der FFmpeg-Assembler setzt die Artikel-Titelkarten vor die Iterationsfilme; die Reihenfolge folgt `run.json`.
 
 - `glue-vids/eu-reski-live-full.mp4`: alle Brücken.
 - `glue-vids/eu-reski-live-random-bridges.mp4`: nur Brücken mit reproduzierbarem Zufallswert `> 0.7`.
@@ -33,7 +35,7 @@ Jede Iterationskarte zeigt die Überschrift „Geschichte“ und darunter `recor
 npm run news:exhibition
 ```
 
-Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAST_GLUE=0`, `EXHIBITION_GLUE_DURATION_PATTERN=9,5,7,5,8` und `EXHIBITION_RANDOM_BRIDGE_THRESHOLD=0.7`.
+Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAST_GLUE=0`, `EXHIBITION_GLUE_DURATION_PATTERN=9,5,7,5,8`, `EXHIBITION_GLUE_WAIT_PATTERN=classic|all|4,1,2,1,3,1,2,1` und `EXHIBITION_RANDOM_BRIDGE_THRESHOLD=0.7`.
 
 `Article + article photo + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; full painting for style) → cumulative HTML audit report`.
 
@@ -309,14 +311,14 @@ Für diesen Lauf kosteten Runware-Bilder und -Videos zusammen $3.9005 (GPT separ
 
 ### First-Last-Frame-Brücken innerhalb einer Iteration
 
-Für Iterationen 1–5 zwischen jedem benachbarten Szenenclip eine neue 5-Sekunden-Brücke erzeugen. Jede Brücke startet mit dem letzten decodierten Frame der vorherigen Szene und endet mit dem ersten Frame der nächsten Szene derselben Iteration. Es gibt keine Brücke über Iterationsgrenzen hinweg. Runware P-Video-2-Pro akzeptiert beide Endpunkte als `inputs.frameImages` (`frame: "first"` / `frame: "last"`); Mindestdauer beträgt fünf Sekunden.
+Standard für `news:glue-scenes`, Montage und `news:exhibition` ist `new Taktmuster({ taktCnt: 2, zaehler: 4, nenner: 4, type: 'classic' })`; der globale `getNext().patternValue`-Strom liefert `4,1,2,1,3,1,2,1` und läuft über Iterationen weiter. `--transition-wait-pattern=4,1,...` kann ihn explizit überschreiben; `--transition-wait-pattern=all` erzeugt eine Brücke an jeder benachbarten Szenengrenze. Jede Brücke startet mit dem letzten decodierten Frame der vorherigen Szene und endet mit dem ersten Frame der nächsten Szene derselben Iteration. Es gibt keine Brücke über Iterationsgrenzen hinweg. Runware P-Video-2-Pro akzeptiert beide Endpunkte als `inputs.frameImages` (`frame: "first"` / `frame: "last"`); Mindestdauer beträgt fünf Sekunden.
 
 ```sh
 RUN="eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001"
 export DAILYDOASE_ENV_FILE="/Users/eggermann/Projekte/dailydoase/.env"
-npm run news:glue-scenes -- --run="$RUN" --iterations=5
+npm run news:glue-scenes -- --run="$RUN" --iterations=5 --transition-wait-pattern=all
 npm run news:assemble-film -- \
-  --run-dir="$RUN" --scene-glue-dir="$RUN/glue-vids" --limit=5
+  --run-dir="$RUN" --scene-glue-dir="$RUN/glue-vids" --limit=5 --transition-wait-pattern=all
 ```
 
 Aus 5 Iterationen × 5 Szenen entstehen 20 Übergangsclips. Dateien landen unter `run-001/glue-vids/iteration-NNN/scene-NNN-to-NNN.mp4`; jeweilige `*-first.jpg` und `*-last.jpg`, API-Request/Response und `glue-run.json` bleiben dort als Referenz. Der Film-Merge legt die Titelkarten in `glue-vids/title-cards/` ab. Quelle je Karte: `iteration-NNN/record.json` → `article.title`. `glue-vids/film-order.txt` protokolliert Filmreihenfolge; Ausgabe heißt `glue-vids/eu-reski-first-5-glued.mp4`.
@@ -330,15 +332,19 @@ RUN="eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001"
 export DAILYDOASE_ENV_FILE="/Users/eggermann/Projekte/dailydoase/.env"
 npm run news:glue-scenes -- --run="$RUN" --iterations=2 \
   --duration-pattern=9,5,7,5,8 --frame-offset-seconds=0.25 \
+  --transition-wait-pattern=4,1,2,1,3,1,2,1 \
   --output-dir="$RUN/glue-vids-long" --concurrency=4
 npm run news:assemble-film -- --run-dir="$RUN" \
   --scene-glue-dir="$RUN/glue-vids-long" --limit=2 --fade-seconds=0.25 \
+  --frame-offset-seconds=0.25 --transition-wait-pattern=4,1,2,1,3,1,2,1 \
   --output="$RUN/glue-vids-long/eu-reski-iterations-001-002-long-pattern-fade-025.mp4"
 ```
 
-Der zyklische `getNext()`-Strom weist den acht Übergängen `9,5,7,5,8,9,5,7` Sekunden zu. Vorheriges Endbild wird bei `Ende − 0,25 s`, nächstes Startbild bei `Start + 0,25 s` extrahiert. FFmpeg blendet beide Clipkanten mit demselben 0,25-s-Fade und Audio-Crossfade ein. Szenenanfang nach einer Brücke wird dafür um 0,25 s versetzt; es wird weiterhin keine Brücke zwischen Iterationen erzeugt. Ergebnis und Referenzen liegen in `glue-vids-long/`; `glue-run.json`, `film-order.txt` und `fade-filter.txt` protokollieren Muster, Reihenfolge und Filter.
+Das `Taktmuster.getNext()` zählt Szenen ohne Glue über den ganzen Lauf; Iterationsgrenzen setzen Zähler und Muster nicht zurück. Die ersten Grenzen in einer ausreichend langen Iteration sind `4→5`, `5→6`, `8→9`. Hat Iteration 1 drei Szenen, zählt Iteration 2 ab Szene 1 weiter. Eine fällige Brücke genau an einer Iterationsgrenze wird ausgelassen und der Taktmuster-Strom rückt weiter; sie wird nicht aufgeschoben. Der separate Dauer-`getNext()`-Strom vergibt Dauern nur an tatsächlich ausgewählte Brücken.
 
-Eine zweite Montageversion behält nur die zwei längsten generierten Übergänge und blendet alle übrigen Szenengrenzen direkt mit 0,25 Sekunden über:
+Jede Brücke beginnt mit dem Bild bei `Ende − 0,25 s` und endet beim Bild `Start + 0,25 s`. Montage schneidet diese 0,25 s an beiden benachbarten Szenenclips ab, damit Quellclips und Brücke keine doppelten Frames enthalten. `--fade-seconds=0.25` blendet die verbleibenden Clipkanten gleichmäßig mit FFmpeg ein. `glue-run.json`, `film-order.txt` und der gespeicherte Filtergraph dokumentieren Muster und Reihenfolge.
+
+Eine Alternative ist `--bridge-limit=2` ohne `--transition-wait-pattern`; sie wählt die zwei längsten generierten Brücken. Beide Auswahlarten können nicht kombiniert werden.
 
 ```sh
 npm run news:assemble-film -- --run-dir="$RUN" \
