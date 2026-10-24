@@ -118,19 +118,24 @@ const renderTimingSummary = (iterations, linkIterations = false) => `<section cl
   return `<tr><td>${label}</td><td>${escapeHtml(summary.count)}</td><td>${escapeHtml(summary.durations)}</td><td>${escapeHtml(summary.total)}</td></tr>`;
 }).join('')}</tbody></table></section>`;
 const renderMergedFilms = (iterations) => {
-  const films = iterations.filter(({ record }) => record.concatenatedVideo?.path);
+  const films = iterations.filter(({ record }) => record.titleCardFilm?.path || record.concatenatedVideo?.path);
   if (!films.length) return '';
   return `<section class="merged-films"><h2>Zusammengesetzte Filme · ${films.length}</h2><div class="merged-film-grid">${films.map(({ directory, record }, index) => {
-    const film = record.concatenatedVideo;
+    const film = record.titleCardFilm?.path
+      ? { ...record.concatenatedVideo, ...record.titleCardFilm }
+      : record.concatenatedVideo;
     const iterationNumber = Number(directory.match(/iteration-(\d+)/)?.[1]) || index + 1;
     const path = film.runPath || `${directory}/${film.path}`;
-    return `<article class="merged-film"><h3>Iteration ${iterationNumber} · MP4 ${Number(film.durationSeconds).toFixed(2)} s</h3><p>${escapeHtml(record.article?.title || '')}</p><p>Angeforderte Szenensumme: ${escapeHtml(film.requestedDurationSeconds ?? film.durationSeconds)} s</p><video controls preload="metadata" playsinline src="${escapeHtml(path)}" aria-label="Gesamtfilm Iteration ${iterationNumber}"></video>${film.gaps?.length ? `<p class="film-gap">Lücke: ${film.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).map(escapeHtml).join('; ')}</p>` : ''}</article>`;
+    return `<article class="merged-film"><h3>Iteration ${iterationNumber}${record.titleCardFilm?.path ? ' · mit Titeltafel' : ''} · MP4 ${Number(film.durationSeconds).toFixed(2)} s</h3><p>${escapeHtml(record.article?.title || '')}</p><p>Angeforderte Szenensumme: ${escapeHtml(film.requestedDurationSeconds ?? film.durationSeconds)} s</p><video controls preload="metadata" playsinline src="${escapeHtml(path)}" aria-label="Gesamtfilm Iteration ${iterationNumber}"></video>${film.gaps?.length ? `<p class="film-gap">Lücke: ${film.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).join('; ')}</p>` : ''}</article>`;
   }).join('')}</div></section>`;
 };
 
 export function renderReport(record) {
   const { article, semantic, plan, results = [], catalog = [] } = record;
   const costs = results.map((item) => item.cost).filter((cost) => typeof cost === 'number');
+  const displayFilm = record.titleCardFilm?.path
+    ? { ...record.concatenatedVideo, ...record.titleCardFilm }
+    : record.concatenatedVideo;
   const scenes = (plan?.scenes || []).map((scene, index) => {
     const figure = catalog.find((item) => item.id === scene.guernicaId);
     const result = results[index];
@@ -157,7 +162,9 @@ export function renderReport(record) {
   </style></head><body><main><h1>Artikel + Semantic Stream → Szenenbild und Filmplan</h1>
   <p>${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)} · ${escapeHtml(record.imageModel)}</p>
   ${renderTimingSummary([{ record }])}
-  ${record.concatenatedVideo?.path ? `<section><h2>Zusammengesetzter Film</h2><video controls preload="metadata" playsinline src="${escapeHtml(record.concatenatedVideo.path)}"></video><p>${escapeHtml(record.concatenatedVideo.generatedVideos ?? record.concatenatedVideo.scenes)} Videos · ${escapeHtml(record.concatenatedVideo.scenes)} Szenen · MP4 ${Number(record.concatenatedVideo.durationSeconds).toFixed(2)} s · angeforderte Szenensumme ${escapeHtml(record.concatenatedVideo.requestedDurationSeconds ?? record.concatenatedVideo.durationSeconds)} s${record.concatenatedVideo.gaps?.length ? ` · Lücke: ${record.concatenatedVideo.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).map(escapeHtml).join('; ')}` : ''} · ${escapeHtml(record.concatenatedVideo.method)} · ${audioSummary(record.concatenatedVideo.audioStream)}</p></section>` : ''}
+  ${record.titleCard?.imagePath ? photo(record.titleCard.imagePath, 'Generierte Titeltafel aus record.json → article.title') : ''}
+  ${record.titleCardFilm?.status === 'render_failed' ? `<p class="error">Titeltafel-Film fehlgeschlagen: ${escapeHtml(record.titleCardFilm.error)} · Szenenfilm bleibt verfügbar.</p>` : ''}
+  ${displayFilm?.path ? `<section><h2>${record.titleCardFilm?.path ? 'Film mit Titeltafel' : 'Zusammengesetzter Film'}</h2><video controls preload="metadata" playsinline src="${escapeHtml(displayFilm.path)}"></video><p>${escapeHtml(displayFilm.generatedVideos ?? displayFilm.scenes)} Videos · ${escapeHtml(displayFilm.scenes)} Szenen · MP4 ${Number(displayFilm.durationSeconds).toFixed(2)} s · angeforderte Szenensumme ${escapeHtml(displayFilm.requestedDurationSeconds ?? displayFilm.durationSeconds)} s${displayFilm.gaps?.length ? ` · Lücke: ${displayFilm.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).map(escapeHtml).join('; ')}` : ''} · ${escapeHtml(displayFilm.method)} · ${audioSummary(displayFilm.audioStream)}</p></section>` : ''}
   ${countSelection(record)}
   ${record.sceneVisualControls ? '<p>Bildparameter werden pro Szene aus Handlung und Raum gewählt.</p>' : record.visualStyleOptions ? `<p>Feste Bildparameter für alle Szenen: Symbolik ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
   ${record.sceneDurationSettings ? `<p>Szenenlänge: ${escapeHtml(record.sceneDurationSettings.provider)} · Werte ${escapeHtml(record.sceneDurationSettings.patternValues?.join(', ') || '–')} · × ${escapeHtml(record.sceneDurationSettings.multiplier)} + Bias ${escapeHtml(record.sceneDurationSettings.bias)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
@@ -193,6 +200,9 @@ export function renderRunReport(run, iterations) {
   const totalImageCost = iterations.reduce((sum, { record }) => sum + (record.results || []).reduce((sceneSum, image) => sceneSum + (typeof image?.cost === 'number' ? image.cost : 0), 0), 0);
   const reports = iterations.map(({ directory, record }, iterationIndex) => {
     const prefix = `${directory}/`;
+    const displayFilm = record.titleCardFilm?.path
+      ? { ...record.concatenatedVideo, ...record.titleCardFilm }
+      : record.concatenatedVideo;
     const scenes = (record.plan?.scenes || []).map((scene, sceneIndex) => {
       const result = record.results?.[sceneIndex];
       const filmScene = record.filmPlan?.scenePlan?.[sceneIndex];
@@ -213,9 +223,11 @@ export function renderRunReport(run, iterations) {
       ${record.sceneVisualControls ? '<p>GPT wählt Bildparameter für jede Szene passend zu Handlung und Raum.</p>' : record.visualStyleOptions ? `<p><b>Feste Bildparameter:</b> Symbolik ${record.visualStyleOptions.symbolic ? 'AN' : 'AUS'} · Raumtiefe ${record.visualStyleOptions.roomDeepness ? 'AN' : 'AUS'} · Layering ${escapeHtml(record.visualStyleOptions.layering ?? 0)} / 7</p>` : ''}
       ${record.sceneDurationSettings ? `<p><b>Szenenlänge:</b> ${escapeHtml(record.sceneDurationSettings.provider)} · Werte ${escapeHtml(record.sceneDurationSettings.patternValues?.join(', ') || '–')} · × ${escapeHtml(record.sceneDurationSettings.multiplier)} + Bias ${escapeHtml(record.sceneDurationSettings.bias)} · ${escapeHtml(record.sceneDurationSettings.minimum)}–${escapeHtml(record.sceneDurationSettings.maximum)} s</p>` : ''}
       <h2>${escapeHtml(record.article?.title)}</h2><p>${escapeHtml(record.article?.publish_date)} · ${escapeHtml(record.article?.source_country)}</p>
+      ${record.titleCard?.imageRunPath ? `<figure><img src="${escapeHtml(record.titleCard.imageRunPath)}" alt="Titeltafel: ${escapeHtml(record.article?.title)}"><figcaption>Generierte Titeltafel · aus record.json → article.title</figcaption></figure>` : ''}
       <p>${escapeHtml(record.plan?.storyPremise || '')}</p>
       ${storyDramaturgy(record.plan)}
-      ${record.concatenatedVideo?.path ? `<h3>Zusammengesetzter Film</h3><video controls preload="metadata" playsinline src="${escapeHtml(record.concatenatedVideo.runPath || `${prefix}${record.concatenatedVideo.path}`)}"></video><p>${escapeHtml(record.concatenatedVideo.generatedVideos ?? record.concatenatedVideo.scenes)} Videos · ${escapeHtml(record.concatenatedVideo.scenes)} Szenen · MP4 ${Number(record.concatenatedVideo.durationSeconds).toFixed(2)} s · angeforderte Szenensumme ${escapeHtml(record.concatenatedVideo.requestedDurationSeconds ?? record.concatenatedVideo.durationSeconds)} s${record.concatenatedVideo.gaps?.length ? ` · Lücke: ${record.concatenatedVideo.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).map(escapeHtml).join('; ')}` : ''} · ${escapeHtml(record.concatenatedVideo.method)} · ${audioSummary(record.concatenatedVideo.audioStream)}</p>` : ''}
+      ${record.titleCardFilm?.status === 'render_failed' ? `<p class="error">Titeltafel-Film fehlgeschlagen: ${escapeHtml(record.titleCardFilm.error)} · Szenenfilm bleibt verfügbar.</p>` : ''}
+      ${displayFilm?.path ? `<h3>${record.titleCardFilm?.path ? 'Film mit Titeltafel' : 'Zusammengesetzter Film'}</h3><video controls preload="metadata" playsinline src="${escapeHtml(displayFilm.runPath || `${prefix}${displayFilm.path}`)}"></video><p>${escapeHtml(displayFilm.generatedVideos ?? displayFilm.scenes)} Videos · ${escapeHtml(displayFilm.scenes)} Szenen · MP4 ${Number(displayFilm.durationSeconds).toFixed(2)} s · angeforderte Szenensumme ${escapeHtml(displayFilm.requestedDurationSeconds ?? displayFilm.durationSeconds)} s${displayFilm.gaps?.length ? ` · Lücke: ${displayFilm.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).map(escapeHtml).join('; ')}` : ''} · ${escapeHtml(displayFilm.method)} · ${audioSummary(displayFilm.audioStream)}</p>` : ''}
       ${record.videoDirection ? `<p>Optionale Videoregie: ${escapeHtml(record.videoDirection.status)} · ${escapeHtml(record.videoDirection.model)} · kein Video-Provider aufgerufen.</p>` : ''}
       ${videoIterationGuide(record)}
       <p><b>Hauptfigur:</b> ${escapeHtml(record.plan?.protagonist?.name || 'Noch nicht festgelegt')} · ${escapeHtml(record.plan?.protagonist?.role || '')}</p>
@@ -233,7 +245,7 @@ export function renderRunReport(run, iterations) {
   .video-guide{margin:20px 0;padding:16px;border:1px solid #47473e;border-radius:8px;background:#20211f}.video-guide h4{margin:0 0 10px}.video-guide dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:8px;margin:0}.video-guide dt{color:#dfc987}.video-guide dd{margin:0;overflow-wrap:anywhere}.video-guide a{color:#dfc987}@media(max-width:700px){.video-guide dl{grid-template-columns:1fr;gap:2px}.video-guide dd{margin-bottom:8px}}
   video{display:block;width:100%;max-width:100%;height:auto;margin:16px auto;border-radius:8px;background:#111}
   </style></head><body><main><h1>EU-RESKI · ${escapeHtml(run.profile || 'linearer Run')}</h1>
-  <p>${escapeHtml(run.status)} · ${iterations.length} von ${escapeHtml(run.iterationLimit)} Iterationen · ${escapeHtml(run.startedAt)}</p>
+  <p>${escapeHtml(run.status)} · ${iterations.length} von ${escapeHtml(run.iterationLimit)} Iterationen · ${escapeHtml(run.startedAt)} · Titeltafeln ${run.generationSettings?.generateTitleCards === false ? 'AUS' : 'AN'}${run.generationSettings?.generateTitleCards === false ? '' : ' · Quelle record.json → article.title'}</p>
   ${run.assembledFilm?.path ? `<section class="merged-films"><h2>Gesamtfilm · ${escapeHtml(run.assembledFilm.iterations)} Iterationen · ${escapeHtml(run.assembledFilm.durationSeconds)} s</h2><video controls preload="metadata" playsinline src="${escapeHtml(run.assembledFilm.path)}" aria-label="Gesamtfilm mit Titelkarten"></video><p>${escapeHtml(run.assembledFilm.method)}</p></section>` : run.assembledFilm?.status === 'render_failed' ? `<p class="error">Gesamtfilm-Montage fehlgeschlagen: ${escapeHtml(run.assembledFilm.error)} · Einzelne Iterationsfilme sind verfügbar.</p>` : ''}
   ${renderMergedFilms(iterations)}
   ${renderTimingSummary(iterations, true)}

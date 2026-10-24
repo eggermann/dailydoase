@@ -206,6 +206,7 @@ function defaultsFromExhibitionSettings() {
   defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
   defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
   if (defaultGeneration.videosAfterEachIteration) defaults.push('--videos-after-each-iteration');
+  if (defaultGeneration['generate-title-cards']) defaults.push('--generate-title-cards');
 
   return {
     args: defaults,
@@ -221,6 +222,7 @@ function mergeRunnerArguments(defaults, userArguments) {
     ['--room-deepness', '--no-room-deepness'], ['--no-room-deepness', '--room-deepness'],
     ['--scene-visual-controls', '--fixed-visual-controls'], ['--fixed-visual-controls', '--scene-visual-controls'],
     ['--style-reference', '--no-style-reference'], ['--no-style-reference', '--style-reference'],
+    ['--generate-title-cards', '--no-generate-title-cards'], ['--no-generate-title-cards', '--generate-title-cards'],
   ]);
   const suppliedFlags = new Set(userArguments.map(flagName));
   for (let index = 0; index < defaults.length; index += 1) {
@@ -337,7 +339,7 @@ async function getReadyIterations(runDirectory) {
   return ready;
 }
 
-async function updateFilms(runDirectory, readyIterations, videoSettings) {
+async function updateFilms(runDirectory, readyIterations, videoSettings, generateTitleCards) {
   if (!glueEnabled || !readyIterations.length) return;
   const glueDirectory = join(runDirectory, 'glue-vids');
   const iterationCount = readyIterations.length;
@@ -360,6 +362,7 @@ async function updateFilms(runDirectory, readyIterations, videoSettings) {
     `--run-dir=${runDirectory}`,
     `--scene-glue-dir=${glueDirectory}`,
     `--limit=${iterationCount}`,
+    generateTitleCards ? '--generate-title-cards' : '--no-generate-title-cards',
     `--transition-wait-pattern=${glueWaitPattern}`,
     `--frame-offset-seconds=${glueFrameOffset}`,
     `--fade-seconds=${fadeSeconds}`,
@@ -383,7 +386,7 @@ async function updateFilms(runDirectory, readyIterations, videoSettings) {
   await saveJson(statePath, state);
 }
 
-async function runMergeLoop(runDirectory, videoSettings) {
+async function runMergeLoop(runDirectory, videoSettings, generateTitleCards) {
   while (!stopping) {
     if (mergeRunning) {
       await delayOrStop(mergeCheckMs);
@@ -393,7 +396,7 @@ async function runMergeLoop(runDirectory, videoSettings) {
     try {
       const ready = await getReadyIterations(runDirectory);
       const state = await readState();
-      if (ready.length > Number(state.gluedThroughIteration || 0)) await updateFilms(runDirectory, ready, videoSettings);
+      if (ready.length > Number(state.gluedThroughIteration || 0)) await updateFilms(runDirectory, ready, videoSettings, generateTitleCards);
       await delayOrStop(mergeCheckMs);
     } catch (error) {
       console.error(`[exhibition] Film merge failed: ${error.message}`);
@@ -566,6 +569,7 @@ async function exhibitionMain() {
       articleOrder: argumentValue(runnerArguments, '--article-order', 'linear'),
       sceneVideo: { enabled: runnerArguments.includes('--videos-after-each-iteration'), ...videoSettings },
       visualControlMode: runnerArguments.includes('--scene-visual-controls') ? 'scene-specific' : 'fixed',
+      generateTitleCards: runnerArguments.includes('--generate-title-cards'),
       firstLastGlue: glueEnabled,
       gluePattern,
       glueWaitPattern,
@@ -593,11 +597,12 @@ async function exhibitionMain() {
     if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
 
     const refreshTask = runRefreshLoop();
-    let mergeTask = runDirectory ? runMergeLoop(runDirectory, videoSettings) : null;
+    const generateTitleCards = runnerArguments.includes('--generate-title-cards');
+    let mergeTask = runDirectory ? runMergeLoop(runDirectory, videoSettings, generateTitleCards) : null;
     while (!stopping) {
       const running = startRunner(runnerArguments, runDirectory, (reportedRunDirectory) => {
         runDirectory = resolve(reportedRunDirectory);
-        if (!mergeTask) mergeTask = runMergeLoop(runDirectory, videoSettings);
+        if (!mergeTask) mergeTask = runMergeLoop(runDirectory, videoSettings, generateTitleCards);
       });
       const result = await running.closed;
       if (state.runDirectory) runDirectory = resolve(state.runDirectory);

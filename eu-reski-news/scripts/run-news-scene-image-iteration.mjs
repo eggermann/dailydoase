@@ -1,7 +1,7 @@
 import { randomInt, randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
-import { dirname, join, resolve, basename, extname } from 'node:path';
+import { dirname, join, resolve, basename, extname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { buildPlanRequest, validatePlan, buildImageTask, imageModel, hash } from '../news-scene/planner.mjs';
@@ -17,6 +17,7 @@ import { buildVideoVisionRequest, validateVideoVisionResponse, videoVisionPrompt
 import { buildGrokVideoPrompt, buildVideoDirectionRequest, validateVideoDirectionResponse, videoDirectionInputHash, videoDirectorPromptVersion } from '../news-scene/video-director.mjs';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
+import { renderTitleCard } from '../news-scene/title-card.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values: options } = parseArgs({ options: {
@@ -51,6 +52,8 @@ const { values: options } = parseArgs({ options: {
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
   'video-audio-direction': { type: 'string', default: process.env.NEWS_VIDEO_AUDIO_DIRECTION || 'off' }, 'video-max-zoom': { type: 'string', default: process.env.NEWS_VIDEO_MAX_ZOOM || '0.08' },
   'videos-after-each-iteration': { type: 'boolean', default: false },
+  'generate-title-cards': { type: 'boolean', default: false },
+  'no-generate-title-cards': { type: 'boolean', default: false },
   'video-model': { type: 'string', default: 'prunaai:p-video@2-pro' },
   'video-resolution': { type: 'string', default: '480p' },
   'video-settings-mode': { type: 'string', default: 'cost' },
@@ -58,6 +61,10 @@ const { values: options } = parseArgs({ options: {
   'room-deepness': { type: 'boolean', default: false }, 'no-room-deepness': { type: 'boolean', default: false }, help: { type: 'boolean' },
   layering: { type: 'string', default: '0' },
 } });
+if (options['generate-title-cards'] && options['no-generate-title-cards']) {
+  throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
+}
+if (options['no-generate-title-cards']) options['generate-title-cards'] = false;
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
 for (const flag of ['story-clou', 'video-direction', 'video-vision']) {
@@ -191,6 +198,7 @@ function currentGenerationSettings() {
     sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
     visualStyleOptions: { ...recordStyleOptions },
     videosAfterEachIteration: options['videos-after-each-iteration'],
+    generateTitleCards: options['generate-title-cards'],
     videoModel: options['video-model'],
     videoResolution: options['video-resolution'],
     videoSettingsMode: options['video-settings-mode'],
@@ -627,7 +635,7 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --videos-after-each-iteration --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost');
+    console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --videos-after-each-iteration --generate-title-cards --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost');
     return;
   }
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
@@ -783,7 +791,7 @@ async function main() {
       await writeFile(join(iterationRoot, 'index.html'), renderRunReport(runManifest, reports));
       console.log(`Cumulative HTML: ${join(iterationRoot, 'index.html')}`);
       if (options['videos-after-each-iteration']) {
-        execFileSync(process.execPath, [
+        const videoArguments = [
           join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
           `--run=${iterationRoot}`,
           `--iteration=${relativeDirectory}`,
@@ -791,7 +799,9 @@ async function main() {
           `--resolution=${options['video-resolution']}`,
           `--settings-mode=${options['video-settings-mode']}`,
           '--poll-timeout-seconds=300',
-        ], { cwd: root, stdio: 'inherit' });
+        ];
+        if (options['generate-title-cards']) videoArguments.push('--generate-title-cards');
+        execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
       }
     }
     if (!endless && completed >= iterationLimit) break;
@@ -913,6 +923,16 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
     };
     delete record.error;
     await persist();
+    if (options['generate-title-cards']) {
+      const iterationNumber = Number(basename(directory).match(/iteration-(\d+)/)?.[1]);
+      record.titleCard = await renderTitleCard({
+        runDirectory: iterationRoot,
+        iterationDirectory: relative(iterationRoot, directory),
+        iterationNumber,
+      });
+      await persist();
+      console.log(`Title card ready: ${record.titleCard.articleTitle}`);
+    }
     console.log(`Iteration: ${directory}\nArticle: ${record.article.title}`);
     if (!record.semantic) {
       record.semantic = await semanticSource.next();

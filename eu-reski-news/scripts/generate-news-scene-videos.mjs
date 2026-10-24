@@ -5,6 +5,7 @@ import { basename, dirname, join, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { renderReport, renderRunReport } from '../news-scene/report.mjs';
+import { renderTitleCard } from '../news-scene/title-card.mjs';
 import { concatMp4Lossless, createBlackMp4, probeAudioStream, probeVideoStream } from '../../lib/generator/ffmpeg-helpers.js';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
 
@@ -16,6 +17,7 @@ const { values } = parseArgs({ options: {
   'output-quality': { type: 'string', default: process.env.NEWS_VIDEO_OUTPUT_QUALITY || '20' },
   'video-concurrency': { type: 'string', default: process.env.NEWS_VIDEO_CONCURRENCY || '4' },
   'audio-edge-fade-seconds': { type: 'string', default: process.env.NEWS_VIDEO_AUDIO_EDGE_FADE_SECONDS || '0.03' },
+  'generate-title-cards': { type: 'boolean', default: false },
   'poll-timeout-seconds': { type: 'string', default: process.env.NEWS_VIDEO_POLL_TIMEOUT_SECONDS || '60' },
   help: { type: 'boolean', default: false },
 } });
@@ -29,7 +31,7 @@ const audioEdgeFadeSeconds = Number(values['audio-edge-fade-seconds']);
 const pollTimeoutSeconds = Number(values['poll-timeout-seconds']);
 const pollTimeoutMs = pollTimeoutSeconds * 1000;
 if (values.help) {
-  console.log('node --env-file=.env eu-reski-news/scripts/generate-news-scene-videos.mjs --run=PATH [--iteration=iteration-001] [--model=prunaai:p-video@2-pro] [--resolution=480p] [--settings-mode=cost] [--video-concurrency=4] [--audio-edge-fade-seconds=0.03] [--poll-timeout-seconds=300]');
+  console.log('node --env-file=.env eu-reski-news/scripts/generate-news-scene-videos.mjs --run=PATH [--iteration=iteration-001] [--model=prunaai:p-video@2-pro] [--resolution=480p] [--settings-mode=cost] [--generate-title-cards] [--video-concurrency=4] [--audio-edge-fade-seconds=0.03] [--poll-timeout-seconds=300]');
   process.exit(0);
 }
 if (!values.run) throw new Error('Pass --run=PATH to an image-generation run directory');
@@ -364,7 +366,8 @@ async function concatenateIteration(directory, record) {
 
 async function assembleAllIterations(run, runDirectory) {
   const entries = run.iterations || [];
-  if (entries.length <= 2) return;
+  if (!entries.length) return;
+  const generateTitleCards = run.generationSettings?.generateTitleCards !== false;
 
   const sourceIterations = [];
   for (const entry of entries) {
@@ -392,7 +395,8 @@ async function assembleAllIterations(run, runDirectory) {
   const sourceSignature = JSON.stringify(sourceIterations);
   if (run.assembledFilm?.path === relative(runDirectory, outputPath)
     && JSON.stringify(run.assembledFilm.sourceIterations) === sourceSignature
-    && run.assembledFilm.audioEdgeFadeSeconds === 0.03
+    && run.assembledFilm.audioEdgeFadeSeconds === 0.25
+    && run.assembledFilm.generateTitleCards === generateTitleCards
     && await exists(outputPath)) return;
 
   await mkdir(mergedDirectory, { recursive: true });
@@ -401,7 +405,8 @@ async function assembleAllIterations(run, runDirectory) {
       join(root, 'eu-reski-news', 'scripts', 'assemble-news-film.mjs'),
       `--run-dir=${runDirectory}`,
       `--output=${outputPath}`,
-      '--fade-seconds=0.03',
+      generateTitleCards ? '--generate-title-cards' : '--no-generate-title-cards',
+      '--fade-seconds=0.25',
     ], { cwd: root, stdio: 'inherit' });
     const assembledVideo = await probeVideoStream(outputPath);
     run.assembledFilm = {
@@ -409,8 +414,9 @@ async function assembleAllIterations(run, runDirectory) {
       iterations: entries.length,
       durationSeconds: assembledVideo.duration,
       sourceIterations,
-      method: 'FFmpeg assembler · article title cards · 0.03s audio/video fades',
-      audioEdgeFadeSeconds: 0.03,
+      method: `FFmpeg assembler · ${generateTitleCards ? 'article title cards from record.json → article.title' : 'no title cards'} · 0.25s audio/video fades`,
+      audioEdgeFadeSeconds: 0.25,
+      generateTitleCards,
       audioStream: await probeAudioStream(outputPath),
       createdAt: new Date().toISOString(),
     };
@@ -432,6 +438,11 @@ async function assembleAllIterations(run, runDirectory) {
 const runManifestPath = join(runDirectory, 'run.json');
 if (!await exists(runManifestPath)) throw new Error(`Missing run manifest: ${runManifestPath}`);
 const run = await json(runManifestPath);
+if (values['generate-title-cards']) {
+  run.generationSettings ||= {};
+  run.generationSettings.generateTitleCards = true;
+  await safeSave(runManifestPath, run);
+}
   const selectedIterations = values.iteration
     ? (run.iterations || []).filter((entry) => entry.directory === values.iteration)
     : run.iterations || [];
@@ -439,6 +450,15 @@ const run = await json(runManifestPath);
   for (const entry of selectedIterations) {
   const directory = join(runDirectory, entry.directory);
   const record = await json(join(directory, 'record.json'));
+  if (values['generate-title-cards']) {
+    const iterationNumber = Number(entry.directory.match(/iteration-(\d+)/)?.[1]);
+    record.titleCard = await renderTitleCard({
+      runDirectory,
+      iterationDirectory: entry.directory,
+      iterationNumber,
+    });
+    await safeSave(join(directory, 'record.json'), record);
+  }
   const filmPlanPath = join(directory, 'film-plan.json');
   record.filmPlan = await json(filmPlanPath);
   const scenes = record.filmPlan.scenePlan;
@@ -518,6 +538,39 @@ const run = await json(runManifestPath);
       record.videoGeneration.renderError = error.message || String(error);
       await saveHtml(directory, record);
       console.error(`ITERATION_RENDER_FAILED ${directory} · ${error.message || error}; videos remain saved for a render retry`);
+    }
+    if (record.concatenatedVideo?.path && values['generate-title-cards']) {
+      try {
+        const iterationFilmPath = join(runDirectory, 'merged', `${entry.directory}-with-title-card.mp4`);
+        execFileSync(process.execPath, [
+          join(root, 'eu-reski-news', 'scripts', 'assemble-news-film.mjs'),
+          `--run-dir=${runDirectory}`,
+          `--iteration=${entry.directory}`,
+          '--generate-title-cards',
+          `--card-seconds=${record.titleCard?.durationSeconds || 4}`,
+          '--fade-seconds=0.25',
+          `--output=${iterationFilmPath}`,
+        ], { cwd: root, stdio: 'inherit' });
+        const titledFilm = await probeVideoStream(iterationFilmPath);
+        record.titleCardFilm = {
+          path: relative(directory, iterationFilmPath),
+          runPath: relative(runDirectory, iterationFilmPath),
+          durationSeconds: titledFilm.duration,
+          audioStream: await probeAudioStream(iterationFilmPath),
+          fadeSeconds: 0.25,
+          method: 'FFmpeg assembler · title card from record.json → article.title',
+          createdAt: new Date().toISOString(),
+        };
+        await saveHtml(directory, record);
+      } catch (error) {
+        record.titleCardFilm = {
+          status: 'render_failed',
+          error: error.message || String(error),
+          failedAt: new Date().toISOString(),
+        };
+        await saveHtml(directory, record);
+        console.error(`TITLE_CARD_RENDER_FAILED ${directory} · ${error.message || error}; scene film remains available`);
+      }
     }
   }
 }
