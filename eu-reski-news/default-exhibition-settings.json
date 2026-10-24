@@ -25,6 +25,7 @@
     "videosAfterEachIteration": true,
     "sceneCount": {
       "mode": "taktmuster",
+      "count": 5,
       "takt": 4,
       "numerator": 4,
       "denominator": 5,
@@ -42,9 +43,6 @@
       "maximum": 8
     },
     "imageProvider": "runware",
-    "videoModel": "prunaai:p-video@2-pro",
-    "videoResolution": "480p",
-    "videoSettingsMode": "cost",
     "videoMode": "image_to_video",
     "videoDirection": "off",
     "storyClou": "off",
@@ -52,7 +50,7 @@
     "videoAudioDirection": "off",
     "videoMaxZoom": 0.08,
     "visualControls": {
-      "mode": "scene-specific",
+      "mode": "fixed",
       "symbolic": true,
       "roomDeepness": false,
       "layering": 3
