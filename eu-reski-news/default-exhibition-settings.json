@@ -50,7 +50,7 @@
     "videoAudioDirection": "off",
     "videoMaxZoom": 0.08,
     "visualControls": {
-      "mode": "fixed",
+      "mode": "scene-specific",
       "symbolic": true,
       "roomDeepness": false,
       "layering": 3
