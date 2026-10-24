@@ -186,7 +186,12 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
     throw new Error('An expanded plan must preserve the original protagonist and figure reference');
   }
   for (const [index, scene] of plan.scenes.entries()) {
-    if (scene.index !== index + 1 || !figureIds.has(scene.guernicaId) || !scene.protagonistAction?.toLocaleLowerCase().includes(plan.protagonist.name.toLocaleLowerCase()) || !scene.selectionReason?.trim()) throw new Error('Every scene needs the same named protagonist and a valid, justified figure reference');
+    const protagonistName = plan.protagonist.name.toLocaleLowerCase();
+    const protagonistGivenName = protagonistName.split(/\s+/)[0];
+    const protagonistAction = scene.protagonistAction?.toLocaleLowerCase() || '';
+    const namesProtagonist = protagonistAction.includes(protagonistName)
+      || protagonistAction.includes(protagonistGivenName);
+    if (scene.index !== index + 1 || !figureIds.has(scene.guernicaId) || !namesProtagonist || !scene.selectionReason?.trim()) throw new Error('Every scene needs the same named protagonist and a valid, justified figure reference');
     if (!planSchema.properties.scenes.items.properties.composition.enum.includes(scene.composition)) throw new Error('Each scene needs a supported composition');
     if (sceneVisualControls) {
       const controls = scene.visualStyleOptions;

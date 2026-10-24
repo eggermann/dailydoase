@@ -550,6 +550,8 @@ async function exhibitionMain() {
       state.storyModel = defaults.storyModel;
       state.settingsSource = defaults.source;
     }
+    const requestedStoryModel = process.env.NEWS_STORY_MODEL?.trim();
+    if (requestedStoryModel) defaults = { ...defaults, storyModel: requestedStoryModel };
     const runnerArguments = mergeRunnerArguments(defaults.args, userArguments);
     const iterationLimit = Number(argumentValue(runnerArguments, '--iterations', '-1'));
     const videoSettings = {
