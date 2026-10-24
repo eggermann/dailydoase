@@ -15,9 +15,11 @@ export function buildTimingRequest({ plan, sceneDurations, sceneDurationSettings
   if (!chooseDurations && (!Array.isArray(sceneDurations) || sceneDurations.length !== count)) {
     throw new Error('Timing requires one fixed duration per scene');
   }
+  const reasoningModel = /^gpt-6(?:\.1-sol|-luna)(?:-|$)/.test(model);
+  const reasoningEffort = model.startsWith('gpt-6-luna') ? 'medium' : 'high';
   return {
     model,
-    temperature: 0.3,
+    ...(reasoningModel ? { reasoning_effort: reasoningEffort } : { temperature: 0.3 }),
     max_completion_tokens: Math.max(7000, count * 1000),
     messages: [
       { role: 'system', content: [
