@@ -239,8 +239,14 @@ function mergeRunnerArguments(defaults, userArguments) {
   addDefault(merged, userArguments, '--article-order', 'linear');
   addDefault(merged, userArguments, '--news-dir', newsDirectory);
   addDefault(merged, userArguments, '--output-dir', outputDirectory);
-  addDefault(merged, userArguments, '--videos-after-each-iteration');
   return [...merged, ...userArguments];
+}
+
+function argumentValue(argumentsList, flag, fallback) {
+  const index = argumentsList.findIndex((argument) => flagName(argument) === flag);
+  if (index < 0) return fallback;
+  const argument = argumentsList[index];
+  return argument.includes('=') ? argument.slice(flag.length + 1) : argumentsList[index + 1] ?? fallback;
 }
 
 async function newestAggregate() {
@@ -331,7 +337,7 @@ async function getReadyIterations(runDirectory) {
   return ready;
 }
 
-async function updateFilms(runDirectory, readyIterations) {
+async function updateFilms(runDirectory, readyIterations, videoSettings) {
   if (!glueEnabled || !readyIterations.length) return;
   const glueDirectory = join(runDirectory, 'glue-vids');
   const iterationCount = readyIterations.length;
@@ -340,6 +346,9 @@ async function updateFilms(runDirectory, readyIterations) {
     glueScript,
     `--run=${runDirectory}`,
     `--iterations=${iterationCount}`,
+    `--model=${videoSettings.model}`,
+    `--resolution=${videoSettings.resolution}`,
+    `--settings-mode=${videoSettings.settingsMode}`,
     `--duration-pattern=${gluePattern}`,
     `--transition-wait-pattern=${glueWaitPattern}`,
     `--frame-offset-seconds=${glueFrameOffset}`,
@@ -374,7 +383,7 @@ async function updateFilms(runDirectory, readyIterations) {
   await saveJson(statePath, state);
 }
 
-async function runMergeLoop(runDirectory) {
+async function runMergeLoop(runDirectory, videoSettings) {
   while (!stopping) {
     if (mergeRunning) {
       await delayOrStop(mergeCheckMs);
@@ -384,7 +393,7 @@ async function runMergeLoop(runDirectory) {
     try {
       const ready = await getReadyIterations(runDirectory);
       const state = await readState();
-      if (ready.length > Number(state.gluedThroughIteration || 0)) await updateFilms(runDirectory, ready);
+      if (ready.length > Number(state.gluedThroughIteration || 0)) await updateFilms(runDirectory, ready, videoSettings);
       await delayOrStop(mergeCheckMs);
     } catch (error) {
       console.error(`[exhibition] Film merge failed: ${error.message}`);
@@ -507,15 +516,16 @@ async function exhibitionMain() {
     }
     if (exhibitionArguments.includes('--first-last-glue')) glueEnabled = true;
     if (exhibitionArguments.includes('--no-first-last-glue')) glueEnabled = false;
-    if (!exhibitionArguments.includes('--first-last-glue') && !exhibitionArguments.includes('--no-first-last-glue') && state.exhibitionSettings) {
+    if (!exhibitionArguments.includes('--first-last-glue') && !exhibitionArguments.includes('--no-first-last-glue')
+      && process.env.EXHIBITION_FIRST_LAST_GLUE === undefined && state.exhibitionSettings) {
       glueEnabled = state.exhibitionSettings.glueEnabled;
     }
     if (state.exhibitionSettings) {
-      gluePattern = state.exhibitionSettings.gluePattern;
-      glueWaitPattern = state.exhibitionSettings.glueWaitPattern || glueWaitPattern;
-      glueFrameOffset = state.exhibitionSettings.glueFrameOffset;
-      fadeSeconds = state.exhibitionSettings.fadeSeconds;
-      randomThreshold = state.exhibitionSettings.randomThreshold;
+      if (process.env.EXHIBITION_GLUE_DURATION_PATTERN === undefined) gluePattern = state.exhibitionSettings.gluePattern;
+      if (process.env.EXHIBITION_GLUE_WAIT_PATTERN === undefined) glueWaitPattern = state.exhibitionSettings.glueWaitPattern || glueWaitPattern;
+      if (process.env.EXHIBITION_FRAME_OFFSET_SECONDS === undefined) glueFrameOffset = state.exhibitionSettings.glueFrameOffset;
+      if (process.env.EXHIBITION_FADE_SECONDS === undefined) fadeSeconds = state.exhibitionSettings.fadeSeconds;
+      if (process.env.EXHIBITION_RANDOM_BRIDGE_THRESHOLD === undefined) randomThreshold = state.exhibitionSettings.randomThreshold;
     }
     if (!(randomThreshold >= 0 && randomThreshold < 1)) throw new Error('EXHIBITION_RANDOM_BRIDGE_THRESHOLD must be from 0 to below 1');
     const glueDurations = gluePattern.split(',').map((value) => Number(value.trim()));
@@ -537,14 +547,30 @@ async function exhibitionMain() {
       state.settingsSource = defaults.source;
     }
     const runnerArguments = mergeRunnerArguments(defaults.args, userArguments);
+    const videoSettings = {
+      model: argumentValue(runnerArguments, '--video-model', defaultGeneration.videoModel),
+      resolution: argumentValue(runnerArguments, '--video-resolution', defaultGeneration.videoResolution),
+      settingsMode: argumentValue(runnerArguments, '--video-settings-mode', defaultGeneration.videoSettingsMode),
+    };
     log(`Settings source: ${defaults.source || 'exhibition defaults'}`);
     log(`Settings snapshot: ${JSON.stringify({
-      sceneCountMode: runnerArguments.find((argument) => argument.startsWith('--scene-count-mode='))?.split('=').at(-1),
-      sceneCount: runnerArguments.find((argument) => argument.startsWith('--scenes='))?.split('=').at(-1),
-      articleOrder: 'linear',
-      sceneVideo: true,
+      storyModel: defaults.storyModel,
+      sceneCount: {
+        mode: argumentValue(runnerArguments, '--scene-count-mode', 'fixed'),
+        takt: argumentValue(runnerArguments, '--scene-count-takt', '2'),
+        meter: `${argumentValue(runnerArguments, '--scene-count-numerator', '3')}/${argumentValue(runnerArguments, '--scene-count-denominator', '4')}`,
+        type: argumentValue(runnerArguments, '--scene-count-type', 'balanced'),
+        bias: argumentValue(runnerArguments, '--scene-count-bias', '2'),
+        fixedCount: argumentValue(runnerArguments, '--scenes', null),
+      },
+      articleOrder: argumentValue(runnerArguments, '--article-order', 'linear'),
+      sceneVideo: { enabled: runnerArguments.includes('--videos-after-each-iteration'), ...videoSettings },
+      visualControlMode: runnerArguments.includes('--scene-visual-controls') ? 'scene-specific' : 'fixed',
       firstLastGlue: glueEnabled,
       gluePattern,
+      glueWaitPattern,
+      frameOffsetSeconds: glueFrameOffset,
+      fadeSeconds,
       randomBridgeThreshold: randomThreshold,
     })}`);
     state.runnerArguments = runnerArguments.filter((argument) => flagName(argument) !== '--resume-run');
@@ -567,11 +593,11 @@ async function exhibitionMain() {
     if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
 
     const refreshTask = runRefreshLoop();
-    let mergeTask = runDirectory ? runMergeLoop(runDirectory) : null;
+    let mergeTask = runDirectory ? runMergeLoop(runDirectory, videoSettings) : null;
     while (!stopping) {
       const running = startRunner(runnerArguments, runDirectory, (reportedRunDirectory) => {
         runDirectory = resolve(reportedRunDirectory);
-        if (!mergeTask) mergeTask = runMergeLoop(runDirectory);
+        if (!mergeTask) mergeTask = runMergeLoop(runDirectory, videoSettings);
       });
       const result = await running.closed;
       if (state.runDirectory) runDirectory = resolve(state.runDirectory);
