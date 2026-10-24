@@ -234,7 +234,8 @@ function mergeRunnerArguments(defaults, userArguments) {
   const suppliedIterations = userArguments.find((argument) => flagName(argument) === '--iterations');
   if (suppliedIterations) {
     const value = suppliedIterations.includes('=') ? suppliedIterations.split('=').at(-1) : userArguments[userArguments.indexOf(suppliedIterations) + 1];
-    if (!['0', '-1'].includes(value)) throw new Error('Exhibition runner requires --iterations=0 or --iterations=-1 for endless operation');
+    const iterations = Number(value);
+    if (!Number.isInteger(iterations) || iterations < -1) throw new Error('Use --iterations=N for a finite run, --iterations=0 or --iterations=-1 for endless operation');
   }
   addDefault(merged, userArguments, '--iterations', '-1');
   addDefault(merged, userArguments, '--pause-ms', '0');
@@ -550,6 +551,7 @@ async function exhibitionMain() {
       state.settingsSource = defaults.source;
     }
     const runnerArguments = mergeRunnerArguments(defaults.args, userArguments);
+    const iterationLimit = Number(argumentValue(runnerArguments, '--iterations', '-1'));
     const videoSettings = {
       model: argumentValue(runnerArguments, '--video-model', defaultGeneration.videoModel),
       resolution: argumentValue(runnerArguments, '--video-resolution', defaultGeneration.videoResolution),
@@ -607,6 +609,12 @@ async function exhibitionMain() {
       const result = await running.closed;
       if (state.runDirectory) runDirectory = resolve(state.runDirectory);
       if (stopping) break;
+      if (result.code === 0 && iterationLimit > 0) {
+        stopping = true;
+        wakeForStop();
+        log(`Completed ${iterationLimit} exhibition iterations; stopping after final merge work finishes.`);
+        break;
+      }
       log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
       await delayOrStop(30_000);
     }
