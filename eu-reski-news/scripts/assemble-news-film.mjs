@@ -136,7 +136,6 @@ async function renderTitleCard(iterationDirectory, number, font) {
 
   const titleTextPath = join(cardsDirectory, `title-${iterationId}.txt`);
   const titleImagePath = join(cardsDirectory, `title-${iterationId}.png`);
-  const headingLayerPath = join(cardsDirectory, `.heading-${iterationId}.png`);
   const textLayerPath = join(cardsDirectory, `.text-${iterationId}.png`);
   const titleVideoPath = join(cardsDirectory, `title-${iterationId}.mp4`);
   const expectedTitleText = `${title}\n`;
@@ -148,18 +147,12 @@ async function renderTitleCard(iterationDirectory, number, font) {
   await writeFile(titleTextPath, expectedTitleText, 'utf8');
 
   runWithOutput(magick, [
-    '-size', '760x60', '-background', 'none', '-fill', 'white', '-font', font,
-    '-pointsize', '24', '-gravity', 'center', 'caption:Geschichte', headingLayerPath,
-  ], 'ImageMagick');
-  runWithOutput(magick, [
     '-size', '760x240', '-background', 'none', '-fill', 'white', '-font', font,
     '-pointsize', '36', '-gravity', 'center', `caption:@${titleTextPath}`, textLayerPath,
   ], 'ImageMagick');
   runWithOutput(magick, [
-    '-size', '832x480', 'xc:#101820', headingLayerPath, '-gravity', 'north', '-geometry', '+0+110',
-    '-composite', textLayerPath, '-gravity', 'center', '-geometry', '+0+70', '-composite', titleImagePath,
+    '-size', '832x480', 'xc:#101820', textLayerPath, '-gravity', 'center', '-composite', titleImagePath,
   ], 'ImageMagick');
-  await unlink(headingLayerPath);
   await unlink(textLayerPath);
 
   runWithOutput(ffmpeg, [

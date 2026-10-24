@@ -22,7 +22,7 @@
 </head>
 <body><main>
   <h1>EU-RESKI · Parameter-Merkliste</h1>
-  <p class="muted">Stand: 22.10.2026 · Feature-Branch <code>codex/eu-reski-scene-count-takt</code> · Worktree <code>/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase</code></p>
+  <p class="muted">Stand: 23.10.2026 · Branch <code>eu-reski/default</code> · Worktree <code>/Users/eggermann/.codex/worktrees/e3e1/dailydoase</code></p>
   <p class="flow"><strong>Iteration = eine Nachricht → mehrere Szenen → ein Startbild pro Szene.</strong></p>
 
   <section>
@@ -82,16 +82,35 @@
   </section>
 
   <section>
+    <h2>Videoparameter · P-Video 2 Pro</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Parameter</th><th>Werte / Standard</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td>Modell</td><td><code>prunaai:p-video@2-pro</code></td><td>Runware Image-to-Video mit erstem Szenenbild als Startframe.</td></tr>
+        <tr><td><code>duration</code></td><td>5–15 Sekunden</td><td>Modellgrenzen laut Runware. Die Generator-Grenze muss den geplanten Szenenwert unverändert durchreichen.</td></tr>
+        <tr><td><code>--min-scene-seconds</code> / <code>--max-scene-seconds</code></td><td>Im Lauf 5–8 Sekunden</td><td>Begrenzt die GPT-/Taktmuster-Szenenplanung; 7–8 Sekunden sind für P-Video gültig.</td></tr>
+        <tr><td><code>--video-resolution</code></td><td><code>480p</code></td><td>Ausgabeauflösung für den Videolauf.</td></tr>
+        <tr><td><code>--video-settings-mode</code></td><td><code>cost</code></td><td>P-Video-Rezept für den API-Aufruf.</td></tr>
+        <tr><td><code>--videos-after-each-iteration</code></td><td>Optional</td><td>Erzeugt nach jeder Bilditeration Szenenclips und den Iterationsfilm.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Für bereits erzeugte Bilder: <code>node --env-file=/pfad/zum/.env eu-reski-news/scripts/generate-news-scene-videos.mjs --run=PFAD/ZU/run-001 --model=prunaai:p-video@2-pro --resolution=480p --settings-mode=cost</code>.</p>
+    <p class="muted">Quelle: <a href="https://runware.ai/docs/models/prunaai-p-video-2-pro/guides/speed-quality-and-size">Runware · Dauer, Qualität und Größe</a>.</p>
+  </section>
+
+  <section>
     <h2>Argumente zum Merken</h2>
     <p>Diese Argumentgruppen an den vorhandenen Generator-Aufruf anhängen:</p>
     <p><strong>Vier Nachrichten; Taktmuster wählt Szenenzahl, GPT wählt Dauer und Bildparameter:</strong></p>
     <pre>--iterations=4 --scene-count-mode=taktmuster --min-scenes=1 --max-scenes=12
 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=8
 --scene-visual-controls</pre>
-    <p><strong>Vier Nachrichten, je fünf Szenen; Taktmuster wählt Dauer:</strong></p>
+    <p><strong>Vier Iterationen, je fünf Szenen; Taktmuster wählt Dauer, GPT wählt Bildparameter; Videos direkt mit P-Video:</strong></p>
     <pre>--iterations=4 --scenes=5 --scene-length-takt=4 --scene-length-type=balanced
 --scene-length-multiplier=1.15 --scene-length-bias=3.85
---min-scene-seconds=5 --max-scene-seconds=8</pre>
+--min-scene-seconds=5 --max-scene-seconds=8 --scene-visual-controls
+--video-mode=image_to_video --videos-after-each-iteration
+--video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost</pre>
     <p><strong>Feste Bildparameter für einen Vergleich:</strong></p>
     <pre>--fixed-visual-controls --symbolic --room-deepness --layering=3</pre>
   </section>
