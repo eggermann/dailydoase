@@ -50,7 +50,8 @@
     .film h2 { margin: 0; }
     .tag { display: inline-flex; align-items: center; border: 1px solid #657055; border-radius: 999px; padding: 3px 9px; color: var(--green); font-size: 12px; white-space: nowrap; }
     .tag.partial { border-color: #805d45; color: var(--orange); }
-    .tag.no-article-reference { border-color: #bd4545; background: #4a2020; color: #ffb0a8; }
+    .tag.no-article-reference, .tag.no-reference { border-color: #bd4545; background: #4a2020; color: #ffb0a8; }
+    .reference-tags { display: flex; flex-wrap: wrap; gap: 7px; }
     .meta { color: var(--muted); font-size: 13px; margin-top: 7px; }
     .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
     .fact { min-width: 0; border-radius: 10px; background: var(--panel-soft); padding: 11px 12px; }
@@ -84,12 +85,12 @@
     <div class="eyebrow">EU-RESKI · Arbeitsübersicht</div>
     <h1>Filme nach Selfomat</h1>
     <p class="lede">Zusammengeführte Gesamtfilme mit Run- und Branch-Details. Filmdateien und HTML-Berichte öffnen sich aus den lokalen Worktrees.</p>
-    <p class="scope">17 Läufe ab erstem gespeichertem Selfomat-Test: 22.10.2026, 21:35 Uhr. Enthalten sind 84 Basisfilme (75 Iterationsfilme und 9 Gesamtfassungen) plus 39 Iterationsfassungen mit Titelkarte. Alle Dateien liegen in den jeweiligen <code>merged/</code>-Ordnern; Zeiten sind Berliner Ortszeit.</p>
+    <p class="scope">18 Läufe ab erstem gespeichertem Selfomat-Test: 22.10.2026, 21:35 Uhr. Enthalten sind 91 Basisfilme (81 Iterationsfilme und 10 Gesamtfassungen) plus 45 Iterationsfassungen mit Titelkarte. Alle Dateien liegen in den jeweiligen <code>merged/</code>-Ordnern; Zeiten sind Berliner Ortszeit.</p>
   </header>
 
   <section class="note" aria-labelledby="article-image-title">
-    <h2 id="article-image-title">Was bedeutet „Artikelbild nicht als Referenz“?</h2>
-    <p>Das Nachrichtenfoto wurde dem Bildmodell <strong>nicht als Vorlage zur Bildgenerierung mitgeschickt</strong>. Der Artikeltext lieferte weiterhin das Thema und die Fakten. Als Stilreferenz diente Guernica samt Figurenkatalog. <strong>Roter Rahmen</strong> markiert Läufe ohne Artikelbild-Referenz; eine Guernica-Stilreferenz kann trotzdem aktiv sein.</p>
+    <h2 id="article-image-title">Welche Bildreferenz bekam das Bildmodell?</h2>
+    <p>Jeder Film zeigt drei Quellen getrennt: <strong>Presse-/Artikelbild</strong>, <strong>Guernica-Vollbild</strong> und <strong>maskierte Guernica-Figur</strong>. Roter Rahmen markiert Läufe ohne Pressebild. „Nur Artikelbild“ heißt: keine Guernica-Bildreferenz; der schriftliche Stil bleibt eigene Einstellung.</p>
   </section>
 
   <div class="toolbar" aria-label="Filme filtern">
@@ -112,7 +113,7 @@
     <h2>Branches und Prompt-Code kurz</h2>
     <p><b><code>eu-reski/default</code></b>: Ausstellungs- und 10-Iterationen-Läufe. Worktree-HEAD <code>e4223345</code>, Branch war 6 Commits voraus; uncommittete Änderungen an Defaults und Runner änderten Laufkonfiguration/Argumentübergabe, nicht den Story-Prompt.</p>
     <p><b><code>codex/eu-reski-scene-count-takt</code></b>: frühe Selfomat- und Video-Richtungstests. <b><code>codex/eu-reski-scene-visual-controls</code></b>: Guernica-/Stiltests, teils mit Artikelbild als Bildreferenz (ohne roten Rahmen).</p>
-    <p><b><code>codex/story-composition-prompt-test</code></b>: Planner-Prompt erhielt Anwendungscode-, Schema- und Director-Kontext; Protagonisten-Prüfung akzeptiert auch Vornamen. GPT‑6 nutzt Reasoning-Aufwand statt Temperatur. Der neue GPT‑4o-mini-Lauf ist der Referenzbildvergleich: Figur, vollständige Guernica-Stilreferenz und Artikelbild gehen gemeinsam an FLUX; seine Filme werden mit P‑Video 2 Pro gerendert. Grok Imagine gehört nur zum älteren <code>scene-auto-video-low</code>-Lauf.</p>
+    <p><b><code>codex/story-composition-prompt-test</code></b>: Planner-Prompt erhielt Anwendungscode-, Schema- und Director-Kontext; Protagonisten-Prüfung akzeptiert auch Vornamen. GPT‑6 nutzt Reasoning-Aufwand statt Temperatur. Zwei GPT‑4o-mini-Referenzläufe mit gleichen sechs Artikeln: erster mit Figuren-Crop, Guernica-Vollbild und Artikelbild; zweiter mit Artikelbild allein. Beide Filme mit P‑Video 2 Pro. Grok Imagine gehört nur zum älteren <code>scene-auto-video-low</code>-Lauf.</p>
   </section>
 
   <footer>Quellen: jeweilige <code>run.json</code>, Iterations-<code>record.json</code> und HTML-Run-Berichte in den verlinkten Worktrees. Einstellungen stammen aus den gespeicherten Laufdaten.</footer>
@@ -139,7 +140,8 @@
     {name:'exhibition/gpt-4o-mini-6iter · Modellvergleich',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter/run-001',branch:'codex/story-composition-prompt-test',start:'24.10.2026 · 15:48',end:'16:05',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
     {name:'exhibition/run-004 · feste Fünf-Szenen-Fassung',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004',branch:'eu-reski/default',start:'24.10.2026 · 16:36',end:'16:57',status:'Abgeschlossen',counts:[5,5,5,5,5,5],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
     {name:'exhibition-seedream/run-001 · Seedream-Vergleich',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition-seedream/run-001',branch:'eu-reski/default',start:'24.10.2026 · 16:38',end:'16:58',status:'Abgeschlossen',counts:[5,5,5,5,5,5],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/gpt-4o-mini-6iter · Referenzbildvergleich mit P-Video',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-both-refs-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 14:46',end:'15:06',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Referenzbildvergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica-Vollbild als Stilreferenz + maskierter Figuren-Crop; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:true,whole:'eu-reski-gesamtfilm.mp4'}
+    {name:'exhibition/gpt-4o-mini-6iter · Referenzbildvergleich mit P-Video',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-both-refs-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 14:46',end:'15:06',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Referenzbildvergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica-Vollbild als Stilreferenz + maskierter Figuren-Crop; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:true,whole:'eu-reski-gesamtfilm.mp4'},
+    {name:'exhibition/gpt-4o-mini-6iter · nur Artikelbild als Referenz',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-photo-only-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 15:28',end:'15:49',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Artikelbild-Vergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Schriftlicher monochromer Cubismus-Stil; pro Szene Controls; Symbolik an als Standard, Raumtiefe aus, Layering 3',articleRef:true,guernicaStyleRef:false,guernicaFigureRef:false,whole:'eu-reski-gesamtfilm.mp4'}
   ];
 
   function localFile(base, relativePath) {
@@ -183,6 +185,21 @@
       marker.textContent = 'Kein Artikelbild als Referenz';
       top.append(marker);
     }
+    const referenceTags = document.createElement('div');
+    referenceTags.className = 'reference-tags';
+    const guernicaPainting = run.guernicaStyleRef ?? run.style.includes('Guernica-Vollbild als Stilreferenz');
+    const guernicaFigure = run.guernicaFigureRef ?? /Guernica|Figuren-Crop/.test(run.style);
+    for (const [label, enabled] of [
+      ['Pressebild', run.articleRef],
+      ['Guernica-Vollbild', guernicaPainting],
+      ['Guernica-Figur', guernicaFigure],
+    ]) {
+      const marker = document.createElement('span');
+      marker.className = `tag${enabled ? '' : ' no-reference'}`;
+      marker.textContent = `${label}: ${enabled ? 'Referenz' : 'keine Referenz'}`;
+      referenceTags.append(marker);
+    }
+    top.append(referenceTags);
 
     const facts = document.createElement('div');
     facts.className = 'facts';
@@ -200,7 +217,8 @@
 
     const settings = document.createElement('div');
     settings.className = 'settings';
-    for (const [label, value] of [['Szenendauer', run.timing], ['Szenenzahl', run.countSetting], ['Stil', run.style], ['Artikelbild', run.articleRef ? 'Als Bildreferenz verwendet' : 'Nicht als Bildreferenz verwendet']]) {
+    const references = `Pressebild ${run.articleRef ? 'ja' : 'nein'} · Guernica-Vollbild ${guernicaPainting ? 'ja' : 'nein'} · Figuren-Crop ${guernicaFigure ? 'ja' : 'nein'}`;
+    for (const [label, value] of [['Szenendauer', run.timing], ['Szenenzahl', run.countSetting], ['Stil', run.style], ['Bildreferenzen', references]]) {
       const item = document.createElement('div');
       const bold = document.createElement('b');
       bold.textContent = `${label}: `;
