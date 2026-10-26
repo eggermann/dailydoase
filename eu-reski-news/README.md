@@ -37,7 +37,7 @@ npm run news:exhibition
 
 Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAST_GLUE=0`, `EXHIBITION_GLUE_DURATION_PATTERN=9,5,7,5,8`, `EXHIBITION_GLUE_WAIT_PATTERN=classic|all|4,1,2,1,3,1,2,1` und `EXHIBITION_RANDOM_BRIDGE_THRESHOLD=0.7`.
 
-`--transition-wait-pattern=classic|all|4,1,...` überschreibt das Glue-Taktmuster direkt beim Ausstellungsstart. Für Bildrefs kann `--article-image-reference` das Pressebild ergänzen; `--guernica-location-reference` stuft das vollständige Guernica-Bild zur sekundären Orts- und Raumatmosphären-Referenz herab. Maskierte Guernica-Figuren führen die Protagonistenreferenz.
+`--transition-wait-pattern=classic|all|4,1,...` überschreibt das Glue-Taktmuster direkt beim Ausstellungsstart. `--article-image-reference` ergänzt ein echtes Pressebild; bekannte Fallback-/Platzhalterbilder werden übersprungen. `--guernica-location-reference` gibt das vollständige Guernica-Bild nur GPT bei der Planung als sekundären Orts- und Raumatmosphärenhinweis. FLUX erhält es nicht direkt als Bildref, damit es keine Guernica-Komposition kopiert. Maskierte Guernica-Figuren führen die Protagonistenreferenz.
 
 ```sh
 npm run news:exhibition -- --transition-wait-pattern=classic --article-image-reference --guernica-location-reference

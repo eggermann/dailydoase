@@ -32,15 +32,16 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, styleReferenceRole = 'style', articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, locationReferenceProvided = false, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
   const referenceInstructions = figureReferenceProvided
     ? [
       'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
       styleReferenceProvided
-        ? styleReferenceRole === 'location'
-          ? 'Reference image 2 is the complete Guernica painting, used only as a secondary cue for broad setting and spatial atmosphere. Do not copy its figures, pose, composition, motifs or color balance; the new article-based scene and selected protagonist must dominate.'
-          : 'Reference image 2 is the complete painting, used only for painterly style.'
+        ? 'Reference image 2 is the complete painting, used only for painterly style.'
         : 'No complete painting reference is supplied; follow the written style description.',
+      locationReferenceProvided
+        ? 'GPT also receives the complete Guernica painting as a planning-only, secondary location cue. Extract subtle setting and spatial-atmosphere ideas into the written scene prompts. The image API does not receive the complete painting. Do not reproduce its figures, pose, composition, motifs or color balance.'
+        : '',
       'Do not import story content from the character or painting references.',
     ].join(' ')
     : 'The image API receives only the original article photograph as reference image 1 for broad subject orientation. No Guernica painting or figure crop is supplied. Never copy identifiable people, exact composition, logos, or readable text.';
@@ -102,7 +103,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   ];
   for (const image of images) {
     content.push({ type: 'text', text: image.label });
-    content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: image.role === 'article' || image.role === 'style' ? 'high' : 'low' } });
+    content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: ['article', 'style', 'location'].includes(image.role) ? 'high' : 'low' } });
   }
   const schema = structuredClone(planSchema);
   if (!figureReferenceProvided) {
