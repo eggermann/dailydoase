@@ -223,11 +223,15 @@ function mergeRunnerArguments(defaults, userArguments) {
     ['--scene-visual-controls', '--fixed-visual-controls'], ['--fixed-visual-controls', '--scene-visual-controls'],
     ['--style-reference', '--no-style-reference'], ['--no-style-reference', '--style-reference'],
     ['--generate-title-cards', '--no-generate-title-cards'], ['--no-generate-title-cards', '--generate-title-cards'],
+    ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
   ]);
   const suppliedFlags = new Set(userArguments.map(flagName));
+  const locationReferenceWasSpecified = suppliedFlags.has('--guernica-location-reference')
+    || suppliedFlags.has('--no-guernica-location-reference');
   for (let index = 0; index < defaults.length; index += 1) {
     const argument = defaults[index];
     const flag = flagName(argument);
+    if (!locationReferenceWasSpecified && ['--guernica-location-reference', '--no-guernica-location-reference'].includes(flag)) continue;
     if (flag && (suppliedFlags.has(flag) || suppliedFlags.has(oppositeFlags.get(flag)))) continue;
     merged.push(argument);
   }

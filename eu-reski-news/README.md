@@ -37,13 +37,14 @@ npm run news:exhibition
 
 Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAST_GLUE=0`, `EXHIBITION_GLUE_DURATION_PATTERN=9,5,7,5,8`, `EXHIBITION_GLUE_WAIT_PATTERN=classic|all|4,1,2,1,3,1,2,1` und `EXHIBITION_RANDOM_BRIDGE_THRESHOLD=0.7`.
 
-`--transition-wait-pattern=classic|all|4,1,...` überschreibt das Glue-Taktmuster direkt beim Ausstellungsstart. `--article-image-reference` ergänzt ein echtes Pressebild; bekannte Fallback-/Platzhalterbilder werden übersprungen. `--guernica-location-reference` gibt das vollständige Guernica-Bild nur GPT bei der Planung als sekundären Orts- und Raumatmosphärenhinweis. FLUX erhält es nicht direkt als Bildref, damit es keine Guernica-Komposition kopiert. Maskierte Guernica-Figuren führen die Protagonistenreferenz.
+`--transition-wait-pattern=classic|all|4,1,...` überschreibt das Glue-Taktmuster direkt beim Ausstellungsstart. `--article-image-reference` ergänzt ein echtes Pressebild; bekannte Fallback-/Platzhalterbilder werden übersprungen. `--guernica-location-reference` gibt Guernica GPT bei der Planung und FLUX als sekundäre Orts-/Raumreferenz. Das Pressebild und die Szenenhandlung führen; Guernica liefert nur Hintergrundraum und Atmosphäre, ohne Figuren, Pose, Komposition, Motive oder Farbbalance zu kopieren. Ohne dieses Flag bleibt der bisherige Prompt- und Referenzpfad unverändert. `--no-guernica-location-reference` schaltet den Zusatz explizit aus und überschreibt auch ein gespeichertes Enable-Flag. Maskierte Guernica-Figuren führen weiterhin die Protagonistenreferenz.
 
 ```sh
 npm run news:exhibition -- --transition-wait-pattern=classic --article-image-reference --guernica-location-reference
+npm run news:exhibition -- --article-image-reference --no-guernica-location-reference
 ```
 
-`Article + article photo + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; full painting for style or secondary location cue; optional article photo for subject orientation) → cumulative HTML audit report`.
+`Article + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; optional article photo for subject orientation; --guernica-location-reference adds Guernica as secondary setting/space reference; without it, the previous prompt/reference path remains) → cumulative HTML audit report`.
 
 The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API. `--scenes` accepts 1–7 scenes; default remains 3.
 

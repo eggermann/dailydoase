@@ -38,15 +38,17 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
       'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
       styleReferenceProvided
         ? 'Reference image 2 is the complete painting, used only for painterly style.'
-        : 'No complete painting reference is supplied; follow the written style description.',
+        : locationReferenceProvided
+          ? 'Reference image 2 is the complete Guernica painting, supplied only as a subordinate setting and spatial-atmosphere reference; the article and scene action must lead. Do not use the painting as the scene composition or copy its figures, pose, motifs or color balance.'
+          : 'No complete painting reference is supplied; follow the written style description.',
       locationReferenceProvided
-        ? 'GPT also receives the complete Guernica painting as a planning-only, secondary location cue. Extract subtle setting and spatial-atmosphere ideas into the written scene prompts. The image API does not receive the complete painting. Do not reproduce its figures, pose, composition, motifs or color balance.'
+        ? 'GPT also receives the complete Guernica painting during planning. Extract subtle setting and spatial-atmosphere ideas into the written scene prompts. The image API receives the painting only as a secondary location reference, never as the dominant subject or composition. Do not reproduce its figures, pose, composition, motifs or color balance.'
         : '',
       'Do not import story content from the character or painting references.',
     ].join(' ')
     : 'The image API receives only the original article photograph as reference image 1 for broad subject orientation. No Guernica painting or figure crop is supplied. Never copy identifiable people, exact composition, logos, or readable text.';
   const articleImageReferenceInstructions = figureReferenceProvided && articleImageReferenceProvided
-    ? `The image API also receives the original article photograph as reference image ${styleReferenceProvided ? 3 : 2} for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.`
+    ? `The image API also receives the original article photograph as reference image ${styleReferenceProvided || locationReferenceProvided ? 3 : 2} for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.`
     : figureReferenceProvided
       ? 'The article photo is for GPT visual analysis only and is never sent to the image API.'
       : 'The article photo is the only image reference sent to the image API.';

@@ -47,7 +47,7 @@ const { values: options } = parseArgs({ options: {
   'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
-  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false },
+  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
@@ -66,6 +66,12 @@ if (options['generate-title-cards'] && options['no-generate-title-cards']) {
   throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
 }
 if (options['no-generate-title-cards']) options['generate-title-cards'] = false;
+if (options['guernica-location-reference'] && options['no-guernica-location-reference']) {
+  throw new Error('Choose only one: --guernica-location-reference or --no-guernica-location-reference');
+}
+if (options['no-guernica-location-reference']) {
+  options['guernica-location-reference'] = false;
+}
 if (options['article-image-only-reference']) {
   options['article-image-reference'] = true;
   options['no-style-reference'] = true;
@@ -252,7 +258,7 @@ function applySceneVisualControls(scenes, defaultVisualStyleOptions) {
     const baseVideoPrompt = scene.videoPrompt?.split('\n\nVISION-DRIVEN CAMERA:')[0];
     return {
       ...scene,
-      stillPrompt: `${basePrompt}\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. ${options['article-image-only-reference'] ? 'Use the article photo only for broad subject orientation; invent the fictional protagonist and redraw the reported situation without copying identifiable people, pose, framing, logos or text.' : 'Redraw the masked figure reference in the scene’s own pose; do not paste it.'} ${options['guernica-location-reference'] ? 'GUERNICA LOCATION CUE: use the planner’s subtle setting and spatial-atmosphere details derived from Guernica. The full painting is not sent to the image API. The masked figure guides only protagonist anatomy and gesture; the article photo guides subject matter. Make this new scene’s action and composition clearly distinct from Guernica.' : ''} ${layeringInstruction} ${visualStyleOptions.symbolic
+      stillPrompt: `${basePrompt}\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. ${options['article-image-only-reference'] ? 'Use the article photo only for broad subject orientation; invent the fictional protagonist and redraw the reported situation without copying identifiable people, pose, framing, logos or text.' : 'Redraw the masked figure reference in the scene’s own pose; do not paste it.'} ${options['guernica-location-reference'] ? 'GUERNICA LOCATION CUE: use the planner’s subtle setting and spatial-atmosphere details derived from Guernica. The full painting is supplied to the image API only as a secondary setting and spatial reference. Let the article-grounded scene action and the masked figure’s protagonist identity lead. Use Guernica only for broad background space and atmosphere; do not copy its figures, poses, composition, motifs or color balance. Make this new scene’s action and composition clearly distinct from Guernica.' : ''} ${layeringInstruction} ${visualStyleOptions.symbolic
         ? 'SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships.'
         : 'SYMBOLISM OFF: show concrete action without allegorical overlays or coded props.'} ${visualStyleOptions.roomDeepness
         ? 'ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.'
@@ -981,7 +987,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       }
       const images = [await imageInput(directory, record.articleImage, 'Article photograph for factual and visual analysis only; never reproduce its identifiable people.', 'article')];
       if (options['guernica-location-reference'] && !options['no-style-reference']) {
-        images.push(await imageInput(directory, record.styleReference, 'Complete Guernica painting for GPT planning only: derive subtle setting and spatial atmosphere; never copy its scene or figures. This image is not sent to the image API.', 'location'));
+        images.push(await imageInput(directory, record.styleReference, 'Complete Guernica painting for GPT planning and image generation: derive only subtle setting and spatial atmosphere; use it as a secondary background/space reference, never copy its figures, poses, composition, motifs or color balance.', 'location'));
       }
       if (!options['article-image-only-reference']) {
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
@@ -1033,14 +1039,14 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
                 ? 'The image API receives only reference image 1: the original article photograph, used for broad subject orientation only. No Guernica painting or masked figure crop is supplied. Never reproduce identifiable people, exact framing, logos, or text; redraw the underlying situation as the established fictional cubist mural.'
                 : record.articleImageReference
                 ? options['guernica-location-reference'] && !options['no-style-reference']
-                  ? 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the original article photo, used only for broad visual orientation. GPT used the complete Guernica painting only during planning to derive a secondary setting cue; that painting is not sent to the image API. Make this new scene’s action and composition clearly distinct from Guernica. Do not reproduce the photo’s identifiable people, exact composition, logos, or text. Redraw the selected figure into the scene; never paste either reference. Do not import the figure’s original story, props, or symbols. Keep protagonist prominent.'
+                  ? 'Each image API request receives three images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the complete Guernica painting, used only as a secondary setting and spatial-atmosphere reference; reference 3 is the original article photo, used only for broad visual orientation. Let the article-grounded action and protagonist lead. Use Guernica only for background space and atmosphere; do not reproduce its figures, pose, composition, motifs or color balance, or the photo’s identifiable people, exact composition, logos or text. Redraw the selected figure into the scene; never paste any reference. Do not import the figure’s original story, props or symbols. Keep protagonist prominent.'
                   : options['no-style-reference']
                     ? 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the original article photo, used only for broad visual orientation. Do not reproduce its identifiable people, exact composition, logos, or text. No complete painting reference is supplied; follow the written style description. Redraw the figure into the scene; never paste either reference. Do not import the figure’s original story, props, or symbols. Keep protagonist prominent.'
                     : 'Each image API request receives three images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the complete painting, used only for painterly style; reference 3 is the original article photo, used only for broad visual orientation. Do not reproduce the photo’s identifiable people, exact composition, logos, or text. Redraw the figure into the scene; never paste any reference. Do not import the figure’s original story, props, or symbols. Keep protagonist prominent.'
                 : options['no-style-reference']
                   ? 'The image API receives only reference image 1: the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
                   : options['guernica-location-reference'] && !options['no-style-reference']
-                    ? 'Each image API request receives only the selected masked figure for the fictional protagonist’s abstract appearance and gesture. GPT used the complete Guernica painting only during planning to derive a secondary setting cue; that painting is not sent to the image API. Make this new scene’s action and composition clearly distinct from Guernica. Redraw the selected figure into the scene; never paste it. Do not import its original story or props.'
+                  ? 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the complete Guernica painting, used only as a secondary setting and spatial-atmosphere reference. Let the article-grounded action and protagonist lead. Use Guernica only for background space and atmosphere; do not reproduce its figures, pose, composition, motifs or color balance. Make this new scene’s action and composition clearly distinct from Guernica. Redraw the selected figure into the scene; never paste it. Do not import its original story or props.'
                     : 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the complete painting, used only for style. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. Reference 2 contributes painterly style only. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.',
               'Here is the complete previous JSON plan to correct:',
               raw.choices?.[0]?.message?.content || '',
@@ -1130,6 +1136,9 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       } else await save(storyArcPath, storyArc);
     }
     if (!options['prompt-only']) {
+      const locationInput = options['guernica-location-reference'] && !options['no-style-reference']
+        ? await prepareImageReference(directory, await imageInput(directory, record.styleReference, 'Complete Guernica painting supplied only as a secondary setting and spatial-atmosphere reference; do not copy its figures, pose, composition, motifs or color balance.', 'location'))
+        : null;
       const styleInput = options['no-style-reference'] || options['guernica-location-reference'] ? null : await prepareImageReference(directory, await imageInput(directory, record.styleReference, 'Full-painting style reference only; no depicted content may be used', 'style'));
       for (const [index, scene] of record.plan.scenes.entries()) {
         if (record.results[index]?.path && await exists(join(directory, record.results[index].path))) continue;
@@ -1144,6 +1153,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           : null;
         const referenceImages = [
           ...(figureInput ? [figureInput.dataUrl] : []),
+          ...(locationInput ? [locationInput.dataUrl] : []),
           ...(styleInput ? [styleInput.dataUrl] : []),
           ...(articleInput ? [articleInput.dataUrl] : []),
         ];
@@ -1152,6 +1162,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
         const referencePaths = [
           ...(figureInput ? [figureInput.path] : []),
+          ...(locationInput ? [locationInput.path] : []),
           ...(styleInput ? [styleInput.path] : []),
           ...(articleInput ? [articleInput.path] : []),
         ];
@@ -1170,7 +1181,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           if (!result) throw new Error('Runware returned no matching image; saved response retained');
           output = await download(result.imageURL, directory, `scene-${scene.index}-first-frame`);
         }
-        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths, referenceMetadata: [figureInput, styleInput, articleInput].filter(Boolean).map(({ dataUrl, ...metadata }) => metadata) };
+        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths, referenceMetadata: [figureInput, locationInput, styleInput, articleInput].filter(Boolean).map(({ dataUrl, ...metadata }) => metadata) };
         await persist();
       }
     }
