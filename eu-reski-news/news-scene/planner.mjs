@@ -32,12 +32,14 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, styleReferenceRole = 'style', articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
   const referenceInstructions = figureReferenceProvided
     ? [
       'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
       styleReferenceProvided
-        ? 'Reference image 2 is the complete painting, used only for painterly style.'
+        ? styleReferenceRole === 'location'
+          ? 'Reference image 2 is the complete Guernica painting, used only as a secondary cue for broad setting and spatial atmosphere. Do not copy its figures, pose, composition, motifs or color balance; the new article-based scene and selected protagonist must dominate.'
+          : 'Reference image 2 is the complete painting, used only for painterly style.'
         : 'No complete painting reference is supplied; follow the written style description.',
       'Do not import story content from the character or painting references.',
     ].join(' ')

@@ -37,7 +37,13 @@ npm run news:exhibition
 
 Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAST_GLUE=0`, `EXHIBITION_GLUE_DURATION_PATTERN=9,5,7,5,8`, `EXHIBITION_GLUE_WAIT_PATTERN=classic|all|4,1,2,1,3,1,2,1` und `EXHIBITION_RANDOM_BRIDGE_THRESHOLD=0.7`.
 
-`Article + article photo + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; full painting for style) → cumulative HTML audit report`.
+`--transition-wait-pattern=classic|all|4,1,...` überschreibt das Glue-Taktmuster direkt beim Ausstellungsstart. Für Bildrefs kann `--article-image-reference` das Pressebild ergänzen; `--guernica-location-reference` stuft das vollständige Guernica-Bild zur sekundären Orts- und Raumatmosphären-Referenz herab. Maskierte Guernica-Figuren führen die Protagonistenreferenz.
+
+```sh
+npm run news:exhibition -- --transition-wait-pattern=classic --article-image-reference --guernica-location-reference
+```
+
+`Article + article photo + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; full painting for style or secondary location cue; optional article photo for subject orientation) → cumulative HTML audit report`.
 
 The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API. `--scenes` accepts 1–7 scenes; default remains 3.
 

@@ -531,6 +531,8 @@ async function exhibitionMain() {
       if (process.env.EXHIBITION_FADE_SECONDS === undefined) fadeSeconds = state.exhibitionSettings.fadeSeconds;
       if (process.env.EXHIBITION_RANDOM_BRIDGE_THRESHOLD === undefined) randomThreshold = state.exhibitionSettings.randomThreshold;
     }
+    const requestedTransitionWaitPattern = argumentValue(exhibitionArguments, '--transition-wait-pattern', undefined);
+    if (requestedTransitionWaitPattern !== undefined) glueWaitPattern = requestedTransitionWaitPattern;
     if (!(randomThreshold >= 0 && randomThreshold < 1)) throw new Error('EXHIBITION_RANDOM_BRIDGE_THRESHOLD must be from 0 to below 1');
     const glueDurations = gluePattern.split(',').map((value) => Number(value.trim()));
     if (!glueDurations.length || glueDurations.some((value) => !Number.isInteger(value) || value < 5 || value > 15)) {
@@ -540,7 +542,8 @@ async function exhibitionMain() {
     if (!Number.isFinite(frameOffset) || frameOffset <= 0 || frameOffset > 1) throw new Error('EXHIBITION_FRAME_OFFSET_SECONDS must be greater than 0 and no more than 1');
     const fadeLength = Number(fadeSeconds);
     if (!Number.isFinite(fadeLength) || fadeLength < 0 || fadeLength > 2) throw new Error('EXHIBITION_FADE_SECONDS must be from 0 through 2');
-    const userArguments = exhibitionArguments.filter((argument) => !['--first-last-glue', '--no-first-last-glue'].includes(argument));
+    const userArguments = exhibitionArguments.filter((argument) => !['--first-last-glue', '--no-first-last-glue'].includes(flagName(argument))
+      && flagName(argument) !== '--transition-wait-pattern');
     let defaults;
     if (state.runnerArguments?.length) {
       defaults = { args: state.runnerArguments, storyModel: state.storyModel, source: state.settingsSource || null };
