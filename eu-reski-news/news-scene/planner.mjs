@@ -33,11 +33,15 @@ export const planSchema = object({
 });
 
 export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
-  const referenceInstructions = styleReferenceProvided
-    ? 'The image API receives two references: reference image 1 is the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture; reference image 2 is the complete painting, used only for painterly style. Do not import story content from either reference.'
-    : 'The image API receives only reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Do not import story content from reference image 1.';
+  const referenceInstructions = [
+    'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
+    styleReferenceProvided
+      ? 'Reference image 2 is the complete painting, used only for painterly style.'
+      : 'No complete painting reference is supplied; follow the written style description.',
+    'Do not import story content from the character or painting references.',
+  ].join(' ');
   const articleImageReferenceInstructions = articleImageReferenceProvided
-    ? 'The image API also receives the original article photograph as reference image 2 for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.'
+    ? `The image API also receives the original article photograph as reference image ${styleReferenceProvided ? 3 : 2} for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.`
     : 'The article photo is for GPT visual analysis only and is never sent to the image API.';
   const directorFile = sceneVisualControls ? './director.md' : './director-fixed-controls.md';
   const baseDirector = (await readFile(new URL(directorFile, import.meta.url), 'utf8'))
@@ -230,7 +234,7 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
 }
 
 export function buildImageTask(scene, taskUUID, referenceImages) {
-  if (referenceImages.length < 1 || referenceImages.length > 2) throw new Error('Expected protagonist figure reference, optionally with full-painting style reference');
+  if (referenceImages.length < 1 || referenceImages.length > 3) throw new Error('Expected protagonist figure reference, optionally with full-painting and article-photo references');
   return {
     taskType: 'imageInference', taskUUID, model: imageModel,
     positivePrompt: scene.stillPrompt,

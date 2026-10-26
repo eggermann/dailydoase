@@ -654,7 +654,6 @@ async function main() {
   if (options['videos-after-each-iteration'] && (options['video-model'] !== 'prunaai:p-video@2-pro' || options['video-resolution'] !== '480p' || options['video-settings-mode'] !== 'cost')) {
     throw new Error('Automatic video generation in this runner requires P-Video-2-Pro, 480p, and cost mode');
   }
-  if (options['article-image-reference'] && !options['no-style-reference']) throw new Error('Use --article-image-reference together with --no-style-reference; FLUX receives figure and article photo references');
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   const imageProvider = options['image-provider'];
@@ -1118,11 +1117,19 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         const articleInput = record.articleImageReference
           ? await prepareImageReference(directory, await imageInput(directory, record.articleImage, 'Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text', 'article'))
           : null;
-        const referenceImages = [figureInput.dataUrl, ...(articleInput ? [articleInput.dataUrl] : styleInput ? [styleInput.dataUrl] : [])];
+        const referenceImages = [
+          figureInput.dataUrl,
+          ...(styleInput ? [styleInput.dataUrl] : []),
+          ...(articleInput ? [articleInput.dataUrl] : []),
+        ];
         const task = log ? { ...log, inputs: { referenceImages } } : buildImageTask(scene, randomUUID(), referenceImages);
         if (!log && record.imageSeed !== null && record.imageSeed !== undefined) task.seed = (record.imageSeed + index) % 2_147_483_647;
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
-        const referencePaths = [figureInput.path, ...(articleInput ? [articleInput.path] : styleInput ? [styleInput.path] : [])];
+        const referencePaths = [
+          figureInput.path,
+          ...(styleInput ? [styleInput.path] : []),
+          ...(articleInput ? [articleInput.path] : []),
+        ];
         log = { ...task, inputs: { referenceImages: referencePaths } };
         await save(requestPath, log);
         console.log(`Scene ${scene.index}: GPT prompt → ${record.imageModel}`);
