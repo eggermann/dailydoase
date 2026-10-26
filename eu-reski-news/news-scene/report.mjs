@@ -5,7 +5,9 @@ const audioSummary = (stream) => stream
   ? `Tonspur: ${escapeHtml(stream.codecName || 'Codec unbekannt')} · ${escapeHtml(stream.channels ?? '–')} Kanäle${stream.channelLayout ? ` · ${escapeHtml(stream.channelLayout)}` : ''}${stream.sampleRate ? ` · ${escapeHtml(stream.sampleRate)} Hz` : ''}`
   : 'Keine Audiospur erkannt';
 const money = (value) => typeof value === 'number' ? `$${value.toFixed(5)}` : 'vom Anbieter nicht gemeldet';
-const referenceGallery = (catalog, selectedId, prefix = '') => `<section class="reference-options"><h3>Mögliche Figurenreferenzen · ${catalog.length}</h3><div class="reference-gallery">${catalog.map((item) => `<figure class="reference-option${item.id === selectedId ? ' selected' : ''}"><img src="${escapeHtml(`${prefix}${item.path}`)}" alt="${escapeHtml(item.name)}"><figcaption>${escapeHtml(item.name)}${item.id === selectedId ? ' · ausgewählt' : ''}</figcaption></figure>`).join('')}</div></section>`;
+const referenceGallery = (catalog, selectedId, prefix = '', figureReferenceEnabled = true) => figureReferenceEnabled
+  ? `<section class="reference-options"><h3>Mögliche Figurenreferenzen · ${catalog.length}</h3><div class="reference-gallery">${catalog.map((item) => `<figure class="reference-option${item.id === selectedId ? ' selected' : ''}"><img src="${escapeHtml(`${prefix}${item.path}`)}" alt="${escapeHtml(item.name)}"><figcaption>${escapeHtml(item.name)}${item.id === selectedId ? ' · ausgewählt' : ''}</figcaption></figure>`).join('')}</div></section>`
+  : '<section class="reference-options"><h3>Keine Guernica-Bildreferenz</h3><p>Weder Vollbild noch Figuren-Crops wurden an Planung oder Bildmodell übergeben.</p></section>';
 const videoGuide = (scene, filmScene, record, index, prefix = '') => {
   const startPath = record.results?.[index]?.path || filmScene.startImagePath;
   const mode = filmScene.videoMode === 'first_last_frame' ? 'First-Last-Frame · Start- und Endbild erforderlich' : filmScene.videoMode === 'image_to_video' ? 'Image-to-video · GPT pro Szene gewählt' : 'Image-to-video · einzelnes Startbild';
@@ -132,6 +134,9 @@ const renderMergedFilms = (iterations) => {
 
 export function renderReport(record) {
   const { article, semantic, plan, results = [], catalog = [] } = record;
+  const imageReferenceExplanation = record.guernicaFigureReference === false
+    ? 'GPT nutzt Artikeltext und Nachrichtenfoto für Planung und Szeneninhalt. Die Bild-API erhält ausschließlich das Nachrichtenfoto als Bildreferenz; Guernica-Vollbild und Figuren-Crops werden nicht übergeben.'
+    : `GPT nutzt Artikeltext und Nachrichtenfoto für Fakten und Szenenplanung. Die Bild-API erhält die gewählte maskierte Figurenreferenz als Protagonistenreferenz${record.styleReference ? ' und das vollständige Gemälde ausschließlich als Stilreferenz' : '; ein vollständiges Gemälde wird nicht übergeben'}${record.articleImageReference ? ' sowie das Nachrichtenfoto als Referenz für die grobe visuelle Orientierung' : '; das Nachrichtenfoto wird nicht an die Bild-API übergeben'}.`;
   const costs = results.map((item) => item.cost).filter((cost) => typeof cost === 'number');
   const displayFilm = record.titleCardFilm?.path
     ? { ...record.concatenatedVideo, ...record.titleCardFilm }
@@ -180,13 +185,14 @@ export function renderReport(record) {
   ${/^https?:\/\//i.test(article.url || '') ? `<a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">Quelle öffnen</a>` : ''}
   ${record.articleImage ? photo(record.articleImage.path, 'Originales Artikelbild') : ''}
   ${record.styleReference ? photo(record.styleReference.path, 'Guernica · vollständige Stilreferenz') : ''}
+  ${record.guernicaFigureReference === false ? '<p><b>Bildreferenz:</b> nur Presse-/Artikelbild · kein Guernica-Vollbild · keine Guernica-Figuren-Crops</p>' : ''}
   ${details('Artikeltext', article.text || article.summary)}${details('Zufallsauswahl', record.selection)}</section>
   <section><h2>Wörter und gezogene Stream-Fragmente</h2>${details('Vollständiger Semantic-Stream-Snapshot', semantic)}
   ${(semantic?.entries || []).map((entry) => `<p><b>${escapeHtml(entry.seed.join(' · '))} → ${escapeHtml(entry.item.title)}</b></p>`).join('')}
   ${semanticTrace(record)}
   ${details('GPT: relevante Begriffe, Szenen und wörtliche Bildmotive', plan?.semanticUse || [])}</section>
-  ${plan ? `<section><h2>Automatisch entwickelte Geschichte</h2><p>${escapeHtml(plan.storyPremise)}</p>${storyDramaturgy(plan)}<h3>Hauptfigur</h3><p><b>${escapeHtml(plan.protagonist?.name || 'Noch nicht festgelegt')}</b> · ${escapeHtml(plan.protagonist?.role || '')}</p><p>${escapeHtml(plan.protagonist?.visualIdentity || '')}</p><h3>Bildbeobachtung</h3><p>${escapeHtml(plan.visionAnalysis)}</p><h3>Fakten laut Artikel</h3><ul>${plan.articleFacts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('')}</ul><p><b>Fiktionsgrenze:</b> ${escapeHtml(plan.fictionBoundary)}</p>${referenceGallery(catalog, plan.protagonist?.guernicaId)}</section>` : ''}
-  ${scenes}<section><h2>Nachvollziehbarkeit</h2><p>${escapeHtml(record.variant?.promptOrigin || record.promptOrigin || `GPT nutzt Artikeltext und Nachrichtenfoto für Fakten und Szenenplanung. Die Bild-API erhält die gewählte maskierte Figurenreferenz als Protagonistenreferenz${record.styleReference ? ' und das vollständige Gemälde ausschließlich als Stilreferenz' : '; ein vollständiges Gemälde wird nicht übergeben'}${record.articleImageReference ? ' sowie das Nachrichtenfoto als Referenz für die grobe visuelle Orientierung' : '; das Nachrichtenfoto wird nicht an die Bild-API übergeben'}.`)}</p>
+  ${plan ? `<section><h2>Automatisch entwickelte Geschichte</h2><p>${escapeHtml(plan.storyPremise)}</p>${storyDramaturgy(plan)}<h3>Hauptfigur</h3><p><b>${escapeHtml(plan.protagonist?.name || 'Noch nicht festgelegt')}</b> · ${escapeHtml(plan.protagonist?.role || '')}</p><p>${escapeHtml(plan.protagonist?.visualIdentity || '')}</p><h3>Bildbeobachtung</h3><p>${escapeHtml(plan.visionAnalysis)}</p><h3>Fakten laut Artikel</h3><ul>${plan.articleFacts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('')}</ul><p><b>Fiktionsgrenze:</b> ${escapeHtml(plan.fictionBoundary)}</p>${referenceGallery(catalog, plan.protagonist?.guernicaId, '', record.guernicaFigureReference !== false)}</section>` : ''}
+  ${scenes}<section><h2>Nachvollziehbarkeit</h2><p>${escapeHtml(record.variant?.promptOrigin || record.promptOrigin || imageReferenceExplanation)}</p>
   ${record.sourceVersion ? `<p>Generator-Commit: ${escapeHtml(record.sourceVersion.commit)} · Branch: ${escapeHtml(record.sourceVersion.branch || 'detached HEAD')} · ${record.sourceVersion.clean ? 'Code unverändert beim Start' : 'Lokale Codeänderungen beim Start'}</p>` : ''}
   <p>Versionierter Regieprompt: ${escapeHtml(record.directorHash || 'noch nicht geladen')}</p>
   ${record.visualPlanHash ? `<p>Fixierter Bildplan: <a href="visual-plan.json">Bildplan vor Zeitwahl</a> · SHA-256 ${escapeHtml(record.visualPlanHash)}${record.sceneTiming ? ' · <a href="timing-request.json">Zeitplanung: Eingabe</a> · <a href="timing-response.json">Zeitplanung: Antwort</a>' : ''}</p>` : ''}
@@ -235,6 +241,7 @@ export function renderRunReport(run, iterations) {
       <p><a href="${prefix}index.html">Einzelbericht öffnen</a> · <a href="${prefix}record.json">Protokoll</a></p></header>
       ${record.articleImage?.path ? photo(`${prefix}${record.articleImage.path}`, 'Originales Artikelbild') : ''}
       ${record.styleReference?.path ? photo(`${prefix}${record.styleReference.path}`, 'Guernica · vollständige Stilreferenz') : ''}
+      ${record.guernicaFigureReference === false ? '<p><b>Bildreferenz:</b> nur Presse-/Artikelbild · kein Guernica-Vollbild · keine Guernica-Figuren-Crops</p>' : ''}
       ${semantic ? `<details><summary>Semantic-Stream</summary><ul>${semantic}</ul></details>` : ''}${semanticTrace(record)}${scenes}</section>`;
   }).join('');
   return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

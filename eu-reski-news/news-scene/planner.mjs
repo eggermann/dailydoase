@@ -32,24 +32,36 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, continuationPlan = null }) {
-  const referenceInstructions = [
-    'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
-    styleReferenceProvided
-      ? 'Reference image 2 is the complete painting, used only for painterly style.'
-      : 'No complete painting reference is supplied; follow the written style description.',
-    'Do not import story content from the character or painting references.',
-  ].join(' ');
-  const articleImageReferenceInstructions = articleImageReferenceProvided
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
+  const referenceInstructions = figureReferenceProvided
+    ? [
+      'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
+      styleReferenceProvided
+        ? 'Reference image 2 is the complete painting, used only for painterly style.'
+        : 'No complete painting reference is supplied; follow the written style description.',
+      'Do not import story content from the character or painting references.',
+    ].join(' ')
+    : 'The image API receives only the original article photograph as reference image 1 for broad subject orientation. No Guernica painting or figure crop is supplied. Never copy identifiable people, exact composition, logos, or readable text.';
+  const articleImageReferenceInstructions = figureReferenceProvided && articleImageReferenceProvided
     ? `The image API also receives the original article photograph as reference image ${styleReferenceProvided ? 3 : 2} for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.`
-    : 'The article photo is for GPT visual analysis only and is never sent to the image API.';
+    : figureReferenceProvided
+      ? 'The article photo is for GPT visual analysis only and is never sent to the image API.'
+      : 'The article photo is the only image reference sent to the image API.';
   const directorFile = sceneVisualControls ? './director.md' : './director-fixed-controls.md';
-  const baseDirector = (await readFile(new URL(directorFile, import.meta.url), 'utf8'))
+  let baseDirector = (await readFile(new URL(directorFile, import.meta.url), 'utf8'))
     .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
     .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)
     .replaceAll('{{VISUAL_STYLE_CONTROLS}}', sceneVisualControls
       ? `Each scene chooses its own visual controls. Select symbolism, room depth and layering independently for that scene based on its concrete action, setting and story beat; do not copy one scene's settings to the others. Choose symbolism ON only when a specific metaphor makes the article-grounded action clearer; otherwise choose OFF. Choose room depth ON when the scene needs a meaningful foreground-to-background journey; choose OFF for a compressed mural plane. Choose an integer layering value from 0 to 7 based on how many distinct spatial planes this scene needs; use 0 when explicit planes add nothing. Explain each choice briefly in scene.visualControlReason. Put the exact chosen values in scene.visualStyleOptions and make the stillPrompt implement them. Choose freely from the scene rather than applying a run-wide default.`
       : `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}; layering=${visualStyleOptions.layering ?? 0} (integer 0–7). Follow each control in every scene and stillPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. Layering N above zero means build exactly N distinct, article-grounded spatial planes with different spatial roles, then unify them with one final merge-paint layer of shared marks, pigment and contours; zero means no deliberate stacked planes. These controls work independently.`);
+  if (!figureReferenceProvided) {
+    baseDirector = baseDirector
+      .replace('GPT receives article text, article photo and masked Guernica character catalog to plan the story, choose a stable protagonist identity and assign suitable scene-specific figure references. The image API receives only the selected masked figure for each scene, not the full catalog.', 'GPT receives article text and article photo only. No Guernica painting, figure crop or character catalog is supplied. Invent and keep a stable fictional protagonist identity from the story action; do not assign external figure references.')
+      .replace('The selected masked figure reference defines identity cues and painted treatment only. Never copy its arm pose, body pose, silhouette, scale or placement. Use a different suitable figure reference when the scene\'s action calls for another gesture. Choose camera distance, viewing angle, body silhouette and protagonist gesture from the current scene’s action and semantic associations. They may recur when narratively justified. Never impose a stock centered figure with raised arms on unrelated actions.', 'Invent the protagonist’s identity and gesture from the current scene’s action and semantic associations. Keep that identity stable across scenes. Choose camera distance, viewing angle, body silhouette and gesture from the action; never impose a stock centered figure with raised arms on unrelated actions.')
+      .replace('When supplied, use only painterly qualities from the full Guernica reference: energetic charcoal contours, fractured brushwork, oil-painted texture, scraped surface, dark tonal range, broad curved silhouettes and organic rounded masses mixed with sharp fractures.', 'Use the written painterly qualities only: energetic charcoal contours, fractured brushwork, oil-painted texture, scraped surface, dark tonal range, broad curved silhouettes and organic rounded masses mixed with sharp fractures. No Guernica image reference is supplied.')
+      .replace('The selected masked figure crop may guide only the protagonist\'s abstract visual identity and gesture. Do not transfer any reference\'s original story, relationships, props, symbols, layout or arrangement.', 'Use the article photograph only for broad subject orientation. Do not transfer its real people, exact framing, pose, props, symbols, layout or arrangement.')
+      .replace('Redraw either reference', 'Redraw the article photograph');
+  }
   const plannerSource = await readFile(new URL(import.meta.url), 'utf8');
   const compositionImplementation = plannerSource.slice(
     plannerSource.indexOf('export async function buildPlanRequest'),
@@ -91,6 +103,10 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
     content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: image.role === 'article' || image.role === 'style' ? 'high' : 'low' } });
   }
   const schema = structuredClone(planSchema);
+  if (!figureReferenceProvided) {
+    schema.properties.protagonist.properties.guernicaId = { type: 'integer', enum: [0] };
+    schema.properties.scenes.items.properties.guernicaId = { type: 'integer', enum: [0] };
+  }
   schema.properties.scenes.items.properties.index.maximum = sceneCount;
   schema.properties.scenes.minItems = sceneCount;
   schema.properties.scenes.maxItems = sceneCount;
@@ -152,7 +168,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
   return { request, log, director, directorHash: hash(director) };
 }
 
-export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null, visualStyleOptions = null, sceneDurationSettings = null, visualOnly = false, sceneVisualControls = false, storyClou = false }) {
+export function validatePlan(response, { sceneCount, catalog, semantic, continuationPlan = null, visualStyleOptions = null, sceneDurationSettings = null, visualOnly = false, sceneVisualControls = false, storyClou = false, figureReferenceProvided = true }) {
   const choice = response.choices?.[0];
   if (choice?.message?.refusal) throw new Error(`GPT refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return a complete plan');
@@ -183,8 +199,13 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
     }
   }
   const figureIds = new Set(catalog.map((item) => item.id));
-  if (!plan.protagonist?.name?.trim() || !plan.protagonist.role?.trim() || !plan.protagonist.visualIdentity?.trim() || !figureIds.has(plan.protagonist.guernicaId)) {
-    throw new Error('The story needs one named protagonist with a valid Guernica character reference');
+  const validProtagonistReference = figureReferenceProvided
+    ? figureIds.has(plan.protagonist?.guernicaId)
+    : plan.protagonist?.guernicaId === 0;
+  if (!plan.protagonist?.name?.trim() || !plan.protagonist.role?.trim() || !plan.protagonist.visualIdentity?.trim() || !validProtagonistReference) {
+    throw new Error(figureReferenceProvided
+      ? 'The story needs one named protagonist with a valid Guernica character reference'
+      : 'The story needs one named protagonist and guernicaId 0 when no figure reference is supplied');
   }
   if (continuationPlan && (plan.protagonist.name !== continuationPlan.protagonist?.name || plan.protagonist.guernicaId !== continuationPlan.protagonist?.guernicaId)) {
     throw new Error('An expanded plan must preserve the original protagonist and figure reference');
@@ -195,7 +216,14 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
     const protagonistAction = scene.protagonistAction?.toLocaleLowerCase() || '';
     const namesProtagonist = protagonistAction.includes(protagonistName)
       || protagonistAction.includes(protagonistGivenName);
-    if (scene.index !== index + 1 || !figureIds.has(scene.guernicaId) || !namesProtagonist || !scene.selectionReason?.trim()) throw new Error('Every scene needs the same named protagonist and a valid, justified figure reference');
+    if (scene.index !== index + 1) throw new Error(`Scene ${index + 1} must use its matching scene index`);
+    if (figureReferenceProvided ? !figureIds.has(scene.guernicaId) : scene.guernicaId !== 0) {
+      throw new Error(figureReferenceProvided
+        ? `Scene ${scene.index} must select a Guernica figure reference from the supplied catalog`
+        : `Scene ${scene.index} must use guernicaId 0 because no figure reference is supplied`);
+    }
+    if (!namesProtagonist) throw new Error(`Scene ${scene.index} protagonistAction must repeat the protagonist name "${plan.protagonist.name}" instead of using a pronoun or omission`);
+    if (!scene.selectionReason?.trim()) throw new Error(`Scene ${scene.index} must explain why its selected figure reference fits the action`);
     if (!planSchema.properties.scenes.items.properties.composition.enum.includes(scene.composition)) throw new Error('Each scene needs a supported composition');
     if (sceneVisualControls) {
       const controls = scene.visualStyleOptions;

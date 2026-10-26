@@ -47,7 +47,7 @@ const { values: options } = parseArgs({ options: {
   'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
-  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false },
+  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
@@ -66,6 +66,10 @@ if (options['generate-title-cards'] && options['no-generate-title-cards']) {
   throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
 }
 if (options['no-generate-title-cards']) options['generate-title-cards'] = false;
+if (options['article-image-only-reference']) {
+  options['article-image-reference'] = true;
+  options['no-style-reference'] = true;
+}
 const storyModel = options['story-model'].trim();
 if (!storyModel) throw new Error('--story-model must not be empty');
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
@@ -193,11 +197,12 @@ function currentGenerationSettings() {
       maximum: Number(options['max-scene-seconds']),
     },
     imageProvider: options['image-provider'],
-    imageModel,
+    imageModel: options['image-provider'] === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
     storyModel,
     articleImageReference: options['article-image-reference'],
+    guernicaFigureReference: !options['article-image-only-reference'],
     styleReferencePath: options['no-style-reference'] ? null : options['style-reference'],
-    guernicaDirectory: resolve(options['guernica-dir']),
+    guernicaDirectory: options['article-image-only-reference'] ? null : resolve(options['guernica-dir']),
     sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
     visualStyleOptions: { ...recordStyleOptions },
     videosAfterEachIteration: options['videos-after-each-iteration'],
@@ -243,7 +248,7 @@ function applySceneVisualControls(scenes, defaultVisualStyleOptions) {
     const baseVideoPrompt = scene.videoPrompt?.split('\n\nVISION-DRIVEN CAMERA:')[0];
     return {
       ...scene,
-      stillPrompt: `${basePrompt}\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it. ${layeringInstruction} ${visualStyleOptions.symbolic
+      stillPrompt: `${basePrompt}\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. ${options['article-image-only-reference'] ? 'Use the article photo only for broad subject orientation; invent the fictional protagonist and redraw the reported situation without copying identifiable people, pose, framing, logos or text.' : 'Redraw the masked figure reference in the scene’s own pose; do not paste it.'} ${layeringInstruction} ${visualStyleOptions.symbolic
         ? 'SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships.'
         : 'SYMBOLISM OFF: show concrete action without allegorical overlays or coded props.'} ${visualStyleOptions.roomDeepness
         ? 'ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.'
@@ -901,12 +906,12 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           candidateCount: candidates.length,
           aggregateIndex,
         },
-        article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], visualStyleOptions: recordStyleOptions, storyModel, imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
+        article, sceneCount, imageProvider, articleImageReference: options['article-image-reference'], guernicaFigureReference: !options['article-image-only-reference'], visualStyleOptions: recordStyleOptions, storyModel, imageModel: imageProvider === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
         generationSettings: currentGenerationSettings(),
         featureSettings: currentFeatureSettings(),
         sceneVisualControls: options['scene-visual-controls'] && !options['fixed-visual-controls'],
         sceneCountSelection,
-        guernicaDirectory: resolve(options['guernica-dir']), results: [],
+        guernicaDirectory: options['article-image-only-reference'] ? null : resolve(options['guernica-dir']), results: [],
         imageSeed: runImageSeedBase === null ? null : (runImageSeedBase + imageSeedOffset) % 2_147_483_647,
       };
     }
@@ -957,6 +962,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       await persist();
     }
     if (!record.plan) {
+      if (!record.catalog && options['article-image-only-reference']) record.catalog = [];
       if (!record.catalog) {
         const { elemente } = await json(join(record.guernicaDirectory, 'guernica_elemente.json'));
         record.catalog = [];
@@ -970,8 +976,10 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         await persist();
       }
       const images = [await imageInput(directory, record.articleImage, 'Article photograph for factual and visual analysis only; never reproduce its identifiable people.', 'article')];
-      for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, continuationPlan: record.continuationPlan || null });
+      if (!options['article-image-only-reference']) {
+        for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
+      }
+      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: !options['article-image-only-reference'], continuationPlan: record.continuationPlan || null });
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
       const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
@@ -995,7 +1003,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       let finalResponse = raw;
       try {
         record.semanticIndexCorrections = [];
-        record.plan = validatePlan(raw, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on' });
+        record.plan = validatePlan(raw, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on', figureReferenceProvided: record.guernicaFigureReference !== false });
       } catch (error) {
         if (!/semantic|motif|crocodile|protagonist|composition|figure|reference|visual control|story arc|clou|dramatic function/i.test(error.message)) throw error;
         const revisionRequest = {
@@ -1009,10 +1017,14 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
                 ? 'Revise the visual plan once. Do not assign durations or write video prompts. Every stillPrompt must be entirely natural English.'
                 : 'Revise the whole plan once. Every stillPrompt and videoPrompt must be entirely natural English.',
               'Use the current stream fragments for free fictional associations before outlining the story. In semanticUse, relevance means creatively used, not factually related to the news. Let associations shape materials, gesture, mood, staging or story action. They may be surprising, indirect or playful; no factual, geographic or historical match is needed. Record your chosen motifs, scene indices and a short explanation in semanticUse; exact quotation or literal phrase repetition is not required. Keep the reported article facts distinct from the invented image story in fictionBoundary. Symbolism OFF permits stream-driven concrete fictional staging without allegorical overlays. Translate model prompts into natural English. Unused fragments are allowed; no minimum quota applies.',
-              'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. Choose a valid masked figure reference separately for each scene to match its action and body shape. References may recur, including in neighboring scenes, when appropriate; no variety quota applies. Every selectionReason must explain visual fit without importing the figure source story. Choose a supported composition from the scene action and current semantic association. Compositions may repeat; change camera angle, distance, framing and gesture only when the scene calls for it. The image model must ignore each reference crop’s exact pose, scale and placement.',
+              record.guernicaFigureReference === false
+                ? 'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. No Guernica figure or painting reference is supplied; set protagonist.guernicaId and every scene.guernicaId to 0. State in selectionReason that no Guernica figure reference is used. Derive identity, composition and gesture from the scene action, article and semantic association. The article photo is the only image reference and provides broad subject orientation only; do not copy its people, pose, framing, logos or text.'
+                : 'Keep one invented protagonist name and stable written visual identity for the entire scene sequence. Every protagonistAction must include the exact protagonist name. Choose a valid masked figure reference separately for each scene to match its action and body shape. References may recur, including in neighboring scenes, when appropriate; no variety quota applies. Every selectionReason must explain visual fit without importing the figure source story. Choose a supported composition from the scene action and current semantic association. Compositions may repeat; change camera angle, distance, framing and gesture only when the scene calls for it. The image model must ignore each reference crop’s exact pose, scale and placement.',
               record.sceneVisualControls ? 'For every scene, include its own visualStyleOptions object (symbolic boolean, roomDeepness boolean, layering integer 0–7) and visualControlReason of at least 20 characters. Decide values from that scene’s story beat, action and setting; do not repeat one run-wide setting without a scene-specific reason. The stillPrompt must implement those choices.' : '',
               'The crocodile is optional. Include it only if its action makes sense as a metaphor; never add it as an edge decoration.',
-              record.articleImageReference
+              record.guernicaFigureReference === false
+                ? 'The image API receives only reference image 1: the original article photograph, used for broad subject orientation only. No Guernica painting or masked figure crop is supplied. Never reproduce identifiable people, exact framing, logos, or text; redraw the underlying situation as the established fictional cubist mural.'
+                : record.articleImageReference
                 ? 'Each image API request receives two images: reference 1 is the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture; reference 2 is the original article photo, used only for broad visual orientation. Do not reproduce its identifiable people, exact composition, logos, or text. No complete painting reference is supplied; follow the written style description. Redraw reference 1 into the scene; never paste either reference. Do not import the figure’s original story, props, or symbols. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
                 : options['no-style-reference']
                   ? 'The image API receives only reference image 1: the selected masked figure, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description. Redraw reference 1 fully in the scene; never paste it. Do not import the figure’s original story, props, or symbols. The article photo is for GPT analysis only, never sent to the image API. Keep protagonist prominent. Do not copy real-person likenesses, crests, logos, brands, or readable lettering.'
@@ -1031,7 +1043,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         const revised = await paidRequest(directory, 'gpt-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, revisionRequest);
         if (revised.error) throw new Error(`GPT revision failed: ${revised.error.message}`);
         record.semanticIndexCorrections = [];
-        record.plan = validatePlan(revised, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on' });
+        record.plan = validatePlan(revised, { ...record, visualOnly: record.planningVersion === 2, continuationPlan: record.continuationPlan || null, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on', figureReferenceProvided: record.guernicaFigureReference !== false });
         record.planRevisionReason = error.message;
         finalResponse = revised;
       }
@@ -1076,7 +1088,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         const timingResponse = await paidRequest(directory, 'timing', 'https://api.openai.com/v1/chat/completions', openAiKey, await json(timingPath));
         if (timingResponse.error) throw new Error(`GPT timing error: ${timingResponse.error.message}`);
         const timed = applySceneTiming(record.plan, timingResponse, record);
-        const checkedPlan = validatePlan({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(timed.plan) } }] }, record);
+        const checkedPlan = validatePlan({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(timed.plan) } }] }, { ...record, figureReferenceProvided: record.guernicaFigureReference !== false });
         if (hash(JSON.stringify(visualPlanSnapshot(checkedPlan))) !== record.visualPlanHash) throw new Error('Timing changed the locked visual plan');
         record.plan = checkedPlan;
         record.sceneTiming = timed.timing;
@@ -1108,9 +1120,9 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const styleInput = options['no-style-reference'] ? null : await prepareImageReference(directory, await imageInput(directory, record.styleReference, 'Full-painting style reference only; no depicted content may be used', 'style'));
       for (const [index, scene] of record.plan.scenes.entries()) {
         if (record.results[index]?.path && await exists(join(directory, record.results[index].path))) continue;
-        const figure = record.catalog.find((item) => item.id === scene.guernicaId);
-        if (!figure) throw new Error(`No Guernica figure ${scene.guernicaId} for scene ${scene.index}`);
-        const figureInput = await prepareImageReference(directory, await imageInput(directory, figure, `Protagonist character reference: ${figure.name}; redraw, do not paste`, 'catalog'));
+        const figure = options['article-image-only-reference'] ? null : record.catalog.find((item) => item.id === scene.guernicaId);
+        if (!options['article-image-only-reference'] && !figure) throw new Error(`No Guernica figure ${scene.guernicaId} for scene ${scene.index}`);
+        const figureInput = figure ? await prepareImageReference(directory, await imageInput(directory, figure, `Protagonist character reference: ${figure.name}; redraw, do not paste`, 'catalog')) : null;
         const name = `scene-${scene.index}`;
         const requestPath = join(directory, `${name}-request.json`);
         let log = await exists(requestPath) ? await json(requestPath) : null;
@@ -1118,7 +1130,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           ? await prepareImageReference(directory, await imageInput(directory, record.articleImage, 'Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text', 'article'))
           : null;
         const referenceImages = [
-          figureInput.dataUrl,
+          ...(figureInput ? [figureInput.dataUrl] : []),
           ...(styleInput ? [styleInput.dataUrl] : []),
           ...(articleInput ? [articleInput.dataUrl] : []),
         ];
@@ -1126,7 +1138,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         if (!log && record.imageSeed !== null && record.imageSeed !== undefined) task.seed = (record.imageSeed + index) % 2_147_483_647;
         if (log && log.positivePrompt !== scene.stillPrompt) throw new Error('Saved image prompt differs from GPT plan');
         const referencePaths = [
-          figureInput.path,
+          ...(figureInput ? [figureInput.path] : []),
           ...(styleInput ? [styleInput.path] : []),
           ...(articleInput ? [articleInput.path] : []),
         ];
@@ -1145,7 +1157,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           if (!result) throw new Error('Runware returned no matching image; saved response retained');
           output = await download(result.imageURL, directory, `scene-${scene.index}-first-frame`);
         }
-        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths, referenceMetadata: [figureInput, ...(articleInput ? [articleInput] : styleInput ? [styleInput] : [])].map(({ dataUrl, ...metadata }) => metadata) };
+        record.results[index] = { ...output, provider: imageProvider, taskUUID: result.taskUUID || result.eventId, seed: result.seed, cost: result.cost ?? null, billing: imageProvider === 'hf-flux-klein' ? 'ZeroGPU quota/credits; exact GPU seconds not reported by Space' : 'provider-reported', promptHash: hash(scene.stillPrompt), referencePaths, referenceMetadata: [figureInput, styleInput, articleInput].filter(Boolean).map(({ dataUrl, ...metadata }) => metadata) };
         await persist();
       }
     }
