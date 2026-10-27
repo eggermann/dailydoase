@@ -19,7 +19,7 @@
   },
   "generation": {
     "storyModel": "gpt-4o-mini",
-    "iterations": 1,
+    "iterations": 4,
     "pauseMs": 0,
     "articleOrder": "linear",
     "styleReference": false,
