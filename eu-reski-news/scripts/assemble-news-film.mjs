@@ -11,6 +11,7 @@ const { values: options } = parseArgs({
     'run-dir': { type: 'string' },
     iteration: { type: 'string' },
     'scene-glue-dir': { type: 'string' },
+    'iteration-film-dir': { type: 'string' },
     limit: { type: 'string' },
     'bridge-limit': { type: 'string' },
     'bridge-random-threshold': { type: 'string' },
@@ -41,6 +42,7 @@ if (!options['run-dir']) throw new Error('--run-dir is required');
 const runDirectory = resolve(options['run-dir']);
 const mergedDirectory = join(runDirectory, 'merged');
 const sceneGlueDirectory = options['scene-glue-dir'] ? resolve(options['scene-glue-dir']) : null;
+const iterationFilmDirectory = options['iteration-film-dir'] ? resolve(options['iteration-film-dir']) : null;
 const outputDirectory = sceneGlueDirectory || mergedDirectory;
 const cardsDirectory = join(mergedDirectory, 'title-cards');
 const cardDuration = Number(options['card-seconds']);
@@ -80,6 +82,9 @@ if (!Number.isFinite(frameOffsetSeconds) || frameOffsetSeconds <= 0 || frameOffs
 }
 if (transitionWaitPattern && !sceneGlueDirectory) {
   throw new Error('--transition-wait-pattern requires --scene-glue-dir');
+}
+if (sceneGlueDirectory && iterationFilmDirectory) {
+  throw new Error('--scene-glue-dir and --iteration-film-dir cannot be combined');
 }
 if (!(iterationLimit === Infinity || (Number.isInteger(iterationLimit) && iterationLimit > 0))) {
   throw new Error('--limit must be a positive integer');
@@ -277,7 +282,10 @@ for (let index = 0; index < iterations.length; index += 1) {
       if (keepNextBridge) addMedia(nextBridge);
     }
   } else {
-    const mergedClip = join(mergedDirectory, `iteration-${iterationId}.mp4`);
+    const mergedClip = iterationFilmDirectory
+      ? join(iterationFilmDirectory, `${iterationDirectory}-audio-normalized.mp4`)
+      : join(mergedDirectory, `iteration-${iterationId}.mp4`);
+    if (!await exists(mergedClip)) throw new Error(`Missing iteration film: ${mergedClip}`);
     addMedia(mergedClip);
   }
 }

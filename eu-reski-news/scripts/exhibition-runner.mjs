@@ -6,6 +6,7 @@ import { basename, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
+import { renderRunReport } from '../news-scene/report.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -367,27 +368,113 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
     `--output-dir=${glueDirectory}`,
   ]);
 
+  const normalizedIterationDirectory = join(glueDirectory, 'normalized-iterations');
+  const normalizeAudioScript = join(scriptDirectory, 'normalize-iteration-audio.mjs');
+  const stableSeed = createHash('sha256').update(runDirectory).digest('hex').slice(0, 16);
+  const iterationFilmVariants = [
+    { name: 'full', bridgeArguments: [] },
+    {
+      name: 'random-bridges',
+      bridgeArguments: [`--bridge-random-threshold=${randomThreshold}`, `--bridge-random-seed=${stableSeed}`],
+    },
+  ];
+  for (const variant of iterationFilmVariants) {
+    for (const entry of readyIterations) {
+      const record = await readJson(join(runDirectory, entry.directory, 'record.json'));
+      const scenes = record.plan?.scenes || [];
+      const iterationNumber = Number(entry.directory.match(/iteration-(\d+)/)?.[1]);
+      const iterationId = String(iterationNumber).padStart(3, '0');
+      const bridgeIndexes = [];
+      for (let index = 0; index < scenes.length - 1; index += 1) {
+        const bridgePath = join(
+          glueDirectory,
+          `iteration-${iterationId}`,
+          `scene-${String(scenes[index].index).padStart(3, '0')}-to-${String(scenes[index + 1].index).padStart(3, '0')}.mp4`,
+        );
+        try {
+          await stat(bridgePath);
+          bridgeIndexes.push(index);
+        } catch (error) {
+          if (error.code !== 'ENOENT') throw error;
+        }
+      }
+      let previousBridgeIndex = -1;
+      const iterationWaitPattern = bridgeIndexes.length
+        ? bridgeIndexes.map((bridgeIndex) => {
+          const distance = bridgeIndex - previousBridgeIndex;
+          previousBridgeIndex = bridgeIndex;
+          return distance === 1 ? 1 : distance - 1;
+        }).join(',')
+        : String(scenes.length + 1);
+      const variantDirectory = join(normalizedIterationDirectory, variant.name);
+      const intermediatePath = join(variantDirectory, `${entry.directory}-before-audio-normalization.mp4`);
+      const normalizedPath = join(variantDirectory, `${entry.directory}-audio-normalized.mp4`);
+      await runCommand(`Assemble ${entry.directory} (${variant.name})`, process.execPath, [
+        assembleScript,
+        `--run-dir=${runDirectory}`,
+        `--iteration=${entry.directory}`,
+        `--scene-glue-dir=${glueDirectory}`,
+        `--transition-wait-pattern=${iterationWaitPattern}`,
+        `--frame-offset-seconds=${glueFrameOffset}`,
+        `--fade-seconds=${fadeSeconds}`,
+        ...(generateTitleCards ? ['--generate-title-cards'] : ['--no-generate-title-cards']),
+        ...variant.bridgeArguments,
+        `--output=${intermediatePath}`,
+      ]);
+      await runCommand(`Normalize ${entry.directory} audio (${variant.name})`, process.execPath, [
+        normalizeAudioScript,
+        `--input=${intermediatePath}`,
+        `--output=${normalizedPath}`,
+      ]);
+    }
+  }
+
   const baseArguments = [
     assembleScript,
     `--run-dir=${runDirectory}`,
-    `--scene-glue-dir=${glueDirectory}`,
+    `--iteration-film-dir=${join(normalizedIterationDirectory, 'full')}`,
     `--limit=${iterationCount}`,
-    generateTitleCards ? '--generate-title-cards' : '--no-generate-title-cards',
-    `--transition-wait-pattern=${glueWaitPattern}`,
-    `--frame-offset-seconds=${glueFrameOffset}`,
+    '--no-generate-title-cards',
     `--fade-seconds=${fadeSeconds}`,
   ];
   await runCommand('Full exhibition film', process.execPath, [
     ...baseArguments,
     `--output=${join(glueDirectory, 'eu-reski-live-full.mp4')}`,
   ]);
-  const stableSeed = createHash('sha256').update(runDirectory).digest('hex').slice(0, 16);
   await runCommand('Sparse random-bridge film', process.execPath, [
-    ...baseArguments,
-    `--bridge-random-threshold=${randomThreshold}`,
-    `--bridge-random-seed=${stableSeed}`,
+    assembleScript,
+    `--run-dir=${runDirectory}`,
+    `--iteration-film-dir=${join(normalizedIterationDirectory, 'random-bridges')}`,
+    `--limit=${iterationCount}`,
+    '--no-generate-title-cards',
+    `--fade-seconds=${fadeSeconds}`,
     `--output=${join(glueDirectory, 'eu-reski-live-random-bridges.mp4')}`,
   ]);
+
+  const runManifestPath = join(runDirectory, 'run.json');
+  const runManifest = await readJson(runManifestPath);
+  const glueSummary = await readJson(join(glueDirectory, 'glue-run.json'));
+  runManifest.assembledFilm = {
+    status: 'ready',
+    path: 'glue-vids/eu-reski-live-full.mp4',
+    iterations: iterationCount,
+    transitionCount: glueSummary.transitionCount,
+    transitionWaitPattern: glueSummary.transitionWaitPattern,
+    method: `First/Last-Frame-Glue · ${glueSummary.transitionCount} Übergänge · ${glueSummary.transitionWaitPattern} · Audio je Iteration normalisiert`,
+    audioNormalization: {
+      method: 'FFmpeg loudnorm after assembling each iteration with its bridges',
+      targetIntegratedLufs: -16,
+      maximumTruePeakDbtp: -1.5,
+      targetLoudnessRangeLu: 11,
+      iterationFilmsDirectory: 'glue-vids/normalized-iterations',
+    },
+  };
+  await saveJson(runManifestPath, runManifest);
+  const reportIterations = await Promise.all((runManifest.iterations || []).map(async (entry) => ({
+    directory: entry.directory,
+    record: await readJson(join(runDirectory, entry.directory, 'record.json')),
+  })));
+  await writeFile(join(runDirectory, 'index.html'), renderRunReport(runManifest, reportIterations));
 
   const state = await readState();
   state.runDirectory = runDirectory;

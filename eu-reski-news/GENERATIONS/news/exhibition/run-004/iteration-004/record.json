@@ -1,0 +1,873 @@
+{
+  "generator": "semantic-news-v1",
+  "planningVersion": 2,
+  "createdAt": "2026-10-27T10:26:45.191Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e",
+    "branch": "codex/story-composition-prompt-test",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/all-2026-10-26T14-27-19-985Z.json",
+  "aggregateHash": "83ecffb1faa37e6f108ce7f99871b7d233ada211950f2b42594c7a0e9e98df6c",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "ranking": "jev-eu-relevance",
+    "euRelevance": 0.98,
+    "relevancePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/eu-relevance-2026-10-26T14-27-19-985Z.json",
+    "draw": 3,
+    "candidateCount": 2373,
+    "aggregateIndex": 1132
+  },
+  "article": {
+    "id": 476337160,
+    "title": "Quelles conséquences pour vos achats ?: Un nouveau surcoût pour les colis importés en Europe",
+    "text": "Un surcoût sur les colis importés dans l'Union européenne entre en vigueur ce 1er novembre. Et pourrait se répercuter indirectement sur les consommateurs. Pour réduire l'avalanche de produits chinois achetés sur internet, et renforcer les contrôles, des \"frais de traitement\" de 2 euros vont s'appliquer à partir de dimanche sur les colis importés dans l'Union européenne. À l'approche du \"Black friday\" et de Noël, périodes phares pour les achats en ligne, voici ce qu'il faut savoir sur cette mesure qui s'ajoute à la taxe européenne de 3 euros sur les \"petits colis\": Comment fonctionnent ces frais ? Ces \"frais de traitement de l'Union\" s'appliquent à partir du 1er novembre à tous les envois arrivant dans l'Union européenne en provenance d'un pays tiers, réalisés dans le cadre de \"ventes à distance\", quelle que soit la valeur des articles commandés. D'un montant de deux euros, ils s'ajoutent à la taxe de 3 euros, imposée depuis juillet sur les colis importés d'une valeur inférieure à 150 euros. Tout comme cette taxe spécifique aux \"petits colis\", les frais de traitement sont exigibles pour chaque catégorie d'articles contenus dans un même paquet. Par exemple : si un envoi contient vingt casquettes (quels que soient la marque ou le modèle), ils s'élèvent à 2 euros si un colis contient trois casquettes, quatre tee-shirts et deux ceintures, il atteignent un total de 6 euros Ce calcul peu intuitif est lié à la façon dont les produits sont déclarés en douane. Détail capital : les frais ne doivent pas être facturés aux consommateurs. C'est aux plateformes, aux vendeurs ou à leurs intermédiaires de les régler. En revanche, les commerçants sont libres d'augmenter leurs prix pour répercuter cette nouvelle charge sur leurs clients, comme l'ont fait certains sites ces derniers mois pour compenser la taxe sur les \"petits colis\". Pourquoi cette mesure ? Elle vise à financer un renforcement des contrôles douaniers, face au déferlement sur le territoire européen de produits chinois, achetés via des plateformes basées en Asie. Près de 5,9 milliards de petits colis sont entrés dans l'UE en 2025, soit plus de 180 chaque seconde. C'est quatre fois plus qu'en 2022. Sur ce total, 93 % provenaient de Chine, généralement via des sites comme Shein, Temu, Aliexpress... Attention à ces produits dangereux vendus sur Temu ou Shein (620x349, AR: 1.78) Face à une telle avalanche de marchandises, qui creuse le déficit commercial européen, il est impossible de contrôler systématiquement les colis. Cela permet à des produits dangereux ou contrefaits de passer entre les mailles du filet. Industriels et commerçants européens dénonçaient de longue date une concurrence déloyale et plusieurs pays, France en tête, ont poussé l'UE à agir pour endiguer le phénomène. La taxe de 3 euros a déjà eu des effets importants : depuis juillet, les flux de petits colis ont chuté d'environ 64 %, même si Bruxelles prévient qu'il est trop tôt pour en tirer des conclusions. Quelles sont les prochaines étapes? Les frais de traitement, décidés dans le cadre d'une réforme en profondeur du système douanier des Vingt-Sept, sont une mesure permanente. Mais leur montant sera revu tous les deux ans pour suivre l'évolution du coût des vérifications douanières. Des frais spécifiques, au montant réduit, seront par ailleurs applicables à partir du 1er juillet 2028 aux colis transitant dans des entrepôts spécialisés. Comme pour la taxe de 3 euros, à des fins d'harmonisation du marché européen, les pays de l'UE qui avaient mis en place leurs propres frais de traitement à l'échelle nationale ont dû y renoncer. Enfin, la taxe de 3 euros disparaitra en juillet 2028. Les petits colis seront alors soumis aux droits de douane européens, au même titre que les autres envois.",
+    "summary": "Un surcoût sur les colis importés dans l'Union européenne entre en vigueur ce 1er novembre. Et pourrait se répercuter indirectement sur les consommateurs.",
+    "url": "https://infos.rtl.lu/news/monde/un-nouveau-surcout-pour-les-colis-importes-en-europe-662122020",
+    "image": "https://static-prod.rtl.lu/dims4/default/3cfdd5e/2147483647/strip/false/crop/1024x682+0+0/resize/1024x682!/quality/90/?url=https%3A%2F%2Frtl-luxembourg-new-production-web.s3.eu-central-1.amazonaws.com%2Fbrightspot%2Fcb%2Fd5%2Fac87a38345a79a98d944e304716b%2Fafp-20241213-hl-nguyonnet-2605041-v2-midres-francelogistiquetransportpackagesdh.jpg",
+    "video": null,
+    "publish_date": "2026-10-26 05:35:12",
+    "author": "Rtl Infos Avec Afp",
+    "authors": [
+      "Rtl Infos Avec Afp"
+    ],
+    "language": "fr",
+    "category": "politics",
+    "source_country": "LU"
+  },
+  "sceneCount": 2,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": true,
+  "guernicaFigureReference": true,
+  "guernicaLocationReference": false,
+  "visualStyleOptions": {
+    "symbolic": true,
+    "roomDeepness": false,
+    "layering": 3
+  },
+  "storyModel": "gpt-4o-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "generationSettings": {
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": -1,
+      "type": "dramatic-arc",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4o-mini",
+    "articleImageReference": true,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": null,
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "featureSettings": {
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "on",
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": true,
+    "landscapePrompt": false
+  },
+  "sceneVisualControls": true,
+  "sceneCountSelection": {
+    "iteration": 3,
+    "rawValue": 1,
+    "biasedValue": 2,
+    "count": 2,
+    "settings": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 4,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 1,
+      "minimum": 1,
+      "maximum": 12
+    }
+  },
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "7baf4645282a5046545da047d5aa235c617da0337c1634596f9097c892cd3b03",
+      "bytes": 2951184,
+      "provider": "hf-flux-klein",
+      "taskUUID": "d740534c276748449b74f49432d3721b",
+      "seed": 2043852636,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "4effb296233f39670f64f5e1c1be9afad2aa8d76fbcb9ada6c2a1ce604f33c98",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "9616cf12496d76d87edc28381f2492d3e4160105d20b92e9517139bbce891b6d",
+          "bytes": 181330,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "49a6824a1297c154c1eeac0783ce4e078f7814098400871c2d436a780fa5f333",
+      "bytes": 3012916,
+      "provider": "hf-flux-klein",
+      "taskUUID": "d0cd534e61bf4ce0b3d12fb8a1a612a3",
+      "seed": 1153571422,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "dfbdd0cbe8639b3800f47cb0216cab71b7dd79c452dd5d4cd69f0cd47290706a",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "9616cf12496d76d87edc28381f2492d3e4160105d20b92e9517139bbce891b6d",
+          "bytes": 181330,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    }
+  ],
+  "imageSeed": null,
+  "sceneDurations": [
+    6,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "GPT dramatic pacing",
+    "takt": -1,
+    "minimum": 5,
+    "maximum": 8,
+    "type": "dramatic-arc",
+    "scaler": "GPT chooses scene duration from story tension and dramatic progression"
+  },
+  "titleCard": {
+    "articleTitle": "Quelles conséquences pour vos achats ?: Un nouveau surcoût pour les colis importés en Europe",
+    "imagePath": "../merged/title-cards/title-004.png",
+    "imageRunPath": "merged/title-cards/title-004.png",
+    "videoPath": "../merged/title-cards/title-004.mp4",
+    "videoRunPath": "merged/title-cards/title-004.mp4",
+    "durationSeconds": 4,
+    "createdAt": "2026-10-27T10:28:09.616Z"
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-27T10:26:45.504Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.6,
+          "urlLink": "Spanien",
+          "title": "Spanien",
+          "text": "Spanien",
+          "sentences": {
+            "prev": [
+              "Geburten pro Tausend Einwohnern und Jahr. Schlusslichter waren",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "(6,9) und Italien (6,7).Mit der gemeinsamen Kulturpolitik will",
+              "mit 4,7 % am geringsten. Die emotionale Bindung zur EU stieg",
+              "Europäische Union, kurz EU, ist ein Staatenverbund aus 27",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 1.2,
+          "urlLink": "Eurozone",
+          "title": "Eurozone",
+          "text": "eurozone",
+          "sentences": {
+            "prev": [
+              "The",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "is a group composed of the 21 EU member states that have fully",
+              "as is Mayotte, north of Madagascar.The gross domestic product",
+              "and the area of freedom, security and justice (AFSJ); Ireland",
+              "Union operates through a hybrid system of",
+              "continent. The EU's highest peak is Mont Blanc in the"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.1,
+          "urlLink": "%D0%98%D1%80%D0%BB%D0%B0%D0%BD%D0%B4%D0%B8%D1%8F",
+          "title": "Ирландия",
+          "text": "Ирландия",
+          "sentences": {
+            "prev": [
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом"
+            ],
+            "next": [
+              "(с 2021) остаётся частично привязанной к общему рынку после"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "9616cf12496d76d87edc28381f2492d3e4160105d20b92e9517139bbce891b6d",
+    "bytes": 181330
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "c01556f8cc856d36996aaca0e92f7130c06ba9f66db4de2fa2d6fb39e87a5d9c",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "The article discusses the new fees for imported packages in the EU, highlighting the impact on consumers and the measures taken to control imports from outside the EU. The scenes will reflect the chaotic nature of package processing and the emotional response of consumers facing increased costs.",
+    "articleFacts": [
+      "A new processing fee of 2 euros for imported packages in the EU comes into effect on November 1.",
+      "This fee is in addition to an existing 3-euro tax on small packages.",
+      "The measure aims to manage the influx of Chinese products and enforce customs checks.",
+      "Merchants may pass these costs onto consumers, potentially raising prices."
+    ],
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          1,
+          2
+        ],
+        "visualMotif": "The chaotic environment of package handling symbolizes the confusion and frustration of consumers facing new fees.",
+        "visibleConsequence": "The protagonist, overwhelmed by the new fees, represents the collective anxiety of shoppers."
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      }
+    },
+    "storyPremise": "The protagonist navigates a chaotic package processing environment, confronting the implications of new fees for online shopping.",
+    "fictionBoundary": "The story is a fictional representation of the article's themes, focusing on a protagonist's emotional journey rather than factual accuracy.",
+    "protagonist": {
+      "name": "Maya",
+      "role": "Consumer",
+      "visualIdentity": "A young woman with a distressed expression, holding a receipt with new fees listed, dressed in casual clothing.",
+      "guernicaId": 6
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "The Overwhelming Arrival",
+        "storyBeat": "Maya stands amidst a chaotic sorting area, surrounded by piles of boxes. She looks distressed as she reads the receipt with the new fees.",
+        "protagonistAction": "Maya clutches the receipt tightly, her face showing confusion and frustration.",
+        "composition": "wide_establishing",
+        "guernicaId": 6,
+        "selectionReason": "The raised arms of the figure express Maya's despair and confusion about the new costs.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Maya's decisive physical action of clutching a receipt, a secondary figure visibly reacting to the chaos of boxes, and the setting transforming into a disordered package sorting area. Make the forms collide and flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "This scene captures the overwhelming nature of the new fees and the chaos of package sorting.",
+        "durationSeconds": 6,
+        "videoPrompt": "Maya stands in the chaotic sorting area, surrounded by disordered piles of boxes. She clutches a receipt tightly, her face a mix of confusion and frustration as she scans the chaotic environment. The camera slowly moves in, focusing on her distressed expression and the crumpled receipt in her hand. As the camera approaches, the surrounding chaos seems to swirl around her, emphasizing her isolation in the overwhelming situation. The scene settles as Maya's gaze drops to the receipt, her shoulders slumping slightly, embodying the weight of the new fees."
+      },
+      {
+        "index": 2,
+        "title": "The Rising Costs",
+        "storyBeat": "Maya faces a cashier at a store, visibly distressed as she is informed about the increased prices due to the new fees.",
+        "protagonistAction": "Maya protests as the cashier explains the new pricing structure, her hands raised in frustration.",
+        "composition": "intimate_close_up",
+        "guernicaId": 6,
+        "selectionReason": "The raised arms symbolize Maya's desperation and the emotional weight of the situation.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Maya's decisive physical action of raising her hands in protest, the cashier's indifferent reaction to her frustration, and the setting morphing into a busy checkout area. Make the forms collide and flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "This scene emphasizes Maya's emotional response to the rising costs and the personal impact of the new fees.",
+        "durationSeconds": 7,
+        "videoPrompt": "Maya stands at the checkout counter, her hands raised in protest as she faces the cashier. The camera captures her close-up, focusing on her expressive face that conveys desperation and frustration. The cashier, indifferent, continues to explain the new pricing structure, but the camera lingers on Maya's reaction. As she processes the information, her hands slowly lower, and her expression shifts from protest to resignation. The scene concludes with a tight frame on her face, reflecting the emotional toll of the rising costs."
+      }
+    ]
+  },
+  "visualPlanHash": "28ac5c696daac67b18a9ccb6caa48e82249ccc95064d145d0477ef1ae48f292c",
+  "usage": {
+    "prompt_tokens": 66625,
+    "completion_tokens": 2083,
+    "total_tokens": 68708
+  },
+  "planHash": "1bf37b3beb6ce9b1f41eced87f03f41787ad106f94e9c80ee243241a726aa750",
+  "sceneTiming": {
+    "scenes": [
+      {
+        "index": 1,
+        "durationSeconds": 6,
+        "videoPrompt": "Maya stands in the chaotic sorting area, surrounded by disordered piles of boxes. She clutches a receipt tightly, her face a mix of confusion and frustration as she scans the chaotic environment. The camera slowly moves in, focusing on her distressed expression and the crumpled receipt in her hand. As the camera approaches, the surrounding chaos seems to swirl around her, emphasizing her isolation in the overwhelming situation. The scene settles as Maya's gaze drops to the receipt, her shoulders slumping slightly, embodying the weight of the new fees.",
+        "reason": "Die Dauer von 6 Sekunden zeigt die emotionale Belastung von Maya und die chaotische Umgebung."
+      },
+      {
+        "index": 2,
+        "durationSeconds": 7,
+        "videoPrompt": "Maya stands at the checkout counter, her hands raised in protest as she faces the cashier. The camera captures her close-up, focusing on her expressive face that conveys desperation and frustration. The cashier, indifferent, continues to explain the new pricing structure, but the camera lingers on Maya's reaction. As she processes the information, her hands slowly lower, and her expression shifts from protest to resignation. The scene concludes with a tight frame on her face, reflecting the emotional toll of the rising costs.",
+        "reason": "Die 7 Sekunden erlauben es, Mayas emotionale Reaktion auf die steigenden Kosten intensiv zu zeigen."
+      }
+    ]
+  },
+  "storyUsage": {
+    "prompt_tokens": 63843,
+    "completion_tokens": 1394,
+    "total_tokens": 65237,
+    "prompt_tokens_details": {
+      "cached_tokens": 3968,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "timingUsage": {
+    "prompt_tokens": 1993,
+    "completion_tokens": 289,
+    "total_tokens": 2282,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "audioDirection": {
+    "version": 1,
+    "promptVersion": "eu-reski-audio-director-v1",
+    "status": "planned",
+    "model": "gpt-4o-mini",
+    "sourceVisualPlanHash": "28ac5c696daac67b18a9ccb6caa48e82249ccc95064d145d0477ef1ae48f292c",
+    "inputHash": "68abc4633ebd1b897c7ddf8d42a5769d0bff8cc51e4330201aed5d586e76973e",
+    "requestPath": "audio-direction-request.json",
+    "responsePath": "audio-direction-response.json",
+    "usage": {
+      "prompt_tokens": 789,
+      "completion_tokens": 400,
+      "total_tokens": 1189,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "createdAt": "2026-10-27T10:28:09.562Z",
+    "audioDirection": {
+      "overallConcept": "A soundscape that captures the chaos and emotional weight of navigating a confusing and frustrating shopping environment, emphasizing the protagonist's feelings of isolation and distress.",
+      "recurringMotifs": [
+        "chaotic sorting sounds",
+        "distant chatter",
+        "cash register sounds",
+        "frustrated sighs"
+      ],
+      "voicePolicy": "no_spoken_dialogue",
+      "musicPolicy": "subtle ambient music to enhance emotional tone without overpowering sound effects",
+      "continuityStrategy": "maintain a consistent chaotic atmosphere that transitions smoothly between scenes."
+    },
+    "scenes": [
+      {
+        "sceneIndex": 1,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "boxes shifting and falling in the sorting area",
+              "startSeconds": 0,
+              "endSeconds": 6
+            },
+            {
+              "description": "distant chatter of workers in the background",
+              "startSeconds": 0,
+              "endSeconds": 6
+            },
+            {
+              "description": "Maya's frustrated sigh as she reads the receipt",
+              "startSeconds": 4,
+              "endSeconds": 6
+            }
+          ],
+          "ambientTexture": "chaotic sorting area with boxes and distant sounds of workers",
+          "continuityFromPrevious": "N/A",
+          "continuityToNext": "sound of a cash register in the next scene",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      },
+      {
+        "sceneIndex": 2,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "cash register beeping as items are scanned",
+              "startSeconds": 0,
+              "endSeconds": 7
+            },
+            {
+              "description": "Maya's hands slapping the counter in frustration",
+              "startSeconds": 1,
+              "endSeconds": 2
+            },
+            {
+              "description": "cashier's indifferent response (implied through ambient noise)",
+              "startSeconds": 2,
+              "endSeconds": 5
+            },
+            {
+              "description": "Maya's frustrated sigh as she lowers her hands",
+              "startSeconds": 5,
+              "endSeconds": 7
+            }
+          ],
+          "ambientTexture": "checkout area with register sounds and background chatter",
+          "continuityFromPrevious": "sound of boxes and distant chatter fades into the register sounds",
+          "continuityToNext": "N/A",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      }
+    ]
+  },
+  "audioDirectionUsage": {
+    "prompt_tokens": 789,
+    "completion_tokens": 400,
+    "total_tokens": 1189,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-004",
+    "sourceCommit": "a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e",
+    "article": {
+      "title": "Quelles conséquences pour vos achats ?: Un nouveau surcoût pour les colis importés en Europe",
+      "url": "https://infos.rtl.lu/news/monde/un-nouveau-surcout-pour-les-colis-importes-en-europe-662122020",
+      "publish_date": "2026-10-26 05:35:12"
+    },
+    "status": "Videos per API erzeugt",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. Use each scene’s videoMode as selected by GPT. image_to_video uses startImagePath. first_last_frame requires both start and separately supplied final image; never downgrade it to image-to-video.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "The Overwhelming Arrival",
+        "beat": "Maya stands amidst a chaotic sorting area, surrounded by piles of boxes. She looks distressed as she reads the receipt with the new fees.",
+        "storyBeat": "Maya stands amidst a chaotic sorting area, surrounded by piles of boxes. She looks distressed as she reads the receipt with the new fees.",
+        "durationSeconds": 6,
+        "requestedDurationSeconds": 6,
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "This scene captures the overwhelming nature of the new fees and the chaos of package sorting.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-004/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Maya's decisive physical action of clutching a receipt, a secondary figure visibly reacting to the chaos of boxes, and the setting transforming into a disordered package sorting area. Make the forms collide and flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Maya stands in the chaotic sorting area, surrounded by disordered piles of boxes. She clutches a receipt tightly, her face a mix of confusion and frustration as she scans the chaotic environment. The camera slowly moves in, focusing on her distressed expression and the crumpled receipt in her hand. As the camera approaches, the surrounding chaos seems to swirl around her, emphasizing her isolation in the overwhelming situation. The scene settles as Maya's gaze drops to the receipt, her shoulders slumping slightly, embodying the weight of the new fees.\n\nAUDIO: Generate synchronized sound with this video. chaotic sorting area with boxes and distant sounds of workers Sound events: 0.0–6.0s: boxes shifting and falling in the sorting area; 0.0–6.0s: distant chatter of workers in the background; 4.0–6.0s: Maya's frustrated sigh as she reads the receipt. N/A sound of a cash register in the next scene Overall sound identity: A soundscape that captures the chaos and emotional weight of navigating a confusing and frustrating shopping environment, emphasizing the protagonist's feelings of isolation and distress.. Music policy: subtle ambient music to enhance emotional tone without overpowering sound effects. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Maya's decisive physical action of clutching a receipt, a secondary figure visibly reacting to the chaos of boxes, and the setting transforming into a disordered package sorting area. Make the forms collide and flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-004/media/scene-1-video.mp4",
+        "videoTaskUUID": "2cdb0b48-4a89-4004-abce-8d8b3a105fe4"
+      },
+      {
+        "index": 2,
+        "title": "The Rising Costs",
+        "beat": "Maya faces a cashier at a store, visibly distressed as she is informed about the increased prices due to the new fees.",
+        "storyBeat": "Maya faces a cashier at a store, visibly distressed as she is informed about the increased prices due to the new fees.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "This scene emphasizes Maya's emotional response to the rising costs and the personal impact of the new fees.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-004/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Maya's decisive physical action of raising her hands in protest, the cashier's indifferent reaction to her frustration, and the setting morphing into a busy checkout area. Make the forms collide and flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Maya stands at the checkout counter, her hands raised in protest as she faces the cashier. The camera captures her close-up, focusing on her expressive face that conveys desperation and frustration. The cashier, indifferent, continues to explain the new pricing structure, but the camera lingers on Maya's reaction. As she processes the information, her hands slowly lower, and her expression shifts from protest to resignation. The scene concludes with a tight frame on her face, reflecting the emotional toll of the rising costs.\n\nAUDIO: Generate synchronized sound with this video. checkout area with register sounds and background chatter Sound events: 0.0–7.0s: cash register beeping as items are scanned; 1.0–2.0s: Maya's hands slapping the counter in frustration; 2.0–5.0s: cashier's indifferent response (implied through ambient noise); 5.0–7.0s: Maya's frustrated sigh as she lowers her hands. sound of boxes and distant chatter fades into the register sounds N/A Overall sound identity: A soundscape that captures the chaos and emotional weight of navigating a confusing and frustrating shopping environment, emphasizing the protagonist's feelings of isolation and distress.. Music policy: subtle ambient music to enhance emotional tone without overpowering sound effects. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Maya's decisive physical action of raising her hands in protest, the cashier's indifferent reaction to her frustration, and the setting morphing into a busy checkout area. Make the forms collide and flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep the fictional protagonist and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-004/media/scene-2-video.mp4",
+        "videoTaskUUID": "f2684ce8-b4b7-47f9-9361-ff410347f279"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-27T10:28:09.566Z",
+  "videoResults": [
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-1-video.mp4",
+      "durationSeconds": 6.583333,
+      "requestedDurationSeconds": 6,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:28:09.618Z",
+      "renderedAt": "2026-10-27T10:28:39.456Z",
+      "savedAt": "2026-10-27T10:28:42.637Z",
+      "renderSeconds": 29.8,
+      "downloadSeconds": 3.2,
+      "totalSeconds": 33,
+      "cost": 0.0658,
+      "seed": 1431611887,
+      "taskUUID": "2cdb0b48-4a89-4004-abce-8d8b3a105fe4",
+      "sourceUrl": "https://vm.runware.ai/video/os/a10dlim3/ws/5/vi/af46e807-4e3c-40fc-8a12-a17df015e517.mp4",
+      "bytes": 4676680,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 6.575
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-2-video.mp4",
+      "durationSeconds": 7.292,
+      "requestedDurationSeconds": 7,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:28:09.618Z",
+      "renderedAt": "2026-10-27T10:28:39.454Z",
+      "savedAt": "2026-10-27T10:28:42.455Z",
+      "renderSeconds": 29.8,
+      "downloadSeconds": 3,
+      "totalSeconds": 32.8,
+      "cost": 0.0729,
+      "seed": 1141345025,
+      "taskUUID": "f2684ce8-b4b7-47f9-9361-ff410347f279",
+      "sourceUrl": "https://vm.runware.ai/video/os/a10dlim3/ws/5/vi/cc6ba1ad-52d2-4dd7-add4-1a60d50d1f1b.mp4",
+      "bytes": 4295028,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 7.292
+      }
+    }
+  ],
+  "videoGeneration": {
+    "provider": "Runware",
+    "model": "prunaai:p-video@2-pro",
+    "resolution": "480p",
+    "settings": {
+      "mode": "cost"
+    },
+    "completedAt": "2026-10-27T10:28:42.676Z",
+    "concurrency": 4,
+    "audioEdgeFadeSeconds": 0.03
+  },
+  "concatenatedVideo": {
+    "path": "../merged/iteration-004.mp4",
+    "runPath": "merged/iteration-004.mp4",
+    "scenes": 2,
+    "generatedVideos": 2,
+    "gaps": [],
+    "durationSeconds": 13.875,
+    "requestedDurationSeconds": 13,
+    "sourceTasks": [
+      "2cdb0b48-4a89-4004-abce-8d8b3a105fe4",
+      "f2684ce8-b4b7-47f9-9361-ff410347f279"
+    ],
+    "method": "Selfomat ffmpeg concat · 0.03s audio fades at scene edges · moderation gaps shown as black video",
+    "audioEdgeFadeSeconds": 0.03,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 13.875
+    },
+    "createdAt": "2026-10-27T10:28:43.087Z"
+  },
+  "titleCardFilm": {
+    "path": "../merged/iteration-004-with-title-card-audio-normalized.mp4",
+    "runPath": "merged/iteration-004-with-title-card-audio-normalized.mp4",
+    "durationSeconds": 17.7,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 96000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 17.7
+    },
+    "fadeSeconds": 0.25,
+    "method": "FFmpeg assembler · title card from record.json → article.title",
+    "createdAt": "2026-10-27T10:28:43.838Z",
+    "sourcePath": "../merged/iteration-004-with-title-card.mp4",
+    "sourceRunPath": "merged/iteration-004-with-title-card.mp4",
+    "audioNormalization": {
+      "method": "FFmpeg loudnorm after iteration film assembly",
+      "targetIntegratedLufs": -16,
+      "maximumTruePeakDbtp": -1.5,
+      "targetLoudnessRangeLu": 11,
+      "outputPath": "merged/iteration-004-with-title-card-audio-normalized.mp4",
+      "completedAt": "2026-10-27T10:28:44.473Z"
+    }
+  }
+}

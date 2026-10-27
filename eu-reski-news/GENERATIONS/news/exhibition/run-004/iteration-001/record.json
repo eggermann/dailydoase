@@ -1,0 +1,1320 @@
+{
+  "generator": "semantic-news-v1",
+  "planningVersion": 2,
+  "createdAt": "2026-10-27T10:17:07.056Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e",
+    "branch": "codex/story-composition-prompt-test",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/all-2026-10-26T14-27-19-985Z.json",
+  "aggregateHash": "83ecffb1faa37e6f108ce7f99871b7d233ada211950f2b42594c7a0e9e98df6c",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "ranking": "jev-eu-relevance",
+    "euRelevance": 0.98,
+    "relevancePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/eu-relevance-2026-10-26T14-27-19-985Z.json",
+    "draw": 0,
+    "candidateCount": 2373,
+    "aggregateIndex": 337
+  },
+  "article": {
+    "id": 476415974,
+    "title": "Curtea de Justiție a Uniunii Europene este departe, dar de fapt ne privește pe toți",
+    "text": "Independența judecătorilor, protejarea banilor europeni și respectarea drepturilor cetățenilor au un numitor comun: statul de drept. Curtea de Justiție a Uniunii Europene, cu sediul la Luxemburg, are un rol esențial în apărarea lui. Hotărârile sale arată de ce această temă nu îi privește doar pe magistrați sau pe politicieni, ci pe fiecare dintre noi, se arată într-un articol publicat pe JURIDICE.ro de jud. dr. Octavia Spineanu-Matei, judecător la Curtea de Justiție a Uniunii Europene.\n\nUniunea Europeană înseamnă mai mult decât o piață comună și libertatea de a circula între țările membre. Ea se întemeiază pe valori precum democrația, egalitatea, respectarea drepturilor omului și statul de drept. Acestea nu sunt simple declarații de intenție, ci angajamente juridice pe care statele trebuie să le respecte și după aderare.\n\nO justiție independentă protejează cetățeanul\n\nDrepturile au nevoie de instanțe independente care să le apere. De aceea, Curtea de Justiție a stabilit, printr-o serie de hotărâri, garanții împotriva presiunilor asupra judecătorilor.\n\nUnele dintre aceste hotărâri privesc direct România. În cauzele Asociația „Forumul Judecătorilor din România” și Euro Box Promotion, Curtea a subliniat că judecătorii nu pot fi supuși unor proceduri sau sancțiuni disciplinare pentru că au cerut instanței europene să clarifice interpretarea dreptului Uniunii. Acest dialog permite aplicarea corectă a regulilor europene în procesele judecate în țară.\n\nAlte hotărâri au vizat mutarea unui judecător fără acordul său sau înlocuirea judecătorului desemnat să soluționeze un dosar. Orientarea CJUE a fost că asemenea măsuri trebuie să poată fi verificate de o instanță. Independența justiției nu este un privilegiu al magistraților, ci o garanție pentru persoanele care ajung în fața lor.\n\nCe legătură există între statul de drept și fondurile europene\n\nRespectarea statului de drept contează și pentru protejarea banilor comuni. Curtea a confirmat legalitatea mecanismului european care permite adoptarea unor măsuri de protecție a bugetului Uniunii atunci când încălcarea principiilor statului de drept pune în pericol utilizarea fondurilor.\n\nExistă însă o condiție importantă: trebuie demonstrată o legătură suficient de directă și reală între încălcare și riscul pentru bugetul european. Nu orice abatere permite, automat, blocarea finanțării.\n\nLogica este aceea că solidaritatea europeană presupune încredere. Statele contribuie la un buget comun și trebuie să poată avea încredere că banii sunt utilizați responsabil.\n\nIdentitatea națională nu înlătură obligațiile europene\n\nUniunea respectă identitatea națională a statelor membre. Nu le impune constituții identice și nici aceeași organizare a justiției. Libertatea de a alege propriul model nu permite însă abandonarea valorilor comune.\n\nUn stat nu poate invoca particularitățile sale constituționale pentru a justifica subminarea independenței justiției sau încălcarea drepturilor fundamentale.\n\nÎntr-o hotărâre din aprilie 2026, pronunțată într-o cauză împotriva Ungariei, Curtea a constatat pentru prima dată o încălcare distinctă a articolului din tratat care consacră valorile Uniunii. A precizat totodată că o asemenea constatare presupune încălcări vădite și deosebit de grave.\n\nMiza acestor hotărâri este încrederea cetățeanului în instanța care îi judecă dosarul și a statelor membre în sistemele de justiție ale celorlalte țări. Fără această încredere, nici protecția drepturilor, nici cooperarea europeană nu pot funcționa.",
+    "summary": "Independența judecătorilor, protejarea banilor europeni și respectarea drepturilor cetățenilor au un numitor comun: statul de drept. Curtea de Justiție a Uniunii Europene, cu sediul la Luxemburg, are un rol esențial în apărarea lui.",
+    "url": "https://adevarul.ro/adevarul-juridic/curtea-de-justitie-a-uniunii-europene-este-2566586.html",
+    "image": "https://cdn.adh.reperio.news/image-2/2fd6447e-5b9d-4462-af84-150159986ebf/index.jpeg?p=f%3Djpeg%26w%3D1200%26h%3D675%26r%3Dcover",
+    "video": null,
+    "publish_date": "2026-10-26 13:28:41",
+    "author": "Juridice.ro",
+    "authors": [
+      "Juridice.ro"
+    ],
+    "language": "ro",
+    "category": "politics",
+    "source_country": "ro"
+  },
+  "sceneCount": 5,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": true,
+  "guernicaFigureReference": true,
+  "guernicaLocationReference": false,
+  "visualStyleOptions": {
+    "symbolic": true,
+    "roomDeepness": false,
+    "layering": 3
+  },
+  "storyModel": "gpt-4o-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "generationSettings": {
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": -1,
+      "type": "dramatic-arc",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4o-mini",
+    "articleImageReference": true,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": null,
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "featureSettings": {
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "on",
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": true,
+    "landscapePrompt": false
+  },
+  "sceneVisualControls": true,
+  "sceneCountSelection": {
+    "iteration": 0,
+    "rawValue": 4,
+    "biasedValue": 5,
+    "count": 5,
+    "settings": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 4,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 1,
+      "minimum": 1,
+      "maximum": 12
+    }
+  },
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "b65b6e855c5b77bd49b4613e0b864f128811221879c5041f0c532a59eb9c76a6",
+      "bytes": 3036074,
+      "provider": "hf-flux-klein",
+      "taskUUID": "8a40a9ccfd254127b8991918914011b4",
+      "seed": 1712421060,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "bb34378a82a667577c153986b3ab5678a9ee34b0dd48287cea1d2006407e7cb3",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "dcee24fb435e5120b2fd66c8d117f607e42920108ad1f3fb18628aaba2a6d941",
+          "bytes": 156390,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "d30b0bbec950252d20585fa5f8fcc65cd35d2ad606fa40cdebd5304d81863b83",
+      "bytes": 2814727,
+      "provider": "hf-flux-klein",
+      "taskUUID": "12e080c2e4e84639accc6c5076b22ce4",
+      "seed": 1271091060,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "bb34378a82a667577c153986b3ab5678a9ee34b0dd48287cea1d2006407e7cb3",
+      "referencePaths": [
+        "media/08_schreiende_frau.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 8,
+          "name": "Schreiende / fliehende Frau",
+          "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+          "eu_bezug": [
+            "Schutz von Zivilisten",
+            "Sicherheit",
+            "Frieden"
+          ],
+          "path": "media/08_schreiende_frau.png",
+          "mimeType": "image/png",
+          "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13",
+          "label": "Protagonist character reference: Schreiende / fliehende Frau; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "dcee24fb435e5120b2fd66c8d117f607e42920108ad1f3fb18628aaba2a6d941",
+          "bytes": 156390,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "fc9fa198f2913ebf93e2df8545b54770b06002344689cad411a40a6e2f035bbf",
+      "bytes": 3079417,
+      "provider": "hf-flux-klein",
+      "taskUUID": "e2ee45e4662b4611bd246e631211e1c6",
+      "seed": 1865061688,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "bb34378a82a667577c153986b3ab5678a9ee34b0dd48287cea1d2006407e7cb3",
+      "referencePaths": [
+        "media/04_pferd.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 4,
+          "name": "Pferd",
+          "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+          "eu_bezug": [
+            "Menschenwürde",
+            "Schutz des Lebens",
+            "Menschenrechte"
+          ],
+          "path": "media/04_pferd.png",
+          "mimeType": "image/png",
+          "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671",
+          "label": "Protagonist character reference: Pferd; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "dcee24fb435e5120b2fd66c8d117f607e42920108ad1f3fb18628aaba2a6d941",
+          "bytes": 156390,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-4-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "5240bcad2b00aba9070a0ddb92ee466494f9c72b61a543901f4a96271fdfb286",
+      "bytes": 2847586,
+      "provider": "hf-flux-klein",
+      "taskUUID": "a8932b2dc8344eee880adace2e72d4e2",
+      "seed": 1176684677,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "bb34378a82a667577c153986b3ab5678a9ee34b0dd48287cea1d2006407e7cb3",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "dcee24fb435e5120b2fd66c8d117f607e42920108ad1f3fb18628aaba2a6d941",
+          "bytes": 156390,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-5-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "e3122fe5ead8d5e201952800c011c06614fd787e118cb9cd1c25e124c4e5455e",
+      "bytes": 3101838,
+      "provider": "hf-flux-klein",
+      "taskUUID": "7772f13f5cf340b5af39aabb6b8a1087",
+      "seed": 1979420737,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "bb34378a82a667577c153986b3ab5678a9ee34b0dd48287cea1d2006407e7cb3",
+      "referencePaths": [
+        "media/07_gefallener_soldat-api.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 7,
+          "name": "Gefallener Soldat",
+          "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+          "eu_bezug": [
+            "Frieden",
+            "Menschenwürde",
+            "Ablehnung von Krieg"
+          ],
+          "path": "media/07_gefallener_soldat-api.png",
+          "mimeType": "image/png",
+          "sha256": "61d0f70ac0db8aa1258c5d0966fd7b08acf4ac65de76a1693f4e4654a8449a10",
+          "label": "Protagonist character reference: Gefallener Soldat; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/07_gefallener_soldat.png",
+          "sourceSha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572",
+          "bytes": 77684,
+          "width": 480,
+          "height": 128
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "dcee24fb435e5120b2fd66c8d117f607e42920108ad1f3fb18628aaba2a6d941",
+          "bytes": 156390,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    }
+  ],
+  "imageSeed": null,
+  "sceneDurations": [
+    6,
+    7,
+    8,
+    5,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "GPT dramatic pacing",
+    "takt": -1,
+    "minimum": 5,
+    "maximum": 8,
+    "type": "dramatic-arc",
+    "scaler": "GPT chooses scene duration from story tension and dramatic progression"
+  },
+  "titleCard": {
+    "articleTitle": "Curtea de Justiție a Uniunii Europene este departe, dar de fapt ne privește pe toți",
+    "imagePath": "../merged/title-cards/title-001.png",
+    "imageRunPath": "merged/title-cards/title-001.png",
+    "videoPath": "../merged/title-cards/title-001.mp4",
+    "videoRunPath": "merged/title-cards/title-001.mp4",
+    "durationSeconds": 4,
+    "createdAt": "2026-10-27T10:20:46.265Z"
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-27T10:17:07.459Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.7,
+          "urlLink": "Italien",
+          "title": "Italien",
+          "text": "Italien",
+          "sentences": {
+            "prev": [
+              "und",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "und Frankreich in einer Höhe von 4805 m am Mont Blanc, der",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU „einen"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 2,
+          "urlLink": "Member_state_of_the_European_Union",
+          "title": "Member state of the European Union",
+          "text": "27 members",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "regulations, which are immediately enforceable in all member",
+              "or from €4,600 to €92,600. EU member states own",
+              "when the Maastricht Treaty came into force in"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.8,
+          "urlLink": "%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%8F",
+          "title": "Франция",
+          "text": "Франция",
+          "sentences": {
+            "prev": [],
+            "next": [
+              "вышедшая из состава союза 31 января 2020 года."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "dcee24fb435e5120b2fd66c8d117f607e42920108ad1f3fb18628aaba2a6d941",
+    "bytes": 156390
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "c01556f8cc856d36996aaca0e92f7130c06ba9f66db4de2fa2d6fb39e87a5d9c",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "The scenes depict a fictional narrative inspired by the themes of the EU's commitment to the rule of law and judicial independence, represented through a cubist lens. Justina Veritas, the protagonist, interacts with symbolic elements that reflect the broader implications of justice and citizen rights within the European Union.",
+    "articleFacts": [
+      "The Court of Justice of the European Union is essential in defending the rule of law.",
+      "Independence of judges protects citizens' rights.",
+      "The EU stands for democracy, equality, and human rights as legal commitments.",
+      "Judges cannot face disciplinary actions for seeking clarification from the European Court.",
+      "The Court protects EU budget funds from misuse due to rule of law violations."
+    ],
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          1
+        ],
+        "visualMotif": "Judicial independence and its impact on citizens' rights",
+        "visibleConsequence": "Justina Veritas embodies the spirit of justice, confronting challenges to independence."
+      },
+      "stream-2": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          2
+        ],
+        "visualMotif": "European solidarity and citizen trust",
+        "visibleConsequence": "Justina Veritas navigates the complexities of EU values and their practical implications."
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      }
+    },
+    "storyPremise": "A fictional character representing the spirit of justice navigates the complexities of judicial independence and the implications of European law, highlighting the importance of citizen rights and trust in the judicial system.",
+    "fictionBoundary": "The narrative is entirely fictional, inspired by the themes of the article without depicting real events or individuals.",
+    "protagonist": {
+      "name": "Justina Veritas",
+      "role": "Guardian of Justice",
+      "visualIdentity": "A figure embodying the essence of justice, with an abstract form that reflects strength and determination.",
+      "guernicaId": 5
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "The Call to Justice",
+        "storyBeat": "Justina stands at the entrance of the Court, symbolizing the judicial independence that protects citizens.",
+        "protagonistAction": "Justina Veritas raises her hand as if invoking the principles of justice, her form abstract and powerful against the backdrop of the Court.",
+        "composition": "wide_establishing",
+        "guernicaId": 5,
+        "selectionReason": "The figure of 'Woman with Lamp' symbolizes the search for truth and guidance, aligning with Justina Veritas's role as a guardian of justice.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "This scene requires a wide establishing shot to convey Justina Veritas's significant presence at the Court.",
+        "durationSeconds": 6,
+        "videoPrompt": "Justina Veritas stands at the entrance of the Court, her powerful abstract form raised in a gesture that invokes the principles of justice. As she lifts her hand, the surrounding charcoal-black and white masses seem to ripple in response, creating a dynamic interplay between her and the backdrop. The camera slowly pans from her hand to the Court, capturing the tension in the air as the scene settles into a moment of stillness, emphasizing her significant presence and the weight of her action."
+      },
+      {
+        "index": 2,
+        "title": "The Dialogue of Rights",
+        "storyBeat": "Justina engages in a dialogue with abstract figures representing citizens, emphasizing the importance of judicial independence.",
+        "protagonistAction": "Justina Veritas gestures towards the figures, encouraging them to express their rights and concerns.",
+        "composition": "intimate_close_up",
+        "guernicaId": 8,
+        "selectionReason": "The 'Screaming Woman' portrays the anguish and urgency of citizens, aligning with Justina Veritas's mission to protect their rights.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "An intimate close-up is needed to capture Justina Veritas's connection with the citizens, conveying emotion and urgency.",
+        "durationSeconds": 7,
+        "videoPrompt": "Justina Veritas gestures towards the abstract figures representing citizens, encouraging them to voice their rights and concerns. The camera moves in closer, capturing the urgency in her expression and the shifting forms of the citizens around her. As she extends her hand, the figures seem to lean in, their shapes intertwining with hers, creating a sense of connection and dialogue. The motion culminates in a moment of engagement, where the scene breathes with the weight of their shared struggle."
+      },
+      {
+        "index": 3,
+        "title": "The Shield of Integrity",
+        "storyBeat": "Justina stands before a representation of the EU flag, symbolizing the protection of common funds and the rule of law.",
+        "protagonistAction": "Justina Veritas raises a shield made of abstract forms, defending the integrity of the EU's financial resources.",
+        "composition": "oblique_diagonal",
+        "guernicaId": 4,
+        "selectionReason": "The 'Horse' symbolizes the suffering and sacrifice involved in upholding justice, reflecting the serious nature of Justina Veritas's task.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "An oblique diagonal composition adds dynamic tension, emphasizing Justina Veritas's protective stance.",
+        "durationSeconds": 8,
+        "videoPrompt": "Justina Veritas stands before an abstract representation of the EU flag, raising a shield made of overlapping forms to defend the integrity of the EU's financial resources. The camera moves diagonally across the scene, capturing the tension in her stance as she embodies the protective spirit of justice. The shield seems to shimmer with potential, and as the camera settles, the forms around her shift slightly, echoing the gravity of her task and the stakes involved."
+      },
+      {
+        "index": 4,
+        "title": "The Trust of Citizens",
+        "storyBeat": "Justina addresses an abstract crowd, symbolizing the trust citizens place in the judicial system.",
+        "protagonistAction": "Justina Veritas extends her hands outward, inviting dialogue and engagement with the citizens.",
+        "composition": "high_angle",
+        "guernicaId": 6,
+        "selectionReason": "The 'Woman with Raised Arms' conveys a call for peace and solidarity, resonating with Justina Veritas's mission.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "The high-angle perspective gives an overview of the crowd's engagement, highlighting the importance of citizen trust.",
+        "durationSeconds": 5,
+        "videoPrompt": "Justina Veritas extends her hands outward towards an abstract crowd, inviting dialogue and engagement. The camera captures her outstretched arms, framing her figure against the swirling masses of the crowd. As she gestures, the surrounding forms pulse gently, reflecting the trust and hope of the citizens. The scene holds this moment, allowing the viewer to absorb the significance of her invitation before it transitions into the next action."
+      },
+      {
+        "index": 5,
+        "title": "The Legacy of Justice",
+        "storyBeat": "Justina reflects on the importance of a strong judiciary for future generations, symbolizing hope and continuity.",
+        "protagonistAction": "Justina Veritas looks upwards, embodying hope for a just and fair future.",
+        "composition": "low_angle",
+        "guernicaId": 7,
+        "selectionReason": "The 'Fallen Soldier' symbolizes the ongoing struggle for justice, resonating with Justina Veritas's vision for the future.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "A low-angle shot emphasizes Justina Veritas's hopeful stance, creating a sense of aspiration and determination.",
+        "durationSeconds": 7,
+        "videoPrompt": "Justina Veritas looks upwards, embodying hope for a just and fair future. The camera starts from a low angle, emphasizing her upward gaze and the abstract forms that surround her. As she reflects, the shapes around her seem to rise and swell, mirroring her aspirations. The motion settles as the scene captures her determination, creating a moment of quiet reflection that resonates with the ongoing struggle for justice."
+      }
+    ]
+  },
+  "planRevisionReason": "Scene 3 protagonistAction must repeat the protagonist name \"Justina Veritas\" instead of using a pronoun or omission",
+  "visualPlanHash": "43d49f6aca65f2397b7cca9711e4bb20c7d4a4d1818cf137512255164c0ef199",
+  "usage": {
+    "prompt_tokens": 86426,
+    "completion_tokens": 4385,
+    "total_tokens": 90811
+  },
+  "planHash": "9b8a43f0b48362861d2394bec04921a942bf6cf7f1f1a9fccb0e77d038448b8e",
+  "sceneTiming": {
+    "scenes": [
+      {
+        "index": 1,
+        "durationSeconds": 6,
+        "videoPrompt": "Justina Veritas stands at the entrance of the Court, her powerful abstract form raised in a gesture that invokes the principles of justice. As she lifts her hand, the surrounding charcoal-black and white masses seem to ripple in response, creating a dynamic interplay between her and the backdrop. The camera slowly pans from her hand to the Court, capturing the tension in the air as the scene settles into a moment of stillness, emphasizing her significant presence and the weight of her action.",
+        "reason": "Die Szene benötigt Zeit, um Justina Veritas' bedeutende Präsenz zu etablieren und die emotionale Wirkung ihrer Handlung zu verstärken."
+      },
+      {
+        "index": 2,
+        "durationSeconds": 7,
+        "videoPrompt": "Justina Veritas gestures towards the abstract figures representing citizens, encouraging them to voice their rights and concerns. The camera moves in closer, capturing the urgency in her expression and the shifting forms of the citizens around her. As she extends her hand, the figures seem to lean in, their shapes intertwining with hers, creating a sense of connection and dialogue. The motion culminates in a moment of engagement, where the scene breathes with the weight of their shared struggle.",
+        "reason": "Die intime Nahaufnahme erfordert mehr Zeit, um die emotionale Verbindung zwischen Justina und den Bürgern zu verdeutlichen."
+      },
+      {
+        "index": 3,
+        "durationSeconds": 8,
+        "videoPrompt": "Justina Veritas stands before an abstract representation of the EU flag, raising a shield made of overlapping forms to defend the integrity of the EU's financial resources. The camera moves diagonally across the scene, capturing the tension in her stance as she embodies the protective spirit of justice. The shield seems to shimmer with potential, and as the camera settles, the forms around her shift slightly, echoing the gravity of her task and the stakes involved.",
+        "reason": "Die dramatische Schwere der Handlung erfordert eine längere Dauer, um die Bedeutung von Justinas Schutzgestus zu vermitteln."
+      },
+      {
+        "index": 4,
+        "durationSeconds": 5,
+        "videoPrompt": "Justina Veritas extends her hands outward towards an abstract crowd, inviting dialogue and engagement. The camera captures her outstretched arms, framing her figure against the swirling masses of the crowd. As she gestures, the surrounding forms pulse gently, reflecting the trust and hope of the citizens. The scene holds this moment, allowing the viewer to absorb the significance of her invitation before it transitions into the next action.",
+        "reason": "Die Einladung zur Interaktion benötigt weniger Zeit, um die Dynamik der Szene zu bewahren."
+      },
+      {
+        "index": 5,
+        "durationSeconds": 7,
+        "videoPrompt": "Justina Veritas looks upwards, embodying hope for a just and fair future. The camera starts from a low angle, emphasizing her upward gaze and the abstract forms that surround her. As she reflects, the shapes around her seem to rise and swell, mirroring her aspirations. The motion settles as the scene captures her determination, creating a moment of quiet reflection that resonates with the ongoing struggle for justice.",
+        "reason": "Die hoffnungsvolle Reflexion erfordert mehr Zeit, um die emotionale Tiefe von Justinas Vision für die Zukunft zu vermitteln."
+      }
+    ]
+  },
+  "storyUsage": {
+    "prompt_tokens": 81362,
+    "completion_tokens": 2878,
+    "total_tokens": 84240,
+    "prompt_tokens_details": {
+      "cached_tokens": 75136,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "timingUsage": {
+    "prompt_tokens": 3828,
+    "completion_tokens": 648,
+    "total_tokens": 4476,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "audioDirection": {
+    "version": 1,
+    "promptVersion": "eu-reski-audio-director-v1",
+    "status": "planned",
+    "model": "gpt-4o-mini",
+    "sourceVisualPlanHash": "43d49f6aca65f2397b7cca9711e4bb20c7d4a4d1818cf137512255164c0ef199",
+    "inputHash": "27274e54a6ba7d3d3dd7d4e8ce12376fd4a181dbf96e3b57131c7ab22fee8be6",
+    "requestPath": "audio-direction-request.json",
+    "responsePath": "audio-direction-response.json",
+    "usage": {
+      "prompt_tokens": 1236,
+      "completion_tokens": 859,
+      "total_tokens": 2095,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "createdAt": "2026-10-27T10:20:46.207Z",
+    "audioDirection": {
+      "overallConcept": "A soundscape that embodies the spirit of justice through abstract textures and resonant motifs, reflecting the themes of judicial independence and citizen engagement.",
+      "recurringMotifs": [
+        "gentle chimes",
+        "deep resonant tones",
+        "soft wind sounds"
+      ],
+      "voicePolicy": "no_spoken_dialogue",
+      "musicPolicy": "subtle, ambient music that underscores emotional moments without overpowering the soundscape",
+      "continuityStrategy": "use of recurring sound motifs to create a cohesive audio identity across scenes."
+    },
+    "scenes": [
+      {
+        "sceneIndex": 1,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "gentle chime sounds as Justina raises her hand, symbolizing the invocation of justice",
+              "startSeconds": 0,
+              "endSeconds": 2
+            },
+            {
+              "description": "deep resonant tone that swells as the backdrop ripples in response",
+              "startSeconds": 2,
+              "endSeconds": 4
+            },
+            {
+              "description": "soft wind sounds to create a sense of stillness and tension in the air",
+              "startSeconds": 4,
+              "endSeconds": 6
+            }
+          ],
+          "ambientTexture": "soft wind and subtle chimes",
+          "continuityFromPrevious": "none",
+          "continuityToNext": "the gentle chime motif continues into the next scene",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      },
+      {
+        "sceneIndex": 2,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "gentle chime sounds echo as Justina gestures toward the citizens, inviting them to express themselves",
+              "startSeconds": 0,
+              "endSeconds": 3
+            },
+            {
+              "description": "soft overlapping tones that represent the intertwining of Justina and the citizens",
+              "startSeconds": 3,
+              "endSeconds": 5
+            },
+            {
+              "description": "a crescendo of resonant tones as the moment of engagement builds",
+              "startSeconds": 5,
+              "endSeconds": 7
+            }
+          ],
+          "ambientTexture": "soft wind and gentle chimes",
+          "continuityFromPrevious": "the gentle chimes from the previous scene continue",
+          "continuityToNext": "the resonant tones transition into the next scene",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      },
+      {
+        "sceneIndex": 3,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "deep resonant tone as Justina raises the shield, symbolizing protection",
+              "startSeconds": 0,
+              "endSeconds": 3
+            },
+            {
+              "description": "a shimmering sound effect as the shield shimmers with potential",
+              "startSeconds": 3,
+              "endSeconds": 5
+            },
+            {
+              "description": "soft wind sounds that reflect the gravity of her task",
+              "startSeconds": 5,
+              "endSeconds": 8
+            }
+          ],
+          "ambientTexture": "deep resonant tones and soft wind",
+          "continuityFromPrevious": "the deep resonant tone motif continues",
+          "continuityToNext": "the wind sounds transition into the next scene",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      },
+      {
+        "sceneIndex": 4,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "gentle chime sounds as Justina extends her hands, inviting dialogue",
+              "startSeconds": 0,
+              "endSeconds": 2
+            },
+            {
+              "description": "soft pulsing sounds that reflect the trust and hope of the citizens",
+              "startSeconds": 2,
+              "endSeconds": 4
+            },
+            {
+              "description": "a gentle swell of ambient tones as the scene holds the moment",
+              "startSeconds": 4,
+              "endSeconds": 5
+            }
+          ],
+          "ambientTexture": "soft wind and gentle chimes",
+          "continuityFromPrevious": "the gentle chime motif continues",
+          "continuityToNext": "the ambient tones transition into the next scene",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      },
+      {
+        "sceneIndex": 5,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "soft rising tones as Justina looks upwards, embodying hope",
+              "startSeconds": 0,
+              "endSeconds": 3
+            },
+            {
+              "description": "gentle chime sounds that reflect her aspirations",
+              "startSeconds": 3,
+              "endSeconds": 5
+            },
+            {
+              "description": "a quiet, resonant tone that holds the moment of reflection",
+              "startSeconds": 5,
+              "endSeconds": 7
+            }
+          ],
+          "ambientTexture": "soft wind and gentle chimes",
+          "continuityFromPrevious": "the gentle chimes from the previous scene continue",
+          "continuityToNext": "the soundscape fades out, leaving a lingering sense of hope",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      }
+    ]
+  },
+  "audioDirectionUsage": {
+    "prompt_tokens": 1236,
+    "completion_tokens": 859,
+    "total_tokens": 2095,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001",
+    "sourceCommit": "a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e",
+    "article": {
+      "title": "Curtea de Justiție a Uniunii Europene este departe, dar de fapt ne privește pe toți",
+      "url": "https://adevarul.ro/adevarul-juridic/curtea-de-justitie-a-uniunii-europene-este-2566586.html",
+      "publish_date": "2026-10-26 13:28:41"
+    },
+    "status": "Videos per API erzeugt",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. Use each scene’s videoMode as selected by GPT. image_to_video uses startImagePath. first_last_frame requires both start and separately supplied final image; never downgrade it to image-to-video.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "The Call to Justice",
+        "beat": "Justina stands at the entrance of the Court, symbolizing the judicial independence that protects citizens.",
+        "storyBeat": "Justina stands at the entrance of the Court, symbolizing the judicial independence that protects citizens.",
+        "durationSeconds": 6,
+        "requestedDurationSeconds": 6,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "This scene requires a wide establishing shot to convey Justina Veritas's significant presence at the Court.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Justina Veritas stands at the entrance of the Court, her powerful abstract form raised in a gesture that invokes the principles of justice. As she lifts her hand, the surrounding charcoal-black and white masses seem to ripple in response, creating a dynamic interplay between her and the backdrop. The camera slowly pans from her hand to the Court, capturing the tension in the air as the scene settles into a moment of stillness, emphasizing her significant presence and the weight of her action.\n\nAUDIO: Generate synchronized sound with this video. soft wind and subtle chimes Sound events: 0.0–2.0s: gentle chime sounds as Justina raises her hand, symbolizing the invocation of justice; 2.0–4.0s: deep resonant tone that swells as the backdrop ripples in response; 4.0–6.0s: soft wind sounds to create a sense of stillness and tension in the air. none the gentle chime motif continues into the next scene Overall sound identity: A soundscape that embodies the spirit of justice through abstract textures and resonant motifs, reflecting the themes of judicial independence and citizen engagement.. Music policy: subtle, ambient music that underscores emotional moments without overpowering the soundscape. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-1-video.mp4",
+        "videoTaskUUID": "7dfaf670-19a0-4dda-a1ac-5f6ec8a79e5d"
+      },
+      {
+        "index": 2,
+        "title": "The Dialogue of Rights",
+        "beat": "Justina engages in a dialogue with abstract figures representing citizens, emphasizing the importance of judicial independence.",
+        "storyBeat": "Justina engages in a dialogue with abstract figures representing citizens, emphasizing the importance of judicial independence.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "An intimate close-up is needed to capture Justina Veritas's connection with the citizens, conveying emotion and urgency.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Justina Veritas gestures towards the abstract figures representing citizens, encouraging them to voice their rights and concerns. The camera moves in closer, capturing the urgency in her expression and the shifting forms of the citizens around her. As she extends her hand, the figures seem to lean in, their shapes intertwining with hers, creating a sense of connection and dialogue. The motion culminates in a moment of engagement, where the scene breathes with the weight of their shared struggle.\n\nAUDIO: Generate synchronized sound with this video. soft wind and gentle chimes Sound events: 0.0–3.0s: gentle chime sounds echo as Justina gestures toward the citizens, inviting them to express themselves; 3.0–5.0s: soft overlapping tones that represent the intertwining of Justina and the citizens; 5.0–7.0s: a crescendo of resonant tones as the moment of engagement builds. the gentle chimes from the previous scene continue the resonant tones transition into the next scene Overall sound identity: A soundscape that embodies the spirit of justice through abstract textures and resonant motifs, reflecting the themes of judicial independence and citizen engagement.. Music policy: subtle, ambient music that underscores emotional moments without overpowering the soundscape. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-2-video.mp4",
+        "videoTaskUUID": "7260d264-13f9-40e1-ae5a-e5fc7e3a2436"
+      },
+      {
+        "index": 3,
+        "title": "The Shield of Integrity",
+        "beat": "Justina stands before a representation of the EU flag, symbolizing the protection of common funds and the rule of law.",
+        "storyBeat": "Justina stands before a representation of the EU flag, symbolizing the protection of common funds and the rule of law.",
+        "durationSeconds": 8,
+        "requestedDurationSeconds": 8,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "An oblique diagonal composition adds dynamic tension, emphasizing Justina Veritas's protective stance.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Justina Veritas stands before an abstract representation of the EU flag, raising a shield made of overlapping forms to defend the integrity of the EU's financial resources. The camera moves diagonally across the scene, capturing the tension in her stance as she embodies the protective spirit of justice. The shield seems to shimmer with potential, and as the camera settles, the forms around her shift slightly, echoing the gravity of her task and the stakes involved.\n\nAUDIO: Generate synchronized sound with this video. deep resonant tones and soft wind Sound events: 0.0–3.0s: deep resonant tone as Justina raises the shield, symbolizing protection; 3.0–5.0s: a shimmering sound effect as the shield shimmers with potential; 5.0–8.0s: soft wind sounds that reflect the gravity of her task. the deep resonant tone motif continues the wind sounds transition into the next scene Overall sound identity: A soundscape that embodies the spirit of justice through abstract textures and resonant motifs, reflecting the themes of judicial independence and citizen engagement.. Music policy: subtle, ambient music that underscores emotional moments without overpowering the soundscape. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-3-video.mp4",
+        "videoTaskUUID": "af35b1f8-efb2-4e50-bec5-a7bfc34b108f"
+      },
+      {
+        "index": 4,
+        "title": "The Trust of Citizens",
+        "beat": "Justina addresses an abstract crowd, symbolizing the trust citizens place in the judicial system.",
+        "storyBeat": "Justina addresses an abstract crowd, symbolizing the trust citizens place in the judicial system.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "The high-angle perspective gives an overview of the crowd's engagement, highlighting the importance of citizen trust.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-4-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Justina Veritas extends her hands outward towards an abstract crowd, inviting dialogue and engagement. The camera captures her outstretched arms, framing her figure against the swirling masses of the crowd. As she gestures, the surrounding forms pulse gently, reflecting the trust and hope of the citizens. The scene holds this moment, allowing the viewer to absorb the significance of her invitation before it transitions into the next action.\n\nAUDIO: Generate synchronized sound with this video. soft wind and gentle chimes Sound events: 0.0–2.0s: gentle chime sounds as Justina extends her hands, inviting dialogue; 2.0–4.0s: soft pulsing sounds that reflect the trust and hope of the citizens; 4.0–5.0s: a gentle swell of ambient tones as the scene holds the moment. the gentle chime motif continues the ambient tones transition into the next scene Overall sound identity: A soundscape that embodies the spirit of justice through abstract textures and resonant motifs, reflecting the themes of judicial independence and citizen engagement.. Music policy: subtle, ambient music that underscores emotional moments without overpowering the soundscape. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-4-video.mp4",
+        "videoTaskUUID": "96b800e5-8fd2-4223-a7cd-c648f0f356a5"
+      },
+      {
+        "index": 5,
+        "title": "The Legacy of Justice",
+        "beat": "Justina reflects on the importance of a strong judiciary for future generations, symbolizing hope and continuity.",
+        "storyBeat": "Justina reflects on the importance of a strong judiciary for future generations, symbolizing hope and continuity.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "A low-angle shot emphasizes Justina Veritas's hopeful stance, creating a sense of aspiration and determination.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-5-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Justina Veritas looks upwards, embodying hope for a just and fair future. The camera starts from a low angle, emphasizing her upward gaze and the abstract forms that surround her. As she reflects, the shapes around her seem to rise and swell, mirroring her aspirations. The motion settles as the scene captures her determination, creating a moment of quiet reflection that resonates with the ongoing struggle for justice.\n\nAUDIO: Generate synchronized sound with this video. soft wind and gentle chimes Sound events: 0.0–3.0s: soft rising tones as Justina looks upwards, embodying hope; 3.0–5.0s: gentle chime sounds that reflect her aspirations; 5.0–7.0s: a quiet, resonant tone that holds the moment of reflection. the gentle chimes from the previous scene continue the soundscape fades out, leaving a lingering sense of hope Overall sound identity: A soundscape that embodies the spirit of justice through abstract textures and resonant motifs, reflecting the themes of judicial independence and citizen engagement.. Music policy: subtle, ambient music that underscores emotional moments without overpowering the soundscape. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: Justina Veritas's decisive physical action, a secondary figure or object visibly reacting, and the setting or a relevant semantic motif changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Justina Veritas and the main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Justina Veritas's abstract appearance and gesture. No complete painting reference is supplied; follow the written style description.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-001/media/scene-5-video.mp4",
+        "videoTaskUUID": "d58ee583-dab8-49a0-be78-e0ac22bc42e6"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-27T10:20:46.212Z",
+  "videoResults": [
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-1-video.mp4",
+      "durationSeconds": 6.583333,
+      "requestedDurationSeconds": 6,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:20:46.267Z",
+      "renderedAt": "2026-10-27T10:21:20.829Z",
+      "savedAt": "2026-10-27T10:21:21.824Z",
+      "renderSeconds": 34.6,
+      "downloadSeconds": 1,
+      "totalSeconds": 35.6,
+      "cost": 0.0658,
+      "seed": 1562144413,
+      "taskUUID": "7dfaf670-19a0-4dda-a1ac-5f6ec8a79e5d",
+      "sourceUrl": "https://vm.runware.ai/video/os/a02d21/ws/5/vi/cdba5edf-4fd8-4a3d-856d-6bdaa402e1a0.mp4",
+      "bytes": 3021119,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 6.575
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-2-video.mp4",
+      "durationSeconds": 7.292,
+      "requestedDurationSeconds": 7,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:20:46.267Z",
+      "renderedAt": "2026-10-27T10:21:34.079Z",
+      "savedAt": "2026-10-27T10:21:35.255Z",
+      "renderSeconds": 47.8,
+      "downloadSeconds": 1.2,
+      "totalSeconds": 49,
+      "cost": 0.0729,
+      "seed": 1238711701,
+      "taskUUID": "7260d264-13f9-40e1-ae5a-e5fc7e3a2436",
+      "sourceUrl": "https://vm.runware.ai/video/os/a02d21/ws/5/vi/ea8370f3-5cac-4790-9c90-ad75deb326c0.mp4",
+      "bytes": 3576105,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 7.292
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-3-video.mp4",
+      "durationSeconds": 8,
+      "requestedDurationSeconds": 8,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:20:46.267Z",
+      "renderedAt": "2026-10-27T10:21:31.038Z",
+      "savedAt": "2026-10-27T10:21:32.052Z",
+      "renderSeconds": 44.8,
+      "downloadSeconds": 1,
+      "totalSeconds": 45.8,
+      "cost": 0.08,
+      "seed": 1352047547,
+      "taskUUID": "af35b1f8-efb2-4e50-bec5-a7bfc34b108f",
+      "sourceUrl": "https://vm.runware.ai/video/os/a02d21/ws/5/vi/c5a84444-55d8-424e-8f1c-8217bf62ff3a.mp4",
+      "bytes": 3315068,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 8
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-4-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:20:46.267Z",
+      "renderedAt": "2026-10-27T10:21:23.884Z",
+      "savedAt": "2026-10-27T10:21:25.094Z",
+      "renderSeconds": 37.6,
+      "downloadSeconds": 1.2,
+      "totalSeconds": 38.8,
+      "cost": 0.0517,
+      "seed": 364726561,
+      "taskUUID": "96b800e5-8fd2-4223-a7cd-c648f0f356a5",
+      "sourceUrl": "https://vm.runware.ai/video/os/a02d21/ws/5/vi/ccd9e1a6-90fc-48ca-836a-3a8d716744a1.mp4",
+      "bytes": 2984217,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-5-video.mp4",
+      "durationSeconds": 7.292,
+      "requestedDurationSeconds": 7,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:21:21.903Z",
+      "renderedAt": "2026-10-27T10:21:49.145Z",
+      "savedAt": "2026-10-27T10:21:51.247Z",
+      "renderSeconds": 27.2,
+      "downloadSeconds": 2.1,
+      "totalSeconds": 29.3,
+      "cost": 0.0729,
+      "seed": 1209632684,
+      "taskUUID": "d58ee583-dab8-49a0-be78-e0ac22bc42e6",
+      "sourceUrl": "https://vm.runware.ai/video/os/a03d21/ws/5/vi/4818eb2e-4d9c-4f40-842c-5cb105e8bc32.mp4",
+      "bytes": 5564284,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 7.292
+      }
+    }
+  ],
+  "videoGeneration": {
+    "provider": "Runware",
+    "model": "prunaai:p-video@2-pro",
+    "resolution": "480p",
+    "settings": {
+      "mode": "cost"
+    },
+    "completedAt": "2026-10-27T10:21:51.295Z",
+    "concurrency": 4,
+    "audioEdgeFadeSeconds": 0.03
+  },
+  "concatenatedVideo": {
+    "path": "../merged/iteration-001.mp4",
+    "runPath": "merged/iteration-001.mp4",
+    "scenes": 5,
+    "generatedVideos": 5,
+    "gaps": [],
+    "durationSeconds": 34.333333,
+    "requestedDurationSeconds": 33,
+    "sourceTasks": [
+      "7dfaf670-19a0-4dda-a1ac-5f6ec8a79e5d",
+      "7260d264-13f9-40e1-ae5a-e5fc7e3a2436",
+      "af35b1f8-efb2-4e50-bec5-a7bfc34b108f",
+      "96b800e5-8fd2-4223-a7cd-c648f0f356a5",
+      "d58ee583-dab8-49a0-be78-e0ac22bc42e6"
+    ],
+    "method": "Selfomat ffmpeg concat · 0.03s audio fades at scene edges · moderation gaps shown as black video",
+    "audioEdgeFadeSeconds": 0.03,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 34.333333
+    },
+    "createdAt": "2026-10-27T10:21:51.928Z"
+  },
+  "titleCardFilm": {
+    "path": "../merged/iteration-001-with-title-card-audio-normalized.mp4",
+    "runPath": "merged/iteration-001-with-title-card-audio-normalized.mp4",
+    "durationSeconds": 38.1,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 96000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 38.1
+    },
+    "fadeSeconds": 0.25,
+    "method": "FFmpeg assembler · title card from record.json → article.title",
+    "createdAt": "2026-10-27T10:21:53.130Z",
+    "sourcePath": "../merged/iteration-001-with-title-card.mp4",
+    "sourceRunPath": "merged/iteration-001-with-title-card.mp4",
+    "audioNormalization": {
+      "method": "FFmpeg loudnorm after iteration film assembly",
+      "targetIntegratedLufs": -16,
+      "maximumTruePeakDbtp": -1.5,
+      "targetLoudnessRangeLu": 11,
+      "outputPath": "merged/iteration-001-with-title-card-audio-normalized.mp4",
+      "completedAt": "2026-10-27T10:21:54.441Z"
+    }
+  }
+}

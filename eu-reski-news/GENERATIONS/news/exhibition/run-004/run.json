@@ -1,0 +1,102 @@
+{
+  "profile": "EU-RESKI exhibition mix",
+  "startedAt": "2026-10-27T10:17:06.827Z",
+  "iterationLimit": 4,
+  "pauseMilliseconds": 0,
+  "status": "completed",
+  "featureSettings": {
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "on",
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": true,
+    "landscapePrompt": false
+  },
+  "generationSettings": {
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": -1,
+      "type": "dramatic-arc",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4o-mini",
+    "articleImageReference": true,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": null,
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "articleProgress": {
+    "sourceAggregate": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/all-2026-10-26T14-27-19-985Z.json",
+    "nextDraw": 4
+  },
+  "iterations": [
+    {
+      "index": 1,
+      "directory": "iteration-001",
+      "report": "iteration-001/index.html"
+    },
+    {
+      "index": 2,
+      "directory": "iteration-002",
+      "report": "iteration-002/index.html"
+    },
+    {
+      "index": 3,
+      "directory": "iteration-003",
+      "report": "iteration-003/index.html"
+    },
+    {
+      "index": 4,
+      "directory": "iteration-004",
+      "report": "iteration-004/index.html"
+    }
+  ],
+  "sceneCountSettings": {
+    "mode": "taktmuster",
+    "takt": 2,
+    "numerator": 4,
+    "denominator": 4,
+    "type": "balanced",
+    "bias": 1,
+    "minimum": 1,
+    "maximum": 12
+  },
+  "visualControls": {
+    "sceneSpecific": true,
+    "defaults": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  },
+  "imageSeedBase": null,
+  "finishedAt": "2026-10-27T10:28:47.785Z",
+  "assembledFilm": {
+    "status": "ready",
+    "path": "glue-vids/eu-reski-live-full.mp4",
+    "iterations": 4,
+    "transitionCount": 3,
+    "transitionWaitPattern": "Taktmuster 2/4/4 classic",
+    "method": "First/Last-Frame-Glue · 3 Übergänge · Taktmuster 2/4/4 classic"
+  }
+}

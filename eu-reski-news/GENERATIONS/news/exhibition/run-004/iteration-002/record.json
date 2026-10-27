@@ -1,0 +1,858 @@
+{
+  "generator": "semantic-news-v1",
+  "planningVersion": 2,
+  "createdAt": "2026-10-27T10:21:56.123Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e",
+    "branch": "codex/story-composition-prompt-test",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/all-2026-10-26T14-27-19-985Z.json",
+  "aggregateHash": "83ecffb1faa37e6f108ce7f99871b7d233ada211950f2b42594c7a0e9e98df6c",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "ranking": "jev-eu-relevance",
+    "euRelevance": 0.98,
+    "relevancePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/news/A/eu-relevance-2026-10-26T14-27-19-985Z.json",
+    "draw": 1,
+    "candidateCount": 2373,
+    "aggregateIndex": 734
+  },
+  "article": {
+    "id": 476404146,
+    "title": "Coletele din afara UE, vizate de o nouă taxă de procesare de la 1 noiembrie. Cum se va aplica",
+    "text": "Uniunea Europeană introduce, de la 1 noiembrie, o nouă taxă de procesare în valoare de 2 euro/categorie produs pentru comenzile online, fiind vizate coletele venite din afara Uniunii.\n\nPotrivit News.ro, taxa este concepută ca o măsură permanentă, însă valoarea ei va fi revizuită o dată la doi ani, în funcţie de evoluţia costurilor controalelor vamale.\n\nTaxele vor fi folosite pentru finanțarea controalelor vamale, în contextul creșterii numărului de colete comandate din Asia. În 2025, aproape 5,9 miliarde de colete mici au intrat în UE, de patru ori mai multe decât în 2022. \n\nDintre acestea, 93% au provenit din China, prin platforme precum Shein, Temu și AliExpress.\n\nAșadar, noua taxă de procesare se aplică fiecărei categorii de articole cuprinse într-un pachet. De exemplu, un colet care conţine trei tricouri va fi supus unei taxe de 2 euro, chiar dacă este vorba despre trei articole distincte. În schimb, dacă pachetul conţine trei tricouri şi o pereche de pantaloni, taxa va fi de 4 euro (2 euro pentru tricouri şi 2 euro pentru pantaloni).\n\nDeși taxa va fi plătită de platforme, vânzători sau intermediari, aceștia ar putea transfera costurile către cumpărători prin majorarea prețurilor. \n\nMăsura urmărește să faciliteze controalele vamale și să împiedice intrarea pe piața europeană a produselor periculoase sau contrafăcute. Totodată, UE vrea să răspundă nemulțumirilor comercianților europeni, care reclamă concurența neloială din partea vânzătorilor de pe platformele internaționale, Franța fiind una dintre țările care au susținut măsura.\n\nÎn plus, începând cu 1 iulie 2028, vor fi introduse şi taxe specifice, cu valoare redusă, pentru coletele care tranzitează depozite specializate. La acel moment, taxa de 3 euro aplicată coletelor mici va fi eliminată.\n\nNoile reglementări sunt stabilite prin Regulamentul delegat (UE) 2026/2152 al Comisiei din 21 septembrie 2026 de completare a Regulamentului (UE) 2026/2108 al Parlamentului European şi al Consiliului prin stabilirea cuantumului taxei de procesare la nivelul Uniunii, publicat în Jurnalul Oficial al Uniunii Europene, seria L, din 22 octombrie 2026.",
+    "summary": "Uniunea Europeană introduce, de la 1 noiembrie, o nouă taxă de procesare în valoare de 2 euro/categorie produs pentru comenzile online, fiind vizate coletele venite din afara Uniunii.",
+    "url": "https://adevarul.ro/stiri-externe/europa/coletele-din-afara-ue-vizate-de-o-noua-taxa-de-2566606.html",
+    "image": "https://cdn.adh.reperio.news/image-0/0fbfe28f-896b-4918-90a3-a54a8462ac39/index.png?p=f%3Djpeg%26w%3D1200%26h%3D675%26r%3Dcover",
+    "video": null,
+    "publish_date": "2026-10-26 12:18:28",
+    "author": "Narcis Ghiurca",
+    "authors": [
+      "Narcis Ghiurca"
+    ],
+    "language": "ro",
+    "category": "politics",
+    "source_country": "ro"
+  },
+  "sceneCount": 2,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": true,
+  "guernicaFigureReference": true,
+  "guernicaLocationReference": false,
+  "visualStyleOptions": {
+    "symbolic": true,
+    "roomDeepness": false,
+    "layering": 3
+  },
+  "storyModel": "gpt-4o-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "generationSettings": {
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": -1,
+      "type": "dramatic-arc",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4o-mini",
+    "articleImageReference": true,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": null,
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "featureSettings": {
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "on",
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": true,
+    "landscapePrompt": false
+  },
+  "sceneVisualControls": true,
+  "sceneCountSelection": {
+    "iteration": 1,
+    "rawValue": 1,
+    "biasedValue": 2,
+    "count": 2,
+    "settings": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 4,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 1,
+      "minimum": 1,
+      "maximum": 12
+    }
+  },
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "1645c585d6b787d81942d6b170ba85e2a379e29cb9973f16db2c0e07efbda4bf",
+      "bytes": 3155805,
+      "provider": "hf-flux-klein",
+      "taskUUID": "784f16c67399466aa300ceaacdfe0f2b",
+      "seed": 887608593,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "4ddc2df10eea8ffcad492044ab0665f4d59dafb358e9605bd13e62b230200525",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "d5969876fea7016b8a489c3b3d580fe7eda2add9cbd2811fb955fb2384416608",
+          "bytes": 86713,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "d435c767f60574aa870678b9ea2ab1d6e9deb1df63370d53780e1c0960b83eeb",
+      "bytes": 3106265,
+      "provider": "hf-flux-klein",
+      "taskUUID": "8c0c8a60691f4163a0c96a030db9bcf1",
+      "seed": 217753394,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "4f46fccdaece8806b33f2f870f7201b91f1d735186332ba310c9e0591c5f307d",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/article.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/article.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "d5969876fea7016b8a489c3b3d580fe7eda2add9cbd2811fb955fb2384416608",
+          "bytes": 86713,
+          "label": "Original article photograph for broad visual orientation only; do not reproduce identifiable people, logos, or text",
+          "role": "article"
+        }
+      ]
+    }
+  ],
+  "imageSeed": null,
+  "sceneDurations": [
+    6,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "GPT dramatic pacing",
+    "takt": -1,
+    "minimum": 5,
+    "maximum": 8,
+    "type": "dramatic-arc",
+    "scaler": "GPT chooses scene duration from story tension and dramatic progression"
+  },
+  "titleCard": {
+    "articleTitle": "Coletele din afara UE, vizate de o nouă taxă de procesare de la 1 noiembrie. Cum se va aplica",
+    "imagePath": "../merged/title-cards/title-002.png",
+    "imageRunPath": "merged/title-cards/title-002.png",
+    "videoPath": "../merged/title-cards/title-002.mp4",
+    "videoRunPath": "merged/title-cards/title-002.mp4",
+    "durationSeconds": 4,
+    "createdAt": "2026-10-27T10:23:12.516Z"
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-27T10:21:56.450Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.6,
+          "urlLink": "Irland",
+          "title": "Irland",
+          "text": "Irland",
+          "sentences": {
+            "prev": [
+              "umfasst sie auch zahlreiche Inseln; die größten unter ihnen",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              ", ",
+              "Europäische Union, kurz EU, ist ein Staatenverbund aus 27",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU",
+              "Union, kurz EU, ist ein Staatenverbund aus 27"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 1.3,
+          "urlLink": "ISSN_(identifier)",
+          "title": "ISSN (identifier)",
+          "text": "ISSN",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": []
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.5,
+          "urlLink": "%D0%90%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA",
+          "title": "Английский язык",
+          "text": "Английский",
+          "sentences": {
+            "prev": [
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом",
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом",
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом"
+            ],
+            "next": [
+              "решения, рекомендации и заключения (англ. opinions).",
+              "право ЕС, налоговое право ЕС и др. С учётом"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "d5969876fea7016b8a489c3b3d580fe7eda2add9cbd2811fb955fb2384416608",
+    "bytes": 86713
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "c01556f8cc856d36996aaca0e92f7130c06ba9f66db4de2fa2d6fb39e87a5d9c",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "The article discusses the introduction of a processing fee for packages coming into the EU from outside its borders, highlighting the implications for consumers and retailers. In the visual representation, the protagonist will embody the tension and complexity of navigating this new regulation. The imagery will capture the emotional response to increased costs and the bureaucratic nature of customs processing.",
+    "articleFacts": [
+      "The EU is introducing a processing fee of 2 euros per product category for online orders from outside the EU, starting November 1.",
+      "The fee aims to fund customs checks amid a rising influx of packages from Asia, notably from China.",
+      "In 2025, 5.9 billion small packages entered the EU, significantly increasing from previous years.",
+      "The fee will be charged per product category within a package, potentially increasing costs for consumers.",
+      "The measure seeks to enhance customs control and address complaints from European merchants regarding unfair competition."
+    ],
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          1
+        ],
+        "visualMotif": "The complexity of navigating bureaucracy and costs in a modern economy.",
+        "visibleConsequence": "A character grappling with the implications of new tax regulations."
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      }
+    },
+    "storyPremise": "In the wake of new EU regulations, a consumer faces the reality of increased costs and bureaucratic hurdles as they navigate online shopping from outside the EU. Their emotional journey reflects the tension between convenience and unexpected financial burdens.",
+    "fictionBoundary": "This visual narrative is entirely fictional and does not replicate real events or individuals but draws inspiration from the article's themes.",
+    "protagonist": {
+      "name": "Mara",
+      "role": "Consumer",
+      "visualIdentity": "A young woman looking frustrated while handling packages, embodying the anxiety of new regulations.",
+      "guernicaId": 6
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Facing New Costs",
+        "storyBeat": "Mara confronts the new processing fees while sorting through her online orders.",
+        "protagonistAction": "Mara stands over a pile of packages, holding a processing fee label with a distressed expression.",
+        "composition": "intimate_close_up",
+        "guernicaId": 6,
+        "selectionReason": "The selected figure, 'Woman with Raised Arms,' represents the emotional response to overwhelming circumstances.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: the fictional protagonist, Mara, standing over a pile of packages, holding a processing fee label, with a distressed expression, a secondary figure reacting in surprise at the unexpected costs, and the setting of a cluttered room filled with packages, visibly changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Mara and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "The scene requires an intimate close-up to emphasize Mara's emotional response, focusing on her frustration.",
+        "durationSeconds": 6,
+        "videoPrompt": "Mara stands over a chaotic pile of packages, her brow furrowed as she clutches a processing fee label in her hand. The camera slowly zooms in on her distressed expression, capturing the weight of the new regulations on her shoulders. As she shifts her weight from one foot to the other, the surrounding packages seem to loom larger, emphasizing her feeling of being overwhelmed. The scene settles as she takes a deep breath, her gaze fixed on the label, embodying the tension of navigating these new costs."
+      },
+      {
+        "index": 2,
+        "title": "The Impact of Fees",
+        "storyBeat": "Mara reflects on how the new fees might affect her future online shopping.",
+        "protagonistAction": "Mara sits at a table with her laptop open, staring thoughtfully at a list of items she wants to buy, her expression a mix of concern and determination.",
+        "composition": "over_the_shoulder",
+        "guernicaId": 6,
+        "selectionReason": "The same figure of 'Woman with Raised Arms' symbolizes the ongoing struggle against new burdens.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: the fictional protagonist, Mara, sitting at a table with her laptop open, staring thoughtfully at a list of items she wants to buy with a concerned expression, a secondary figure in the background discussing the fees with a look of disbelief, and the setting of a dimly lit room reflecting uncertainty and contemplation. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Mara and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "An over-the-shoulder perspective emphasizes Mara's contemplation of the future and the implications of the new fees.",
+        "durationSeconds": 7,
+        "videoPrompt": "Mara sits at a dimly lit table, her laptop open in front of her. The camera moves over her shoulder, focusing on the screen where a list of desired items is displayed. Her expression shifts from concern to determination as she contemplates the impact of the new fees. The camera lingers on her thoughtful gaze, capturing the moment of decision as she weighs her options. The scene concludes with her nodding slightly, a sign of resolve amidst uncertainty."
+      }
+    ]
+  },
+  "visualPlanHash": "5b39895084a3b0f4ff87d8a67ce8add75b127cad38daf1749b01232d52c2ab9d",
+  "usage": {
+    "prompt_tokens": 77590,
+    "completion_tokens": 1988,
+    "total_tokens": 79578
+  },
+  "planHash": "f6e64106a417d22b1a0e814cdae91d5eef4f2aead165cd085112b11bafa8be4d",
+  "sceneTiming": {
+    "scenes": [
+      {
+        "index": 1,
+        "durationSeconds": 6,
+        "videoPrompt": "Mara stands over a chaotic pile of packages, her brow furrowed as she clutches a processing fee label in her hand. The camera slowly zooms in on her distressed expression, capturing the weight of the new regulations on her shoulders. As she shifts her weight from one foot to the other, the surrounding packages seem to loom larger, emphasizing her feeling of being overwhelmed. The scene settles as she takes a deep breath, her gaze fixed on the label, embodying the tension of navigating these new costs.",
+        "reason": "Die Dauer von 6 Sekunden ermöglicht es, Maras emotionale Reaktion auf die neuen Gebühren zu erfassen."
+      },
+      {
+        "index": 2,
+        "durationSeconds": 7,
+        "videoPrompt": "Mara sits at a dimly lit table, her laptop open in front of her. The camera moves over her shoulder, focusing on the screen where a list of desired items is displayed. Her expression shifts from concern to determination as she contemplates the impact of the new fees. The camera lingers on her thoughtful gaze, capturing the moment of decision as she weighs her options. The scene concludes with her nodding slightly, a sign of resolve amidst uncertainty.",
+        "reason": "Die 7 Sekunden erlauben es, Maras innere Überlegungen und den Konflikt mit den neuen Gebühren zu zeigen."
+      }
+    ]
+  },
+  "storyUsage": {
+    "prompt_tokens": 74897,
+    "completion_tokens": 1302,
+    "total_tokens": 76199,
+    "prompt_tokens_details": {
+      "cached_tokens": 3968,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "timingUsage": {
+    "prompt_tokens": 1901,
+    "completion_tokens": 280,
+    "total_tokens": 2181,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "audioDirection": {
+    "version": 1,
+    "promptVersion": "eu-reski-audio-director-v1",
+    "status": "planned",
+    "model": "gpt-4o-mini",
+    "sourceVisualPlanHash": "5b39895084a3b0f4ff87d8a67ce8add75b127cad38daf1749b01232d52c2ab9d",
+    "inputHash": "2170ac7065ed4566ac86ddb1efb5791bd7edee7e28cf14e2ac9bbd7cd2f7b07b",
+    "requestPath": "audio-direction-request.json",
+    "responsePath": "audio-direction-response.json",
+    "usage": {
+      "prompt_tokens": 792,
+      "completion_tokens": 406,
+      "total_tokens": 1198,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "createdAt": "2026-10-27T10:23:12.463Z",
+    "audioDirection": {
+      "overallConcept": "The audio landscape reflects Mara's emotional journey through the challenges of new online shopping regulations, emphasizing her feelings of stress, contemplation, and determination.",
+      "recurringMotifs": [
+        "rustling packages",
+        "keyboard typing",
+        "deep breaths"
+      ],
+      "voicePolicy": "no_spoken_dialogue",
+      "musicPolicy": "subtle ambient music that underscores emotional tension without overpowering the sound events",
+      "continuityStrategy": "The audio transitions smoothly between scenes, maintaining a consistent emotional tone."
+    },
+    "scenes": [
+      {
+        "sceneIndex": 1,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "Rustling of packages as Mara shifts through them",
+              "startSeconds": 0,
+              "endSeconds": 3
+            },
+            {
+              "description": "A deep breath taken by Mara, emphasizing her distress",
+              "startSeconds": 3,
+              "endSeconds": 4
+            },
+            {
+              "description": "The sound of the processing fee label being crumpled slightly in her hand",
+              "startSeconds": 4,
+              "endSeconds": 6
+            }
+          ],
+          "ambientTexture": "soft, tense ambient music underscoring the scene",
+          "continuityFromPrevious": "None",
+          "continuityToNext": "The tension in the sound carries over into the next scene, linking her emotional state across transitions.",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      },
+      {
+        "sceneIndex": 2,
+        "sceneAudio": {
+          "soundEvents": [
+            {
+              "description": "Faint sound of keyboard typing as Mara navigates her laptop",
+              "startSeconds": 0,
+              "endSeconds": 4
+            },
+            {
+              "description": "A soft sigh from Mara, reflecting her concern",
+              "startSeconds": 4,
+              "endSeconds": 5
+            },
+            {
+              "description": "The sound of a pen tapping lightly on the table as she thinks",
+              "startSeconds": 5,
+              "endSeconds": 7
+            }
+          ],
+          "ambientTexture": "subtle ambient music that builds a sense of determination",
+          "continuityFromPrevious": "The ambient music transitions smoothly, maintaining emotional continuity.",
+          "continuityToNext": "The sound of typing continues to echo the ongoing struggle with the new regulations.",
+          "intentionalSilence": false,
+          "silenceReason": "",
+          "spokenDialogue": false
+        }
+      }
+    ]
+  },
+  "audioDirectionUsage": {
+    "prompt_tokens": 792,
+    "completion_tokens": 406,
+    "total_tokens": 1198,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-002",
+    "sourceCommit": "a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e",
+    "article": {
+      "title": "Coletele din afara UE, vizate de o nouă taxă de procesare de la 1 noiembrie. Cum se va aplica",
+      "url": "https://adevarul.ro/stiri-externe/europa/coletele-din-afara-ue-vizate-de-o-noua-taxa-de-2566606.html",
+      "publish_date": "2026-10-26 12:18:28"
+    },
+    "status": "Videos per API erzeugt",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. Use each scene’s videoMode as selected by GPT. image_to_video uses startImagePath. first_last_frame requires both start and separately supplied final image; never downgrade it to image-to-video.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Facing New Costs",
+        "beat": "Mara confronts the new processing fees while sorting through her online orders.",
+        "storyBeat": "Mara confronts the new processing fees while sorting through her online orders.",
+        "durationSeconds": 6,
+        "requestedDurationSeconds": 6,
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "The scene requires an intimate close-up to emphasize Mara's emotional response, focusing on her frustration.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-002/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: the fictional protagonist, Mara, standing over a pile of packages, holding a processing fee label, with a distressed expression, a secondary figure reacting in surprise at the unexpected costs, and the setting of a cluttered room filled with packages, visibly changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Mara and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Mara stands over a chaotic pile of packages, her brow furrowed as she clutches a processing fee label in her hand. The camera slowly zooms in on her distressed expression, capturing the weight of the new regulations on her shoulders. As she shifts her weight from one foot to the other, the surrounding packages seem to loom larger, emphasizing her feeling of being overwhelmed. The scene settles as she takes a deep breath, her gaze fixed on the label, embodying the tension of navigating these new costs.\n\nAUDIO: Generate synchronized sound with this video. soft, tense ambient music underscoring the scene Sound events: 0.0–3.0s: Rustling of packages as Mara shifts through them; 3.0–4.0s: A deep breath taken by Mara, emphasizing her distress; 4.0–6.0s: The sound of the processing fee label being crumpled slightly in her hand. None The tension in the sound carries over into the next scene, linking her emotional state across transitions. Overall sound identity: The audio landscape reflects Mara's emotional journey through the challenges of new online shopping regulations, emphasizing her feelings of stress, contemplation, and determination.. Music policy: subtle ambient music that underscores emotional tension without overpowering the sound events. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: the fictional protagonist, Mara, standing over a pile of packages, holding a processing fee label, with a distressed expression, a secondary figure reacting in surprise at the unexpected costs, and the setting of a cluttered room filled with packages, visibly changing the space. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Mara and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-002/media/scene-1-video.mp4",
+        "videoTaskUUID": "e51f8d8c-2fe1-457b-9fb4-7b5dda9b4dec"
+      },
+      {
+        "index": 2,
+        "title": "The Impact of Fees",
+        "beat": "Mara reflects on how the new fees might affect her future online shopping.",
+        "storyBeat": "Mara reflects on how the new fees might affect her future online shopping.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "visualStyleOptions": {
+          "symbolic": false,
+          "roomDeepness": false,
+          "layering": 0
+        },
+        "visualControlReason": "An over-the-shoulder perspective emphasizes Mara's contemplation of the future and the implications of the new fees.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-002/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: the fictional protagonist, Mara, sitting at a table with her laptop open, staring thoughtfully at a list of items she wants to buy with a concerned expression, a secondary figure in the background discussing the fees with a look of disbelief, and the setting of a dimly lit room reflecting uncertainty and contemplation. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Mara and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "videoPrompt": "Mara sits at a dimly lit table, her laptop open in front of her. The camera moves over her shoulder, focusing on the screen where a list of desired items is displayed. Her expression shifts from concern to determination as she contemplates the impact of the new fees. The camera lingers on her thoughtful gaze, capturing the moment of decision as she weighs her options. The scene concludes with her nodding slightly, a sign of resolve amidst uncertainty.\n\nAUDIO: Generate synchronized sound with this video. subtle ambient music that builds a sense of determination Sound events: 0.0–4.0s: Faint sound of keyboard typing as Mara navigates her laptop; 4.0–5.0s: A soft sigh from Mara, reflecting her concern; 5.0–7.0s: The sound of a pen tapping lightly on the table as she thinks. The ambient music transitions smoothly, maintaining emotional continuity. The sound of typing continues to echo the ongoing struggle with the new regulations. Overall sound identity: The audio landscape reflects Mara's emotional journey through the challenges of new online shopping regulations, emphasizing her feelings of stress, contemplation, and determination.. Music policy: subtle ambient music that underscores emotional tension without overpowering the sound events. No spoken dialogue or narration.\n\nP-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Show three connected actions in the same instant: the fictional protagonist, Mara, sitting at a table with her laptop open, staring thoughtfully at a list of items she wants to buy with a concerned expression, a secondary figure in the background discussing the fees with a look of disbelief, and the setting of a dimly lit room reflecting uncertainty and contemplation. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Mara and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 0: no deliberate stacked planes; keep one unified mural surface. SYMBOLISM OFF: show concrete action without allegorical overlays or coded props. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors. Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004/iteration-002/media/scene-2-video.mp4",
+        "videoTaskUUID": "62e6782b-cdbe-476b-83e6-996d9c012948"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-27T10:23:12.468Z",
+  "videoResults": [
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-1-video.mp4",
+      "durationSeconds": 6.583333,
+      "requestedDurationSeconds": 6,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:23:12.519Z",
+      "renderedAt": "2026-10-27T10:23:47.274Z",
+      "savedAt": "2026-10-27T10:23:48.608Z",
+      "renderSeconds": 34.8,
+      "downloadSeconds": 1.3,
+      "totalSeconds": 36.1,
+      "cost": 0.0658,
+      "seed": 987447576,
+      "taskUUID": "e51f8d8c-2fe1-457b-9fb4-7b5dda9b4dec",
+      "sourceUrl": "https://vm.runware.ai/video/os/a02d21/ws/5/vi/04205474-39b5-4078-b5a2-840655bd86b6.mp4",
+      "bytes": 5464730,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 6.575
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-2-video.mp4",
+      "durationSeconds": 7.292,
+      "requestedDurationSeconds": 7,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-27T10:23:12.519Z",
+      "renderedAt": "2026-10-27T10:23:44.917Z",
+      "savedAt": "2026-10-27T10:23:46.212Z",
+      "renderSeconds": 32.4,
+      "downloadSeconds": 1.3,
+      "totalSeconds": 33.7,
+      "cost": 0.0729,
+      "seed": 1367213178,
+      "taskUUID": "62e6782b-cdbe-476b-83e6-996d9c012948",
+      "sourceUrl": "https://vm.runware.ai/video/os/a02d21/ws/5/vi/f6291589-14b6-41de-a07c-fe4b5ddbc3cd.mp4",
+      "bytes": 4227448,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 7.292
+      }
+    }
+  ],
+  "videoGeneration": {
+    "provider": "Runware",
+    "model": "prunaai:p-video@2-pro",
+    "resolution": "480p",
+    "settings": {
+      "mode": "cost"
+    },
+    "completedAt": "2026-10-27T10:23:48.656Z",
+    "concurrency": 4,
+    "audioEdgeFadeSeconds": 0.03
+  },
+  "concatenatedVideo": {
+    "path": "../merged/iteration-002.mp4",
+    "runPath": "merged/iteration-002.mp4",
+    "scenes": 2,
+    "generatedVideos": 2,
+    "gaps": [],
+    "durationSeconds": 13.875,
+    "requestedDurationSeconds": 13,
+    "sourceTasks": [
+      "e51f8d8c-2fe1-457b-9fb4-7b5dda9b4dec",
+      "62e6782b-cdbe-476b-83e6-996d9c012948"
+    ],
+    "method": "Selfomat ffmpeg concat · 0.03s audio fades at scene edges · moderation gaps shown as black video",
+    "audioEdgeFadeSeconds": 0.03,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 13.875
+    },
+    "createdAt": "2026-10-27T10:23:49.067Z"
+  },
+  "titleCardFilm": {
+    "path": "../merged/iteration-002-with-title-card-audio-normalized.mp4",
+    "runPath": "merged/iteration-002-with-title-card-audio-normalized.mp4",
+    "durationSeconds": 17.7,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 96000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 17.7
+    },
+    "fadeSeconds": 0.25,
+    "method": "FFmpeg assembler · title card from record.json → article.title",
+    "createdAt": "2026-10-27T10:23:49.721Z",
+    "sourcePath": "../merged/iteration-002-with-title-card.mp4",
+    "sourceRunPath": "merged/iteration-002-with-title-card.mp4",
+    "audioNormalization": {
+      "method": "FFmpeg loudnorm after iteration film assembly",
+      "targetIntegratedLufs": -16,
+      "maximumTruePeakDbtp": -1.5,
+      "targetLoudnessRangeLu": 11,
+      "outputPath": "merged/iteration-002-with-title-card-audio-normalized.mp4",
+      "completedAt": "2026-10-27T10:23:50.418Z"
+    }
+  }
+}

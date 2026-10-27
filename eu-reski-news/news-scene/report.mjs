@@ -74,12 +74,14 @@ const videoDirectionGuide = (record, sceneIndex, prefix = '') => {
     <p><b>Kamera über die Iteration:</b> ${escapeHtml(record.videoDirection.overallDirection?.cameraOverview)}</p>
     ${visionBlock}</section>${transitionGuide(record, sceneIndex)}`;
 };
-const videoIterationGuide = (record) => {
+const videoIterationGuide = (record, prefix = '') => {
   const direction = record.videoDirection;
-  if (!direction) return '';
-  const audio = direction.audioDirectionEnabled && direction.audioDirection;
-  return `<section class="video-guide"><h3>Regie über die ganze Iteration</h3><p><b>Kamera:</b> ${escapeHtml(direction.overallDirection?.cameraOverview)} · maximaler Zoom ${escapeHtml((direction.maxZoom ?? 0.08) * 100)}%</p>${audio
-    ? `<p><b>Audiokonzept:</b> ${escapeHtml(audio.overallConcept)}<br><b>Wiederkehrende Motive:</b> ${escapeHtml(audio.recurringMotifs.join(' · ') || 'keine')}<br><b>Stimme:</b> keine Dialoge oder Erzählstimme · <b>Kontinuität:</b> ${escapeHtml(audio.continuityStrategy)} · <b>Musik:</b> ${escapeHtml(audio.musicPolicy)}</p>`
+  const audio = record.audioDirection?.audioDirection || (direction?.audioDirectionEnabled ? direction.audioDirection : null);
+  if (!direction && !audio) return '';
+  return `<section class="video-guide"><h3>Regie über die ganze Iteration</h3>${direction
+    ? `<p><b>Kamera:</b> ${escapeHtml(direction.overallDirection?.cameraOverview)} · maximaler Zoom ${escapeHtml((direction.maxZoom ?? 0.08) * 100)}%</p>`
+    : '<p>Visuelle Video-Direction aus; der ursprüngliche Szenenprompt bleibt bestehen.</p>'}${audio
+    ? `<p><b>Audiokonzept (${record.audioDirection?.model || direction?.model || 'GPT'}):</b> ${escapeHtml(audio.overallConcept)}<br><b>Wiederkehrende Motive:</b> ${escapeHtml(audio.recurringMotifs.join(' · ') || 'keine')}<br><b>Stimme:</b> keine Dialoge oder Erzählstimme · <b>Kontinuität:</b> ${escapeHtml(audio.continuityStrategy)} · <b>Musik:</b> ${escapeHtml(audio.musicPolicy)}<br><a href="${escapeHtml(`${prefix}audio-direction.json`)}">Audio-Regieprotokoll</a></p>`
     : '<p>Audio-Regie aus; es wird kein Audioabschnitt an den Videoprompt angehängt.</p>'}</section>`;
 };
 const visualControls = (scene, fallback) => {
@@ -155,6 +157,7 @@ export function renderReport(record) {
       ${scene.crocodileAppearance ? `<p><b>Krokodil:</b> ${scene.crocodileAppearance.present ? `${escapeHtml(scene.crocodileAppearance.role)} · ${escapeHtml(scene.crocodileAppearance.placement)}` : 'Weggelassen; passt hier nicht als Metapher.'}</p>` : ''}
       ${details(`Unveränderter GPT-Bildprompt → ${record.imageModel || 'Bild-API'}`, scene.stillPrompt)}
       ${filmScene?.videoPrompt ? videoGuide(scene, filmScene, record, index) : ''}
+      ${record.audioDirection?.scenes?.[index] ? `<p><b>Audio-Regie:</b> ${escapeHtml(record.audioDirection.scenes[index].sceneAudio.intentionalSilence ? `Stille · ${record.audioDirection.scenes[index].sceneAudio.silenceReason}` : `${record.audioDirection.scenes[index].sceneAudio.ambientTexture} · ${record.audioDirection.scenes[index].sceneAudio.soundEvents.map((event) => `${event.startSeconds}–${event.endSeconds} s: ${event.description}`).join(' · ') || 'keine einzelnen Soundereignisse'}`)}</p>` : ''}
       ${videoDirectionGuide(record, index)}
       ${record.sceneTiming?.scenes?.[index] ? `<p><b>Dauerbegründung:</b> ${escapeHtml(record.sceneTiming.scenes[index].reason)}</p>` : ''}
       ${result ? details('Bild-API · Kosten, Seed, Prompt-Hash', result) : ''}</section>`;
@@ -219,6 +222,7 @@ export function renderRunReport(run, iterations) {
         ${result?.path ? photo(`${prefix}${result.path}`, 'API-generiertes Startbild') : '<p>Startbild noch nicht gespeichert.</p>'}
         ${record.videoResults?.[sceneIndex]?.path ? `<video controls preload="metadata" playsinline src="${escapeHtml(`${prefix}${record.videoResults[sceneIndex].path}`)}"></video><p>API-generiertes Video · angefordert ${escapeHtml(record.videoResults[sceneIndex].requestedDurationSeconds ?? filmScene?.durationSeconds)} s · MP4 ${Number(record.videoResults[sceneIndex].durationSeconds).toFixed(2)} s · ${escapeHtml(record.videoResults[sceneIndex].resolution)} · ${escapeHtml(record.videoResults[sceneIndex].model)} · Clip-Kosten ${money(record.videoResults[sceneIndex].cost)} · Renderzeit ${escapeHtml(record.videoResults[sceneIndex].renderSeconds)} s · Download ${escapeHtml(record.videoResults[sceneIndex].downloadSeconds)} s · Gesamt ${escapeHtml(record.videoResults[sceneIndex].totalSeconds)} s · ${audioSummary(record.videoResults[sceneIndex].audioStream)}</p>` : ''}
         ${filmScene?.videoPrompt ? videoGuide(scene, filmScene, record, sceneIndex, prefix) : ''}
+        ${record.audioDirection?.scenes?.[sceneIndex] ? `<p><b>Audio-Regie:</b> ${escapeHtml(record.audioDirection.scenes[sceneIndex].sceneAudio.intentionalSilence ? `Stille · ${record.audioDirection.scenes[sceneIndex].sceneAudio.silenceReason}` : `${record.audioDirection.scenes[sceneIndex].sceneAudio.ambientTexture} · ${record.audioDirection.scenes[sceneIndex].sceneAudio.soundEvents.map((event) => `${event.startSeconds}–${event.endSeconds} s: ${event.description}`).join(' · ') || 'keine einzelnen Soundereignisse'}`)}</p>` : ''}
         ${videoDirectionGuide(record, sceneIndex, prefix)}
         ${record.catalog?.find((item) => item.id === scene.guernicaId) ? photo(`${prefix}${record.catalog.find((item) => item.id === scene.guernicaId).path}`, 'Figurenreferenz für die Hauptfigur') : ''}
         ${details('Bildprompt', scene.stillPrompt || '')}</article>`;
@@ -235,7 +239,7 @@ export function renderRunReport(run, iterations) {
       ${record.titleCardFilm?.status === 'render_failed' ? `<p class="error">Titeltafel-Film fehlgeschlagen: ${escapeHtml(record.titleCardFilm.error)} · Szenenfilm bleibt verfügbar.</p>` : ''}
       ${displayFilm?.path ? `<h3>${record.titleCardFilm?.path ? 'Film mit Titeltafel' : 'Zusammengesetzter Film'}</h3><video controls preload="metadata" playsinline src="${escapeHtml(displayFilm.runPath || `${prefix}${displayFilm.path}`)}"></video><p>${escapeHtml(displayFilm.generatedVideos ?? displayFilm.scenes)} Videos · ${escapeHtml(displayFilm.scenes)} Szenen · MP4 ${Number(displayFilm.durationSeconds).toFixed(2)} s · angeforderte Szenensumme ${escapeHtml(displayFilm.requestedDurationSeconds ?? displayFilm.durationSeconds)} s${displayFilm.gaps?.length ? ` · Lücke: ${displayFilm.gaps.map((gap) => `Szene ${gap.sceneIndex}, ${gap.durationSeconds} s schwarz`).map(escapeHtml).join('; ')}` : ''} · ${escapeHtml(displayFilm.method)} · ${audioSummary(displayFilm.audioStream)}</p>` : ''}
       ${record.videoDirection ? `<p>Optionale Videoregie: ${escapeHtml(record.videoDirection.status)} · ${escapeHtml(record.videoDirection.model)} · kein Video-Provider aufgerufen.</p>` : ''}
-      ${videoIterationGuide(record)}
+      ${videoIterationGuide(record, prefix)}
       <p><b>Hauptfigur:</b> ${escapeHtml(record.plan?.protagonist?.name || 'Noch nicht festgelegt')} · ${escapeHtml(record.plan?.protagonist?.role || '')}</p>
       <p>${escapeHtml(record.plan?.protagonist?.visualIdentity || '')}</p>
       <p><a href="${prefix}index.html">Einzelbericht öffnen</a> · <a href="${prefix}record.json">Protokoll</a></p></header>
@@ -253,7 +257,7 @@ export function renderRunReport(run, iterations) {
   video{display:block;width:100%;max-width:100%;height:auto;margin:16px auto;border-radius:8px;background:#111}
   </style></head><body><main><h1>EU-RESKI · ${escapeHtml(run.profile || 'linearer Run')}</h1>
   <p>${escapeHtml(run.status)} · ${iterations.length} von ${escapeHtml(run.iterationLimit)} Iterationen · ${escapeHtml(run.startedAt)} · Titeltafeln ${run.generationSettings?.generateTitleCards === false ? 'AUS' : 'AN'}${run.generationSettings?.generateTitleCards === false ? '' : ' · Quelle record.json → article.title'}</p>
-  ${run.assembledFilm?.path ? `<section class="merged-films"><h2>Gesamtfilm · ${escapeHtml(run.assembledFilm.iterations)} Iterationen · ${escapeHtml(run.assembledFilm.durationSeconds)} s</h2><video controls preload="metadata" playsinline src="${escapeHtml(run.assembledFilm.path)}" aria-label="Gesamtfilm mit Titelkarten"></video><p>${escapeHtml(run.assembledFilm.method)}</p></section>` : run.assembledFilm?.status === 'render_failed' ? `<p class="error">Gesamtfilm-Montage fehlgeschlagen: ${escapeHtml(run.assembledFilm.error)} · Einzelne Iterationsfilme sind verfügbar.</p>` : ''}
+  ${run.assembledFilm?.path ? `<section class="merged-films"><h2>Gesamtfilm · ${escapeHtml(run.assembledFilm.iterations)} Iterationen${Number.isFinite(run.assembledFilm.durationSeconds) ? ` · ${escapeHtml(run.assembledFilm.durationSeconds)} s` : ''}</h2><video controls preload="metadata" playsinline src="${escapeHtml(run.assembledFilm.path)}" aria-label="Gesamtfilm mit First/Last-Frame-Glue"></video><p>${escapeHtml(run.assembledFilm.method)}${Number.isInteger(run.assembledFilm.transitionCount) ? ` · ${escapeHtml(run.assembledFilm.transitionCount)} Bridges` : ''}</p></section>` : run.assembledFilm?.status === 'render_failed' ? `<p class="error">Gesamtfilm-Montage fehlgeschlagen: ${escapeHtml(run.assembledFilm.error)} · Einzelne Iterationsfilme sind verfügbar.</p>` : ''}
   ${renderMergedFilms(iterations)}
   ${renderTimingSummary(iterations, true)}
   ${run.sceneCountSettings?.mode === 'taktmuster' ? '<p>Szenenzahl: ein fortlaufender Taktmuster-Schritt pro Iteration. Szenendauern werden unabhängig davon erzeugt.</p>' : ''}

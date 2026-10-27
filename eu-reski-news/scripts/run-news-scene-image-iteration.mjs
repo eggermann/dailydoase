@@ -15,6 +15,7 @@ import { createSceneCountStream, resolveSceneCountSettings } from '../news-scene
 import { loadTaktmuster } from '../news-scene/taktmuster.mjs';
 import { buildVideoVisionRequest, validateVideoVisionResponse, videoVisionPromptVersion } from '../news-scene/video-vision.mjs';
 import { buildGrokVideoPrompt, buildVideoDirectionRequest, validateVideoDirectionResponse, videoDirectionInputHash, videoDirectorPromptVersion } from '../news-scene/video-director.mjs';
+import { audioDirectionInputHash, audioDirectorPromptVersion, buildAudioDirectionRequest, buildAudioPrompt, validateAudioDirectionResponse } from '../news-scene/audio-director.mjs';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderTitleCard } from '../news-scene/title-card.mjs';
@@ -101,7 +102,6 @@ for (const flag of ['story-clou', 'video-direction', 'video-vision']) {
 if (!['auto', 'image_to_video', 'first_last_frame'].includes(options['video-mode'])) throw new Error('--video-mode must be auto, image_to_video or first_last_frame');
 if (options['video-vision'] === 'on' && options['video-direction'] !== 'on') throw new Error('--video-vision=on requires --video-direction=on');
 if (!['on', 'off'].includes(options['video-audio-direction'])) throw new Error('--video-audio-direction must be on or off');
-if (options['video-audio-direction'] === 'on' && options['video-direction'] !== 'on') throw new Error('--video-audio-direction=on requires --video-direction=on');
 const getMaxVideoZoom = () => Number(options['video-max-zoom']);
 if (!Number.isFinite(getMaxVideoZoom()) || getMaxVideoZoom() < 0 || getMaxVideoZoom() > 0.3) throw new Error('--video-max-zoom must be from 0 through 0.3 (fraction of frame)');
 const layering = Number(options.layering);
@@ -171,7 +171,7 @@ function buildFilmPlan(record, directory) {
       visualControlReason: scene.visualControlReason || null,
       videoMode, frameSource: videoMode === 'first_last_frame' ? 'firstAndRequiredLastFrame' : 'providedStartImage',
       startImagePath: record.results[index]?.path ? resolve(directory, record.results[index].path) : null, stillPrompt: scene.stillPrompt,
-      videoPrompt: preservePVideoStyle(record.videoDirection?.scenes?.[index]
+      videoPrompt: preservePVideoStyle(`${record.videoDirection?.scenes?.[index]
         ? (record.videoDirection.scenes[index].finalVideoPrompt || buildGrokVideoPrompt({
           visualPrompt: record.videoDirection.scenes[index].videoPrompt,
           cameraMotion: record.videoDirection.scenes[index].motionPlan.cameraMotion,
@@ -179,7 +179,8 @@ function buildFilmPlan(record, directory) {
           audioDirection: record.videoDirection.audioDirectionEnabled ? 'on' : 'off',
           maxZoom: record.videoDirection.maxZoom ?? 0.08,
         }))
-        : scene.videoPrompt),
+        : scene.videoPrompt}${record.audioDirection?.scenes?.[index]
+        ? `\n\n${buildAudioPrompt(record.audioDirection.scenes[index].sceneAudio, record.audioDirection.audioDirection)}` : ''}`),
       singleImagePrompt: scene.stillPrompt,
       ...(videoDirection ? { videoDirection } : {}),
     });
@@ -264,9 +265,6 @@ function restoreFeatureSettings(settings) {
   }
   if (options['video-vision'] === 'on' && options['video-direction'] !== 'on') {
     throw new Error('Saved settings are invalid: video vision requires video direction');
-  }
-  if (options['video-audio-direction'] === 'on' && options['video-direction'] !== 'on') {
-    throw new Error('Saved settings are invalid: audio direction requires video direction');
   }
 }
 
@@ -628,7 +626,7 @@ async function createVideoVision(record, directory, openAiKey, persist) {
 async function createVideoDirection(record, directory, openAiKey, persist, vision) {
   const model = process.env.NEWS_VIDEO_DIRECTOR_MODEL || record.storyModel;
   const mode = record.featureSettings?.videoMode || 'auto';
-  const audioDirection = record.featureSettings?.videoAudioDirection || 'off';
+  const audioDirection = 'off';
   const maxZoom = record.featureSettings?.videoMaxZoom ?? 0.08;
   const inputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, maxZoom });
   const outputPath = join(directory, 'video-direction.json');
@@ -674,6 +672,45 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   addUsage(record, 'videoDirectionUsage', raw.usage);
   await persist();
   return videoDirection;
+}
+
+async function createVideoAudioDirection(record, directory, openAiKey, persist) {
+  const model = process.env.NEWS_VIDEO_DIRECTOR_MODEL || record.storyModel;
+  const inputHash = audioDirectionInputHash({ record, model });
+  const outputPath = join(directory, 'audio-direction.json');
+  if (await exists(outputPath)) {
+    const saved = await json(outputPath);
+    if (saved.inputHash !== inputHash) throw new Error('Saved audio direction is stale; start a new iteration to re-plan changed inputs');
+    record.audioDirection = saved;
+    return saved;
+  }
+
+  const requestPath = join(directory, 'audio-direction-request.json');
+  const request = await exists(requestPath)
+    ? await json(requestPath)
+    : buildAudioDirectionRequest({ record, model });
+  if (!await exists(requestPath)) await save(requestPath, request);
+  const raw = await paidRequest(directory, 'audio-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
+  if (raw.error) throw new Error(`Audio direction GPT error: ${raw.error.message}`);
+  const direction = validateAudioDirectionResponse(raw, { record });
+  const audioDirection = {
+    version: 1,
+    promptVersion: audioDirectorPromptVersion,
+    status: 'planned',
+    model,
+    sourceVisualPlanHash: lockedVisualPlanHash(record),
+    inputHash,
+    requestPath: 'audio-direction-request.json',
+    responsePath: 'audio-direction-response.json',
+    usage: raw.usage || null,
+    createdAt: new Date().toISOString(),
+    ...direction,
+  };
+  await save(outputPath, audioDirection);
+  record.audioDirection = audioDirection;
+  addUsage(record, 'audioDirectionUsage', raw.usage);
+  await persist();
+  return audioDirection;
 }
 
 async function main() {
@@ -1225,6 +1262,9 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const beforeDirectionHash = hash(JSON.stringify(visualPlanSnapshot(record.plan)));
       await createVideoDirection(record, directory, openAiKey, persist, videoVision);
       if (hash(JSON.stringify(visualPlanSnapshot(record.plan))) !== beforeDirectionHash) throw new Error('Video direction changed the locked visual plan');
+    }
+    if (record.featureSettings?.videoAudioDirection === 'on') {
+      await createVideoAudioDirection(record, directory, openAiKey, persist);
     }
     record.status = options['prompt-only'] ? 'Prompts erstellt' : 'Abgeschlossen';
     record.filmPlan = buildFilmPlan(record, directory);
