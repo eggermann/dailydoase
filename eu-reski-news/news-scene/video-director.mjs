@@ -201,6 +201,7 @@ export function validateVideoDirectionResponse(response, { record, videoMode = '
       || !Array.isArray(scene.endState.completedActions) || !Array.isArray(scene.endState.unchangedElements)
       || typeof scene.endState.exactCompositionRequired !== 'boolean') throw new Error(`Incomplete motion/end-state plan for scene ${scene.sceneIndex}`);
     const camera = scene.motionPlan.cameraMotion;
+    if (camera.type === 'static' && camera.normalizedDisplacement === 0) camera.zoomAmount = 0;
     if (!['static', 'pan', 'tilt', 'push_in', 'pull_back', 'lateral', 'rotation'].includes(camera.type)
       || !camera.description?.trim() || !camera.startFraming?.trim() || !camera.endFraming?.trim() || !camera.continuityIntent?.trim()
       || !Number.isFinite(camera.zoomAmount) || camera.zoomAmount < 0 || camera.zoomAmount > maxZoom
