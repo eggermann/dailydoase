@@ -9,7 +9,7 @@ const object = (properties) => ({
   properties,
 });
 
-export const videoDirectorPromptVersion = 'eu-reski-video-director-v4';
+export const videoDirectorPromptVersion = 'eu-reski-video-director-v5';
 
 const nullablePoint = {
   anyOf: [
@@ -121,7 +121,7 @@ export function buildVideoDirectionRequest({ record, vision, model, videoMode = 
         ...(includeAudio ? [
           'Plan one experimental audio identity for the whole iteration in this same response. Use the story, ordered scenes, actual motion vectors and exact durations. The existing video model produces the sound; add no narration or spoken dialogue. Silence is allowed scene by scene.',
           'Give each scene concrete sound events only when supported by a visible planned movement. Use actual motion vector timing where available; invent no movement for sound. Every sound event must start before it ends and fit inside that exact scene duration. Include continuity to adjacent scenes without requiring music in every scene.',
-          'Return sceneAudio.spokenDialogue as false. If intentionalSilence is true, soundEvents must be empty and explain why. Audio is direction for the video model, not a separate audio-generation request.',
+          'Return sceneAudio.spokenDialogue as false. Keep intentionalSilence, silenceReason, ambientTexture, and soundEvents as independent cues; they may coexist or conflict. Do not reject or normalize such combinations. When silence and sound cues coexist, preserve both for the video model to interpret in context.',
         ] : []),
         videoMode === 'auto' ? 'Select either supported mode independently for each scene and explain each choice.' : `Use ${videoMode} for every scene; the requested mode is a planning constraint.`,
         'Do not alter the original legacyVideoPrompt. This new direction is separate metadata. Motion vector timing must fit the exact existing duration; do not plan or modify duration.',
@@ -241,7 +241,7 @@ export function validateVideoDirectionResponse(response, { record, videoMode = '
       if (!audio || audio.spokenDialogue !== false || typeof audio.intentionalSilence !== 'boolean'
         || !Array.isArray(audio.soundEvents) || !audio.ambientTexture?.trim()
         || !audio.continuityFromPrevious?.trim() || !audio.continuityToNext?.trim()
-        || (audio.intentionalSilence && (audio.soundEvents.length || !audio.silenceReason?.trim()))) {
+        || (audio.intentionalSilence && !audio.silenceReason?.trim())) {
         throw new Error(`Invalid audio direction for scene ${scene.sceneIndex}`);
       }
       for (const event of audio.soundEvents) {
@@ -285,11 +285,18 @@ export function buildGrokVideoPrompt({ visualPrompt, cameraMotion, sceneAudio, a
   const camera = cameraMotion.type === 'static'
     ? `CAMERA:\nLocked ${cameraMotion.startFraming} framing; no camera movement or zoom. Preserve the full composition.`
     : `CAMERA:\n${cameraMotion.description} Move ${cameraMotion.type} ${cameraMotion.direction}; framing shifts from ${cameraMotion.startFraming} to ${cameraMotion.endFraming}. Keep the move continuous and restrained. Zoom/crop change is limited to ${zoomPercent}% (configured maximum ${Math.round(maxZoom * 100)}%); preserve principal figures and the overall composition.`;
+  const silenceInstruction = sceneAudio?.intentionalSilence
+    ? `Intentional silence cue: ${sceneAudio.silenceReason}`
+    : '';
+  const soundInstruction = sceneAudio
+    ? `${sceneAudio.ambientTexture}${sceneAudio.soundEvents.length ? ` Sound events: ${sceneAudio.soundEvents.map((event) => `${event.startSeconds.toFixed(1)}–${event.endSeconds.toFixed(1)}s: ${event.description}`).join('; ')}.` : 'No discrete sound event.'} ${sceneAudio.continuityFromPrevious} ${sceneAudio.continuityToNext}`
+    : '';
+  const audioInstruction = [silenceInstruction, soundInstruction,
+    sceneAudio?.intentionalSilence && sceneAudio.soundEvents.length
+      ? 'Both silence and sound cues are intentional; preserve this tension and interpret it in context.'
+      : ''].filter(Boolean).join(' ');
   const audio = audioDirection === 'on'
-    ? `\n\nAUDIO:\nGenerate synchronized sound with this video. ${sceneAudio.intentionalSilence
-      ? `Use intentional silence. ${sceneAudio.silenceReason}`
-      : `${sceneAudio.ambientTexture}${sceneAudio.soundEvents.length ? ` Sound events: ${sceneAudio.soundEvents.map((event) => `${event.startSeconds.toFixed(1)}–${event.endSeconds.toFixed(1)}s: ${event.description}`).join('; ')}.` : 'No discrete sound event.'} ${sceneAudio.continuityFromPrevious} ${sceneAudio.continuityToNext}`}
-No narration or spoken dialogue.`
+    ? `\n\nAUDIO:\nGenerate synchronized sound with this video. ${audioInstruction}\nNo narration or spoken dialogue.`
     : '';
   return `VISUAL MOTION:\n${visualPrompt.trim()}\n\n${camera}${audio}`;
 }

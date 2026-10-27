@@ -8,7 +8,7 @@ const object = (properties) => ({
   properties,
 });
 
-export const audioDirectorPromptVersion = 'eu-reski-audio-director-v2';
+export const audioDirectorPromptVersion = 'eu-reski-audio-director-v3';
 
 export function audioDirectionInputHash({ record, model, noDialogueNarration = false }) {
   return createHash('sha256').update(JSON.stringify({
@@ -62,7 +62,7 @@ export function buildAudioDirectionRequest({ record, model, noDialogueNarration 
           ? 'No spoken dialogue, narration, or voices. Set spokenAudio=false, spokenKind=none, and spokenText empty in every scene.'
           : 'Spoken dialogue or narration is allowed when useful, but is not required in every scene. When used, write the exact short words to be spoken in spokenText; otherwise set spokenAudio=false, spokenKind=none, and spokenText empty.'} Music is optional and need not play in every scene.`,
         'For every sound event, use seconds relative to its scene. startSeconds must be before endSeconds, and both must fit the exact scene duration. Keep ambientTexture concise and concrete.',
-        'Intentional silence is allowed. When intentionalSilence is true, soundEvents must be empty and silenceReason must explain the choice.',
+        'Intentional silence is allowed. Keep intentionalSilence, silenceReason, ambientTexture, and soundEvents as independent cues. They may coexist or conflict; do not reject or normalize such combinations. When both silence and sound are described, preserve both so the video model can interpret them in context.',
         'Audio direction is a separate prompt for the video model. It must not alter the supplied visual prompt.',
       ].join('\n') },
       { role: 'user', content: JSON.stringify({
@@ -118,7 +118,7 @@ export function validateAudioDirectionResponse(response, { record, noDialogueNar
       || typeof sceneAudio.intentionalSilence !== 'boolean'
       || !Array.isArray(sceneAudio.soundEvents) || typeof sceneAudio.ambientTexture !== 'string'
       || !sceneAudio.continuityFromPrevious?.trim() || !sceneAudio.continuityToNext?.trim()
-      || (sceneAudio.intentionalSilence && (sceneAudio.soundEvents.length || sceneAudio.spokenAudio || !sceneAudio.silenceReason?.trim()))) {
+      || (sceneAudio.intentionalSilence && !sceneAudio.silenceReason?.trim())) {
       throw new Error(`Invalid audio direction for scene ${original.index}`);
     }
     for (const event of sceneAudio.soundEvents) {
@@ -133,11 +133,16 @@ export function validateAudioDirectionResponse(response, { record, noDialogueNar
 
 export function buildAudioPrompt(sceneAudio, audioDirection, noDialogueNarration = false) {
   if (!sceneAudio || !audioDirection) return '';
-  const instruction = sceneAudio.intentionalSilence
-    ? `Use intentional silence. ${sceneAudio.silenceReason}`
-    : `${sceneAudio.ambientTexture}${sceneAudio.soundEvents.length
-      ? ` Sound events: ${sceneAudio.soundEvents.map((event) => `${event.startSeconds.toFixed(1)}–${event.endSeconds.toFixed(1)}s: ${event.description}`).join('; ')}.`
-      : ' No discrete sound event.'} ${sceneAudio.continuityFromPrevious} ${sceneAudio.continuityToNext}`;
+  const silenceInstruction = sceneAudio.intentionalSilence
+    ? `Intentional silence cue: ${sceneAudio.silenceReason}`
+    : '';
+  const soundInstruction = `${sceneAudio.ambientTexture}${sceneAudio.soundEvents.length
+    ? ` Sound events: ${sceneAudio.soundEvents.map((event) => `${event.startSeconds.toFixed(1)}–${event.endSeconds.toFixed(1)}s: ${event.description}`).join('; ')}.`
+    : ' No discrete sound event.'} ${sceneAudio.continuityFromPrevious} ${sceneAudio.continuityToNext}`;
+  const instruction = [silenceInstruction, soundInstruction,
+    sceneAudio.intentionalSilence && sceneAudio.soundEvents.length
+      ? 'Both silence and sound cues are intentional; preserve this tension and interpret it in context.'
+      : ''].filter(Boolean).join(' ');
   const spokenInstruction = noDialogueNarration
     ? 'No spoken dialogue or narration.'
     : sceneAudio.spokenAudio
