@@ -178,6 +178,7 @@ function buildFilmPlan(record, directory) {
           cameraMotion: record.videoDirection.scenes[index].motionPlan.cameraMotion,
           sceneAudio: record.videoDirection.scenes[index].sceneAudio,
           audioDirection: record.videoDirection.audioDirectionEnabled ? 'on' : 'off',
+          noDialogueNarration: record.featureSettings?.noDialogueNarration === true,
           maxZoom: record.videoDirection.maxZoom ?? 0.08,
         }))
         : scene.videoPrompt}${record.audioDirection?.scenes?.[index]
@@ -631,7 +632,7 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   const mode = record.featureSettings?.videoMode || 'auto';
   const audioDirection = 'off';
   const maxZoom = record.featureSettings?.videoMaxZoom ?? 0.08;
-  const inputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, maxZoom });
+  const inputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
   const outputPath = join(directory, 'video-direction.json');
   if (await exists(outputPath)) {
     const saved = await json(outputPath);
@@ -645,11 +646,11 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   const requestPath = join(directory, 'video-direction-request.json');
   const request = await exists(requestPath)
     ? await json(requestPath)
-    : buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, maxZoom });
+    : buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'video-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Video direction GPT error: ${raw.error.message}`);
-  const direction = validateVideoDirectionResponse(raw, { record, videoMode: mode, audioDirection, maxZoom });
+  const direction = validateVideoDirectionResponse(raw, { record, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
   if (hash(JSON.stringify(visualPlanSnapshot(record.plan))) !== beforeHash) throw new Error('Video direction changed the locked visual plan');
   const videoDirection = {
     version: 3,

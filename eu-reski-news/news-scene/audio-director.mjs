@@ -8,7 +8,7 @@ const object = (properties) => ({
   properties,
 });
 
-export const audioDirectorPromptVersion = 'eu-reski-audio-director-v3';
+export const audioDirectorPromptVersion = 'eu-reski-audio-director-v4';
 
 export function audioDirectionInputHash({ record, model, noDialogueNarration = false }) {
   return createHash('sha256').update(JSON.stringify({
@@ -45,7 +45,6 @@ export function buildAudioDirectionRequest({ record, model, noDialogueNarration 
     continuityToNext: { type: 'string' },
     intentionalSilence: { type: 'boolean' },
     silenceReason: { type: 'string' },
-    spokenAudio: { type: 'boolean' },
     spokenKind: { type: 'string', enum: ['dialogue', 'narration', 'none'] },
     spokenText: { type: 'string' },
   });
@@ -59,8 +58,8 @@ export function buildAudioDirectionRequest({ record, model, noDialogueNarration 
         'You are an audio director. Plan sound only for the supplied locked scenes.',
         'Do not rewrite or add visual actions. Do not direct camera, image, or video motion. Sound events must be plausible consequences of the described action; invent no unsupported event.',
         `Create one coherent audio identity across the iteration, with recurring motifs only when useful. ${noDialogueNarration
-          ? 'No spoken dialogue, narration, or voices. Set spokenAudio=false, spokenKind=none, and spokenText empty in every scene.'
-          : 'Spoken dialogue or narration is allowed when useful, but is not required in every scene. When used, write the exact short words to be spoken in spokenText; otherwise set spokenAudio=false, spokenKind=none, and spokenText empty.'} Music is optional and need not play in every scene.`,
+          ? 'No spoken dialogue, narration, or voices. Set spokenKind=none and spokenText empty in every scene.'
+          : 'Spoken dialogue or narration is allowed when useful, but is not required in every scene. Use spokenKind and spokenText to describe it when present; otherwise use spokenKind=none and an empty spokenText.'} Music is optional and need not play in every scene.`,
         'For every sound event, use seconds relative to its scene. startSeconds must be before endSeconds, and both must fit the exact scene duration. Keep ambientTexture concise and concrete.',
         'Intentional silence is allowed. Keep intentionalSilence, silenceReason, ambientTexture, and soundEvents as independent cues. They may coexist or conflict; do not reject or normalize such combinations. When both silence and sound are described, preserve both so the video model can interpret them in context.',
         'Audio direction is a separate prompt for the video model. It must not alter the supplied visual prompt.',
@@ -98,11 +97,6 @@ export function validateAudioDirectionResponse(response, { record, noDialogueNar
   if (choice?.message?.refusal) throw new Error(`Audio direction refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return complete audio direction');
   const direction = JSON.parse(choice.message.content);
-  for (const { sceneAudio } of direction.scenes || []) {
-    if (sceneAudio?.spokenAudio === true && sceneAudio.spokenKind === 'none' && !sceneAudio.spokenText?.trim()) {
-      sceneAudio.spokenAudio = false;
-    }
-  }
   const expectedScenes = record.plan.scenes;
   const concept = direction.audioDirection;
   if (!concept?.overallConcept?.trim() || !Array.isArray(concept.recurringMotifs)
@@ -114,12 +108,9 @@ export function validateAudioDirectionResponse(response, { record, noDialogueNar
   for (const [index, { sceneAudio }] of direction.scenes.entries()) {
     const original = expectedScenes[index];
     if (direction.scenes[index].sceneIndex !== original.index || !sceneAudio
-      || typeof sceneAudio.spokenAudio !== 'boolean'
       || !['dialogue', 'narration', 'none'].includes(sceneAudio.spokenKind)
       || typeof sceneAudio.spokenText !== 'string'
-      || (noDialogueNarration && (sceneAudio.spokenAudio || sceneAudio.spokenKind !== 'none' || sceneAudio.spokenText.trim()))
-      || (sceneAudio.spokenAudio && (sceneAudio.spokenKind === 'none' || !sceneAudio.spokenText.trim()))
-      || (!sceneAudio.spokenAudio && (sceneAudio.spokenKind !== 'none' || sceneAudio.spokenText.trim()))
+      || (noDialogueNarration && (sceneAudio.spokenKind !== 'none' || sceneAudio.spokenText.trim()))
       || typeof sceneAudio.intentionalSilence !== 'boolean'
       || !Array.isArray(sceneAudio.soundEvents) || typeof sceneAudio.ambientTexture !== 'string'
       || !sceneAudio.continuityFromPrevious?.trim() || !sceneAudio.continuityToNext?.trim()
@@ -150,7 +141,7 @@ export function buildAudioPrompt(sceneAudio, audioDirection, noDialogueNarration
       : ''].filter(Boolean).join(' ');
   const spokenInstruction = noDialogueNarration
     ? 'No spoken dialogue or narration.'
-    : sceneAudio.spokenAudio
+    : sceneAudio.spokenKind !== 'none' || sceneAudio.spokenText.trim()
       ? `Include ${sceneAudio.spokenKind} and speak exactly: "${sceneAudio.spokenText}".`
       : 'No spoken dialogue or narration in this scene.';
   return `AUDIO: Generate synchronized sound with this video. ${instruction} Overall sound identity: ${audioDirection.overallConcept}. Music policy: ${audioDirection.musicPolicy}. ${spokenInstruction}`;

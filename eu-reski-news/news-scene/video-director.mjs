@@ -9,7 +9,7 @@ const object = (properties) => ({
   properties,
 });
 
-export const videoDirectorPromptVersion = 'eu-reski-video-director-v5';
+export const videoDirectorPromptVersion = 'eu-reski-video-director-v6';
 
 const nullablePoint = {
   anyOf: [
@@ -43,7 +43,7 @@ const transition = object({
   cameraReason: { type: 'string' },
 });
 
-export function videoDirectionInputHash({ record, vision, model, videoMode, audioDirection = 'off', maxZoom = 0.08 }) {
+export function videoDirectionInputHash({ record, vision, model, videoMode, audioDirection = 'off', noDialogueNarration = false, maxZoom = 0.08 }) {
   return hash(JSON.stringify({
     promptVersion: videoDirectorPromptVersion,
     visualPlanHash: record.visualPlanHash || hash(JSON.stringify(visualPlanSnapshot(record.plan))),
@@ -54,11 +54,12 @@ export function videoDirectionInputHash({ record, vision, model, videoMode, audi
     model,
     videoMode,
     audioDirection,
+    noDialogueNarration,
     maxZoom,
   }));
 }
 
-export function buildVideoDirectionRequest({ record, vision, model, videoMode = 'auto', audioDirection = 'off', maxZoom = 0.08 }) {
+export function buildVideoDirectionRequest({ record, vision, model, videoMode = 'auto', audioDirection = 'off', noDialogueNarration = false, maxZoom = 0.08 }) {
   if (!['on', 'off'].includes(audioDirection)) throw new Error('audioDirection must be on or off');
   if (!Number.isFinite(maxZoom) || maxZoom < 0 || maxZoom > 0.3) throw new Error('maxZoom must be from 0 through 0.3');
   const includeAudio = audioDirection === 'on';
@@ -80,7 +81,7 @@ export function buildVideoDirectionRequest({ record, vision, model, videoMode = 
     audioDirection: object({
       overallConcept: { type: 'string', minLength: 1 },
       recurringMotifs: stringList,
-      voicePolicy: { type: 'string', enum: ['no_spoken_dialogue'] },
+      voicePolicy: { type: 'string', enum: [noDialogueNarration ? 'no_spoken_audio' : 'spoken_audio_allowed'] },
       musicPolicy: { type: 'string' },
       continuityStrategy: { type: 'string' },
     }),
@@ -97,7 +98,8 @@ export function buildVideoDirectionRequest({ record, vision, model, videoMode = 
       continuityToNext: { type: 'string' },
       intentionalSilence: { type: 'boolean' },
       silenceReason: { type: 'string' },
-      spokenDialogue: { type: 'boolean', enum: [false] },
+      spokenKind: { type: 'string', enum: noDialogueNarration ? ['none'] : ['dialogue', 'narration', 'none'] },
+      spokenText: { type: 'string' },
     }),
   } : {};
   const request = {
@@ -119,9 +121,11 @@ export function buildVideoDirectionRequest({ record, vision, model, videoMode = 
         'Return one sceneTransitions entry for each adjacent pair. Describe whether movement continues or changes, recurring visible elements, direction across the cut, intended transition and potential discontinuities. A deliberate cut is valid; never require artificial continuity.',
         'For each scene transition, explicitly compare previous and next camera motions and state whether the camera continues, contrasts, resets or is independent. Do not force a camera sequence.',
         ...(includeAudio ? [
-          'Plan one experimental audio identity for the whole iteration in this same response. Use the story, ordered scenes, actual motion vectors and exact durations. The existing video model produces the sound; add no narration or spoken dialogue. Silence is allowed scene by scene.',
+          `Plan one experimental audio identity for the whole iteration in this same response. Use the story, ordered scenes, actual motion vectors and exact durations. The existing video model produces the sound. ${noDialogueNarration
+            ? 'Add no narration or spoken dialogue; use spokenKind=none and empty spokenText in every scene.'
+            : 'Spoken dialogue or narration is allowed when useful; use spokenKind and spokenText when present, otherwise use spokenKind=none and empty spokenText.'} Silence is allowed scene by scene.`,
           'Give each scene concrete sound events only when supported by a visible planned movement. Use actual motion vector timing where available; invent no movement for sound. Every sound event must start before it ends and fit inside that exact scene duration. Include continuity to adjacent scenes without requiring music in every scene.',
-          'Return sceneAudio.spokenDialogue as false. Keep intentionalSilence, silenceReason, ambientTexture, and soundEvents as independent cues; they may coexist or conflict. Do not reject or normalize such combinations. When silence and sound cues coexist, preserve both for the video model to interpret in context.',
+          'Keep intentionalSilence, silenceReason, ambientTexture, and soundEvents as independent cues; they may coexist or conflict. Do not reject or normalize such combinations. When silence and sound cues coexist, preserve both for the video model to interpret in context.',
         ] : []),
         videoMode === 'auto' ? 'Select either supported mode independently for each scene and explain each choice.' : `Use ${videoMode} for every scene; the requested mode is a planning constraint.`,
         'Do not alter the original legacyVideoPrompt. This new direction is separate metadata. Motion vector timing must fit the exact existing duration; do not plan or modify duration.',
@@ -176,7 +180,7 @@ export function buildVideoDirectionRequest({ record, vision, model, videoMode = 
   return request;
 }
 
-export function validateVideoDirectionResponse(response, { record, videoMode = 'auto', audioDirection = 'off', maxZoom = 0.08 }) {
+export function validateVideoDirectionResponse(response, { record, videoMode = 'auto', audioDirection = 'off', noDialogueNarration = false, maxZoom = 0.08 }) {
   const choice = response.choices?.[0];
   if (choice?.message?.refusal) throw new Error(`Video direction refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return complete video direction');
@@ -238,7 +242,10 @@ export function validateVideoDirectionResponse(response, { record, videoMode = '
     scene.legacyVideoPrompt = original.videoPrompt;
     if (audioDirection === 'on') {
       const audio = scene.sceneAudio;
-      if (!audio || audio.spokenDialogue !== false || typeof audio.intentionalSilence !== 'boolean'
+      if (!audio || !['dialogue', 'narration', 'none'].includes(audio.spokenKind)
+        || typeof audio.spokenText !== 'string'
+        || (noDialogueNarration && (audio.spokenKind !== 'none' || audio.spokenText.trim()))
+        || typeof audio.intentionalSilence !== 'boolean'
         || !Array.isArray(audio.soundEvents) || !audio.ambientTexture?.trim()
         || !audio.continuityFromPrevious?.trim() || !audio.continuityToNext?.trim()
         || (audio.intentionalSilence && !audio.silenceReason?.trim())) {
@@ -258,12 +265,13 @@ export function validateVideoDirectionResponse(response, { record, videoMode = '
       cameraMotion: camera,
       sceneAudio: scene.sceneAudio,
       audioDirection,
+      noDialogueNarration,
       maxZoom,
     });
   }
   if (audioDirection === 'on' && (!direction.audioDirection?.overallConcept?.trim()
     || !Array.isArray(direction.audioDirection.recurringMotifs)
-    || direction.audioDirection.voicePolicy !== 'no_spoken_dialogue'
+    || direction.audioDirection.voicePolicy !== (noDialogueNarration ? 'no_spoken_audio' : 'spoken_audio_allowed')
     || !direction.audioDirection.musicPolicy?.trim() || !direction.audioDirection.continuityStrategy?.trim())) {
     throw new Error('Invalid iteration audio direction');
   }
@@ -279,7 +287,7 @@ export function validateVideoDirectionResponse(response, { record, videoMode = '
   return direction;
 }
 
-export function buildGrokVideoPrompt({ visualPrompt, cameraMotion, sceneAudio, audioDirection = 'off', maxZoom = 0.08 }) {
+export function buildGrokVideoPrompt({ visualPrompt, cameraMotion, sceneAudio, audioDirection = 'off', noDialogueNarration = false, maxZoom = 0.08 }) {
   if (!visualPrompt?.trim() || !cameraMotion) throw new Error('A visual prompt and camera plan are required');
   const zoomPercent = Math.round(cameraMotion.zoomAmount * 100);
   const camera = cameraMotion.type === 'static'
@@ -295,8 +303,13 @@ export function buildGrokVideoPrompt({ visualPrompt, cameraMotion, sceneAudio, a
     sceneAudio?.intentionalSilence && sceneAudio.soundEvents.length
       ? 'Both silence and sound cues are intentional; preserve this tension and interpret it in context.'
       : ''].filter(Boolean).join(' ');
+  const spokenInstruction = noDialogueNarration
+    ? 'No narration or spoken dialogue.'
+    : sceneAudio?.spokenKind && (sceneAudio.spokenKind !== 'none' || sceneAudio.spokenText?.trim())
+      ? `Spoken audio cue: ${sceneAudio.spokenKind}; exact words: "${sceneAudio.spokenText}".`
+      : 'No spoken audio is planned for this scene.';
   const audio = audioDirection === 'on'
-    ? `\n\nAUDIO:\nGenerate synchronized sound with this video. ${audioInstruction}\nNo narration or spoken dialogue.`
+    ? `\n\nAUDIO:\nGenerate synchronized sound with this video. ${audioInstruction} ${spokenInstruction}`
     : '';
   return `VISUAL MOTION:\n${visualPrompt.trim()}\n\n${camera}${audio}`;
 }
