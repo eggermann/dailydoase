@@ -223,6 +223,9 @@ export function validateVideoDirectionResponse(response, { record, videoMode = '
         || !['hold', 'constant', 'ease_in', 'ease_out', 'ease_in_out', 'irregular'].includes(vector.speedProfile)) throw new Error(`Invalid motion vector for scene ${scene.sceneIndex}`);
     }
     if (scene.videoMode === 'image_to_video') {
+      scene.lastFrame.required = false;
+      scene.lastFrame.imagePath = null;
+      scene.executionStatus = 'planned_single_image';
       if (scene.lastFrame.required || scene.lastFrame.imagePath !== null || scene.executionStatus !== 'planned_single_image') throw new Error('Image-to-video direction must not require a last-frame asset');
     } else if (scene.videoMode === 'first_last_frame') {
       if (!scene.lastFrame.required || scene.lastFrame.imagePath !== null || !scene.lastFrame.description?.trim()
