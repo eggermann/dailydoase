@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 6,
   "paths": {
     "newsDirectory": "eu-reski-news/news/A",
     "outputDirectory": "eu-reski-news/GENERATIONS/news/exhibition"
@@ -23,7 +23,7 @@
     "pauseMs": 0,
     "articleOrder": "linear",
     "articleImageReference": true,
-    "guernicaLocationReference": true,
+    "guernicaLocationReference": false,
     "landscapePrompt": false,
     "preserveCubistVideoStyle": true,
     "videosAfterEachIteration": true,
@@ -40,8 +40,8 @@
       "maximum": 12
     },
     "sceneLength": {
-      "takt": 4,
-      "type": "balanced",
+      "takt": -1,
+      "type": "dramatic-arc",
       "multiplier": 1.15,
       "bias": 4.2,
       "minimum": 5,
