@@ -26,7 +26,7 @@
     "articleImageReference": true,
     "guernicaLocationReference": false,
     "landscapePrompt": false,
-    "preserveCubistVideoStyle": false,
+    "preserveCubistVideoStyle": true,
     "videosAfterEachIteration": true,
     "generate-title-cards": true,
     "sceneCount": {
