@@ -391,6 +391,7 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
 
   const state = await readState();
   state.runDirectory = runDirectory;
+  state.gluedThroughRunDirectory = runDirectory;
   state.gluedThroughIteration = iterationCount;
   state.lastFilmBuildAt = new Date().toISOString();
   await saveJson(statePath, state);
@@ -406,7 +407,10 @@ async function runMergeLoop(runDirectory, videoSettings, generateTitleCards) {
     try {
       const ready = await getReadyIterations(runDirectory);
       const state = await readState();
-      if (ready.length > Number(state.gluedThroughIteration || 0)) await updateFilms(runDirectory, ready, videoSettings, generateTitleCards);
+      const gluedThroughIteration = state.gluedThroughRunDirectory === runDirectory
+        ? Number(state.gluedThroughIteration || 0)
+        : 0;
+      if (ready.length > gluedThroughIteration) await updateFilms(runDirectory, ready, videoSettings, generateTitleCards);
       await delayOrStop(mergeCheckMs);
     } catch (error) {
       console.error(`[exhibition] Film merge failed: ${error.message}`);
