@@ -401,9 +401,10 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
       let previousBridgeIndex = -1;
       const iterationWaitPattern = bridgeIndexes.length
         ? bridgeIndexes.map((bridgeIndex) => {
-          const distance = bridgeIndex - previousBridgeIndex;
+          const isFirstBridge = previousBridgeIndex < 0;
+          const distance = isFirstBridge ? bridgeIndex + 1 : bridgeIndex - previousBridgeIndex;
           previousBridgeIndex = bridgeIndex;
-          return distance === 1 ? 1 : distance - 1;
+          return isFirstBridge || distance === 1 ? distance : distance - 1;
         }).join(',')
         : String(scenes.length + 1);
       const variantDirectory = join(normalizedIterationDirectory, variant.name);
