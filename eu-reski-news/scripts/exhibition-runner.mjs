@@ -210,7 +210,7 @@ function defaultsFromExhibitionSettings() {
   if (defaultGeneration.styleReference === false) defaults.push('--no-style-reference');
   defaults.push(defaultGeneration.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
   defaults.push(defaultGeneration.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
-  defaults.push(defaultGeneration.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
+  if (defaultGeneration.preserveCubistVideoStyle) defaults.push('--preserve-cubist-video-style');
   if (defaultGeneration.videosAfterEachIteration) defaults.push('--videos-after-each-iteration');
   if (defaultGeneration['generate-title-cards']) defaults.push('--generate-title-cards');
 
@@ -232,7 +232,6 @@ function mergeRunnerArguments(defaults, userArguments) {
     ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
     ['--article-image-reference', '--no-article-image-reference'], ['--no-article-image-reference', '--article-image-reference'],
     ['--landscape-prompt', '--no-landscape-prompt'], ['--no-landscape-prompt', '--landscape-prompt'],
-    ['--preserve-cubist-video-style', '--no-preserve-cubist-video-style'], ['--no-preserve-cubist-video-style', '--preserve-cubist-video-style'],
   ]);
   const suppliedFlags = new Set(userArguments.map(flagName));
   for (let index = 0; index < defaults.length; index += 1) {

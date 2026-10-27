@@ -49,7 +49,7 @@ const { values: options } = parseArgs({ options: {
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
   'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'no-article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
-  'preserve-cubist-video-style': { type: 'boolean', default: false }, 'no-preserve-cubist-video-style': { type: 'boolean', default: false },
+  'preserve-cubist-video-style': { type: 'boolean', default: false },
   'landscape-prompt': { type: 'boolean', default: false }, 'no-landscape-prompt': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
@@ -79,10 +79,6 @@ if (options['article-image-reference'] && options['no-article-image-reference'])
   throw new Error('Choose only one: --article-image-reference or --no-article-image-reference');
 }
 if (options['no-article-image-reference']) options['article-image-reference'] = false;
-if (options['preserve-cubist-video-style'] && options['no-preserve-cubist-video-style']) {
-  throw new Error('Choose only one: --preserve-cubist-video-style or --no-preserve-cubist-video-style');
-}
-if (options['no-preserve-cubist-video-style']) options['preserve-cubist-video-style'] = false;
 if (options['landscape-prompt'] && options['no-landscape-prompt']) {
   throw new Error('Choose only one: --landscape-prompt or --no-landscape-prompt');
 }
