@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "paths": {
     "newsDirectory": "eu-reski-news/news/A",
     "outputDirectory": "eu-reski-news/GENERATIONS/news/exhibition"
@@ -35,7 +35,7 @@
       "numerator": 3,
       "denominator": 4,
       "type": "balanced",
-      "bias": 3,
+      "bias": 1,
       "minimum": 1,
       "maximum": 12
     },
