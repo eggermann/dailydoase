@@ -55,6 +55,7 @@ const { values: options } = parseArgs({ options: {
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
   'video-audio-direction': { type: 'string', default: process.env.NEWS_VIDEO_AUDIO_DIRECTION || 'off' }, 'video-max-zoom': { type: 'string', default: process.env.NEWS_VIDEO_MAX_ZOOM || '0.08' },
+  'no-dialogue-narration': { type: 'boolean', default: false }, 'allow-dialogue-narration': { type: 'boolean', default: false },
   'videos-after-each-iteration': { type: 'boolean', default: false },
   'generate-title-cards': { type: 'boolean', default: false },
   'no-generate-title-cards': { type: 'boolean', default: false },
@@ -79,6 +80,10 @@ if (options['article-image-reference'] && options['no-article-image-reference'])
   throw new Error('Choose only one: --article-image-reference or --no-article-image-reference');
 }
 if (options['no-article-image-reference']) options['article-image-reference'] = false;
+if (options['no-dialogue-narration'] && options['allow-dialogue-narration']) {
+  throw new Error('Choose only one: --no-dialogue-narration or --allow-dialogue-narration');
+}
+if (options['allow-dialogue-narration']) options['no-dialogue-narration'] = false;
 if (options['landscape-prompt'] && options['no-landscape-prompt']) {
   throw new Error('Choose only one: --landscape-prompt or --no-landscape-prompt');
 }
@@ -176,7 +181,7 @@ function buildFilmPlan(record, directory) {
           maxZoom: record.videoDirection.maxZoom ?? 0.08,
         }))
         : scene.videoPrompt}${record.audioDirection?.scenes?.[index]
-        ? `\n\n${buildAudioPrompt(record.audioDirection.scenes[index].sceneAudio, record.audioDirection.audioDirection)}` : ''}`),
+        ? `\n\n${buildAudioPrompt(record.audioDirection.scenes[index].sceneAudio, record.audioDirection.audioDirection, record.featureSettings?.noDialogueNarration === true)}` : ''}`),
       singleImagePrompt: scene.stillPrompt,
       ...(videoDirection ? { videoDirection } : {}),
     });
@@ -207,6 +212,7 @@ function currentFeatureSettings() {
     videoMode: options['video-mode'],
     videoVision: options['video-vision'],
     videoAudioDirection: options['video-audio-direction'],
+    noDialogueNarration: options['no-dialogue-narration'],
     videoMaxZoom: getMaxVideoZoom(),
     preserveCubistVideoStyle: options['preserve-cubist-video-style'],
     landscapePrompt: options['landscape-prompt'],
@@ -250,6 +256,7 @@ function restoreFeatureSettings(settings) {
   options['video-mode'] = settings.videoMode || 'auto';
   options['video-vision'] = settings.videoVision || 'off';
   options['video-audio-direction'] = settings.videoAudioDirection || 'off';
+  options['no-dialogue-narration'] = settings.noDialogueNarration === true;
   options['video-max-zoom'] = String(settings.videoMaxZoom ?? 0.08);
   options['preserve-cubist-video-style'] = settings.preserveCubistVideoStyle === true;
   options['landscape-prompt'] = settings.landscapePrompt === true;
@@ -672,7 +679,8 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
 
 async function createVideoAudioDirection(record, directory, openAiKey, persist) {
   const model = process.env.NEWS_VIDEO_DIRECTOR_MODEL || record.storyModel;
-  const inputHash = audioDirectionInputHash({ record, model });
+  const noDialogueNarration = record.featureSettings?.noDialogueNarration === true;
+  const inputHash = audioDirectionInputHash({ record, model, noDialogueNarration });
   const outputPath = join(directory, 'audio-direction.json');
   if (await exists(outputPath)) {
     const saved = await json(outputPath);
@@ -684,11 +692,11 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
   const requestPath = join(directory, 'audio-direction-request.json');
   const request = await exists(requestPath)
     ? await json(requestPath)
-    : buildAudioDirectionRequest({ record, model });
+    : buildAudioDirectionRequest({ record, model, noDialogueNarration });
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'audio-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Audio direction GPT error: ${raw.error.message}`);
-  const direction = validateAudioDirectionResponse(raw, { record });
+  const direction = validateAudioDirectionResponse(raw, { record, noDialogueNarration });
   const audioDirection = {
     version: 1,
     promptVersion: audioDirectorPromptVersion,

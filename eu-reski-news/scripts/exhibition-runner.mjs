@@ -197,6 +197,7 @@ function defaultsFromExhibitionSettings() {
     `--story-clou=${defaultGeneration.storyClou}`,
     `--video-vision=${defaultGeneration.videoVision}`,
     `--video-audio-direction=${defaultGeneration.videoAudioDirection}`,
+    defaultGeneration.noDialogueNarration ? '--no-dialogue-narration' : '--allow-dialogue-narration',
     `--video-max-zoom=${defaultGeneration.videoMaxZoom}`,
     `--layering=${visualControls.layering}`,
     `--iterations=${defaultGeneration.iterations}`,
@@ -232,6 +233,7 @@ function mergeRunnerArguments(defaults, userArguments) {
     ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
     ['--article-image-reference', '--no-article-image-reference'], ['--no-article-image-reference', '--article-image-reference'],
     ['--landscape-prompt', '--no-landscape-prompt'], ['--no-landscape-prompt', '--landscape-prompt'],
+    ['--no-dialogue-narration', '--allow-dialogue-narration'], ['--allow-dialogue-narration', '--no-dialogue-narration'],
   ]);
   const suppliedFlags = new Set(userArguments.map(flagName));
   for (let index = 0; index < defaults.length; index += 1) {

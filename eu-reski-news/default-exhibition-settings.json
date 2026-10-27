@@ -57,6 +57,7 @@
     "storyClou": "off",
     "videoVision": "off",
     "videoAudioDirection": "on",
+    "noDialogueNarration": false,
     "videoMaxZoom": 0.08,
     "visualControls": {
       "mode": "scene-specific",
