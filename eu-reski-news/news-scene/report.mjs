@@ -169,6 +169,8 @@ export function renderReport(record) {
   video{display:block;width:100%;max-width:100%;height:auto;margin:16px auto;border-radius:8px;background:#111}
   </style></head><body><main><h1>Artikel + Semantic Stream → Szenenbild und Filmplan</h1>
   <p>${escapeHtml(record.status)} · ${escapeHtml(record.createdAt)} · ${escapeHtml(record.imageModel)}</p>
+  ${record.generationSettings?.legacyGuernicaStyleReferencePrompt ? '<p><b>Regieprompt:</b> archivierter Guernica-Stilreferenz-Prompt vom 23.10.2026 · feste visuelle Steuerungen · P-Video-Stil-Lock aus</p>' : ''}
+  ${record.generationSettings?.legacyGuernicaStyleReferencePromptRequested && !record.generationSettings?.legacyGuernicaStyleReferencePrompt ? '<p><b>Regieprompt:</b> angefordert, aber inaktiv · Guernica wurde nicht als Stilreferenz gesendet</p>' : ''}
   ${renderTimingSummary([{ record }])}
   ${record.titleCard?.imagePath ? photo(record.titleCard.imagePath, 'Generierte Titeltafel aus record.json → article.title') : ''}
   ${record.titleCardFilm?.status === 'render_failed' ? `<p class="error">Titeltafel-Film fehlgeschlagen: ${escapeHtml(record.titleCardFilm.error)} · Szenenfilm bleibt verfügbar.</p>` : ''}

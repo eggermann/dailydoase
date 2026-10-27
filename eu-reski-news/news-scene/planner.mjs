@@ -32,7 +32,7 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, storyClou = false, images, model, styleReferenceProvided = true, locationReferenceProvided = false, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, legacyGuernicaStyleReferencePrompt = false, storyClou = false, images, model, styleReferenceProvided = true, locationReferenceProvided = false, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
   const referenceInstructions = figureReferenceProvided
     ? [
       'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
@@ -52,7 +52,9 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
     : figureReferenceProvided
       ? 'The article photo is for GPT visual analysis only and is never sent to the image API.'
       : 'The article photo is the only image reference sent to the image API.';
-  const directorFile = sceneVisualControls ? './director.md' : './director-fixed-controls.md';
+  const directorFile = legacyGuernicaStyleReferencePrompt
+    ? './director-legacy-guernica-style-reference-prompt.md'
+    : sceneVisualControls ? './director.md' : './director-fixed-controls.md';
   let baseDirector = (await readFile(new URL(directorFile, import.meta.url), 'utf8'))
     .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
     .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)

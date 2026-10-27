@@ -48,7 +48,7 @@ const { values: options } = parseArgs({ options: {
   'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
-  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'no-article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
+  'prompt-only': { type: 'boolean', default: false }, 'legacy-guernica-style-reference-prompt': { type: 'boolean', default: false }, 'no-legacy-guernica-style-reference-prompt': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'no-article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
   'preserve-cubist-video-style': { type: 'boolean', default: false },
   'landscape-prompt': { type: 'boolean', default: false }, 'no-landscape-prompt': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
@@ -70,6 +70,10 @@ if (options['generate-title-cards'] && options['no-generate-title-cards']) {
   throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
 }
 if (options['no-generate-title-cards']) options['generate-title-cards'] = false;
+if (options['legacy-guernica-style-reference-prompt'] && options['no-legacy-guernica-style-reference-prompt']) {
+  throw new Error('Choose only one: --legacy-guernica-style-reference-prompt or --no-legacy-guernica-style-reference-prompt');
+}
+if (options['no-legacy-guernica-style-reference-prompt']) options['legacy-guernica-style-reference-prompt'] = false;
 if (options['guernica-location-reference'] && options['no-guernica-location-reference']) {
   throw new Error('Choose only one: --guernica-location-reference or --no-guernica-location-reference');
 }
@@ -91,6 +95,13 @@ if (options['no-landscape-prompt']) options['landscape-prompt'] = false;
 if (options['article-image-only-reference']) {
   options['article-image-reference'] = true;
   options['no-style-reference'] = true;
+}
+const legacyGuernicaStyleReferencePromptEnabled = options['legacy-guernica-style-reference-prompt']
+  && !options['no-style-reference']
+  && !options['guernica-location-reference'];
+if (legacyGuernicaStyleReferencePromptEnabled) {
+  options['scene-visual-controls'] = false;
+  options['fixed-visual-controls'] = true;
 }
 const storyModel = options['story-model'].trim();
 if (!storyModel) throw new Error('--story-model must not be empty');
@@ -149,7 +160,7 @@ const redact = (message) => [process.env.OPENAI_API_KEY, process.env.RUNWARE_API
 const cubistVideoStyleLock = 'P-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.';
 
 function preservePVideoStyle(prompt) {
-  if (!options['preserve-cubist-video-style'] || !prompt || prompt.includes('P-VIDEO STYLE LOCK:')) return prompt;
+  if (legacyGuernicaStyleReferencePromptEnabled || !options['preserve-cubist-video-style'] || !prompt || prompt.includes('P-VIDEO STYLE LOCK:')) return prompt;
   return `${prompt}\n\n${cubistVideoStyleLock}`;
 }
 
@@ -215,7 +226,7 @@ function currentFeatureSettings() {
     videoAudioDirection: options['video-audio-direction'],
     noDialogueNarration: options['no-dialogue-narration'],
     videoMaxZoom: getMaxVideoZoom(),
-    preserveCubistVideoStyle: options['preserve-cubist-video-style'],
+    preserveCubistVideoStyle: !legacyGuernicaStyleReferencePromptEnabled && options['preserve-cubist-video-style'],
     landscapePrompt: options['landscape-prompt'],
   };
 }
@@ -237,6 +248,8 @@ function currentGenerationSettings() {
     articleImageReference: options['article-image-reference'],
     guernicaLocationReference: options['guernica-location-reference'],
     landscapePrompt: options['landscape-prompt'],
+    legacyGuernicaStyleReferencePromptRequested: options['legacy-guernica-style-reference-prompt'],
+    legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled,
     guernicaFigureReference: !options['article-image-only-reference'],
     styleReferencePath: options['no-style-reference'] ? null : options['style-reference'],
     guernicaDirectory: options['article-image-only-reference'] ? null : resolve(options['guernica-dir']),
@@ -728,7 +741,7 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
 
 async function main() {
   if (options.help) {
-    console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --videos-after-each-iteration --generate-title-cards --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost');
+    console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --legacy-guernica-style-reference-prompt --videos-after-each-iteration --generate-title-cards --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost');
     return;
   }
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
@@ -1067,7 +1080,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (!options['article-image-only-reference']) {
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
       }
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: !options['article-image-only-reference'], continuationPlan: record.continuationPlan || null });
+      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: !options['article-image-only-reference'], continuationPlan: record.continuationPlan || null });
       if (options['landscape-prompt']) {
         const landscapeInstruction = 'LANDSCAPE PROMPT: Use the wide frame deliberately; let each scene’s focal action and spatial relationships use the frame width naturally. Do not force a horizontal frieze, central cluster or repeated layout.';
         built.director += `\n\n${landscapeInstruction}`;

@@ -203,6 +203,7 @@ function defaultsFromExhibitionSettings() {
     `--iterations=${defaultGeneration.iterations}`,
     `--pause-ms=${defaultGeneration.pauseMs}`,
     `--article-order=${defaultGeneration.articleOrder}`,
+    defaultGeneration.legacyGuernicaStyleReferencePrompt ? '--legacy-guernica-style-reference-prompt' : '--no-legacy-guernica-style-reference-prompt',
   ];
   defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
   defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
@@ -233,6 +234,7 @@ function mergeRunnerArguments(defaults, userArguments) {
     ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
     ['--article-image-reference', '--no-article-image-reference'], ['--no-article-image-reference', '--article-image-reference'],
     ['--landscape-prompt', '--no-landscape-prompt'], ['--no-landscape-prompt', '--landscape-prompt'],
+    ['--legacy-guernica-style-reference-prompt', '--no-legacy-guernica-style-reference-prompt'], ['--no-legacy-guernica-style-reference-prompt', '--legacy-guernica-style-reference-prompt'],
     ['--no-dialogue-narration', '--allow-dialogue-narration'], ['--allow-dialogue-narration', '--no-dialogue-narration'],
   ]);
   const suppliedFlags = new Set(userArguments.map(flagName));
@@ -681,7 +683,12 @@ async function exhibitionMain() {
       },
       articleOrder: argumentValue(runnerArguments, '--article-order', 'linear'),
       sceneVideo: { enabled: runnerArguments.includes('--videos-after-each-iteration'), ...videoSettings },
-      visualControlMode: runnerArguments.includes('--scene-visual-controls') ? 'scene-specific' : 'fixed',
+      visualControlMode: runnerArguments.includes('--legacy-guernica-style-reference-prompt')
+        && !runnerArguments.includes('--no-style-reference')
+        && !runnerArguments.includes('--article-image-only-reference')
+        && !runnerArguments.includes('--guernica-location-reference')
+        ? 'fixed'
+        : runnerArguments.includes('--scene-visual-controls') ? 'scene-specific' : 'fixed',
       generateTitleCards: runnerArguments.includes('--generate-title-cards'),
       firstLastGlue: glueEnabled,
       gluePattern,
