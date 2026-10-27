@@ -8,7 +8,7 @@ const object = (properties) => ({
   properties,
 });
 
-export const audioDirectorPromptVersion = 'eu-reski-audio-director-v4';
+export const audioDirectorPromptVersion = 'eu-reski-audio-director-v5';
 
 export function audioDirectionInputHash({ record, model, noDialogueNarration = false }) {
   return createHash('sha256').update(JSON.stringify({
@@ -61,6 +61,7 @@ export function buildAudioDirectionRequest({ record, model, noDialogueNarration 
           ? 'No spoken dialogue, narration, or voices. Set spokenKind=none and spokenText empty in every scene.'
           : 'Spoken dialogue or narration is allowed when useful, but is not required in every scene. Use spokenKind and spokenText to describe it when present; otherwise use spokenKind=none and an empty spokenText.'} Music is optional and need not play in every scene.`,
         'For every sound event, use seconds relative to its scene. startSeconds must be before endSeconds, and both must fit the exact scene duration. Keep ambientTexture concise and concrete.',
+        'Every scene must have concise, non-empty continuityFromPrevious and continuityToNext text. For the first scene, continuityFromPrevious describes how its sound begins; do not leave it empty.',
         'Intentional silence is allowed. Keep intentionalSilence, silenceReason, ambientTexture, and soundEvents as independent cues. They may coexist or conflict; do not reject or normalize such combinations. When both silence and sound are described, preserve both so the video model can interpret them in context.',
         'Audio direction is a separate prompt for the video model. It must not alter the supplied visual prompt.',
       ].join('\n') },

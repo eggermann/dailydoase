@@ -6,6 +6,6 @@ Dominik, reviewing AI-generated story images and prompts.
 ## Core Value
 See the source story, image analysis, story plan, generated first-scene image, and exact prompt trail together.
 ## Current Scope
-One random article, one GPT multimodal story-planning call, one first-scene still generation, and one HTML review page.
+The existing exhibition runner can choose fresh artistic settings per news article, save them per iteration, and resume with the same decision. Manual mode remains the default. The ten-iteration command is documented but has not been run.
 ## Non-Goals
-Video generation, automatic repeated iterations, production UI, or modifying existing camera/story pipelines.
+Changing technical providers/models, spending on live media runs during implementation, a production UI, or modifying unrelated camera/story pipelines.

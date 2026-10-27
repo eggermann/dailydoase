@@ -94,6 +94,7 @@
     "news:eu:today": "node eu-reski-news/scripts/fetch-eu-news-today.mjs",
     "news:eu:jev": "node eu-reski-news/scripts/classify-eu-news-with-jev.mjs",
     "news:exhibition": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh",
+    "news:auto-10": "npm run news:exhibition -- --auto-mode --iterations=10",
     "news:html": "node eu-reski-news/scripts/build-news-html.mjs",
     "news:assemble-film": "node eu-reski-news/scripts/assemble-news-film.mjs",
     "news:normalize-iteration-audio": "node eu-reski-news/scripts/normalize-iteration-audio.mjs",

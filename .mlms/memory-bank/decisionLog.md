@@ -1,5 +1,11 @@
 # Decision Log
 ## Decisions
+### D-0006: Iteration-local artistic auto-mode
+Status: Accepted
+Context: The exhibition needs article-specific creative settings while preserving the existing manual pipeline and resume behavior.
+Decision: Add a default-off `generation.autoMode` and CLI switch. Use one structured Story-model director decision per new iteration, persist selected and effective flags before Story planning, reuse saved decisions on resume, and keep technical/media controls manual. Constrain scene video mode to executable `image_to_video`.
+Consequences: Auto mode adds one bounded GPT planning call per new iteration (with one correction attempt only after invalid output). Manual mode makes no additional calls and leaves Story prompts/schemas untouched. No live run is part of implementation.
+
 ### D-0005: P-Video-2-Pro cost recipe for ten new iterations
 Status: Complete
 Context: User requested ten linear EU-RESKI news iterations with five images and matching videos per iteration.

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
+import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -205,6 +206,7 @@ function defaultsFromExhibitionSettings() {
     `--article-order=${defaultGeneration.articleOrder}`,
     defaultGeneration.legacyGuernicaStyleReferencePrompt ? '--legacy-guernica-style-reference-prompt' : '--no-legacy-guernica-style-reference-prompt',
   ];
+  if (defaultGeneration.autoMode === true) defaults.push('--auto-mode');
   defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
   defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
   defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
@@ -604,6 +606,7 @@ async function exhibitionMain() {
   if (process.argv.includes('--help')) {
     console.log('Start continuous exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
+    console.log('Flags: --auto-mode enables per-iteration artistic direction; --no-auto-mode disables it.');
     console.log('Environment: NEWS_ENV_FILE (in start script), NEWS_REFRESH_INTERVAL_MS.');
     return;
   }
@@ -621,6 +624,9 @@ async function exhibitionMain() {
     const exhibitionArguments = process.argv.slice(2);
     if (exhibitionArguments.includes('--first-last-glue') && exhibitionArguments.includes('--no-first-last-glue')) {
       throw new Error('Choose either --first-last-glue or --no-first-last-glue');
+    }
+    if (exhibitionArguments.includes('--auto-mode') && exhibitionArguments.includes('--no-auto-mode')) {
+      throw new Error('Choose either --auto-mode or --no-auto-mode');
     }
     if (exhibitionArguments.includes('--first-last-glue')) glueEnabled = true;
     if (exhibitionArguments.includes('--no-first-last-glue')) glueEnabled = false;
@@ -646,7 +652,7 @@ async function exhibitionMain() {
     if (!Number.isFinite(frameOffset) || frameOffset <= 0 || frameOffset > 1) throw new Error('EXHIBITION_FRAME_OFFSET_SECONDS must be greater than 0 and no more than 1');
     const fadeLength = Number(fadeSeconds);
     if (!Number.isFinite(fadeLength) || fadeLength < 0 || fadeLength > 2) throw new Error('EXHIBITION_FADE_SECONDS must be from 0 through 2');
-    const userArguments = exhibitionArguments.filter((argument) => !['--first-last-glue', '--no-first-last-glue'].includes(flagName(argument))
+    const userArguments = exhibitionArguments.filter((argument) => !['--first-last-glue', '--no-first-last-glue', '--auto-mode', '--no-auto-mode'].includes(flagName(argument))
       && flagName(argument) !== '--transition-wait-pattern');
     let defaults;
     if (state.runnerArguments?.length) {
@@ -663,7 +669,14 @@ async function exhibitionMain() {
       process.env.NEWS_STORY_MODEL?.trim() || '',
     ).trim();
     if (requestedStoryModel) defaults = { ...defaults, storyModel: requestedStoryModel };
+    const configuredAutoMode = defaults.args.includes('--no-auto-mode') ? false
+      : defaults.args.includes('--auto-mode') ? true : defaultGeneration.autoMode === true;
+    const autoModeEnabled = resolveAutoModeSetting(configuredAutoMode, exhibitionArguments);
     const runnerArguments = mergeRunnerArguments(defaults.args, userArguments);
+    const normalizedRunnerArguments = runnerArguments.filter((argument) => !['--auto-mode', '--no-auto-mode'].includes(flagName(argument)));
+    if (autoModeEnabled) normalizedRunnerArguments.push('--auto-mode');
+    else if (defaultGeneration.autoMode === true || defaults.args.includes('--no-auto-mode')
+      || exhibitionArguments.includes('--no-auto-mode')) normalizedRunnerArguments.push('--no-auto-mode');
     const iterationLimit = Number(argumentValue(runnerArguments, '--iterations', '-1'));
     const videoSettings = {
       model: argumentValue(runnerArguments, '--video-model', defaultGeneration.videoModel),
@@ -697,7 +710,7 @@ async function exhibitionMain() {
       fadeSeconds,
       randomBridgeThreshold: randomThreshold,
     })}`);
-    state.runnerArguments = runnerArguments.filter((argument) => flagName(argument) !== '--resume-run');
+    state.runnerArguments = normalizedRunnerArguments.filter((argument) => flagName(argument) !== '--resume-run');
     state.storyModel = defaults.storyModel;
     state.settingsSource = defaults.source;
     state.settingsVersion = defaultSettings.version;
@@ -720,7 +733,7 @@ async function exhibitionMain() {
     const generateTitleCards = runnerArguments.includes('--generate-title-cards');
     let mergeTask = runDirectory ? runMergeLoop(runDirectory, videoSettings, generateTitleCards) : null;
     while (!stopping) {
-      const running = startRunner(runnerArguments, runDirectory, (reportedRunDirectory) => {
+      const running = startRunner(normalizedRunnerArguments, runDirectory, (reportedRunDirectory) => {
         runDirectory = resolve(reportedRunDirectory);
         if (!mergeTask) mergeTask = runMergeLoop(runDirectory, videoSettings, generateTitleCards);
       });
@@ -728,9 +741,14 @@ async function exhibitionMain() {
       if (state.runDirectory) runDirectory = resolve(state.runDirectory);
       if (stopping) break;
       if (result.code === 0 && iterationLimit > 0) {
+        const savedRun = runDirectory ? await readJson(join(runDirectory, 'run.json')).catch(() => null) : null;
         stopping = true;
         wakeForStop();
-        log(`Completed ${iterationLimit} exhibition iterations; stopping after final merge work finishes.`);
+        if (savedRun?.status === 'pending_media') {
+          log(`Run paused with pending media (${(savedRun.pendingMedia || []).length} iteration(s)); restart runner to poll saved provider task IDs.`);
+        } else {
+          log(`Completed ${iterationLimit} exhibition iterations; stopping after final merge work finishes.`);
+        }
         break;
       }
       log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);

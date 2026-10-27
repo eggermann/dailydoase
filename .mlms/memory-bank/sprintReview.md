@@ -1,4 +1,46 @@
 # Sprint Review
+## Loop 1 Review — Artistic Auto-Mode
+### What Changed
+- Added default-off `generation.autoMode`, CLI overrides, and `npm run news:auto-10`.
+- Added a compact structured auto-director using the configured Story model. It chooses existing creative features before Story planning and saves selected/effective settings to `auto-decisions.json`.
+- Added constraints for legacy prompt interactions, video vision dependency, fixed no-dialogue policy, and executable `image_to_video`; decisions are isolated per iteration and reused on resume.
+- Documented the exact ten-iteration command and exposed decision JSON in the iteration report.
+
+### Acceptance Criteria Result
+- [x] Auto mode defaults off and can be enabled through configuration or CLI.
+- [x] Selected and effective flags are validated and saved per iteration.
+- [x] Saved decisions are reused; missing/corrupt/mismatched resume state fails safely.
+- [x] Fixed technical/media controls remain outside director selection.
+- [x] Implementation tests used mocks; later live generation ran only after direct user authorization.
+- [x] Pending video tasks remain checkpointed; First/Last-Frame glue is built incrementally after complete iterations.
+
+### Verification Result
+- Focused Jest suite: 6 tests passed.
+- `node --check` on changed JavaScript modules, JSON parsing, CLI help smoke checks, and `git diff --check` passed.
+- `npm test -- ...` could not run because this worktree has no local `cross-env`; the focused test suite ran with the available global Jest binary.
+
+### Issues / Gaps
+- Live reference film: `eu-reski-news/GENERATIONS/news/exhibition/run-001/glue-vids/eu-reski-live-full.mp4`. Seven iterations glued; iterations 8/9 still have four video tasks pending.
+- No webpack build was needed for script/config-only changes.
+
+### User Demo Notes
+- Review the exact command in `eu-reski-news/README.md`: `npm run news:auto-10`.
+
+## Loop 1 Retrospective
+### What Worked
+- Inserting the director after article selection and before Story planning reused the existing pipeline with a small component.
+- Selected/effective flags make legacy prompt effects and resume behavior inspectable.
+
+### What Was Confusing
+- Existing `.mlms` described a prior unrelated goal; its earlier brief remains preserved as `projectBrief.previous.md`.
+- The worktree has no `.env`, while the wrapper resolves the main repository `.env` automatically.
+
+### What To Improve Next Loop
+- Resume same run using `npm run news:auto-10`; preserve existing task IDs and generated media.
+
+### Process Decision
+- Stop polling after bounded windows; persist pending state for safe resume.
+
 ## P-Video Cost Run Review
 ### What Changed
 - Added P-Video-2-Pro image-to-video requests with first frame, 480p, `settings.mode=cost`, and 5–6 second durations.

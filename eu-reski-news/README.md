@@ -256,6 +256,8 @@ Der finale, tatsächlich an Grok gesendete Prompt ist pro Szene im Filmplan, im 
 
 `--videos-after-each-iteration` startet nach der Bild- und Szenenplanung jeder Iteration direkt die passende Image-to-Video-Erzeugung und fügt die fertigen Clips in `merged/iteration-NNN.mp4` zusammen. Der Video-Starter sendet das erste Bild als `inputs.frameImages`, `resolution: "480p"`, eine ganzzahlige Dauer von 5 bis 15 Sekunden und `settings.mode: "cost"`; `outputQuality` bleibt weg. So bleibt API-Payload mit P-Video-2-Pro-Schema kompatibel. `--iteration=iteration-NNN` erlaubt gezieltes Fortsetzen einer einzelnen Iteration. Pro Clip und im Sammel-HTML stehen Anbieter-Kosten.
 
+Video-Polls laufen je Aufruf höchstens 60 Sekunden. Danach steht `run.json` auf `pending_media` und listet Iterationen, Szenen und gespeicherte Task-IDs. `--resume-run=PATH` pollt dieselben IDs erneut und überspringt vorhandene Videodateien. Hugging Face Bild-Submits ohne gespeicherte Event-ID bleiben fail-closed: automatischer Neu-Submit wäre nicht sicher, da er doppelte Kosten verursachen könnte. Provider-Verfügbarkeit und endgültigen Abschluss kann der Runner nicht garantieren; er sichert lokale Checkpoints und wiederaufnehmbare Arbeit.
+
 Beispiel für zehn lineare Iterationen mit je fünf Szenen:
 
 ```sh
@@ -367,3 +369,21 @@ npm run news:assemble-film -- --run-dir="$RUN" \
 ```
 
 `--bridge-limit=2` wählt längste Brücken, bei Gleichstand zuerst chronologisch. Auswahl steht in der zum Film benannten `*.assembly.json`; Reihenfolge und Filtergraph haben ebenfalls filmbezogene Dateinamen und überschreiben andere Montageversionen nicht.
+
+### Künstlerischer Auto-Modus: zehn Iterationen
+
+`generation.autoMode` ist standardmäßig `false`. Für zehn Ausstellungsiterationen `--auto-mode` aktiviert pro neuem Artikel eine strukturierte Regieentscheidung vor der Storyplanung. Jede Entscheidung steht in `iteration-NNN/auto-decisions.json`; beim Resume wird sie wiederverwendet. Manuelle technische Werte wie Provider, Modelle, Auflösung, Kostenmodus, Quellen, Szenenzahl/-dauer und Montage bleiben aus der Run-Konfiguration erhalten. Das Szenenvideomodell bleibt auf ausführbarem `image_to_video`.
+
+Zusätzliche automatische Auswahl: `videoMaxZoom` (0–0,3). Stil-/Figuren-/Ortsreferenzpfade, Dialogsperre, Titelkarten sowie das Ein-/Ausschalten der Mediengenerierung bleiben manuell, weil sie Teil der Referenzpolitik, Sprachvorgabe, Kostenentscheidung oder des Betriebs sind.
+
+Der vorbereitete Befehl lautet:
+
+```sh
+npm run news:auto-10
+```
+
+Der Starthelfer lädt standardmäßig `.env` aus dem Haupt-Repository; alternativ kann `NEWS_ENV_FILE` explizit gesetzt werden. Der Befehl startet die bestehende Exhibition-Pipeline mit zehn Iterationen; die aktuelle Standardkonfiguration erzeugt Bilder und Szenenvideos.
+
+#### Live-Referenzlauf und Resume
+
+Der ausgeführte Referenzfilm liegt lokal unter `eu-reski-news/GENERATIONS/news/exhibition/run-001/glue-vids/eu-reski-live-full.mp4`. `run-001/run.json` und `run-001/glue-vids/glue-run.json` enthalten Laufparameter, Provider-Task-IDs und Glue-Fortschritt. Der Glue-Film ist aktuell bis Iteration 7 gebaut; Iteration 8 und 9 haben vier offene Videotasks. Auf derselben Installation setzt `npm run news:auto-10` diesen Lauf über den gespeicherten Runner-Zustand fort, pollt offene IDs und ergänzt Glue nach jeder vollständig fertigen Iteration. Generierte Medien und Provider-Logs liegen im gitignored `GENERATIONS/`-Ordner und sind nicht Teil des Commits.

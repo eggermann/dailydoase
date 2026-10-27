@@ -19,9 +19,17 @@ import { audioDirectionInputHash, audioDirectorPromptVersion, buildAudioDirectio
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderTitleCard } from '../news-scene/title-card.mjs';
+import {
+  autoDirectorPromptVersion,
+  buildAutoDirectorRequest,
+  resolveAutoModeSetting,
+  resolveEffectiveAutoFlags,
+  resolveSavedAutoDecision,
+  validateAutoDirectorResponse,
+} from '../news-scene/auto-director.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const { values: options } = parseArgs({ options: {
+const parsedArguments = parseArgs({ options: {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
@@ -50,6 +58,7 @@ const { values: options } = parseArgs({ options: {
   'image-seed': { type: 'string' },
   'prompt-only': { type: 'boolean', default: false }, 'legacy-guernica-style-reference-prompt': { type: 'boolean', default: false }, 'no-legacy-guernica-style-reference-prompt': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'no-article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
   'preserve-cubist-video-style': { type: 'boolean', default: false },
+  'auto-mode': { type: 'boolean', default: false }, 'no-auto-mode': { type: 'boolean', default: false },
   'landscape-prompt': { type: 'boolean', default: false }, 'no-landscape-prompt': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
@@ -66,6 +75,8 @@ const { values: options } = parseArgs({ options: {
   'room-deepness': { type: 'boolean', default: false }, 'no-room-deepness': { type: 'boolean', default: false }, help: { type: 'boolean' },
   layering: { type: 'string', default: '0' },
 } });
+let options = parsedArguments.values;
+options['auto-mode'] = resolveAutoModeSetting(false, process.argv.slice(2));
 if (options['generate-title-cards'] && options['no-generate-title-cards']) {
   throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
 }
@@ -96,10 +107,10 @@ if (options['article-image-only-reference']) {
   options['article-image-reference'] = true;
   options['no-style-reference'] = true;
 }
-const legacyGuernicaStyleReferencePromptEnabled = options['legacy-guernica-style-reference-prompt']
+let legacyGuernicaStyleReferencePromptEnabled = options['legacy-guernica-style-reference-prompt']
   && !options['no-style-reference']
   && !options['guernica-location-reference'];
-if (legacyGuernicaStyleReferencePromptEnabled) {
+if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
   options['scene-visual-controls'] = false;
   options['fixed-visual-controls'] = true;
 }
@@ -112,7 +123,7 @@ for (const flag of ['story-clou', 'video-direction', 'video-vision']) {
   if (!['on', 'off'].includes(options[flag])) throw new Error(`--${flag} must be on or off`);
 }
 if (!['auto', 'image_to_video', 'first_last_frame'].includes(options['video-mode'])) throw new Error('--video-mode must be auto, image_to_video or first_last_frame');
-if (options['video-vision'] === 'on' && options['video-direction'] !== 'on') throw new Error('--video-vision=on requires --video-direction=on');
+if (!options['auto-mode'] && options['video-vision'] === 'on' && options['video-direction'] !== 'on') throw new Error('--video-vision=on requires --video-direction=on');
 if (!['on', 'off'].includes(options['video-audio-direction'])) throw new Error('--video-audio-direction must be on or off');
 const getMaxVideoZoom = () => Number(options['video-max-zoom']);
 if (!Number.isFinite(getMaxVideoZoom()) || getMaxVideoZoom() < 0 || getMaxVideoZoom() > 0.3) throw new Error('--video-max-zoom must be from 0 through 0.3 (fraction of frame)');
@@ -153,6 +164,132 @@ async function save(path, value) {
   const temporary = `${path}.${randomUUID()}.tmp`;
   await writeFile(temporary, JSON.stringify(value, null, 2) + '\n');
   await rename(temporary, path);
+}
+
+function applyAutoDecisionToIteration(record, decision) {
+  const flags = decision.effectiveFlags;
+  options['story-clou'] = flags.storyClou;
+  options['legacy-guernica-style-reference-prompt'] = flags.legacyGuernicaStyleReferencePrompt;
+  options['preserve-cubist-video-style'] = flags.preserveCubistVideoStyle;
+  options['scene-visual-controls'] = flags.sceneVisualControls === 'scene-specific';
+  options['fixed-visual-controls'] = flags.sceneVisualControls === 'fixed';
+  options['article-image-reference'] = flags.articleImageReference;
+  options['landscape-prompt'] = flags.landscapePrompt;
+  options['video-direction'] = flags.videoDirection;
+  options['video-vision'] = flags.videoVision;
+  options['video-audio-direction'] = flags.videoAudioDirection;
+  options['video-max-zoom'] = String(flags.videoMaxZoom);
+  options['video-mode'] = 'image_to_video';
+  legacyGuernicaStyleReferencePromptEnabled = flags.legacyGuernicaStyleReferencePrompt;
+
+  record.articleImageReference = flags.articleImageReference;
+  record.sceneVisualControls = flags.sceneVisualControls === 'scene-specific';
+  record.generationSettings = currentGenerationSettings();
+  record.featureSettings = currentFeatureSettings();
+  record.visualStyleOptions = { ...recordStyleOptions };
+  record.autoMode = true;
+  record.autoDecision = {
+    promptVersion: decision.promptVersion,
+    selectedFlags: decision.selectedFlags,
+    effectiveFlags: decision.effectiveFlags,
+  };
+}
+
+async function hasDependentIterationWork(record, directory) {
+  if (record.plan || (record.results || []).some(Boolean)) return true;
+  const files = await readdir(directory);
+  if (files.some((name) => [
+    'gpt-request.json', 'gpt-response.json', 'scene-plan.json', 'visual-plan.json',
+    'timing-request.json', 'timing-response.json', 'video-vision.json',
+    'video-direction.json', 'audio-direction.json', 'film-plan.json',
+  ].includes(name) || /^scene-\d+-(?:request|response)\.json$/.test(name))) return true;
+  const mediaFiles = await readdir(join(directory, 'media')).catch((error) => {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  });
+  return mediaFiles.some((name) => /^scene-\d+/.test(name));
+}
+
+async function ensureAutoDecision(record, directory, openAiKey, persist) {
+  if (!options['auto-mode']) return;
+  const decisionPath = join(directory, 'auto-decisions.json');
+  const articleId = String(record.article?.id ?? record.article?.url ?? record.article?.title ?? 'unknown');
+  const constraints = {
+    noDialogueNarration: options['no-dialogue-narration'],
+    styleReferenceAvailable: !options['no-style-reference'],
+    guernicaLocationReference: options['guernica-location-reference'] && !options['no-style-reference'],
+    articleImageAvailable: Boolean(record.articleImage),
+    fixedVisualStyleOptions: { ...(record.visualStyleOptions || recordStyleOptions) },
+    sceneCount: record.sceneCount,
+    sceneTiming: record.generationSettings?.sceneTiming || null,
+    imageProvider: record.generationSettings?.imageProvider || options['image-provider'],
+    videoModel: record.generationSettings?.videoModel || options['video-model'],
+    videoResolution: record.generationSettings?.videoResolution || options['video-resolution'],
+    videoSettingsMode: record.generationSettings?.videoSettingsMode || options['video-settings-mode'],
+    videosAfterEachIteration: record.generationSettings?.videosAfterEachIteration === true || options['videos-after-each-iteration'],
+  };
+
+  if (await exists(decisionPath)) {
+    const saved = await json(decisionPath);
+    resolveSavedAutoDecision(saved, {
+      iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
+      articleId, model: record.storyModel, promptVersion: autoDirectorPromptVersion,
+      hasDependentWork: await hasDependentIterationWork(record, directory),
+      constraints,
+    });
+    if (record.autoDecision && JSON.stringify(record.autoDecision.effectiveFlags) !== JSON.stringify(saved.effectiveFlags)) {
+      throw new Error('Iteration record conflicts with the saved auto decision');
+    }
+    applyAutoDecisionToIteration(record, saved);
+    if (record.featureSettings.autoMode !== true) throw new Error('Saved auto decision lost its autoMode setting');
+    record.autoDecision = { promptVersion: saved.promptVersion, selectedFlags: saved.selectedFlags, effectiveFlags: saved.effectiveFlags };
+    return;
+  }
+
+  const hasDependentWork = await hasDependentIterationWork(record, directory);
+  if (hasDependentWork) throw new Error('Auto decision is missing after dependent iteration work began; refusing to choose new settings on resume');
+
+  const request = buildAutoDirectorRequest({ article: record.article, model: record.storyModel, constraints });
+  await save(join(directory, 'auto-director-request.json'), request);
+  let raw = await paidRequest(directory, 'auto-director', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
+  let answer;
+  try {
+    answer = validateAutoDirectorResponse(raw);
+  } catch (firstError) {
+    const correctionRequest = {
+      ...request,
+      messages: [...request.messages, { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' }, {
+        role: 'user', content: `Correct your decision once. Validation error: ${firstError.message}. Return all required fields and obey videoVision=on only with videoDirection=on.`,
+      }],
+    };
+    await save(join(directory, 'auto-director-revision-request.json'), correctionRequest);
+    raw = await paidRequest(directory, 'auto-director-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, correctionRequest);
+    answer = validateAutoDirectorResponse(raw);
+  }
+
+  const resolved = resolveEffectiveAutoFlags(answer.flags, constraints);
+  const decision = {
+    autoMode: true,
+    iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
+    articleId,
+    model: record.storyModel,
+    promptVersion: autoDirectorPromptVersion,
+    createdAt: new Date().toISOString(),
+    dramaturgicalConcept: answer.dramaturgicalConcept,
+    visualConcept: answer.visualConcept,
+    motionConcept: answer.motionConcept,
+    audioConcept: answer.audioConcept,
+    selectedFlags: answer.flags,
+    effectiveFlags: resolved.effectiveFlags,
+    constraints,
+    reason: answer.reason,
+    constraintsApplied: resolved.constraintsApplied,
+    usage: raw.usage || null,
+  };
+  applyAutoDecisionToIteration(record, decision);
+  await save(decisionPath, decision);
+  addUsage(record, 'autoDirectorUsage', raw.usage);
+  await persist();
 }
 const redact = (message) => [process.env.OPENAI_API_KEY, process.env.RUNWARE_API_KEY, process.env.RUNWARE_KEY, process.env.HF_TOKEN, process.env.HF_API_TOKEN, process.env.HUGGINGFACEHUB_API_TOKEN]
   .filter(Boolean).reduce((text, key) => text.replaceAll(key, '[redacted]'), String(message));
@@ -219,6 +356,7 @@ function buildFilmPlan(record, directory) {
 
 function currentFeatureSettings() {
   return {
+    autoMode: options['auto-mode'],
     storyClou: options['story-clou'],
     videoDirection: options['video-direction'],
     videoMode: options['video-mode'],
@@ -233,6 +371,7 @@ function currentFeatureSettings() {
 
 function currentGenerationSettings() {
   return {
+    autoMode: options['auto-mode'],
     articleOrder: options['article-order'],
     sceneTiming: {
       takt: Number(options['scene-length-takt']),
@@ -265,6 +404,7 @@ function currentGenerationSettings() {
 
 function restoreFeatureSettings(settings) {
   if (!settings) return;
+  if (Object.hasOwn(settings, 'autoMode')) options['auto-mode'] = settings.autoMode === true;
   options['story-clou'] = settings.storyClou || 'off';
   options['video-direction'] = settings.videoDirection || 'off';
   options['video-mode'] = settings.videoMode || 'auto';
@@ -280,7 +420,7 @@ function restoreFeatureSettings(settings) {
     || !Number.isFinite(getMaxVideoZoom()) || getMaxVideoZoom() < 0 || getMaxVideoZoom() > 0.3) {
     throw new Error('Saved feature settings contain an unsupported story or video mode');
   }
-  if (options['video-vision'] === 'on' && options['video-direction'] !== 'on') {
+  if (!settings.autoMode && options['video-vision'] === 'on' && options['video-direction'] !== 'on') {
     throw new Error('Saved settings are invalid: video vision requires video direction');
   }
 }
@@ -739,9 +879,48 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
   return audioDirection;
 }
 
+async function pendingVideoScenes(iterationRoot, entry) {
+  const directory = join(iterationRoot, entry.directory);
+  const record = await json(join(directory, 'record.json'));
+  const pending = [];
+  for (const [index, scene] of (record.filmPlan?.scenePlan || []).entries()) {
+    const result = record.videoResults?.[index];
+    if (scene.videoMode === 'first_last_frame' || result?.status === 'rejected_by_provider_moderation') continue;
+    const sceneIndex = scene.index ?? index + 1;
+    const mediaPath = result?.path || `media/scene-${sceneIndex}-video.mp4`;
+    if (!await exists(join(directory, mediaPath))) {
+      pending.push({ sceneIndex, taskUUID: result?.taskUUID || scene.videoTaskUUID || null, status: result?.status || 'pending' });
+    }
+  }
+  return pending;
+}
+
+async function pollIterationVideos(iterationRoot, entry, videoOptions) {
+  const videoArguments = [
+    join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
+    `--run=${iterationRoot}`,
+    `--iteration=${entry.directory}`,
+    `--model=${videoOptions.model}`,
+    `--resolution=${videoOptions.resolution}`,
+    `--settings-mode=${videoOptions.settingsMode}`,
+    '--poll-timeout-seconds=60',
+  ];
+  if (videoOptions.generateTitleCards) videoArguments.push('--generate-title-cards');
+  execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
+}
+
+async function summarizePendingMedia(iterationRoot, runManifest) {
+  const pendingMedia = [];
+  for (const entry of runManifest.iterations) {
+    const scenes = await pendingVideoScenes(iterationRoot, entry);
+    if (scenes.length) pendingMedia.push({ iteration: entry.directory, scenes });
+  }
+  return pendingMedia;
+}
+
 async function main() {
   if (options.help) {
-    console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --legacy-guernica-style-reference-prompt --videos-after-each-iteration --generate-title-cards --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost');
+    console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --legacy-guernica-style-reference-prompt --videos-after-each-iteration --generate-title-cards --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost [--auto-mode|--no-auto-mode]');
     return;
   }
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
@@ -872,7 +1051,26 @@ async function main() {
       await save(join(iterationRoot, 'run.json'), runManifest);
     }
   }
+  const videoOptions = {
+    model: options['video-model'],
+    resolution: options['video-resolution'],
+    settingsMode: options['video-settings-mode'],
+    generateTitleCards: options['generate-title-cards'],
+  };
+  if (options['resume-run'] && options['videos-after-each-iteration']) {
+    for (const entry of runManifest.iterations) {
+      if ((await pendingVideoScenes(iterationRoot, entry)).length) await pollIterationVideos(iterationRoot, entry, videoOptions);
+    }
+  }
+  const runBaseOptions = { ...options };
   while (endless || completed < iterationLimit) {
+    options = { ...runBaseOptions };
+    legacyGuernicaStyleReferencePromptEnabled = options['legacy-guernica-style-reference-prompt']
+      && !options['no-style-reference'] && !options['guernica-location-reference'];
+    if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
+      options['scene-visual-controls'] = false;
+      options['fixed-visual-controls'] = true;
+    }
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
     const iterationDirectory = await runIteration(semanticSource, sceneDurations, sceneCounts, iterationRoot, completed, imageSeedOffset, runImageSeedBase, pendingIterationDirectory, runManifest?.articleProgress || null);
     pendingIterationDirectory = null;
@@ -896,17 +1094,7 @@ async function main() {
       await writeFile(join(iterationRoot, 'index.html'), renderRunReport(runManifest, reports));
       console.log(`Cumulative HTML: ${join(iterationRoot, 'index.html')}`);
       if (options['videos-after-each-iteration']) {
-        const videoArguments = [
-          join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
-          `--run=${iterationRoot}`,
-          `--iteration=${relativeDirectory}`,
-          `--model=${options['video-model']}`,
-          `--resolution=${options['video-resolution']}`,
-          `--settings-mode=${options['video-settings-mode']}`,
-          '--poll-timeout-seconds=300',
-        ];
-        if (options['generate-title-cards']) videoArguments.push('--generate-title-cards');
-        execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
+        await pollIterationVideos(iterationRoot, { directory: relativeDirectory }, videoOptions);
       }
     }
     if (!endless && completed >= iterationLimit) break;
@@ -914,8 +1102,14 @@ async function main() {
     await new Promise((resolveDelay) => setTimeout(resolveDelay, pauseMilliseconds));
   }
   if (runManifest) {
-    runManifest.status = 'completed';
+    const pendingMedia = options['videos-after-each-iteration']
+      ? await summarizePendingMedia(iterationRoot, runManifest)
+      : [];
+    runManifest.status = pendingMedia.length ? 'pending_media' : 'completed';
+    if (pendingMedia.length) runManifest.pendingMedia = pendingMedia;
+    else delete runManifest.pendingMedia;
     runManifest.finishedAt = new Date().toISOString();
+    if (pendingMedia.length) console.log(`Run pending media: ${pendingMedia.map(({ iteration, scenes }) => `${iteration} scene(s) ${scenes.map(({ sceneIndex, taskUUID }) => `#${sceneIndex}${taskUUID ? ` (${taskUUID})` : ''}`).join(', ')}`).join('; ')}. Resume same run to poll saved task IDs.`);
     await save(join(iterationRoot, 'run.json'), runManifest);
     const reports = await Promise.all(runManifest.iterations.map(async (iteration) => ({
       directory: iteration.directory,
@@ -939,7 +1133,14 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const saved = await json(join(directory, 'record.json'));
       if (saved.generator !== 'semantic-news-v1') throw new Error('Resume requires an iteration created by this generator');
       record = saved;
-      if (options['resume-run'] && record.featureSettings && JSON.stringify(record.featureSettings) !== JSON.stringify(currentFeatureSettings())) {
+      if (options['resume-run'] && options['auto-mode'] && record.featureSettings?.autoMode !== true) {
+        throw new Error('Iteration was not created with auto mode; refusing to mix run settings');
+      }
+      const savedFeatureSettings = record.featureSettings
+        ? { autoMode: record.featureSettings.autoMode === true, ...record.featureSettings }
+        : null;
+      if (options['resume-run'] && !options['auto-mode'] && savedFeatureSettings
+        && JSON.stringify(savedFeatureSettings) !== JSON.stringify(currentFeatureSettings())) {
         throw new Error('Iteration feature settings differ from the saved run settings; refusing a mixed run');
       }
       restoreFeatureSettings(record.featureSettings || currentFeatureSettings());
@@ -1048,6 +1249,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       record.articleImage = await download(record.article.image, directory, 'article');
       await persist();
     }
+    await ensureAutoDecision(record, directory, openAiKey, persist);
     if (!record.styleReference && !options['no-style-reference']) {
       const sourcePath = resolve(options['style-reference']);
       const extension = extname(sourcePath).toLocaleLowerCase();

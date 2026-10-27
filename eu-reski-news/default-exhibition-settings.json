@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "paths": {
     "newsDirectory": "eu-reski-news/news/A",
     "outputDirectory": "eu-reski-news/GENERATIONS/news/exhibition"
@@ -18,6 +18,7 @@
     "randomBridgeThreshold": 0.7
   },
   "generation": {
+    "autoMode": false,
     "storyModel": "gpt-4.1-mini",
     "iterations": 4,
     "pauseMs": 0,

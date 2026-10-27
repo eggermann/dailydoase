@@ -1,4 +1,5 @@
-import { readFile, writeFile, unlink } from 'node:fs/promises';
+import { randomUUID } from 'node:crypto';
+import { readFile, writeFile, rename, unlink } from 'node:fs/promises';
 import { join, basename } from 'node:path';
 
 const SPACE_URL = 'https://black-forest-labs-flux-3-image-klein.hf.space';
@@ -13,7 +14,11 @@ const OUTPUT_SETTINGS = {
 };
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
-const writeJson = (path, value) => writeFile(path, `${JSON.stringify(value, null, 2)}\n`);
+async function writeJson(path, value) {
+  const temporaryPath = `${path}.${randomUUID()}.tmp`;
+  await writeFile(temporaryPath, `${JSON.stringify(value, null, 2)}\n`);
+  await rename(temporaryPath, path);
+}
 
 async function request(path, token, options = {}) {
   const response = await fetch(`${SPACE_URL}${path}`, {
@@ -71,17 +76,20 @@ export async function generateFluxKleinImage({ prompt, referencePaths, token, di
   if (!(await exists(requestPath))) await writeJson(requestPath, requestLog);
   else if ((await readJson(requestPath)).prompt !== prompt) throw new Error(`${name}: saved FLUX prompt differs from scene plan`);
 
-  if (!(await exists(responsePath))) {
+  if (await exists(responsePath)) {
+    const saved = await readJson(responsePath);
+    if (!saved.eventId) throw new Error(`${name}: saved Hugging Face response has no event id; refusing to submit again`);
+    const completed = await poll(saved.eventId, token);
+    await writeJson(responsePath, { eventId: saved.eventId, data: completed, completedAt: saved.completedAt, refreshedAt: new Date().toISOString() });
+    await unlink(pendingPath).catch((error) => { if (error.code !== 'ENOENT') throw error; });
+  } else {
     let eventId;
     if (await exists(submissionPath)) {
       eventId = (await readJson(submissionPath)).eventId;
       if (!eventId) throw new Error(`${name}: saved Hugging Face submission has no event id`);
     } else {
-      try {
-        await writeJson(pendingPath, { startedAt: new Date().toISOString(), provider: 'huggingface-zerogpu' });
-      } catch (error) {
-        if (error.code === 'EEXIST') throw new Error(`${name}: previous Hugging Face outcome unknown; inspect Space history before retrying`);
-        throw error;
+      if (await exists(pendingPath)) {
+        throw new Error(`${name}: Hugging Face submission outcome is unknown; refusing to submit again and risk duplicate generation`);
       }
       const inputImages = [];
       for (const imagePath of referencePaths) inputImages.push(await uploadImage(imagePath, token));
@@ -92,10 +100,16 @@ export async function generateFluxKleinImage({ prompt, referencePaths, token, di
         seed,
       };
       await writeJson(join(directory, `${name}-hf-api-request.json`), body);
+      try {
+        await writeFile(pendingPath, `${JSON.stringify({ startedAt: new Date().toISOString(), provider: 'huggingface-zerogpu', status: 'submitting' }, null, 2)}\n`, { flag: 'wx' });
+      } catch (error) {
+        if (error.code === 'EEXIST') throw new Error(`${name}: Hugging Face submission outcome is unknown; refusing to submit again and risk duplicate generation`);
+        throw error;
+      }
       const submitted = JSON.parse(await request('/gradio_api/call/v2/generate', token, {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
       }));
-      if (!submitted.event_id) throw new Error(`${name}: Hugging Face returned no event id; pending marker retained`);
+      if (!submitted.event_id) throw new Error(`${name}: Hugging Face returned no event id; outcome remains pending and will not be resubmitted automatically`);
       eventId = submitted.event_id;
       await writeJson(submissionPath, { eventId, submittedAt: new Date().toISOString() });
     }
