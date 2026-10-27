@@ -22,7 +22,7 @@
     "iterations": 4,
     "pauseMs": 0,
     "articleOrder": "linear",
-    "styleReference": false,
+    "styleReference": true,
     "articleImageReference": true,
     "guernicaLocationReference": false,
     "landscapePrompt": false,

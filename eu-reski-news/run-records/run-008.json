@@ -1,0 +1,160 @@
+{
+  "runId": "run-008",
+  "completedAt": "2026-10-27T12:48:21.996Z",
+  "film": {
+    "path": "eu-reski-news/GENERATIONS/news/exhibition/run-008/merged/eu-reski-gesamtfilm.mp4",
+    "sha256": "7ca90b2228c13da8263760676611e15bf0c5e4b4d87b562d221652fd2f074857",
+    "durationSeconds": 91.125031
+  },
+  "source": {
+    "commit": "236d42f3ccf0bcf85ec2e2da462fa6f92b6dfe78",
+    "branch": "codex/story-composition-prompt-test",
+    "clean": false
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "articleTitle": "Curtea de Justiție a Uniunii Europene este departe, dar de fapt ne privește pe toți",
+      "sceneCount": 5,
+      "sceneDurationsSeconds": [
+        8,
+        5,
+        7,
+        5,
+        8
+      ],
+      "imageReferenceFiles": [
+        "05_frau_mit_lampe.png",
+        "guernica-style-reference.jpg",
+        "article.jpg"
+      ]
+    },
+    {
+      "iteration": 2,
+      "articleTitle": "Coletele din afara UE, vizate de o nouă taxă de procesare de la 1 noiembrie. Cum se va aplica",
+      "sceneCount": 2,
+      "sceneDurationsSeconds": [
+        5,
+        7
+      ],
+      "imageReferenceFiles": [
+        "05_frau_mit_lampe.png",
+        "guernica-style-reference.jpg",
+        "article.jpg"
+      ]
+    },
+    {
+      "iteration": 3,
+      "articleTitle": "Magyarország is nagyot kaszálhat az európai átálláson – átcsorognak a támogatások",
+      "sceneCount": 3,
+      "sceneDurationsSeconds": [
+        5,
+        8,
+        5
+      ],
+      "imageReferenceFiles": [
+        "05_frau_mit_lampe.png",
+        "guernica-style-reference.jpg",
+        "article.jpg"
+      ]
+    },
+    {
+      "iteration": 4,
+      "articleTitle": "Quelles conséquences pour vos achats ?: Un nouveau surcoût pour les colis importés en Europe",
+      "sceneCount": 2,
+      "sceneDurationsSeconds": [
+        7,
+        5
+      ],
+      "imageReferenceFiles": [
+        "06_frau_im_brennenden_haus.png",
+        "guernica-style-reference.jpg",
+        "article.jpg"
+      ]
+    }
+  ],
+  "effectiveSettings": {
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4o-mini",
+    "articleImageReference": true,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "featureSettings": {
+      "storyClou": "off",
+      "videoDirection": "off",
+      "videoMode": "image_to_video",
+      "videoVision": "off",
+      "videoAudioDirection": "on",
+      "noDialogueNarration": false,
+      "videoMaxZoom": 0.08,
+      "preserveCubistVideoStyle": true,
+      "landscapePrompt": false
+    },
+    "sceneCount": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 4,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 1,
+      "minimum": 1,
+      "maximum": 12
+    },
+    "sceneLength": {
+      "provider": "Selfomat Taktmuster scene-length generator",
+      "takt": 4,
+      "meter": "4/4",
+      "type": "balanced",
+      "scaler": "quality floor → multiplier → bias → duration clamp",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "exhibition": {
+      "firstLastGlue": true,
+      "glueDurationPattern": [
+        9,
+        5,
+        7,
+        5,
+        8
+      ],
+      "glueWaitPattern": "classic",
+      "frameOffsetSeconds": 0.25,
+      "fadeSeconds": 0.25
+    },
+    "glueGeneration": {
+      "model": "prunaai:p-video@2-pro",
+      "resolution": "480p",
+      "settingsMode": "cost",
+      "transitionWaitPattern": "Taktmuster 2/4/4 classic",
+      "transitionCount": 3,
+      "transitionsPerIteration": 1
+    }
+  }
+}
