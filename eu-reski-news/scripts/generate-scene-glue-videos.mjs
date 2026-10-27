@@ -59,6 +59,19 @@ if (!Number.isInteger(pollTimeoutSeconds) || pollTimeoutSeconds < 10 || pollTime
 const apiKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
 if (!apiKey) throw new Error('Set RUNWARE_API_KEY or RUNWARE_KEY in .env');
 
+const runwareRetryAttempts = 8;
+async function retryRunware(operation, label) {
+  return retryTransient(operation, {
+    attempts: runwareRetryAttempts,
+    baseDelayMs: 3000,
+    maxDelayMs: 30000,
+    shouldRetry: (error) => isRetryableNetworkError(error) || isRetryableHttpStatus(error.status),
+    onRetry: ({ nextAttempt, delay, error }) => {
+      console.warn(`${label} retry ${nextAttempt}/${runwareRetryAttempts} in ${delay}ms · ${error.message}`);
+    },
+  });
+}
+
 const runDirectory = resolve(options.run);
 const outputDirectory = resolve(options['output-dir'] || join(runDirectory, 'glue-vids'));
 const ffmpeg = process.env.FFMPEG_BIN || 'ffmpeg';
@@ -195,10 +208,10 @@ async function apiRequest(body, timeoutMs = 240_000) {
 }
 
 async function getTaskDetails(taskUUID) {
-  const response = await retryTransient(() => apiRequest([{ taskType: 'getTaskDetails', taskUUID }], 60_000), {
-    attempts: 5,
-    shouldRetry: (error) => isRetryableNetworkError(error) || isRetryableHttpStatus(error.status),
-  });
+  const response = await retryRunware(
+    () => apiRequest([{ taskType: 'getTaskDetails', taskUUID }], 60_000),
+    `Task lookup ${taskUUID}`,
+  );
   const task = response.data?.find((item) => item.taskUUID === taskUUID);
   if (task) return task.response || null;
   if (response.errors?.some((error) => error.code === 'taskNotFound')) return null;
@@ -220,11 +233,7 @@ async function submitOrRecover(job) {
   }
 
   try {
-    const submission = await retryTransient(() => apiRequest([job.task]), {
-      attempts: 5,
-      shouldRetry: (error) => isRetryableNetworkError(error) || isRetryableHttpStatus(error.status),
-      onRetry: ({ nextAttempt, delay }) => console.warn(`Submit retry ${nextAttempt}/5 in ${delay}ms`),
-    });
+    const submission = await retryRunware(() => apiRequest([job.task]), `Submit ${job.taskUUID}`);
     await save(job.submissionPath, submission);
     return submission;
   } catch (error) {
@@ -249,11 +258,10 @@ async function getResult(job, submission) {
     await new Promise((resolvePromise) => setTimeout(resolvePromise, 2000));
     const remainingMs = timeoutMs - (Date.now() - startedAt);
     if (remainingMs <= 0) break;
-    const response = await retryTransient(() => apiRequest([{ taskType: 'getResponse', taskUUID: job.taskUUID }], remainingMs), {
-      attempts: 5,
-      shouldRetry: (error) => isRetryableNetworkError(error) || isRetryableHttpStatus(error.status),
-      onRetry: ({ nextAttempt, delay }) => console.warn(`Poll retry ${nextAttempt}/5 in ${delay}ms`),
-    });
+    const response = await retryRunware(
+      () => apiRequest([{ taskType: 'getResponse', taskUUID: job.taskUUID }], remainingMs),
+      `Poll ${job.taskUUID}`,
+    );
     if (response.errors?.length) throw new Error(`Runware poll failed: ${JSON.stringify(response.errors).slice(0, 1200)}`);
     const result = response.data?.find((item) => item.taskUUID === job.taskUUID);
     if (result?.videoURL) return result;
@@ -268,9 +276,16 @@ async function getResult(job, submission) {
 }
 
 async function downloadVideo(url, outputPath) {
-  const response = await fetch(url, { signal: AbortSignal.timeout(120_000) });
-  if (!response.ok) throw new Error(`Video download failed with HTTP ${response.status}`);
-  await writeFile(outputPath, Buffer.from(await response.arrayBuffer()));
+  const bytes = await retryRunware(async () => {
+    const response = await fetch(url, { signal: AbortSignal.timeout(120_000) });
+    if (!response.ok) {
+      const error = new Error(`Video download failed with HTTP ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+    return Buffer.from(await response.arrayBuffer());
+  }, 'Video download');
+  await writeFile(outputPath, bytes);
 }
 
 async function processJob(job) {
