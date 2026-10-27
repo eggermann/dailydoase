@@ -206,6 +206,7 @@ function defaultsFromExhibitionSettings() {
   defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
   defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
   defaults.push(defaultGeneration.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
+  if (defaultGeneration.styleReference === false) defaults.push('--no-style-reference');
   defaults.push(defaultGeneration.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
   defaults.push(defaultGeneration.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
   defaults.push(defaultGeneration.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
