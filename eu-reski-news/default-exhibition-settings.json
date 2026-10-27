@@ -41,8 +41,8 @@
       "maximum": 12
     },
     "sceneLength": {
-      "takt": -1,
-      "type": "dramatic-arc",
+      "takt": 4,
+      "type": "balanced",
       "multiplier": 1.15,
       "bias": 4.2,
       "minimum": 5,
