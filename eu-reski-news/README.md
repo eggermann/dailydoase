@@ -39,9 +39,12 @@ Nützliche Overrides: `NEWS_REFRESH_INTERVAL_MS=86400000`, `EXHIBITION_FIRST_LAS
 
 `--transition-wait-pattern=classic|all|4,1,...` überschreibt das Glue-Taktmuster direkt beim Ausstellungsstart. `--article-image-reference` ergänzt ein echtes Pressebild; bekannte Fallback-/Platzhalterbilder werden übersprungen. `--guernica-location-reference` gibt Guernica GPT bei der Planung und FLUX als sekundäre Orts-/Raumreferenz. Das Pressebild und die Szenenhandlung führen; Guernica liefert nur Hintergrundraum und Atmosphäre, ohne Figuren, Pose, Komposition, Motive oder Farbbalance zu kopieren. Ohne dieses Flag bleibt der bisherige Prompt- und Referenzpfad unverändert. `--no-guernica-location-reference` schaltet den Zusatz explizit aus und überschreibt auch ein gespeichertes Enable-Flag. Maskierte Guernica-Figuren führen weiterhin die Protagonistenreferenz.
 
+`--preserve-cubist-video-style` ergänzt ausschließlich den P-Video-Bewegungsprompt um eine Stilbindung an das gemalte, fragmentierte Erscheinungsbild des Startbilds. Sie bleibt auch erhalten, wenn `--video-direction=on` einen verfeinerten Bewegungs-Prompt erzeugt. Ohne Flag bleibt der bisherige P-Video-Prompt unverändert. Die Anweisung reduziert realistische Gesichter und Körper, kann das Videomodell aber nicht technisch darauf festlegen.
+
 ```sh
 npm run news:exhibition -- --transition-wait-pattern=classic --article-image-reference --guernica-location-reference
 npm run news:exhibition -- --article-image-reference --no-guernica-location-reference
+npm run news:exhibition -- --preserve-cubist-video-style
 ```
 
 `Article + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; optional article photo for subject orientation; --guernica-location-reference adds Guernica as secondary setting/space reference; without it, the previous prompt/reference path remains) → cumulative HTML audit report`.

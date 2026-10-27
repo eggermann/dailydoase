@@ -48,6 +48,7 @@ const { values: options } = parseArgs({ options: {
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
   'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
+  'preserve-cubist-video-style': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
@@ -131,6 +132,12 @@ async function save(path, value) {
 const redact = (message) => [process.env.OPENAI_API_KEY, process.env.RUNWARE_API_KEY, process.env.RUNWARE_KEY, process.env.HF_TOKEN, process.env.HF_API_TOKEN, process.env.HUGGINGFACEHUB_API_TOKEN]
   .filter(Boolean).reduce((text, key) => text.replaceAll(key, '[redacted]'), String(message));
 
+const cubistVideoStyleLock = 'P-VIDEO STYLE LOCK: Keep every figure visibly painted as a distorted, fragmented cubist mural form, with angular planes, charcoal and chalk marks, rough pigment and the supplied start image’s monochrome palette. Preserve the existing figures’ identity, silhouette, proportions, pose and placement. Animate only restrained changes within the established painted composition. Do not turn figures into lifelike people; add no realistic faces, natural skin, realistic eyes, lifelike bodies, extra people, detailed clothing or newly invented props and background. Do not smooth, clarify or complete abstract forms.';
+
+function preservePVideoStyle(prompt) {
+  if (!options['preserve-cubist-video-style'] || !prompt || prompt.includes('P-VIDEO STYLE LOCK:')) return prompt;
+  return `${prompt}\n\n${cubistVideoStyleLock}`;
+}
 
 function buildFilmPlan(record, directory) {
   return {
@@ -151,7 +158,7 @@ function buildFilmPlan(record, directory) {
       visualControlReason: scene.visualControlReason || null,
       videoMode, frameSource: videoMode === 'first_last_frame' ? 'firstAndRequiredLastFrame' : 'providedStartImage',
       startImagePath: record.results[index]?.path ? resolve(directory, record.results[index].path) : null, stillPrompt: scene.stillPrompt,
-      videoPrompt: record.videoDirection?.scenes?.[index]
+      videoPrompt: preservePVideoStyle(record.videoDirection?.scenes?.[index]
         ? (record.videoDirection.scenes[index].finalVideoPrompt || buildGrokVideoPrompt({
           visualPrompt: record.videoDirection.scenes[index].videoPrompt,
           cameraMotion: record.videoDirection.scenes[index].motionPlan.cameraMotion,
@@ -159,7 +166,7 @@ function buildFilmPlan(record, directory) {
           audioDirection: record.videoDirection.audioDirectionEnabled ? 'on' : 'off',
           maxZoom: record.videoDirection.maxZoom ?? 0.08,
         }))
-        : scene.videoPrompt,
+        : scene.videoPrompt),
       singleImagePrompt: scene.stillPrompt,
       ...(videoDirection ? { videoDirection } : {}),
     });
@@ -191,6 +198,7 @@ function currentFeatureSettings() {
     videoVision: options['video-vision'],
     videoAudioDirection: options['video-audio-direction'],
     videoMaxZoom: getMaxVideoZoom(),
+    preserveCubistVideoStyle: options['preserve-cubist-video-style'],
   };
 }
 
@@ -231,6 +239,7 @@ function restoreFeatureSettings(settings) {
   options['video-vision'] = settings.videoVision || 'off';
   options['video-audio-direction'] = settings.videoAudioDirection || 'off';
   options['video-max-zoom'] = String(settings.videoMaxZoom ?? 0.08);
+  options['preserve-cubist-video-style'] = settings.preserveCubistVideoStyle === true;
   if (!['on', 'off'].includes(options['story-clou']) || !['on', 'off'].includes(options['video-direction'])
     || !['on', 'off'].includes(options['video-vision']) || !['on', 'off'].includes(options['video-audio-direction'])
     || !['auto', 'image_to_video', 'first_last_frame'].includes(options['video-mode'])
@@ -263,7 +272,7 @@ function applySceneVisualControls(scenes, defaultVisualStyleOptions) {
         : 'SYMBOLISM OFF: show concrete action without allegorical overlays or coded props.'} ${visualStyleOptions.roomDeepness
         ? 'ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.'
         : 'ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.'}${options['article-image-reference'] ? ' Use article photo only for broad subject orientation; redraw fictional cubist forms, never copy people, pose, framing, logos or text.' : ''}`,
-      ...(baseVideoPrompt ? { videoPrompt: `${baseVideoPrompt}\n\n${cameraInstruction}` } : {}),
+      ...(baseVideoPrompt ? { videoPrompt: preservePVideoStyle(`${baseVideoPrompt}\n\n${cameraInstruction}`) } : {}),
     };
   });
 }
