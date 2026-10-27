@@ -205,6 +205,10 @@ function defaultsFromExhibitionSettings() {
   defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
   defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
   defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
+  defaults.push(defaultGeneration.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
+  defaults.push(defaultGeneration.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
+  defaults.push(defaultGeneration.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
+  defaults.push(defaultGeneration.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
   if (defaultGeneration.videosAfterEachIteration) defaults.push('--videos-after-each-iteration');
   if (defaultGeneration['generate-title-cards']) defaults.push('--generate-title-cards');
 
@@ -224,14 +228,14 @@ function mergeRunnerArguments(defaults, userArguments) {
     ['--style-reference', '--no-style-reference'], ['--no-style-reference', '--style-reference'],
     ['--generate-title-cards', '--no-generate-title-cards'], ['--no-generate-title-cards', '--generate-title-cards'],
     ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
+    ['--article-image-reference', '--no-article-image-reference'], ['--no-article-image-reference', '--article-image-reference'],
+    ['--landscape-prompt', '--no-landscape-prompt'], ['--no-landscape-prompt', '--landscape-prompt'],
+    ['--preserve-cubist-video-style', '--no-preserve-cubist-video-style'], ['--no-preserve-cubist-video-style', '--preserve-cubist-video-style'],
   ]);
   const suppliedFlags = new Set(userArguments.map(flagName));
-  const locationReferenceWasSpecified = suppliedFlags.has('--guernica-location-reference')
-    || suppliedFlags.has('--no-guernica-location-reference');
   for (let index = 0; index < defaults.length; index += 1) {
     const argument = defaults[index];
     const flag = flagName(argument);
-    if (!locationReferenceWasSpecified && ['--guernica-location-reference', '--no-guernica-location-reference'].includes(flag)) continue;
     if (flag && (suppliedFlags.has(flag) || suppliedFlags.has(oppositeFlags.get(flag)))) continue;
     merged.push(argument);
   }

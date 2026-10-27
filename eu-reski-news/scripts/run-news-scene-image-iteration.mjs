@@ -47,8 +47,9 @@ const { values: options } = parseArgs({ options: {
   'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
-  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
-  'preserve-cubist-video-style': { type: 'boolean', default: false },
+  'prompt-only': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'no-article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
+  'preserve-cubist-video-style': { type: 'boolean', default: false }, 'no-preserve-cubist-video-style': { type: 'boolean', default: false },
+  'landscape-prompt': { type: 'boolean', default: false }, 'no-landscape-prompt': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
@@ -73,6 +74,18 @@ if (options['guernica-location-reference'] && options['no-guernica-location-refe
 if (options['no-guernica-location-reference']) {
   options['guernica-location-reference'] = false;
 }
+if (options['article-image-reference'] && options['no-article-image-reference']) {
+  throw new Error('Choose only one: --article-image-reference or --no-article-image-reference');
+}
+if (options['no-article-image-reference']) options['article-image-reference'] = false;
+if (options['preserve-cubist-video-style'] && options['no-preserve-cubist-video-style']) {
+  throw new Error('Choose only one: --preserve-cubist-video-style or --no-preserve-cubist-video-style');
+}
+if (options['no-preserve-cubist-video-style']) options['preserve-cubist-video-style'] = false;
+if (options['landscape-prompt'] && options['no-landscape-prompt']) {
+  throw new Error('Choose only one: --landscape-prompt or --no-landscape-prompt');
+}
+if (options['no-landscape-prompt']) options['landscape-prompt'] = false;
 if (options['article-image-only-reference']) {
   options['article-image-reference'] = true;
   options['no-style-reference'] = true;
@@ -199,6 +212,7 @@ function currentFeatureSettings() {
     videoAudioDirection: options['video-audio-direction'],
     videoMaxZoom: getMaxVideoZoom(),
     preserveCubistVideoStyle: options['preserve-cubist-video-style'],
+    landscapePrompt: options['landscape-prompt'],
   };
 }
 
@@ -218,6 +232,7 @@ function currentGenerationSettings() {
     storyModel,
     articleImageReference: options['article-image-reference'],
     guernicaLocationReference: options['guernica-location-reference'],
+    landscapePrompt: options['landscape-prompt'],
     guernicaFigureReference: !options['article-image-only-reference'],
     styleReferencePath: options['no-style-reference'] ? null : options['style-reference'],
     guernicaDirectory: options['article-image-only-reference'] ? null : resolve(options['guernica-dir']),
@@ -240,6 +255,7 @@ function restoreFeatureSettings(settings) {
   options['video-audio-direction'] = settings.videoAudioDirection || 'off';
   options['video-max-zoom'] = String(settings.videoMaxZoom ?? 0.08);
   options['preserve-cubist-video-style'] = settings.preserveCubistVideoStyle === true;
+  options['landscape-prompt'] = settings.landscapePrompt === true;
   if (!['on', 'off'].includes(options['story-clou']) || !['on', 'off'].includes(options['video-direction'])
     || !['on', 'off'].includes(options['video-vision']) || !['on', 'off'].includes(options['video-audio-direction'])
     || !['auto', 'image_to_video', 'first_last_frame'].includes(options['video-mode'])
@@ -1002,6 +1018,13 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
       }
       const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: !options['article-image-only-reference'], continuationPlan: record.continuationPlan || null });
+      if (options['landscape-prompt']) {
+        const landscapeInstruction = 'LANDSCAPE PROMPT: Use the wide frame deliberately; let each scene’s focal action and spatial relationships use the frame width naturally. Do not force a horizontal frieze, central cluster or repeated layout.';
+        built.director += `\n\n${landscapeInstruction}`;
+        built.directorHash = hash(built.director);
+        built.request.messages[0].content += `\n\n${landscapeInstruction}`;
+        built.log.messages[0].content += `\n\n${landscapeInstruction}`;
+      }
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
       const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
