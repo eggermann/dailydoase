@@ -320,7 +320,7 @@ const hasTrimmedMedia = orderedFiles.some(({ trimStart, trimEnd }) => trimStart 
 if (fadeDuration > 0 || hasTrimmedMedia) {
   if (fadeDuration > 0 && orderedFiles.length < 2) throw new Error('At least two clips are required for an FFmpeg fade');
   const rawDurations = orderedFiles.map(({ path }) => Number(run(ffprobe, [
-    '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', path,
+    '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=duration', '-of', 'default=noprint_wrappers=1:nokey=1', path,
   ], 'FFprobe').trim()));
   const durations = orderedFiles.map(({ path, trimStart, trimEnd }, index) => {
     const duration = rawDurations[index] - trimStart - trimEnd;
@@ -337,7 +337,7 @@ if (fadeDuration > 0 || hasTrimmedMedia) {
     const videoTrim = trimOptions.length ? `trim=${trimOptions.join(':')},` : '';
     const audioTrim = trimOptions.length ? `atrim=${trimOptions.join(':')},` : '';
     filters.push(`[${index}:v]${videoTrim}settb=AVTB,setpts=PTS-STARTPTS,scale=832:480:force_original_aspect_ratio=decrease,pad=832:480:(ow-iw)/2:(oh-ih)/2,fps=24,format=yuv420p[v${index}]`);
-    filters.push(`[${index}:a]${audioTrim}aresample=32000:async=1:first_pts=0,aformat=sample_fmts=fltp:channel_layouts=stereo,asetpts=PTS-STARTPTS[a${index}]`);
+    filters.push(`[${index}:a]${audioTrim}atrim=duration=${durations[index].toFixed(6)},aresample=32000:async=1:first_pts=0,aformat=sample_fmts=fltp:channel_layouts=stereo,asetpts=PTS-STARTPTS[a${index}]`);
   });
 
   let outputVideo = 'vout';
