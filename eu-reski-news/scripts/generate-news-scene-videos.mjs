@@ -339,7 +339,7 @@ async function concatenateIteration(directory, record) {
     segmentPaths.push(gapPath);
   }
   const sourceTasks = videos.map((video, index) => video?.taskUUID || `gap:scene-${index + 1}:${scenes[index].durationSeconds}s:black`);
-  if (record.concatenatedVideo?.path === iterationRelativePath
+  if ((record.concatenatedVideo?.sourcePath || record.concatenatedVideo?.path) === iterationRelativePath
     && JSON.stringify(record.concatenatedVideo.sourceTasks) === JSON.stringify(sourceTasks)
     && await exists(outputPath)) return;
 
@@ -362,6 +362,40 @@ async function concatenateIteration(directory, record) {
   await saveHtml(directory, record);
   await safeSave(join(directory, 'film-plan.json'), record.filmPlan);
   console.log(`FILM_READY ${outputPath} · ${record.concatenatedVideo.durationSeconds}s · ${scenes.length} Szenen${gaps.length ? ` · ${gaps.length} black gap(s)` : ''}`);
+}
+
+async function normalizeIterationFilm(directory, record) {
+  const filmKey = record.titleCardFilm?.path ? 'titleCardFilm' : 'concatenatedVideo';
+  const film = record[filmKey];
+  if (!film?.path) return;
+
+  const inputPath = resolve(runDirectory, film.runPath || join(directory, film.path));
+  const outputPath = inputPath.replace(/\.mp4$/i, '-audio-normalized.mp4');
+  const outputRunPath = relative(runDirectory, outputPath);
+  if (film.audioNormalization?.outputPath === outputRunPath && await exists(outputPath)) return;
+
+  execFileSync(process.execPath, [
+    join(root, 'eu-reski-news', 'scripts', 'normalize-iteration-audio.mjs'),
+    `--input=${inputPath}`,
+    `--output=${outputPath}`,
+  ], { cwd: root, stdio: 'inherit' });
+
+  film.sourcePath = film.path;
+  film.sourceRunPath = film.runPath;
+  film.path = relative(directory, outputPath);
+  film.runPath = relative(runDirectory, outputPath);
+  film.audioNormalization = {
+    method: 'FFmpeg loudnorm after iteration film assembly',
+    targetIntegratedLufs: -16,
+    maximumTruePeakDbtp: -1.5,
+    targetLoudnessRangeLu: 11,
+    outputPath: outputRunPath,
+    completedAt: new Date().toISOString(),
+  };
+  film.audioStream = await probeAudioStream(outputPath);
+  film.durationSeconds = (await probeVideoStream(outputPath)).duration;
+  delete record.iterationAudioNormalization;
+  await saveHtml(directory, record);
 }
 
 async function assembleAllIterations(run, runDirectory) {
@@ -571,6 +605,19 @@ if (values['generate-title-cards']) {
         await saveHtml(directory, record);
         console.error(`TITLE_CARD_RENDER_FAILED ${directory} · ${error.message || error}; scene film remains available`);
       }
+    }
+  }
+  if (record.concatenatedVideo?.path) {
+    try {
+      await normalizeIterationFilm(directory, record);
+    } catch (error) {
+      record.iterationAudioNormalization = {
+        status: 'failed',
+        error: error.message || String(error),
+        failedAt: new Date().toISOString(),
+      };
+      await saveHtml(directory, record);
+      console.error(`ITERATION_AUDIO_NORMALIZATION_FAILED ${directory} · ${error.message || error}; original film remains available`);
     }
   }
 }

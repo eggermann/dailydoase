@@ -96,6 +96,7 @@
     "news:exhibition": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh",
     "news:html": "node eu-reski-news/scripts/build-news-html.mjs",
     "news:assemble-film": "node eu-reski-news/scripts/assemble-news-film.mjs",
+    "news:normalize-iteration-audio": "node eu-reski-news/scripts/normalize-iteration-audio.mjs",
     "news:glue-scenes": "node --env-file=${DAILYDOASE_ENV_FILE:-.env} eu-reski-news/scripts/generate-scene-glue-videos.mjs",
     "demo:mirelo:v2v": "node lib/generator/mireloAI/demo-video-to-video.js",
     "start": "cross-env APP_ENV=development npm-run-all -p server webpack:watch",
