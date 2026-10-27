@@ -702,7 +702,7 @@ async function main() {
   if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
   const semanticSource = options.resume ? null : await createSemanticSource(options);
   const endless = iterationLimit === 0 || iterationLimit === -1;
-  const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1;
+  const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1 || options['videos-after-each-iteration'];
   const iterationRoot = options.resume
     ? null
     : options['resume-run']
