@@ -98,6 +98,11 @@ export function validateAudioDirectionResponse(response, { record, noDialogueNar
   if (choice?.message?.refusal) throw new Error(`Audio direction refusal: ${choice.message.refusal}`);
   if (choice?.finish_reason !== 'stop') throw new Error('GPT did not return complete audio direction');
   const direction = JSON.parse(choice.message.content);
+  for (const { sceneAudio } of direction.scenes || []) {
+    if (sceneAudio?.spokenAudio === true && sceneAudio.spokenKind === 'none' && !sceneAudio.spokenText?.trim()) {
+      sceneAudio.spokenAudio = false;
+    }
+  }
   const expectedScenes = record.plan.scenes;
   const concept = direction.audioDirection;
   if (!concept?.overallConcept?.trim() || !Array.isArray(concept.recurringMotifs)
