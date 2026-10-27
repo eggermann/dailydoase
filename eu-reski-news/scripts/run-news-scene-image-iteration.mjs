@@ -696,7 +696,15 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'audio-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Audio direction GPT error: ${raw.error.message}`);
-  const direction = validateAudioDirectionResponse(raw, { record, noDialogueNarration });
+  let direction;
+  try {
+    direction = validateAudioDirectionResponse(raw, { record, noDialogueNarration });
+  } catch (error) {
+    const responsePath = join(directory, 'audio-direction-response.json');
+    const rejectedResponsePath = join(directory, `audio-direction-response.invalid-${randomUUID()}.json`);
+    await rename(responsePath, rejectedResponsePath);
+    throw new Error(`${error.message}; rejected response archived, next resume will request a fresh audio direction`);
+  }
   const audioDirection = {
     version: 1,
     promptVersion: audioDirectorPromptVersion,
