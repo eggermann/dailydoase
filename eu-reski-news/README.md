@@ -85,6 +85,20 @@ Relative Iterator-Pfade beziehen sich auf den Ordner des Scene-JSONs. `generatio
 npm run news:exhibition -- --scene=./exhibition-scene.json
 ```
 
+Kurzform mit festem npm-Befehl; Scene-Datei als Argument nach `--` übergeben:
+
+```sh
+npm run news:exhibition:from-scene-json -- ./pfad/zur/exhibition-scene.json
+```
+
+Mit Zeitinterpolation und Standard-Gesamtfenster von einer Stunde (überschreibt `generationInterval` aus der Scene-JSON):
+
+```sh
+npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json
+```
+
+Intervall pro Aufruf überschreiben, zum Beispiel auf zwei Stunden: `npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json --generation-interval=2h`. Beim normalen `from-scene-json`-Befehl kommt Intervallvorgabe aus Scene-JSON.
+
 Lauf setzt Iterator-Reihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Plan und dieselben CLI-Overrides erneut angeben.
 
 `Article + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; optional article photo for subject orientation; --guernica-location-reference adds Guernica as secondary setting/space reference; without it, the previous prompt/reference path remains) → cumulative HTML audit report`.

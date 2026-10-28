@@ -8,7 +8,7 @@ import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
-import { loadSceneSequence } from '../news-scene/scene-sequence.mjs';
+import { loadSceneSequence, parseGenerationInterval } from '../news-scene/scene-sequence.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -636,6 +636,18 @@ async function exhibitionMain() {
     const sceneSequence = sceneArgumentValue
       ? await loadSceneSequence(sceneArgumentValue, defaultGeneration)
       : null;
+    const generationIntervalArgument = exhibitionArguments.findLast((argument) => flagName(argument) === '--generation-interval');
+    if (generationIntervalArgument && !sceneSequence) {
+      throw new Error('--generation-interval requires --scene=PATH');
+    }
+    if (generationIntervalArgument) {
+      const intervalValue = generationIntervalArgument.includes('=')
+        ? generationIntervalArgument.slice('--generation-interval='.length)
+        : exhibitionArguments[exhibitionArguments.indexOf(generationIntervalArgument) + 1];
+      if (!intervalValue || intervalValue.startsWith('--')) throw new Error('Use --generation-interval=1h');
+      sceneSequence.generationInterval = intervalValue;
+      sceneSequence.intervalMs = parseGenerationInterval(intervalValue, sceneSequence.iterators.length);
+    }
     if (state.runDirectory && state.scenePath && !sceneSequence) {
       throw new Error(`Resume the active scene sequence with --scene=${state.scenePath}`);
     }
@@ -686,8 +698,8 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene'].includes(flagName(argument))) {
-        if (['--stop-after-iterations', '--transition-wait-pattern', '--scene'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval'].includes(flagName(argument))) {
+        if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }
       userArguments.push(argument);
