@@ -945,9 +945,10 @@ async function main() {
   }
   const iteratorPlan = options['iterator-plan'] ? await json(resolve(options['iterator-plan'])) : null;
   if (iteratorPlan && (!Array.isArray(iteratorPlan.iterators) || iteratorPlan.iterators.length === 0
-    || !Number.isSafeInteger(iteratorPlan.intervalMs) || iteratorPlan.intervalMs < 1
-    || !['on', 'off'].includes(iteratorPlan.biasMode))) {
-    throw new Error('Iterator plan must contain paths, a positive interval, and biasMode "on" or "off"');
+    || (iteratorPlan.scheduleEnabled !== false
+      && (!Number.isSafeInteger(iteratorPlan.intervalMs) || iteratorPlan.intervalMs < 1
+        || !['on', 'off'].includes(iteratorPlan.biasMode))))) {
+    throw new Error('Scheduled iterator plan must contain paths, a positive interval, and biasMode "on" or "off"');
   }
   const iteratorPlanFingerprint = iteratorPlan
     ? createHash('sha256').update(JSON.stringify(iteratorPlan)).digest('hex')
@@ -1013,6 +1014,7 @@ async function main() {
       iteratorPlanFingerprint,
       sceneSchedule: {
         scenePath: iteratorPlan.scenePath,
+        enabled: iteratorPlan.scheduleEnabled !== false,
         generationInterval: iteratorPlan.generationInterval,
         intervalMs: iteratorPlan.intervalMs,
         biasMode: iteratorPlan.biasMode,
@@ -1072,6 +1074,7 @@ async function main() {
       runManifest.iteratorPlanFingerprint = iteratorPlanFingerprint;
       runManifest.sceneSchedule ||= {
         scenePath: iteratorPlan.scenePath,
+        enabled: iteratorPlan.scheduleEnabled !== false,
         generationInterval: iteratorPlan.generationInterval,
         intervalMs: iteratorPlan.intervalMs,
         biasMode: iteratorPlan.biasMode,
@@ -1213,7 +1216,7 @@ async function main() {
   while (endless || completed < iterationLimit) {
     const iteratorIndex = completed % iteratorCount;
     activateIterator(iteratorIndex);
-    if (iteratorPlan) {
+    if (iteratorPlan?.scheduleEnabled) {
       const targetStart = getIteratorStartTime(
         sceneScheduleStartedAt,
         completed,

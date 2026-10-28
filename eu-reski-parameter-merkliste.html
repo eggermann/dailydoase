@@ -22,8 +22,84 @@
 </head>
 <body><main>
   <h1>EU-RESKI · Parameter-Merkliste</h1>
-  <p class="muted">Stand: 23.10.2026 · Branch <code>eu-reski/default</code> · Worktree <code>/Users/eggermann/.codex/worktrees/e3e1/dailydoase</code></p>
+  <p class="muted">Stand: 28.10.2026 · Scene-JSON, Iterator-JSON und CLI-Parameter</p>
   <p class="flow"><strong>Iteration = eine Nachricht → mehrere Szenen → ein Startbild pro Szene.</strong></p>
+
+  <section>
+    <h2>Scene-JSON und vollständige Parameterdatei</h2>
+    <p>Scene-JSON bestimmt Reihenfolge der Iterator-Dateien. Jede Iterator-Datei enthält Einstellungen unter <code>generation</code>; fehlende Werte erben aus <code>eu-reski-news/default-exhibition-settings.json</code>. CLI-Flags überschreiben JSON-Werte.</p>
+    <p>Vollständiges, lauffähiges Beispiel unter <code>docs/eu-reski/</code>: <a href="docs/eu-reski/scene.example.json"><code>scene.example.json</code></a> und <a href="docs/eu-reski/iterator-all-parameters.example.json"><code>iterator-all-parameters.example.json</code></a>.</p>
+    <pre>{
+  "paths": ["./iterator-all-parameters.example.json"],
+  "generationInterval": "1h",
+  "biasMode": "on"
+}</pre>
+    <p>Normaler Scene-Start ignoriert Zeitfelder vollständig und startet Iteratoren direkt nacheinander. Zeitinterpolation aktiviert nur <code>news:exhibition:from-scene-json:with-time-interpolation</code>; Standardintervall dort ist <code>1h</code>, per <code>--generation-interval=2h</code> änderbar. <code>biasMode</code> (<code>on</code>/<code>off</code>) stammt bei Zeitinterpolation aus der Scene-JSON.</p>
+    <p><strong>Startbefehle:</strong></p>
+    <pre>npm run news:exhibition:from-scene-json -- ./docs/eu-reski/scene.example.json
+npm run news:exhibition:from-scene-json:with-time-interpolation -- ./docs/eu-reski/scene.example.json
+npm run news:exhibition:from-scene-json:with-time-interpolation -- ./docs/eu-reski/scene.example.json --generation-interval=2h</pre>
+    <div class="scroll"><table>
+      <thead><tr><th>Iterator-JSON: Feld unter <code>generation</code></th><th>Entsprechende CLI-Steuerung</th></tr></thead>
+      <tbody>
+        <tr><td><code>autoMode</code></td><td><code>--auto-mode</code> / <code>--no-auto-mode</code></td></tr>
+        <tr><td><code>storyModel</code></td><td><code>--story-model</code></td></tr>
+        <tr><td><code>iterations</code>, <code>pauseMs</code>, <code>articleOrder</code></td><td><code>--iterations</code>, <code>--pause-ms</code>, <code>--article-order</code></td></tr>
+        <tr><td><code>styleReference</code>, <code>legacyGuernicaStyleReferencePrompt</code></td><td><code>--style-reference=PATH</code>, <code>--no-style-reference</code>, <code>--legacy-guernica-style-reference-prompt</code></td></tr>
+        <tr><td><code>guernicaFigureReference</code>, <code>articleImageReference</code>, <code>guernicaLocationReference</code></td><td><code>--no-guernica-figure-reference</code>, <code>--article-image-reference</code>, <code>--guernica-location-reference</code> / <code>--no-guernica-location-reference</code></td></tr>
+        <tr><td><code>landscapePrompt</code>, <code>preserveCubistVideoStyle</code></td><td><code>--landscape-prompt</code>, <code>--preserve-cubist-video-style</code></td></tr>
+        <tr><td><code>videosAfterEachIteration</code>, <code>generate-title-cards</code></td><td><code>--videos-after-each-iteration</code>, <code>--generate-title-cards</code> / <code>--no-generate-title-cards</code></td></tr>
+        <tr><td><code>sceneCount.mode/count/takt/numerator/denominator/type/bias/minimum/maximum</code></td><td><code>--scene-count-mode</code>, <code>--scenes</code>, <code>--scene-count-takt</code>, <code>--scene-count-numerator</code>, <code>--scene-count-denominator</code>, <code>--scene-count-type</code>, <code>--scene-count-bias</code>, <code>--min-scenes</code>, <code>--max-scenes</code></td></tr>
+        <tr><td><code>sceneLength.takt/type/multiplier/bias/minimum/maximum</code></td><td><code>--scene-length-takt</code>, <code>--scene-length-type</code>, <code>--scene-length-multiplier</code>, <code>--scene-length-bias</code>, <code>--min-scene-seconds</code>, <code>--max-scene-seconds</code></td></tr>
+        <tr><td><code>imageProvider</code></td><td><code>--image-provider=runware|hf-flux-klein</code></td></tr>
+        <tr><td><code>videoModel</code>, <code>videoResolution</code>, <code>videoSettingsMode</code></td><td><code>--video-model</code>, <code>--video-resolution</code>, <code>--video-settings-mode</code></td></tr>
+        <tr><td><code>videoMode</code>, <code>videoDirection</code>, <code>videoVision</code>, <code>videoAudioDirection</code>, <code>videoMaxZoom</code>, <code>storyClou</code></td><td><code>--video-mode</code>, <code>--video-direction</code>, <code>--video-vision</code>, <code>--video-audio-direction</code>, <code>--video-max-zoom</code>, <code>--story-clou</code></td></tr>
+        <tr><td><code>noDialogueNarration</code></td><td><code>--no-dialogue-narration</code> / <code>--allow-dialogue-narration</code></td></tr>
+        <tr><td><code>visualControls.mode/symbolic/roomDeepness/layering</code></td><td><code>--scene-visual-controls</code> / <code>--fixed-visual-controls</code>, <code>--symbolic</code> / <code>--no-symbolic</code>, <code>--room-deepness</code> / <code>--no-room-deepness</code>, <code>--layering</code></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <details>
+    <summary>Vollständige CLI-Flagliste</summary>
+    <p><strong>Iteratoren, Szene und Dauer:</strong></p>
+    <pre>--iterations --pause-ms --article-order --scene-count-mode --scenes --scene-count-takt
+--scene-count-numerator --scene-count-denominator --scene-count-type --scene-count-bias
+--min-scenes --max-scenes --scene-length-takt --scene-length-type
+--scene-length-multiplier --scene-length-bias --min-scene-seconds --max-scene-seconds</pre>
+    <p><strong>Story, Quelle und Bild:</strong></p>
+    <pre>--story-model --article-id --words --words-file --stream-module --stream-file
+--stream-sequence-file --news-dir --output-dir --image-seed --image-provider
+--style-reference --no-style-reference --article-image-reference --no-article-image-reference
+--article-image-only-reference --no-guernica-figure-reference --guernica-location-reference
+--no-guernica-location-reference --landscape-prompt --no-landscape-prompt --prompt-only</pre>
+    <p><strong>Regie und Video:</strong></p>
+    <pre>--auto-mode --no-auto-mode --legacy-guernica-style-reference-prompt
+--no-legacy-guernica-style-reference-prompt --story-clou --video-mode --video-direction
+--video-vision --video-audio-direction --video-max-zoom --video-model --video-resolution
+--video-settings-mode --videos-after-each-iteration --no-videos-after-each-iteration
+--generate-title-cards --no-generate-title-cards --preserve-cubist-video-style</pre>
+    <p><strong>Visuelle Steuerung:</strong></p>
+    <pre>--scene-visual-controls --fixed-visual-controls --symbolic --no-symbolic
+--room-deepness --no-room-deepness --layering --no-dialogue-narration --allow-dialogue-narration
+--use-style-reference --use-guernica-figure-reference --no-preserve-cubist-video-style</pre>
+    <p><strong>Exhibition und Laufsteuerung:</strong></p>
+    <pre>--scene --generation-interval --stop-after-iterations --first-last-glue
+--no-first-last-glue --transition-wait-pattern --resume --resume-run --guernica-dir --help
+--iterator-plan (interne Übergabe vom Exhibition-Runner)</pre>
+    <h3>Weitere Werte in <code>default-exhibition-settings.json</code></h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Feld</th><th>Bedeutung / Umgebungsvariable</th></tr></thead>
+      <tbody>
+        <tr><td><code>version</code></td><td>Versioniert den Standard-Settings-Snapshot.</td></tr>
+        <tr><td><code>paths.newsDirectory</code>, <code>paths.outputDirectory</code></td><td>Quell-News und Ausgabeverzeichnis; überschreibbar mit <code>NEWS_NEWS_DIR</code>, <code>NEWS_OUTPUT_DIR</code>.</td></tr>
+        <tr><td><code>exhibition.newsRefreshIntervalMs</code>, <code>newsRefreshCheckMs</code>, <code>newsRefreshRetryMs</code></td><td>News-Aktualisierung und Prüf-/Retry-Abstände; passende Variablen beginnen mit <code>NEWS_REFRESH_</code>.</td></tr>
+        <tr><td><code>exhibition.mergeCheckMs</code>, <code>mergeRetryMs</code></td><td>Prüf-/Retry-Abstände für Montage und Glue; <code>EXHIBITION_MERGE_CHECK_MS</code>, <code>EXHIBITION_MERGE_RETRY_MS</code>.</td></tr>
+        <tr><td><code>exhibition.firstLastGlue</code>, <code>glueDurationPattern</code>, <code>glueWaitPattern</code></td><td>Brücken an Iterationsgrenzen, Dauermuster und Übergangsmuster; überschreibbar über <code>EXHIBITION_FIRST_LAST_GLUE</code>, <code>EXHIBITION_GLUE_DURATION_PATTERN</code>, <code>EXHIBITION_GLUE_WAIT_PATTERN</code> oder CLI-Flags.</td></tr>
+        <tr><td><code>exhibition.frameOffsetSeconds</code>, <code>fadeSeconds</code>, <code>randomBridgeThreshold</code></td><td>Frame-Abstand, Überblendung und Zufallsschwelle; Variablen <code>EXHIBITION_FRAME_OFFSET_SECONDS</code>, <code>EXHIBITION_FADE_SECONDS</code>, <code>EXHIBITION_RANDOM_BRIDGE_THRESHOLD</code>.</td></tr>
+      </tbody>
+    </table></div>
+  </details>
 
   <section>
     <h2>Die drei Entscheidungen</h2>
@@ -156,6 +232,6 @@
     </table></div>
     <p><a href="/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/run-001/index.html">HTML-Bericht ansehen</a> · <a href="/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/start-command.txt">Startbefehl und Laufparameter</a>.</p>
   </section>
-  <p class="muted">Quelle: <code>eu-reski-news/scripts/run-news-scene-image-iteration.mjs</code> im Worktree <code>codex/eu-reski-scene-count-takt</code>. Merkliste dokumentiert vorhandene CLI-Parameter.</p>
+  <p class="muted">Quellen: <code>eu-reski-news/default-exhibition-settings.json</code>, <code>eu-reski-news/scripts/exhibition-runner.mjs</code> und <code>eu-reski-news/scripts/run-news-scene-image-iteration.mjs</code>.</p>
 </main></body>
 </html>

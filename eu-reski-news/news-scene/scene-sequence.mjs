@@ -36,7 +36,10 @@ function resolveConfigPath(configPath, scenePath) {
     : resolve(dirname(scenePath), configPath);
 }
 
-export async function loadSceneSequence(scenePath, defaultGeneration) {
+export async function loadSceneSequence(scenePath, defaultGeneration, {
+  scheduleEnabled = true,
+  generationInterval = undefined,
+} = {}) {
   const absoluteScenePath = resolve(scenePath);
   const scene = JSON.parse(await readFile(absoluteScenePath, 'utf8'));
   if (!scene || typeof scene !== 'object' || Array.isArray(scene)) {
@@ -45,11 +48,14 @@ export async function loadSceneSequence(scenePath, defaultGeneration) {
   if (!Array.isArray(scene.paths) || scene.paths.length === 0) {
     throw new Error('Scene JSON paths must be a non-empty ordered list of iterator JSON paths');
   }
-  if (!['on', 'off'].includes(scene.biasMode)) {
+  if (scheduleEnabled && !['on', 'off'].includes(scene.biasMode)) {
     throw new Error('Scene JSON biasMode must be "on" or "off"');
   }
 
-  const intervalMs = parseGenerationInterval(scene.generationInterval, scene.paths.length);
+  const selectedInterval = generationInterval ?? scene.generationInterval;
+  const intervalMs = scheduleEnabled
+    ? parseGenerationInterval(selectedInterval, scene.paths.length)
+    : null;
   const iterators = [];
   for (const [index, configPath] of scene.paths.entries()) {
     if (typeof configPath !== 'string' || !configPath.trim()) {
@@ -72,9 +78,10 @@ export async function loadSceneSequence(scenePath, defaultGeneration) {
 
   return {
     path: absoluteScenePath,
-    generationInterval: scene.generationInterval,
+    scheduleEnabled,
+    generationInterval: scheduleEnabled ? selectedInterval : null,
     intervalMs,
-    biasMode: scene.biasMode,
+    biasMode: scheduleEnabled ? scene.biasMode : null,
     iterators,
   };
 }

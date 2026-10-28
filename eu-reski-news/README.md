@@ -79,7 +79,7 @@ Iterator-Datei enthält zum Beispiel:
 }
 ```
 
-Relative Iterator-Pfade beziehen sich auf den Ordner des Scene-JSONs. `generationInterval` ist Gesamtfenster für geordnete Liste und akzeptiert `ms`, `s`, `m` oder `h`; `-1` bedeutet fünf Sekunden je Iterator. Bei `1h` und vier Iteratoren beträgt jeder Slot 15 Minuten. `biasMode: "on"` startet in Slotmitte (nach 7 Minuten 30 Sekunden), `"off"` am Slotanfang. Startzeiten liegen dann bei `00:07:30`, `00:22:30`, `00:37:30`, `00:52:30`. Eine verspätete Generation überlappt nicht mit nächster: Runner startet nächsten Iterator sofort, sobald vorheriger fertig ist.
+Relative Iterator-Pfade beziehen sich auf den Ordner des Scene-JSONs. Zeitfelder wirken nur mit dem `with-time-interpolation`-Befehl: `generationInterval` ist Gesamtfenster für geordnete Liste und akzeptiert `ms`, `s`, `m` oder `h`; `-1` bedeutet fünf Sekunden je Iterator. Bei `1h` und vier Iteratoren beträgt jeder Slot 15 Minuten. `biasMode: "on"` startet in Slotmitte (nach 7 Minuten 30 Sekunden), `"off"` am Slotanfang. Startzeiten liegen dann bei `00:07:30`, `00:22:30`, `00:37:30`, `00:52:30`. Eine verspätete Generation überlappt nicht mit nächster: Runner startet nächsten Iterator sofort, sobald vorheriger fertig ist.
 
 ```sh
 npm run news:exhibition -- --scene=./exhibition-scene.json
@@ -91,13 +91,15 @@ Kurzform mit festem npm-Befehl; Scene-Datei als Argument nach `--` übergeben:
 npm run news:exhibition:from-scene-json -- ./pfad/zur/exhibition-scene.json
 ```
 
+Dieser normale Start ignoriert `generationInterval` und `biasMode` vollständig; Iteratoren laufen ohne Zeitverzögerung nacheinander. Zeitplan startet nur mit `with-time-interpolation`.
+
 Mit Zeitinterpolation und Standard-Gesamtfenster von einer Stunde (überschreibt `generationInterval` aus der Scene-JSON):
 
 ```sh
 npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json
 ```
 
-Intervall pro Aufruf überschreiben, zum Beispiel auf zwei Stunden: `npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json --generation-interval=2h`. Beim normalen `from-scene-json`-Befehl kommt Intervallvorgabe aus Scene-JSON.
+Intervall pro Aufruf überschreiben, zum Beispiel auf zwei Stunden: `npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json --generation-interval=2h`. `biasMode` kommt bei diesem Befehl weiterhin aus Scene-JSON.
 
 Lauf setzt Iterator-Reihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Plan und dieselben CLI-Overrides erneut angeben.
 

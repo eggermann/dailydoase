@@ -8,7 +8,7 @@ import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
-import { loadSceneSequence, parseGenerationInterval } from '../news-scene/scene-sequence.mjs';
+import { loadSceneSequence } from '../news-scene/scene-sequence.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -633,21 +633,24 @@ async function exhibitionMain() {
         ? exhibitionArguments[exhibitionArguments.indexOf(sceneArgument) + 1]
         : null;
     if (sceneArgument && !sceneArgumentValue) throw new Error('Use --scene=PATH');
-    const sceneSequence = sceneArgumentValue
-      ? await loadSceneSequence(sceneArgumentValue, defaultGeneration)
-      : null;
     const generationIntervalArgument = exhibitionArguments.findLast((argument) => flagName(argument) === '--generation-interval');
-    if (generationIntervalArgument && !sceneSequence) {
+    if (generationIntervalArgument && !sceneArgumentValue) {
       throw new Error('--generation-interval requires --scene=PATH');
     }
-    if (generationIntervalArgument) {
-      const intervalValue = generationIntervalArgument.includes('=')
+    const generationInterval = generationIntervalArgument
+      ? generationIntervalArgument.includes('=')
         ? generationIntervalArgument.slice('--generation-interval='.length)
-        : exhibitionArguments[exhibitionArguments.indexOf(generationIntervalArgument) + 1];
-      if (!intervalValue || intervalValue.startsWith('--')) throw new Error('Use --generation-interval=1h');
-      sceneSequence.generationInterval = intervalValue;
-      sceneSequence.intervalMs = parseGenerationInterval(intervalValue, sceneSequence.iterators.length);
+        : exhibitionArguments[exhibitionArguments.indexOf(generationIntervalArgument) + 1]
+      : undefined;
+    if (generationIntervalArgument) {
+      if (!generationInterval || generationInterval.startsWith('--')) throw new Error('Use --generation-interval=1h');
     }
+    const sceneSequence = sceneArgumentValue
+      ? await loadSceneSequence(sceneArgumentValue, defaultGeneration, {
+        scheduleEnabled: Boolean(generationIntervalArgument),
+        generationInterval,
+      })
+      : null;
     if (state.runDirectory && state.scenePath && !sceneSequence) {
       throw new Error(`Resume the active scene sequence with --scene=${state.scenePath}`);
     }
@@ -754,6 +757,7 @@ async function exhibitionMain() {
       iteratorPlanPath = join(outputDirectory, '.exhibition-iterator-plan.json');
       const iteratorPlan = {
         scenePath: sceneSequence.path,
+        scheduleEnabled: sceneSequence.scheduleEnabled,
         generationInterval: sceneSequence.generationInterval,
         intervalMs: sceneSequence.intervalMs,
         biasMode: sceneSequence.biasMode,
