@@ -72,6 +72,13 @@ async function saveJson(path, value) {
   await rename(temporaryPath, path);
 }
 
+let stateSaveQueue = Promise.resolve();
+function saveState() {
+  const snapshot = structuredClone(state);
+  stateSaveQueue = stateSaveQueue.then(() => saveJson(statePath, snapshot));
+  return stateSaveQueue;
+}
+
 async function listAggregateFiles() {
   let directoryEntries;
   try {
@@ -166,6 +173,62 @@ function runCommand(label, command, args, { onLine = null, inheritStdin = false 
 
 function flagName(argument) {
   return argument.startsWith('--') ? argument.split('=', 1)[0] : null;
+}
+
+function defaultsFromExhibitionSettings(generation = defaultGeneration) {
+  const { sceneCount, sceneLength, visualControls } = generation;
+  const defaults = [
+    `--story-model=${generation.storyModel}`,
+    `--scene-count-mode=${sceneCount.mode}`,
+    ...(sceneCount.mode === 'fixed' && Number.isInteger(sceneCount.count) ? [`--scenes=${sceneCount.count}`] : []),
+    `--scene-count-takt=${sceneCount.takt}`,
+    `--scene-count-numerator=${sceneCount.numerator}`,
+    `--scene-count-denominator=${sceneCount.denominator}`,
+    `--scene-count-type=${sceneCount.type}`,
+    `--scene-count-bias=${sceneCount.bias}`,
+    `--min-scenes=${sceneCount.minimum}`,
+    `--max-scenes=${sceneCount.maximum}`,
+    `--scene-length-takt=${sceneLength.takt}`,
+    `--scene-length-type=${sceneLength.type}`,
+    `--scene-length-multiplier=${sceneLength.multiplier}`,
+    `--scene-length-bias=${sceneLength.bias}`,
+    `--min-scene-seconds=${sceneLength.minimum}`,
+    `--max-scene-seconds=${sceneLength.maximum}`,
+    `--image-provider=${generation.imageProvider}`,
+    `--video-model=${generation.videoModel}`,
+    `--video-resolution=${generation.videoResolution}`,
+    `--video-settings-mode=${generation.videoSettingsMode}`,
+    `--video-mode=${generation.videoMode}`,
+    `--video-direction=${generation.videoDirection}`,
+    `--story-clou=${generation.storyClou}`,
+    `--video-vision=${generation.videoVision}`,
+    `--video-audio-direction=${generation.videoAudioDirection}`,
+    generation.noDialogueNarration ? '--no-dialogue-narration' : '--allow-dialogue-narration',
+    `--video-max-zoom=${generation.videoMaxZoom}`,
+    `--layering=${visualControls.layering}`,
+    `--iterations=${generation.iterations}`,
+    `--pause-ms=${generation.pauseMs}`,
+    `--article-order=${generation.articleOrder}`,
+    generation.legacyGuernicaStyleReferencePrompt ? '--legacy-guernica-style-reference-prompt' : '--no-legacy-guernica-style-reference-prompt',
+  ];
+  defaults.push(generation.autoMode ? '--auto-mode' : '--no-auto-mode');
+  defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
+  defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
+  defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
+  defaults.push(generation.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
+  defaults.push(generation.styleReference === false ? '--no-style-reference' : '--use-style-reference');
+  defaults.push(generation.guernicaFigureReference === false ? '--no-guernica-figure-reference' : '--use-guernica-figure-reference');
+  defaults.push(generation.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
+  defaults.push(generation.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
+  defaults.push(generation.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
+  defaults.push(generation.videosAfterEachIteration ? '--videos-after-each-iteration' : '--no-videos-after-each-iteration');
+  defaults.push(generation['generate-title-cards'] ? '--generate-title-cards' : '--no-generate-title-cards');
+
+  return {
+    args: defaults,
+    storyModel: generation.storyModel,
+    source: `${settingsPath} (version ${defaultSettings.version})`,
+  };
 }
 
 function argumentValue(argumentsList, flag, fallback) {
@@ -263,7 +326,7 @@ async function getReadyIterations(runDirectory) {
   return ready;
 }
 
-async function updateFilms(runDirectory, readyIterations, videoSettings, generateTitleCards) {
+async function updateFilms(runDirectory, readyIterations, videoSettings, generateTitleCards, workerKey = null) {
   if (!glueEnabled || !readyIterations.length) return;
   const glueDirectory = join(runDirectory, 'glue-vids');
   const iterationCount = readyIterations.length;
@@ -364,15 +427,24 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
   })));
   await writeFile(join(runDirectory, 'index.html'), renderRunReport(runManifest, reportIterations));
 
-  const state = await readState();
-  state.runDirectory = runDirectory;
-  state.gluedThroughRunDirectory = runDirectory;
-  state.gluedThroughIteration = iterationCount;
-  state.lastFilmBuildAt = new Date().toISOString();
-  await saveJson(statePath, state);
+  if (workerKey) {
+    state.sceneWorkers ||= {};
+    state.sceneWorkers[workerKey] ||= {};
+    Object.assign(state.sceneWorkers[workerKey], {
+      runDirectory,
+      gluedThroughIteration: iterationCount,
+      lastFilmBuildAt: new Date().toISOString(),
+    });
+  } else {
+    state.runDirectory = runDirectory;
+    state.gluedThroughRunDirectory = runDirectory;
+    state.gluedThroughIteration = iterationCount;
+    state.lastFilmBuildAt = new Date().toISOString();
+  }
+  await saveState();
 }
 
-async function runMergeLoop(runDirectory, videoSettings, generateTitleCards) {
+async function runMergeLoop(runDirectory, videoSettings, generateTitleCards, workerKey = null) {
   while (!stopping) {
     if (mergeRunning) {
       await delayOrStop(mergeCheckMs);
@@ -382,10 +454,14 @@ async function runMergeLoop(runDirectory, videoSettings, generateTitleCards) {
     try {
       const ready = await getReadyIterations(runDirectory);
       const state = await readState();
-      const gluedThroughIteration = state.gluedThroughRunDirectory === runDirectory
-        ? Number(state.gluedThroughIteration || 0)
+      const workerState = workerKey ? state.sceneWorkers?.[workerKey] : null;
+      const gluedThroughIteration = workerKey
+        ? workerState?.runDirectory === runDirectory ? Number(workerState.gluedThroughIteration || 0) : 0
+        : state.gluedThroughRunDirectory === runDirectory ? Number(state.gluedThroughIteration || 0)
         : 0;
-      if (ready.length > gluedThroughIteration) await updateFilms(runDirectory, ready, videoSettings, generateTitleCards);
+      if (ready.length > gluedThroughIteration) {
+        await updateFilms(runDirectory, ready, videoSettings, generateTitleCards, workerKey);
+      }
       await delayOrStop(mergeCheckMs);
     } catch (error) {
       console.error(`[exhibition] Film merge failed: ${error.message}`);
@@ -442,7 +518,7 @@ async function withLock(task) {
   }
 }
 
-function startRunner(argumentsList, runDirectory, onRunDirectory) {
+function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = null) {
   let resolveClosed;
   let rejectClosed;
   const closed = new Promise((resolveRunner, rejectRunner) => {
@@ -460,8 +536,14 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
       console.log(line);
       const match = /^Run folder: (.+)$/.exec(line);
       if (!match) return;
-      state.runDirectory = match[1];
-      saveJson(statePath, state).catch((error) => console.error(`[exhibition] Could not save run pointer: ${error.message}`));
+      if (workerKey) {
+        state.sceneWorkers ||= {};
+        state.sceneWorkers[workerKey] ||= {};
+        state.sceneWorkers[workerKey].runDirectory = match[1];
+      } else {
+        state.runDirectory = match[1];
+      }
+      saveState().catch((error) => console.error(`[exhibition] Could not save run pointer: ${error.message}`));
       onRunDirectory?.(match[1]);
     };
     const stdoutLines = createInterface({ input: child.stdout, crlfDelay: Infinity });
@@ -488,6 +570,60 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
   }
 }
 
+async function runParallelSceneWorkers(workers, finiteIterationLimit) {
+  const refreshTask = runRefreshLoop();
+  const mergeTasks = new Map();
+  const startMergeLoop = (worker) => {
+    if (!glueEnabled || mergeTasks.has(worker.key)) return;
+    const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory;
+    if (!runDirectory) return;
+    mergeTasks.set(worker.key, runMergeLoop(runDirectory, worker.videoSettings, worker.generateTitleCards, worker.key));
+  };
+  const workerTasks = workers.map(async (worker) => {
+    if (state.sceneWorkers?.[worker.key]?.runDirectory) startMergeLoop(worker);
+    while (!stopping) {
+      const savedRunDirectory = state.sceneWorkers?.[worker.key]?.runDirectory || null;
+      const running = startRunner(worker.arguments, savedRunDirectory, (runDirectory) => {
+        state.sceneWorkers ||= {};
+        state.sceneWorkers[worker.key] ||= {};
+        state.sceneWorkers[worker.key].runDirectory = runDirectory;
+        startMergeLoop(worker);
+      }, worker.key);
+      const result = await running.closed;
+      if (stopping) return;
+
+      if (finiteIterationLimit !== null && result.code === 0) {
+        if (glueEnabled) {
+          const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory;
+          while (!stopping) {
+            const savedState = await readState();
+            if (savedState.sceneWorkers?.[worker.key]?.runDirectory === runDirectory
+              && Number(savedState.sceneWorkers[worker.key].gluedThroughIteration || 0) >= finiteIterationLimit) break;
+            await delayOrStop(mergeCheckMs);
+          }
+        }
+        return;
+      }
+
+      if (result.globalArticleQueueExhausted) {
+        log(`${worker.name}: global article queue exhausted; wait ${refreshCheckMs} ms for news refresh.`);
+        await delayOrStop(refreshCheckMs);
+      } else {
+        log(`${worker.name}: image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
+        await delayOrStop(30_000);
+      }
+    }
+  });
+
+  await Promise.all(workerTasks);
+  if (!stopping) {
+    stopping = true;
+    wakeForStop();
+    for (const child of children) child.kill('SIGTERM');
+  }
+  await Promise.allSettled([refreshTask, ...mergeTasks.values()]);
+}
+
 async function exhibitionMain() {
   if (process.argv.includes('--help')) {
     console.log('Start exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
@@ -504,8 +640,10 @@ async function exhibitionMain() {
     const resumePath = resumeArgument ? argumentValue(commandArguments, '--resume-run', '') : '';
     if (resumeArgument && (!resumePath || resumePath.startsWith('--'))) throw new Error('Use --resume-run=PATH');
     if (resumePath) state.runDirectory = resolve(resumePath);
-    const priorRun = state.runDirectory
-      ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
+    const activeWorkerRunDirectory = Object.values(state.sceneWorkers || {}).find((worker) => worker.runDirectory)?.runDirectory;
+    const trackedRunDirectory = state.runDirectory || activeWorkerRunDirectory;
+    const priorRun = trackedRunDirectory
+      ? await readJson(join(trackedRunDirectory, 'run.json')).catch(() => null)
       : null;
     if (resumePath && !priorRun) throw new Error(`Cannot resume: no run.json in ${state.runDirectory}`);
     const priorRunIsIncomplete = priorRun && (Boolean(resumePath) || ['running', 'pending_media'].includes(priorRun.status));
@@ -517,14 +655,14 @@ async function exhibitionMain() {
     }
     log(`News directory: ${newsDirectory}; output directory: ${outputDirectory}`);
     if (state.settingsFingerprint !== settingsFingerprint) {
-      const savedRun = state.runDirectory
-        ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
+      const savedRun = trackedRunDirectory
+        ? await readJson(join(trackedRunDirectory, 'run.json')).catch(() => null)
         : null;
       const resumableRun = savedRun && (Boolean(resumePath) || ['running', 'pending_media'].includes(savedRun.status));
       if (resumableRun) {
         log(`Defaults changed, but run ${state.runDirectory} is incomplete; preserving its saved arguments and run snapshot for resume.`);
       } else {
-        if (state.runDirectory) log(`Default settings changed; new run will use ${settingsPath} version ${defaultSettings.version}. Existing run files remain intact.`);
+        if (trackedRunDirectory) log(`Default settings changed; new run will use ${settingsPath} version ${defaultSettings.version}. Existing run files remain intact.`);
         state.runnerArguments = null;
         state.runDirectory = null;
         state.storyModel = null;
@@ -585,12 +723,18 @@ async function exhibitionMain() {
       }))),
     } : null;
     const activeScenePaths = state.scenePaths || (state.scenePath ? [state.scenePath] : []);
-    if (state.runDirectory && activeScenePaths.length && !sceneSequence) {
+    const hasActiveSceneWorkers = Object.values(state.sceneWorkers || {}).some(({ runDirectory }) => Boolean(runDirectory));
+    const hasActiveSceneSequence = Boolean(state.runDirectory || hasActiveSceneWorkers);
+    if (hasActiveSceneSequence && activeScenePaths.length && !sceneSequence) {
       throw new Error(`Resume the active scene sequence with ${activeScenePaths.map((scenePath) => `--scene=${scenePath}`).join(' ')}`);
     }
-    if (state.runDirectory && activeScenePaths.length
+    if (hasActiveSceneSequence && activeScenePaths.length
       && JSON.stringify(sceneSequence?.paths || [sceneSequence?.path]) !== JSON.stringify(activeScenePaths)) {
       throw new Error(`Active scene sequence uses ${activeScenePaths.join(', ')}; resume with the same --scene files before selecting another sequence`);
+    }
+    const parallelSceneMode = Boolean(sceneSequence && sceneSequence.iterators.length > 1);
+    if (parallelSceneMode && state.runDirectory && priorRunIsIncomplete) {
+      throw new Error('An active sequential scene run cannot be resumed as parallel workers; preserve it and start parallel workers in a new output directory.');
     }
     const stopAfterArgument = exhibitionArguments.find((argument) => flagName(argument) === '--stop-after-iterations');
     let stopAfterIterations = null;
@@ -659,7 +803,7 @@ async function exhibitionMain() {
       process.env.NEWS_STORY_MODEL?.trim() || '',
     ).trim();
     if (requestedStoryModel) defaults = { ...defaults, storyModel: requestedStoryModel };
-    if (stopAfterIterations === null && !userArguments.some((argument) => flagName(argument) === '--iterations')) {
+    if (!parallelSceneMode && stopAfterIterations === null && !userArguments.some((argument) => flagName(argument) === '--iterations')) {
       const configuredIterations = Number(argumentValue(defaults.args, '--iterations', '-1'));
       if (Number.isSafeInteger(configuredIterations) && configuredIterations > 0) {
         stopAfterIterations = configuredIterations;
@@ -695,6 +839,7 @@ async function exhibitionMain() {
     else if (defaultGeneration.autoMode === true || defaults.args.includes('--no-auto-mode')
       || exhibitionArguments.includes('--no-auto-mode')) normalizedRunnerArguments.push('--no-auto-mode');
     let iteratorPlanPath = null;
+    let parallelWorkers = null;
     if (iteratorPlans) {
       iteratorPlanPath = join(outputDirectory, '.exhibition-iterator-plan.json');
       const iteratorPlan = {
@@ -705,28 +850,94 @@ async function exhibitionMain() {
         biasMode: sceneSequence.biasMode,
         iterators: iteratorPlans,
       };
-      if (priorRunIsIncomplete && state.runDirectory && priorRun?.iteratorPlanFingerprint) {
-        const savedPlan = await readJson(iteratorPlanPath);
-        const comparable = (plan) => ({
-          ...plan,
-          iterators: plan.iterators.map((iterator) => ({
-            ...iterator,
-            arguments: iterator.arguments.filter((argument) => !['--iterations', '--article-order'].includes(flagName(argument))),
-          })),
+      if (parallelSceneMode) {
+        const configuredWorkers = iteratorPlans.map((iterator, index) => {
+          const generation = sceneSequence.iterators[index].generation;
+          const ratePerHour = Number(generation.iterations);
+          if (!Number.isSafeInteger(ratePerHour) || ratePerHour < 1) {
+            throw new Error(`Scene ${iterator.name} requires a positive integer generation.iterations rate per hour`);
+          }
+          const intervalMs = sceneSequence.scheduleEnabled ? sceneSequence.intervalMs / ratePerHour : null;
+          if (sceneSequence.scheduleEnabled && (!Number.isSafeInteger(intervalMs) || intervalMs < 1)) {
+            throw new Error(`Scene ${iterator.name} rate does not divide its generation interval into whole milliseconds`);
+          }
+          const key = `${String(index + 1).padStart(2, '0')}-${iterator.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+          const planPath = join(outputDirectory, `.exhibition-iterator-plan-${key}.json`);
+          const workerPlan = {
+            scenePath: sceneSequence.path,
+            scheduleEnabled: sceneSequence.scheduleEnabled,
+            generationInterval: sceneSequence.scheduleEnabled ? `${sceneSequence.generationInterval}/${ratePerHour}` : null,
+            intervalMs,
+            biasMode: sceneSequence.scheduleEnabled ? sceneSequence.biasMode : null,
+            iterators: [iterator],
+          };
+          const workerArguments = iterator.arguments.filter((argument) =>
+            !['--iterations', '--article-order'].includes(flagName(argument)));
+          workerArguments.push('--article-order=global', `--iterations=${stopAfterIterations ?? 0}`, `--iterator-plan=${planPath}`);
+          const videoSettings = {
+            model: argumentValue(iterator.arguments, '--video-model', defaultGeneration.videoModel),
+            resolution: argumentValue(iterator.arguments, '--video-resolution', defaultGeneration.videoResolution),
+            settingsMode: argumentValue(iterator.arguments, '--video-settings-mode', defaultGeneration.videoSettingsMode),
+          };
+          return {
+            key,
+            name: iterator.name,
+            ratePerHour,
+            planPath,
+            plan: workerPlan,
+            arguments: workerArguments,
+            videoSettings,
+            generateTitleCards: iterator.arguments.includes('--generate-title-cards')
+              && !iterator.arguments.includes('--no-generate-title-cards'),
+          };
         });
-        if (JSON.stringify(comparable(savedPlan)) !== JSON.stringify(comparable(iteratorPlan))) {
-          throw new Error('Scene settings changed; resume requires the original scene plan.');
+        const workerPlanSnapshot = {
+          scenePath: sceneSequence.path,
+          scheduleEnabled: sceneSequence.scheduleEnabled,
+          generationInterval: sceneSequence.generationInterval,
+          biasMode: sceneSequence.biasMode,
+          workers: configuredWorkers.map(({ key, name, ratePerHour, plan }) => ({ key, name, ratePerHour, plan })),
+        };
+        const workerPlanFingerprint = createHash('sha256').update(JSON.stringify(workerPlanSnapshot)).digest('hex');
+        if (hasActiveSceneWorkers && state.scenePlanFingerprint !== workerPlanFingerprint) {
+          throw new Error('Parallel scene settings changed; resume requires the original worker plans.');
         }
-        const savedFingerprint = createHash('sha256').update(JSON.stringify(savedPlan)).digest('hex');
-        if (savedFingerprint !== priorRun.iteratorPlanFingerprint) throw new Error('Saved scene plan does not match the interrupted run.');
-        log('Resuming the saved scene plan; iteration limit and global article order may be changed explicitly.');
+        await saveJson(iteratorPlanPath, workerPlanSnapshot);
+        for (const worker of configuredWorkers) {
+          await saveJson(worker.planPath, worker.plan);
+          state.sceneWorkers ||= {};
+          state.sceneWorkers[worker.key] ||= {};
+          Object.assign(state.sceneWorkers[worker.key], {
+            name: worker.name,
+            ratePerHour: worker.ratePerHour,
+            planPath: worker.planPath,
+          });
+        }
+        state.scenePlanFingerprint = workerPlanFingerprint;
+        parallelWorkers = configuredWorkers;
       } else {
-        await saveJson(iteratorPlanPath, iteratorPlan);
+        if (priorRunIsIncomplete && state.runDirectory && priorRun?.iteratorPlanFingerprint) {
+          const savedPlan = await readJson(iteratorPlanPath);
+          const comparable = (plan) => ({
+            ...plan,
+            iterators: plan.iterators.map((iterator) => ({
+              ...iterator,
+              arguments: iterator.arguments.filter((argument) => !['--iterations', '--article-order'].includes(flagName(argument))),
+            })),
+          });
+          if (JSON.stringify(comparable(savedPlan)) !== JSON.stringify(comparable(iteratorPlan))) {
+            throw new Error('Scene settings changed; resume requires the original scene plan.');
+          }
+          const savedFingerprint = createHash('sha256').update(JSON.stringify(savedPlan)).digest('hex');
+          if (savedFingerprint !== priorRun.iteratorPlanFingerprint) throw new Error('Saved scene plan does not match the interrupted run.');
+          log('Resuming the saved scene plan; iteration limit and global article order may be changed explicitly.');
+        } else {
+          await saveJson(iteratorPlanPath, iteratorPlan);
+        }
+        normalizedRunnerArguments.push(`--iterator-plan=${iteratorPlanPath}`);
       }
       state.scenePath = sceneSequence.path;
       state.scenePaths = scenePaths;
-      state.scenePlanFingerprint = createHash('sha256').update(JSON.stringify(await readJson(iteratorPlanPath))).digest('hex');
-      normalizedRunnerArguments.push(`--iterator-plan=${iteratorPlanPath}`);
     } else {
       delete state.scenePath;
       delete state.scenePaths;
@@ -781,7 +992,7 @@ async function exhibitionMain() {
     state.settingsFingerprint = settingsFingerprint;
     state.exhibitionSettings = { glueEnabled, gluePattern, glueWaitPattern, glueFrameOffset, fadeSeconds, randomThreshold };
     state.updatedAt = new Date().toISOString();
-    await saveJson(statePath, state);
+    await saveState();
     if (state.storyModel) process.env.NEWS_STORY_MODEL = state.storyModel;
 
     let runDirectory = state.runDirectory ? resolve(state.runDirectory) : null;
@@ -790,7 +1001,7 @@ async function exhibitionMain() {
       state.runDirectory = null;
       state.gluedThroughIteration = 0;
       delete state.lastFilmBuildAt;
-      await saveJson(statePath, state);
+      await saveState();
     }
 
     if (!await rankedCollectionAvailable()) {
@@ -798,6 +1009,15 @@ async function exhibitionMain() {
       await refreshNewsIfNeeded();
     }
     if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
+
+    if (parallelWorkers) {
+      log(`Starting ${parallelWorkers.length} independent scene workers in parallel${sceneSequence.scheduleEnabled ? `; window ${sceneSequence.generationInterval}, bias ${sceneSequence.biasMode}` : '; no interval interpolation'}.`);
+      for (const worker of parallelWorkers) {
+        log(`${worker.name}: ${worker.ratePerHour} iteration(s)/hour${sceneSequence.scheduleEnabled ? `; interval ${(worker.plan.intervalMs / 60_000).toFixed(2)} min` : ''}.`);
+      }
+      await runParallelSceneWorkers(parallelWorkers, stopAfterIterations);
+      return;
+    }
 
     const refreshTask = runRefreshLoop();
     const generateTitleCards = runnerArguments.includes('--generate-title-cards');

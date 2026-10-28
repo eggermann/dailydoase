@@ -1,6 +1,6 @@
 import { createHash, randomInt, randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
+import { mkdir, open, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve, basename, extname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -37,7 +37,7 @@ import {
   autoConceptInputHash,
   createAutoConceptSnapshot,
 } from '../news-scene/auto-concepts.mjs';
-import { recoverAutoDirectorDecision } from '../news-scene/auto-director-recovery.mjs';
+import { addUsageIdempotently, buildAutoDirectorCorrectionRequest, recoverSavedAutoDirectorDecision } from '../news-scene/auto-director-recovery.mjs';
 import { getIteratorStartTime } from '../news-scene/scene-sequence.mjs';
 import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
 
@@ -273,25 +273,19 @@ async function ensureAutoDecision(record, directory, openAiKey, persist, isResum
   };
 
   const request = buildAutoDirectorRequest({ article: record.article, model: record.storyModel, constraints });
-  const responsePath = join(directory, 'auto-director-response.json');
   const requestPath = join(directory, 'auto-director-request.json');
-  if (!await exists(decisionPath) && await exists(responsePath)) {
-    if (!await exists(requestPath)) {
-      throw new Error('Saved Auto Director response has no original request; refusing to reconstruct or issue another paid request');
-    }
-    const recoveredDecision = recoverAutoDirectorDecision({
-      savedRequest: await json(requestPath),
-      expectedRequest: request,
-      response: await json(responsePath),
-      articleId,
-      iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
-      model: record.storyModel,
-      constraints,
-    });
-    applyAutoDecisionToIteration(record, recoveredDecision);
-    await save(decisionPath, recoveredDecision);
-    addUsage(record, 'autoDirectorUsage', raw.usage);
-    await persist();
+  const recoveredDecision = await recoverSavedAutoDirectorDecision({
+    directory,
+    expectedRequest: request,
+    articleId,
+    iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
+    model: record.storyModel,
+    constraints,
+    record,
+    applyDecision: applyAutoDecisionToIteration,
+    persist,
+  });
+  if (recoveredDecision) {
     console.log('Recovered Auto Director decision from saved response; no provider request sent.');
     return;
   }
@@ -359,12 +353,7 @@ async function ensureAutoDecision(record, directory, openAiKey, persist, isResum
   try {
     answer = validateAutoDirectorResponse(raw, { sceneCount: constraints.sceneCount });
   } catch (firstError) {
-    const correctionRequest = {
-      ...request,
-      messages: [...request.messages, { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' }, {
-        role: 'user', content: `Correct your decision once. Validation error: ${firstError.message}. Return all required fields, choose sceneCount within the supplied bounds, explain it in sceneCountReason, and obey videoVision=on only with videoDirection=on.`,
-      }],
-    };
+    const correctionRequest = buildAutoDirectorCorrectionRequest(request, raw, firstError.message);
     await save(join(directory, 'auto-director-revision-request.json'), correctionRequest);
     raw = await paidRequest(directory, 'auto-director-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, correctionRequest);
     answer = validateAutoDirectorResponse(raw, { sceneCount: constraints.sceneCount });
@@ -797,10 +786,89 @@ function lockedVisualPlanHash(record) {
 }
 
 function addUsage(record, field, usage) {
-  record[field] = usage || null;
-  if (!usage) return;
-  const totals = ['prompt_tokens', 'completion_tokens', 'total_tokens'];
-  record.usage = Object.fromEntries(totals.map((key) => [key, (record.usage?.[key] || 0) + (usage[key] || 0)]));
+  addUsageIdempotently(record, field, usage);
+}
+
+async function withGlobalArticleProgressLock(task) {
+  const progressPath = join(resolve(options['output-dir']), 'global-article-progress.json');
+  const lockPath = `${progressPath}.lock`;
+  let lockHandle;
+  while (!lockHandle) {
+    try {
+      lockHandle = await open(lockPath, 'wx');
+      await lockHandle.writeFile(`${process.pid}\n`);
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error;
+      const owner = Number((await readFile(lockPath, 'utf8').catch(() => '')).trim());
+      let ownerIsAlive = Number.isInteger(owner) && owner > 0;
+      if (ownerIsAlive) {
+        try { process.kill(owner, 0); } catch (ownerError) { if (ownerError.code === 'ESRCH') ownerIsAlive = false; }
+      }
+      if (!ownerIsAlive) await unlink(lockPath).catch(() => {});
+      else await new Promise((resolveDelay) => setTimeout(resolveDelay, 50));
+    }
+  }
+  try {
+    return await task(progressPath);
+  } finally {
+    await lockHandle.close();
+    const currentOwner = (await readFile(lockPath, 'utf8').catch(() => '')).trim();
+    if (currentOwner === String(process.pid)) await unlink(lockPath).catch(() => {});
+  }
+}
+
+async function reserveNextGlobalArticle(collection, articleProgress) {
+  return withGlobalArticleProgressLock(async (progressPath) => {
+    const storedProgress = await json(progressPath).catch((error) => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    });
+    const sharedProgress = storedProgress || articleProgress || {};
+    const seenArticleKeys = new Set([
+      ...(articleProgress?.seenArticleKeys || []),
+      ...(storedProgress?.seenArticleKeys || []),
+    ]);
+    if (!storedProgress?.seenArticleKeys?.length
+      && !articleProgress?.seenArticleKeys?.length
+      && sharedProgress.sourceAggregate === collection.aggregatePath) {
+      for (let index = 0; index < Math.min(sharedProgress.nextDraw || 0, collection.candidates.length); index += 1) {
+        seenArticleKeys.add(articleKey(collection.candidates[index].article));
+      }
+    }
+    const startDraw = sharedProgress.sourceAggregate === collection.aggregatePath
+      ? Number(sharedProgress.nextDraw || 0) % collection.candidates.length
+      : 0;
+    let draw = -1;
+    for (let offset = 0; offset < collection.candidates.length; offset += 1) {
+      const candidateIndex = (startDraw + offset) % collection.candidates.length;
+      const candidate = collection.candidates[candidateIndex];
+      if (seenArticleKeys.has(articleKey(candidate.article))) continue;
+      if (await hasUsableArticleImage(candidate.article.image)) {
+        draw = candidateIndex;
+        break;
+      }
+      console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
+    }
+    if (draw < 0) {
+      const unseenCandidateCount = collection.candidates.filter(({ article }) => !seenArticleKeys.has(articleKey(article))).length;
+      if (!unseenCandidateCount) {
+        throw new Error(`Global article queue exhausted: all ${collection.candidates.length} eligible stories in ${collection.aggregateFile} were already used`);
+      }
+      throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+    }
+
+    const selected = collection.candidates[draw];
+    seenArticleKeys.add(articleKey(selected.article));
+    const reservedProgress = articleProgress || {};
+    Object.assign(reservedProgress, {
+      sourceAggregate: collection.aggregatePath,
+      aggregateHash: collection.aggregateHash,
+      nextDraw: draw + 1,
+      seenArticleKeys: [...seenArticleKeys],
+    });
+    await save(progressPath, reservedProgress);
+    return { ...selected, draw, articleProgress: reservedProgress };
+  });
 }
 
 async function videoVisionSources(record, directory) {
@@ -1336,7 +1404,6 @@ async function main() {
         ])] } : {}),
       };
       articleProgress = runManifest.articleProgress;
-      if (runBaseOptions['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
       await save(join(iterationRoot, 'run.json'), runManifest);
     }
   }
@@ -1396,7 +1463,6 @@ async function main() {
         ])] } : {}),
       };
       if (options['article-order'] === 'global') {
-        await save(globalArticleProgressPath, articleProgress);
         console.log(`Global news counter: ${articleProgress.seenArticleKeys?.length || 0} used; next list position ${articleProgress.nextDraw + 1}.`);
       }
     }
@@ -1515,44 +1581,39 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         && options['article-order'] !== 'global') {
         throw new Error(`Cannot seamlessly resume article order: saved news aggregate changed: ${articleProgress.sourceAggregate}`);
       }
-      const { aggregate, aggregatePath: sourceAggregate, aggregateHash, candidates } = selectedCollection;
-      const seenArticleKeys = new Set(order === 'global' ? articleProgress?.seenArticleKeys || [] : []);
-      if (order === 'global' && !articleProgress?.seenArticleKeys?.length
-        && articleProgress?.sourceAggregate === selectedCollection.aggregatePath) {
-        for (let index = 0; index < Math.min(articleProgress.nextDraw || 0, candidates.length); index += 1) {
-          seenArticleKeys.add(articleKey(candidates[index].article));
+      const { aggregatePath: sourceAggregate, aggregateHash, candidates } = selectedCollection;
+      let draw;
+      let article;
+      let aggregateIndex;
+      let score;
+      if (order === 'global') {
+        const reservation = await reserveNextGlobalArticle(selectedCollection, articleProgress);
+        articleProgress = reservation.articleProgress;
+        ({ draw, article, aggregateIndex, score } = reservation);
+      } else {
+        const requestedDraw = options['article-id']
+          ? candidates.findIndex(({ article: candidateArticle }) => String(candidateArticle.id) === options['article-id'])
+          : order === 'random'
+            ? randomInt(candidates.length)
+            : articleProgress?.sourceAggregate === selectedCollection.aggregatePath
+              ? articleProgress.nextDraw % candidates.length
+              : 0;
+        if (requestedDraw < 0) throw new Error('Requested article is missing or has no usable text and image');
+        draw = -1;
+        const searchCount = options['article-id'] ? 1 : candidates.length;
+        for (let offset = 0; offset < searchCount; offset += 1) {
+          const candidateIndex = (requestedDraw + offset) % candidates.length;
+          const candidate = candidates[candidateIndex];
+          if (await hasUsableArticleImage(candidate.article.image)) {
+            draw = candidateIndex;
+            break;
+          }
+          console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
+          if (options['article-id']) break;
         }
+        if (draw < 0) throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+        ({ article, aggregateIndex, score } = candidates[draw]);
       }
-      if (order === 'global' && articleProgress) articleProgress.seenArticleKeys = [...seenArticleKeys];
-      const requestedDraw = options['article-id']
-        ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
-        : order === 'random'
-          ? randomInt(candidates.length)
-          : articleProgress?.sourceAggregate === selectedCollection.aggregatePath
-            ? articleProgress.nextDraw % candidates.length
-            : 0;
-      if (requestedDraw < 0) throw new Error('Requested article is missing or has no usable text and image');
-      let draw = -1;
-      const searchCount = options['article-id'] ? 1 : candidates.length;
-      for (let offset = 0; offset < searchCount; offset += 1) {
-        const candidateIndex = (requestedDraw + offset) % candidates.length;
-        const candidate = candidates[candidateIndex];
-        if (seenArticleKeys.has(articleKey(candidate.article))) continue;
-        if (await hasUsableArticleImage(candidate.article.image)) {
-          draw = candidateIndex;
-          break;
-        }
-        console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
-        if (options['article-id']) break;
-      }
-      if (draw < 0) {
-        const unseenCandidateCount = candidates.filter(({ article }) => !seenArticleKeys.has(articleKey(article))).length;
-        if (order === 'global' && unseenCandidateCount === 0) {
-          throw new Error(`Global article queue exhausted: all ${candidates.length} eligible stories in ${selectedCollection.aggregateFile} were already used`);
-        }
-        throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
-      }
-      const { article, aggregateIndex, score } = candidates[draw];
       console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
       const sceneCountSelection = options['auto-mode'] ? null : sceneCountStream.next();
       const sceneCount = sceneCountSelection?.count ?? null;
