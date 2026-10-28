@@ -1,0 +1,176 @@
+{
+  "werk": "Guernica",
+  "kuenstler": "Pablo Picasso",
+  "jahr": 1937,
+  "hinweis": "Die Bedeutungen der Bildelemente sind kunsthistorische Interpretationen und nicht in allen Fällen eindeutig.",
+  "elemente": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "bild": "01_mutter_mit_kind.png",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        0,
+        19,
+        152,
+        282
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "bild": "02_stier.png",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        45,
+        10,
+        144,
+        140
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "bild": "03_auge_gluehbirne.png",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        196,
+        0,
+        377,
+        73
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "bild": "04_pferd.png",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        147,
+        38,
+        408,
+        306
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "bild": "05_frau_mit_lampe.png",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        363,
+        25,
+        564,
+        154
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "bild": "06_frau_im_brennenden_haus.png",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        583,
+        15,
+        722,
+        206
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "bild": "07_gefallener_soldat.png",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        8,
+        237,
+        442,
+        338
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "bild": "08_schreiende_frau.png",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        429,
+        130,
+        559,
+        303
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "bild": "09_fliehende_frau_rechts.png",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "hinweis": "Interpretation; Picasso legte für viele Einzelelemente keine eindeutige Symbolbedeutung fest.",
+      "quelle": "Maskierter Ausschnitt aus dem vom Nutzer hochgeladenen Bild von Guernica.",
+      "bbox_original_px": [
+        505,
+        206,
+        750,
+        338
+      ]
+    }
+  ]
+}

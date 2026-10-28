@@ -212,6 +212,7 @@ function defaultsFromExhibitionSettings() {
   defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
   defaults.push(defaultGeneration.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
   if (defaultGeneration.styleReference === false) defaults.push('--no-style-reference');
+  if (defaultGeneration.guernicaFigureReference === false) defaults.push('--no-guernica-figure-reference');
   defaults.push(defaultGeneration.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
   defaults.push(defaultGeneration.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
   if (defaultGeneration.preserveCubistVideoStyle) defaults.push('--preserve-cubist-video-style');
@@ -386,32 +387,6 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
   for (const variant of iterationFilmVariants) {
     for (const entry of readyIterations) {
       const record = await readJson(join(runDirectory, entry.directory, 'record.json'));
-      const scenes = record.plan?.scenes || [];
-      const iterationNumber = Number(entry.directory.match(/iteration-(\d+)/)?.[1]);
-      const iterationId = String(iterationNumber).padStart(3, '0');
-      const bridgeIndexes = [];
-      for (let index = 0; index < scenes.length - 1; index += 1) {
-        const bridgePath = join(
-          glueDirectory,
-          `iteration-${iterationId}`,
-          `scene-${String(scenes[index].index).padStart(3, '0')}-to-${String(scenes[index + 1].index).padStart(3, '0')}.mp4`,
-        );
-        try {
-          await stat(bridgePath);
-          bridgeIndexes.push(index);
-        } catch (error) {
-          if (error.code !== 'ENOENT') throw error;
-        }
-      }
-      let previousBridgeIndex = -1;
-      const iterationWaitPattern = bridgeIndexes.length
-        ? bridgeIndexes.map((bridgeIndex) => {
-          const isFirstBridge = previousBridgeIndex < 0;
-          const distance = isFirstBridge ? bridgeIndex + 1 : bridgeIndex - previousBridgeIndex;
-          previousBridgeIndex = bridgeIndex;
-          return isFirstBridge || distance === 1 ? distance : distance - 1;
-        }).join(',')
-        : String(scenes.length + 1);
       const variantDirectory = join(normalizedIterationDirectory, variant.name);
       const intermediatePath = join(variantDirectory, `${entry.directory}-before-audio-normalization.mp4`);
       const normalizedPath = join(variantDirectory, `${entry.directory}-audio-normalized.mp4`);
@@ -420,7 +395,7 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
         `--run-dir=${runDirectory}`,
         `--iteration=${entry.directory}`,
         `--scene-glue-dir=${glueDirectory}`,
-        `--transition-wait-pattern=${iterationWaitPattern}`,
+        '--existing-bridges-only',
         `--frame-offset-seconds=${glueFrameOffset}`,
         `--fade-seconds=${fadeSeconds}`,
         ...(generateTitleCards ? ['--generate-title-cards'] : ['--no-generate-title-cards']),

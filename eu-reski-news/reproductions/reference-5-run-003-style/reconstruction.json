@@ -1,0 +1,399 @@
+{
+  "formatVersion": 1,
+  "runName": "reference-5-run-003-style",
+  "createdFrom": "eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001",
+  "status": "completed",
+  "iterations": 5,
+  "outputFilm": "eu-reski-gesamtfilm.mp4",
+  "outputFilmBytes": 32118437,
+  "outputFilmSha256": "696ad18a5d5bdb6cd16fb859ed87d7bbca95d932aa06957b75cbe2150620cc5d",
+  "assets": {
+    "styleReference": {
+      "path": "inputs/guernica-style-reference.jpg",
+      "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264"
+    },
+    "catalog": {
+      "path": "inputs/guernica_elemente_maskiert/guernica_elemente.json",
+      "sha256": "d611b6014f2d9075293a3b905858e6c223ebe0fbb81129a68840e6e326db81ff"
+    }
+  },
+  "settings": {
+    "styleReference": true,
+    "guernicaFigureReference": true,
+    "articleImageReference": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "sceneCount": {
+      "mode": "taktmuster",
+      "count": 5,
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    },
+    "sceneLength": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "videoAudioDirection": "off",
+    "preserveCubistVideoStyle": false,
+    "videosAfterEachIteration": true,
+    "firstLastGlue": true,
+    "glueDurationPattern": [
+      9,
+      5,
+      7,
+      5,
+      8
+    ],
+    "glueWaitPattern": "classic"
+  },
+  "iterationsDetail": [
+    {
+      "iteration": 1,
+      "articleTitle": "La Commissione Ue propone di rafforzare Frontex, al centro anche i rimpatri",
+      "articleUrl": "https://www.monrealepress.it/2026/10/27/la-commissione-ue-propone-di-rafforzare-frontex-al-centro-anche-i-rimpatri",
+      "sceneCount": 5,
+      "figureReference": true,
+      "articleImageReference": false,
+      "imageProvider": "hf-flux-klein",
+      "imageSeed": null,
+      "selectedFigureIds": [
+        5,
+        2,
+        3,
+        5,
+        6
+      ],
+      "images": [
+        {
+          "seed": 950497056,
+          "taskUUID": "485d424442e24d4cb9d56a2c091b38f7",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 141233698,
+          "taskUUID": "8bac12c0ef1241b9a6df6d0251b1d84f",
+          "cost": null,
+          "referencePaths": [
+            "media/02_stier-api.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 1027994118,
+          "taskUUID": "02309b88e71f4f558cbaa20ac1dc11e3",
+          "cost": null,
+          "referencePaths": [
+            "media/03_auge_gluehbirne-api.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 1624109438,
+          "taskUUID": "1c76fca836d949f499d6a95669b51347",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 1346070361,
+          "taskUUID": "79d36b1049014092b41273f9729da634",
+          "cost": null,
+          "referencePaths": [
+            "media/06_frau_im_brennenden_haus.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        }
+      ],
+      "videoTasks": [
+        {
+          "taskUUID": "3c006369-da72-48f1-a6fa-33312a695b0c",
+          "cost": 0.08
+        },
+        {
+          "taskUUID": "d7c240b1-1e3a-47ce-8983-41f5afada304",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "78388028-3739-422f-9f6d-65a65db5df2e",
+          "cost": 0.0729
+        },
+        {
+          "taskUUID": "1cc1c977-ae3c-42db-92ce-27e8e9dca39b",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "2ec74584-a474-4c79-af8f-7764554c0bb1",
+          "cost": 0.08
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "articleTitle": "Komissio ehdottaa Frontexin vahvistamista: vahvistetaan rajavalvontaa ja palautuksia ja tehostetaan kriisinhallintaa",
+      "articleUrl": "https://www.sttinfo.fi/tiedote/72449597/komissio-ehdottaa-frontexin-vahvistamista-vahvistetaan-rajavalvontaa-ja-palautuksia-ja-tehostetaan-kriisinhallintaa?lang=fi",
+      "sceneCount": 3,
+      "figureReference": true,
+      "articleImageReference": false,
+      "imageProvider": "hf-flux-klein",
+      "imageSeed": null,
+      "selectedFigureIds": [
+        3,
+        2,
+        5
+      ],
+      "images": [
+        {
+          "seed": 1070412402,
+          "taskUUID": "ee81075b7c784fbe8b01a5d48d4cfe05",
+          "cost": null,
+          "referencePaths": [
+            "media/03_auge_gluehbirne-api.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 387173772,
+          "taskUUID": "29aac201c303498589e88cddd1ea7f6d",
+          "cost": null,
+          "referencePaths": [
+            "media/02_stier-api.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 1116359968,
+          "taskUUID": "6ed7e8f24003455bb9ee45da66182407",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        }
+      ],
+      "videoTasks": [
+        {
+          "taskUUID": "05385e60-8909-41fe-b171-41c696abf0ed",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "d8c4d29b-1aae-426e-9e29-ba7be75aaf14",
+          "cost": 0.0729
+        },
+        {
+          "taskUUID": "5b1d0418-4e2a-4e19-ba1d-709bd300fcd2",
+          "cost": 0.0517
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "articleTitle": "Bruxelas quer administração da UE mais eficiente e prepara reforma até final de 2026",
+      "articleUrl": "https://jornaleconomico.sapo.pt/noticias/bruxelas-quer-administracao-da-ue-mais-eficiente-e-prepara-reforma-ate-final-de-2026",
+      "sceneCount": 3,
+      "figureReference": true,
+      "articleImageReference": false,
+      "imageProvider": "hf-flux-klein",
+      "imageSeed": null,
+      "selectedFigureIds": [
+        5,
+        3,
+        5
+      ],
+      "images": [
+        {
+          "seed": 1577429887,
+          "taskUUID": "cac6ff0f399f49b9a44295f521cb98a1",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 358186123,
+          "taskUUID": "7078c25ed4234ec1a5b9088c5931fe29",
+          "cost": null,
+          "referencePaths": [
+            "media/03_auge_gluehbirne-api.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 832856488,
+          "taskUUID": "a88fd7c58b9140cb8964040ea50e8bc0",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        }
+      ],
+      "videoTasks": [
+        {
+          "taskUUID": "06048a69-5682-4b78-a272-c3ad05ff3b97",
+          "cost": 0.08
+        },
+        {
+          "taskUUID": "b82fc123-46f9-42cd-bf65-94ca1365a07a",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "9278b945-9cbf-4ccb-ad8d-5f6f692fba5b",
+          "cost": 0.0729
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "articleTitle": "Decesele rutiere în UE au scăzut în 2025; Bulgaria și România au în continuare cele mai periculoase drumuri din UE - AGERPRES",
+      "articleUrl": "https://agerpres.ro/economic-extern/2026/10/27/decesele-rutiere-in-ue-au-scazut-in-2025-bulgaria-si-romania-au-in-continuare-cele-mai-periculoase-d--1607308",
+      "sceneCount": 4,
+      "figureReference": true,
+      "articleImageReference": false,
+      "imageProvider": "hf-flux-klein",
+      "imageSeed": null,
+      "selectedFigureIds": [
+        5,
+        4,
+        5,
+        5
+      ],
+      "images": [
+        {
+          "seed": 1127265325,
+          "taskUUID": "1dd24d2c44e14c3ba92c5488333d8695",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 645133928,
+          "taskUUID": "62fad44162e34251b9f4541da54136dc",
+          "cost": null,
+          "referencePaths": [
+            "media/04_pferd.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 1318443750,
+          "taskUUID": "614f31c1a77e4701a8f586cde562c379",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 458359013,
+          "taskUUID": "3c4cebcf7ddb46c3a42c05581ad34376",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        }
+      ],
+      "videoTasks": [
+        {
+          "taskUUID": "ac4c398b-5b26-4fb4-b8d8-c7f17f6c0164",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "12873d70-ade2-4e6e-a444-7e03e904b834",
+          "cost": 0.08
+        },
+        {
+          "taskUUID": "c1fb0343-f797-4d76-b920-7919228d5d01",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "303c3817-55fa-45d9-a779-311f5add2a0b",
+          "cost": 0.0729
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "articleTitle": "UE vrea să întărească Frontex și să-i extindă atribuțiile de expulzare a migranților - AGERPRES",
+      "articleUrl": "https://agerpres.ro/politic-extern/2026/10/27/ue-vrea-sa-intareasca-frontex-si-sa-i-extinda-atributiile-de-expulzare-a-migrantilor--1607298",
+      "sceneCount": 3,
+      "figureReference": true,
+      "articleImageReference": false,
+      "imageProvider": "hf-flux-klein",
+      "imageSeed": null,
+      "selectedFigureIds": [
+        5,
+        6,
+        9
+      ],
+      "images": [
+        {
+          "seed": 1518259132,
+          "taskUUID": "6c33d1326be14b10a156ffb269483664",
+          "cost": null,
+          "referencePaths": [
+            "media/05_frau_mit_lampe.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 825493909,
+          "taskUUID": "634e884770c9428f963705c724795f48",
+          "cost": null,
+          "referencePaths": [
+            "media/06_frau_im_brennenden_haus.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        },
+        {
+          "seed": 1998821692,
+          "taskUUID": "3c05e53e7b2549f1ac79678f4cbe0e48",
+          "cost": null,
+          "referencePaths": [
+            "media/09_fliehende_frau_rechts.png",
+            "media/guernica-style-reference.jpg"
+          ]
+        }
+      ],
+      "videoTasks": [
+        {
+          "taskUUID": "6eb1f540-a2f5-4934-a538-e70a30bf62e7",
+          "cost": 0.0517
+        },
+        {
+          "taskUUID": "379224f4-f284-4564-8569-695ce85bd4eb",
+          "cost": 0.08
+        },
+        {
+          "taskUUID": "eec7042d-8d03-4001-b2ef-4dc430241909",
+          "cost": 0.0517
+        }
+      ]
+    }
+  ],
+  "glueFilm": "eu-reski-live-full.mp4",
+  "glueFilmBytes": 51540683,
+  "glueFilmSha256": "645507da47bb7e05c70555e59f951e246dc22f9dad1ec0f9e1d1101c2db8bccb",
+  "glueManifest": "glue-run.json"
+}

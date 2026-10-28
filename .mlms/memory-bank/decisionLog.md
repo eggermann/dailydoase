@@ -1,5 +1,11 @@
 # Decision Log
 ## Decisions
+### D-0007: Commit a self-contained run-003-style reproduction snapshot
+Status: Accepted by user
+Context: User requested five new iterations matching exhibition run-003 and asked to save and commit enough to reconstruct the run.
+Decision: Retain final merged and glue films, exact settings and per-iteration records, hashes, and the Guernica reference inputs in `eu-reski-news/reproductions/reference-5-run-003-style/`; commit relevant generator/config changes and this snapshot. Leave the earlier no-Guernica partial run separate.
+Consequences: Reproduction recipe is reviewable from the repository. Future provider generations can differ; saved output film and task/seed records preserve this run.
+
 ### D-0006: Iteration-local artistic auto-mode
 Status: Accepted
 Context: The exhibition needs article-specific creative settings while preserving the existing manual pipeline and resume behavior.

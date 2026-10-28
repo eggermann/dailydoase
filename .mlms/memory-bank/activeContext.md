@@ -1,27 +1,27 @@
 # Active Context
 
 ## Current Goal
-Implement EU RESKI artistic auto-mode, run ten exhibition iterations, and make provider tasks resumable.
+Save and commit a reproducible five-iteration exhibition run matching run-003.
 
 ## Current Loop
-Loop: 1 · Phase: Implementation complete; live run pending four video tasks
+Loop: 2 · Phase: Complete; final review and commit
 
 ## Shared Loop Budget
 Root Context: .mlms
-Used: 1
+Used: 2
 Maximum: 5
 
 ## Current Focus
-Implementation and recovery changes complete. Reference film exists; glue built through iteration 7. Resume same run for four open video tasks.
+Five iterations completed with Guernica figure and full-painting references, article references off, and incremental First/Last-Frame glue. Film, run records, reference inputs, settings snapshot, and reconstruction recipe are staged for commit.
 
 ## Assumptions
-- The new feature branch starts at `32e27bbc`, as requested.
-- Exhibition `generation.autoMode` defaults to false.
-- `run-001` has 10 iterations; video tasks pending in iterations 8 and 9.
+- User explicitly authorized live generation and commit after the earlier no-generation scope.
+- Reference run-003 used masked Guernica figure crops and the full-painting style reference; article-photo references were off.
+- Provider outputs can vary across time, so records and final MP4 are retained alongside the reconstruction recipe.
 
 ## Risks / Unknowns
-- The worktree has no `.env`; the main repository `.env` exists and is resolved by `EU-reski-mix-arg-and-camera-moovs.start.sh`. Its contents were not read or copied.
-- Run-time external credentials are deliberately not evaluated or printed.
+- The worktree has no `.env`; the main repository `.env` is resolved by the start script. Its contents were not read or copied.
+- Full per-scene working outputs are large and remain local; committed snapshot contains final films, run records, and source reference assets.
 
 ## Next Action
-Resume `npm run news:auto-10` when requested; poll saved task IDs, then let exhibition runner build First/Last-Frame glue after each complete iteration.
+Review staged file list, commit requested reproduction snapshot and relevant runner/config changes; do not push.

@@ -17,6 +17,7 @@ const { values: options } = parseArgs({
     'bridge-random-threshold': { type: 'string' },
     'bridge-random-seed': { type: 'string' },
     'transition-wait-pattern': { type: 'string' },
+    'existing-bridges-only': { type: 'boolean', default: false },
     'frame-offset-seconds': { type: 'string', default: '0.25' },
     output: { type: 'string' },
     'card-seconds': { type: 'string', default: '4' },
@@ -48,7 +49,7 @@ const cardsDirectory = join(mergedDirectory, 'title-cards');
 const cardDuration = Number(options['card-seconds']);
 const fadeDuration = Number(options['fade-seconds']);
 const frameOffsetSeconds = Number(options['frame-offset-seconds']);
-const transitionWaitPattern = sceneGlueDirectory
+const transitionWaitPattern = sceneGlueDirectory && !options['existing-bridges-only']
   ? parseTransitionWaitPattern(options['transition-wait-pattern'])
   : null;
 const ffmpeg = process.env.FFMPEG_BIN || 'ffmpeg';
@@ -60,6 +61,7 @@ const bridgeRandomThreshold = options['bridge-random-threshold'] === undefined
   : Number(options['bridge-random-threshold']);
 const bridgeRandomSeed = options['bridge-random-seed'] || basename(runDirectory);
 const bridgeSelectionEnabled = bridgeLimit !== null || bridgeRandomThreshold !== null;
+const existingBridgesOnly = options['existing-bridges-only'];
 
 async function exists(path) {
   try {
@@ -82,6 +84,12 @@ if (!Number.isFinite(frameOffsetSeconds) || frameOffsetSeconds <= 0 || frameOffs
 }
 if (transitionWaitPattern && !sceneGlueDirectory) {
   throw new Error('--transition-wait-pattern requires --scene-glue-dir');
+}
+if (existingBridgesOnly && !sceneGlueDirectory) {
+  throw new Error('--existing-bridges-only requires --scene-glue-dir');
+}
+if (existingBridgesOnly && options['transition-wait-pattern'] !== undefined) {
+  throw new Error('--existing-bridges-only cannot be combined with --transition-wait-pattern');
 }
 if (sceneGlueDirectory && iterationFilmDirectory) {
   throw new Error('--scene-glue-dir and --iteration-film-dir cannot be combined');
@@ -157,7 +165,26 @@ const selectedBridgePaths = new Set();
 const transitionBoundariesByIteration = new Map();
 let transitionWaitPatternStepsConsumed = 0;
 let allBridgeCandidates = [];
-if (transitionWaitPattern !== null) {
+if (existingBridgesOnly) {
+  for (const iterationDirectory of iterations) {
+    const iterationNumber = Number(iterationDirectory.match(/iteration-(\d+)/)?.[1]);
+    const iterationId = padIteration(iterationNumber);
+    const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
+    const scenes = record.plan?.scenes || [];
+    const existingBoundaries = new Set();
+    for (let index = 0; index < scenes.length - 1; index += 1) {
+      const previous = scenes[index];
+      const next = scenes[index + 1];
+      const bridge = join(
+        sceneGlueDirectory,
+        `iteration-${iterationId}`,
+        `scene-${padIteration(previous.index)}-to-${padIteration(next.index)}.mp4`,
+      );
+      if (await exists(bridge)) existingBoundaries.add(`${previous.index}->${next.index}`);
+    }
+    transitionBoundariesByIteration.set(iterationDirectory, existingBoundaries);
+  }
+} else if (transitionWaitPattern !== null) {
   const transitionWaitScheduler = createTransitionWaitScheduler(transitionWaitPattern);
   for (const iterationDirectory of iterations) {
     const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
@@ -275,7 +302,7 @@ for (let index = 0; index < iterations.length; index += 1) {
         keepNextBridge = scheduled && (!bridgeSelectionEnabled || selectedBridgePaths.has(nextBridge));
         if (keepNextBridge) {
           if (!await exists(nextBridge)) throw new Error(`Missing scene bridge: ${nextBridge}`);
-          if (transitionWaitPattern !== null) scheduledBridgeCount += 1;
+          if (transitionWaitPattern !== null || existingBridgesOnly) scheduledBridgeCount += 1;
         }
       }
       addMedia(sceneVideo, keepPreviousBridge ? frameOffsetSeconds : 0, keepNextBridge ? frameOffsetSeconds : 0);
@@ -317,15 +344,15 @@ if (bridgeSelectionEnabled || transitionWaitPattern !== null) {
 await mkdir(dirname(outputPath), { recursive: true });
 
 const hasTrimmedMedia = orderedFiles.some(({ trimStart, trimEnd }) => trimStart > 0 || trimEnd > 0);
-if (fadeDuration > 0 || hasTrimmedMedia) {
-  if (fadeDuration > 0 && orderedFiles.length < 2) throw new Error('At least two clips are required for an FFmpeg fade');
+const effectiveFadeDuration = orderedFiles.length < 2 ? 0 : fadeDuration;
+if (effectiveFadeDuration > 0 || hasTrimmedMedia) {
   const rawDurations = orderedFiles.map(({ path }) => Number(run(ffprobe, [
     '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=duration', '-of', 'default=noprint_wrappers=1:nokey=1', path,
   ], 'FFprobe').trim()));
   const durations = orderedFiles.map(({ path, trimStart, trimEnd }, index) => {
     const duration = rawDurations[index] - trimStart - trimEnd;
     if (!Number.isFinite(duration) || duration <= 0) throw new Error(`Clip too short after frame-offset trim: ${path}`);
-    if (fadeDuration > 0 && duration <= fadeDuration) throw new Error(`Clip too short for fade: ${path}`);
+    if (effectiveFadeDuration > 0 && duration <= effectiveFadeDuration) throw new Error(`Clip too short for fade: ${path}`);
     return duration;
   });
 
@@ -342,16 +369,16 @@ if (fadeDuration > 0 || hasTrimmedMedia) {
 
   let outputVideo = 'vout';
   let outputAudio = 'aout';
-  if (fadeDuration > 0) {
+  if (effectiveFadeDuration > 0) {
     let accumulatedDuration = durations[0];
     let previousVideo = 'v0';
     let previousAudio = 'a0';
     for (let index = 1; index < orderedFiles.length; index += 1) {
       const nextVideo = `vx${index}`;
       const nextAudio = `ax${index}`;
-      const offset = Number((accumulatedDuration - fadeDuration).toFixed(6));
-      filters.push(`[${previousVideo}][v${index}]xfade=transition=fade:duration=${fadeDuration}:offset=${offset}[${nextVideo}]`);
-      filters.push(`[${previousAudio}][a${index}]acrossfade=d=${fadeDuration}:c1=tri:c2=tri[${nextAudio}]`);
+      const offset = Number((accumulatedDuration - effectiveFadeDuration).toFixed(6));
+      filters.push(`[${previousVideo}][v${index}]xfade=transition=fade:duration=${effectiveFadeDuration}:offset=${offset}[${nextVideo}]`);
+      filters.push(`[${previousAudio}][a${index}]acrossfade=d=${effectiveFadeDuration}:c1=tri:c2=tri[${nextAudio}]`);
       accumulatedDuration = offset + durations[index];
       previousVideo = nextVideo;
       previousAudio = nextAudio;
@@ -363,7 +390,7 @@ if (fadeDuration > 0 || hasTrimmedMedia) {
     filters.push(`${inputs}concat=n=${orderedFiles.length}:v=1:a=1[vout][aout]`);
   }
 
-  const filterPath = join(outputDirectory, `${outputStem}.${fadeDuration > 0 ? 'fade-' : ''}filter.txt`);
+  const filterPath = join(outputDirectory, `${outputStem}.${effectiveFadeDuration > 0 ? 'fade-' : ''}filter.txt`);
   const filterGraph = filters.join(';');
   await writeFile(filterPath, `${filters.join(';\n')}\n`, 'utf8');
   const args = ['-hide_banner', '-y'];

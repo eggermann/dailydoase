@@ -143,3 +143,40 @@
 - Check provider wallet/quota before launching paid video.
 ### Process Decision
 - Complete this first still-image iteration and wait for the user's next direction.
+
+## Loop 2 Review: run-003-style five-iteration reproduction
+### What Changed
+- Restored run-003 reference behavior: Guernica figure crop and full-painting style reference on, article images off, 3/4 scene-count takt with bias 2, P-Video 2 Pro at 480p, audio direction off.
+- Completed five iterations and built First/Last-Frame glue incrementally.
+- Saved both films, settings, run/iteration metadata, hashes, source reference assets, and reconstruction recipe under `eu-reski-news/reproductions/reference-5-run-003-style/`.
+- Left interrupted no-Guernica output untouched in its separate directory.
+
+### Acceptance Criteria Result
+- [x] Run used the figure and full-painting reference roles recorded for run-003.
+- [x] Five iterations and per-iteration films completed.
+- [x] Incremental glue artifacts and final films saved.
+- [x] Reconstruction inputs and metadata saved without credentials.
+
+### Verification Result
+- All five iteration records report figure reference enabled and article photo disabled; image metadata contains `catalog` and `style` roles.
+- `ffprobe` reports main film duration 133.416688 seconds.
+- `git diff --check` passed.
+
+### Issues / Gaps
+- Model outputs may differ on future provider runs; committed films and records preserve this run.
+- Full per-scene intermediates remain local to avoid committing 558 MB of generated files.
+
+### User Demo Notes
+- Main film: `eu-reski-news/reproductions/reference-5-run-003-style/eu-reski-gesamtfilm.mp4`.
+- Glue film: `eu-reski-news/reproductions/reference-5-run-003-style/eu-reski-live-full.mp4`.
+
+## Loop 2 Retrospective
+### What Worked
+- Reading run-003 records exposed both reference inputs and corrected the first run configuration.
+- Fresh output roots kept the interrupted partial run separate and unoverwritten.
+### What Was Confusing
+- The first output root used wrong reference flags; saved metadata exposed the mismatch before the corrected set was generated.
+### What To Improve Next Loop
+- Compare iteration reference metadata against the requested reference film before provider submission.
+### Process Decision
+- Complete after authorized commit; do not push.

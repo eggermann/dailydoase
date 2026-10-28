@@ -14,7 +14,14 @@
 - Focused Jest suite passed (6/6 earlier; 8/8 after recovery changes); syntax checks and `git diff --check` passed.
 
 ## In Progress
-- Four saved Runware video tasks pending in iteration 8/9; same run directory is resumable.
+- None. User redirected follow-on work to a new five-iteration set matching run-003.
 
 ## Next
-- Resume run-001; exhibition merge loop builds First/Last-Frame glue after each fully ready iteration.
+- Review and commit the run-003-style reproduction snapshot and relevant config/runner changes; do not push.
+
+## Run-003-style five-iteration reproduction
+- Completed five iterations using HF FLUX Klein, masked Guernica figure references, the full-painting style reference, article-photo references off, and P-Video 2 Pro at 480p.
+- First/Last-Frame glue was generated as iterations completed; merged film duration is 133.416688 seconds.
+- Added a tracked reproduction snapshot with both films, run records, settings, hashes, and copied Guernica reference assets.
+- Earlier no-Guernica partial run remains separate and untouched.
+- Validation: all five records show figure refs on, article refs off, and catalog + style roles; ffprobe reports 133.416688 seconds; git diff check passes.

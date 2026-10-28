@@ -46,12 +46,16 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
         : '',
       'Do not import story content from the character or painting references.',
     ].join(' ')
-    : 'The image API receives only the original article photograph as reference image 1 for broad subject orientation. No Guernica painting or figure crop is supplied. Never copy identifiable people, exact composition, logos, or readable text.';
+    : articleImageReferenceProvided
+      ? 'The image API receives only the original article photograph as reference image 1 for broad subject orientation. No Guernica painting or figure crop is supplied. Never copy identifiable people, exact composition, logos, or readable text.'
+      : 'The image API receives no reference images. No Guernica painting, figure crop, or article photograph is supplied; derive the invented protagonist and composition from the written scene plan.';
   const articleImageReferenceInstructions = figureReferenceProvided && articleImageReferenceProvided
     ? `The image API also receives the original article photograph as reference image ${styleReferenceProvided || locationReferenceProvided ? 3 : 2} for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.`
     : figureReferenceProvided
       ? 'The article photo is for GPT visual analysis only and is never sent to the image API.'
-      : 'The article photo is the only image reference sent to the image API.';
+      : articleImageReferenceProvided
+        ? 'The article photo is the only image reference sent to the image API.'
+        : 'No article photograph is sent to the image API.';
   const directorFile = legacyGuernicaStyleReferencePrompt
     ? './director-legacy-guernica-style-reference-prompt.md'
     : sceneVisualControls ? './director.md' : './director-fixed-controls.md';
@@ -66,8 +70,10 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
       .replace('GPT receives article text, article photo and masked Guernica character catalog to plan the story, choose a stable protagonist identity and assign suitable scene-specific figure references. The image API receives only the selected masked figure for each scene, not the full catalog.', 'GPT receives article text and article photo only. No Guernica painting, figure crop or character catalog is supplied. Invent and keep a stable fictional protagonist identity from the story action; do not assign external figure references.')
       .replace('The selected masked figure reference defines identity cues and painted treatment only. Never copy its arm pose, body pose, silhouette, scale or placement. Use a different suitable figure reference when the scene\'s action calls for another gesture. Choose camera distance, viewing angle, body silhouette and protagonist gesture from the current scene’s action and semantic associations. They may recur when narratively justified. Never impose a stock centered figure with raised arms on unrelated actions.', 'Invent the protagonist’s identity and gesture from the current scene’s action and semantic associations. Keep that identity stable across scenes. Choose camera distance, viewing angle, body silhouette and gesture from the action; never impose a stock centered figure with raised arms on unrelated actions.')
       .replace('When supplied, use only painterly qualities from the full Guernica reference: energetic charcoal contours, fractured brushwork, oil-painted texture, scraped surface, dark tonal range, broad curved silhouettes and organic rounded masses mixed with sharp fractures.', 'Use the written painterly qualities only: energetic charcoal contours, fractured brushwork, oil-painted texture, scraped surface, dark tonal range, broad curved silhouettes and organic rounded masses mixed with sharp fractures. No Guernica image reference is supplied.')
-      .replace('The selected masked figure crop may guide only the protagonist\'s abstract visual identity and gesture. Do not transfer any reference\'s original story, relationships, props, symbols, layout or arrangement.', 'Use the article photograph only for broad subject orientation. Do not transfer its real people, exact framing, pose, props, symbols, layout or arrangement.')
-      .replace('Redraw either reference', 'Redraw the article photograph');
+      .replace('The selected masked figure crop may guide only the protagonist\'s abstract visual identity and gesture. Do not transfer any reference\'s original story, relationships, props, symbols, layout or arrangement.', articleImageReferenceProvided
+        ? 'Use the article photograph only for broad subject orientation. Do not transfer its real people, exact framing, pose, props, symbols, layout or arrangement.'
+        : 'Invent the protagonist from the written scene plan. No visual reference images are supplied.')
+      .replace('Redraw either reference', articleImageReferenceProvided ? 'Redraw the article photograph' : 'Follow the written scene plan without a reference image');
   }
   const plannerSource = await readFile(new URL(import.meta.url), 'utf8');
   const compositionImplementation = plannerSource.slice(
@@ -269,12 +275,12 @@ export function validatePlan(response, { sceneCount, catalog, semantic, continua
 }
 
 export function buildImageTask(scene, taskUUID, referenceImages) {
-  if (referenceImages.length < 1 || referenceImages.length > 3) throw new Error('Expected protagonist figure reference, optionally with full-painting and article-photo references');
+  if (referenceImages.length > 3) throw new Error('At most three reference images are supported');
   return {
     taskType: 'imageInference', taskUUID, model: imageModel,
     positivePrompt: scene.stillPrompt,
     width: 1680, height: 944, numberResults: 1,
     outputType: 'URL', outputFormat: 'JPG', includeCost: true,
-    inputs: { referenceImages },
+    ...(referenceImages.length ? { inputs: { referenceImages } } : {}),
   };
 }
