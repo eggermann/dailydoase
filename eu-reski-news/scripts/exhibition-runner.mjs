@@ -603,10 +603,16 @@ async function exhibitionMain() {
   }
   await withLock(async () => {
     state = await readState();
+    const commandArguments = process.argv.slice(2);
+    const resumeArgument = commandArguments.find((argument) => flagName(argument) === '--resume-run');
+    const resumePath = resumeArgument ? argumentValue(commandArguments, '--resume-run', '') : '';
+    if (resumeArgument && (!resumePath || resumePath.startsWith('--'))) throw new Error('Use --resume-run=PATH');
+    if (resumePath) state.runDirectory = resolve(resumePath);
     const priorRun = state.runDirectory
       ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
       : null;
-    const priorRunIsIncomplete = priorRun && ['running', 'pending_media'].includes(priorRun.status);
+    if (resumePath && !priorRun) throw new Error(`Cannot resume: no run.json in ${state.runDirectory}`);
+    const priorRunIsIncomplete = priorRun && (Boolean(resumePath) || ['running', 'pending_media'].includes(priorRun.status));
     if (state.runDirectory && !priorRunIsIncomplete) {
       state.runDirectory = null;
       delete state.scenePath;
@@ -618,7 +624,7 @@ async function exhibitionMain() {
       const savedRun = state.runDirectory
         ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
         : null;
-      const resumableRun = savedRun && ['running', 'pending_media'].includes(savedRun.status);
+      const resumableRun = savedRun && (Boolean(resumePath) || ['running', 'pending_media'].includes(savedRun.status));
       if (resumableRun) {
         log(`Defaults changed, but run ${state.runDirectory} is incomplete; preserving its saved arguments and run snapshot for resume.`);
       } else {
@@ -630,7 +636,7 @@ async function exhibitionMain() {
         state.exhibitionSettings = null;
       }
     }
-    const exhibitionArguments = process.argv.slice(2);
+    const exhibitionArguments = commandArguments;
     const sceneArgumentValues = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       if (flagName(exhibitionArguments[index]) !== '--scene') continue;
@@ -734,8 +740,8 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval'].includes(flagName(argument))) {
-        if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument))) {
+        if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }
       userArguments.push(argument);
@@ -803,10 +809,27 @@ async function exhibitionMain() {
         biasMode: sceneSequence.biasMode,
         iterators: iteratorPlans,
       };
-      await saveJson(iteratorPlanPath, iteratorPlan);
+      if (priorRunIsIncomplete && state.runDirectory && priorRun?.iteratorPlanFingerprint) {
+        const savedPlan = await readJson(iteratorPlanPath);
+        const comparable = (plan) => ({
+          ...plan,
+          iterators: plan.iterators.map((iterator) => ({
+            ...iterator,
+            arguments: iterator.arguments.filter((argument) => !['--iterations', '--article-order'].includes(flagName(argument))),
+          })),
+        });
+        if (JSON.stringify(comparable(savedPlan)) !== JSON.stringify(comparable(iteratorPlan))) {
+          throw new Error('Scene settings changed; resume requires the original scene plan.');
+        }
+        const savedFingerprint = createHash('sha256').update(JSON.stringify(savedPlan)).digest('hex');
+        if (savedFingerprint !== priorRun.iteratorPlanFingerprint) throw new Error('Saved scene plan does not match the interrupted run.');
+        log('Resuming the saved scene plan; iteration limit and global article order may be changed explicitly.');
+      } else {
+        await saveJson(iteratorPlanPath, iteratorPlan);
+      }
       state.scenePath = sceneSequence.path;
       state.scenePaths = scenePaths;
-      state.scenePlanFingerprint = createHash('sha256').update(JSON.stringify(iteratorPlan)).digest('hex');
+      state.scenePlanFingerprint = createHash('sha256').update(JSON.stringify(await readJson(iteratorPlanPath))).digest('hex');
       normalizedRunnerArguments.push(`--iterator-plan=${iteratorPlanPath}`);
     } else {
       delete state.scenePath;
@@ -865,9 +888,9 @@ async function exhibitionMain() {
     await saveJson(statePath, state);
     if (state.storyModel) process.env.NEWS_STORY_MODEL = state.storyModel;
 
-    let runDirectory = stopAfterIterations === null && state.runDirectory ? resolve(state.runDirectory) : null;
+    let runDirectory = state.runDirectory ? resolve(state.runDirectory) : null;
     if (!runDirectory || !(await stat(join(runDirectory, 'run.json')).catch(() => null))) runDirectory = null;
-    if (stopAfterIterations !== null) {
+    if (stopAfterIterations !== null && !runDirectory) {
       state.runDirectory = null;
       state.gluedThroughIteration = 0;
       delete state.lastFilmBuildAt;

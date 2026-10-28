@@ -957,6 +957,7 @@ async function main() {
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
   if (options.resume && options['resume-run']) throw new Error('Use either --resume or --resume-run, not both');
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-sequence-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
+  const requestedGlobalOrder = options['resume-run'] && options['article-order'] === 'global';
   let savedRunManifest = null;
   if (options['resume-run']) {
     const resumeDirectory = resolve(options['resume-run']);
@@ -978,6 +979,7 @@ async function main() {
       options.iterations = requestedIterationLimit;
       options['resume-run'] = resumeDirectory;
       options['output-dir'] = outputDirectory;
+      if (requestedGlobalOrder) options['article-order'] = 'global';
       storyModel = options['story-model'].trim();
       console.log(`Restored saved run settings from ${join(resumeDirectory, 'run.json')}; only an explicit --iterations may change run length.`);
     }
@@ -1055,6 +1057,7 @@ async function main() {
     if (sharedArticleProgress && !options['resume-run'] && !options.resume) {
       console.log(`Global news article counter resumes at ${articleProgress.nextDraw + 1} (${articleProgress.sourceAggregate})`);
     }
+    if (!sharedArticleProgress && !articleProgress) console.log('Global news counter: no saved position; starting with the first article.');
   }
   const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
     ? Date.parse(runManifest.sceneSchedule.startedAt)
@@ -1083,6 +1086,12 @@ async function main() {
   }
   if (runManifest) {
     if (options['resume-run']) {
+      if (options['article-order'] === 'global') {
+        runManifest.runOptions ||= {};
+        runManifest.generationSettings ||= {};
+        runManifest.runOptions['article-order'] = 'global';
+        runManifest.generationSettings.articleOrder = 'global';
+      }
       const firstPath = previouslyCompleted > 0 ? join(iterationRoot, runManifest.iterations[0].directory, 'record.json')
         : pendingIterationDirectory ? join(pendingIterationDirectory, 'record.json') : null;
       const first = firstPath ? await json(firstPath) : null;
@@ -1144,6 +1153,7 @@ async function main() {
       'output-dir': runBaseOptions['output-dir'],
       'iterator-plan': runBaseOptions['iterator-plan'],
       'pause-ms': runBaseOptions['pause-ms'],
+      ...(options['resume-run'] && runBaseOptions['article-order'] === 'global' ? { 'article-order': 'global' } : {}),
     };
     options = { ...runBaseOptions, ...iteratorOptionValues[iteratorIndex], ...controls };
     if (options['use-style-reference']) options['no-style-reference'] = false;
@@ -1223,7 +1233,7 @@ async function main() {
         ])] } : {}),
       };
       articleProgress = runManifest.articleProgress;
-      if (options['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
+      if (runBaseOptions['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
       await save(join(iterationRoot, 'run.json'), runManifest);
     }
   }
@@ -1282,7 +1292,10 @@ async function main() {
           ...(articleProgress?.seenArticleKeys || []), articleKey(completedRecord.article),
         ])] } : {}),
       };
-      if (options['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
+      if (options['article-order'] === 'global') {
+        await save(globalArticleProgressPath, articleProgress);
+        console.log(`Global news counter: ${articleProgress.seenArticleKeys?.length || 0} used; next list position ${articleProgress.nextDraw + 1}.`);
+      }
     }
     imageSeedOffset += completedRecord.sceneCount;
     completed += 1;

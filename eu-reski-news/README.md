@@ -73,6 +73,8 @@ npm run news:exhibition:from-scene-json:with-time-interpolation -- --generation-
 
 Lauf setzt alphabetische Dateireihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Ordner und dieselben CLI-Overrides erneut angeben.
 
+Ein unterbrochener Lauf wird beim Neustart mit demselben Ausgabeordner fortgesetzt. Einen abgeschlossenen Lauf kann `--resume-run=PFAD --stop-after-iterations=10` bis insgesamt zehn Iterationen fortsetzen; dabei denselben Scene-Ordner und Ausgabeordner verwenden. Mit `--article-order=global` wird beim Fortsetzen die gespeicherte Artikelposition übernommen. Ohne gespeicherten globalen Zähler beginnt ein neuer globaler Lauf beim ersten Artikel. Der Laufbericht zeigt den Zähler und die nächste Listenposition.
+
 `Article + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; optional article photo for subject orientation; --guernica-location-reference adds Guernica as secondary setting/space reference; without it, the previous prompt/reference path remains) → cumulative HTML audit report`.
 
 The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API. `--scenes` accepts 1–7 scenes; default remains 3.
