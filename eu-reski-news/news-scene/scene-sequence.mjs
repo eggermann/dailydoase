@@ -1,7 +1,5 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-
-export const DEFAULT_GENERATION_INTERVAL_MS = 5000;
+import { resolve } from 'node:path';
 
 export function mergeSettings(defaults, overrides) {
   if (!overrides || typeof overrides !== 'object' || Array.isArray(overrides)) return overrides ?? defaults;
@@ -14,8 +12,8 @@ export function mergeSettings(defaults, overrides) {
   return merged;
 }
 
-export function parseGenerationInterval(value, iteratorCount = 1) {
-  if (value === -1 || value === '-1') return DEFAULT_GENERATION_INTERVAL_MS * iteratorCount;
+export function parseGenerationInterval(value) {
+  if (value === -1 || value === '-1') return null;
   if (typeof value !== 'string') throw new Error('generationInterval must be -1 or duration such as "1h"');
 
   const match = /^(\d+(?:\.\d+)?)(ms|s|m|h)$/.exec(value.trim());
@@ -49,7 +47,7 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
   let sceneIterations = scene.iterations;
   if (isSceneDirectory) {
     const iterationFileNames = directoryEntries
-      .filter((entry) => entry.isFile() && entry.name.endsWith('.json') && entry.name !== 'scene.json')
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.scene.json'))
       .map((entry) => entry.name)
       .sort((left, right) => left.localeCompare(right, 'en'));
     sceneIterations = await Promise.all(iterationFileNames.map(async (fileName) =>
@@ -57,15 +55,21 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
   }
   if (!Array.isArray(sceneIterations) || sceneIterations.length === 0) {
     throw new Error(isSceneDirectory
-      ? `Scene folder must contain iteration JSON files: ${absoluteScenePath}`
+      ? `Scene folder must contain .scene.json files: ${absoluteScenePath}`
       : 'Scene JSON iterations must be a non-empty ordered list');
   }
-  if (scheduleEnabled && !['on', 'off'].includes(scene.biasMode)) {
+  const minutes = scene.generationIntervalInMinutes;
+  if (scheduleEnabled && generationInterval === undefined && minutes !== undefined
+    && String(minutes) !== '-1' && !/^\d+(?:\.\d+)?$/.test(String(minutes))) {
+    throw new Error('generationIntervalInMinutes must be a positive number of minutes or -1');
+  }
+  const selectedInterval = generationInterval ?? (minutes === undefined ? undefined : String(minutes) === '-1' ? '-1' : `${minutes}m`);
+  const activeSchedule = scheduleEnabled && selectedInterval !== '-1';
+  if (activeSchedule && !['on', 'off'].includes(scene.biasMode)) {
     throw new Error('Scene JSON biasMode must be "on" or "off"');
   }
 
-  const selectedInterval = generationInterval ?? scene.generationInterval;
-  const intervalMs = scheduleEnabled
+  const intervalMs = activeSchedule
     ? parseGenerationInterval(selectedInterval, sceneIterations.length)
     : null;
   const iterators = [];
@@ -88,10 +92,10 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
 
   return {
     path: absoluteScenePath,
-    scheduleEnabled,
-    generationInterval: scheduleEnabled ? selectedInterval : null,
+    scheduleEnabled: activeSchedule,
+    generationInterval: activeSchedule ? selectedInterval : null,
     intervalMs,
-    biasMode: scheduleEnabled ? scene.biasMode : null,
+    biasMode: activeSchedule ? scene.biasMode : null,
     iterators,
   };
 }

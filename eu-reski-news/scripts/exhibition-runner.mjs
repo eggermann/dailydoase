@@ -554,6 +554,7 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
     rejectClosed = rejectRunner;
   });
   try {
+    let globalArticleQueueExhausted = false;
     const args = [runnerScript, ...argumentsList];
     if (runDirectory && !args.some((argument) => flagName(argument) === '--resume-run')) args.push(`--resume-run=${runDirectory}`);
     const child = spawn(process.execPath, args, { cwd: repositoryRoot, env: process.env, stdio: ['inherit', 'pipe', 'pipe'] });
@@ -570,7 +571,10 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
     const stdoutLines = createInterface({ input: child.stdout, crlfDelay: Infinity });
     const stderrLines = createInterface({ input: child.stderr, crlfDelay: Infinity });
     stdoutLines.on('line', onLine);
-    stderrLines.on('line', (line) => console.error(line));
+    stderrLines.on('line', (line) => {
+      console.error(line);
+      if (line.includes('Global article queue exhausted:')) globalArticleQueueExhausted = true;
+    });
     child.once('error', (error) => {
       children.delete(child);
       runnerChild = null;
@@ -579,7 +583,7 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
     child.once('close', (code, signal) => {
       children.delete(child);
       runnerChild = null;
-      resolveClosed({ code, signal });
+      resolveClosed({ code, signal, globalArticleQueueExhausted });
     });
     return { child, closed };
   } catch (error) {
@@ -606,6 +610,7 @@ async function exhibitionMain() {
     if (state.runDirectory && !priorRunIsIncomplete) {
       state.runDirectory = null;
       delete state.scenePath;
+      delete state.scenePaths;
       delete state.scenePlanFingerprint;
     }
     log(`News directory: ${newsDirectory}; output directory: ${outputDirectory}`);
@@ -626,15 +631,19 @@ async function exhibitionMain() {
       }
     }
     const exhibitionArguments = process.argv.slice(2);
-    const sceneArgument = exhibitionArguments.findLast((argument) => flagName(argument) === '--scene');
-    const sceneArgumentValue = sceneArgument?.includes('=')
-      ? sceneArgument.slice('--scene='.length)
-      : sceneArgument
-        ? exhibitionArguments[exhibitionArguments.indexOf(sceneArgument) + 1]
-        : null;
-    if (sceneArgument && !sceneArgumentValue) throw new Error('Use --scene=PATH');
+    const sceneArgumentValues = [];
+    for (let index = 0; index < exhibitionArguments.length; index += 1) {
+      if (flagName(exhibitionArguments[index]) !== '--scene') continue;
+      const value = exhibitionArguments[index].includes('=')
+        ? exhibitionArguments[index].slice('--scene='.length)
+        : exhibitionArguments[++index];
+      if (!value || value.startsWith('--')) throw new Error('Use --scene=PATH; repeat --scene=PATH to schedule several scene files');
+      sceneArgumentValues.push(value);
+    }
+    const scenePaths = sceneArgumentValues.map((scenePath) => resolve(scenePath));
+    const hasSceneArgument = scenePaths.length > 0;
     const generationIntervalArgument = exhibitionArguments.findLast((argument) => flagName(argument) === '--generation-interval');
-    if (generationIntervalArgument && !sceneArgumentValue) {
+    if (generationIntervalArgument && !hasSceneArgument) {
       throw new Error('--generation-interval requires --scene=PATH');
     }
     const generationInterval = generationIntervalArgument
@@ -645,17 +654,41 @@ async function exhibitionMain() {
     if (generationIntervalArgument) {
       if (!generationInterval || generationInterval.startsWith('--')) throw new Error('Use --generation-interval=1h');
     }
-    const sceneSequence = sceneArgumentValue
-      ? await loadSceneSequence(sceneArgumentValue, defaultGeneration, {
+    const loadedSceneSequences = scenePaths.length
+      ? await Promise.all(scenePaths.map((scenePath) => loadSceneSequence(scenePath, defaultGeneration, {
         scheduleEnabled: Boolean(generationIntervalArgument),
         generationInterval,
-      })
+      })))
       : null;
-    if (state.runDirectory && state.scenePath && !sceneSequence) {
-      throw new Error(`Resume the active scene sequence with --scene=${state.scenePath}`);
+    if (loadedSceneSequences?.length > 1) {
+      const firstSequence = loadedSceneSequences[0];
+      for (const sequence of loadedSceneSequences.slice(1)) {
+        if (sequence.scheduleEnabled !== firstSequence.scheduleEnabled
+          || sequence.intervalMs !== firstSequence.intervalMs
+          || sequence.biasMode !== firstSequence.biasMode) {
+          throw new Error('Scheduled scene files must use the same interval and bias mode; set --generation-interval=... to share one interval.');
+        }
+      }
     }
-    if (state.runDirectory && state.scenePath && sceneSequence?.path !== state.scenePath) {
-      throw new Error(`Active scene sequence uses ${state.scenePath}; finish or resume it before selecting another scene file`);
+    const sceneSequence = loadedSceneSequences?.length ? {
+      path: scenePaths.length === 1 ? scenePaths[0] : scenePaths.join(' | '),
+      paths: scenePaths,
+      scheduleEnabled: loadedSceneSequences[0].scheduleEnabled,
+      generationInterval: loadedSceneSequences[0].generationInterval,
+      intervalMs: loadedSceneSequences[0].intervalMs,
+      biasMode: loadedSceneSequences[0].biasMode,
+      iterators: loadedSceneSequences.flatMap((sequence, sequenceIndex) => sequence.iterators.map((iterator) => ({
+        ...iterator,
+        name: loadedSceneSequences.length === 1 ? iterator.name : `${basename(scenePaths[sequenceIndex])} · ${iterator.name}`,
+      }))),
+    } : null;
+    const activeScenePaths = state.scenePaths || (state.scenePath ? [state.scenePath] : []);
+    if (state.runDirectory && activeScenePaths.length && !sceneSequence) {
+      throw new Error(`Resume the active scene sequence with ${activeScenePaths.map((scenePath) => `--scene=${scenePath}`).join(' ')}`);
+    }
+    if (state.runDirectory && activeScenePaths.length
+      && JSON.stringify(sceneSequence?.paths || [sceneSequence?.path]) !== JSON.stringify(activeScenePaths)) {
+      throw new Error(`Active scene sequence uses ${activeScenePaths.join(', ')}; resume with the same --scene files before selecting another sequence`);
     }
     const stopAfterArgument = exhibitionArguments.find((argument) => flagName(argument) === '--stop-after-iterations');
     let stopAfterIterations = null;
@@ -742,7 +775,14 @@ async function exhibitionMain() {
     const iteratorPlans = sceneSequence
       ? sceneSequence.iterators.map((iterator) => {
         const iteratorDefaults = defaultsFromExhibitionSettings(iterator.generation);
-        const iteratorArguments = mergeRunnerArguments(iteratorDefaults.args, userArguments, stopAfterIterations);
+        let iteratorArguments = mergeRunnerArguments(iteratorDefaults.args, userArguments, stopAfterIterations);
+        if (sceneSequence.iterators.length > 1) {
+          if (iteratorArguments.some((argument) => flagName(argument) === '--article-id')) {
+            throw new Error('Scheduled scene files cannot pin --article-id; global article order prevents repeats.');
+          }
+          iteratorArguments = iteratorArguments.filter((argument) => flagName(argument) !== '--article-order');
+          iteratorArguments.push('--article-order=global');
+        }
         return { name: iterator.name, arguments: iteratorArguments };
       })
       : null;
@@ -765,10 +805,12 @@ async function exhibitionMain() {
       };
       await saveJson(iteratorPlanPath, iteratorPlan);
       state.scenePath = sceneSequence.path;
+      state.scenePaths = scenePaths;
       state.scenePlanFingerprint = createHash('sha256').update(JSON.stringify(iteratorPlan)).digest('hex');
       normalizedRunnerArguments.push(`--iterator-plan=${iteratorPlanPath}`);
     } else {
       delete state.scenePath;
+      delete state.scenePaths;
       delete state.scenePlanFingerprint;
     }
     const videoSettings = {
@@ -874,8 +916,13 @@ async function exhibitionMain() {
         }
         break;
       }
-      log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
-      await delayOrStop(30_000);
+      if (result.globalArticleQueueExhausted) {
+        log(`All eligible articles used; keep scene schedule paused until news refresh. Check again in ${refreshCheckMs} ms.`);
+        await delayOrStop(refreshCheckMs);
+      } else {
+        log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
+        await delayOrStop(30_000);
+      }
     }
     await Promise.allSettled([refreshTask, mergeTask].filter(Boolean));
   });

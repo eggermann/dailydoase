@@ -18,6 +18,7 @@ import { buildGrokVideoPrompt, buildVideoDirectionRequest, validateVideoDirectio
 import { audioDirectionInputHash, audioDirectorPromptVersion, buildAudioDirectionRequest, buildAudioPrompt, validateAudioDirectionResponse } from '../news-scene/audio-director.mjs';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
+import { articleKey } from './news-eu-relevance.mjs';
 import { renderTitleCard } from '../news-scene/title-card.mjs';
 import {
   autoDirectorPromptVersion,
@@ -987,7 +988,10 @@ async function main() {
   if (!Number.isInteger(pauseMilliseconds) || pauseMilliseconds < 0) throw new Error('--pause-ms must be a non-negative integer');
   if (options.resume && iterationLimit !== 1) throw new Error('--resume only supports one iteration');
   let sceneCountSettings = resolveSceneCountSettings(options);
-  if (!['linear', 'random'].includes(options['article-order'])) throw new Error('Use --article-order=linear or --article-order=random');
+  if (!['linear', 'random', 'global'].includes(options['article-order'])) throw new Error('Use --article-order=linear, --article-order=random or --article-order=global');
+  if (options['article-order'] === 'global' && options['article-id']) {
+    throw new Error('--article-id cannot be combined with --article-order=global');
+  }
   if (options['videos-after-each-iteration'] && (options['video-model'] !== 'prunaai:p-video@2-pro' || options['video-resolution'] !== '480p' || options['video-settings-mode'] !== 'cost')) {
     throw new Error('Automatic video generation in this runner requires P-Video-2-Pro, 480p, and cost mode');
   }
@@ -1007,6 +1011,7 @@ async function main() {
     : groupedRun
       ? await allocateRunDirectory(resolve(options['output-dir']))
       : resolve(options['output-dir']);
+  const globalArticleProgressPath = join(resolve(options['output-dir']), 'global-article-progress.json');
   const runManifest = options['resume-run'] ? await json(join(iterationRoot, 'run.json')) : groupedRun ? {
     profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
     startedAt: new Date().toISOString(),
@@ -1031,6 +1036,26 @@ async function main() {
     articleProgress: null,
     iterations: [],
   } : null;
+  let articleProgress = runManifest?.articleProgress || null;
+  if (options['article-order'] === 'global') {
+    const sharedArticleProgress = await json(globalArticleProgressPath).catch((error) => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    });
+    if (sharedArticleProgress) {
+      articleProgress = {
+        ...(articleProgress || {}),
+        ...sharedArticleProgress,
+        seenArticleKeys: [...new Set([
+          ...(articleProgress?.seenArticleKeys || []),
+          ...(sharedArticleProgress.seenArticleKeys || []),
+        ])],
+      };
+    }
+    if (sharedArticleProgress && !options['resume-run'] && !options.resume) {
+      console.log(`Global news article counter resumes at ${articleProgress.nextDraw + 1} (${articleProgress.sourceAggregate})`);
+    }
+  }
   const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
     ? Date.parse(runManifest.sceneSchedule.startedAt)
     : Date.now();
@@ -1187,12 +1212,18 @@ async function main() {
   if (runManifest && completed > 0) {
     const latestDirectory = runManifest.iterations[completed - 1].directory;
     const latestRecord = await json(join(iterationRoot, latestDirectory, 'record.json'));
-    if (latestRecord.selection?.method === 'linear' && latestRecord.selection.ranking === 'jev-eu-relevance') {
+    if (['linear', 'global'].includes(latestRecord.selection?.method) && latestRecord.selection.ranking === 'jev-eu-relevance') {
       runManifest.articleProgress = {
+        ...(articleProgress || {}),
         sourceAggregate: latestRecord.sourceAggregate,
         aggregateHash: latestRecord.aggregateHash || null,
         nextDraw: latestRecord.selection.draw + 1,
+        ...(latestRecord.article ? { seenArticleKeys: [...new Set([
+          ...(articleProgress?.seenArticleKeys || []), articleKey(latestRecord.article),
+        ])] } : {}),
       };
+      articleProgress = runManifest.articleProgress;
+      if (options['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
       await save(join(iterationRoot, 'run.json'), runManifest);
     }
   }
@@ -1237,20 +1268,26 @@ async function main() {
       imageSeedOffset,
       runImageSeedBase,
       pendingIterationDirectory,
-      runManifest?.articleProgress || null,
+      articleProgress,
     );
     pendingIterationDirectory = null;
     const completedRecord = await json(join(iterationDirectory, 'record.json'));
+    if (['linear', 'global'].includes(completedRecord.selection?.method) && completedRecord.selection.ranking === 'jev-eu-relevance') {
+      articleProgress = {
+        ...(articleProgress || {}),
+        sourceAggregate: completedRecord.sourceAggregate,
+        aggregateHash: completedRecord.aggregateHash || null,
+        nextDraw: completedRecord.selection.draw + 1,
+        ...(completedRecord.article ? { seenArticleKeys: [...new Set([
+          ...(articleProgress?.seenArticleKeys || []), articleKey(completedRecord.article),
+        ])] } : {}),
+      };
+      if (options['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
+    }
     imageSeedOffset += completedRecord.sceneCount;
     completed += 1;
     if (runManifest) {
-      if (completedRecord.selection?.method === 'linear' && completedRecord.selection.ranking === 'jev-eu-relevance') {
-        runManifest.articleProgress = {
-          sourceAggregate: completedRecord.sourceAggregate,
-          aggregateHash: completedRecord.aggregateHash || null,
-          nextDraw: completedRecord.selection.draw + 1,
-        };
-      }
+      if (articleProgress) runManifest.articleProgress = articleProgress;
       const relativeDirectory = iterationDirectory.slice(iterationRoot.length + 1);
       runManifest.iterations.push({ index: completed, directory: relativeDirectory, report: `${relativeDirectory}/index.html` });
       await save(join(iterationRoot, 'run.json'), runManifest);
@@ -1338,22 +1375,34 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const newsDirectory = resolve(options['news-dir']);
       const rankedCollections = await findRankedNewsCollections(newsDirectory);
       if (!rankedCollections.length) throw new Error('No EU-scored news collection found; fetch news and finish Jev classification first');
-      const rankedCollection = articleProgress?.sourceAggregate
-        ? rankedCollections.find(({ aggregatePath }) => aggregatePath === articleProgress.sourceAggregate)
-        : rankedCollections[0];
-      if (!rankedCollection) {
+      const order = options['article-order'];
+      const rankedCollection = order === 'global'
+        ? rankedCollections[0]
+        : articleProgress?.sourceAggregate
+          ? rankedCollections.find(({ aggregatePath }) => aggregatePath === articleProgress.sourceAggregate)
+          : rankedCollections[0];
+      if (!rankedCollection && options['article-order'] !== 'global') {
         throw new Error(`Cannot seamlessly resume article order: saved news aggregate is missing: ${articleProgress.sourceAggregate}`);
       }
-      if (articleProgress?.aggregateHash && rankedCollection.aggregateHash !== articleProgress.aggregateHash) {
+      const selectedCollection = rankedCollection || rankedCollections[0];
+      if (articleProgress?.aggregateHash && selectedCollection.aggregateHash !== articleProgress.aggregateHash
+        && options['article-order'] !== 'global') {
         throw new Error(`Cannot seamlessly resume article order: saved news aggregate changed: ${articleProgress.sourceAggregate}`);
       }
-      const { aggregate, aggregatePath: sourceAggregate, aggregateHash, candidates } = rankedCollection;
-      const order = options['article-order'];
+      const { aggregate, aggregatePath: sourceAggregate, aggregateHash, candidates } = selectedCollection;
+      const seenArticleKeys = new Set(order === 'global' ? articleProgress?.seenArticleKeys || [] : []);
+      if (order === 'global' && !articleProgress?.seenArticleKeys?.length
+        && articleProgress?.sourceAggregate === selectedCollection.aggregatePath) {
+        for (let index = 0; index < Math.min(articleProgress.nextDraw || 0, candidates.length); index += 1) {
+          seenArticleKeys.add(articleKey(candidates[index].article));
+        }
+      }
+      if (order === 'global' && articleProgress) articleProgress.seenArticleKeys = [...seenArticleKeys];
       const requestedDraw = options['article-id']
         ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
         : order === 'random'
           ? randomInt(candidates.length)
-          : articleProgress?.sourceAggregate === rankedCollection.aggregatePath
+          : articleProgress?.sourceAggregate === selectedCollection.aggregatePath
             ? articleProgress.nextDraw % candidates.length
             : 0;
       if (requestedDraw < 0) throw new Error('Requested article is missing or has no usable text and image');
@@ -1362,6 +1411,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       for (let offset = 0; offset < searchCount; offset += 1) {
         const candidateIndex = (requestedDraw + offset) % candidates.length;
         const candidate = candidates[candidateIndex];
+        if (seenArticleKeys.has(articleKey(candidate.article))) continue;
         if (await hasUsableArticleImage(candidate.article.image)) {
           draw = candidateIndex;
           break;
@@ -1369,7 +1419,13 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
         if (options['article-id']) break;
       }
-      if (draw < 0) throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+      if (draw < 0) {
+        const unseenCandidateCount = candidates.filter(({ article }) => !seenArticleKeys.has(articleKey(article))).length;
+        if (order === 'global' && unseenCandidateCount === 0) {
+          throw new Error(`Global article queue exhausted: all ${candidates.length} eligible stories in ${selectedCollection.aggregateFile} were already used`);
+        }
+        throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+      }
       const { article, aggregateIndex, score } = candidates[draw];
       console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
       const sceneCountSelection = sceneCountStream.next();

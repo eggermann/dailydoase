@@ -44,8 +44,8 @@ case "$NEWS_SCENES" in
   *) echo 'NEWS_SCENES must be between 1 and 12.' >&2; exit 2 ;;
 esac
 case "$NEWS_ARTICLE_ORDER" in
-  linear|random) ;;
-  *) echo 'NEWS_ARTICLE_ORDER must be linear or random.' >&2; exit 2 ;;
+  linear|random|global) ;;
+  *) echo 'NEWS_ARTICLE_ORDER must be linear, random or global.' >&2; exit 2 ;;
 esac
 case "$NEWS_POLLING_TIME_MS" in
   ''|*[!0-9]*) echo 'NEWS_POLLING_TIME_MS must be a non-negative integer.' >&2; exit 2 ;;

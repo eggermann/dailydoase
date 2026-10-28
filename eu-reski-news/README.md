@@ -52,16 +52,16 @@ npm run news:exhibition -- --legacy-guernica-style-reference-prompt
 
 ### Scene-Dateien
 
-Der Standardordner `eu-reski-news/scenes/` enthält `scene.json` mit Zeitplan-Metadaten sowie einzelne Iterationsdateien. Der Runner lädt alle anderen `.json`-Dateien im Ordner alphabetisch. Jede Datei enthält genau ein Objekt mit `name` und `generationOverrides`; Overrides werden rekursiv auf [`default-exhibition-settings.json`](default-exhibition-settings.json) gelegt. Fehlende Werte erben Defaults, CLI-Flags überschreiben alle Iterationen.
+Der Standardordner `eu-reski-news/scenes/` enthält `scene.json` mit Zeitplan-Metadaten sowie einzelne Scene-Dateien. Der Runner lädt ausschließlich Dateien mit der Endung `.scene.json` im angegebenen Ordner, alphabetisch. Jede enthält genau ein Objekt mit `name` und `generationOverrides`; Overrides werden rekursiv auf [`default-exhibition-settings.json`](default-exhibition-settings.json) gelegt. Andere JSON-Dateien werden nicht als Scenes geladen. Fehlende Werte erben Defaults, CLI-Flags überschreiben alle Iterationen.
 
 ```text
 eu-reski-news/scenes/
-  scene.json             # generationInterval, biasMode
-  off-expression.json    # { name, generationOverrides: { ... } }
-  on-expression.json     # { name, generationOverrides: { ... } }
+  scene.json             # generationIntervalInMinutes, biasMode
+  off-expression.scene.json    # { name, generationOverrides: { ... } }
+  on-expression.scene.json     # { name, generationOverrides: { ... } }
 ```
 
-Beide npm-Befehle starten diesen Ordner ohne Pfadargument. Normaler Start läuft ohne Zeitverzögerung; `with-time-interpolation` setzt standardmäßig ein Gesamtfenster von `1h`. `generationInterval` akzeptiert `ms`, `s`, `m`, `h` oder `-1` (fünf Sekunden je Iteration). Bei zwei Dateien und `1h` beträgt jeder Slot 30 Minuten; `biasMode: "on"` startet nach 15 Minuten pro Slot, `"off"` am Slotanfang. Späte Iterationen überlappen nicht; nächste startet nach Abschluss der vorherigen.
+Beide npm-Befehle starten diesen Ordner ohne Pfadargument. Normaler Start läuft ohne Zeitverzögerung; `with-time-interpolation` setzt standardmäßig ein Gesamtfenster von `1h`. In `scene.json` gibt `generationIntervalInMinutes` die Minuten an; `"-1"` schaltet die zeitliche Planung aus. Das CLI-Flag `--generation-interval` akzeptiert `ms`, `s`, `m`, `h` oder `-1` und überschreibt den JSON-Wert. Bei zwei Dateien und `1h` beträgt jeder Slot 30 Minuten; `biasMode: "on"` startet nach 15 Minuten pro Slot, `"off"` am Slotanfang. Späte Iterationen überlappen nicht; nächste startet nach Abschluss der vorherigen.
 
 ```sh
 npm run news:exhibition:from-scene-json
@@ -87,7 +87,13 @@ npm run news:story
 
 The EU-RESKI shell starter writes under `eu-reski-news/GENERATIONS/news/iteration-NNN`. Its editable settings block controls scene count, article order, article/semantic inputs, iteration count, and Taktmuster timing. Each report contains one still per scene plus the film handoff. Source articles come from `eu-reski-news/news/A` by default.
 
-Article order defaults to `linear`: each new run starts with the first eligible article in the latest aggregate and advances one article per iteration, wrapping at the end. A new invocation starts at the beginning again. Use `--article-order=random` to draw randomly each iteration; `--article-id=ID` pins one article.
+Article order defaults to `linear`: each runner invocation starts with the first eligible article in the latest aggregate and advances one article per iteration, wrapping at the end. Use `--article-order=random` to draw randomly each iteration. Use `--article-order=global` to continue the saved article counter across runner invocations; its position is saved in `GENERATIONS/news/global-article-progress.json`. `--article-id=ID` pins one article.
+
+Scene files in one directory run as one persistent schedule. Files ending in `.scene.json` are loaded in alphabetical order; their generators share one global article history, so completed stories are not selected again. Use the same command after restarting to resume its active run:
+
+```sh
+npm run news:exhibition -- --scene=eu-reski-news/scenes --generation-interval=1h
+```
 
 ```sh
 # Three articles in collection order

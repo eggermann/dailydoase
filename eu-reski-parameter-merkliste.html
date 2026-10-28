@@ -28,10 +28,10 @@
   <section>
     <h2>Scene-JSON und vollständige Parameterüberschreibungen</h2>
     <p>Der Runner liest alphabetisch alle Iterationsdateien aus <code>eu-reski-news/scenes/</code>. <code>scene.json</code> enthält nur Zeitplan-Metadaten; jede weitere Datei enthält ein einzelnes Objekt mit <code>name</code> und <code>generationOverrides</code>. Dieses Objekt wird auf <code>eu-reski-news/default-exhibition-settings.json</code> gelegt. Fehlende Werte erben Defaults; CLI-Flags überschreiben JSON-Werte.</p>
-    <p>Vollständiges Beispiel: <a href="eu-reski-news/docs/scenes-example/scene.json"><code>scene.json</code></a>, <a href="eu-reski-news/docs/scenes-example/off-expression.json"><code>off-expression.json</code></a>, <a href="eu-reski-news/docs/scenes-example/on-expression.json"><code>on-expression.json</code></a> mit allen Generationseinstellungen.</p>
+    <p>Vollständiges Beispiel: <a href="eu-reski-news/docs/scenes-example/scene.json"><code>scene.json</code></a>, <a href="eu-reski-news/docs/scenes-example/off-expression.scene.json"><code>off-expression.scene.json</code></a>, <a href="eu-reski-news/docs/scenes-example/on-expression.scene.json"><code>on-expression.scene.json</code></a> mit allen Generationseinstellungen.</p>
     <p><code>scene.json</code>:</p>
     <pre>{
-  "generationInterval": "1h",
+  "generationIntervalInMinutes": "60",
   "biasMode": "on"
 }</pre>
     <p><code>off-expression.json</code> oder <code>on-expression.json</code>:</p>

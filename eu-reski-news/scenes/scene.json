@@ -1,5 +1,4 @@
 {
-  "generationInterval": "1h",
-  "biasMode": "on",
-  "settingsFile": "./settings.json"
+  "generationIntervalInMinutes": "60",
+  "biasMode": "on"
 }

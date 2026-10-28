@@ -1,4 +1,4 @@
 {
-  "generationInterval": "1h",
+  "generationIntervalInMinutes": "60",
   "biasMode": "on"
 }
