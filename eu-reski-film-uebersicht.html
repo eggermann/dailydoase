@@ -33,10 +33,12 @@
     p { margin: 8px 0; }
     .lede { color: var(--muted); font-size: 17px; max-width: 760px; }
     .toolbar, .note, .film, .diff { border: 1px solid var(--line); border-radius: 16px; background: #20231eeb; box-shadow: var(--shadow); }
-    .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px; margin: 24px 0 16px; }
+    .toolbar { position: sticky; top: 8px; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px; margin: 24px 0 16px; backdrop-filter: blur(14px); }
     input, select { min-height: 42px; border: 1px solid #575d50; border-radius: 9px; background: #151714; color: var(--ink); padding: 8px 11px; font: inherit; }
     input { flex: 1 1 250px; }
-    select { flex: 0 1 250px; }
+    select { flex: 0 1 230px; }
+    button { min-height: 42px; border: 1px solid #575d50; border-radius: 9px; background: #282c25; color: var(--ink); padding: 8px 12px; font: inherit; cursor: pointer; }
+    button:hover { border-color: var(--gold); }
     .count { margin-left: auto; color: var(--muted); font-size: 13px; }
     .note { padding: 17px 19px; margin: 16px 0 24px; box-shadow: none; }
     .note strong { color: var(--gold); }
@@ -44,15 +46,33 @@
     .film-list { display: grid; gap: 14px; }
     #film-catalog { display: grid; gap: 14px; }
     .film { padding: 20px; }
-    .film[data-article-image-reference="false"] { border: 2px solid #d34c4c; }
-    .film[hidden] { display: none; }
+    .film.latest-run { border-color: var(--gold); box-shadow: 0 0 0 1px #e5ca8355, var(--shadow); }
+    .latest-tag { margin-top: 8px; border-color: var(--gold); color: var(--gold); }
+    .empty-state { padding: 24px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); text-align: center; }
+    .film.no-image-references { border: 2px solid #d34c4c; }
+    .film[hidden], .empty-state[hidden] { display: none; }
     .film-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start; }
     .film h2 { margin: 0; }
     .tag { display: inline-flex; align-items: center; border: 1px solid #657055; border-radius: 999px; padding: 3px 9px; color: var(--green); font-size: 12px; white-space: nowrap; }
     .tag.partial { border-color: #805d45; color: var(--orange); }
     .tag.no-article-reference, .tag.no-reference { border-color: #bd4545; background: #4a2020; color: #ffb0a8; }
     .reference-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ref-codes { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .ref-code { display: inline-flex; align-items: center; gap: 6px; border: 1px solid; border-radius: 999px; padding: 4px 9px; font-size: 11px; font-weight: 750; letter-spacing: .06em; }
+    .ref-code::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .ref-code.news { color: #ff9b82; border-color: #a95443; background: #44251f; }
+    .ref-code.person { color: #9ecbff; border-color: #426c97; background: #1e3041; }
+    .ref-code.guernica { color: #e5ca83; border-color: #897745; background: #3a3423; }
+    .ref-code.off { color: #85887e; border-color: #4d5148; background: #272a25; }
     .meta { color: var(--muted); font-size: 13px; margin-top: 7px; }
+    .film-media { display: grid; grid-template-columns: minmax(210px, .9fr) minmax(0, 3.1fr); gap: 18px; align-items: start; margin: 16px 0 4px; }
+    .film-media.single-column { grid-template-columns: 1fr; }
+    .media-group { min-width: 0; }
+    .media-group h3 { margin: 0 0 8px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    .output-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(142px, 1fr)); gap: 9px; }
+    .whole-output .output-grid { grid-template-columns: minmax(0, 1fr); }
+    .whole-output .output-card { border-color: var(--gold); }
+    .whole-output .output-card span { color: var(--gold); }
     .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
     .fact { min-width: 0; border-radius: 10px; background: var(--panel-soft); padding: 11px 12px; }
     .fact span { display: block; color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
@@ -60,6 +80,21 @@
     .settings { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; color: var(--muted); font-size: 13px; }
     .settings b { color: var(--ink); font-weight: 600; }
     .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 17px; }
+    .code-box { margin-top: 16px; border: 1px solid #565b4d; border-radius: 12px; padding: 14px 16px; background: #1a1c18; }
+    .code-box h3 { margin: 0 0 8px; color: var(--gold); font-size: 15px; }
+    .code-box p { margin: 5px 0; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+    .code-box b { color: var(--ink); }
+    .code-confidence { display: inline-flex; margin-left: 6px; border-radius: 999px; padding: 2px 8px; font-weight: 750; font-size: 11px; }
+    .code-confidence.level-3 { color: #bad0a2; background: #263321; border: 1px solid #657055; }
+    .code-confidence.level-2 { color: #f0b080; background: #3b2b20; border: 1px solid #805d45; }
+    .code-confidence.level-1 { color: #ffb0a8; background: #4a2020; border: 1px solid #bd4545; }
+    .output-card { overflow: hidden; border: 1px solid var(--line); border-radius: 11px; background: #171915; color: var(--ink); text-decoration: none; }
+    .output-card:hover { border-color: var(--gold); background: #29291f; }
+    .output-card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #10110f; }
+    .output-card span { display: block; padding: 8px 10px; font-size: 12px; font-weight: 650; }
+    .run-details { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 11px; }
+    .run-details summary { color: var(--gold); cursor: pointer; font-weight: 650; }
+    .run-details[open] summary { margin-bottom: 14px; }
     a { color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     .button-link { display: inline-block; border: 1px solid #857747; border-radius: 9px; padding: 7px 11px; text-decoration: none; font-size: 13px; }
     .button-link:hover { background: #393526; }
@@ -74,6 +109,8 @@
       main { width: min(100% - 24px, 640px); padding-top: 28px; }
       .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .settings { grid-template-columns: 1fr; }
+      .film-media { grid-template-columns: 1fr; }
+      .whole-output .output-grid { grid-template-columns: repeat(auto-fill, minmax(142px, 1fr)); }
       .film { padding: 16px; }
       .count { width: 100%; margin-left: 0; }
     }
@@ -84,24 +121,30 @@
   <header>
     <div class="eyebrow">EU-RESKI · Arbeitsübersicht</div>
     <h1>Filme nach Selfomat</h1>
-    <p class="lede">Zusammengeführte Gesamtfilme mit Run- und Branch-Details. Filmdateien und HTML-Berichte öffnen sich aus den lokalen Worktrees.</p>
-    <p class="scope">18 Läufe ab erstem gespeichertem Selfomat-Test: 22.10.2026, 21:35 Uhr. Enthalten sind 91 Basisfilme (81 Iterationsfilme und 10 Gesamtfassungen) plus 45 Iterationsfassungen mit Titelkarte. Alle Dateien liegen in den jeweiligen <code>merged/</code>-Ordnern; Zeiten sind Berliner Ortszeit.</p>
+    <p class="lede">Gesamtfilm zuerst, danach die gemergten Iterationen. Vorschaubilder zeigen Szenen ohne Titelkarte; beim Gesamtfilm kommt das Bild aus Iteration 1. Klick öffnet verlinkte Filmfassung in neuem Tab. Run-, Einstellungs- und Commit-Details lassen sich aufklappen.</p>
+    <p class="scope">38 Läufe ab erstem gespeichertem Selfomat-Test: 22.10.2026, 21:35 Uhr; ergänzt bis 28.10.2026. Pro Iteration erscheint eine Fassung: mit Titelkarte, falls vorhanden, sonst ohne. Gesamtfilme bleiben separat verlinkt.</p>
   </header>
 
-  <section class="note" aria-labelledby="article-image-title">
-    <h2 id="article-image-title">Welche Bildreferenz bekam das Bildmodell?</h2>
-    <p>Jeder Film zeigt drei Quellen getrennt: <strong>Presse-/Artikelbild</strong>, <strong>Guernica-Vollbild</strong> und <strong>maskierte Guernica-Figur</strong>. Roter Rahmen markiert Läufe ohne Pressebild. „Nur Artikelbild“ heißt: keine Guernica-Bildreferenz; der schriftliche Stil bleibt eigene Einstellung.</p>
-  </section>
+
 
   <div class="toolbar" aria-label="Filme filtern">
     <input id="search" type="search" placeholder="Film, Thema, Modell oder Branch suchen …" aria-label="Filme durchsuchen">
     <select id="branch-filter" aria-label="Nach Branch filtern">
       <option value="all">Alle Branches</option>
       <option value="eu-reski/default">eu-reski/default</option>
+      <option value="codex/eu-reski-news-iterations">codex/eu-reski-news-iterations</option>
       <option value="codex/eu-reski-scene-count-takt">codex/eu-reski-scene-count-takt</option>
       <option value="codex/eu-reski-scene-visual-controls">codex/eu-reski-scene-visual-controls</option>
       <option value="codex/story-composition-prompt-test">codex/story-composition-prompt-test</option>
+      <option value="codex/eu-reski-artistic-auto-mode">codex/eu-reski-artistic-auto-mode</option>
     </select>
+    <select id="video-direction-filter" aria-label="Nach Bewegungsregie filtern">
+      <option value="all">Bewegungsregie: alle</option><option value="on">Bewegungsregie: an</option><option value="off">Bewegungsregie: aus</option><option value="unknown">Bewegungsregie: unbelegt</option>
+    </select>
+    <select id="audio-direction-filter" aria-label="Nach Audio-Regie filtern">
+      <option value="all">Audio-Regie: alle</option><option value="on">Audio-Regie: an</option><option value="off">Audio-Regie: aus</option><option value="unknown">Audio-Regie: unbelegt</option>
+    </select>
+    <button id="reset-filters" type="button">Filter zurücksetzen</button>
     <span class="count" id="count" aria-live="polite"></span>
   </div>
 
@@ -109,11 +152,23 @@
     <div id="film-catalog"></div>
   </section>
 
-  <section class="section diff">
-    <h2>Branches und Prompt-Code kurz</h2>
-    <p><b><code>eu-reski/default</code></b>: Ausstellungs- und 10-Iterationen-Läufe. Worktree-HEAD <code>e4223345</code>, Branch war 6 Commits voraus; uncommittete Änderungen an Defaults und Runner änderten Laufkonfiguration/Argumentübergabe, nicht den Story-Prompt.</p>
-    <p><b><code>codex/eu-reski-scene-count-takt</code></b>: frühe Selfomat- und Video-Richtungstests. <b><code>codex/eu-reski-scene-visual-controls</code></b>: Guernica-/Stiltests, teils mit Artikelbild als Bildreferenz (ohne roten Rahmen).</p>
-    <p><b><code>codex/story-composition-prompt-test</code></b>: Planner-Prompt erhielt Anwendungscode-, Schema- und Director-Kontext; Protagonisten-Prüfung akzeptiert auch Vornamen. GPT‑6 nutzt Reasoning-Aufwand statt Temperatur. Zwei GPT‑4o-mini-Referenzläufe mit gleichen sechs Artikeln: erster mit Figuren-Crop, Guernica-Vollbild und Artikelbild; zweiter mit Artikelbild allein. Beide Filme mit P‑Video 2 Pro. Grok Imagine gehört nur zum älteren <code>scene-auto-video-low</code>-Lauf.</p>
+  <section class="note" aria-labelledby="article-image-title">
+    <h2 id="article-image-title">Welche Referenzen waren aktiv?</h2>
+    <p>Die farbigen Kurzmarker stehen oben an jedem Lauf: <strong>NEWS</strong> = Artikelbild ans Bildmodell, <strong>PERSON</strong> = maskierter Figuren-Crop ans Bildmodell, <strong>GUERNICA</strong> = Guernica-Vollbild verwendet. Die Referenz-Tags darunter zeigen getrennt, ob Vollbild ans Bildmodell als Stilreferenz, an GPT als Ortscue oder an beide ging. Grau heißt: nicht verwendet. Roter Rahmen markiert Läufe ohne irgendeine Bildreferenz ans Bildmodell; ein GPT-Ortscue allein zählt nicht als Bildreferenz. Vorschaubilder öffnen den Film in einem neuen Tab. Commit-Bezüge: Wo der Commit konkrete Filme oder Run-Berichte nennt, sind sie im Kasten verlinkt. Code-Sicherheit: <strong>3</strong> = gespeicherter Quellstand sauber, Diff nachvollziehbar; <strong>2</strong> = Commit sichtbar, aber Run-Stand war geändert oder nicht sauber; <strong>1</strong> = Code/Commit nicht mehr verfügbar.</p>
+  </section>
+  <section class="note" aria-labelledby="video-direction-title">
+    <h2 id="video-direction-title">Videoregie: Bewegungs- und Audioplanung</h2>
+    <p><strong><code>--video-direction=on</code></strong> lässt ein Modell Bewegung im Szenenbild, Kamerafahrt und Übergänge planen. Der Plan geht in den Videoprompt; Szenenbilder und -dauer bleiben gleich. <strong><code>--video-audio-direction=on</code></strong> ergänzt geplante Geräusche pro Szene im selben Prompt. Das Videomodell erzeugt den Ton mit dem Film; es entsteht keine separate Tonspur. Audio-Regie ist unabhängig von Bewegungsregie. Beide Schalter sind standardmäßig <code>off</code>.</p>
+    <p>In 38 erfassten Läufen steht <code>videoDirection</code> bei sieben ausdrücklich auf <code>on</code>; <code>videoAudioDirection</code> bei zehn. Bei drei Läufen stehen beide auf <code>on</code>. Jede Karte zeigt beide Werte. „Nicht im Laufbericht gespeichert“ heißt: Der historische Wert ist nicht belegt.</p>
+  </section>
+  <section class="section diff" aria-labelledby="branch-title">
+    <h2 id="branch-title">Branches und Quellstände</h2>
+    <p>Die Karten nennen den Commit, der den Lauf erzeugt hat. Der aktuelle Branch-HEAD kann inzwischen weiter sein.</p>
+    <p><b><code>eu-reski/default</code> · HEAD <code>e4223345</code></b>: sechs Commits vor <code>origin/eu-reski/default</code>; Worktree hat uncommittete Änderungen. Letzter Commit: endliche Ausstellungs-Läufe mit Merge-Filmen.</p>
+    <p><b><code>codex/eu-reski-scene-count-takt</code> · HEAD <code>55dd1ed7</code></b>: Taktmuster-Szenenzahlen, direkte Bewegungsplanung aus Szenenbildern und Fortsetzen unterbrochener Medienläufe. Worktree hat Änderungen an Report- und Video-Dateien.</p>
+    <p><b><code>codex/eu-reski-scene-visual-controls</code> · HEAD <code>83262ddc</code></b>: Szenenstil-Regler; letzter Commit stellt klassische feste Bildprompts wieder her.</p>
+    <p><b><code>codex/story-composition-prompt-test</code> · HEAD <code>32e27bbc</code></b>: spätere Prompt- und Run-Einstellungen, darunter P-Video-Stil-Lock und optionale Audio-Regie. Letzter Commit ergänzt einen Legacy-Guernica-Prompt. Die am 27.10. erzeugten Filme stammen aus früheren Commits desselben Branches.</p>
+    <p><b><code>codex/eu-reski-artistic-auto-mode</code> · HEAD <code>6d520728</code></b>: künstlerischer Auto-Modus mit speicherbaren/fortsetzbaren Exhibition-Läufen. Die hier erfassten Filme stammen aus den gespeicherten Commits <code>32e27bbc</code> und <code>663d4c28</code>; der heutige HEAD ist später.</p>
   </section>
 
   <footer>Quellen: jeweilige <code>run.json</code>, Iterations-<code>record.json</code> und HTML-Run-Berichte in den verlinkten Worktrees. Einstellungen stammen aus den gespeicherten Laufdaten.</footer>
@@ -121,28 +176,50 @@
 <script>
   const search = document.querySelector('#search');
   const branchFilter = document.querySelector('#branch-filter');
+  const videoDirectionFilter = document.querySelector('#video-direction-filter');
+  const audioDirectionFilter = document.querySelector('#audio-direction-filter');
+  const resetFilters = document.querySelector('#reset-filters');
   const catalog = document.querySelector('#film-catalog');
   const count = document.querySelector('#count');
   const runs = [
-    {name:'video-test-20261022-213454 · niedrige Videoqualität',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261022-213454/run-001',branch:'codex/eu-reski-scene-count-takt',start:'22.10.2026 · 21:35',end:'pausiert',status:'Pausiert; nur Iteration 1 gemergt',counts:[5,3],iterations:[1],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–7 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false},
-    {name:'video-direction-on · Richtungstest',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-direction-on-20261022-001',branch:'codex/eu-reski-scene-count-takt',start:'22.10.2026 · 23:18',end:'kein Ende protokolliert',status:'1 gemergte Iteration',counts:[5],iterations:[1],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–6 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,feature:'Video Direction an'},
-    {name:'scene-auto-video-low · Artikelbildvergleich',base:'/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-video-low-20261022-001/run-001',branch:'codex/eu-reski-scene-visual-controls',start:'22.10.2026 · 23:40',end:'23.10.2026 · 00:05',status:'Abgeschlossen',counts:[5,5,5,5],iterations:[1,2,3,4],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'GPT-Dramaturgie; Szenen 5–8 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:true},
-    {name:'video-test-20261022-fresh-3 · frische Drei-Iterationen-Fassung',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261022-fresh-3-001/run-001',branch:'codex/eu-reski-scene-count-takt',start:'22.10.2026 · 23:46',end:'23.10.2026 · 00:15',status:'Abgeschlossen; Lücken-Debugclips ausgelassen',counts:[5,3,3],iterations:[1,2,3],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–6 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false},
-    {name:'symbolic-on-depth-off-layer-3 · Stilvergleich',base:'/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/symbolic-on-depth-off-layer-3-video-low-20261023-001/run-001',branch:'codex/eu-reski-scene-visual-controls',start:'23.10.2026 · 00:25',end:'08:36',status:'Abgeschlossen',counts:[5,5,5,5],iterations:[1,2,3,4],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'GPT-Dramaturgie; Szenen 5–8 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:true},
-    {name:'video-test-20261023-eu-de-en-ru · semantische Streams',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261023-eu-de-en-ru-3-001/run-001',branch:'codex/eu-reski-scene-count-takt',start:'23.10.2026 · 00:27',end:'08:35',status:'Abgeschlossen',counts:[5,3,3],iterations:[1,2,3],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–6 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false},
-    {name:'p-video-2-pro-cost-10 · Zehn Iterationen',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001',branch:'eu-reski/default',start:'23.10.2026 · 09:35',end:'10:12',status:'Abgeschlossen',counts:[5,5,5,5,5,5,5,5,5,5],iterations:[1,2,3,4,5,6,7,8,9,10],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'run-001 · Selfomat-Startwortlauf',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/run-001',branch:'eu-reski/default',start:'23.10.2026 · 17:48',end:'17:54',status:'Abgeschlossen',counts:[5,3,3,4],iterations:[1,2,3,4],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 3,85 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false},
-    {name:'run-002 · EU Inc. und weitere EU-Nachrichten',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/run-002',branch:'eu-reski/default',start:'23.10.2026 · 18:31',end:'18:48',status:'Abgeschlossen',counts:[5,3,3,4],iterations:[1,2,3,4],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 3,85 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/run-001 · Titelkarten-Fassung',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-001',branch:'eu-reski/default',start:'24.10.2026 · 14:16',end:'unterbrochen',status:'Unterbrochen; 2 Iterationen gemergt',counts:[8,5],iterations:[1,2],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 3,85 s; Begrenzung 5–8 s',countSetting:'Taktmuster 4, 4/5; balanced; Bias 4; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,whole:'eu-reski-gesamtfilm-titelkarten.mp4'},
-    {name:'exhibition/run-002 · FLUX-Klein-Test',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-002',branch:'eu-reski/default',start:'24.10.2026 · 14:52',end:'unterbrochen',status:'Unterbrochen; Iteration 1 gemergt',counts:[5,3],iterations:[1],withTitle:[1],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false},
-    {name:'exhibition/run-003 · FLUX-Klein-Lauf',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-003',branch:'eu-reski/default',start:'24.10.2026 · 15:11',end:'15:45',status:'Abgeschlossen',counts:[5,3,3,4,3,3,5],iterations:[1,2,3,4,5,6,7],withTitle:[1,2,3,4,5,6,7],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/run-001 · Story-Composition-Test',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-001',branch:'codex/story-composition-prompt-test',start:'24.10.2026 · 15:16',end:'15:45',status:'Abgeschlossen',counts:[5,3,3,4,3,3,5],iterations:[1,2,3,4,5,6,7],withTitle:[1,2,3,4,5,6,7],image:'HF FLUX 3 Image Klein',story:'GPT‑6 Luna',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/gpt-4o-mini-6iter · Modellvergleich',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter/run-001',branch:'codex/story-composition-prompt-test',start:'24.10.2026 · 15:48',end:'16:05',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/run-004 · feste Fünf-Szenen-Fassung',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004',branch:'eu-reski/default',start:'24.10.2026 · 16:36',end:'16:57',status:'Abgeschlossen',counts:[5,5,5,5,5,5],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition-seedream/run-001 · Seedream-Vergleich',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition-seedream/run-001',branch:'eu-reski/default',start:'24.10.2026 · 16:38',end:'16:58',status:'Abgeschlossen',counts:[5,5,5,5,5,5],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/gpt-4o-mini-6iter · Referenzbildvergleich mit P-Video',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-both-refs-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 14:46',end:'15:06',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Referenzbildvergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica-Vollbild als Stilreferenz + maskierter Figuren-Crop; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:true,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/gpt-4o-mini-6iter · nur Artikelbild als Referenz',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-photo-only-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 15:28',end:'15:49',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Artikelbild-Vergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Schriftlicher monochromer Cubismus-Stil; pro Szene Controls; Symbolik an als Standard, Raumtiefe aus, Layering 3',articleRef:true,guernicaStyleRef:false,guernicaFigureRef:false,whole:'eu-reski-gesamtfilm.mp4'},
-    {name:'exhibition/gpt-4o-mini-6iter · Figuren + Artikelbild · FLF-Brücken',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-figures-photo-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 14:54',end:'15:17',status:'Abgeschlossen · 5 FLF-Brücken nach Taktmuster',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Szenenfilm + 5 First/Last-Frame-Brücken',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Maskierter Guernica-Figuren-Crop + Pressebild; kein Guernica-Vollbild; Symbolik an als Standard, Raumtiefe aus, Layering 3; Controls je Szene',articleRef:true,guernicaStyleRef:false,guernicaFigureRef:true,whole:'eu-reski-gesamtfilm.mp4',glued:'glue-vids/eu-reski-first-6-glued.mp4'}
+    {"name":"exhibition/reference-5-like-run-003 · fünf Iterationen","base":"/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001","branch":"codex/eu-reski-artistic-auto-mode","start":"28.10.2026 · 09:54","end":"10:06","status":"Abgeschlossen","counts":[5,3,3,4,3],"iterations":[1,2,3,4,5],"withTitle":[1,2,3,4,5],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4.1 mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12","style":"maskierter Figuren-Crop + Guernica-Vollbild als Stilreferenz + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock aus","articleRef":false,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":true,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"off","codeInfo":{"commit":"663d4c28df176dd53ac103dea11008a4c0e42e47","sourceBranch":"codex/eu-reski-artistic-auto-mode","sourceClean":false,"previousCommit":"663d4c28df176dd53ac103dea11008a4c0e42e47","change":"Vorgängerfilm nutzte Seedream 5.0 Flash und zehn Iterationen. Dieser Lauf wechselt auf FLUX 3 Image Klein und fünf Iterationen; gleicher Branch für speicherbare, künstlerische Exhibition-Läufe. Bericht schließt fünf Iterationen vollständig ab.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-001 · Auto-Modus + Audio-Regie","base":"/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-001","branch":"codex/eu-reski-artistic-auto-mode","start":"27.10.2026 · 16:08","end":"Medienstand 17:26","status":"Teilweise gemergt · Medien ausstehend · 8/10 Iterationen + Gesamtfilm","counts":[5,2,3,2,4,2,3,2],"iterations":[1,2,3,4,5,6,7,10],"withTitle":[1,2,3,4,5,6,7,10],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4.1 mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Guernica-Vollbild als Stilreferenz + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock aus","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":true,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"32e27bbc3db8a844b400c57ab74cd76e01ceb88b","sourceBranch":"codex/eu-reski-artistic-auto-mode","sourceClean":false,"previousCommit":"3c46674695ed087a5cbd4492121c7c3ad16e9ea7","change":"Auto-Modus mit zehn Ziehungen, Artikelbild, Figuren-Crop und aktivem Legacy-Guernica-Stilprompt. Audio-Regie an, Bewegungsregie aus. Acht Iterationen plus Gesamtfilm liegen gemergt vor; Medien für Iteration 8 und 9 fehlen.","confidence":2,"references":[]}},
+    {"name":"exhibition/reference-10 · Seedream + Guernica-Stilreferenz","base":"/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-10/run-001","branch":"codex/eu-reski-artistic-auto-mode","start":"27.10.2026 · 17:58","end":"28.10.2026 · 09:02","status":"Abgeschlossen","counts":[5,3,3,4,3,3,5,3,3,4],"iterations":[1,2,3,4,5,6,7,8,9,10],"withTitle":[1,2,3,4,5,6,7,8,9,10],"normalizedTitleCards":true,"image":"ByteDance Seedream 5.0 Flash","story":"GPT‑4.1 mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12","style":"maskierter Figuren-Crop + Guernica-Vollbild als Stilreferenz + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock an","articleRef":false,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":true,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"off","codeInfo":{"commit":"663d4c28df176dd53ac103dea11008a4c0e42e47","sourceBranch":"codex/eu-reski-artistic-auto-mode","sourceClean":false,"previousCommit":"32e27bbc3db8a844b400c57ab74cd76e01ceb88b","change":"Gegenüber dem Auto-Modus-Vorgänger: Seedream 5.0 Flash, zehn Iterationen, kein Artikelbild; Figuren-Crop und Guernica-Vollbild als Stilreferenz. Der gemeinsame Branch-Commit ergänzt fortsetzbare Exhibition-Läufe und speichert deren Einstellungen.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-008 · Artikelbild + Figuren-Crop + Audio","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-008","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 13:37","end":"13:49","status":"Abgeschlossen","counts":[5,2,3,2],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock an","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":false,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"236d42f3ccf0bcf85ec2e2da462fa6f92b6dfe78","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"236d42f3ccf0bcf85ec2e2da462fa6f92b6dfe78","change":"Gleicher Commit wie Vorgänger; gleiche Referenzen und Audio-Regie. Diesmal Guernica-Vollbild als Stilreferenz mitgespeichert, aber Legacy-Stilprompt aus; Source im Lauf war geändert.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-006 · Audio-Regie + Film-Timing-Fix","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-006","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 12:41","end":"13:02","status":"Abgeschlossen","counts":[5,2,3,2],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock aus","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":false,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"f30add46c96aed103e886fec7e7bde4dcb20994f","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"1fd0547ba8539cae64f6fb7b4c0e0d57d7001f52","change":"Ausgewogene Szenendauer und Audio-Regie bleiben. Kein kubistischer Video-Stil-Lock. Die Commitfolge richtet Film-Timing an Videostreams aus und verbessert anschließend widersprüchliche sowie leere Audio-Cues.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-007 · Audio-Regie + kubistischer Video-Lock","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-007","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 13:13","end":"13:23","status":"Abgeschlossen","counts":[5,2,3,2],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock an","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":false,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"236d42f3ccf0bcf85ec2e2da462fa6f92b6dfe78","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"706bc3cf8602fc36565054e6feeac97fee2f9bf5","change":"Audio-Regie an, Bewegungsregie aus; kubistischer Video-Stil-Lock an. Commit aktiviert den Stil-Lock für den Audio-Test; Run-Quellstand sauber.","confidence":3,"references":[]}},
+    {"name":"exhibition/run-009 · Legacy-Guernica-Prompt + Audio","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-009","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 14:18","end":"14:28","status":"Abgeschlossen","counts":[5,2,3,2],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Guernica-Vollbild als Stilreferenz + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock aus","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":true,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"3c46674695ed087a5cbd4492121c7c3ad16e9ea7","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"236d42f3ccf0bcf85ec2e2da462fa6f92b6dfe78","change":"Guernica-Legacy-Stilprompt ist nun ausdrücklich angefordert und aktiv. Artikelbild + Figuren-Crop bleiben Referenzen; Video-Audio-Regie an. Commit speichert Einstellungen des vorherigen Exhibition-Laufs; Quellstand war geändert.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-005 · ausgewogene Szenendauer + Audio","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-005","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 11:49","end":"12:03","status":"Abgeschlossen","counts":[5,2,3,2],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock an","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":false,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"1fd0547ba8539cae64f6fb7b4c0e0d57d7001f52","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e","change":"Szenendauer wechselt vom dramatischen Bogen zurück auf ausgewogenes Taktmuster 4/4. Audio-Regie an. Commitwechsel im Lauf: Iterationen 1–2 auf 1fd0547b, 3–4 auf 043316f8; der zweite Commit richtet die FLF-Brückenmontage aus.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-003 · dramatischer Szenenbogen + Audio","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-003","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 10:51","end":"11:05","status":"Abgeschlossen","counts":[4,2,2,3],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"GPT-Dramaturgiebogen; Szenendauer 5–8 s","countSetting":"Taktmuster 2, 3/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock an","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":false,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"on","videoAudioDirection":"on","codeInfo":{"commit":"f13323316208853ef32385481d2592feb3efa391","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"b1df98ddd688f0a372632444b97558016c72b22e","change":"Neue Dramaturgie für Szenendauer: GPT plant einen Szenenbogen statt Taktmuster. Bewegungs- und Audio-Regie sind an. Commitwechsel im Lauf: Iteration 1 auf f1332331, Iterationen 2–4 auf 216b0593; dort Audio nach Montage normalisiert. Vier Iterationen enthalten gemergte Titelkartenfassungen.","confidence":2,"references":[]}},
+    {"name":"exhibition/run-004 · dramatischer Szenenbogen + Audio","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004","branch":"codex/story-composition-prompt-test","start":"27.10.2026 · 11:17","end":"11:28","status":"Abgeschlossen","counts":[5,2,3,2],"iterations":[1,2,3,4],"withTitle":[1,2,3,4],"normalizedTitleCards":true,"image":"FLUX 3 Image Klein · ZeroGPU","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"GPT-Dramaturgiebogen; Szenendauer 5–8 s","countSetting":"Taktmuster 2, 4/4; balanced; Bias 1; Bereich 1–12","style":"Artikelbild + maskierter Figuren-Crop + Symbolik an; Raumtiefe aus; Layering 3 + kubistischer Video-Lock an","articleRef":true,"guernicaLocationRef":false,"guernicaFigureRef":true,"guernicaStyleRef":false,"whole":"eu-reski-gesamtfilm.mp4","videoDirection":"off","videoAudioDirection":"on","codeInfo":{"commit":"a490c1f3a6d961e5238fbbf1024b0b3a8fcef92e","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"f13323316208853ef32385481d2592feb3efa391","change":"Gleicher dramatischer Szenenbogen wie im Vorgänger. Bewegungsregie aus, Audio-Regie bleibt an. Commit setzt den exakten Vier-Iterationen-Ausstellungsfilm um; Quellstand war geändert.","confidence":2,"references":[]}},
+    {name:'video-test-20261022-213454 · niedrige Videoqualität',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261022-213454/run-001',branch:'codex/eu-reski-scene-count-takt',start:'22.10.2026 · 21:35',end:'pausiert',status:'Pausiert; nur Iteration 1 gemergt',counts:[5,3],iterations:[1],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–7 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,videoDirection:'off',videoAudioDirection:'unknown',codeInfo:{"commit":"4b1306c8187909f25fb776ecf5b21db9aa5757ec","sourceBranch":"codex/eu-reski-scene-count-takt","sourceClean":false,"previousCommit":null,"change":"Erste gespeicherte Generation: kein Vorgänger. Commit fügt Taktmuster-Szenenzahlen und freie semantische Zuordnungen hinzu. Der Lauf selbst stoppte nach Iteration 1. ","confidence":2,"references":[{"label":"Im Commit genannt: Volk/de-Startwort-Generation","path":"/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/run-001/index.html"}]}},
+    {name:'video-direction-on · Richtungstest',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-direction-on-20261022-001',branch:'codex/eu-reski-scene-count-takt',start:'22.10.2026 · 23:18',end:'kein Ende protokolliert',status:'1 gemergte Iteration',counts:[5],iterations:[1],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–6 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,feature:'Video Direction an',videoDirection:'on',videoAudioDirection:'off',codeInfo:{"commit":"4b1306c8187909f25fb776ecf5b21db9aa5757ec","sourceBranch":"codex/eu-reski-scene-count-takt","sourceClean":false,"previousCommit":"4b1306c8187909f25fb776ecf5b21db9aa5757ec","change":"Kein Commit-Unterschied zum Vorgänger. Geändert wurde der Lauf: Video Direction an; niedrige Videoqualität. Uncommittete Änderungen sind laut Run-Datensatz vorhanden.","confidence":2,"references":[{"label":"Im Commit genannt: Volk/de-Startwort-Generation","path":"/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/run-001/index.html"}]}},
+    {name:'scene-auto-video-low · Artikelbildvergleich',base:'/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-video-low-20261022-001/run-001',branch:'codex/eu-reski-scene-visual-controls',start:'22.10.2026 · 23:40',end:'23.10.2026 · 00:05',status:'Abgeschlossen',counts:[5,5,5,5],iterations:[1,2,3,4],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'GPT-Dramaturgie; Szenen 5–8 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:true,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:false,videoDirection:'unknown',videoAudioDirection:'unknown',codeInfo:{"commit":"dded226acde9c2b59b6113c14850df25989cee33","sourceBranch":"codex/eu-reski-scene-visual-controls","sourceClean":false,"previousCommit":"4b1306c8187909f25fb776ecf5b21db9aa5757ec","change":"Branchwechsel zu den Szenen-Stilreglern. Planner, Director und Report unterscheiden sich; Teile des Taktmuster-Codes fehlen in diesem Snapshot. Artikelbild-Referenz und Grok-Test kommen aus der Laufkonfiguration.","confidence":2,"references":[{"label":"Im Commit genannter Lauf: scene-auto-4","path":"/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-4-20261021-001/run-001/index.html"}]}},
+    {name:'video-test-20261022-fresh-3 · frische Drei-Iterationen-Fassung',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261022-fresh-3-001/run-001',branch:'codex/eu-reski-scene-count-takt',start:'22.10.2026 · 23:46',end:'23.10.2026 · 00:15',status:'Abgeschlossen; Lücken-Debugclips ausgelassen',counts:[5,3,3],iterations:[1,2,3],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–6 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,videoDirection:'on',videoAudioDirection:'off',codeInfo:{"commit":"9856d092d08a5d3380d657aaff7d316b7cd730fa","sourceBranch":"codex/eu-reski-scene-count-takt","sourceClean":true,"previousCommit":"dded226acde9c2b59b6113c14850df25989cee33","change":"Video-Bewegung wird direkt aus Szenenbildern geplant; neue Video-Director- und Video-Vision-Module, dazu Planner- und Report-Änderungen. Gespeicherter Quellstand sauber.","confidence":3,"references":[{"label":"Vergleichsfilm: video-test-20261022-213454","path":"/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261022-213454/run-001/index.html"},{"label":"Vergleichsfilm: video-direction-on","path":"/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-direction-on-20261022-001/index.html"}]}},
+    {name:'symbolic-on-depth-off-layer-3 · Stilvergleich',base:'/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/symbolic-on-depth-off-layer-3-video-low-20261023-001/run-001',branch:'codex/eu-reski-scene-visual-controls',start:'23.10.2026 · 00:25',end:'08:36',status:'Abgeschlossen',counts:[5,5,5,5],iterations:[1,2,3,4],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'GPT-Dramaturgie; Szenen 5–8 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:true,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:false,videoDirection:'unknown',videoAudioDirection:'unknown',codeInfo:{"commit":"dded226acde9c2b59b6113c14850df25989cee33","sourceBranch":"codex/eu-reski-scene-visual-controls","sourceClean":false,"previousCommit":"9856d092d08a5d3380d657aaff7d316b7cd730fa","change":"Zur Visual-Controls-Version zurückgewechselt: Der Commit entspricht Generation 3; gegenüber Generation 4 fehlen die neue direkte Videosteuerung und die Taktmuster-Module. Stiltest mit Layering 3.","confidence":2,"references":[{"label":"Im Commit genannter Lauf: scene-auto-4","path":"/Users/eggermann/.codex/worktrees/eu-reski-guernica-abstract/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-4-20261021-001/run-001/index.html"}]}},
+    {name:'video-test-20261023-eu-de-en-ru · semantische Streams',base:'/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/video-test-20261023-eu-de-en-ru-3-001/run-001',branch:'codex/eu-reski-scene-count-takt',start:'23.10.2026 · 00:27',end:'08:35',status:'Abgeschlossen',counts:[5,3,3],iterations:[1,2,3],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'Grok Imagine Video 1.5 Lite · 480p',timing:'Selfomat Takt 4/4; ×1,6 + 0,1 s; Begrenzung 2–6 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,videoDirection:'on',videoAudioDirection:'off',codeInfo:{"commit":"55dd1ed760b6def04ef24840951ee18efbb3424e","sourceBranch":"codex/eu-reski-scene-count-takt","sourceClean":false,"previousCommit":"dded226acde9c2b59b6113c14850df25989cee33","change":"Taktmuster und direkte Szenenbild-Bewegung sind wieder im Code; dazu kommen Provider-Resilienz und Wiederaufnahme ab unterbrochenen Medienläufen. EU/de/en/ru-Streams sind Laufdaten. Quellstand war nicht sauber.","confidence":2,"references":[]}},
+    {name:'p-video-2-pro-cost-10 · Zehn Iterationen',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/p-video-2-pro-cost-10-20261023-001/run-001',branch:'codex/eu-reski-news-iterations',start:'23.10.2026 · 09:35',end:'10:12',status:'Abgeschlossen',counts:[5,5,5,5,5,5,5,5,5,5],iterations:[1,2,3,4,5,6,7,8,9,10],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"42141b9617a90eec2316bd5246493c089187ac5d","sourceBranch":"codex/eu-reski-news-iterations","sourceClean":false,"previousCommit":"55dd1ed760b6def04ef24840951ee18efbb3424e","change":"Branchwechsel zu codex/eu-reski-news-iterations. Gelisteter Commit ändert nur die Parameter-Merkliste und dokumentiert den Volk/de-Lauf; der Laufquellstand war geändert, genaue uncommittete Runtime-Diffs sind nicht gespeichert.","confidence":2,"references":[{"label":"Im Commit-Titel genannt: Volk/de-Run","path":"/Users/eggermann/.codex/worktrees/eu-reski-scene-count-takt/dailydoase/eu-reski-news/GENERATIONS/news/scene-auto-volk-de-start-word-4-20261022-001/run-001/index.html"}]}},
+    {name:'run-001 · Selfomat-Startwortlauf',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/run-001',branch:'eu-reski/default',start:'23.10.2026 · 17:48',end:'17:54',status:'Abgeschlossen',counts:[5,3,3,4],iterations:[1,2,3,4],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 3,85 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"3282868abe6ad80f79053d6557c2cbd62a2587e2","sourceBranch":"eu-reski/default","sourceClean":true,"previousCommit":"42141b9617a90eec2316bd5246493c089187ac5d","change":"Ausbau zur automatisierten Ausstellung: reproduzierbare Läufe, Duplikat-/Bildfehler-Filter, Auswahl langer First/Last-Brücken, Überblendungen und Gesamtfilm-Merge. Commit-Stand sauber.","confidence":3,"references":[]}},
+    {name:'run-002 · EU Inc. und weitere EU-Nachrichten',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/run-002',branch:'eu-reski/default',start:'23.10.2026 · 18:31',end:'18:48',status:'Abgeschlossen',counts:[5,3,3,4],iterations:[1,2,3,4],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 3,85 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 0; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"362e797bcff959d69ea8af4fd2271b77a8904095","sourceBranch":"eu-reski/default","sourceClean":false,"previousCommit":"3282868abe6ad80f79053d6557c2cbd62a2587e2","change":"P-Video-Clips von 5 bis 15 Sekunden werden unterstützt. Änderung liegt in der Videogenerierung und README; der Quellstand war nicht sauber.","confidence":2,"references":[]}},
+    {name:'exhibition/run-001 · Titelkarten-Fassung',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-001',branch:'eu-reski/default',start:'24.10.2026 · 14:16',end:'unterbrochen',status:'Unterbrochen; 2 Iterationen gemergt',counts:[8,5],iterations:[1,2],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 3,85 s; Begrenzung 5–8 s',countSetting:'Taktmuster 4, 4/5; balanced; Bias 4; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm-titelkarten.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"cc6ab09d7ae7bae5f405422d8badd230c679960e","sourceBranch":"eu-reski/default","sourceClean":true,"previousCommit":"362e797bcff959d69ea8af4fd2271b77a8904095","change":"Szenen-Controls werden als Default festgelegt. Gegenüber dem vorherigen Lauf ändern sich Runner, Videoausgabe und Assembly; dazu kommt ein neues Warte-Muster für Szenenübergänge. Quellstand sauber.","confidence":3,"references":[]}},
+    {name:'exhibition/run-002 · FLUX-Klein-Test',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-002',branch:'eu-reski/default',start:'24.10.2026 · 14:52',end:'unterbrochen',status:'Unterbrochen; Iteration 1 gemergt',counts:[5,3],iterations:[1],withTitle:[1],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"cc6ab09d7ae7bae5f405422d8badd230c679960e","sourceBranch":"eu-reski/default","sourceClean":false,"previousCommit":"cc6ab09d7ae7bae5f405422d8badd230c679960e","change":"Kein Commit-Unterschied. Laufvergleich wechselt vom Seedream-Bildmodell zu FLUX Klein; Code-Änderungen außerhalb des Commits sind nicht vollständig rekonstruierbar.","confidence":2,"references":[]}},
+    {name:'exhibition/run-003 · FLUX-Klein-Lauf',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-003',branch:'eu-reski/default',start:'24.10.2026 · 15:11',end:'15:45',status:'Abgeschlossen',counts:[5,3,3,4,3,3,5],iterations:[1,2,3,4,5,6,7],withTitle:[1,2,3,4,5,6,7],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"c3676cf761ff860760501d9c39372f8ea8ee555a","sourceBranch":"eu-reski/default","sourceClean":false,"previousCommit":"cc6ab09d7ae7bae5f405422d8badd230c679960e","change":"Titelkarten werden generiert; Szenendauer und Timing werden angepasst. Assembly, Runner, Report und Videoausgabe ändern sich mit. Run-Datensatz meldet einen unsauberen Quellstand.","confidence":2,"references":[]}},
+    {name:'exhibition/run-001 · Story-Composition-Test',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-001',branch:'codex/story-composition-prompt-test',start:'24.10.2026 · 15:16',end:'15:45',status:'Abgeschlossen',counts:[5,3,3,4,3,3,5],iterations:[1,2,3,4,5,6,7],withTitle:[1,2,3,4,5,6,7],image:'HF FLUX 3 Image Klein',story:'GPT‑6 Luna',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"da59907fe3b91af1f15c3f790034cd1a6ca224df","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"c3676cf761ff860760501d9c39372f8ea8ee555a","change":"Code-Diff zum vorherigen Lauf: Exhibition-Runner stoppt nach sieben Iterationen. GPT‑6 Luna ist Modelleinstellung dieses Laufs, keine Codeänderung. Ab Iteration 2 lief der Run mit Commit 41226282; dieser lässt Temperatur bei Lunas Szenenzeit-Anfrage weg. Beide Quellstände waren sauber.","confidence":3,"references":[]}},
+    {name:'exhibition/gpt-4o-mini-6iter · Modellvergleich',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter/run-001',branch:'codex/story-composition-prompt-test',start:'24.10.2026 · 15:48',end:'16:05',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"4122628221cae355eddfaac7e4869eb7e623d4dc","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"da59907fe3b91af1f15c3f790034cd1a6ca224df","change":"Modellvergleich mit GPT‑4o mini. Code korrigiert die Luna-Szenenzeit-Anfrage, damit keine Temperatur mitgesendet wird. Der Quellstand war nicht sauber.","confidence":2,"references":[]}},
+    {name:'exhibition/run-004 · feste Fünf-Szenen-Fassung',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-004',branch:'eu-reski/default',start:'24.10.2026 · 16:36',end:'16:57',status:'Abgeschlossen',counts:[5,5,5,5,5,5],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica; feste Controls: Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"e42233453622541dc0370c0b33a78b310aafe151","sourceBranch":"eu-reski/default","sourceClean":false,"previousCommit":"4122628221cae355eddfaac7e4869eb7e623d4dc","change":"Zur eu-reski/default-Ausstellungslogik gewechselt: endliche Läufe und Glue-Merges, Änderungen am HF-Flux-Adapter, Runner und Szenenplanung. Der exakte uncommittete Stand ist nicht gesichert.","confidence":2,"references":[]}},
+    {name:'exhibition-seedream/run-001 · Seedream-Vergleich',base:'/Users/eggermann/.codex/worktrees/e3e1/dailydoase/eu-reski-news/GENERATIONS/news/exhibition-seedream/run-001',branch:'eu-reski/default',start:'24.10.2026 · 16:38',end:'16:58',status:'Abgeschlossen',counts:[5,5,5,5,5,5],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'Runware Seedream 5.0 Flash',story:'GPT‑4.1 mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgie; Szenen 5–6 s',countSetting:'Fest 5 Szenen je Iteration',style:'Guernica-Vollbild als Stilreferenz + maskierter Figuren-Crop; Symbolik an, Raumtiefe aus, Layering 3',articleRef:false,guernicaLocationRef:false,guernicaStyleRef:true,guernicaFigureRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"e42233453622541dc0370c0b33a78b310aafe151","sourceBranch":"eu-reski/default","sourceClean":false,"previousCommit":"e42233453622541dc0370c0b33a78b310aafe151","change":"Kein Commit-Unterschied. Nur das Bildmodell wechselt im Lauf von FLUX Klein zu Seedream; Quellstand laut Run-Datensatz nicht sauber.","confidence":2,"references":[]}},
+    {name:'exhibition/gpt-4o-mini-6iter · Referenzbildvergleich mit P-Video',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-both-refs-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 14:46',end:'15:06',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Referenzbildvergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica-Vollbild als Stilreferenz + maskierter Figuren-Crop; Symbolik an; Raumtiefe aus; Layering 3 als Standard; Controls je Szene',articleRef:true,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"1cfed12a1e96f9e84f8279a1f3b8b09496dfecce","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"e42233453622541dc0370c0b33a78b310aafe151","change":"Storymodell kann per CLI überschrieben werden; Runner und Iterationsskript reichen die Auswahl durch. Die Branch-Historie enthält außerdem Luna-Planung und das Sieben-Iterationen-Limit. Quellstand nicht sauber.","confidence":2,"references":[]}},
+    {name:'exhibition/gpt-4o-mini-6iter · nur Artikelbild als Referenz',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-photo-only-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 15:28',end:'15:49',status:'Abgeschlossen',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Film aus diesem Artikelbild-Vergleich',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Schriftlicher monochromer Cubismus-Stil; pro Szene Controls; Symbolik an als Standard, Raumtiefe aus, Layering 3',articleRef:true,guernicaLocationRef:false,guernicaStyleRef:false,guernicaFigureRef:false,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"cfff2c9b83e4c567b6acafd10a5655f1d1f5a276","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"1cfed12a1e96f9e84f8279a1f3b8b09496dfecce","change":"Planner und Runner unterstützen kombinierte Bildreferenzen; Report und CLI speichern deren Auswahl. Dieser konkrete Lauf schaltet Guernica- und Figurenreferenz aus und nutzt nur das Artikelbild. Quellstand nicht sauber.","confidence":2,"references":[]}},
+    {name:'exhibition/gpt-4o-mini-6iter · Figuren + Artikelbild · FLF-Brücken',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-figures-photo-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 14:54',end:'15:17',status:'Abgeschlossen · 5 FLF-Brücken nach Taktmuster',counts:[5,3,3,4,3,3],iterations:[1,2,3,4,5,6],withTitle:[1,2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus · Szenenfilm + 5 First/Last-Frame-Brücken',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Maskierter Guernica-Figuren-Crop + Pressebild; kein Guernica-Vollbild; Symbolik an als Standard, Raumtiefe aus, Layering 3; Controls je Szene',articleRef:true,guernicaLocationRef:false,guernicaStyleRef:false,guernicaFigureRef:true,whole:'eu-reski-gesamtfilm.mp4',glued:'glue-vids/eu-reski-first-6-glued.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"215d6c069f10919329de5e11199938c43ba94313","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"cfff2c9b83e4c567b6acafd10a5655f1d1f5a276","change":"Artikelbild-Referenz kann eigenständig laufen; Planner, Report und CLI behandeln Figuren- und Artikelbild-Auswahl. Dieser Lauf aktiviert zusätzlich den Figuren-Crop. Quellstand sauber.","confidence":3,"references":[{"label":"Im Commit genannter Film: nur Artikelbild","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-photo-only-20261026/run-001/merged/eu-reski-gesamtfilm.mp4"}]}},
+    {name:'exhibition/gpt-6-luna-7iter · Guernica-Location-Blend',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-7iter-location-blend-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 16:29',end:'läuft',status:'Läuft · 3 Iterationen + Gesamtfilm gemergt',counts:[5,3,3],iterations:[1,2,3],withTitle:[1,2,3],image:'HF FLUX 3 Image Klein',story:'GPT‑6 Luna',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica-Vollbild als Stil- und Ortsreferenz + maskierter Figuren-Crop; Symbolik an, Raumtiefe aus, Layering 3; Controls je Szene',articleRef:true,guernicaLocationRef:true,guernicaStyleRef:true,guernicaFigureRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"f42aea3f59c93dcaf58644bc2fdd15cfc0c72af1","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"215d6c069f10919329de5e11199938c43ba94313","change":"Commitwechsel im Lauf: Iteration 1 auf f42aea3f (Quellstand geändert), Iterationen 2–3 auf 95e908c5 (sauber). Der spätere Commit ergänzt Guernica als sekundäre GPT-Ortsreferenz. Gespeicherte Bildresultate zeigen in allen drei Iterationen zusätzlich das Guernica-Vollbild an FLUX als Stilreferenz; Lauf nutzt GPT‑6 Luna und Artikelbild.","confidence":2,"references":[{"label":"Commit-Referenz: nur Artikelbild","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-photo-only-20261026/run-001/merged/eu-reski-gesamtfilm.mp4"},{"label":"Commit-Referenz: Figuren + Artikelbild + Glue","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter-article-figures-photo-20261026/run-001/glue-vids/eu-reski-first-6-glued.mp4"}]}},
+    {name:'exhibition/gpt-6-luna-7iter · Guernica-Location-Plan',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-7iter-location-plan-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 18:55',end:'19:18',status:'Abgeschlossen',counts:[5,3,3,4,3,3,5],iterations:[1,2,3,4,5,6,7],withTitle:[2,3,4,5,6],image:'HF FLUX 3 Image Klein',story:'GPT‑6 Luna',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Guernica-Vollbild nur als GPT-Ortscue + maskierter Figuren-Crop an FLUX; Symbolik an, Raumtiefe aus, Layering 3; Controls je Szene',articleRef:true,guernicaLocationRef:true,guernicaStyleRef:false,guernicaFigureRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"24179bd49107412f1ace6e3866f05d373198c4b4","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"f42aea3f59c93dcaf58644bc2fdd15cfc0c72af1","change":"Guernica wird als sekundäre Ortsreferenz ergänzt; Folgeänderung verhindert, dass das Gemälde als normale Bildreferenz in den Bildprompt gerät. Planner, Runner und CLI angepasst. Quellstand sauber.","confidence":3,"references":[{"label":"Im Commit geprüfter Lauf: Location-Blend","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-7iter-location-blend-20261026/run-001/index.html"}]}},
+    {name:'exhibition/gpt-6-luna · frischer Artikel + Guernica-Location',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-fresh-article-location-20261026/run-001',branch:'codex/story-composition-prompt-test',start:'26.10.2026 · 22:37',end:'läuft',status:'Läuft · Iteration 1 + Gesamtfilm gemergt',counts:[5],iterations:[1],withTitle:[1],image:'HF FLUX 3 Image Klein',story:'GPT‑6 Luna',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12',style:'Neues Artikelbild + Guernica-Vollbild als Ortsreferenz + maskierter Figuren-Crop; Symbolik an, Raumtiefe aus, Layering 3; Controls je Szene',articleRef:true,guernicaLocationRef:true,guernicaStyleRef:false,guernicaFigureRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"24179bd49107412f1ace6e3866f05d373198c4b4","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"24179bd49107412f1ace6e3866f05d373198c4b4","change":"Kein Commit-Unterschied. Neuer Artikel und GPT‑6 Luna mit Orts- und Figurenreferenz sind Laufdaten; derselbe saubere Code-Stand wie Generation 21.","confidence":3,"references":[{"label":"Im Commit geprüfter Lauf: Location-Blend","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-7iter-location-blend-20261026/run-001/index.html"}]}},
+    {"name":"exhibition/gpt-6-luna-restart · frischer Artikel + Guernica-Location","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-fresh-article-location-restart-20261026/run-001","branch":"codex/story-composition-prompt-test","start":"26.10.2026 · 22:58","end":"23:21","status":"Abgeschlossen · Neustart","counts":[5,3,3,4,3,3,5],"iterations":[1,2,3,4,5,6,7],"withTitle":[1,2,3,4,5,6,7],"image":"HF FLUX 3 Image Klein","story":"GPT‑6 Luna","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12","style":"Neues Artikelbild + maskierter Figuren-Crop an FLUX; Guernica-Vollbild nur als GPT-Ortscue; Symbolik an, Raumtiefe aus, Layering 3; Controls je Szene","articleRef":true,"guernicaStyleRef":false,"guernicaFigureRef":true,"guernicaLocationRef":true,"whole":"eu-reski-gesamtfilm.mp4","codeInfo":{"commit":"24179bd49107412f1ace6e3866f05d373198c4b4","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"24179bd49107412f1ace6e3866f05d373198c4b4","change":"Kein Commit-Unterschied zum Vorgänger. Derselbe GPT‑6-Luna-Lauf wurde mit frischem Artikel und Guernica-Ortscue neu erzeugt; Run-Quellstand nicht sauber, uncommittete Änderungen sind möglich.","confidence":2,"references":[{"label":"Im Commit geprüfter Lauf: Location-Blend","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-7iter-location-blend-20261026/run-001/index.html"}]}},
+    {"name":"exhibition/gpt-4o-mini · frischer Artikel + Guernica-Location","base":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-fresh-article-location-20261026/run-001","branch":"codex/story-composition-prompt-test","start":"26.10.2026 · 23:48","end":"27.10.2026 · 00:07","status":"Abgeschlossen","counts":[5,3,3,4,3,3,5],"iterations":[1,2,3,4,5,6,7],"withTitle":[1,2,3,4,5,6,7],"image":"HF FLUX 3 Image Klein","story":"GPT‑4o mini","video":"P‑Video 2 Pro · 480p · Kostenmodus","timing":"Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s","countSetting":"Taktmuster 2, 3/4; balanced; Bias 2; Bereich 1–12","style":"Neues Artikelbild + maskierter Figuren-Crop an FLUX; Guernica-Vollbild nur als GPT-Ortscue; Symbolik an, Raumtiefe aus, Layering 3; Controls je Szene","articleRef":true,"guernicaStyleRef":false,"guernicaFigureRef":true,"guernicaLocationRef":true,"whole":"eu-reski-gesamtfilm.mp4","codeInfo":{"commit":"24179bd49107412f1ace6e3866f05d373198c4b4","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"24179bd49107412f1ace6e3866f05d373198c4b4","change":"Kein Commit-Unterschied zum Vorgänger. Gegenüber dem GPT‑6-Luna-Neustart ändert sich das Storymodell auf GPT‑4o mini; Artikel, Bildreferenzen und Videoparameter bleiben gleich. Run-Quellstand nicht sauber, uncommittete Änderungen sind möglich.","confidence":2,"references":[{"label":"Im Commit geprüfter Lauf: Location-Blend","path":"/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-6-luna-7iter-location-blend-20261026/run-001/index.html"}]}},
+    {name:'exhibition/gpt-4o-mini-location-ref-bias-3 · Bias-3-Vergleich',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-location-ref-bias-3-20261027/run-001',branch:'codex/story-composition-prompt-test',start:'27.10.2026 · 00:40',end:'01:04',status:'Abgeschlossen',counts:[6,4,4,5,4,4,6],iterations:[1,2,3,4,5,6,7],withTitle:[1,2,3,4,5,6,7],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 3; Bereich 1–12',style:'Guernica-Vollbild als Stilreferenz und GPT-Ortscue + Figuren-Crop; Symbolik an, Raumtiefe aus, Layering 3; Controls je Szene',articleRef:true,guernicaLocationRef:true,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'off',videoAudioDirection:'off',codeInfo:{"commit":"146cc8326edca635a107d6dfee010f873dbb98cb","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"24179bd49107412f1ace6e3866f05d373198c4b4","change":"Commit begrenzt Wiederholungen bei Semantic-Stream-429. Dieser Lauf nutzt Bias 3 und sieben Iterationen; Quellstand beim Lauf nicht sauber.","confidence":2,"references":[]}},
+    {name:'exhibition/gpt-4o-mini · P-Video-Stil-Lock + Bewegungsregie',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-location-ref-pvideo-style-lock-video-direction-b68a52da/run-001',branch:'codex/story-composition-prompt-test',start:'27.10.2026 · 01:22',end:'01:41',status:'Abgeschlossen',counts:[6,4,4,5],iterations:[1,2,3,4],withTitle:[1,2,3,4],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 3; Bereich 1–12',style:'Guernica-Vollbild als Stilreferenz und GPT-Ortscue + Figuren-Crop; kubistischer Videostil-Lock; Symbolik an, Raumtiefe aus, Layering 3',articleRef:true,guernicaLocationRef:true,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'on',videoAudioDirection:'off',codeInfo:{"commit":"b68a52da4b8f0357a5ed989d03c47b57bfaaf995","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"146cc8326edca635a107d6dfee010f873dbb98cb","change":"Neues optionales P-Video-Stil-Lock bindet den Bewegungs-Prompt an den kubistischen Malstil. In diesem Lauf ist Bewegungsregie an, Audio-Regie aus.","confidence":3,"references":[]}},
+    {name:'exhibition/gpt-4o-mini · Landschaft aus, Video-Audio-Regie an',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-no-landscape-video-audio-20261027/run-001',branch:'codex/story-composition-prompt-test',start:'27.10.2026 · 01:39',end:'läuft',status:'Läuft · 2 Iterationen + Gesamtfilm gemergt',counts:[6,4],iterations:[1,2],withTitle:[1,2],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'Selfomat Takt 4/4; ×1,15 + 4,2 s; Begrenzung 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 3; Bereich 1–12',style:'Artikelbild + Figuren-Crop; Landschaftsprompt aus; kubistischer Videostil-Lock; Symbolik an, Raumtiefe aus, Layering 3',articleRef:true,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'on',videoAudioDirection:'on',codeInfo:{"commit":"5e45ac59656b11db2b249ff130dc0b82afb39cb8","sourceBranch":"codex/story-composition-prompt-test","sourceClean":true,"previousCommit":"b68a52da4b8f0357a5ed989d03c47b57bfaaf995","change":"Commit korrigiert widersprüchliche Video-Direction-Werte. Lauf schaltet Bewegungs- und Audio-Regie ein; Landschaftsprompt ist aus. Bericht zeigt zwei gemergte Iterationen, Laufstatus noch aktiv.","confidence":3,"references":[]}},
+    {name:'exhibition/gpt-4o-mini · dramatischer Szenenbogen',base:'/Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-gpt-dramatic-scene-length-20261027/run-001',branch:'codex/story-composition-prompt-test',start:'27.10.2026 · 02:13',end:'02:23',status:'Abgeschlossen',counts:[4,2,2,3],iterations:[1,2,3,4],withTitle:[1,2,3,4],image:'HF FLUX 3 Image Klein',story:'GPT‑4o mini',video:'P‑Video 2 Pro · 480p · Kostenmodus',timing:'GPT-Dramaturgiebogen; Szenendauer 5–8 s',countSetting:'Taktmuster 2, 3/4; balanced; Bias 1; Bereich 1–12',style:'Artikelbild + Figuren-Crop; Landschaftsprompt aus; kubistischer Videostil-Lock; Symbolik an, Raumtiefe aus, Layering 3',articleRef:true,guernicaLocationRef:false,guernicaFigureRef:true,guernicaStyleRef:true,whole:'eu-reski-gesamtfilm.mp4',videoDirection:'on',videoAudioDirection:'on',codeInfo:{"commit":"b1df98ddd688f0a372632444b97558016c72b22e","sourceBranch":"codex/story-composition-prompt-test","sourceClean":false,"previousCommit":"5e45ac59656b11db2b249ff130dc0b82afb39cb8","change":"Commit setzt den Exhibition-Szenen-Bias auf 1. Lauf nutzt GPT-Dramaturgiebogen und beide Video-Regien; lokaler Quellstand beim Lauf war geändert.","confidence":2,"references":[]}},
   ];
 
   function localFile(base, relativePath) {
@@ -160,9 +237,43 @@
     return link;
   }
 
-  function renderRun(run) {
+  function fileSlug(value) {
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('de').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
+  function renderOutputCard(run, relativePath, label) {
+    const output = document.createElement('a');
+    output.className = 'output-card';
+    output.href = localFile(run.base, relativePath);
+    output.target = '_blank';
+    output.rel = 'noopener';
+    const filename = relativePath.split('/').pop();
+    const poster = document.createElement('img');
+    poster.src = `./eu-reski-film-thumbnails/${fileSlug(run.name)}__${fileSlug(filename)}.jpg`;
+    poster.alt = `Vorschau: ${label}`;
+    poster.loading = 'lazy';
+    const caption = document.createElement('span');
+    caption.textContent = label;
+    output.append(poster, caption);
+    return output;
+  }
+
+  function startTimestamp(run) {
+    const match = run.start.match(/(\d{2})\.(\d{2})\.(\d{4}) · (\d{2}):(\d{2})/);
+    return match ? new Date(+match[3], +match[2] - 1, +match[1], +match[4], +match[5]).getTime() : 0;
+  }
+
+  const newestRuns = [...runs].sort((first, second) => startTimestamp(second) - startTimestamp(first));
+  const latestRun = newestRuns[0];
+
+  function renderRun(run, isLatest) {
     const card = document.createElement('article');
-    card.className = 'film';
+    const guernicaStyleRef = run.guernicaStyleRef ?? (run.style.includes('Guernica-Vollbild als Stilreferenz') || run.style.includes('Guernica-Vollbild als Stil- und Ortsreferenz'));
+    const guernicaLocationRef = Boolean(run.guernicaLocationRef);
+    const personImage = run.guernicaFigureRef ?? /Guernica|Figuren-Crop/.test(run.style);
+    const hasImageReference = Boolean(run.articleRef || guernicaStyleRef || personImage);
+    const guernicaUsed = Boolean(guernicaStyleRef || guernicaLocationRef);
+    card.className = `film${hasImageReference ? '' : ' no-image-references'}${isLatest ? ' latest-run' : ''}`;
     card.dataset.branch = run.branch;
     card.dataset.base = run.base;
     card.dataset.search = `${run.name} ${run.branch} ${run.image} ${run.story} ${run.video}`;
@@ -177,36 +288,88 @@
     meta.className = 'meta';
     meta.textContent = `${run.start}–${run.end} · Branch ${run.branch}`;
     heading.append(title, meta);
+    if (isLatest) {
+      const latest = document.createElement('span');
+      latest.className = 'tag latest-tag';
+      latest.textContent = 'Neuester Lauf';
+      heading.append(latest);
+    }
     const status = document.createElement('span');
-    status.className = `tag${run.status.toLocaleLowerCase('de').includes('unterbrochen') || run.status.toLocaleLowerCase('de').includes('pausiert') ? ' partial' : ''}`;
+    status.className = `tag${run.status.toLocaleLowerCase('de').includes('unterbrochen') || run.status.toLocaleLowerCase('de').includes('pausiert') || run.status.toLocaleLowerCase('de').includes('teilweise') ? ' partial' : ''}`;
     status.textContent = run.status;
     top.append(heading, status);
+    const refCodes = document.createElement('div');
+    refCodes.className = 'ref-codes';
+    for (const [label, enabled, colorClass] of [['NEWS', run.articleRef, 'news'], ['PERSON', personImage, 'person'], ['GUERNICA', guernicaUsed, 'guernica']]) {
+      const marker = document.createElement('span');
+      marker.className = `ref-code ${colorClass}${enabled ? '' : ' off'}`;
+      marker.textContent = `${label} ${enabled ? 'JA' : 'NEIN'}`;
+      refCodes.append(marker);
+    }
+    heading.append(refCodes);
     if (!run.articleRef) {
       const marker = document.createElement('span');
       marker.className = 'tag no-article-reference';
-      marker.textContent = 'Kein Artikelbild als Referenz';
+      marker.textContent = 'Kein Artikelbild ans Bildmodell';
       top.append(marker);
     }
     const referenceTags = document.createElement('div');
     referenceTags.className = 'reference-tags';
-    const guernicaPainting = run.guernicaStyleRef ?? run.style.includes('Guernica-Vollbild als Stilreferenz');
-    const guernicaFigure = run.guernicaFigureRef ?? /Guernica|Figuren-Crop/.test(run.style);
+    const guernicaPainting = guernicaStyleRef;
+    const guernicaFigure = personImage;
     for (const [label, enabled] of [
-      ['Pressebild', run.articleRef],
-      ['Guernica-Vollbild', guernicaPainting],
-      ['Guernica-Figur', guernicaFigure],
+      ['Artikelbild → Bildmodell', run.articleRef],
+      ['Guernica-Vollbild → Bildmodell (Stil)', guernicaPainting],
+      ['Guernica-Vollbild → GPT (Ortscue)', guernicaLocationRef],
+      ['Figuren-Crop → Bildmodell', guernicaFigure],
     ]) {
       const marker = document.createElement('span');
       marker.className = `tag${enabled ? '' : ' no-reference'}`;
       marker.textContent = `${label}: ${enabled ? 'Referenz' : 'keine Referenz'}`;
       referenceTags.append(marker);
     }
-    top.append(referenceTags);
+    const media = document.createElement('section');
+    media.className = `film-media${run.whole ? '' : ' single-column'}`;
+    media.setAttribute('aria-label', 'Gemergte Filmdateien');
+
+    if (run.whole) {
+      const wholeGroup = document.createElement('div');
+      wholeGroup.className = 'media-group whole-output';
+      const wholeHeading = document.createElement('h3');
+      wholeHeading.textContent = 'Gesamtfilm';
+      const wholeGrid = document.createElement('div');
+      wholeGrid.className = 'output-grid';
+      wholeGrid.append(renderOutputCard(run, run.whole, 'Gesamtfilm öffnen'));
+      wholeGroup.append(wholeHeading, wholeGrid);
+      media.append(wholeGroup);
+    }
+
+    const iterationGroup = document.createElement('div');
+    iterationGroup.className = 'media-group iteration-output';
+    const iterationHeading = document.createElement('h3');
+    iterationHeading.textContent = `Iterationen · ${run.iterations.length} gemergte Filme`;
+    const iterationGrid = document.createElement('div');
+    iterationGrid.className = 'output-grid';
+    for (const iteration of run.iterations) {
+      const number = String(iteration).padStart(3, '0');
+      const hasTitleCard = run.withTitle?.includes(iteration);
+      const file = hasTitleCard && run.normalizedTitleCards ? `iteration-${number}-with-title-card-audio-normalized.mp4` : hasTitleCard ? `iteration-${number}-with-title-card.mp4` : `iteration-${number}.mp4`;
+      const label = `Iteration ${iteration}${hasTitleCard ? ' · Titelkarte' : ''}`;
+      iterationGrid.append(renderOutputCard(run, file, label));
+    }
+    iterationGroup.append(iterationHeading, iterationGrid);
+    media.append(iterationGroup);
+
+    const details = document.createElement('details');
+    details.className = 'run-details';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Einstellungen, Referenzen und Commit-Details';
+    details.append(summary, referenceTags);
 
     const facts = document.createElement('div');
     facts.className = 'facts';
     const totalScenes = run.counts.reduce((sum, value) => sum + value, 0);
-    for (const [label, value] of [['Erfasste Iterationen / Szenen', `${run.counts.length} / ${totalScenes}`], ['Bildmodell', run.image], ['Storymodell', run.story], ['Videomodell', run.video]]) {
+    for (const [label, value] of [['Gemergte Iterationen / Szenen', `${run.counts.length} / ${totalScenes}`], ['Bildmodell', run.image], ['Storymodell', run.story], ['Videomodell', run.video]]) {
       const fact = document.createElement('div');
       fact.className = 'fact';
       const caption = document.createElement('span');
@@ -219,8 +382,11 @@
 
     const settings = document.createElement('div');
     settings.className = 'settings';
-    const references = `Pressebild ${run.articleRef ? 'ja' : 'nein'} · Guernica-Vollbild ${guernicaPainting ? 'ja' : 'nein'} · Figuren-Crop ${guernicaFigure ? 'ja' : 'nein'}`;
-    for (const [label, value] of [['Szenendauer', run.timing], ['Szenenzahl', run.countSetting], ['Stil', run.style], ['Bildreferenzen', references]]) {
+    const references = `Artikelbild → Bildmodell ${run.articleRef ? 'ja' : 'nein'} · Guernica-Vollbild → Bildmodell ${guernicaPainting ? 'ja' : 'nein'} · Guernica-Vollbild → GPT-Ortscue ${guernicaLocationRef ? 'ja' : 'nein'} · Figuren-Crop → Bildmodell ${guernicaFigure ? 'ja' : 'nein'}`;
+    const videoDirectionText = run.videoDirection === 'unknown' ? 'nicht im Laufbericht gespeichert' : run.videoDirection;
+    const audioDirectionText = run.videoAudioDirection === 'unknown' ? 'nicht im Laufbericht gespeichert' : run.videoAudioDirection;
+    const settingsRows = [['Szenendauer', run.timing], ['Szenenzahl', run.countSetting], ['Stil', run.style], ['Bildreferenzen', references], ['Video-Bewegungsregie', videoDirectionText], ['Audio-Regie', audioDirectionText]];
+    for (const [label, value] of settingsRows) {
       const item = document.createElement('div');
       const bold = document.createElement('b');
       bold.textContent = `${label}: `;
@@ -228,32 +394,67 @@
       settings.append(item);
     }
 
+    const codeBox = document.createElement('section');
+    codeBox.className = 'code-box';
+    const codeHeading = document.createElement('h3');
+    codeHeading.textContent = 'Codeänderungen zum vorherigen Lauf';
+    const code = run.codeInfo;
+    const confidence = document.createElement('span');
+    confidence.className = `code-confidence level-${code.confidence}`;
+    confidence.textContent = `Sicherheit ${code.confidence}/3`;
+    codeHeading.append(confidence);
+    const commitLine = document.createElement('p');
+    commitLine.innerHTML = '<b>Commit:</b> ';
+    commitLine.append(document.createTextNode(`${code.commit} · ${code.sourceBranch} · ${code.sourceClean ? 'Quellstand sauber' : 'Quellstand nicht sauber; uncommittete Änderungen möglich'}`));
+    const previousLine = document.createElement('p');
+    previousLine.innerHTML = '<b>Vorheriger Lauf · Quell-Commit:</b> ';
+    if (code.previousCommit) {
+      previousLine.append(document.createTextNode(code.previousCommit));
+      previousLine.append(document.createTextNode(' · Quellstand des vorherigen Films in dieser Übersicht, nicht zwingend Git-Elterncommit.'));
+    } else {
+      previousLine.append(document.createTextNode('keiner (Startgeneration)'));
+    }
+    const changeLine = document.createElement('p');
+    const changeLabel = document.createElement('b');
+    changeLabel.textContent = 'Änderung: ';
+    changeLine.append(changeLabel, document.createTextNode(code.change));
+    codeBox.append(codeHeading, commitLine, previousLine, changeLine);
+    if (code.references?.length) {
+      const referenceLine = document.createElement('p');
+      const referenceLabel = document.createElement('b');
+      referenceLabel.textContent = 'Im Commit referenziert: ';
+      referenceLine.append(referenceLabel);
+      code.references.forEach((reference, index) => {
+        if (index) referenceLine.append(document.createTextNode(' · '));
+        const referenceLink = document.createElement('a');
+        referenceLink.href = `file://${reference.path}`;
+        referenceLink.target = '_blank';
+        referenceLink.rel = 'noopener';
+        referenceLink.textContent = reference.label;
+        referenceLine.append(referenceLink);
+      });
+      codeBox.append(referenceLine);
+    }
+
     const links = document.createElement('div');
     links.className = 'links';
-    if (run.whole) links.append(makeLink(run.base, run.whole, 'Gesamtfilm öffnen'));
     if (run.glued) links.append(makeLink(run.base, run.glued, 'Gesamtfilm mit FLF-Brücken öffnen'));
     const report = document.createElement('a');
     report.href = `file://${run.base}/index.html`;
     report.textContent = 'Run-Bericht öffnen';
     links.append(report);
 
-    const details = document.createElement('details');
-    details.className = 'outputs';
-    const summary = document.createElement('summary');
-    summary.textContent = `Zusammengeführte Iterationsfilme ansehen (${run.iterations.length}${run.withTitle?.length ? ` + ${run.withTitle.length} Titelkartenfassungen` : ''})`;
-    const list = document.createElement('div');
-    list.className = 'links';
-    for (const iteration of run.iterations) {
-      const number = String(iteration).padStart(3, '0');
-      list.append(makeLink(run.base, `iteration-${number}.mp4`, `Iteration ${iteration}`));
-      if (run.withTitle?.includes(iteration)) list.append(makeLink(run.base, `iteration-${number}-with-title-card.mp4`, `Iteration ${iteration} + Titelkarte`));
-    }
-    details.append(summary, list);
-    card.append(top, facts, settings, links, details);
+    details.append(facts, settings, codeBox, links);
+    card.append(top, media, details);
     return card;
   }
 
-  for (const run of runs) catalog.append(renderRun(run));
+  newestRuns.forEach((run, index) => catalog.append(renderRun(run, index === 0)));
+  const emptyState = document.createElement('p');
+  emptyState.className = 'empty-state';
+  emptyState.hidden = true;
+  emptyState.textContent = 'Keine Filme passen zu diesen Filtern.';
+  catalog.after(emptyState);
   const films = [...catalog.querySelectorAll('.film')];
 
   function filterFilms() {
@@ -263,20 +464,29 @@
 
     for (const film of films) {
       const matchesSearch = `${film.dataset.search} ${film.textContent}`.toLocaleLowerCase('de').includes(query);
+      const run = runs.find((item) => item.base === film.dataset.base);
       const matchesBranch = branch === 'all' || film.dataset.branch === branch;
-      film.hidden = !(matchesSearch && matchesBranch);
+      const matchesVideo = videoDirectionFilter.value === 'all' || run?.videoDirection === videoDirectionFilter.value;
+      const matchesAudio = audioDirectionFilter.value === 'all' || run?.videoAudioDirection === audioDirectionFilter.value;
+      film.hidden = !(matchesSearch && matchesBranch && matchesVideo && matchesAudio);
       if (!film.hidden) visible += 1;
     }
 
     const visibleOutputs = films.filter((film) => !film.hidden).reduce((sum, film) => {
       const run = runs.find((item) => item.base === film.dataset.base);
-      return sum + (run ? run.iterations.length + (run.withTitle?.length || 0) + (run.whole ? 1 : 0) : 0);
+      return sum + (run ? run.iterations.length + (run.whole ? 1 : 0) : 0);
     }, 0);
+    emptyState.hidden = visible !== 0;
     count.textContent = `${visible} Läufe · ${visibleOutputs} gemergte Filme`;
   }
 
   search.addEventListener('input', filterFilms);
   branchFilter.addEventListener('change', filterFilms);
+  videoDirectionFilter.addEventListener('change', filterFilms);
+  audioDirectionFilter.addEventListener('change', filterFilms);
+  resetFilters.addEventListener('click', () => {
+    search.value = ''; branchFilter.value = 'all'; videoDirectionFilter.value = 'all'; audioDirectionFilter.value = 'all'; filterFilms();
+  });
   filterFilms();
 </script>
 </body>
