@@ -589,12 +589,20 @@ async function exhibitionMain() {
     state = await readState();
     log(`News directory: ${newsDirectory}; output directory: ${outputDirectory}`);
     if (state.settingsFingerprint !== settingsFingerprint) {
-      if (state.runDirectory) log(`Default settings changed; new run will use ${settingsPath} version ${defaultSettings.version}. Existing run files remain intact.`);
-      state.runnerArguments = null;
-      state.runDirectory = null;
-      state.storyModel = null;
-      state.settingsSource = null;
-      state.exhibitionSettings = null;
+      const savedRun = state.runDirectory
+        ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
+        : null;
+      const resumableRun = savedRun && ['running', 'pending_media'].includes(savedRun.status);
+      if (resumableRun) {
+        log(`Defaults changed, but run ${state.runDirectory} is incomplete; preserving its saved arguments and run snapshot for resume.`);
+      } else {
+        if (state.runDirectory) log(`Default settings changed; new run will use ${settingsPath} version ${defaultSettings.version}. Existing run files remain intact.`);
+        state.runnerArguments = null;
+        state.runDirectory = null;
+        state.storyModel = null;
+        state.settingsSource = null;
+        state.exhibitionSettings = null;
+      }
     }
     const exhibitionArguments = process.argv.slice(2);
     if (exhibitionArguments.includes('--first-last-glue') && exhibitionArguments.includes('--no-first-last-glue')) {

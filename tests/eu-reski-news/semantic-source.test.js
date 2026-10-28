@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, jest, test } from '@jest/globals';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { appendFile, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { WordStream } from 'semantic-stream';
@@ -68,5 +68,63 @@ describe('EU-RESKI semantic source', () => {
       maxDelayMs: 300000,
       jitterRatio: 0.2,
     });
+  });
+
+  test('restores the same pending semantic snapshot and continues the saved WordStream state', async () => {
+    temporaryDirectory = await mkdtemp(join(tmpdir(), 'semantic-source-checkpoint-test-'));
+    const modulePath = join(temporaryDirectory, 'mock-semantic-stream.mjs');
+    const initializationLog = join(temporaryDirectory, 'initializations.log');
+    const checkpointPath = join(temporaryDirectory, 'semantic-stream-state.json');
+    await writeFile(modulePath, [
+      "import { appendFile } from 'node:fs/promises';",
+      `const initializationLog = ${JSON.stringify(initializationLog)};`,
+      'export class WordStream {',
+      '  constructor(word, lang) { this.word = word; this.lang = lang; this.circularLinks = { links: {}, usedLinks: {} }; }',
+      '  async getNext() {',
+      '    const index = Object.keys(this.circularLinks.usedLinks).length + 1;',
+      '    const title = `${this.word} fragment ${index}`;',
+      '    this.circularLinks.links[title] = { title };',
+      '    this.circularLinks.usedLinks[title] = { cnt: 1 };',
+      '    return { title, context: `context ${index}` };',
+      '  }',
+      '}',
+      'export async function initStreams(words) {',
+      '  await appendFile(initializationLog, "initialized\\n");',
+      '  return words.map(([word, lang]) => new WordStream(word, lang));',
+      '}',
+    ].join('\n'));
+
+    const options = { words: 'EU', 'stream-module': modulePath };
+    const firstSource = await createSemanticSource(options, { checkpointPath });
+    const interruptedSnapshot = await firstSource.next();
+    const resumedSource = await createSemanticSource(options, { checkpointPath });
+
+    expect(resumedSource.resumedFromCheckpoint).toBe(true);
+    expect(await resumedSource.next()).toEqual(interruptedSnapshot);
+    await resumedSource.acknowledge(interruptedSnapshot);
+    const nextSnapshot = await resumedSource.next();
+    expect(nextSnapshot.entries[0].item.title).toBe('EU fragment 2');
+    expect((await readFile(initializationLog, 'utf8')).trim().split('\n')).toHaveLength(1);
+  });
+
+  test('restores sequence cursor after an acknowledged snapshot', async () => {
+    temporaryDirectory = await mkdtemp(join(tmpdir(), 'semantic-sequence-checkpoint-test-'));
+    const sequencePath = join(temporaryDirectory, 'sequence.json');
+    const checkpointPath = join(temporaryDirectory, 'semantic-stream-state.json');
+    const snapshots = [1, 2].map((index) => ({
+      provider: 'fixture',
+      capturedAt: `2026-10-28T00:00:0${index}.000Z`,
+      words: [['EU', 'de']],
+      entries: [{ id: `stream-${index}`, seed: ['EU', 'de'], item: { title: `Fragment ${index}` } }],
+    }));
+    await writeFile(sequencePath, JSON.stringify(snapshots));
+
+    const options = { 'stream-sequence-file': sequencePath };
+    const firstSource = await createSemanticSource(options, { checkpointPath });
+    const firstSnapshot = await firstSource.next();
+    await firstSource.acknowledge(firstSnapshot);
+    const resumedSource = await createSemanticSource(options, { checkpointPath });
+
+    expect(await resumedSource.next()).toEqual(snapshots[1]);
   });
 });

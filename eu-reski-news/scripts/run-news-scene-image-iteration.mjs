@@ -115,7 +115,7 @@ if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
   options['scene-visual-controls'] = false;
   options['fixed-visual-controls'] = true;
 }
-const storyModel = options['story-model'].trim();
+let storyModel = options['story-model'].trim();
 if (!storyModel) throw new Error('--story-model must not be empty');
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
@@ -424,6 +424,19 @@ function restoreFeatureSettings(settings) {
   if (!settings.autoMode && options['video-vision'] === 'on' && options['video-direction'] !== 'on') {
     throw new Error('Saved settings are invalid: video vision requires video direction');
   }
+}
+
+function semanticEntries(semantic) {
+  return (semantic?.entries || []).map(({ id, seed, item }) => ({ id, seed, item }));
+}
+
+async function replayLegacySemanticSnapshot(semanticSource, expectedSemantic, description) {
+  if (!expectedSemantic) throw new Error(`Cannot resume ${description}: saved semantic snapshot is missing`);
+  const replayed = await semanticSource.next();
+  if (JSON.stringify(semanticEntries(replayed)) !== JSON.stringify(semanticEntries(expectedSemantic))) {
+    throw new Error(`Cannot seamlessly resume ${description}: semantic source advanced differently; refusing to replace saved fragments`);
+  }
+  await semanticSource.acknowledge(replayed);
 }
 
 function applySceneVisualControls(scenes, defaultVisualStyleOptions) {
@@ -927,6 +940,24 @@ async function main() {
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
   if (options.resume && options['resume-run']) throw new Error('Use either --resume or --resume-run, not both');
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-sequence-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
+  let savedRunManifest = null;
+  if (options['resume-run']) {
+    const resumeDirectory = resolve(options['resume-run']);
+    savedRunManifest = await json(join(resumeDirectory, 'run.json'));
+    if (savedRunManifest.runOptions) {
+      const explicitIterationLimit = process.argv.slice(2).some((argument) => /^--iterations(?:=|$)/.test(argument));
+      const requestedIterationLimit = explicitIterationLimit
+        ? options.iterations
+        : savedRunManifest.iterationLimit === 'endless' ? '-1' : String(savedRunManifest.iterationLimit);
+      const outputDirectory = options['output-dir'];
+      Object.assign(options, savedRunManifest.runOptions);
+      options.iterations = requestedIterationLimit;
+      options['resume-run'] = resumeDirectory;
+      options['output-dir'] = outputDirectory;
+      storyModel = options['story-model'].trim();
+      console.log(`Restored saved run settings from ${join(resumeDirectory, 'run.json')}; only an explicit --iterations may change run length.`);
+    }
+  }
   const iterationLimit = Number(options.iterations);
   if (!Number.isInteger(iterationLimit) || iterationLimit < -1) throw new Error('Use --iterations=N, --iterations=0 or --iterations=-1');
   const pauseMilliseconds = Number(options['pause-ms']);
@@ -943,7 +974,6 @@ async function main() {
   if (!['runware', 'hf-flux-klein'].includes(imageProvider)) throw new Error('Use --image-provider=runware or --image-provider=hf-flux-klein');
   if (!openAiKey || (!options['prompt-only'] && imageProvider === 'runware' && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
   if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
-  const semanticSource = options.resume ? null : await createSemanticSource(options);
   const endless = iterationLimit === 0 || iterationLimit === -1;
   const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1 || options['videos-after-each-iteration'];
   const iterationRoot = options.resume
@@ -959,6 +989,7 @@ async function main() {
     iterationLimit: endless ? 'endless' : iterationLimit,
     pauseMilliseconds,
     status: 'running',
+    runOptions: Object.fromEntries(Object.entries(options).filter(([key]) => !['resume', 'resume-run', 'iterations', 'output-dir', 'help'].includes(key))),
     featureSettings: currentFeatureSettings(),
     generationSettings: currentGenerationSettings(),
     articleProgress: null,
@@ -1021,6 +1052,9 @@ async function main() {
     runManifest.status = 'running';
     delete runManifest.finishedAt;
   }
+  const semanticSource = options.resume ? null : await createSemanticSource(options, {
+    checkpointPath: runManifest ? join(iterationRoot, 'semantic-stream-state.json') : null,
+  });
   const sceneCounts = options.resume ? null : createSceneCountStream(sceneCountSettings);
   const sceneDurations = createSceneDurationStream();
   const runImageSeedBase = runManifest && Object.hasOwn(runManifest, 'imageSeedBase') ? runManifest.imageSeedBase : imageSeedBase;
@@ -1036,8 +1070,15 @@ async function main() {
     if (!Number.isInteger(count) || count < 1 || count > 12) throw new Error('Saved iteration has an invalid scene count');
     const selection = sceneCounts.next();
     if (sceneCountSettings.mode === 'taktmuster' && selection.count !== count) throw new Error('Saved scene-count rhythm differs; refusing to continue a changed sequence');
-    await semanticSource?.next();
-    for (let scene = 0; scene < count; scene += 1) sceneDurations.next();
+    if (semanticSource && !semanticSource.resumedFromCheckpoint) {
+      const savedSemantic = previous.semantic || await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'semantic-stream.json')).catch(() => null);
+      await replayLegacySemanticSnapshot(semanticSource, savedSemantic, runManifest.iterations[iteration].directory);
+    }
+    const replayedDurations = await sceneDurations.generate(count);
+    if (Array.isArray(previous.sceneDurations)
+      && JSON.stringify(replayedDurations) !== JSON.stringify(previous.sceneDurations)) {
+      throw new Error(`Saved scene-duration rhythm differs in ${runManifest.iterations[iteration].directory}; refusing to continue a changed Taktmuster sequence`);
+    }
     imageSeedOffset += count;
   }
   let completed = previouslyCompleted;
@@ -1047,6 +1088,7 @@ async function main() {
     if (latestRecord.selection?.method === 'linear' && latestRecord.selection.ranking === 'jev-eu-relevance') {
       runManifest.articleProgress = {
         sourceAggregate: latestRecord.sourceAggregate,
+        aggregateHash: latestRecord.aggregateHash || null,
         nextDraw: latestRecord.selection.draw + 1,
       };
       await save(join(iterationRoot, 'run.json'), runManifest);
@@ -1082,6 +1124,7 @@ async function main() {
       if (completedRecord.selection?.method === 'linear' && completedRecord.selection.ranking === 'jev-eu-relevance') {
         runManifest.articleProgress = {
           sourceAggregate: completedRecord.sourceAggregate,
+          aggregateHash: completedRecord.aggregateHash || null,
           nextDraw: completedRecord.selection.draw + 1,
         };
       }
@@ -1134,6 +1177,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       const saved = await json(join(directory, 'record.json'));
       if (saved.generator !== 'semantic-news-v1') throw new Error('Resume requires an iteration created by this generator');
       record = saved;
+      if (record.semantic && semanticSource) await semanticSource.acknowledge(record.semantic);
       if (options['resume-run'] && options['auto-mode'] && record.featureSettings?.autoMode !== true) {
         throw new Error('Iteration was not created with auto mode; refusing to mix run settings');
       }
@@ -1150,16 +1194,30 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         const choice = sceneCountStream.next();
         if (choice.count !== record.sceneCount) throw new Error('Interrupted iteration differs from saved scene-count rhythm');
         record.sceneCountSelection ||= choice;
-        if (record.semantic) await semanticSource.next();
+        if (record.semantic && semanticSource && !semanticSource.resumedFromCheckpoint) {
+          await replayLegacySemanticSnapshot(semanticSource, record.semantic, directory);
+        }
         if (Object.hasOwn(record, 'sceneDurations')) {
-          for (let scene = 0; scene < record.sceneCount; scene += 1) sceneDurationStream.next();
+          const replayedDurations = await sceneDurationStream.generate(record.sceneCount);
+          if (Array.isArray(record.sceneDurations)
+            && JSON.stringify(replayedDurations) !== JSON.stringify(record.sceneDurations)) {
+            throw new Error(`Interrupted scene-duration rhythm differs in ${directory}; refusing to continue a changed Taktmuster sequence`);
+          }
         }
       }
     } else {
       const newsDirectory = resolve(options['news-dir']);
       const rankedCollections = await findRankedNewsCollections(newsDirectory);
       if (!rankedCollections.length) throw new Error('No EU-scored news collection found; fetch news and finish Jev classification first');
-      const rankedCollection = rankedCollections[0];
+      const rankedCollection = articleProgress?.sourceAggregate
+        ? rankedCollections.find(({ aggregatePath }) => aggregatePath === articleProgress.sourceAggregate)
+        : rankedCollections[0];
+      if (!rankedCollection) {
+        throw new Error(`Cannot seamlessly resume article order: saved news aggregate is missing: ${articleProgress.sourceAggregate}`);
+      }
+      if (articleProgress?.aggregateHash && rankedCollection.aggregateHash !== articleProgress.aggregateHash) {
+        throw new Error(`Cannot seamlessly resume article order: saved news aggregate changed: ${articleProgress.sourceAggregate}`);
+      }
       const { aggregate, aggregatePath: sourceAggregate, aggregateHash, candidates } = rankedCollection;
       const order = options['article-order'];
       const requestedDraw = options['article-id']
@@ -1245,6 +1303,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       record.semantic = await semanticSource.next();
       await save(join(directory, 'semantic-stream.json'), record.semantic);
       await persist();
+      await semanticSource.acknowledge(record.semantic);
     }
     if (!record.articleImage) {
       record.articleImage = await download(record.article.image, directory, 'article');
