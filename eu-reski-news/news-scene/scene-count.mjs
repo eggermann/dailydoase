@@ -88,7 +88,8 @@ export function createAutoSceneCountSelection(decision, iteration, limits) {
 }
 
 export function isNewAutoSingleScene(record) {
-  return record?.autoDecision?.promptVersion === autoDirectorPromptVersion
+  return record?.autoMode === true
+    && record?.autoDecision?.promptVersion === autoDirectorPromptVersion
     && record.sceneCount === 1
     && record.plan?.scenes?.length === 1;
 }

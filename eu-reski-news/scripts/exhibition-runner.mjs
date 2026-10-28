@@ -8,6 +8,9 @@ import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
+import { loadSceneSequence } from '../news-scene/scene-sequence.mjs';
+import { mergeRunnerArguments } from '../news-scene/runner-arguments.mjs';
+import { isReadyForExhibition } from '../news-scene/exhibition-readiness.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -165,102 +168,6 @@ function flagName(argument) {
   return argument.startsWith('--') ? argument.split('=', 1)[0] : null;
 }
 
-function addDefault(argumentsList, userArguments, flag, value = null) {
-  if ([...argumentsList, ...userArguments].some((argument) => flagName(argument) === flag)) return;
-  if (value === null) argumentsList.push(flag);
-  else argumentsList.push(`${flag}=${value}`);
-}
-
-function defaultsFromExhibitionSettings() {
-  const { sceneCount, sceneLength, visualControls } = defaultGeneration;
-  const defaults = [
-    `--scene-count-mode=${sceneCount.mode}`,
-    ...(sceneCount.mode === 'fixed' && Number.isInteger(sceneCount.count) ? [`--scenes=${sceneCount.count}`] : []),
-    `--scene-count-takt=${sceneCount.takt}`,
-    `--scene-count-numerator=${sceneCount.numerator}`,
-    `--scene-count-denominator=${sceneCount.denominator}`,
-    `--scene-count-type=${sceneCount.type}`,
-    `--scene-count-bias=${sceneCount.bias}`,
-    `--min-scenes=${sceneCount.minimum}`,
-    `--max-scenes=${sceneCount.maximum}`,
-    `--scene-length-takt=${sceneLength.takt}`,
-    `--scene-length-type=${sceneLength.type}`,
-    `--scene-length-multiplier=${sceneLength.multiplier}`,
-    `--scene-length-bias=${sceneLength.bias}`,
-    `--min-scene-seconds=${sceneLength.minimum}`,
-    `--max-scene-seconds=${sceneLength.maximum}`,
-    `--image-provider=${defaultGeneration.imageProvider}`,
-    `--video-model=${defaultGeneration.videoModel}`,
-    `--video-resolution=${defaultGeneration.videoResolution}`,
-    `--video-settings-mode=${defaultGeneration.videoSettingsMode}`,
-    `--video-mode=${defaultGeneration.videoMode}`,
-    `--video-direction=${defaultGeneration.videoDirection}`,
-    `--story-clou=${defaultGeneration.storyClou}`,
-    `--video-vision=${defaultGeneration.videoVision}`,
-    `--video-audio-direction=${defaultGeneration.videoAudioDirection}`,
-    defaultGeneration.noDialogueNarration ? '--no-dialogue-narration' : '--allow-dialogue-narration',
-    `--video-max-zoom=${defaultGeneration.videoMaxZoom}`,
-    `--layering=${visualControls.layering}`,
-    `--iterations=${defaultGeneration.iterations}`,
-    `--pause-ms=${defaultGeneration.pauseMs}`,
-    `--article-order=${defaultGeneration.articleOrder}`,
-    defaultGeneration.legacyGuernicaStyleReferencePrompt ? '--legacy-guernica-style-reference-prompt' : '--no-legacy-guernica-style-reference-prompt',
-  ];
-  if (defaultGeneration.autoMode === true) defaults.push('--auto-mode');
-  defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
-  defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
-  defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
-  defaults.push(defaultGeneration.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
-  if (defaultGeneration.styleReference === false) defaults.push('--no-style-reference');
-  if (defaultGeneration.guernicaFigureReference === false) defaults.push('--no-guernica-figure-reference');
-  defaults.push(defaultGeneration.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
-  defaults.push(defaultGeneration.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
-  if (defaultGeneration.preserveCubistVideoStyle) defaults.push('--preserve-cubist-video-style');
-  if (defaultGeneration.videosAfterEachIteration) defaults.push('--videos-after-each-iteration');
-  if (defaultGeneration['generate-title-cards']) defaults.push('--generate-title-cards');
-
-  return {
-    args: defaults,
-    storyModel: defaultGeneration.storyModel,
-    source: `${settingsPath} (version ${defaultSettings.version})`,
-  };
-}
-
-function mergeRunnerArguments(defaults, userArguments) {
-  const merged = [];
-  const oppositeFlags = new Map([
-    ['--symbolic', '--no-symbolic'], ['--no-symbolic', '--symbolic'],
-    ['--room-deepness', '--no-room-deepness'], ['--no-room-deepness', '--room-deepness'],
-    ['--scene-visual-controls', '--fixed-visual-controls'], ['--fixed-visual-controls', '--scene-visual-controls'],
-    ['--style-reference', '--no-style-reference'], ['--no-style-reference', '--style-reference'],
-    ['--generate-title-cards', '--no-generate-title-cards'], ['--no-generate-title-cards', '--generate-title-cards'],
-    ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
-    ['--article-image-reference', '--no-article-image-reference'], ['--no-article-image-reference', '--article-image-reference'],
-    ['--landscape-prompt', '--no-landscape-prompt'], ['--no-landscape-prompt', '--landscape-prompt'],
-    ['--legacy-guernica-style-reference-prompt', '--no-legacy-guernica-style-reference-prompt'], ['--no-legacy-guernica-style-reference-prompt', '--legacy-guernica-style-reference-prompt'],
-    ['--no-dialogue-narration', '--allow-dialogue-narration'], ['--allow-dialogue-narration', '--no-dialogue-narration'],
-  ]);
-  const suppliedFlags = new Set(userArguments.map(flagName));
-  for (let index = 0; index < defaults.length; index += 1) {
-    const argument = defaults[index];
-    const flag = flagName(argument);
-    if (flag && (suppliedFlags.has(flag) || suppliedFlags.has(oppositeFlags.get(flag)))) continue;
-    merged.push(argument);
-  }
-  const suppliedIterations = userArguments.find((argument) => flagName(argument) === '--iterations');
-  if (suppliedIterations) {
-    const value = suppliedIterations.includes('=') ? suppliedIterations.split('=').at(-1) : userArguments[userArguments.indexOf(suppliedIterations) + 1];
-    const iterations = Number(value);
-    if (!Number.isInteger(iterations) || iterations < -1) throw new Error('Use --iterations=N for a finite run, --iterations=0 or --iterations=-1 for endless operation');
-  }
-  addDefault(merged, userArguments, '--iterations', '-1');
-  addDefault(merged, userArguments, '--pause-ms', '0');
-  addDefault(merged, userArguments, '--article-order', 'linear');
-  addDefault(merged, userArguments, '--news-dir', newsDirectory);
-  addDefault(merged, userArguments, '--output-dir', outputDirectory);
-  return [...merged, ...userArguments];
-}
-
 function argumentValue(argumentsList, flag, fallback) {
   const index = argumentsList.findIndex((argument) => flagName(argument) === flag);
   if (index < 0) return fallback;
@@ -345,12 +252,12 @@ async function getReadyIterations(runDirectory) {
     const record = await readJson(join(iterationDirectory, 'record.json'));
     if (record.status !== 'Abgeschlossen') break;
     const scenes = record.plan?.scenes || [];
-    if (scenes.length < 2) break;
+    if (scenes.length < 2 && !isNewAutoSingleScene(record)) break;
     const videos = await Promise.all(scenes.map(async (scene) => {
       try { await stat(join(iterationDirectory, 'media', `scene-${scene.index}-video.mp4`)); return true; }
       catch (error) { if (error.code === 'ENOENT') return false; throw error; }
     }));
-    if (videos.some((exists) => !exists)) break;
+    if (!isReadyForExhibition(record, videos)) break;
     ready.push(entry);
   }
   return ready;
@@ -543,6 +450,7 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
     rejectClosed = rejectRunner;
   });
   try {
+    let globalArticleQueueExhausted = false;
     const args = [runnerScript, ...argumentsList];
     if (runDirectory && !args.some((argument) => flagName(argument) === '--resume-run')) args.push(`--resume-run=${runDirectory}`);
     const child = spawn(process.execPath, args, { cwd: repositoryRoot, env: process.env, stdio: ['inherit', 'pipe', 'pipe'] });
@@ -559,7 +467,10 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
     const stdoutLines = createInterface({ input: child.stdout, crlfDelay: Infinity });
     const stderrLines = createInterface({ input: child.stderr, crlfDelay: Infinity });
     stdoutLines.on('line', onLine);
-    stderrLines.on('line', (line) => console.error(line));
+    stderrLines.on('line', (line) => {
+      console.error(line);
+      if (line.includes('Global article queue exhausted:')) globalArticleQueueExhausted = true;
+    });
     child.once('error', (error) => {
       children.delete(child);
       runnerChild = null;
@@ -568,7 +479,7 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
     child.once('close', (code, signal) => {
       children.delete(child);
       runnerChild = null;
-      resolveClosed({ code, signal });
+      resolveClosed({ code, signal, globalArticleQueueExhausted });
     });
     return { child, closed };
   } catch (error) {
@@ -579,7 +490,8 @@ function startRunner(argumentsList, runDirectory, onRunDirectory) {
 
 async function exhibitionMain() {
   if (process.argv.includes('--help')) {
-    console.log('Start continuous exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
+    console.log('Start exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
+    console.log('Use --stop-after-iterations=N for a finite run; final First-Last glue and film merges finish before exit.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
     console.log('Flags: --auto-mode enables per-iteration artistic direction; --no-auto-mode disables it.');
     console.log('Environment: NEWS_ENV_FILE (in start script), NEWS_REFRESH_INTERVAL_MS.');
@@ -587,12 +499,28 @@ async function exhibitionMain() {
   }
   await withLock(async () => {
     state = await readState();
+    const commandArguments = process.argv.slice(2);
+    const resumeArgument = commandArguments.find((argument) => flagName(argument) === '--resume-run');
+    const resumePath = resumeArgument ? argumentValue(commandArguments, '--resume-run', '') : '';
+    if (resumeArgument && (!resumePath || resumePath.startsWith('--'))) throw new Error('Use --resume-run=PATH');
+    if (resumePath) state.runDirectory = resolve(resumePath);
+    const priorRun = state.runDirectory
+      ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
+      : null;
+    if (resumePath && !priorRun) throw new Error(`Cannot resume: no run.json in ${state.runDirectory}`);
+    const priorRunIsIncomplete = priorRun && (Boolean(resumePath) || ['running', 'pending_media'].includes(priorRun.status));
+    if (state.runDirectory && !priorRunIsIncomplete) {
+      state.runDirectory = null;
+      delete state.scenePath;
+      delete state.scenePaths;
+      delete state.scenePlanFingerprint;
+    }
     log(`News directory: ${newsDirectory}; output directory: ${outputDirectory}`);
     if (state.settingsFingerprint !== settingsFingerprint) {
       const savedRun = state.runDirectory
         ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
         : null;
-      const resumableRun = savedRun && ['running', 'pending_media'].includes(savedRun.status);
+      const resumableRun = savedRun && (Boolean(resumePath) || ['running', 'pending_media'].includes(savedRun.status));
       if (resumableRun) {
         log(`Defaults changed, but run ${state.runDirectory} is incomplete; preserving its saved arguments and run snapshot for resume.`);
       } else {
@@ -604,7 +532,77 @@ async function exhibitionMain() {
         state.exhibitionSettings = null;
       }
     }
-    const exhibitionArguments = process.argv.slice(2);
+    const exhibitionArguments = commandArguments;
+    const sceneArgumentValues = [];
+    for (let index = 0; index < exhibitionArguments.length; index += 1) {
+      if (flagName(exhibitionArguments[index]) !== '--scene') continue;
+      const value = exhibitionArguments[index].includes('=')
+        ? exhibitionArguments[index].slice('--scene='.length)
+        : exhibitionArguments[++index];
+      if (!value || value.startsWith('--')) throw new Error('Use --scene=PATH; repeat --scene=PATH to schedule several scene files');
+      sceneArgumentValues.push(value);
+    }
+    const scenePaths = sceneArgumentValues.map((scenePath) => resolve(scenePath));
+    const hasSceneArgument = scenePaths.length > 0;
+    const generationIntervalArgument = exhibitionArguments.findLast((argument) => flagName(argument) === '--generation-interval');
+    if (generationIntervalArgument && !hasSceneArgument) {
+      throw new Error('--generation-interval requires --scene=PATH');
+    }
+    const generationInterval = generationIntervalArgument
+      ? generationIntervalArgument.includes('=')
+        ? generationIntervalArgument.slice('--generation-interval='.length)
+        : exhibitionArguments[exhibitionArguments.indexOf(generationIntervalArgument) + 1]
+      : undefined;
+    if (generationIntervalArgument) {
+      if (!generationInterval || generationInterval.startsWith('--')) throw new Error('Use --generation-interval=1h');
+    }
+    const loadedSceneSequences = scenePaths.length
+      ? await Promise.all(scenePaths.map((scenePath) => loadSceneSequence(scenePath, defaultGeneration, {
+        scheduleEnabled: Boolean(generationIntervalArgument),
+        generationInterval,
+      })))
+      : null;
+    if (loadedSceneSequences?.length > 1) {
+      const firstSequence = loadedSceneSequences[0];
+      for (const sequence of loadedSceneSequences.slice(1)) {
+        if (sequence.scheduleEnabled !== firstSequence.scheduleEnabled
+          || sequence.intervalMs !== firstSequence.intervalMs
+          || sequence.biasMode !== firstSequence.biasMode) {
+          throw new Error('Scheduled scene files must use the same interval and bias mode; set --generation-interval=... to share one interval.');
+        }
+      }
+    }
+    const sceneSequence = loadedSceneSequences?.length ? {
+      path: scenePaths.length === 1 ? scenePaths[0] : scenePaths.join(' | '),
+      paths: scenePaths,
+      scheduleEnabled: loadedSceneSequences[0].scheduleEnabled,
+      generationInterval: loadedSceneSequences[0].generationInterval,
+      intervalMs: loadedSceneSequences[0].intervalMs,
+      biasMode: loadedSceneSequences[0].biasMode,
+      iterators: loadedSceneSequences.flatMap((sequence, sequenceIndex) => sequence.iterators.map((iterator) => ({
+        ...iterator,
+        name: loadedSceneSequences.length === 1 ? iterator.name : `${basename(scenePaths[sequenceIndex])} · ${iterator.name}`,
+      }))),
+    } : null;
+    const activeScenePaths = state.scenePaths || (state.scenePath ? [state.scenePath] : []);
+    if (state.runDirectory && activeScenePaths.length && !sceneSequence) {
+      throw new Error(`Resume the active scene sequence with ${activeScenePaths.map((scenePath) => `--scene=${scenePath}`).join(' ')}`);
+    }
+    if (state.runDirectory && activeScenePaths.length
+      && JSON.stringify(sceneSequence?.paths || [sceneSequence?.path]) !== JSON.stringify(activeScenePaths)) {
+      throw new Error(`Active scene sequence uses ${activeScenePaths.join(', ')}; resume with the same --scene files before selecting another sequence`);
+    }
+    const stopAfterArgument = exhibitionArguments.find((argument) => flagName(argument) === '--stop-after-iterations');
+    let stopAfterIterations = null;
+    if (stopAfterArgument) {
+      const value = stopAfterArgument.includes('=')
+        ? stopAfterArgument.slice('--stop-after-iterations='.length)
+        : exhibitionArguments[exhibitionArguments.indexOf(stopAfterArgument) + 1];
+      stopAfterIterations = Number(value);
+      if (!Number.isSafeInteger(stopAfterIterations) || stopAfterIterations < 1) {
+        throw new Error('--stop-after-iterations must be a positive integer');
+      }
+    }
     if (exhibitionArguments.includes('--first-last-glue') && exhibitionArguments.includes('--no-first-last-glue')) {
       throw new Error('Choose either --first-last-glue or --no-first-last-glue');
     }
@@ -635,10 +633,19 @@ async function exhibitionMain() {
     if (!Number.isFinite(frameOffset) || frameOffset <= 0 || frameOffset > 1) throw new Error('EXHIBITION_FRAME_OFFSET_SECONDS must be greater than 0 and no more than 1');
     const fadeLength = Number(fadeSeconds);
     if (!Number.isFinite(fadeLength) || fadeLength < 0 || fadeLength > 2) throw new Error('EXHIBITION_FADE_SECONDS must be from 0 through 2');
-    const userArguments = exhibitionArguments.filter((argument) => !['--first-last-glue', '--no-first-last-glue', '--auto-mode', '--no-auto-mode'].includes(flagName(argument))
-      && flagName(argument) !== '--transition-wait-pattern');
+    const userArguments = [];
+    for (let index = 0; index < exhibitionArguments.length; index += 1) {
+      const argument = exhibitionArguments[index];
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument))) {
+        if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
+        continue;
+      }
+      userArguments.push(argument);
+    }
     let defaults;
-    if (state.runnerArguments?.length) {
+    if (sceneSequence) {
+      defaults = defaultsFromExhibitionSettings(sceneSequence.iterators[0].generation);
+    } else if (state.runnerArguments?.length) {
       defaults = { args: state.runnerArguments, storyModel: state.storyModel, source: state.settingsSource || null };
     } else {
       defaults = defaultsFromExhibitionSettings();
@@ -652,15 +659,79 @@ async function exhibitionMain() {
       process.env.NEWS_STORY_MODEL?.trim() || '',
     ).trim();
     if (requestedStoryModel) defaults = { ...defaults, storyModel: requestedStoryModel };
+    if (stopAfterIterations === null && !userArguments.some((argument) => flagName(argument) === '--iterations')) {
+      const configuredIterations = Number(argumentValue(defaults.args, '--iterations', '-1'));
+      if (Number.isSafeInteger(configuredIterations) && configuredIterations > 0) {
+        stopAfterIterations = configuredIterations;
+      }
+    }
+    if (stopAfterIterations !== null) {
+      for (let index = userArguments.length - 1; index >= 0; index -= 1) {
+        if (flagName(userArguments[index]) === '--iterations') userArguments.splice(index, 1);
+      }
+      userArguments.push(`--iterations=${stopAfterIterations}`);
+    }
     const configuredAutoMode = defaults.args.includes('--no-auto-mode') ? false
       : defaults.args.includes('--auto-mode') ? true : defaultGeneration.autoMode === true;
     const autoModeEnabled = resolveAutoModeSetting(configuredAutoMode, exhibitionArguments);
-    const runnerArguments = mergeRunnerArguments(defaults.args, userArguments);
+    const iteratorPlans = sceneSequence
+      ? sceneSequence.iterators.map((iterator) => {
+        const iteratorDefaults = defaultsFromExhibitionSettings(iterator.generation);
+        let iteratorArguments = mergeRunnerArguments(iteratorDefaults.args, userArguments, { stopAfterIterations, newsDirectory, outputDirectory });
+        if (sceneSequence.iterators.length > 1) {
+          if (iteratorArguments.some((argument) => flagName(argument) === '--article-id')) {
+            throw new Error('Scheduled scene files cannot pin --article-id; global article order prevents repeats.');
+          }
+          iteratorArguments = iteratorArguments.filter((argument) => flagName(argument) !== '--article-order');
+          iteratorArguments.push('--article-order=global');
+        }
+        return { name: iterator.name, arguments: iteratorArguments };
+      })
+      : null;
+    const runnerArguments = iteratorPlans?.[0].arguments
+      || mergeRunnerArguments(defaults.args, userArguments, { stopAfterIterations, newsDirectory, outputDirectory });
     const normalizedRunnerArguments = runnerArguments.filter((argument) => !['--auto-mode', '--no-auto-mode'].includes(flagName(argument)));
     if (autoModeEnabled) normalizedRunnerArguments.push('--auto-mode');
     else if (defaultGeneration.autoMode === true || defaults.args.includes('--no-auto-mode')
       || exhibitionArguments.includes('--no-auto-mode')) normalizedRunnerArguments.push('--no-auto-mode');
-    const iterationLimit = Number(argumentValue(runnerArguments, '--iterations', '-1'));
+    let iteratorPlanPath = null;
+    if (iteratorPlans) {
+      iteratorPlanPath = join(outputDirectory, '.exhibition-iterator-plan.json');
+      const iteratorPlan = {
+        scenePath: sceneSequence.path,
+        scheduleEnabled: sceneSequence.scheduleEnabled,
+        generationInterval: sceneSequence.generationInterval,
+        intervalMs: sceneSequence.intervalMs,
+        biasMode: sceneSequence.biasMode,
+        iterators: iteratorPlans,
+      };
+      if (priorRunIsIncomplete && state.runDirectory && priorRun?.iteratorPlanFingerprint) {
+        const savedPlan = await readJson(iteratorPlanPath);
+        const comparable = (plan) => ({
+          ...plan,
+          iterators: plan.iterators.map((iterator) => ({
+            ...iterator,
+            arguments: iterator.arguments.filter((argument) => !['--iterations', '--article-order'].includes(flagName(argument))),
+          })),
+        });
+        if (JSON.stringify(comparable(savedPlan)) !== JSON.stringify(comparable(iteratorPlan))) {
+          throw new Error('Scene settings changed; resume requires the original scene plan.');
+        }
+        const savedFingerprint = createHash('sha256').update(JSON.stringify(savedPlan)).digest('hex');
+        if (savedFingerprint !== priorRun.iteratorPlanFingerprint) throw new Error('Saved scene plan does not match the interrupted run.');
+        log('Resuming the saved scene plan; iteration limit and global article order may be changed explicitly.');
+      } else {
+        await saveJson(iteratorPlanPath, iteratorPlan);
+      }
+      state.scenePath = sceneSequence.path;
+      state.scenePaths = scenePaths;
+      state.scenePlanFingerprint = createHash('sha256').update(JSON.stringify(await readJson(iteratorPlanPath))).digest('hex');
+      normalizedRunnerArguments.push(`--iterator-plan=${iteratorPlanPath}`);
+    } else {
+      delete state.scenePath;
+      delete state.scenePaths;
+      delete state.scenePlanFingerprint;
+    }
     const videoSettings = {
       model: argumentValue(runnerArguments, '--video-model', defaultGeneration.videoModel),
       resolution: argumentValue(runnerArguments, '--video-resolution', defaultGeneration.videoResolution),
@@ -693,7 +764,17 @@ async function exhibitionMain() {
       fadeSeconds,
       randomBridgeThreshold: randomThreshold,
     })}`);
-    state.runnerArguments = normalizedRunnerArguments.filter((argument) => flagName(argument) !== '--resume-run');
+    state.runnerArguments = runnerArguments
+      .filter((argument) => flagName(argument) !== '--resume-run')
+      .map((argument) => stopAfterIterations !== null && flagName(argument) === '--iterations' ? '--iterations=-1' : argument);
+    for (let index = state.runnerArguments.length - 1; index >= 0; index -= 1) {
+      if (flagName(state.runnerArguments[index]) === '--auto-mode' || flagName(state.runnerArguments[index]) === '--no-auto-mode') {
+        state.runnerArguments.splice(index, 1);
+      }
+    }
+    if (autoModeEnabled) state.runnerArguments.push('--auto-mode');
+    else if (defaultGeneration.autoMode === true || defaults.args.includes('--no-auto-mode')
+      || exhibitionArguments.includes('--no-auto-mode')) state.runnerArguments.push('--no-auto-mode');
     state.storyModel = defaults.storyModel;
     state.settingsSource = defaults.source;
     state.settingsVersion = defaultSettings.version;
@@ -703,8 +784,14 @@ async function exhibitionMain() {
     await saveJson(statePath, state);
     if (state.storyModel) process.env.NEWS_STORY_MODEL = state.storyModel;
 
-    let runDirectory = state.runDirectory && resolve(state.runDirectory);
+    let runDirectory = state.runDirectory ? resolve(state.runDirectory) : null;
     if (!runDirectory || !(await stat(join(runDirectory, 'run.json')).catch(() => null))) runDirectory = null;
+    if (stopAfterIterations !== null && !runDirectory) {
+      state.runDirectory = null;
+      state.gluedThroughIteration = 0;
+      delete state.lastFilmBuildAt;
+      await saveJson(statePath, state);
+    }
 
     if (!await rankedCollectionAvailable()) {
       log('Noch kein Jev-Ranking vorhanden; initialer News-Refresh läuft vor der ersten Iteration.');
@@ -723,19 +810,38 @@ async function exhibitionMain() {
       const result = await running.closed;
       if (state.runDirectory) runDirectory = resolve(state.runDirectory);
       if (stopping) break;
-      if (result.code === 0 && iterationLimit > 0) {
+      if (stopAfterIterations !== null && result.code === 0) {
         const savedRun = runDirectory ? await readJson(join(runDirectory, 'run.json')).catch(() => null) : null;
-        stopping = true;
-        wakeForStop();
         if (savedRun?.status === 'pending_media') {
+          stopping = true;
+          wakeForStop();
           log(`Run paused with pending media (${(savedRun.pendingMedia || []).length} iteration(s)); restart runner to poll saved provider task IDs.`);
         } else {
-          log(`Completed ${iterationLimit} exhibition iterations; stopping after final merge work finishes.`);
+          if (glueEnabled && runDirectory) {
+            log(`Iteration limit ${stopAfterIterations} reached; waiting for First-Last glue and final films.`);
+            while (!stopping) {
+              const latestState = await readState();
+              if (resolve(latestState.runDirectory || '') === runDirectory
+                && Number(latestState.gluedThroughIteration || 0) >= stopAfterIterations) break;
+              await delayOrStop(mergeCheckMs);
+            }
+          }
+          if (!stopping) {
+            stopping = true;
+            wakeForStop();
+            log(`Finite exhibition complete after ${stopAfterIterations} iterations; no next iteration started.`);
+            for (const child of children) child.kill('SIGTERM');
+          }
         }
         break;
       }
-      log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
-      await delayOrStop(30_000);
+      if (result.globalArticleQueueExhausted) {
+        log(`All eligible articles used; keep scene schedule paused until news refresh. Check again in ${refreshCheckMs} ms.`);
+        await delayOrStop(refreshCheckMs);
+      } else {
+        log(`Image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
+        await delayOrStop(30_000);
+      }
     }
     await Promise.allSettled([refreshTask, mergeTask].filter(Boolean));
   });

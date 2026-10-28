@@ -117,6 +117,7 @@ describe('Auto Director scene count selection', () => {
     expect(transitions.maxItems).toBe(0);
     expect(request.response_format.json_schema.schema.properties.scenes.minItems).toBe(1);
     expect(isNewAutoSingleScene({
+      autoMode: true,
       sceneCount: 1,
       autoDecision: { promptVersion: autoDirectorPromptVersion },
       plan: { scenes: [{ index: 1 }] },
