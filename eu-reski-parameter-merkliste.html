@@ -28,7 +28,7 @@
   <section>
     <h2>Scene-JSON und vollständige Parameterdatei</h2>
     <p>Scene-JSON bestimmt Reihenfolge der Iterator-Dateien. Jede Iterator-Datei enthält Einstellungen unter <code>generation</code>; fehlende Werte erben aus <code>eu-reski-news/default-exhibition-settings.json</code>. CLI-Flags überschreiben JSON-Werte.</p>
-    <p>Vollständiges, lauffähiges Beispiel unter <code>docs/eu-reski/</code>: <a href="docs/eu-reski/scene.example.json"><code>scene.example.json</code></a> und <a href="docs/eu-reski/iterator-all-parameters.example.json"><code>iterator-all-parameters.example.json</code></a>.</p>
+    <p>Vollständiges, lauffähiges Beispiel unter <code>eu-reski-news/docs/</code>: <a href="eu-reski-news/docs/scene.example.json"><code>scene.example.json</code></a> und <a href="eu-reski-news/docs/iterator-all-parameters.example.json"><code>iterator-all-parameters.example.json</code></a>.</p>
     <pre>{
   "paths": ["./iterator-all-parameters.example.json"],
   "generationInterval": "1h",
@@ -36,9 +36,9 @@
 }</pre>
     <p>Normaler Scene-Start ignoriert Zeitfelder vollständig und startet Iteratoren direkt nacheinander. Zeitinterpolation aktiviert nur <code>news:exhibition:from-scene-json:with-time-interpolation</code>; Standardintervall dort ist <code>1h</code>, per <code>--generation-interval=2h</code> änderbar. <code>biasMode</code> (<code>on</code>/<code>off</code>) stammt bei Zeitinterpolation aus der Scene-JSON.</p>
     <p><strong>Startbefehle:</strong></p>
-    <pre>npm run news:exhibition:from-scene-json -- ./docs/eu-reski/scene.example.json
-npm run news:exhibition:from-scene-json:with-time-interpolation -- ./docs/eu-reski/scene.example.json
-npm run news:exhibition:from-scene-json:with-time-interpolation -- ./docs/eu-reski/scene.example.json --generation-interval=2h</pre>
+    <pre>npm run news:exhibition:from-scene-json -- ./eu-reski-news/docs/scene.example.json
+npm run news:exhibition:from-scene-json:with-time-interpolation -- ./eu-reski-news/docs/scene.example.json
+npm run news:exhibition:from-scene-json:with-time-interpolation -- ./eu-reski-news/docs/scene.example.json --generation-interval=2h</pre>
     <div class="scroll"><table>
       <thead><tr><th>Iterator-JSON: Feld unter <code>generation</code></th><th>Entsprechende CLI-Steuerung</th></tr></thead>
       <tbody>
