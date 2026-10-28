@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from '@jest/globals';
 import { autoDirectorPromptVersion } from '../../eu-reski-news/news-scene/auto-director.mjs';
 import { getReadyIterations } from '../../eu-reski-news/news-scene/exhibition-readiness.mjs';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const assemblyScript = fileURLToPath(new URL('../../eu-reski-news/scripts/assemble-news-film.mjs', import.meta.url));
 
@@ -63,7 +64,7 @@ describe('single-scene Auto exhibition assembly', () => {
         '--no-generate-title-cards',
       ], {
         encoding: 'utf8',
-        env: { ...process.env, FFMPEG_BIN: fakeFfmpeg, FAKE_FFMPEG_ARGS: join(root, 'ffmpeg-args.json') },
+        env: offlineTestEnvironment({ FFMPEG_BIN: fakeFfmpeg, FAKE_FFMPEG_ARGS: join(root, 'ffmpeg-args.json') }),
       });
       expect(await getReadyIterations(runDirectory)).toHaveLength(2);
       expect(result.status).toBe(0);

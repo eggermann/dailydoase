@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from '@jest/globals';
 import { articleKey } from '../../eu-reski-news/scripts/news-eu-relevance.mjs';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const repoRoot = fileURLToPath(new URL('../..', import.meta.url));
 const runnerPath = join(repoRoot, 'eu-reski-news/scripts/exhibition-runner.mjs');
@@ -111,15 +112,14 @@ describe('Exhibition Runner startup', () => {
         `--stream-file=${semanticPath}`,
       ], {
         cwd: repoRoot,
-        env: {
-          ...process.env,
+        env: offlineTestEnvironment({
           NEWS_NEWS_DIR: newsDirectory,
           NEWS_OUTPUT_DIR: outputDirectory,
           NEWS_REFRESH_CHECK_MS: '100000',
           OPENAI_API_KEY: 'offline-test-key',
           TEST_NETWORK_LOG: networkLogPath,
           NODE_OPTIONS: `--require=${networkBlockerPath}`,
-        },
+        }),
         stdio: ['ignore', 'pipe', 'pipe'],
       });
       child.stdout.on('data', (chunk) => { output += chunk.toString(); });

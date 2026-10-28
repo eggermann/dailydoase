@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from '@jest/globals';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const runnerPath = fileURLToPath(new URL('../../eu-reski-news/scripts/run-news-scene-image-iteration.mjs', import.meta.url));
 
@@ -77,13 +78,12 @@ describe('parallel worker pending media resume', () => {
       ], {
         encoding: 'utf8',
         timeout: 15000,
-        env: {
-          ...process.env,
+        env: offlineTestEnvironment({
           OPENAI_API_KEY: 'offline-test-key',
           NEWS_TEST_VIDEO_POLL_SCRIPT: pollScript,
           TEST_POLL_LOG: pollLog,
           TEST_POLL_COUNT: join(root, 'poll-count'),
-        },
+        }),
       });
 
       const first = runResume();

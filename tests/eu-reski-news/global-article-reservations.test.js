@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, test } from '@jest/globals';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../../eu-reski-news/news-scene/global-article-reservations.mjs';
 
 const moduleUrl = new URL('../../eu-reski-news/news-scene/global-article-reservations.mjs', import.meta.url).href;
@@ -47,15 +48,14 @@ function startReservationProcess({ progressPath, reservationId, recordPath, cand
   const child = spawn(process.execPath, ['--input-type=module', '-e', program], {
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
-    env: {
-      ...process.env,
+    env: offlineTestEnvironment({
       PROGRESS_PATH: progressPath,
       RESERVATION_ID: reservationId,
       RECORD_PATH: recordPath,
       CANDIDATES: JSON.stringify(candidates),
       HOLD_AFTER_RESERVE: holdAfterReserve ? '1' : '0',
       READY_PATH: readyPath,
-    },
+    }),
   });
   let stdout = '';
   let stderr = '';

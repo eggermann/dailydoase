@@ -91,6 +91,7 @@
   "project": {},
   "scripts": {
     "test": "cross-env WATCHMAN_DISABLE=1 JEST_USE_POLLING=1 NODE_OPTIONS=--experimental-vm-modules jest --env=node --watchman=false",
+    "test:exhibition-parallel-e2e": "npm test -- --runInBand tests/eu-reski-news",
     "news:eu:today": "node eu-reski-news/scripts/fetch-eu-news-today.mjs",
     "news:eu:jev": "node eu-reski-news/scripts/classify-eu-news-with-jev.mjs",
     "news:exhibition": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh",

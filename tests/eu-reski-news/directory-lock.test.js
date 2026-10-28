@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, test } from '@jest/globals';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const lockModule = fileURLToPath(new URL('../../eu-reski-news/news-scene/directory-lock.mjs', import.meta.url));
 let temporaryRoot;
@@ -21,7 +22,7 @@ async function waitForFile(path, child, timeoutMs = 5000) {
 function startLockProcess(lockPath, program, environment = {}) {
   return spawn(process.execPath, ['--input-type=module', '-e', program], {
     stdio: ['ignore', 'pipe', 'pipe'],
-    env: { ...process.env, LOCK_MODULE: lockModule, LOCK_PATH: lockPath, ...environment },
+    env: offlineTestEnvironment({ LOCK_MODULE: lockModule, LOCK_PATH: lockPath, ...environment }),
   });
 }
 

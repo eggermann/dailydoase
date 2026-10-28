@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from '@jest/globals';
 import { articleKey } from '../../eu-reski-news/scripts/news-eu-relevance.mjs';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const runnerPath = fileURLToPath(new URL('../../eu-reski-news/scripts/run-news-scene-image-iteration.mjs', import.meta.url));
 
@@ -96,12 +97,11 @@ describe('new Auto Mode iteration startup', () => {
       ], {
         encoding: 'utf8',
         timeout: 20000,
-        env: {
-          ...process.env,
+        env: offlineTestEnvironment({
           OPENAI_API_KEY: 'offline-test-key',
           TEST_IMAGE_URL: imageUrl,
           TEST_API_CALLS_PATH: callsPath,
-        },
+        }),
       });
 
       expect(result.status).not.toBe(0);

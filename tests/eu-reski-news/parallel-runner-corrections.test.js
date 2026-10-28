@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { describe, expect, test } from '@jest/globals';
+import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const runner = join(root, 'eu-reski-news/scripts/exhibition-runner.mjs');
@@ -22,7 +23,7 @@ describe('parallel runner corrections', () => {
       await mkdir(news);
       await writeFile(plan, JSON.stringify({ workerKey: 'a', scheduleEnabled: false, intervalMs: null, biasMode: null, iterators: [{ name: 'a', arguments: [] }] }));
       await writeFile(semantic, JSON.stringify({ provider: 'offline', entries: [{ id: 'a', seed: ['x', 'en'], item: { title: 'x' } }] }));
-      const result = spawnSync(process.execPath, [generator, `--iterator-plan=${plan}`, `--output-dir=${dir}`, `--news-dir=${news}`, `--stream-file=${semantic}`, '--prompt-only', '--iterations=1'], { encoding: 'utf8', timeout: 10000, env: { ...process.env, OPENAI_API_KEY: 'offline' } });
+      const result = spawnSync(process.execPath, [generator, `--iterator-plan=${plan}`, `--output-dir=${dir}`, `--news-dir=${news}`, `--stream-file=${semantic}`, '--prompt-only', '--iterations=1'], { encoding: 'utf8', timeout: 10000, env: offlineTestEnvironment({ OPENAI_API_KEY: 'offline' }) });
       expect(result.stdout).toContain('Run folder:');
       expect(result.stderr).not.toContain('Worker schedule requires');
       const runPath = result.stdout.match(/Run folder: (.+)/)[1];
