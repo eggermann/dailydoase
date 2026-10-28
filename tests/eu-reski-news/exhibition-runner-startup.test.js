@@ -84,11 +84,26 @@ describe('Exhibition Runner startup', () => {
         '  throw new Error(`Network disabled in startup test: ${url}`);',
         '};',
       ].join('\n'));
+      const oldRunDirectories = [join(outputDirectory, 'old-run-a'), join(outputDirectory, 'old-run-b')];
+      await Promise.all(oldRunDirectories.map(async (directory, index) => {
+        await mkdir(directory, { recursive: true });
+        await writeFile(join(directory, 'run.json'), JSON.stringify({ status: 'completed', iterations: [] }));
+        await writeFile(join(directory, 'keep.txt'), `old-run-${index + 1}`);
+      }));
+      await mkdir(outputDirectory, { recursive: true });
+      await writeFile(join(outputDirectory, 'exhibition-state.json'), JSON.stringify({
+        scenePath: sceneDirectory,
+        scenePaths: [sceneDirectory],
+        sceneWorkers: {
+          '01-run-001-exhibition': { status: 'completed', runDirectory: oldRunDirectories[0] },
+          '02-run-005-prompt-path': { status: 'completed', runDirectory: oldRunDirectories[1] },
+        },
+      }));
 
       child = spawn(process.execPath, [
         runnerPath,
+        '--new-run',
         `--scene=${sceneDirectory}`,
-        '--generation-interval=1h',
         '--stop-after-iterations=1',
         '--prompt-only',
         '--no-first-last-glue',
@@ -116,14 +131,35 @@ describe('Exhibition Runner startup', () => {
       const plan = JSON.parse(await readFile(join(outputDirectory, '.exhibition-iterator-plan.json'), 'utf8'));
       expect(plan).toMatchObject({
         scheduleEnabled: true,
-        generationInterval: '1h',
+        generationInterval: '60m',
         biasMode: 'on',
       });
       expect(plan.workers.map(({ name }) => name)).toEqual(['run-001-exhibition', 'run-005-prompt-path']);
       expect(plan.workers.map(({ ratePerHour }) => ratePerHour)).toEqual([10, 5]);
       expect(plan.workers.map(({ plan: workerPlan }) => workerPlan.intervalMs)).toEqual([360_000, 720_000]);
+      const statePath = join(outputDirectory, 'exhibition-state.json');
+      let savedState;
+      const stateDeadline = Date.now() + 3000;
+      while (Date.now() < stateDeadline) {
+        savedState = JSON.parse(await readFile(statePath, 'utf8').catch(() => 'null'));
+        if (Object.keys(savedState?.sceneWorkers || {}).length === 2) break;
+        await new Promise((resolveDelay) => setTimeout(resolveDelay, 20));
+      }
+      const workerRuns = await Promise.all(Object.values(savedState.sceneWorkers).map(async (worker) =>
+        JSON.parse(await readFile(join(worker.runDirectory, 'run.json'), 'utf8'))));
+      expect(Object.values(savedState.sceneWorkers).map(({ runDirectory }) => runDirectory))
+        .not.toEqual(oldRunDirectories);
+      expect(await Promise.all(oldRunDirectories.map((directory) => readFile(join(directory, 'keep.txt'), 'utf8'))))
+        .toEqual(['old-run-1', 'old-run-2']);
+      expect(workerRuns.map(({ sceneSchedule }) => sceneSchedule.intervalMs).sort((left, right) => left - right))
+        .toEqual([360_000, 720_000]);
+      expect(workerRuns.map(({ iteratorNames }) => iteratorNames)).toEqual([
+        ['run-001-exhibition'],
+        ['run-005-prompt-path'],
+      ]);
       expect(output.match(/^Run folder: /gm)).toHaveLength(2);
       expect(output).toContain('Starting 2 independent scene workers in parallel');
+      expect(output).toContain('--stop-after-iterations=1 applies per worker; maximum total is 2 iterations.');
       const [auto, manual] = plan.workers.map(({ plan: workerPlan }) => workerPlan.iterators[0].arguments);
       const has = (args, value) => expect(args).toContain(value);
 
@@ -134,9 +170,11 @@ describe('Exhibition Runner startup', () => {
       has(auto, '--scene-length-takt=4');
       has(auto, '--video-audio-direction=on');
       has(auto, '--article-order=global');
+      has(auto, '--iterations=1');
       has(manual, '--no-auto-mode');
       has(manual, '--story-model=gpt-4o-mini');
       has(manual, '--article-order=global');
+      has(manual, '--iterations=1');
       has(manual, '--preserve-cubist-video-style');
       has(manual, '--no-style-reference');
       has(manual, '--use-guernica-figure-reference');

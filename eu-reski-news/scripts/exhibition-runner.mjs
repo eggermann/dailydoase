@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { mkdir, open, readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,9 +8,10 @@ import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
-import { loadSceneSequence } from '../news-scene/scene-sequence.mjs';
+import { loadSceneSequence, resolveParallelSceneSchedule } from '../news-scene/scene-sequence.mjs';
 import { mergeRunnerArguments } from '../news-scene/runner-arguments.mjs';
-import { isReadyForExhibition } from '../news-scene/exhibition-readiness.mjs';
+import { getReadyIterations } from '../news-scene/exhibition-readiness.mjs';
+import { withDirectoryLock } from '../news-scene/directory-lock.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -65,6 +66,33 @@ const delayOrStop = (milliseconds) => new Promise((resolveDelay) => {
   });
 });
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+
+async function inspectSavedSceneWorkers(savedWorkers = {}) {
+  const resumableStatuses = new Set(['running', 'pending_media', 'interrupted', 'completed']);
+  let hasResumableWorker = false;
+  for (const [workerKey, worker] of Object.entries(savedWorkers)) {
+    if (!worker.runDirectory) {
+      if (worker.status === 'starting') {
+        throw new Error(`Worker ${workerKey} has no saved Run directory; state is ambiguous. Inspect its output before restarting.`);
+      }
+      continue;
+    }
+    const manifestPath = join(worker.runDirectory, 'run.json');
+    const manifest = await readJson(manifestPath).catch((error) => {
+      if (error.code === 'ENOENT') throw new Error(`Worker ${workerKey} points to a missing run.json: ${manifestPath}`);
+      throw error;
+    });
+    if (!['running', 'pending_media', 'completed', 'failed', 'interrupted'].includes(manifest.status)) {
+      throw new Error(`Worker ${workerKey} has an unknown Run status "${manifest.status ?? '(missing)'}" in ${manifestPath}`);
+    }
+    worker.status = manifest.status;
+    worker.iteratorPlanFingerprint = manifest.iteratorPlanFingerprint || null;
+    worker.runManifestUpdatedAt = manifest.finishedAt || manifest.startedAt || null;
+    if (manifest.status === 'failed') throw new Error(`Worker ${workerKey} has a failed Run; inspect ${manifestPath} before starting again.`);
+    if (resumableStatuses.has(manifest.status)) hasResumableWorker = true;
+  }
+  return hasResumableWorker;
+}
 
 async function saveJson(path, value) {
   const temporaryPath = `${path}.${randomUUID()}.tmp`;
@@ -169,6 +197,21 @@ function runCommand(label, command, args, { onLine = null, inheritStdin = false 
       else rejectCommand(new Error(`${label} ended with ${signal || `exit ${code}`}`));
     });
   });
+}
+
+async function runAtomicMp4Command(label, argumentsList, outputPath) {
+  await mkdir(dirname(outputPath), { recursive: true });
+  const temporaryPath = join(dirname(outputPath), `${basename(outputPath, '.mp4')}.partial-${randomUUID()}.mp4`);
+  const temporaryArguments = argumentsList.map((argument) =>
+    argument === `--output=${outputPath}` ? `--output=${temporaryPath}` : argument);
+  try {
+    await runCommand(label, process.execPath, temporaryArguments);
+    const result = await stat(temporaryPath);
+    if (!result.isFile() || result.size < 1) throw new Error(`${label} did not produce a non-empty MP4`);
+    await rename(temporaryPath, outputPath);
+  } finally {
+    await unlink(temporaryPath).catch((error) => { if (error.code !== 'ENOENT') throw error; });
+  }
 }
 
 function flagName(argument) {
@@ -303,33 +346,23 @@ async function runRefreshLoop() {
   }
 }
 
-async function getReadyIterations(runDirectory) {
-  let manifest;
-  try { manifest = await readJson(join(runDirectory, 'run.json')); } catch (error) {
-    if (error.code === 'ENOENT') return [];
-    throw error;
-  }
-  const ready = [];
-  for (const entry of manifest.iterations || []) {
-    const iterationDirectory = join(runDirectory, entry.directory);
-    const record = await readJson(join(iterationDirectory, 'record.json'));
-    if (record.status !== 'Abgeschlossen') break;
-    const scenes = record.plan?.scenes || [];
-    if (scenes.length < 2 && !isNewAutoSingleScene(record)) break;
-    const videos = await Promise.all(scenes.map(async (scene) => {
-      try { await stat(join(iterationDirectory, 'media', `scene-${scene.index}-video.mp4`)); return true; }
-      catch (error) { if (error.code === 'ENOENT') return false; throw error; }
-    }));
-    if (!isReadyForExhibition(record, videos)) break;
-    ready.push(entry);
-  }
-  return ready;
-}
-
 async function updateFilms(runDirectory, readyIterations, videoSettings, generateTitleCards, workerKey = null) {
   if (!glueEnabled || !readyIterations.length) return;
   const glueDirectory = join(runDirectory, 'glue-vids');
   const iterationCount = readyIterations.length;
+  if (await hasCompleteFilmSet(runDirectory, readyIterations)) {
+    if (workerKey) {
+      state.sceneWorkers ||= {};
+      state.sceneWorkers[workerKey] ||= {};
+      Object.assign(state.sceneWorkers[workerKey], { runDirectory, gluedThroughIteration: iterationCount });
+    } else {
+      state.runDirectory = runDirectory;
+      state.gluedThroughRunDirectory = runDirectory;
+      state.gluedThroughIteration = iterationCount;
+    }
+    await saveState();
+    return;
+  }
   log(`Generate/resume First-Last-Frame bridges through iteration ${iterationCount}; wait source ${glueWaitPattern || 'Taktmuster 2/4/4 classic'}.`);
   await runCommand('First-Last-Frame-Glue', process.execPath, [
     glueScript,
@@ -360,7 +393,7 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
       const variantDirectory = join(normalizedIterationDirectory, variant.name);
       const intermediatePath = join(variantDirectory, `${entry.directory}-before-audio-normalization.mp4`);
       const normalizedPath = join(variantDirectory, `${entry.directory}-audio-normalized.mp4`);
-      await runCommand(`Assemble ${entry.directory} (${variant.name})`, process.execPath, [
+      await runAtomicMp4Command(`Assemble ${entry.directory} (${variant.name})`, [
         assembleScript,
         `--run-dir=${runDirectory}`,
         `--iteration=${entry.directory}`,
@@ -371,12 +404,12 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
         ...(generateTitleCards ? ['--generate-title-cards'] : ['--no-generate-title-cards']),
         ...variant.bridgeArguments,
         `--output=${intermediatePath}`,
-      ]);
-      await runCommand(`Normalize ${entry.directory} audio (${variant.name})`, process.execPath, [
+      ], intermediatePath);
+      await runAtomicMp4Command(`Normalize ${entry.directory} audio (${variant.name})`, [
         normalizeAudioScript,
         `--input=${intermediatePath}`,
         `--output=${normalizedPath}`,
-      ]);
+      ], normalizedPath);
     }
   }
 
@@ -388,11 +421,11 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
     '--no-generate-title-cards',
     `--fade-seconds=${fadeSeconds}`,
   ];
-  await runCommand('Full exhibition film', process.execPath, [
+  await runAtomicMp4Command('Full exhibition film', [
     ...baseArguments,
     `--output=${join(glueDirectory, 'eu-reski-live-full.mp4')}`,
-  ]);
-  await runCommand('Sparse random-bridge film', process.execPath, [
+  ], join(glueDirectory, 'eu-reski-live-full.mp4'));
+  await runAtomicMp4Command('Sparse random-bridge film', [
     assembleScript,
     `--run-dir=${runDirectory}`,
     `--iteration-film-dir=${join(normalizedIterationDirectory, 'random-bridges')}`,
@@ -400,7 +433,7 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
     '--no-generate-title-cards',
     `--fade-seconds=${fadeSeconds}`,
     `--output=${join(glueDirectory, 'eu-reski-live-random-bridges.mp4')}`,
-  ]);
+  ], join(glueDirectory, 'eu-reski-live-random-bridges.mp4'));
 
   const runManifestPath = join(runDirectory, 'run.json');
   const runManifest = await readJson(runManifestPath);
@@ -444,6 +477,31 @@ async function updateFilms(runDirectory, readyIterations, videoSettings, generat
   await saveState();
 }
 
+async function hasCompleteFilmSet(runDirectory, readyIterations) {
+  if (!readyIterations.length) return false;
+  const runManifest = await readJson(join(runDirectory, 'run.json'));
+  if (runManifest.assembledFilm?.status !== 'ready'
+    || Number(runManifest.assembledFilm.iterations) !== readyIterations.length) return false;
+  const glueDirectory = join(runDirectory, 'glue-vids');
+  const expectedFiles = [
+    join(glueDirectory, 'glue-run.json'),
+    join(glueDirectory, 'eu-reski-live-full.mp4'),
+    join(glueDirectory, 'eu-reski-live-random-bridges.mp4'),
+    ...readyIterations.flatMap(({ directory }) => [
+      join(glueDirectory, 'normalized-iterations', 'full', `${directory}-audio-normalized.mp4`),
+      join(glueDirectory, 'normalized-iterations', 'random-bridges', `${directory}-audio-normalized.mp4`),
+    ]),
+  ];
+  for (const path of expectedFiles) {
+    const details = await stat(path).catch((error) => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    });
+    if (!details?.isFile() || details.size < 1) return false;
+  }
+  return true;
+}
+
 async function runMergeLoop(runDirectory, videoSettings, generateTitleCards, workerKey = null) {
   while (!stopping) {
     if (mergeRunning) {
@@ -453,14 +511,29 @@ async function runMergeLoop(runDirectory, videoSettings, generateTitleCards, wor
     mergeRunning = true;
     try {
       const ready = await getReadyIterations(runDirectory);
-      const state = await readState();
-      const workerState = workerKey ? state.sceneWorkers?.[workerKey] : null;
+      const savedState = await readState();
+      const workerState = workerKey ? savedState.sceneWorkers?.[workerKey] : null;
       const gluedThroughIteration = workerKey
         ? workerState?.runDirectory === runDirectory ? Number(workerState.gluedThroughIteration || 0) : 0
-        : state.gluedThroughRunDirectory === runDirectory ? Number(state.gluedThroughIteration || 0)
+        : savedState.gluedThroughRunDirectory === runDirectory ? Number(savedState.gluedThroughIteration || 0)
         : 0;
-      if (ready.length > gluedThroughIteration) {
-        await updateFilms(runDirectory, ready, videoSettings, generateTitleCards, workerKey);
+      if (ready.length) {
+        if (await hasCompleteFilmSet(runDirectory, ready)) {
+          if (gluedThroughIteration < ready.length) {
+            if (workerKey) {
+              state.sceneWorkers ||= {};
+              state.sceneWorkers[workerKey] ||= {};
+              Object.assign(state.sceneWorkers[workerKey], { runDirectory, gluedThroughIteration: ready.length });
+            } else {
+              state.runDirectory = runDirectory;
+              state.gluedThroughRunDirectory = runDirectory;
+              state.gluedThroughIteration = ready.length;
+            }
+            await saveState();
+          }
+        } else {
+          await updateFilms(runDirectory, ready, videoSettings, generateTitleCards, workerKey);
+        }
       }
       await delayOrStop(mergeCheckMs);
     } catch (error) {
@@ -492,30 +565,7 @@ process.once('SIGTERM', () => requestStop('SIGTERM'));
 
 async function withLock(task) {
   await mkdir(outputDirectory, { recursive: true });
-  let lockHandle;
-  try {
-    lockHandle = await open(lockPath, 'wx');
-  } catch (error) {
-    if (error.code === 'EEXIST') {
-      const owner = Number((await readFile(lockPath, 'utf8').catch(() => '')).trim());
-      let processIsAlive = Number.isInteger(owner) && owner > 0;
-      if (processIsAlive) {
-        try { process.kill(owner, 0); } catch (ownerError) { if (ownerError.code === 'ESRCH') processIsAlive = false; }
-      }
-      if (!processIsAlive) {
-        await unlink(lockPath).catch(() => {});
-        lockHandle = await open(lockPath, 'wx');
-      } else throw new Error(`Another exhibition runner (PID ${owner}) owns ${lockPath}`);
-    } else {
-      throw error;
-    }
-  }
-  await lockHandle.writeFile(`${process.pid}\n`);
-  try { await task(); } finally {
-    await lockHandle.close();
-    const currentLock = await readFile(lockPath, 'utf8').catch(() => '');
-    if (currentLock.trim() === String(process.pid)) await unlink(lockPath);
-  }
+  return withDirectoryLock(lockPath, task);
 }
 
 function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = null) {
@@ -573,28 +623,79 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
 async function runParallelSceneWorkers(workers, finiteIterationLimit) {
   const refreshTask = runRefreshLoop();
   const mergeTasks = new Map();
+  const retryAttempts = new Map();
+  const pendingMediaAttempts = new Map();
+  const maxWorkerRetries = positiveInteger(process.env.EXHIBITION_WORKER_MAX_RETRIES, 5);
   const startMergeLoop = (worker) => {
     if (!glueEnabled || mergeTasks.has(worker.key)) return;
-    const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory;
+    const runDirectory = worker.completedRunDirectory
+      || worker.savedRunDirectory
+      || state.sceneWorkers?.[worker.key]?.runDirectory;
     if (!runDirectory) return;
     mergeTasks.set(worker.key, runMergeLoop(runDirectory, worker.videoSettings, worker.generateTitleCards, worker.key));
   };
   const workerTasks = workers.map(async (worker) => {
+    if (worker.completedRunDirectory) {
+      startMergeLoop(worker);
+      if (glueEnabled) {
+        while (!stopping) {
+          const savedState = await readState();
+          if (savedState.sceneWorkers?.[worker.key]?.runDirectory === worker.completedRunDirectory
+            && Number(savedState.sceneWorkers[worker.key].gluedThroughIteration || 0)
+              >= Number((await readJson(join(worker.completedRunDirectory, 'run.json'))).iterations?.length || 0)) break;
+          await delayOrStop(mergeCheckMs);
+        }
+      }
+      return;
+    }
     if (state.sceneWorkers?.[worker.key]?.runDirectory) startMergeLoop(worker);
     while (!stopping) {
-      const savedRunDirectory = state.sceneWorkers?.[worker.key]?.runDirectory || null;
+      const savedRunDirectory = worker.savedRunDirectory || state.sceneWorkers?.[worker.key]?.runDirectory || null;
+      state.sceneWorkers ||= {};
+      state.sceneWorkers[worker.key] ||= {};
+      state.sceneWorkers[worker.key].status = 'running';
+      await saveState();
       const running = startRunner(worker.arguments, savedRunDirectory, (runDirectory) => {
         state.sceneWorkers ||= {};
         state.sceneWorkers[worker.key] ||= {};
         state.sceneWorkers[worker.key].runDirectory = runDirectory;
+        state.sceneWorkers[worker.key].status = 'running';
+        state.sceneWorkers[worker.key].iteratorPlanFingerprint = createHash('sha256').update(JSON.stringify(worker.plan)).digest('hex');
         startMergeLoop(worker);
       }, worker.key);
       const result = await running.closed;
-      if (stopping) return;
+      const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory || savedRunDirectory;
+      const runManifest = runDirectory ? await readJson(join(runDirectory, 'run.json')).catch(() => null) : null;
+      if (stopping) {
+        if (runManifest?.status === 'running') {
+          runManifest.status = 'interrupted';
+          runManifest.interruptedAt = new Date().toISOString();
+          await saveJson(join(runDirectory, 'run.json'), runManifest);
+          state.sceneWorkers[worker.key].status = 'interrupted';
+        }
+        await saveState();
+        return;
+      }
 
-      if (finiteIterationLimit !== null && result.code === 0) {
+      if (!runManifest || !['running', 'pending_media', 'completed', 'failed', 'interrupted'].includes(runManifest.status)) {
+        state.sceneWorkers[worker.key].status = 'failed';
+        await saveState();
+        throw new Error(`${worker.name} ended with an unknown saved Run status; inspect ${runDirectory || 'its Run directory'}.`);
+      }
+      state.sceneWorkers[worker.key].status = runManifest.status;
+      state.sceneWorkers[worker.key].iteratorPlanFingerprint = runManifest.iteratorPlanFingerprint || null;
+      await saveState();
+      if (runManifest.status === 'failed') {
+        throw new Error(`${worker.name} saved a failed Run; refusing automatic resume of ${runDirectory}.`);
+      }
+
+      if (runManifest.status === 'completed') {
+        if (finiteIterationLimit === null) {
+          state.sceneWorkers[worker.key].status = 'failed';
+          await saveState();
+          throw new Error(`${worker.name} ended a continuous Run unexpectedly; it will not be restarted as a completed Run.`);
+        }
         if (glueEnabled) {
-          const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory;
           while (!stopping) {
             const savedState = await readState();
             if (savedState.sceneWorkers?.[worker.key]?.runDirectory === runDirectory
@@ -605,42 +706,89 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         return;
       }
 
-      if (result.globalArticleQueueExhausted) {
+      if (runManifest.status === 'pending_media') {
+        const attempt = (pendingMediaAttempts.get(worker.key) || 0) + 1;
+        pendingMediaAttempts.set(worker.key, attempt);
+        const retryDelay = Math.min(30_000 * (2 ** Math.min(attempt - 1, 4)), 300_000);
+        retryAttempts.set(worker.key, 0);
+        log(`${worker.name}: Run ${runDirectory} still has pending media; poll saved task IDs again in ${retryDelay / 1000} s (attempt ${attempt}).`);
+        await delayOrStop(retryDelay);
+      } else if (result.globalArticleQueueExhausted) {
+        retryAttempts.set(worker.key, 0);
         log(`${worker.name}: global article queue exhausted; wait ${refreshCheckMs} ms for news refresh.`);
         await delayOrStop(refreshCheckMs);
       } else {
-        log(`${worker.name}: image runner exited (${result.signal || `code ${result.code}`}); resume same run in 30 s.`);
-        await delayOrStop(30_000);
+        const attempt = (retryAttempts.get(worker.key) || 0) + 1;
+        retryAttempts.set(worker.key, attempt);
+        if (attempt >= maxWorkerRetries) {
+          runManifest.status = 'failed';
+          runManifest.failedAt = new Date().toISOString();
+          runManifest.failureReason = `Worker process ended ${attempt} consecutive times without a completed or pending_media state.`;
+          await saveJson(join(runDirectory, 'run.json'), runManifest);
+          state.sceneWorkers[worker.key].status = 'failed';
+          await saveState();
+          throw new Error(`${worker.name} failed after ${attempt} consecutive retries; inspect ${runDirectory}.`);
+        }
+        state.sceneWorkers[worker.key].status = 'interrupted';
+        await saveState();
+        const retryDelay = Math.min(30_000 * (2 ** (attempt - 1)), 300_000);
+        log(`${worker.name}: runner ended (${result.signal || `code ${result.code}`}) with Run state ${runManifest.status}; retry ${attempt}/${maxWorkerRetries} on same Run in ${retryDelay / 1000}s.`);
+        await delayOrStop(retryDelay);
       }
+      if (runManifest.status !== 'pending_media') pendingMediaAttempts.set(worker.key, 0);
+      if (runManifest.status === 'completed') retryAttempts.set(worker.key, 0);
+      worker.savedRunDirectory = runDirectory;
     }
   });
 
-  await Promise.all(workerTasks);
-  if (!stopping) {
-    stopping = true;
-    wakeForStop();
+  try {
+    await Promise.all(workerTasks);
+  } finally {
+    if (!stopping) {
+      stopping = true;
+      wakeForStop();
+    }
     for (const child of children) child.kill('SIGTERM');
+    await Promise.allSettled([...workerTasks, refreshTask, ...mergeTasks.values()]);
   }
-  await Promise.allSettled([refreshTask, ...mergeTasks.values()]);
 }
 
 async function exhibitionMain() {
   if (process.argv.includes('--help')) {
     console.log('Start exhibition run. News refreshes every 24 h; Jev ranks EU relevance; linear article order.');
-    console.log('Use --stop-after-iterations=N for a finite run; final First-Last glue and film merges finish before exit.');
+    console.log('Use --stop-after-iterations=N for a finite run; in parallel Scene mode N applies per worker.');
+    console.log('In parallel mode, two workers with N=10 can generate up to 20 iterations total.');
+    console.log('Use --new-run to start fresh after an existing campaign; previous Run directories are retained.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
     console.log('Flags: --auto-mode enables per-iteration artistic direction; --no-auto-mode disables it.');
     console.log('Environment: NEWS_ENV_FILE (in start script), NEWS_REFRESH_INTERVAL_MS.');
     return;
   }
   await withLock(async () => {
-    state = await readState();
     const commandArguments = process.argv.slice(2);
+    const startNewRun = commandArguments.some((argument) => flagName(argument) === '--new-run');
+    const resumeRequested = commandArguments.some((argument) => flagName(argument) === '--resume-run');
+    if (startNewRun && resumeRequested) throw new Error('Choose either --new-run or --resume-run, not both.');
+    state = await readState();
+    let resumingParallelCampaign = false;
+    if (startNewRun) {
+      state.sceneWorkers = {};
+      state.runDirectory = null;
+      delete state.scenePath;
+      delete state.scenePaths;
+      delete state.scenePlanFingerprint;
+      state.gluedThroughIteration = 0;
+      delete state.lastFilmBuildAt;
+      log('Starting an explicit new exhibition Run; previous Run directories are retained.');
+    } else {
+      resumingParallelCampaign = await inspectSavedSceneWorkers(state.sceneWorkers);
+    }
     const resumeArgument = commandArguments.find((argument) => flagName(argument) === '--resume-run');
     const resumePath = resumeArgument ? argumentValue(commandArguments, '--resume-run', '') : '';
     if (resumeArgument && (!resumePath || resumePath.startsWith('--'))) throw new Error('Use --resume-run=PATH');
     if (resumePath) state.runDirectory = resolve(resumePath);
-    const activeWorkerRunDirectory = Object.values(state.sceneWorkers || {}).find((worker) => worker.runDirectory)?.runDirectory;
+    const activeWorkerRunDirectory = Object.values(state.sceneWorkers || {})
+      .find((worker) => ['running', 'pending_media', 'interrupted'].includes(worker.status) && worker.runDirectory)?.runDirectory;
     const trackedRunDirectory = state.runDirectory || activeWorkerRunDirectory;
     const priorRun = trackedRunDirectory
       ? await readJson(join(trackedRunDirectory, 'run.json')).catch(() => null)
@@ -722,8 +870,8 @@ async function exhibitionMain() {
         name: loadedSceneSequences.length === 1 ? iterator.name : `${basename(scenePaths[sequenceIndex])} · ${iterator.name}`,
       }))),
     } : null;
-    const activeScenePaths = state.scenePaths || (state.scenePath ? [state.scenePath] : []);
-    const hasActiveSceneWorkers = Object.values(state.sceneWorkers || {}).some(({ runDirectory }) => Boolean(runDirectory));
+    const activeScenePaths = resumingParallelCampaign ? state.scenePaths || [] : (state.scenePath ? [state.scenePath] : []);
+    const hasActiveSceneWorkers = resumingParallelCampaign;
     const hasActiveSceneSequence = Boolean(state.runDirectory || hasActiveSceneWorkers);
     if (hasActiveSceneSequence && activeScenePaths.length && !sceneSequence) {
       throw new Error(`Resume the active scene sequence with ${activeScenePaths.map((scenePath) => `--scene=${scenePath}`).join(' ')}`);
@@ -733,6 +881,17 @@ async function exhibitionMain() {
       throw new Error(`Active scene sequence uses ${activeScenePaths.join(', ')}; resume with the same --scene files before selecting another sequence`);
     }
     const parallelSceneMode = Boolean(sceneSequence && sceneSequence.iterators.length > 1);
+    if (parallelSceneMode) {
+      const schedules = loadedSceneSequences.map((sequence) => resolveParallelSceneSchedule({
+        requestedInterval: generationIntervalArgument ? generationInterval : undefined,
+        configuredInterval: sequence.configuredGenerationInterval,
+        configuredBiasMode: sequence.configuredBiasMode,
+      }));
+      if (schedules.some((schedule) => JSON.stringify(schedule) !== JSON.stringify(schedules[0]))) {
+        throw new Error('Parallel Scene files must use the same generation interval and bias mode.');
+      }
+      Object.assign(sceneSequence, schedules[0]);
+    }
     if (parallelSceneMode && state.runDirectory && priorRunIsIncomplete) {
       throw new Error('An active sequential scene run cannot be resumed as parallel workers; preserve it and start parallel workers in a new output directory.');
     }
@@ -780,7 +939,7 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument))) {
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run'].includes(flagName(argument))) {
         if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }
@@ -851,6 +1010,16 @@ async function exhibitionMain() {
         iterators: iteratorPlans,
       };
       if (parallelSceneMode) {
+        if (!resumingParallelCampaign) {
+          for (const workerState of Object.values(state.sceneWorkers || {})) {
+            if (workerState.runDirectory && workerState.status === 'completed') {
+              workerState.lastCompletedRunDirectory = workerState.runDirectory;
+              workerState.runDirectory = null;
+              delete workerState.gluedThroughIteration;
+              delete workerState.lastFilmBuildAt;
+            }
+          }
+        }
         const configuredWorkers = iteratorPlans.map((iterator, index) => {
           const generation = sceneSequence.iterators[index].generation;
           const ratePerHour = Number(generation.iterations);
@@ -864,6 +1033,7 @@ async function exhibitionMain() {
           const key = `${String(index + 1).padStart(2, '0')}-${iterator.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
           const planPath = join(outputDirectory, `.exhibition-iterator-plan-${key}.json`);
           const workerPlan = {
+            workerKey: key,
             scenePath: sceneSequence.path,
             scheduleEnabled: sceneSequence.scheduleEnabled,
             generationInterval: sceneSequence.scheduleEnabled ? `${sceneSequence.generationInterval}/${ratePerHour}` : null,
@@ -874,6 +1044,22 @@ async function exhibitionMain() {
           const workerArguments = iterator.arguments.filter((argument) =>
             !['--iterations', '--article-order'].includes(flagName(argument)));
           workerArguments.push('--article-order=global', `--iterations=${stopAfterIterations ?? 0}`, `--iterator-plan=${planPath}`);
+          const savedWorker = state.sceneWorkers?.[key];
+          const savedRunDirectory = resumingParallelCampaign && savedWorker?.runDirectory
+            && ['running', 'pending_media', 'interrupted'].includes(savedWorker.status)
+            ? savedWorker.runDirectory
+            : null;
+          const completedRunDirectory = resumingParallelCampaign && savedWorker?.status === 'completed'
+            ? savedWorker.runDirectory
+            : null;
+          const expectedRunFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
+          if (resumingParallelCampaign && !savedWorker) {
+            throw new Error(`Active parallel exhibition is missing worker ${key}; refusing to create a replacement worker during resume.`);
+          }
+          if ((savedRunDirectory || completedRunDirectory)
+            && savedWorker.iteratorPlanFingerprint !== expectedRunFingerprint) {
+            throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+          }
           const videoSettings = {
             model: argumentValue(iterator.arguments, '--video-model', defaultGeneration.videoModel),
             resolution: argumentValue(iterator.arguments, '--video-resolution', defaultGeneration.videoResolution),
@@ -886,6 +1072,8 @@ async function exhibitionMain() {
             planPath,
             plan: workerPlan,
             arguments: workerArguments,
+            savedRunDirectory,
+            completedRunDirectory,
             videoSettings,
             generateTitleCards: iterator.arguments.includes('--generate-title-cards')
               && !iterator.arguments.includes('--no-generate-title-cards'),
@@ -911,6 +1099,9 @@ async function exhibitionMain() {
             name: worker.name,
             ratePerHour: worker.ratePerHour,
             planPath: worker.planPath,
+            ...(worker.savedRunDirectory ? { runDirectory: worker.savedRunDirectory } : {}),
+            ...(worker.completedRunDirectory ? { runDirectory: worker.completedRunDirectory, status: 'completed' } : {}),
+            ...(!worker.savedRunDirectory && !worker.completedRunDirectory ? { status: 'starting', runDirectory: null } : {}),
           });
         }
         state.scenePlanFingerprint = workerPlanFingerprint;
@@ -1011,9 +1202,12 @@ async function exhibitionMain() {
     if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
 
     if (parallelWorkers) {
-      log(`Starting ${parallelWorkers.length} independent scene workers in parallel${sceneSequence.scheduleEnabled ? `; window ${sceneSequence.generationInterval}, bias ${sceneSequence.biasMode}` : '; no interval interpolation'}.`);
+      log(`Starting ${parallelWorkers.length} independent scene workers in parallel${sceneSequence.scheduleEnabled ? `; protected window ${sceneSequence.generationInterval}, bias ${sceneSequence.biasMode}` : '; explicitly unthrottled by generationInterval=-1'}.`);
+      if (stopAfterIterations !== null) {
+        log(`--stop-after-iterations=${stopAfterIterations} applies per worker; maximum total is ${stopAfterIterations * parallelWorkers.length} iterations.`);
+      }
       for (const worker of parallelWorkers) {
-        log(`${worker.name}: ${worker.ratePerHour} iteration(s)/hour${sceneSequence.scheduleEnabled ? `; interval ${(worker.plan.intervalMs / 60_000).toFixed(2)} min` : ''}.`);
+        log(`${worker.name}: ${worker.ratePerHour} iteration(s)/hour${sceneSequence.scheduleEnabled ? `; minimum start interval ${(worker.plan.intervalMs / 60_000).toFixed(2)} min` : '; rate limit disabled by explicit configuration'}.`);
       }
       await runParallelSceneWorkers(parallelWorkers, stopAfterIterations);
       return;

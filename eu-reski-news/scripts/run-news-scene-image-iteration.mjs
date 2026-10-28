@@ -1,6 +1,6 @@
 import { createHash, randomInt, randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { mkdir, open, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve, basename, extname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -39,7 +39,9 @@ import {
 } from '../news-scene/auto-concepts.mjs';
 import { addUsageIdempotently, buildAutoDirectorCorrectionRequest, recoverSavedAutoDirectorDecision } from '../news-scene/auto-director-recovery.mjs';
 import { getIteratorStartTime } from '../news-scene/scene-sequence.mjs';
+import { advanceWorkerSchedule, createInitialWorkerSchedule, recoverWorkerSchedule } from '../news-scene/parallel-schedule.mjs';
 import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
+import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../news-scene/global-article-reservations.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const optionDefinitions = {
@@ -789,88 +791,6 @@ function addUsage(record, field, usage) {
   addUsageIdempotently(record, field, usage);
 }
 
-async function withGlobalArticleProgressLock(task) {
-  const progressPath = join(resolve(options['output-dir']), 'global-article-progress.json');
-  const lockPath = `${progressPath}.lock`;
-  let lockHandle;
-  while (!lockHandle) {
-    try {
-      lockHandle = await open(lockPath, 'wx');
-      await lockHandle.writeFile(`${process.pid}\n`);
-    } catch (error) {
-      if (error.code !== 'EEXIST') throw error;
-      const owner = Number((await readFile(lockPath, 'utf8').catch(() => '')).trim());
-      let ownerIsAlive = Number.isInteger(owner) && owner > 0;
-      if (ownerIsAlive) {
-        try { process.kill(owner, 0); } catch (ownerError) { if (ownerError.code === 'ESRCH') ownerIsAlive = false; }
-      }
-      if (!ownerIsAlive) await unlink(lockPath).catch(() => {});
-      else await new Promise((resolveDelay) => setTimeout(resolveDelay, 50));
-    }
-  }
-  try {
-    return await task(progressPath);
-  } finally {
-    await lockHandle.close();
-    const currentOwner = (await readFile(lockPath, 'utf8').catch(() => '')).trim();
-    if (currentOwner === String(process.pid)) await unlink(lockPath).catch(() => {});
-  }
-}
-
-async function reserveNextGlobalArticle(collection, articleProgress) {
-  return withGlobalArticleProgressLock(async (progressPath) => {
-    const storedProgress = await json(progressPath).catch((error) => {
-      if (error.code === 'ENOENT') return null;
-      throw error;
-    });
-    const sharedProgress = storedProgress || articleProgress || {};
-    const seenArticleKeys = new Set([
-      ...(articleProgress?.seenArticleKeys || []),
-      ...(storedProgress?.seenArticleKeys || []),
-    ]);
-    if (!storedProgress?.seenArticleKeys?.length
-      && !articleProgress?.seenArticleKeys?.length
-      && sharedProgress.sourceAggregate === collection.aggregatePath) {
-      for (let index = 0; index < Math.min(sharedProgress.nextDraw || 0, collection.candidates.length); index += 1) {
-        seenArticleKeys.add(articleKey(collection.candidates[index].article));
-      }
-    }
-    const startDraw = sharedProgress.sourceAggregate === collection.aggregatePath
-      ? Number(sharedProgress.nextDraw || 0) % collection.candidates.length
-      : 0;
-    let draw = -1;
-    for (let offset = 0; offset < collection.candidates.length; offset += 1) {
-      const candidateIndex = (startDraw + offset) % collection.candidates.length;
-      const candidate = collection.candidates[candidateIndex];
-      if (seenArticleKeys.has(articleKey(candidate.article))) continue;
-      if (await hasUsableArticleImage(candidate.article.image)) {
-        draw = candidateIndex;
-        break;
-      }
-      console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
-    }
-    if (draw < 0) {
-      const unseenCandidateCount = collection.candidates.filter(({ article }) => !seenArticleKeys.has(articleKey(article))).length;
-      if (!unseenCandidateCount) {
-        throw new Error(`Global article queue exhausted: all ${collection.candidates.length} eligible stories in ${collection.aggregateFile} were already used`);
-      }
-      throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
-    }
-
-    const selected = collection.candidates[draw];
-    seenArticleKeys.add(articleKey(selected.article));
-    const reservedProgress = articleProgress || {};
-    Object.assign(reservedProgress, {
-      sourceAggregate: collection.aggregatePath,
-      aggregateHash: collection.aggregateHash,
-      nextDraw: draw + 1,
-      seenArticleKeys: [...seenArticleKeys],
-    });
-    await save(progressPath, reservedProgress);
-    return { ...selected, draw, articleProgress: reservedProgress };
-  });
-}
-
 async function videoVisionSources(record, directory) {
   const available = [];
   const missing = [];
@@ -1087,8 +1007,9 @@ async function pendingVideoScenes(iterationRoot, entry) {
 }
 
 async function pollIterationVideos(iterationRoot, entry, videoOptions) {
+  const configuredPollScript = process.env.NODE_ENV === 'test' ? process.env.NEWS_TEST_VIDEO_POLL_SCRIPT : null;
   const videoArguments = [
-    join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
+    configuredPollScript || join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
     `--run=${iterationRoot}`,
     `--iteration=${entry.directory}`,
     `--model=${videoOptions.model}`,
@@ -1097,7 +1018,17 @@ async function pollIterationVideos(iterationRoot, entry, videoOptions) {
     '--poll-timeout-seconds=60',
   ];
   if (videoOptions.generateTitleCards) videoArguments.push('--generate-title-cards');
-  execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
+  try {
+    execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
+    return { completed: true };
+  } catch (error) {
+    const output = `${error.stdout?.toString() || ''}\n${error.stderr?.toString() || ''}`;
+    if (/still processing after|remains pending after retries/i.test(output)) {
+      console.warn(`Saved video tasks for ${entry.directory} are still pending; the same task IDs will be polled on resume.`);
+      return { pending: true };
+    }
+    throw error;
+  }
 }
 
 async function summarizePendingMedia(iterationRoot, runManifest) {
@@ -1184,9 +1115,10 @@ async function main() {
       ? await allocateRunDirectory(resolve(options['output-dir']))
       : resolve(options['output-dir']);
   const globalArticleProgressPath = join(resolve(options['output-dir']), 'global-article-progress.json');
+  const runStartedAtMs = Date.now();
   const runManifest = options['resume-run'] ? await json(join(iterationRoot, 'run.json')) : groupedRun ? {
     profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
-    startedAt: new Date().toISOString(),
+    startedAt: new Date(runStartedAtMs).toISOString(),
     ...(iteratorPlan ? {
       iteratorPlanFingerprint,
       sceneSchedule: {
@@ -1195,7 +1127,10 @@ async function main() {
         generationInterval: iteratorPlan.generationInterval,
         intervalMs: iteratorPlan.intervalMs,
         biasMode: iteratorPlan.biasMode,
-        startedAt: new Date().toISOString(),
+        startedAt: new Date(runStartedAtMs).toISOString(),
+        ...(iteratorPlan.scheduleEnabled !== false
+          ? createInitialWorkerSchedule(runStartedAtMs, iteratorPlan.intervalMs, iteratorPlan.biasMode)
+          : {}),
       },
       iteratorNames: iteratorPlan.iterators.map(({ name }) => name),
     } : {}),
@@ -1234,6 +1169,27 @@ async function main() {
   const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
     ? Date.parse(runManifest.sceneSchedule.startedAt)
     : Date.now();
+  if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
+    runManifest.sceneSchedule ||= {
+      scenePath: iteratorPlan.scenePath,
+      enabled: true,
+      generationInterval: iteratorPlan.generationInterval,
+      intervalMs: iteratorPlan.intervalMs,
+      biasMode: iteratorPlan.biasMode,
+      startedAt: new Date(sceneScheduleStartedAt).toISOString(),
+      ...createInitialWorkerSchedule(sceneScheduleStartedAt, iteratorPlan.intervalMs, iteratorPlan.biasMode),
+    };
+    const previousNextStartAtMs = runManifest.sceneSchedule.nextStartAtMs;
+    runManifest.sceneSchedule = options['resume-run']
+      ? recoverWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs)
+      : Number.isSafeInteger(previousNextStartAtMs)
+        ? { ...runManifest.sceneSchedule }
+        : createInitialWorkerSchedule(sceneScheduleStartedAt, iteratorPlan.intervalMs, iteratorPlan.biasMode);
+    if (options['resume-run'] && runManifest.sceneSchedule.nextStartAtMs !== previousNextStartAtMs) {
+      console.log(`Worker ${iteratorPlan.workerKey} resumed after its scheduled slot; next start delayed by ${iteratorPlan.intervalMs} ms to prevent catch-up bursts.`);
+    }
+    await save(join(iterationRoot, 'run.json'), runManifest);
+  }
   let pendingIterationDirectory = null;
   if (options['resume-run'] && Array.isArray(runManifest.iterations)) {
     const registered = new Set(runManifest.iterations.map((entry) => entry.directory));
@@ -1395,7 +1351,7 @@ async function main() {
     const latestRecord = await json(join(iterationRoot, latestDirectory, 'record.json'));
     if (['linear', 'global'].includes(latestRecord.selection?.method) && latestRecord.selection.ranking === 'jev-eu-relevance') {
       runManifest.articleProgress = {
-        ...(articleProgress || {}),
+        ...articleProgressSnapshot(articleProgress),
         sourceAggregate: latestRecord.sourceAggregate,
         aggregateHash: latestRecord.aggregateHash || null,
         nextDraw: latestRecord.selection.draw + 1,
@@ -1412,6 +1368,13 @@ async function main() {
       && !iteratorOptions['no-videos-after-each-iteration'])
     : options['videos-after-each-iteration'];
   if (options['resume-run'] && anyIteratorGeneratesVideos) {
+    const mediaBeforeResume = await summarizePendingMedia(iterationRoot, runManifest);
+    if (mediaBeforeResume.length) {
+      runManifest.status = 'pending_media';
+      runManifest.pendingMedia = mediaBeforeResume;
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      console.log(`Resuming ${mediaBeforeResume.length} pending media iteration(s) in ${iterationRoot}; no new article will be selected until their saved tasks finish.`);
+    }
     for (const [index, entry] of runManifest.iterations.entries()) {
       activateIterator(index);
       if ((await pendingVideoScenes(iterationRoot, entry)).length) {
@@ -1423,11 +1386,33 @@ async function main() {
         });
       }
     }
+    const mediaAfterResume = await summarizePendingMedia(iterationRoot, runManifest);
+    if (mediaAfterResume.length) {
+      runManifest.status = 'pending_media';
+      runManifest.pendingMedia = mediaAfterResume;
+      runManifest.finishedAt = new Date().toISOString();
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      console.log(`Run remains pending_media (${mediaAfterResume.length} iteration(s)); same saved provider tasks will be retried after restart.`);
+      return;
+    }
+    if (mediaBeforeResume.length) {
+      runManifest.status = 'running';
+      delete runManifest.pendingMedia;
+      delete runManifest.finishedAt;
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      console.log(`Pending media finished for ${iterationRoot}; continuing the saved Run.`);
+    }
   }
   while (endless || completed < iterationLimit) {
     const iteratorIndex = completed % iteratorCount;
     activateIterator(iteratorIndex);
-    if (iteratorPlan?.scheduleEnabled) {
+    if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
+      const scheduled = advanceWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs);
+      runManifest.sceneSchedule = scheduled.schedule;
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      const waitMilliseconds = scheduled.startAtMs - Date.now();
+      if (waitMilliseconds > 0) await new Promise((resolveDelay) => setTimeout(resolveDelay, waitMilliseconds));
+    } else if (iteratorPlan?.scheduleEnabled) {
       const targetStart = getIteratorStartTime(
         sceneScheduleStartedAt,
         completed,
@@ -1454,7 +1439,7 @@ async function main() {
     const completedRecord = await json(join(iterationDirectory, 'record.json'));
     if (['linear', 'global'].includes(completedRecord.selection?.method) && completedRecord.selection.ranking === 'jev-eu-relevance') {
       articleProgress = {
-        ...(articleProgress || {}),
+        ...articleProgressSnapshot(articleProgress),
         sourceAggregate: completedRecord.sourceAggregate,
         aggregateHash: completedRecord.aggregateHash || null,
         nextDraw: completedRecord.selection.draw + 1,
@@ -1469,7 +1454,7 @@ async function main() {
     imageSeedOffset += completedRecord.sceneCount;
     completed += 1;
     if (runManifest) {
-      if (articleProgress) runManifest.articleProgress = articleProgress;
+      if (articleProgress) runManifest.articleProgress = articleProgressSnapshot(articleProgress);
       const relativeDirectory = iterationDirectory.slice(iterationRoot.length + 1);
       runManifest.iterations.push({ index: completed, directory: relativeDirectory, report: `${relativeDirectory}/index.html` });
       await save(join(iterationRoot, 'run.json'), runManifest);
@@ -1528,6 +1513,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
     resumed: Boolean(resumeDirectory),
   };
   let liveMarkerWritten = false;
+  let globalArticleReservationId = null;
   let record;
   try {
     await writeIterationLiveMarker(directory, liveMarker);
@@ -1587,7 +1573,15 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       let aggregateIndex;
       let score;
       if (order === 'global') {
-        const reservation = await reserveNextGlobalArticle(selectedCollection, articleProgress);
+        globalArticleReservationId = `${resolve(iterationRoot)}::iteration-${String(iterationIndex + 1).padStart(3, '0')}`;
+        const reservation = await reserveGlobalArticle({
+          progressPath: globalArticleProgressPath,
+          articleProgress,
+          collection: selectedCollection,
+          reservationId: globalArticleReservationId,
+          recordPath: join(directory, 'record.json'),
+          hasUsableArticleImage,
+        });
         articleProgress = reservation.articleProgress;
         ({ draw, article, aggregateIndex, score } = reservation);
       } else {
@@ -1633,6 +1627,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           euRelevance: Number.isFinite(score) ? score : null,
           relevancePath: rankedCollection.relevancePath,
           draw,
+          ...(globalArticleReservationId ? { reservationId: globalArticleReservationId } : {}),
           candidateCount: candidates.length,
           aggregateIndex,
         },
@@ -1661,6 +1656,16 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
     };
     delete record.error;
     await persist();
+    if (record.selection?.method === 'global' && record.selection.reservationId) {
+      articleProgress = await commitGlobalArticleReservation({
+        progressPath: globalArticleProgressPath,
+        articleProgress,
+        reservationId: record.selection.reservationId,
+        article: record.article,
+        selection: { sourceAggregate: record.sourceAggregate, aggregateHash: record.aggregateHash, draw: record.selection.draw },
+      });
+      await persist();
+    }
     if (options['generate-title-cards']) {
       const iterationNumber = Number(basename(directory).match(/iteration-(\d+)/)?.[1]);
       record.titleCard = await renderTitleCard({

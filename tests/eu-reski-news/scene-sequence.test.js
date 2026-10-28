@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, test } from '@jest/globals';
-import { getIteratorStartTime, loadSceneSequence, parseGenerationInterval } from '../../eu-reski-news/news-scene/scene-sequence.mjs';
+import { getIteratorStartTime, loadSceneSequence, parseGenerationInterval, resolveParallelSceneSchedule } from '../../eu-reski-news/news-scene/scene-sequence.mjs';
 import { createSceneCountStream, replaySavedSceneCount, resolveSceneCountSettings } from '../../eu-reski-news/news-scene/scene-count.mjs';
 import { autoDirectorPromptVersion } from '../../eu-reski-news/news-scene/auto-director.mjs';
 
@@ -104,5 +104,20 @@ describe('EU-RESKI scene sequence', () => {
       .toEqual([1_000, 1_201_000, 2_401_000]);
     expect([0, 1, 2].map((index) => getIteratorStartTime(start, index, 3_600_000, 3, 'on')))
       .toEqual([601_000, 1_801_000, 3_001_000]);
+  });
+
+  test('protects parallel runs with a default hourly schedule and validates explicit rates', () => {
+    expect(resolveParallelSceneSchedule({})).toEqual({
+      scheduleEnabled: true, generationInterval: '1h', intervalMs: 3_600_000, biasMode: 'off',
+    });
+    expect(resolveParallelSceneSchedule({ configuredInterval: '60', configuredBiasMode: 'on' })).toEqual({
+      scheduleEnabled: true, generationInterval: '60m', intervalMs: 3_600_000, biasMode: 'on',
+    });
+    expect(resolveParallelSceneSchedule({ requestedInterval: '30m', configuredInterval: '60', configuredBiasMode: 'on' })).toEqual({
+      scheduleEnabled: true, generationInterval: '30m', intervalMs: 1_800_000, biasMode: 'on',
+    });
+    expect(resolveParallelSceneSchedule({ configuredInterval: '-1' })).toMatchObject({ scheduleEnabled: false, intervalMs: null });
+    expect(() => resolveParallelSceneSchedule({ requestedInterval: 'nonsense' })).toThrow(/generationInterval/);
+    expect(() => resolveParallelSceneSchedule({ configuredBiasMode: 'unknown' })).toThrow(/biasMode/);
   });
 });

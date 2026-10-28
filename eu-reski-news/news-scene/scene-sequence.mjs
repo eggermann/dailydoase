@@ -28,6 +28,24 @@ export function parseGenerationInterval(value) {
   return milliseconds;
 }
 
+export function resolveParallelSceneSchedule({
+  requestedInterval,
+  configuredInterval,
+  configuredBiasMode,
+} = {}) {
+  const selectedInterval = requestedInterval ?? (configuredInterval === undefined ? '1h' : String(configuredInterval));
+  if (selectedInterval === '-1') {
+    return { scheduleEnabled: false, generationInterval: '-1', intervalMs: null, biasMode: null };
+  }
+  const duration = /^\d+(?:\.\d+)?$/.test(String(selectedInterval))
+    ? `${selectedInterval}m`
+    : String(selectedInterval);
+  const intervalMs = parseGenerationInterval(duration);
+  const biasMode = configuredBiasMode ?? 'off';
+  if (!['on', 'off'].includes(biasMode)) throw new Error('Parallel scene biasMode must be "on" or "off"');
+  return { scheduleEnabled: true, generationInterval: duration, intervalMs, biasMode };
+}
+
 export async function loadSceneSequence(scenePath, defaultGeneration, {
   scheduleEnabled = true,
   generationInterval = undefined,
@@ -92,6 +110,8 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
 
   return {
     path: absoluteScenePath,
+    configuredGenerationInterval: minutes === undefined ? undefined : String(minutes),
+    configuredBiasMode: scene.biasMode,
     scheduleEnabled: activeSchedule,
     generationInterval: activeSchedule ? selectedInterval : null,
     intervalMs,
