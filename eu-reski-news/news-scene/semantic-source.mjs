@@ -5,6 +5,15 @@ import { defaultWords } from './planner.mjs';
 
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
 
+export const WIKIPEDIA_USER_AGENT = 'dailydoase/1.0 (https://github.com/eggermann/dailydoase)';
+export const WIKIPEDIA_REQUEST_POLICY = Object.freeze({
+  minIntervalMs: 3000,
+  maxAttempts: 3,
+  baseDelayMs: 60000,
+  maxDelayMs: 300000,
+  jitterRatio: 0.2,
+});
+
 function validateSemantic(semantic) {
   if (!Array.isArray(semantic.entries) || semantic.entries.length < 1 || semantic.entries.length > 12) throw new Error('Expected 1–12 semantic entries');
   const ids = new Set();
@@ -45,7 +54,10 @@ export async function createSemanticSource(options) {
     console.log(`Semantic stream: ${seed.join(' / ')}`);
     const [stream] = await initStreams([seed], {
       registerExitHandlers: false,
-      wordStreamOptions: { requestPolicy: { maxAttempts: 5, minIntervalMs: 500 } },
+      wordStreamOptions: {
+        userAgent: WIKIPEDIA_USER_AGENT,
+        requestPolicy: WIKIPEDIA_REQUEST_POLICY,
+      },
     });
     streams.push({ id: `stream-${index + 1}`, seed, stream });
   }
@@ -67,4 +79,3 @@ export async function createSemanticSource(options) {
     },
   };
 }
-
