@@ -1,0 +1,14 @@
+{
+  "generation": {
+    "iterations": 5,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "articleImageReference": false,
+    "preserveCubistVideoStyle": false,
+    "sceneCount": {
+      "numerator": 3,
+      "bias": 2
+    },
+    "videoAudioDirection": "off"
+  }
+}

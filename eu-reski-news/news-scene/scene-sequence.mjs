@@ -1,5 +1,5 @@
-import { readFile } from 'node:fs/promises';
-import { dirname, isAbsolute, resolve } from 'node:path';
+import { readFile, readdir, stat } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
 
 export const DEFAULT_GENERATION_INTERVAL_MS = 5000;
 
@@ -30,23 +30,35 @@ export function parseGenerationInterval(value, iteratorCount = 1) {
   return milliseconds;
 }
 
-function resolveConfigPath(configPath, scenePath) {
-  return isAbsolute(configPath)
-    ? configPath
-    : resolve(dirname(scenePath), configPath);
-}
-
 export async function loadSceneSequence(scenePath, defaultGeneration, {
   scheduleEnabled = true,
   generationInterval = undefined,
 } = {}) {
   const absoluteScenePath = resolve(scenePath);
-  const scene = JSON.parse(await readFile(absoluteScenePath, 'utf8'));
+  const sceneLocation = await stat(absoluteScenePath);
+  const isSceneDirectory = sceneLocation.isDirectory();
+  const directoryEntries = isSceneDirectory ? await readdir(absoluteScenePath, { withFileTypes: true }) : [];
+  const metadataPath = isSceneDirectory ? resolve(absoluteScenePath, 'scene.json') : absoluteScenePath;
+  const hasMetadataFile = isSceneDirectory && directoryEntries.some((entry) => entry.isFile() && entry.name === 'scene.json');
+  const scene = isSceneDirectory
+    ? hasMetadataFile ? JSON.parse(await readFile(metadataPath, 'utf8')) : {}
+    : JSON.parse(await readFile(absoluteScenePath, 'utf8'));
   if (!scene || typeof scene !== 'object' || Array.isArray(scene)) {
     throw new Error('Scene JSON must contain an object');
   }
-  if (!Array.isArray(scene.paths) || scene.paths.length === 0) {
-    throw new Error('Scene JSON paths must be a non-empty ordered list of iterator JSON paths');
+  let sceneIterations = scene.iterations;
+  if (isSceneDirectory) {
+    const iterationFileNames = directoryEntries
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.json') && entry.name !== 'scene.json')
+      .map((entry) => entry.name)
+      .sort((left, right) => left.localeCompare(right, 'en'));
+    sceneIterations = await Promise.all(iterationFileNames.map(async (fileName) =>
+      JSON.parse(await readFile(resolve(absoluteScenePath, fileName), 'utf8'))));
+  }
+  if (!Array.isArray(sceneIterations) || sceneIterations.length === 0) {
+    throw new Error(isSceneDirectory
+      ? `Scene folder must contain iteration JSON files: ${absoluteScenePath}`
+      : 'Scene JSON iterations must be a non-empty ordered list');
   }
   if (scheduleEnabled && !['on', 'off'].includes(scene.biasMode)) {
     throw new Error('Scene JSON biasMode must be "on" or "off"');
@@ -54,25 +66,23 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
 
   const selectedInterval = generationInterval ?? scene.generationInterval;
   const intervalMs = scheduleEnabled
-    ? parseGenerationInterval(selectedInterval, scene.paths.length)
+    ? parseGenerationInterval(selectedInterval, sceneIterations.length)
     : null;
   const iterators = [];
-  for (const [index, configPath] of scene.paths.entries()) {
-    if (typeof configPath !== 'string' || !configPath.trim()) {
-      throw new Error(`Scene JSON paths[${index}] must be a non-empty path string`);
+  for (const [index, iteration] of sceneIterations.entries()) {
+    if (!iteration || typeof iteration !== 'object' || Array.isArray(iteration)) {
+      throw new Error(`Scene JSON iterations[${index}] must be an object`);
     }
-    const absoluteConfigPath = resolveConfigPath(configPath, absoluteScenePath);
-    const config = JSON.parse(await readFile(absoluteConfigPath, 'utf8'));
-    if (!config || typeof config !== 'object' || Array.isArray(config)) {
-      throw new Error(`Iterator JSON must contain an object: ${absoluteConfigPath}`);
+    if (typeof iteration.name !== 'string' || !iteration.name.trim()) {
+      throw new Error(`Scene JSON iterations[${index}].name must be a non-empty string`);
     }
-    const generation = config.generation ?? {};
-    if (!generation || typeof generation !== 'object' || Array.isArray(generation)) {
-      throw new Error(`Iterator JSON generation must be an object: ${absoluteConfigPath}`);
+    const generationOverrides = iteration.generationOverrides ?? {};
+    if (!generationOverrides || typeof generationOverrides !== 'object' || Array.isArray(generationOverrides)) {
+      throw new Error(`Scene JSON iterations[${index}].generationOverrides must be an object`);
     }
     iterators.push({
-      path: absoluteConfigPath,
-      generation: mergeSettings(defaultGeneration, generation),
+      name: iteration.name.trim(),
+      generation: mergeSettings(defaultGeneration, generationOverrides),
     });
   }
 

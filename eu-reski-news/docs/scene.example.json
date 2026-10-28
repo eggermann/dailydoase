@@ -1,7 +1,0 @@
-{
-  "paths": [
-    "./iterator-all-parameters.example.json"
-  ],
-  "generationInterval": "1h",
-  "biasMode": "on"
-}

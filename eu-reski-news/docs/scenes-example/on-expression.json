@@ -1,5 +1,6 @@
 {
-  "generation": {
+  "name": "all-generation-parameters",
+  "generationOverrides": {
     "autoMode": false,
     "storyModel": "gpt-4.1-mini",
     "iterations": 5,

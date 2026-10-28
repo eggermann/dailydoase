@@ -1,0 +1,20 @@
+{
+  "name": "expression-on",
+  "generationOverrides": {
+    "storyClou": "on",
+    "sceneCount": {
+      "mode": "fixed",
+      "count": 5,
+      "numerator": 3,
+      "bias": 2
+    },
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": true,
+      "layering": 5
+    },
+    "videoDirection": "on",
+    "videoVision": "on"
+  }
+}

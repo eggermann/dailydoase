@@ -50,58 +50,28 @@ npm run news:exhibition -- --preserve-cubist-video-style
 npm run news:exhibition -- --legacy-guernica-style-reference-prompt
 ```
 
-### Geordnete Scene-Iteratoren
+### Scene-Dateien
 
-Ein Scene-JSON kann geordnete Iterator-Konfigurationen laden. Jede referenzierte JSON-Datei darf unter `generation` nur Werte überschreiben, die vom Standard abweichen; fehlende Werte erben aus [`default-exhibition-settings.json`](default-exhibition-settings.json). CLI-Flags überschreiben danach alle Iterator-Konfigurationen.
+Der Standardordner `eu-reski-news/scenes/` enthält `scene.json` mit Zeitplan-Metadaten sowie einzelne Iterationsdateien. Der Runner lädt alle anderen `.json`-Dateien im Ordner alphabetisch. Jede Datei enthält genau ein Objekt mit `name` und `generationOverrides`; Overrides werden rekursiv auf [`default-exhibition-settings.json`](default-exhibition-settings.json) gelegt. Fehlende Werte erben Defaults, CLI-Flags überschreiben alle Iterationen.
 
-```json
-{
-  "paths": [
-    "./iterator-01.json",
-    "./iterator-02.json",
-    "./iterator-03.json",
-    "./iterator-04.json"
-  ],
-  "generationInterval": "1h",
-  "biasMode": "on"
-}
+```text
+eu-reski-news/scenes/
+  scene.json             # generationInterval, biasMode
+  off-expression.json    # { name, generationOverrides: { ... } }
+  on-expression.json     # { name, generationOverrides: { ... } }
 ```
 
-Iterator-Datei enthält zum Beispiel:
-
-```json
-{
-  "generation": {
-    "storyModel": "gpt-4.1-mini",
-    "imageProvider": "hf-flux-klein",
-    "sceneCount": { "mode": "fixed", "count": 5 }
-  }
-}
-```
-
-Relative Iterator-Pfade beziehen sich auf den Ordner des Scene-JSONs. Zeitfelder wirken nur mit dem `with-time-interpolation`-Befehl: `generationInterval` ist Gesamtfenster für geordnete Liste und akzeptiert `ms`, `s`, `m` oder `h`; `-1` bedeutet fünf Sekunden je Iterator. Bei `1h` und vier Iteratoren beträgt jeder Slot 15 Minuten. `biasMode: "on"` startet in Slotmitte (nach 7 Minuten 30 Sekunden), `"off"` am Slotanfang. Startzeiten liegen dann bei `00:07:30`, `00:22:30`, `00:37:30`, `00:52:30`. Eine verspätete Generation überlappt nicht mit nächster: Runner startet nächsten Iterator sofort, sobald vorheriger fertig ist.
+Beide npm-Befehle starten diesen Ordner ohne Pfadargument. Normaler Start läuft ohne Zeitverzögerung; `with-time-interpolation` setzt standardmäßig ein Gesamtfenster von `1h`. `generationInterval` akzeptiert `ms`, `s`, `m`, `h` oder `-1` (fünf Sekunden je Iteration). Bei zwei Dateien und `1h` beträgt jeder Slot 30 Minuten; `biasMode: "on"` startet nach 15 Minuten pro Slot, `"off"` am Slotanfang. Späte Iterationen überlappen nicht; nächste startet nach Abschluss der vorherigen.
 
 ```sh
-npm run news:exhibition -- --scene=./exhibition-scene.json
+npm run news:exhibition:from-scene-json
+npm run news:exhibition:from-scene-json:with-time-interpolation
+npm run news:exhibition:from-scene-json:with-time-interpolation -- --generation-interval=2h
 ```
 
-Kurzform mit festem npm-Befehl; Scene-Datei als Argument nach `--` übergeben:
+`generationOverrides` ist jeweils ein Objekt, kein Array. Vollständiges Beispiel und Varianten: [`docs/scenes-example/`](docs/scenes-example/). Zum Auswählen eines anderen Ordners: `npm run news:exhibition -- --scene=/absoluter/pfad/zum/ordner`.
 
-```sh
-npm run news:exhibition:from-scene-json -- ./pfad/zur/exhibition-scene.json
-```
-
-Dieser normale Start ignoriert `generationInterval` und `biasMode` vollständig; Iteratoren laufen ohne Zeitverzögerung nacheinander. Zeitplan startet nur mit `with-time-interpolation`.
-
-Mit Zeitinterpolation und Standard-Gesamtfenster von einer Stunde (überschreibt `generationInterval` aus der Scene-JSON):
-
-```sh
-npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json
-```
-
-Intervall pro Aufruf überschreiben, zum Beispiel auf zwei Stunden: `npm run news:exhibition:from-scene-json:with-time-interpolation -- ./pfad/zur/exhibition-scene.json --generation-interval=2h`. `biasMode` kommt bei diesem Befehl weiterhin aus Scene-JSON.
-
-Lauf setzt Iterator-Reihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Plan und dieselben CLI-Overrides erneut angeben.
+Lauf setzt alphabetische Dateireihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Ordner und dieselben CLI-Overrides erneut angeben.
 
 `Article + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; optional article photo for subject orientation; --guernica-location-reference adds Guernica as secondary setting/space reference; without it, the previous prompt/reference path remains) → cumulative HTML audit report`.
 

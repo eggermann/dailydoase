@@ -626,7 +626,7 @@ async function exhibitionMain() {
       }
     }
     const exhibitionArguments = process.argv.slice(2);
-    const sceneArgument = exhibitionArguments.find((argument) => flagName(argument) === '--scene');
+    const sceneArgument = exhibitionArguments.findLast((argument) => flagName(argument) === '--scene');
     const sceneArgumentValue = sceneArgument?.includes('=')
       ? sceneArgument.slice('--scene='.length)
       : sceneArgument
@@ -743,7 +743,7 @@ async function exhibitionMain() {
       ? sceneSequence.iterators.map((iterator) => {
         const iteratorDefaults = defaultsFromExhibitionSettings(iterator.generation);
         const iteratorArguments = mergeRunnerArguments(iteratorDefaults.args, userArguments, stopAfterIterations);
-        return { path: iterator.path, arguments: iteratorArguments };
+        return { name: iterator.name, arguments: iteratorArguments };
       })
       : null;
     const runnerArguments = iteratorPlans?.[0].arguments

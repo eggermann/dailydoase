@@ -1020,7 +1020,7 @@ async function main() {
         biasMode: iteratorPlan.biasMode,
         startedAt: new Date().toISOString(),
       },
-      iteratorPaths: iteratorPlan.iterators.map(({ path }) => path),
+      iteratorNames: iteratorPlan.iterators.map(({ name }) => name),
     } : {}),
     iterationLimit: endless ? 'endless' : iterationLimit,
     pauseMilliseconds,
@@ -1080,7 +1080,7 @@ async function main() {
         biasMode: iteratorPlan.biasMode,
         startedAt: new Date(sceneScheduleStartedAt).toISOString(),
       };
-      runManifest.iteratorPaths = iteratorPlan.iterators.map(({ path }) => path);
+      runManifest.iteratorNames = iteratorPlan.iterators.map(({ name }) => name);
     }
     if (!runManifest.visualControls && options['resume-run'] && previouslyCompleted > 0) {
       const previous = await json(join(iterationRoot, runManifest.iterations[0].directory, 'record.json'));
