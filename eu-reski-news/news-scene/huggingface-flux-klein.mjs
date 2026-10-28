@@ -40,23 +40,36 @@ async function uploadImage(imagePath, token) {
   return { image: { path: response[0], meta: { _type: 'gradio.FileData' }, orig_name: basename(imagePath) }, caption: null };
 }
 
-function parseCompletedEvent(text) {
-  let currentEvent = '';
-  for (const line of text.split(/\r?\n/)) {
-    if (line.startsWith('event:')) currentEvent = line.slice(6).trim();
-    if (!line.startsWith('data:')) continue;
-    const data = line.slice(5).trim();
-    if (currentEvent === 'error') throw new Error(`Hugging Face image generation failed: ${data}`);
-    if (currentEvent === 'complete') return JSON.parse(data);
-  }
-  return null;
-}
-
 async function poll(eventId, token) {
-  const body = await request(`/gradio_api/call/generate/${encodeURIComponent(eventId)}`, token);
-  const result = parseCompletedEvent(body);
-  if (!Array.isArray(result) || !result[0]) throw new Error('Hugging Face generation returned no completed image');
-  return result;
+  const response = await fetch(`${SPACE_URL}/gradio_api/call/v2/generate/${encodeURIComponent(eventId)}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    signal: AbortSignal.timeout(240_000),
+  });
+  if (!response.ok) throw new Error(`Hugging Face image polling failed: HTTP ${response.status}`);
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let currentEvent = '';
+  while (true) {
+    const { value, done } = await reader.read();
+    buffer += decoder.decode(value, { stream: !done });
+    const lines = buffer.split(/\r?\n/);
+    buffer = lines.pop() || '';
+    for (const line of lines) {
+      if (line.startsWith('event:')) currentEvent = line.slice(6).trim();
+      if (!line.startsWith('data:')) continue;
+      const data = line.slice(5).trim();
+      if (currentEvent === 'error') throw new Error(`Hugging Face image generation failed: ${data}`);
+      if (currentEvent === 'complete') {
+        const result = JSON.parse(data);
+        if (!Array.isArray(result) || !result[0]) throw new Error('Hugging Face generation returned no completed image');
+        return result;
+      }
+    }
+    if (done) break;
+  }
+  throw new Error('Hugging Face generation stream ended before completion');
 }
 
 export async function generateFluxKleinImage({ prompt, referencePaths, token, directory, name, seed }) {

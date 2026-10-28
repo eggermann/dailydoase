@@ -69,7 +69,6 @@ describe('EU-RESKI semantic source', () => {
       jitterRatio: 0.2,
     });
   });
-
   test('restores the same pending semantic snapshot and continues the saved WordStream state', async () => {
     temporaryDirectory = await mkdtemp(join(tmpdir(), 'semantic-source-checkpoint-test-'));
     const modulePath = join(temporaryDirectory, 'mock-semantic-stream.mjs');

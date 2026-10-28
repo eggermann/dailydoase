@@ -18,7 +18,6 @@ export const WIKIPEDIA_REQUEST_POLICY = Object.freeze({
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
-
 function validateSemantic(semantic) {
   if (!Array.isArray(semantic.entries) || semantic.entries.length < 1 || semantic.entries.length > 12) throw new Error('Expected 1–12 semantic entries');
   const ids = new Set();
