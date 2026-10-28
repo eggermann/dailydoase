@@ -372,7 +372,11 @@ npm run news:assemble-film -- --run-dir="$RUN" \
 
 ### Künstlerischer Auto-Modus: zehn Iterationen
 
-`generation.autoMode` ist standardmäßig `false`. Für zehn Ausstellungsiterationen `--auto-mode` aktiviert pro neuem Artikel eine strukturierte Regieentscheidung vor der Storyplanung. Jede Entscheidung steht in `iteration-NNN/auto-decisions.json`; beim Resume wird sie wiederverwendet. Manuelle technische Werte wie Provider, Modelle, Auflösung, Kostenmodus, Quellen, Szenenzahl/-dauer und Montage bleiben aus der Run-Konfiguration erhalten. Das Szenenvideomodell bleibt auf ausführbarem `image_to_video`.
+`generation.autoMode` ist standardmäßig `false`. Für zehn Ausstellungsiterationen aktiviert `--auto-mode` pro neuem Artikel den Auto Director V2 vor der Storyplanung. Er entwickelt Dramaturgie-, Bild-, Bewegungs- und Klangkonzept und wählt die Szenenzahl innerhalb `--min-scenes` und `--max-scenes` (Standard: 1–12). Die gespeicherte Zahl wird fest an den Story Planner übergeben; der unabhängige Taktmuster-Strom für Szenendauern bleibt unverändert. Konzepte werden nur an die jeweils aktiven Story-, Timing-, Video- und Audio-Planer weitergereicht. Jede Entscheidung samt Konzept-Hash, Versionen, Flags, Szenenzahl und Begründung steht in `iteration-NNN/auto-decisions.json`.
+
+Beim Resume werden gespeicherte Entscheidungen und Requests wiederverwendet. Historische Auto-Director-V1-Iterationen behalten ihre Szenenzahl, Taktmuster-Zuordnung und Requests; eine fehlende historische Entscheidung wird nicht neu erzeugt. Manuelle Szenen (`autoMode: false`) behalten ihre bisherigen Prompts, Requests, Flags und Szenenzahl-Modi. Eine neue Auto-Iteration mit einer Szene wird ohne interne Glue-Übergänge montiert.
+
+Manuelle technische Werte wie Provider, Modelle, Auflösung, Kostenmodus, Quellen und Montage bleiben aus der Run-Konfiguration erhalten. Das Szenenvideomodell bleibt auf ausführbares `image_to_video` beschränkt.
 
 Zusätzliche automatische Auswahl: `videoMaxZoom` (0–0,3). Stil-/Figuren-/Ortsreferenzpfade, Dialogsperre, Titelkarten sowie das Ein-/Ausschalten der Mediengenerierung bleiben manuell, weil sie Teil der Referenzpolitik, Sprachvorgabe, Kostenentscheidung oder des Betriebs sind.
 

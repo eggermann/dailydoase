@@ -104,6 +104,8 @@ const countSelection = (record) => {
   const settings = choice.settings;
   return settings.mode === 'taktmuster'
     ? `<p><b>Szenenzahl durch Taktmuster:</b> ${escapeHtml(settings.takt)} × ${escapeHtml(settings.numerator)}/${escapeHtml(settings.denominator)} · ${escapeHtml(settings.type)} · Rohwert ${escapeHtml(choice.rawValue)} + Bias ${escapeHtml(settings.bias)} → ${escapeHtml(choice.count)} Szenen · Grenzen ${escapeHtml(settings.minimum)}–${escapeHtml(settings.maximum)}</p>`
+    : settings.mode === 'auto-director'
+      ? `<p><b>Szenenzahl durch Auto Director:</b> ${escapeHtml(choice.count)} · Grenzen ${escapeHtml(settings.minimum)}–${escapeHtml(settings.maximum)} · ${escapeHtml(choice.reason || '')}</p>`
     : `<p><b>Szenenzahl:</b> fest ${escapeHtml(choice.count)}</p>`;
 };
 const sceneTimingSummary = (record) => {
@@ -262,7 +264,7 @@ export function renderRunReport(run, iterations) {
   ${run.assembledFilm?.path ? `<section class="merged-films"><h2>Gesamtfilm · ${escapeHtml(run.assembledFilm.iterations)} Iterationen${Number.isFinite(run.assembledFilm.durationSeconds) ? ` · ${escapeHtml(run.assembledFilm.durationSeconds)} s` : ''}</h2><video controls preload="metadata" playsinline src="${escapeHtml(run.assembledFilm.path)}" aria-label="Gesamtfilm mit First/Last-Frame-Glue"></video><p>${escapeHtml(run.assembledFilm.method)}${Number.isInteger(run.assembledFilm.transitionCount) ? ` · ${escapeHtml(run.assembledFilm.transitionCount)} Bridges` : ''}</p></section>` : run.assembledFilm?.status === 'render_failed' ? `<p class="error">Gesamtfilm-Montage fehlgeschlagen: ${escapeHtml(run.assembledFilm.error)} · Einzelne Iterationsfilme sind verfügbar.</p>` : ''}
   ${renderMergedFilms(iterations)}
   ${renderTimingSummary(iterations, true)}
-  ${run.sceneCountSettings?.mode === 'taktmuster' ? '<p>Szenenzahl: ein fortlaufender Taktmuster-Schritt pro Iteration. Szenendauern werden unabhängig davon erzeugt.</p>' : ''}
+  ${run.autoDirectorSceneCount ? '<p>Neue Auto-Director-V2-Iterationen wählen ihre Szenenzahl selbst innerhalb der gespeicherten Grenzen; historische und manuelle Iterationen behalten ihren Szenenzahl-Modus. Szenendauern werden unabhängig davon erzeugt.</p>' : run.sceneCountSettings?.mode === 'taktmuster' ? '<p>Szenenzahl: ein fortlaufender Taktmuster-Schritt pro Iteration. Szenendauern werden unabhängig davon erzeugt.</p>' : ''}
   <p>${escapeHtml(run.description || 'Artikelreihenfolge: linear · Jede Iteration verwendet den nächsten Artikel und den nächsten Semantic-Stream-Ausschnitt. GPT nutzt Artikeltext, Nachrichtenfoto und Figurenkatalog. Die Bild-API erhält die gewählte Figur als abstrakte Protagonistenreferenz; ein vollständiges Gemälde wird nicht übergeben. Das Nachrichtenfoto dient der Bild-Orientierung.')}</p>
   <p><b>Gemeldete Medienkosten:</b> Video gesamt ${money(totalVideoCost)} · Bilder gesamt ${money(totalImageCost)} · GPT separat abgerechnet</p>
   ${reports}</main></body></html>`;

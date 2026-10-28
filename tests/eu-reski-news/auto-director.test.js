@@ -4,6 +4,7 @@ import {
   autoDirectorSchema,
   buildAutoDirectorRequest,
   resolveAutoModeSetting,
+  resolveAutoDecisionAction,
   resolveEffectiveAutoFlags,
   resolveSavedAutoDecision,
   validateAutoDirectorResponse,
@@ -35,9 +36,11 @@ const decision = (selected = flags(), { iteration = 1, articleId = 'article-1', 
     visualConcept: 'A shallow charcoal mural with one layered scene.',
     motionConcept: 'Slow pan and minimal zoom.',
     audioConcept: 'Sparse sound and intentional silence.',
+    sceneCount: 4,
+    sceneCountReason: 'The article has a sequence of distinct causal turns.',
     selectedFlags: selected,
     effectiveFlags: resolved.effectiveFlags,
-    constraints: { noDialogueNarration: false, styleReferenceAvailable: false, guernicaLocationReference: false, articleImageAvailable: false, ...constraints },
+    constraints: { noDialogueNarration: false, styleReferenceAvailable: false, guernicaLocationReference: false, articleImageAvailable: false, sceneCount: { minimum: 1, maximum: 12 }, ...constraints },
     reason: 'The article benefits from restrained visual continuity.',
     constraintsApplied: resolved.constraintsApplied,
   };
@@ -70,7 +73,8 @@ describe('EU RESKI auto director', () => {
   test('accepts a complete decision and rejects unknown or unsupported flags', () => {
     const value = {
       dramaturgicalConcept: 'A cycle.', visualConcept: 'Cubist planes.', motionConcept: 'Slow pan.',
-      audioConcept: 'Silence.', flags: flags(), reason: 'A quiet treatment suits the story.',
+      audioConcept: 'Silence.', sceneCount: 4, sceneCountReason: 'Four distinct actions make the turn legible.',
+      flags: flags(), reason: 'A quiet treatment suits the story.',
     };
     expect(validateAutoDirectorResponse(response(value)).flags).toEqual(flags());
     expect(() => validateAutoDirectorResponse(response({ ...value, flags: { ...flags(), surprise: true } })))
@@ -79,6 +83,8 @@ describe('EU RESKI auto director', () => {
       .toThrow(/videoMaxZoom/);
     expect(() => validateAutoDirectorResponse(response({ ...value, flags: flags({ videoVision: 'on', videoDirection: 'off' }) })))
       .toThrow(/without videoDirection/);
+    expect(() => validateAutoDirectorResponse(response({ ...value, sceneCount: 8 }), { sceneCount: { minimum: 2, maximum: 6 } }))
+      .toThrow(/sceneCount must be an integer/);
   });
 
   test('records selected and effective legacy behavior separately', () => {
@@ -130,5 +136,51 @@ describe('EU RESKI auto director', () => {
       promptVersion: autoDirectorPromptVersion, hasDependentWork: true,
       constraints: { noDialogueNarration: true, styleReferenceAvailable: false, guernicaLocationReference: false, articleImageAvailable: false },
     })).toThrow(/fixed constraints changed/);
+    expect(() => resolveSavedAutoDecision(saved, {
+      iteration: 1, articleId: 'article-1', model: 'gpt-4.1-mini',
+      promptVersion: autoDirectorPromptVersion, hasDependentWork: true,
+      constraints: { ...saved.constraints, sceneCount: { minimum: 2, maximum: 5 } },
+    })).toThrow(/scene-count limits changed/);
+    expect(() => resolveSavedAutoDecision(saved, {
+      iteration: 1, articleId: 'article-1', model: 'gpt-4.1-mini',
+      promptVersion: autoDirectorPromptVersion, hasDependentWork: true,
+      constraints: { ...saved.constraints, imageProvider: 'different-provider' },
+    })).toThrow(/technical constraints changed/);
+  });
+
+  test('reuses historical V1 decisions without upgrading or reinterpreting them', () => {
+    const selected = flags();
+    const resolved = resolveEffectiveAutoFlags(selected, {});
+    const saved = {
+      autoMode: true,
+      iteration: 1,
+      articleId: 'article-1',
+      model: 'gpt-4.1-mini',
+      promptVersion: 'eu-reski-auto-director-v1',
+      dramaturgicalConcept: 'The saved V1 dramaturgy.',
+      visualConcept: 'The saved V1 image idea.',
+      motionConcept: 'The saved V1 motion.',
+      audioConcept: 'The saved V1 sound.',
+      selectedFlags: selected,
+      effectiveFlags: resolved.effectiveFlags,
+      constraints: { noDialogueNarration: false, styleReferenceAvailable: false, guernicaLocationReference: false, articleImageAvailable: false },
+      constraintsApplied: resolved.constraintsApplied,
+      reason: 'Saved historical decision.',
+    };
+    expect(resolveSavedAutoDecision(saved, {
+      iteration: 1, articleId: 'article-1', model: 'gpt-4.1-mini',
+      promptVersion: autoDirectorPromptVersion, hasDependentWork: true, constraints: saved.constraints,
+    })).toBe(saved);
+  });
+
+  test('never requests a new paid Auto decision while resuming an existing Auto iteration', () => {
+    expect(resolveAutoDecisionAction({ autoMode: true, savedDecisionExists: true, isResume: true, savedAutoMode: true }))
+      .toBe('reuse');
+    expect(() => resolveAutoDecisionAction({
+      autoMode: true, savedDecisionExists: false, hasDependentWork: false, isResume: true, savedAutoMode: true,
+    })).toThrow(/refusing to issue a new paid request/);
+    expect(() => resolveAutoDecisionAction({
+      autoMode: true, savedDecisionExists: false, hasDependentWork: true, isResume: false, savedAutoMode: true,
+    })).toThrow(/dependent iteration work/);
   });
 });

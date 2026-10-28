@@ -4,6 +4,7 @@ import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { parseArgs } from 'node:util';
 import { createTransitionWaitScheduler, parseTransitionWaitPattern } from '../news-scene/transition-wait-pattern.mjs';
+import { isNewAutoSingleScene } from '../news-scene/scene-count.mjs';
 import { renderTitleCard } from '../news-scene/title-card.mjs';
 
 const { values: options } = parseArgs({
@@ -185,15 +186,24 @@ if (existingBridgesOnly) {
     transitionBoundariesByIteration.set(iterationDirectory, existingBoundaries);
   }
 } else if (transitionWaitPattern !== null) {
-  const transitionWaitScheduler = createTransitionWaitScheduler(transitionWaitPattern);
+  const iterationRecords = [];
   for (const iterationDirectory of iterations) {
     const record = JSON.parse(await readFile(join(runDirectory, iterationDirectory, 'record.json'), 'utf8'));
-    transitionBoundariesByIteration.set(
-      iterationDirectory,
-      transitionWaitScheduler.scheduleForIteration(record.plan?.scenes || []),
-    );
+    const scenes = record.plan?.scenes || [];
+    if (scenes.length < 2 && !isNewAutoSingleScene(record)) {
+      throw new Error(`${iterationDirectory} has fewer than two planned scenes`);
+    }
+    iterationRecords.push({ iterationDirectory, record, scenes });
   }
-  transitionWaitPatternStepsConsumed = transitionWaitScheduler.boundariesScheduled;
+  const hasTransitionCandidates = iterationRecords.some(({ scenes }) => scenes.length > 1);
+  const transitionWaitScheduler = hasTransitionCandidates ? createTransitionWaitScheduler(transitionWaitPattern) : null;
+  for (const { iterationDirectory, record, scenes } of iterationRecords) {
+    const boundaries = scenes.length > 1
+      ? transitionWaitScheduler.scheduleForIteration(scenes)
+      : new Set();
+    transitionBoundariesByIteration.set(iterationDirectory, boundaries);
+  }
+  transitionWaitPatternStepsConsumed = transitionWaitScheduler?.boundariesScheduled ?? 0;
 }
 if (bridgeLimit !== null || bridgeRandomThreshold !== null) {
   for (const iterationDirectory of iterations) {

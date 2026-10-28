@@ -11,7 +11,7 @@ import { prepareImageReference } from '../news-scene/reference-images.mjs';
 import { generateFluxKleinImage } from '../news-scene/huggingface-flux-klein.mjs';
 import { buildTimingRequest, applySceneTiming, visualPlanSnapshot } from '../news-scene/scene-timing.mjs';
 import { createSemanticSource } from '../news-scene/semantic-source.mjs';
-import { createSceneCountStream, resolveSceneCountSettings } from '../news-scene/scene-count.mjs';
+import { createAutoSceneCountSelection, createSceneCountStream, replaySavedSceneCount, resolveAutoSceneCountLimits, resolveSceneCountSettings } from '../news-scene/scene-count.mjs';
 import { loadTaktmuster } from '../news-scene/taktmuster.mjs';
 import { buildVideoVisionRequest, validateVideoVisionResponse, videoVisionPromptVersion } from '../news-scene/video-vision.mjs';
 import { buildGrokVideoPrompt, buildVideoDirectionRequest, validateVideoDirectionResponse, videoDirectionInputHash, videoDirectorPromptVersion } from '../news-scene/video-director.mjs';
@@ -22,11 +22,20 @@ import { renderTitleCard } from '../news-scene/title-card.mjs';
 import {
   autoDirectorPromptVersion,
   buildAutoDirectorRequest,
+  resolveAutoDecisionAction,
   resolveAutoModeSetting,
   resolveEffectiveAutoFlags,
   resolveSavedAutoDecision,
   validateAutoDirectorResponse,
 } from '../news-scene/auto-director.mjs';
+import {
+  addAutoConceptsToAudioRequest,
+  addAutoConceptsToStoryRequest,
+  addAutoConceptsToTimingRequest,
+  addAutoConceptsToVideoRequest,
+  autoConceptInputHash,
+  createAutoConceptSnapshot,
+} from '../news-scene/auto-concepts.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const parsedArguments = parseArgs({ options: {
@@ -193,7 +202,27 @@ function applyAutoDecisionToIteration(record, decision) {
     promptVersion: decision.promptVersion,
     selectedFlags: decision.selectedFlags,
     effectiveFlags: decision.effectiveFlags,
+    ...(decision.promptVersion === autoDirectorPromptVersion ? {
+      sceneCount: decision.sceneCount,
+      sceneCountReason: decision.sceneCountReason,
+      dramaturgicalConcept: decision.dramaturgicalConcept,
+      visualConcept: decision.visualConcept,
+      motionConcept: decision.motionConcept,
+      audioConcept: decision.audioConcept,
+      conceptSnapshotHash: createAutoConceptSnapshot(decision).snapshotHash,
+      sceneCountSelection: createAutoSceneCountSelection(decision, decision.iteration - 1, decision.constraints.sceneCount),
+    } : {
+      dramaturgicalConcept: decision.dramaturgicalConcept,
+      visualConcept: decision.visualConcept,
+      motionConcept: decision.motionConcept,
+      audioConcept: decision.audioConcept,
+    }),
   };
+  if (decision.promptVersion === autoDirectorPromptVersion) {
+    record.sceneCount = decision.sceneCount;
+    record.sceneCountSelection = record.autoDecision.sceneCountSelection;
+    record.autoConceptSnapshot = createAutoConceptSnapshot(decision);
+  }
 }
 
 async function hasDependentIterationWork(record, directory) {
@@ -203,6 +232,7 @@ async function hasDependentIterationWork(record, directory) {
     'gpt-request.json', 'gpt-response.json', 'scene-plan.json', 'visual-plan.json',
     'timing-request.json', 'timing-response.json', 'video-vision.json',
     'video-direction.json', 'audio-direction.json', 'film-plan.json',
+    'auto-director-request.json', 'auto-director-revision-request.json',
   ].includes(name) || /^scene-\d+-(?:request|response)\.json$/.test(name))) return true;
   const mediaFiles = await readdir(join(directory, 'media')).catch((error) => {
     if (error.code === 'ENOENT') return [];
@@ -211,7 +241,7 @@ async function hasDependentIterationWork(record, directory) {
   return mediaFiles.some((name) => /^scene-\d+/.test(name));
 }
 
-async function ensureAutoDecision(record, directory, openAiKey, persist) {
+async function ensureAutoDecision(record, directory, openAiKey, persist, isResume = false) {
   if (!options['auto-mode']) return;
   const decisionPath = join(directory, 'auto-decisions.json');
   const articleId = String(record.article?.id ?? record.article?.url ?? record.article?.title ?? 'unknown');
@@ -221,7 +251,10 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     guernicaLocationReference: options['guernica-location-reference'] && !options['no-style-reference'],
     articleImageAvailable: Boolean(record.articleImage),
     fixedVisualStyleOptions: { ...(record.visualStyleOptions || recordStyleOptions) },
-    sceneCount: record.sceneCount,
+    sceneCount: resolveAutoSceneCountLimits({
+      minimum: Number(options['min-scenes'] ?? 1),
+      maximum: Number(options['max-scenes'] ?? 12),
+    }),
     sceneTiming: record.generationSettings?.sceneTiming || null,
     imageProvider: record.generationSettings?.imageProvider || options['image-provider'],
     videoModel: record.generationSettings?.videoModel || options['video-model'],
@@ -230,8 +263,28 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     videosAfterEachIteration: record.generationSettings?.videosAfterEachIteration === true || options['videos-after-each-iteration'],
   };
 
-  if (await exists(decisionPath)) {
+  const savedDecisionExists = await exists(decisionPath);
+  const decisionAction = resolveAutoDecisionAction({
+    autoMode: true,
+    savedDecisionExists,
+    hasDependentWork: savedDecisionExists ? false : await hasDependentIterationWork(record, directory),
+    isResume,
+    savedAutoMode: record.featureSettings?.autoMode,
+  });
+  if (decisionAction === 'reuse') {
     const saved = await json(decisionPath);
+    if (saved.promptVersion === autoDirectorPromptVersion
+      && ((Number.isInteger(record.sceneCount) && record.sceneCount !== saved.sceneCount)
+        || (record.plan && record.plan.scenes?.length !== saved.sceneCount))) {
+      throw new Error('Saved scene count differs between Auto decision, iteration record, and existing story plan');
+    }
+    if (saved.promptVersion === autoDirectorPromptVersion) {
+      const savedConceptSnapshot = createAutoConceptSnapshot(saved);
+      if ((record.autoDecision?.conceptSnapshotHash && record.autoDecision.conceptSnapshotHash !== savedConceptSnapshot.snapshotHash)
+        || (record.autoConceptSnapshot?.snapshotHash && record.autoConceptSnapshot.snapshotHash !== savedConceptSnapshot.snapshotHash)) {
+        throw new Error('Iteration record conflicts with the saved Auto Director concept snapshot');
+      }
+    }
     resolveSavedAutoDecision(saved, {
       iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
       articleId, model: record.storyModel, promptVersion: autoDirectorPromptVersion,
@@ -243,29 +296,46 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     }
     applyAutoDecisionToIteration(record, saved);
     if (record.featureSettings.autoMode !== true) throw new Error('Saved auto decision lost its autoMode setting');
-    record.autoDecision = { promptVersion: saved.promptVersion, selectedFlags: saved.selectedFlags, effectiveFlags: saved.effectiveFlags };
+    if (saved.promptVersion === autoDirectorPromptVersion) {
+      record.autoDecision = {
+        promptVersion: saved.promptVersion,
+        selectedFlags: saved.selectedFlags,
+        effectiveFlags: saved.effectiveFlags,
+        sceneCount: saved.sceneCount,
+        sceneCountReason: saved.sceneCountReason,
+        dramaturgicalConcept: saved.dramaturgicalConcept,
+        visualConcept: saved.visualConcept,
+        motionConcept: saved.motionConcept,
+        audioConcept: saved.audioConcept,
+        conceptSnapshotHash: saved.conceptSnapshotHash,
+      };
+      record.autoDecision.sceneCountSelection = createAutoSceneCountSelection(saved, saved.iteration - 1, saved.constraints.sceneCount);
+      record.autoConceptSnapshot = createAutoConceptSnapshot(saved);
+      if (saved.conceptSnapshotHash !== record.autoConceptSnapshot.snapshotHash) {
+        throw new Error('Saved Auto Director concept snapshot hash is invalid; refusing to resume changed concepts');
+      }
+    } else {
+      record.autoDecision = { promptVersion: saved.promptVersion, selectedFlags: saved.selectedFlags, effectiveFlags: saved.effectiveFlags };
+    }
     return;
   }
-
-  const hasDependentWork = await hasDependentIterationWork(record, directory);
-  if (hasDependentWork) throw new Error('Auto decision is missing after dependent iteration work began; refusing to choose new settings on resume');
 
   const request = buildAutoDirectorRequest({ article: record.article, model: record.storyModel, constraints });
   await save(join(directory, 'auto-director-request.json'), request);
   let raw = await paidRequest(directory, 'auto-director', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   let answer;
   try {
-    answer = validateAutoDirectorResponse(raw);
+    answer = validateAutoDirectorResponse(raw, { sceneCount: constraints.sceneCount });
   } catch (firstError) {
     const correctionRequest = {
       ...request,
       messages: [...request.messages, { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' }, {
-        role: 'user', content: `Correct your decision once. Validation error: ${firstError.message}. Return all required fields and obey videoVision=on only with videoDirection=on.`,
+        role: 'user', content: `Correct your decision once. Validation error: ${firstError.message}. Return all required fields, choose sceneCount within the supplied bounds, explain it in sceneCountReason, and obey videoVision=on only with videoDirection=on.`,
       }],
     };
     await save(join(directory, 'auto-director-revision-request.json'), correctionRequest);
     raw = await paidRequest(directory, 'auto-director-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, correctionRequest);
-    answer = validateAutoDirectorResponse(raw);
+    answer = validateAutoDirectorResponse(raw, { sceneCount: constraints.sceneCount });
   }
 
   const resolved = resolveEffectiveAutoFlags(answer.flags, constraints);
@@ -280,6 +350,8 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     visualConcept: answer.visualConcept,
     motionConcept: answer.motionConcept,
     audioConcept: answer.audioConcept,
+    sceneCount: answer.sceneCount,
+    sceneCountReason: answer.sceneCountReason,
     selectedFlags: answer.flags,
     effectiveFlags: resolved.effectiveFlags,
     constraints,
@@ -287,6 +359,7 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     constraintsApplied: resolved.constraintsApplied,
     usage: raw.usage || null,
   };
+  decision.conceptSnapshotHash = createAutoConceptSnapshot(decision).snapshotHash;
   applyAutoDecisionToIteration(record, decision);
   await save(decisionPath, decision);
   addUsage(record, 'autoDirectorUsage', raw.usage);
@@ -799,7 +872,9 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   const mode = record.featureSettings?.videoMode || 'auto';
   const audioDirection = 'off';
   const maxZoom = record.featureSettings?.videoMaxZoom ?? 0.08;
-  const inputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
+  const autoConceptSnapshot = record.autoConceptSnapshot || null;
+  const baseInputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
+  const inputHash = autoConceptInputHash(baseInputHash, autoConceptSnapshot);
   const outputPath = join(directory, 'video-direction.json');
   if (await exists(outputPath)) {
     const saved = await json(outputPath);
@@ -813,7 +888,7 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   const requestPath = join(directory, 'video-direction-request.json');
   const request = await exists(requestPath)
     ? await json(requestPath)
-    : buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
+    : addAutoConceptsToVideoRequest(buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom }), autoConceptSnapshot);
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'video-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Video direction GPT error: ${raw.error.message}`);
@@ -848,7 +923,9 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
 async function createVideoAudioDirection(record, directory, openAiKey, persist) {
   const model = process.env.NEWS_VIDEO_DIRECTOR_MODEL || record.storyModel;
   const noDialogueNarration = record.featureSettings?.noDialogueNarration === true;
-  const inputHash = audioDirectionInputHash({ record, model, noDialogueNarration });
+  const autoConceptSnapshot = record.autoConceptSnapshot || null;
+  const baseInputHash = audioDirectionInputHash({ record, model, noDialogueNarration });
+  const inputHash = autoConceptInputHash(baseInputHash, autoConceptSnapshot);
   const outputPath = join(directory, 'audio-direction.json');
   if (await exists(outputPath)) {
     const saved = await json(outputPath);
@@ -860,7 +937,7 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
   const requestPath = join(directory, 'audio-direction-request.json');
   const request = await exists(requestPath)
     ? await json(requestPath)
-    : buildAudioDirectionRequest({ record, model, noDialogueNarration });
+    : addAutoConceptsToAudioRequest(buildAudioDirectionRequest({ record, model, noDialogueNarration }), autoConceptSnapshot);
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'audio-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Audio direction GPT error: ${raw.error.message}`);
@@ -989,12 +1066,14 @@ async function main() {
     iterationLimit: endless ? 'endless' : iterationLimit,
     pauseMilliseconds,
     status: 'running',
+    autoDirectorSceneCount: options['auto-mode'] === true,
     runOptions: Object.fromEntries(Object.entries(options).filter(([key]) => !['resume', 'resume-run', 'iterations', 'output-dir', 'help'].includes(key))),
     featureSettings: currentFeatureSettings(),
     generationSettings: currentGenerationSettings(),
     articleProgress: null,
     iterations: [],
   } : null;
+  if (runManifest && options['auto-mode']) runManifest.autoDirectorSceneCount = true;
   let pendingIterationDirectory = null;
   if (options['resume-run'] && Array.isArray(runManifest.iterations)) {
     const registered = new Set(runManifest.iterations.map((entry) => entry.directory));
@@ -1068,8 +1147,7 @@ async function main() {
     const previous = await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'record.json'));
     const count = previous.sceneCount ?? previous.plan?.scenes?.length ?? Number(options.scenes);
     if (!Number.isInteger(count) || count < 1 || count > 12) throw new Error('Saved iteration has an invalid scene count');
-    const selection = sceneCounts.next();
-    if (sceneCountSettings.mode === 'taktmuster' && selection.count !== count) throw new Error('Saved scene-count rhythm differs; refusing to continue a changed sequence');
+    replaySavedSceneCount(previous, sceneCounts);
     if (semanticSource && !semanticSource.resumedFromCheckpoint) {
       const savedSemantic = previous.semantic || await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'semantic-stream.json')).catch(() => null);
       await replayLegacySemanticSnapshot(semanticSource, savedSemantic, runManifest.iterations[iteration].directory);
@@ -1191,8 +1269,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       restoreFeatureSettings(record.featureSettings || currentFeatureSettings());
       record.featureSettings ||= currentFeatureSettings();
       if (pendingDirectory) {
-        const choice = sceneCountStream.next();
-        if (choice.count !== record.sceneCount) throw new Error('Interrupted iteration differs from saved scene-count rhythm');
+        const choice = replaySavedSceneCount(record, sceneCountStream, { validateFixed: true });
         record.sceneCountSelection ||= choice;
         if (record.semantic && semanticSource && !semanticSource.resumedFromCheckpoint) {
           await replayLegacySemanticSnapshot(semanticSource, record.semantic, directory);
@@ -1243,9 +1320,9 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (draw < 0) throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
       const { article, aggregateIndex, score } = candidates[draw];
       console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
-      const sceneCountSelection = sceneCountStream.next();
-      const sceneCount = sceneCountSelection.count;
-      console.log(`Scene count: ${sceneCount} (${sceneCountSelection.settings.mode}${sceneCountSelection.rawValue === undefined ? '' : `; raw ${sceneCountSelection.rawValue}, bias ${sceneCountSelection.settings.bias}`})`);
+      const sceneCountSelection = options['auto-mode'] ? null : sceneCountStream.next();
+      const sceneCount = sceneCountSelection?.count ?? null;
+      if (sceneCountSelection) console.log(`Scene count: ${sceneCount} (${sceneCountSelection.settings.mode}${sceneCountSelection.rawValue === undefined ? '' : `; raw ${sceneCountSelection.rawValue}, bias ${sceneCountSelection.settings.bias}`})`);
       record = {
         generator: 'semantic-news-v1', planningVersion: 2, createdAt: new Date().toISOString(), status: 'preparing',
         sourceVersion: {
@@ -1276,7 +1353,8 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
     await mkdir(join(directory, 'media'), { recursive: true });
     // Old saved requests retain their original combined planning path on resume.
     if (!record.planningVersion && !record.plan && !await exists(join(directory, 'gpt-request.json'))) record.planningVersion = 2;
-    if (!Object.hasOwn(record, 'sceneDurations')) {
+    const deferAutoSceneDurations = options['auto-mode'] && !Number.isInteger(record.sceneCount);
+    if (!Object.hasOwn(record, 'sceneDurations') && !deferAutoSceneDurations) {
       record.sceneDurations = record.plan?.scenes?.map((scene) => scene.durationSeconds)
         || await sceneDurationStream.generate(record.sceneCount);
       record.sceneDurationSettings = sceneDurationStream.settings;
@@ -1309,7 +1387,16 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       record.articleImage = await download(record.article.image, directory, 'article');
       await persist();
     }
-    await ensureAutoDecision(record, directory, openAiKey, persist);
+    await ensureAutoDecision(record, directory, openAiKey, persist, Boolean(resumeDirectory));
+    if (!Number.isInteger(record.sceneCount) || record.sceneCount < 1 || record.sceneCount > 12) {
+      throw new Error('Scene count must be selected and saved before story generation');
+    }
+    if (!Object.hasOwn(record, 'sceneDurations')) {
+      record.sceneDurations = await sceneDurationStream.generate(record.sceneCount);
+      record.sceneDurationSettings = sceneDurationStream.settings;
+      await save(join(directory, 'record.json'), record);
+      await persist();
+    }
     if (!record.styleReference && !options['no-style-reference']) {
       const sourcePath = resolve(options['style-reference']);
       const extension = extname(sourcePath).toLocaleLowerCase();
@@ -1342,7 +1429,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (usesGuernicaFigureReference()) {
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
       }
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null });
+      const built = addAutoConceptsToStoryRequest(await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null }), record.autoConceptSnapshot || null);
       if (options['landscape-prompt']) {
         const landscapeInstruction = 'LANDSCAPE PROMPT: Use the wide frame deliberately; let each scene’s focal action and spatial relationships use the frame width naturally. Do not force a horizontal frieze, central cluster or repeated layout.';
         built.director += `\n\n${landscapeInstruction}`;
@@ -1456,11 +1543,11 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (!record.sceneTiming) {
         const timingPath = join(directory, 'timing-request.json');
         if (!await exists(timingPath)) {
-          await save(timingPath, buildTimingRequest({
+          await save(timingPath, addAutoConceptsToTimingRequest(buildTimingRequest({
             plan: record.plan, sceneDurations: record.sceneDurations,
             sceneDurationSettings: record.sceneDurationSettings,
             visualStyleOptions: record.visualStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, model: record.storyModel,
-          }));
+          }), record.autoConceptSnapshot || null));
         }
         console.log('Visual plan locked; generating scene durations and video prompts separately.');
         const timingResponse = await paidRequest(directory, 'timing', 'https://api.openai.com/v1/chat/completions', openAiKey, await json(timingPath));
