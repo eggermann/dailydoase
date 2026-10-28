@@ -8,6 +8,7 @@ import { createInterface } from 'node:readline';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
+import { loadSceneSequence } from '../news-scene/scene-sequence.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -171,9 +172,10 @@ function addDefault(argumentsList, userArguments, flag, value = null) {
   else argumentsList.push(`${flag}=${value}`);
 }
 
-function defaultsFromExhibitionSettings() {
-  const { sceneCount, sceneLength, visualControls } = defaultGeneration;
+function defaultsFromExhibitionSettings(generation = defaultGeneration) {
+  const { sceneCount, sceneLength, visualControls } = generation;
   const defaults = [
+    `--story-model=${generation.storyModel}`,
     `--scene-count-mode=${sceneCount.mode}`,
     ...(sceneCount.mode === 'fixed' && Number.isInteger(sceneCount.count) ? [`--scenes=${sceneCount.count}`] : []),
     `--scene-count-takt=${sceneCount.takt}`,
@@ -189,39 +191,39 @@ function defaultsFromExhibitionSettings() {
     `--scene-length-bias=${sceneLength.bias}`,
     `--min-scene-seconds=${sceneLength.minimum}`,
     `--max-scene-seconds=${sceneLength.maximum}`,
-    `--image-provider=${defaultGeneration.imageProvider}`,
-    `--video-model=${defaultGeneration.videoModel}`,
-    `--video-resolution=${defaultGeneration.videoResolution}`,
-    `--video-settings-mode=${defaultGeneration.videoSettingsMode}`,
-    `--video-mode=${defaultGeneration.videoMode}`,
-    `--video-direction=${defaultGeneration.videoDirection}`,
-    `--story-clou=${defaultGeneration.storyClou}`,
-    `--video-vision=${defaultGeneration.videoVision}`,
-    `--video-audio-direction=${defaultGeneration.videoAudioDirection}`,
-    defaultGeneration.noDialogueNarration ? '--no-dialogue-narration' : '--allow-dialogue-narration',
-    `--video-max-zoom=${defaultGeneration.videoMaxZoom}`,
+    `--image-provider=${generation.imageProvider}`,
+    `--video-model=${generation.videoModel}`,
+    `--video-resolution=${generation.videoResolution}`,
+    `--video-settings-mode=${generation.videoSettingsMode}`,
+    `--video-mode=${generation.videoMode}`,
+    `--video-direction=${generation.videoDirection}`,
+    `--story-clou=${generation.storyClou}`,
+    `--video-vision=${generation.videoVision}`,
+    `--video-audio-direction=${generation.videoAudioDirection}`,
+    generation.noDialogueNarration ? '--no-dialogue-narration' : '--allow-dialogue-narration',
+    `--video-max-zoom=${generation.videoMaxZoom}`,
     `--layering=${visualControls.layering}`,
-    `--iterations=${defaultGeneration.iterations}`,
-    `--pause-ms=${defaultGeneration.pauseMs}`,
-    `--article-order=${defaultGeneration.articleOrder}`,
-    defaultGeneration.legacyGuernicaStyleReferencePrompt ? '--legacy-guernica-style-reference-prompt' : '--no-legacy-guernica-style-reference-prompt',
+    `--iterations=${generation.iterations}`,
+    `--pause-ms=${generation.pauseMs}`,
+    `--article-order=${generation.articleOrder}`,
+    generation.legacyGuernicaStyleReferencePrompt ? '--legacy-guernica-style-reference-prompt' : '--no-legacy-guernica-style-reference-prompt',
   ];
-  if (defaultGeneration.autoMode === true) defaults.push('--auto-mode');
+  defaults.push(generation.autoMode ? '--auto-mode' : '--no-auto-mode');
   defaults.push(visualControls.symbolic ? '--symbolic' : '--no-symbolic');
   defaults.push(visualControls.roomDeepness ? '--room-deepness' : '--no-room-deepness');
   defaults.push(visualControls.mode === 'scene-specific' ? '--scene-visual-controls' : '--fixed-visual-controls');
-  defaults.push(defaultGeneration.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
-  if (defaultGeneration.styleReference === false) defaults.push('--no-style-reference');
-  if (defaultGeneration.guernicaFigureReference === false) defaults.push('--no-guernica-figure-reference');
-  defaults.push(defaultGeneration.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
-  defaults.push(defaultGeneration.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
-  if (defaultGeneration.preserveCubistVideoStyle) defaults.push('--preserve-cubist-video-style');
-  if (defaultGeneration.videosAfterEachIteration) defaults.push('--videos-after-each-iteration');
-  if (defaultGeneration['generate-title-cards']) defaults.push('--generate-title-cards');
+  defaults.push(generation.articleImageReference ? '--article-image-reference' : '--no-article-image-reference');
+  defaults.push(generation.styleReference === false ? '--no-style-reference' : '--use-style-reference');
+  defaults.push(generation.guernicaFigureReference === false ? '--no-guernica-figure-reference' : '--use-guernica-figure-reference');
+  defaults.push(generation.guernicaLocationReference ? '--guernica-location-reference' : '--no-guernica-location-reference');
+  defaults.push(generation.landscapePrompt ? '--landscape-prompt' : '--no-landscape-prompt');
+  defaults.push(generation.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
+  defaults.push(generation.videosAfterEachIteration ? '--videos-after-each-iteration' : '--no-videos-after-each-iteration');
+  defaults.push(generation['generate-title-cards'] ? '--generate-title-cards' : '--no-generate-title-cards');
 
   return {
     args: defaults,
-    storyModel: defaultGeneration.storyModel,
+    storyModel: generation.storyModel,
     source: `${settingsPath} (version ${defaultSettings.version})`,
   };
 }
@@ -229,10 +231,15 @@ function defaultsFromExhibitionSettings() {
 function mergeRunnerArguments(defaults, userArguments, stopAfterIterations = null) {
   const merged = [];
   const oppositeFlags = new Map([
+    ['--auto-mode', '--no-auto-mode'], ['--no-auto-mode', '--auto-mode'],
     ['--symbolic', '--no-symbolic'], ['--no-symbolic', '--symbolic'],
     ['--room-deepness', '--no-room-deepness'], ['--no-room-deepness', '--room-deepness'],
     ['--scene-visual-controls', '--fixed-visual-controls'], ['--fixed-visual-controls', '--scene-visual-controls'],
     ['--style-reference', '--no-style-reference'], ['--no-style-reference', '--style-reference'],
+    ['--use-style-reference', '--no-style-reference'], ['--no-style-reference', '--use-style-reference'],
+    ['--use-guernica-figure-reference', '--no-guernica-figure-reference'], ['--no-guernica-figure-reference', '--use-guernica-figure-reference'],
+    ['--preserve-cubist-video-style', '--no-preserve-cubist-video-style'], ['--no-preserve-cubist-video-style', '--preserve-cubist-video-style'],
+    ['--videos-after-each-iteration', '--no-videos-after-each-iteration'], ['--no-videos-after-each-iteration', '--videos-after-each-iteration'],
     ['--generate-title-cards', '--no-generate-title-cards'], ['--no-generate-title-cards', '--generate-title-cards'],
     ['--guernica-location-reference', '--no-guernica-location-reference'], ['--no-guernica-location-reference', '--guernica-location-reference'],
     ['--article-image-reference', '--no-article-image-reference'], ['--no-article-image-reference', '--article-image-reference'],
@@ -592,6 +599,15 @@ async function exhibitionMain() {
   }
   await withLock(async () => {
     state = await readState();
+    const priorRun = state.runDirectory
+      ? await readJson(join(state.runDirectory, 'run.json')).catch(() => null)
+      : null;
+    const priorRunIsIncomplete = priorRun && ['running', 'pending_media'].includes(priorRun.status);
+    if (state.runDirectory && !priorRunIsIncomplete) {
+      state.runDirectory = null;
+      delete state.scenePath;
+      delete state.scenePlanFingerprint;
+    }
     log(`News directory: ${newsDirectory}; output directory: ${outputDirectory}`);
     if (state.settingsFingerprint !== settingsFingerprint) {
       const savedRun = state.runDirectory
@@ -610,6 +626,22 @@ async function exhibitionMain() {
       }
     }
     const exhibitionArguments = process.argv.slice(2);
+    const sceneArgument = exhibitionArguments.find((argument) => flagName(argument) === '--scene');
+    const sceneArgumentValue = sceneArgument?.includes('=')
+      ? sceneArgument.slice('--scene='.length)
+      : sceneArgument
+        ? exhibitionArguments[exhibitionArguments.indexOf(sceneArgument) + 1]
+        : null;
+    if (sceneArgument && !sceneArgumentValue) throw new Error('Use --scene=PATH');
+    const sceneSequence = sceneArgumentValue
+      ? await loadSceneSequence(sceneArgumentValue, defaultGeneration)
+      : null;
+    if (state.runDirectory && state.scenePath && !sceneSequence) {
+      throw new Error(`Resume the active scene sequence with --scene=${state.scenePath}`);
+    }
+    if (state.runDirectory && state.scenePath && sceneSequence?.path !== state.scenePath) {
+      throw new Error(`Active scene sequence uses ${state.scenePath}; finish or resume it before selecting another scene file`);
+    }
     const stopAfterArgument = exhibitionArguments.find((argument) => flagName(argument) === '--stop-after-iterations');
     let stopAfterIterations = null;
     if (stopAfterArgument) {
@@ -654,14 +686,16 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--auto-mode', '--no-auto-mode', '--stop-after-iterations', '--transition-wait-pattern'].includes(flagName(argument))) {
-        if (['--stop-after-iterations', '--transition-wait-pattern'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene'].includes(flagName(argument))) {
+        if (['--stop-after-iterations', '--transition-wait-pattern', '--scene'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }
       userArguments.push(argument);
     }
     let defaults;
-    if (state.runnerArguments?.length) {
+    if (sceneSequence) {
+      defaults = defaultsFromExhibitionSettings(sceneSequence.iterators[0].generation);
+    } else if (state.runnerArguments?.length) {
       defaults = { args: state.runnerArguments, storyModel: state.storyModel, source: state.settingsSource || null };
     } else {
       defaults = defaultsFromExhibitionSettings();
@@ -690,11 +724,37 @@ async function exhibitionMain() {
     const configuredAutoMode = defaults.args.includes('--no-auto-mode') ? false
       : defaults.args.includes('--auto-mode') ? true : defaultGeneration.autoMode === true;
     const autoModeEnabled = resolveAutoModeSetting(configuredAutoMode, exhibitionArguments);
-    const runnerArguments = mergeRunnerArguments(defaults.args, userArguments, stopAfterIterations);
+    const iteratorPlans = sceneSequence
+      ? sceneSequence.iterators.map((iterator) => {
+        const iteratorDefaults = defaultsFromExhibitionSettings(iterator.generation);
+        const iteratorArguments = mergeRunnerArguments(iteratorDefaults.args, userArguments, stopAfterIterations);
+        return { path: iterator.path, arguments: iteratorArguments };
+      })
+      : null;
+    const runnerArguments = iteratorPlans?.[0].arguments
+      || mergeRunnerArguments(defaults.args, userArguments, stopAfterIterations);
     const normalizedRunnerArguments = runnerArguments.filter((argument) => !['--auto-mode', '--no-auto-mode'].includes(flagName(argument)));
     if (autoModeEnabled) normalizedRunnerArguments.push('--auto-mode');
     else if (defaultGeneration.autoMode === true || defaults.args.includes('--no-auto-mode')
       || exhibitionArguments.includes('--no-auto-mode')) normalizedRunnerArguments.push('--no-auto-mode');
+    let iteratorPlanPath = null;
+    if (iteratorPlans) {
+      iteratorPlanPath = join(outputDirectory, '.exhibition-iterator-plan.json');
+      const iteratorPlan = {
+        scenePath: sceneSequence.path,
+        generationInterval: sceneSequence.generationInterval,
+        intervalMs: sceneSequence.intervalMs,
+        biasMode: sceneSequence.biasMode,
+        iterators: iteratorPlans,
+      };
+      await saveJson(iteratorPlanPath, iteratorPlan);
+      state.scenePath = sceneSequence.path;
+      state.scenePlanFingerprint = createHash('sha256').update(JSON.stringify(iteratorPlan)).digest('hex');
+      normalizedRunnerArguments.push(`--iterator-plan=${iteratorPlanPath}`);
+    } else {
+      delete state.scenePath;
+      delete state.scenePlanFingerprint;
+    }
     const videoSettings = {
       model: argumentValue(runnerArguments, '--video-model', defaultGeneration.videoModel),
       resolution: argumentValue(runnerArguments, '--video-resolution', defaultGeneration.videoResolution),

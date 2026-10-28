@@ -50,6 +50,43 @@ npm run news:exhibition -- --preserve-cubist-video-style
 npm run news:exhibition -- --legacy-guernica-style-reference-prompt
 ```
 
+### Geordnete Scene-Iteratoren
+
+Ein Scene-JSON kann geordnete Iterator-Konfigurationen laden. Jede referenzierte JSON-Datei darf unter `generation` nur Werte überschreiben, die vom Standard abweichen; fehlende Werte erben aus [`default-exhibition-settings.json`](default-exhibition-settings.json). CLI-Flags überschreiben danach alle Iterator-Konfigurationen.
+
+```json
+{
+  "paths": [
+    "./iterator-01.json",
+    "./iterator-02.json",
+    "./iterator-03.json",
+    "./iterator-04.json"
+  ],
+  "generationInterval": "1h",
+  "biasMode": "on"
+}
+```
+
+Iterator-Datei enthält zum Beispiel:
+
+```json
+{
+  "generation": {
+    "storyModel": "gpt-4.1-mini",
+    "imageProvider": "hf-flux-klein",
+    "sceneCount": { "mode": "fixed", "count": 5 }
+  }
+}
+```
+
+Relative Iterator-Pfade beziehen sich auf den Ordner des Scene-JSONs. `generationInterval` ist Gesamtfenster für geordnete Liste und akzeptiert `ms`, `s`, `m` oder `h`; `-1` bedeutet fünf Sekunden je Iterator. Bei `1h` und vier Iteratoren beträgt jeder Slot 15 Minuten. `biasMode: "on"` startet in Slotmitte (nach 7 Minuten 30 Sekunden), `"off"` am Slotanfang. Startzeiten liegen dann bei `00:07:30`, `00:22:30`, `00:37:30`, `00:52:30`. Eine verspätete Generation überlappt nicht mit nächster: Runner startet nächsten Iterator sofort, sobald vorheriger fertig ist.
+
+```sh
+npm run news:exhibition -- --scene=./exhibition-scene.json
+```
+
+Lauf setzt Iterator-Reihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Plan und dieselben CLI-Overrides erneut angeben.
+
 `Article + semantic-stream fragments + masked character catalog → GPT story and protagonist choice → FLUX Klein first frames (selected figure for protagonist identity; optional article photo for subject orientation; --guernica-location-reference adds Guernica as secondary setting/space reference; without it, the previous prompt/reference path remains) → cumulative HTML audit report`.
 
 The generator writes every image prompt through a multimodal GPT API request. No article-specific scene prompt is hard-coded. The versioned authoring instructions in `news-scene/director.md` preserve the accepted dark material treatment and physical integration of characters. The selected figure is redrawn in the new space rather than pasted into a photograph. Image provider can be selected independently: Runware remains default; `hf-flux-klein` uses the Hugging Face Space API. `--scenes` accepts 1–7 scenes; default remains 3.

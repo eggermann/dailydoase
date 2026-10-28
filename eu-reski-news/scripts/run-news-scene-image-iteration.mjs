@@ -1,4 +1,4 @@
-import { randomInt, randomUUID } from 'node:crypto';
+import { createHash, randomInt, randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, readdir, writeFile, rename, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve, basename, extname, relative } from 'node:path';
@@ -27,9 +27,10 @@ import {
   resolveSavedAutoDecision,
   validateAutoDirectorResponse,
 } from '../news-scene/auto-director.mjs';
+import { getIteratorStartTime } from '../news-scene/scene-sequence.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const parsedArguments = parseArgs({ options: {
+const optionDefinitions = {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
@@ -53,13 +54,16 @@ const parsedArguments = parseArgs({ options: {
   'news-dir': { type: 'string', default: join(root, 'eu-reski-news', 'news', 'A') },
   'output-dir': { type: 'string', default: process.env.NEWS_OUTPUT_DIR || join(root, 'eu-reski-news', 'GENERATIONS', 'news') },
   'guernica-dir': { type: 'string', default: process.env.GUERNICA_DIRECTORY || '/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert' },
-  'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' },
+  'style-reference': { type: 'string', default: process.env.NEWS_STYLE_REFERENCE || '/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg' }, 'use-style-reference': { type: 'boolean', default: false },
   'image-provider': { type: 'string', default: process.env.NEWS_IMAGE_PROVIDER || 'runware' },
   'image-seed': { type: 'string' },
   'prompt-only': { type: 'boolean', default: false }, 'legacy-guernica-style-reference-prompt': { type: 'boolean', default: false }, 'no-legacy-guernica-style-reference-prompt': { type: 'boolean', default: false }, 'no-style-reference': { type: 'boolean', default: false }, 'article-image-reference': { type: 'boolean', default: false }, 'no-article-image-reference': { type: 'boolean', default: false }, 'article-image-only-reference': { type: 'boolean', default: false }, 'no-guernica-figure-reference': { type: 'boolean', default: false }, 'guernica-location-reference': { type: 'boolean', default: false }, 'no-guernica-location-reference': { type: 'boolean', default: false },
   'preserve-cubist-video-style': { type: 'boolean', default: false },
   'auto-mode': { type: 'boolean', default: false }, 'no-auto-mode': { type: 'boolean', default: false },
   'landscape-prompt': { type: 'boolean', default: false }, 'no-landscape-prompt': { type: 'boolean', default: false },
+  'use-guernica-figure-reference': { type: 'boolean', default: false },
+  'no-preserve-cubist-video-style': { type: 'boolean', default: false },
+  'no-videos-after-each-iteration': { type: 'boolean', default: false },
   'scene-visual-controls': { type: 'boolean', default: true }, 'fixed-visual-controls': { type: 'boolean', default: false },
   'story-clou': { type: 'string', default: 'off' }, 'video-direction': { type: 'string', default: 'off' },
   'video-mode': { type: 'string', default: 'auto' }, 'video-vision': { type: 'string', default: 'auto' },
@@ -74,7 +78,9 @@ const parsedArguments = parseArgs({ options: {
   symbolic: { type: 'boolean', default: false }, 'no-symbolic': { type: 'boolean', default: false },
   'room-deepness': { type: 'boolean', default: false }, 'no-room-deepness': { type: 'boolean', default: false }, help: { type: 'boolean' },
   layering: { type: 'string', default: '0' },
-} });
+  'iterator-plan': { type: 'string' },
+};
+const parsedArguments = parseArgs({ options: optionDefinitions });
 let options = parsedArguments.values;
 options['auto-mode'] = resolveAutoModeSetting(false, process.argv.slice(2));
 if (options['generate-title-cards'] && options['no-generate-title-cards']) {
@@ -937,6 +943,15 @@ async function main() {
     console.log('node --env-file=/path/to/.env eu-reski-news/scripts/run-news-scene-image-iteration.mjs --iterations=10 --scenes=5 --scene-length-takt=-1 --min-scene-seconds=5 --max-scene-seconds=6 --symbolic --no-room-deepness --layering=3 --fixed-visual-controls --legacy-guernica-style-reference-prompt --videos-after-each-iteration --generate-title-cards --video-model=prunaai:p-video@2-pro --video-resolution=480p --video-settings-mode=cost [--auto-mode|--no-auto-mode]');
     return;
   }
+  const iteratorPlan = options['iterator-plan'] ? await json(resolve(options['iterator-plan'])) : null;
+  if (iteratorPlan && (!Array.isArray(iteratorPlan.iterators) || iteratorPlan.iterators.length === 0
+    || !Number.isSafeInteger(iteratorPlan.intervalMs) || iteratorPlan.intervalMs < 1
+    || !['on', 'off'].includes(iteratorPlan.biasMode))) {
+    throw new Error('Iterator plan must contain paths, a positive interval, and biasMode "on" or "off"');
+  }
+  const iteratorPlanFingerprint = iteratorPlan
+    ? createHash('sha256').update(JSON.stringify(iteratorPlan)).digest('hex')
+    : null;
   if (options['stream-file'] && options['stream-sequence-file']) throw new Error('Choose one semantic snapshot or one semantic sequence');
   if (options.resume && options['resume-run']) throw new Error('Use either --resume or --resume-run, not both');
   if (options.resume && ['words', 'words-file', 'stream-file', 'stream-sequence-file', 'stream-module', 'article-id'].some((key) => options[key])) throw new Error('Resume reuses saved article and semantic inputs; do not override them');
@@ -944,6 +959,13 @@ async function main() {
   if (options['resume-run']) {
     const resumeDirectory = resolve(options['resume-run']);
     savedRunManifest = await json(join(resumeDirectory, 'run.json'));
+    if (savedRunManifest.iteratorPlanFingerprint
+      && savedRunManifest.iteratorPlanFingerprint !== iteratorPlanFingerprint) {
+      throw new Error('Scene iterator plan changed; resume requires the original scene JSON and iterator settings');
+    }
+    if (savedRunManifest.iteratorPlanFingerprint && !iteratorPlan) {
+      throw new Error('Resume this exhibition with its original --scene iterator plan');
+    }
     if (savedRunManifest.runOptions) {
       const explicitIterationLimit = process.argv.slice(2).some((argument) => /^--iterations(?:=|$)/.test(argument));
       const requestedIterationLimit = explicitIterationLimit
@@ -975,7 +997,8 @@ async function main() {
   if (!openAiKey || (!options['prompt-only'] && imageProvider === 'runware' && !runwareKey)) throw new Error('Set OPENAI_API_KEY and RUNWARE_API_KEY in your environment');
   if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
   const endless = iterationLimit === 0 || iterationLimit === -1;
-  const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1 || options['videos-after-each-iteration'];
+  const groupedRun = Boolean(options['resume-run']) || endless || iterationLimit > 1
+    || options['videos-after-each-iteration'] || Boolean(iteratorPlan);
   const iterationRoot = options.resume
     ? dirname(resolve(options.resume))
     : options['resume-run']
@@ -986,6 +1009,17 @@ async function main() {
   const runManifest = options['resume-run'] ? await json(join(iterationRoot, 'run.json')) : groupedRun ? {
     profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
     startedAt: new Date().toISOString(),
+    ...(iteratorPlan ? {
+      iteratorPlanFingerprint,
+      sceneSchedule: {
+        scenePath: iteratorPlan.scenePath,
+        generationInterval: iteratorPlan.generationInterval,
+        intervalMs: iteratorPlan.intervalMs,
+        biasMode: iteratorPlan.biasMode,
+        startedAt: new Date().toISOString(),
+      },
+      iteratorPaths: iteratorPlan.iterators.map(({ path }) => path),
+    } : {}),
     iterationLimit: endless ? 'endless' : iterationLimit,
     pauseMilliseconds,
     status: 'running',
@@ -995,6 +1029,9 @@ async function main() {
     articleProgress: null,
     iterations: [],
   } : null;
+  const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
+    ? Date.parse(runManifest.sceneSchedule.startedAt)
+    : Date.now();
   let pendingIterationDirectory = null;
   if (options['resume-run'] && Array.isArray(runManifest.iterations)) {
     const registered = new Set(runManifest.iterations.map((entry) => entry.directory));
@@ -1022,13 +1059,26 @@ async function main() {
       const firstPath = previouslyCompleted > 0 ? join(iterationRoot, runManifest.iterations[0].directory, 'record.json')
         : pendingIterationDirectory ? join(pendingIterationDirectory, 'record.json') : null;
       const first = firstPath ? await json(firstPath) : null;
-      sceneCountSettings = runManifest.sceneCountSettings || first?.sceneCountSelection?.settings
-        || { mode: 'fixed', count: first?.sceneCount ?? Number(options.scenes) };
+      if (!iteratorPlan) {
+        sceneCountSettings = runManifest.sceneCountSettings || first?.sceneCountSelection?.settings
+          || { mode: 'fixed', count: first?.sceneCount ?? Number(options.scenes) };
+      }
       restoreFeatureSettings(runManifest.featureSettings || first?.featureSettings);
     }
     runManifest.sceneCountSettings = sceneCountSettings;
     runManifest.featureSettings ||= currentFeatureSettings();
     runManifest.generationSettings ||= currentGenerationSettings();
+    if (iteratorPlan) {
+      runManifest.iteratorPlanFingerprint = iteratorPlanFingerprint;
+      runManifest.sceneSchedule ||= {
+        scenePath: iteratorPlan.scenePath,
+        generationInterval: iteratorPlan.generationInterval,
+        intervalMs: iteratorPlan.intervalMs,
+        biasMode: iteratorPlan.biasMode,
+        startedAt: new Date(sceneScheduleStartedAt).toISOString(),
+      };
+      runManifest.iteratorPaths = iteratorPlan.iterators.map(({ path }) => path);
+    }
     if (!runManifest.visualControls && options['resume-run'] && previouslyCompleted > 0) {
       const previous = await json(join(iterationRoot, runManifest.iterations[0].directory, 'record.json'));
       runManifest.visualControls = {
@@ -1052,11 +1102,58 @@ async function main() {
     runManifest.status = 'running';
     delete runManifest.finishedAt;
   }
+  const runBaseOptions = { ...options };
+  const iteratorOptionValues = iteratorPlan
+    ? iteratorPlan.iterators.map(({ arguments: iteratorArguments }) => parseArgs({ args: iteratorArguments, options: optionDefinitions }).values)
+    : null;
+  const activateIterator = (index) => {
+    if (!iteratorPlan) return;
+    const iteratorIndex = index % iteratorPlan.iterators.length;
+    const controls = {
+      resume: runBaseOptions.resume,
+      'resume-run': runBaseOptions['resume-run'],
+      iterations: runBaseOptions.iterations,
+      'output-dir': runBaseOptions['output-dir'],
+      'iterator-plan': runBaseOptions['iterator-plan'],
+      'pause-ms': runBaseOptions['pause-ms'],
+    };
+    options = { ...runBaseOptions, ...iteratorOptionValues[iteratorIndex], ...controls };
+    if (options['use-style-reference']) options['no-style-reference'] = false;
+    if (options['use-guernica-figure-reference']) options['no-guernica-figure-reference'] = false;
+    if (options['no-preserve-cubist-video-style']) options['preserve-cubist-video-style'] = false;
+    if (options['no-videos-after-each-iteration']) options['videos-after-each-iteration'] = false;
+    if (options['videos-after-each-iteration']
+      && (options['video-model'] !== 'prunaai:p-video@2-pro'
+        || options['video-resolution'] !== '480p'
+        || options['video-settings-mode'] !== 'cost')) {
+      throw new Error(`Iterator ${iteratorIndex + 1} enables automatic video generation with unsupported video settings`);
+    }
+    storyModel = options['story-model'].trim();
+    recordStyleOptions.symbolic = !options['no-symbolic'];
+    recordStyleOptions.roomDeepness = options['room-deepness'];
+    recordStyleOptions.layering = Number(options.layering);
+    legacyGuernicaStyleReferencePromptEnabled = options['legacy-guernica-style-reference-prompt']
+      && !options['no-style-reference'] && !options['guernica-location-reference'];
+    if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
+      options['scene-visual-controls'] = false;
+      options['fixed-visual-controls'] = true;
+    }
+  };
+  const iteratorCount = iteratorPlan?.iterators.length || 1;
+  const iteratorSceneCountSettings = [];
+  const sceneCountStreams = [];
+  const sceneDurationStreams = [];
+  for (let index = 0; index < iteratorCount; index += 1) {
+    activateIterator(index);
+    const settings = resolveSceneCountSettings(options);
+    iteratorSceneCountSettings.push(settings);
+    sceneCountStreams.push(options.resume ? null : createSceneCountStream(settings));
+    sceneDurationStreams.push(createSceneDurationStream());
+  }
+  activateIterator(0);
   const semanticSource = options.resume ? null : await createSemanticSource(options, {
     checkpointPath: runManifest ? join(iterationRoot, 'semantic-stream-state.json') : null,
   });
-  const sceneCounts = options.resume ? null : createSceneCountStream(sceneCountSettings);
-  const sceneDurations = createSceneDurationStream();
   const runImageSeedBase = runManifest && Object.hasOwn(runManifest, 'imageSeedBase') ? runManifest.imageSeedBase : imageSeedBase;
   if (runManifest) runManifest.imageSeedBase = runImageSeedBase;
   if (runManifest) {
@@ -1065,16 +1162,18 @@ async function main() {
   }
   let imageSeedOffset = 0;
   for (let iteration = 0; iteration < previouslyCompleted; iteration += 1) {
+    const iteratorIndex = iteration % iteratorCount;
+    activateIterator(iteratorIndex);
     const previous = await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'record.json'));
     const count = previous.sceneCount ?? previous.plan?.scenes?.length ?? Number(options.scenes);
     if (!Number.isInteger(count) || count < 1 || count > 12) throw new Error('Saved iteration has an invalid scene count');
-    const selection = sceneCounts.next();
-    if (sceneCountSettings.mode === 'taktmuster' && selection.count !== count) throw new Error('Saved scene-count rhythm differs; refusing to continue a changed sequence');
+    const selection = sceneCountStreams[iteratorIndex]?.next();
+    if (iteratorSceneCountSettings[iteratorIndex].mode === 'taktmuster' && selection.count !== count) throw new Error('Saved scene-count rhythm differs; refusing to continue a changed sequence');
     if (semanticSource && !semanticSource.resumedFromCheckpoint) {
       const savedSemantic = previous.semantic || await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'semantic-stream.json')).catch(() => null);
       await replayLegacySemanticSnapshot(semanticSource, savedSemantic, runManifest.iterations[iteration].directory);
     }
-    const replayedDurations = await sceneDurations.generate(count);
+    const replayedDurations = await sceneDurationStreams[iteratorIndex].generate(count);
     if (Array.isArray(previous.sceneDurations)
       && JSON.stringify(replayedDurations) !== JSON.stringify(previous.sceneDurations)) {
       throw new Error(`Saved scene-duration rhythm differs in ${runManifest.iterations[iteration].directory}; refusing to continue a changed Taktmuster sequence`);
@@ -1094,28 +1193,49 @@ async function main() {
       await save(join(iterationRoot, 'run.json'), runManifest);
     }
   }
-  const videoOptions = {
-    model: options['video-model'],
-    resolution: options['video-resolution'],
-    settingsMode: options['video-settings-mode'],
-    generateTitleCards: options['generate-title-cards'],
-  };
-  if (options['resume-run'] && options['videos-after-each-iteration']) {
-    for (const entry of runManifest.iterations) {
-      if ((await pendingVideoScenes(iterationRoot, entry)).length) await pollIterationVideos(iterationRoot, entry, videoOptions);
+  const anyIteratorGeneratesVideos = iteratorOptionValues
+    ? iteratorOptionValues.some((iteratorOptions) => iteratorOptions['videos-after-each-iteration']
+      && !iteratorOptions['no-videos-after-each-iteration'])
+    : options['videos-after-each-iteration'];
+  if (options['resume-run'] && anyIteratorGeneratesVideos) {
+    for (const [index, entry] of runManifest.iterations.entries()) {
+      activateIterator(index);
+      if ((await pendingVideoScenes(iterationRoot, entry)).length) {
+        await pollIterationVideos(iterationRoot, entry, {
+          model: options['video-model'],
+          resolution: options['video-resolution'],
+          settingsMode: options['video-settings-mode'],
+          generateTitleCards: options['generate-title-cards'],
+        });
+      }
     }
   }
-  const runBaseOptions = { ...options };
   while (endless || completed < iterationLimit) {
-    options = { ...runBaseOptions };
-    legacyGuernicaStyleReferencePromptEnabled = options['legacy-guernica-style-reference-prompt']
-      && !options['no-style-reference'] && !options['guernica-location-reference'];
-    if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
-      options['scene-visual-controls'] = false;
-      options['fixed-visual-controls'] = true;
+    const iteratorIndex = completed % iteratorCount;
+    activateIterator(iteratorIndex);
+    if (iteratorPlan) {
+      const targetStart = getIteratorStartTime(
+        sceneScheduleStartedAt,
+        completed,
+        iteratorPlan.intervalMs,
+        iteratorCount,
+        iteratorPlan.biasMode,
+      );
+      const waitMilliseconds = targetStart - Date.now();
+      if (waitMilliseconds > 0) await new Promise((resolveDelay) => setTimeout(resolveDelay, waitMilliseconds));
     }
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
-    const iterationDirectory = await runIteration(semanticSource, sceneDurations, sceneCounts, iterationRoot, completed, imageSeedOffset, runImageSeedBase, pendingIterationDirectory, runManifest?.articleProgress || null);
+    const iterationDirectory = await runIteration(
+      semanticSource,
+      sceneDurationStreams[iteratorIndex],
+      sceneCountStreams[iteratorIndex],
+      iterationRoot,
+      completed,
+      imageSeedOffset,
+      runImageSeedBase,
+      pendingIterationDirectory,
+      runManifest?.articleProgress || null,
+    );
     pendingIterationDirectory = null;
     const completedRecord = await json(join(iterationDirectory, 'record.json'));
     imageSeedOffset += completedRecord.sceneCount;
@@ -1138,15 +1258,21 @@ async function main() {
       await writeFile(join(iterationRoot, 'index.html'), renderRunReport(runManifest, reports));
       console.log(`Cumulative HTML: ${join(iterationRoot, 'index.html')}`);
       if (options['videos-after-each-iteration']) {
-        await pollIterationVideos(iterationRoot, { directory: relativeDirectory }, videoOptions);
+        await pollIterationVideos(iterationRoot, { directory: relativeDirectory }, {
+          model: options['video-model'],
+          resolution: options['video-resolution'],
+          settingsMode: options['video-settings-mode'],
+          generateTitleCards: options['generate-title-cards'],
+        });
       }
     }
     if (!endless && completed >= iterationLimit) break;
+    if (iteratorPlan) continue;
     console.log(`Next article and semantic fragments in ${pauseMilliseconds} ms; streams remain open.`);
     await new Promise((resolveDelay) => setTimeout(resolveDelay, pauseMilliseconds));
   }
   if (runManifest) {
-    const pendingMedia = options['videos-after-each-iteration']
+    const pendingMedia = anyIteratorGeneratesVideos
       ? await summarizePendingMedia(iterationRoot, runManifest)
       : [];
     runManifest.status = pendingMedia.length ? 'pending_media' : 'completed';
