@@ -222,6 +222,8 @@ function defaultsFromExhibitionSettings(generation = defaultGeneration) {
   const { sceneCount, sceneLength, visualControls } = generation;
   const defaults = [
     `--story-model=${generation.storyModel}`,
+    generation.includeSourceCodeContext === false ? '--no-source-code-context' : '--include-source-code-context',
+    ...(generation.sourceCodeSummaryFile ? [`--source-code-summary-file=${generation.sourceCodeSummaryFile}`] : []),
     `--scene-count-mode=${sceneCount.mode}`,
     ...(sceneCount.mode === 'fixed' && Number.isInteger(sceneCount.count) ? [`--scenes=${sceneCount.count}`] : []),
     `--scene-count-takt=${sceneCount.takt}`,

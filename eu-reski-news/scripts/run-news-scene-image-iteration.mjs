@@ -43,11 +43,14 @@ import { getIteratorStartTime } from '../news-scene/scene-sequence.mjs';
 import { advanceWorkerSchedule, createInitialWorkerSchedule, recoverWorkerSchedule } from '../news-scene/parallel-schedule.mjs';
 import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
 import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../news-scene/global-article-reservations.mjs';
+import { applyStoryCodeContext } from '../news-scene/story-code-context.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const optionDefinitions = {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
+  'include-source-code-context': { type: 'boolean', default: false }, 'no-source-code-context': { type: 'boolean', default: false },
+  'source-code-summary-file': { type: 'string' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   'scene-count-mode': { type: 'string', default: process.env.NEWS_SCENE_COUNT_MODE || 'taktmuster' },
@@ -119,6 +122,7 @@ if (options['no-article-image-reference']) options['article-image-reference'] = 
 if (options['no-dialogue-narration'] && options['allow-dialogue-narration']) {
   throw new Error('Choose only one: --no-dialogue-narration or --allow-dialogue-narration');
 }
+if (options['include-source-code-context'] && options['no-source-code-context']) throw new Error('Choose only one source code context flag');
 if (options['allow-dialogue-narration']) options['no-dialogue-narration'] = false;
 if (options['landscape-prompt'] && options['no-landscape-prompt']) {
   throw new Error('Choose only one: --landscape-prompt or --no-landscape-prompt');
@@ -505,6 +509,8 @@ function currentGenerationSettings() {
     imageProvider: options['image-provider'],
     imageModel: options['image-provider'] === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
     storyModel,
+    includeSourceCodeContext: !options['no-source-code-context'],
+    sourceCodeSummaryFile: options['source-code-summary-file'] || null,
     articleImageReference: options['article-image-reference'],
     guernicaLocationReference: options['guernica-location-reference'],
     landscapePrompt: options['landscape-prompt'],
@@ -1853,7 +1859,22 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (usesGuernicaFigureReference()) {
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
       }
-      const built = addAutoConceptsToStoryRequest(await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null }), record.autoConceptSnapshot || null);
+      const logPath = join(directory, 'gpt-request.json');
+      let sourceCodeSummary = null;
+      const summaryPath = record.generationSettings?.sourceCodeSummaryFile;
+      if (summaryPath && !await exists(logPath)) {
+        const snapshotPath = join(directory, 'source-code-summary.txt');
+        sourceCodeSummary = await readFile(await exists(snapshotPath) ? snapshotPath : resolve(summaryPath), 'utf8');
+        if (!sourceCodeSummary.trim()) throw new Error('Source code summary must not be empty');
+        if (!await exists(snapshotPath)) await writeFile(snapshotPath, sourceCodeSummary, { flag: 'wx' });
+        record.sourceCodeSummary = { path: 'source-code-summary.txt', source: resolve(summaryPath), sha256: hash(sourceCodeSummary) };
+        await persist();
+      }
+      const built = addAutoConceptsToStoryRequest(await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, includeSourceCodeContext: record.generationSettings?.includeSourceCodeContext ?? true, sourceCodeSummary, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null }), record.autoConceptSnapshot || null);
+      for (const payload of [built.request, built.log]) applyStoryCodeContext(payload, {
+        includeSourceCodeContext: record.generationSettings?.includeSourceCodeContext ?? true,
+        sourceCodeSummary,
+      });
       if (options['landscape-prompt']) {
         const landscapeInstruction = 'LANDSCAPE PROMPT: Use the wide frame deliberately; let each scene’s focal action and spatial relationships use the frame width naturally. Do not force a horizontal frieze, central cluster or repeated layout.';
         built.director += `\n\n${landscapeInstruction}`;
@@ -1862,7 +1883,6 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         built.log.messages[0].content += `\n\n${landscapeInstruction}`;
       }
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
-      const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
         record.directorHash = built.directorHash;
         await writeFile(join(directory, 'director.md'), built.director);

@@ -2,6 +2,8 @@
   "name": "run-001-exhibition",
   "generationOverrides": {
     "autoMode": true,
-    "iterations": 8
+    "iterations": 8,
+    "includeSourceCodeContext": false,
+    "sourceCodeSummaryFile": "eu-reski-news/docs/scene-code-summary.md"
   }
 }
