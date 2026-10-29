@@ -2,7 +2,7 @@
   "name": "run-005-prompt-path",
   "generationOverrides": {
     "autoMode": false,
-    "storyModel": "gpt-4o-mini",
+    "storyModel": "gpt-6-luna",
     "iterations": 1,
     "pauseMs": 0,
     "articleOrder": "linear",
