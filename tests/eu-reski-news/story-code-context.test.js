@@ -23,4 +23,15 @@ describe('story planner code context', () => {
     applyStoryCodeContext(payload);
     expect(payload).toEqual(before);
   });
+
+  test('handles Auto Director requests whose user content is serialized JSON', () => {
+    const payload = { messages: [
+      { role: 'system', content: 'director rules' },
+      { role: 'user', content: JSON.stringify({ article: { title: 'News' } }) },
+    ] };
+    applyStoryCodeContext(payload, { includeSourceCodeContext: false, sourceCodeSummary: 'Pipeline summary.' });
+    expect(payload.messages[0].content).toBe('director rules');
+    expect(payload.messages[1].content).toContain('"title":"News"');
+    expect(payload.messages[1].content).toContain('Pipeline summary.');
+  });
 });
