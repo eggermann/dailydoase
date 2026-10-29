@@ -83,7 +83,7 @@ generation-by-commit.txt
 **/GENRATIONS*/
 
 # EU-RESKI generation output lives on the attached media volume.
-/eu-reski-news/GENERATIONS/
+/eu-reski-news/GENERATIONS
 data/
 .history
 .roorules-*
