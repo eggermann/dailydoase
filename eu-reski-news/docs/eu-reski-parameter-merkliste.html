@@ -40,7 +40,7 @@
   <section>
     <h2>Scene-JSON und vollständige Parameterüberschreibungen</h2>
     <p>Der Runner liest alphabetisch alle Iterationsdateien aus <code>eu-reski-news/scenes/</code>. <code>scene.json</code> enthält nur Zeitplan-Metadaten; jede weitere Datei enthält ein einzelnes Objekt mit <code>name</code> und <code>generationOverrides</code>. Dieses Objekt wird auf <code>eu-reski-news/default-exhibition-settings.json</code> gelegt. Fehlende Werte erben Defaults; CLI-Flags überschreiben JSON-Werte.</p>
-    <p>Vollständiges Beispiel: <a href="eu-reski-news/docs/scenes-example/scene.json"><code>scene.json</code></a>, <a href="eu-reski-news/docs/scenes-example/off-expression.scene.json"><code>off-expression.scene.json</code></a>, <a href="eu-reski-news/docs/scenes-example/on-expression.scene.json"><code>on-expression.scene.json</code></a> mit allen Generationseinstellungen.</p>
+    <p>Vollständiges Beispiel: <a href="scenes-example/scene.json"><code>scene.json</code></a>, <a href="scenes-example/off-expression.scene.json"><code>off-expression.scene.json</code></a>, <a href="scenes-example/on-expression.scene.json"><code>on-expression.scene.json</code></a> mit allen Generationseinstellungen.</p>
     <p><code>scene.json</code>:</p>
     <pre>{
   "generationIntervalInMinutes": "60",
@@ -62,6 +62,7 @@ npm run news:exhibition:from-scene-json:with-time-interpolation -- --generation-
         <tr><td><code>autoMode</code></td><td><code>--auto-mode</code> / <code>--no-auto-mode</code></td></tr>
         <tr><td><code>storyModel</code></td><td><code>--story-model</code></td></tr>
         <tr><td><code>iterations</code>, <code>pauseMs</code>, <code>articleOrder</code></td><td><code>--iterations</code>, <code>--pause-ms</code>, <code>--article-order</code></td></tr>
+        <tr><td><code>stopOmitSimilar</code> · Standard <code>true</code></td><td><code>--stop-omit-similar</code> / <code>--no-stop-omit-similar</code></td></tr>
         <tr><td><code>styleReference</code>, <code>legacyGuernicaStyleReferencePrompt</code></td><td><code>--style-reference=PATH</code>, <code>--no-style-reference</code>, <code>--legacy-guernica-style-reference-prompt</code></td></tr>
         <tr><td><code>guernicaFigureReference</code>, <code>articleImageReference</code>, <code>guernicaLocationReference</code></td><td><code>--no-guernica-figure-reference</code>, <code>--article-image-reference</code>, <code>--guernica-location-reference</code> / <code>--no-guernica-location-reference</code></td></tr>
         <tr><td><code>landscapePrompt</code>, <code>preserveCubistVideoStyle</code></td><td><code>--landscape-prompt</code>, <code>--preserve-cubist-video-style</code></td></tr>
@@ -75,12 +76,14 @@ npm run news:exhibition:from-scene-json:with-time-interpolation -- --generation-
         <tr><td><code>visualControls.mode/symbolic/roomDeepness/layering</code></td><td><code>--scene-visual-controls</code> / <code>--fixed-visual-controls</code>, <code>--symbolic</code> / <code>--no-symbolic</code>, <code>--room-deepness</code> / <code>--no-room-deepness</code>, <code>--layering</code></td></tr>
       </tbody>
     </table></div>
+    <p>Jev vergleicht den Kandidaten mit dem letzten verwendeten Artikel. Ab <code>NEWS_ARTICLE_SIMILARITY_SKIP_THRESHOLD</code> (Standard <code>0.85</code>) wird er übersprungen und der nächste geprüft. Score und Flag stehen in <code>record.json</code>; <code>--stop-ommit-similar</code> wird als Schreibvariante akzeptiert.</p>
   </section>
 
   <details>
     <summary>Vollständige CLI-Flagliste</summary>
     <p><strong>Iteratoren, Szene und Dauer:</strong></p>
-    <pre>--iterations --pause-ms --article-order --scene-count-mode --scenes --scene-count-takt
+    <pre>--iterations --pause-ms --article-order --stop-omit-similar --no-stop-omit-similar
+--scene-count-mode --scenes --scene-count-takt
 --scene-count-numerator --scene-count-denominator --scene-count-type --scene-count-bias
 --min-scenes --max-scenes --scene-length-takt --scene-length-type
 --scene-length-multiplier --scene-length-bias --min-scene-seconds --max-scene-seconds</pre>
