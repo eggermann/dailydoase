@@ -3,7 +3,7 @@
   "generationOverrides": {
     "autoMode": false,
     "storyModel": "gpt-4o-mini",
-    "iterations": 5,
+    "iterations": 1,
     "pauseMs": 0,
     "articleOrder": "linear",
     "styleReference": false,
