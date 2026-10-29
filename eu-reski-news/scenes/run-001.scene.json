@@ -2,7 +2,6 @@
   "name": "run-001-exhibition",
   "generationOverrides": {
     "autoMode": true,
-    "iterations": 10,
-    "preserveCubistVideoStyle": false
+    "iterations": 1
   }
 }

@@ -1,5 +1,7 @@
 import { loadTaktmuster } from './taktmuster.mjs';
-import { autoDirectorPromptVersion } from './auto-director.mjs';
+import { autoDirectorPromptVersion, previousAutoDirectorPromptVersion } from './auto-director.mjs';
+
+const autoDirectorSceneCountVersions = [autoDirectorPromptVersion, previousAutoDirectorPromptVersion];
 
 export function resolveSceneCountSettings(options) {
   const mode = options['scene-count-mode'] || 'fixed';
@@ -74,7 +76,7 @@ export function resolveAutoSceneCountLimits(settings) {
 
 export function createAutoSceneCountSelection(decision, iteration, limits) {
   const bounds = resolveAutoSceneCountLimits(limits);
-  if (decision?.promptVersion !== autoDirectorPromptVersion || !Number.isInteger(decision.sceneCount)
+  if (!autoDirectorSceneCountVersions.includes(decision?.promptVersion) || !Number.isInteger(decision.sceneCount)
     || decision.sceneCount < bounds.minimum || decision.sceneCount > bounds.maximum
     || typeof decision.sceneCountReason !== 'string' || !decision.sceneCountReason.trim()) {
     throw new Error(`Auto Director scene count must be an integer from ${bounds.minimum} through ${bounds.maximum} with a saved reason`);
@@ -89,14 +91,14 @@ export function createAutoSceneCountSelection(decision, iteration, limits) {
 
 export function isNewAutoSingleScene(record) {
   return record?.autoMode === true
-    && record?.autoDecision?.promptVersion === autoDirectorPromptVersion
+    && autoDirectorSceneCountVersions.includes(record?.autoDecision?.promptVersion)
     && record.sceneCount === 1
     && record.plan?.scenes?.length === 1;
 }
 
 export function replaySavedSceneCount(record, stream, { validateFixed = false } = {}) {
   const savedDecision = record?.autoDecision;
-  if (savedDecision?.promptVersion === autoDirectorPromptVersion) {
+  if (autoDirectorSceneCountVersions.includes(savedDecision?.promptVersion)) {
     const count = savedDecision.sceneCount ?? record.sceneCount;
     if (!Number.isInteger(count) || count !== record.sceneCount) {
       throw new Error('Saved Auto Director scene count differs from its iteration record');

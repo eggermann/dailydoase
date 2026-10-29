@@ -30,11 +30,19 @@ function findFont(font) {
   }
 }
 
+function decodeNumericHtmlEntities(value) {
+  return String(value).replace(/&#(?:x([\da-f]{1,6})|(\d{1,7}));/gi, (entity, hexadecimal, decimal) => {
+    const codePoint = Number.parseInt(hexadecimal || decimal, hexadecimal ? 16 : 10);
+    if (codePoint === 0 || codePoint > 0x10ffff || (codePoint >= 0xd800 && codePoint <= 0xdfff)) return entity;
+    return String.fromCodePoint(codePoint);
+  });
+}
+
 export async function renderTitleCard({ runDirectory, iterationDirectory, iterationNumber, cardSeconds = 4, font = null, titleCardDirectory = null }) {
   const iterationId = String(iterationNumber).padStart(3, '0');
   const recordPath = join(runDirectory, iterationDirectory, 'record.json');
   const record = JSON.parse(await readFile(recordPath, 'utf8'));
-  const title = record.article?.title?.trim();
+  const title = decodeNumericHtmlEntities(record.article?.title?.trim() || '');
   if (!title) throw new Error(`Article title missing in ${recordPath}`);
 
   const cardsDirectory = titleCardDirectory || join(runDirectory, 'merged', 'title-cards');

@@ -95,7 +95,7 @@
     "news:eu:today": "node eu-reski-news/scripts/fetch-eu-news-today.mjs",
     "news:eu:jev": "node eu-reski-news/scripts/classify-eu-news-with-jev.mjs",
     "news:exhibition": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh",
-    "news:exhibition:from-scene-json": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh --scene=eu-reski-news/scenes",
+    "news:exhibition:from-scene-json": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh --scene=${NEWS_SCENE_PATH:-eu-reski-news/scenes}",
     "news:exhibition:from-scene-json:with-time-interpolation": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh --generation-interval=1h --scene=eu-reski-news/scenes",
     "news:auto-10": "npm run news:exhibition -- --auto-mode --iterations=10",
     "news:html": "node eu-reski-news/scripts/build-news-html.mjs",

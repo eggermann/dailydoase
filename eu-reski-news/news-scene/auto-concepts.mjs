@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { autoDirectorPromptVersion } from './auto-director.mjs';
+import { autoDirectorPromptVersion, previousAutoDirectorPromptVersion } from './auto-director.mjs';
 
 export const autoConceptHandoffVersion = 'eu-reski-auto-concept-handoff-v1';
 
@@ -12,7 +12,7 @@ export function autoConceptInputHash(baseInputHash, snapshot) {
 }
 
 export function createAutoConceptSnapshot(decision) {
-  if (decision?.promptVersion !== autoDirectorPromptVersion) return null;
+  if (![autoDirectorPromptVersion, previousAutoDirectorPromptVersion].includes(decision?.promptVersion)) return null;
   const snapshot = {
     autoDirectorVersion: decision.promptVersion,
     sceneCount: decision.sceneCount,
@@ -75,10 +75,15 @@ export function addAutoConceptsToStoryRequest(built, snapshot) {
 }
 
 export function addAutoConceptsToTimingRequest(request, snapshot) {
+  const dramaticTimingAllowed = request.messages.some((message) =>
+    message.role === 'system' && message.content.includes('Choose integer durations from'));
+  const durationInstruction = snapshot?.autoDirectorVersion === autoDirectorPromptVersion && dramaticTimingAllowed
+    ? 'Choose scene durations only when the existing timing request explicitly permits dramatic pacing, and stay within its fixed bounds. Otherwise copy the supplied durations exactly.'
+    : 'Preserve every saved duration exactly.';
   return snapshot ? addStageConcept({ ...request, autoConceptSnapshot: snapshot }, {
     stage: 'timing and motion planning',
     conceptFields: ['motionConcept'],
-    instruction: 'Use the saved motion concept when planning movement and camera paths for the already locked visual plan. Preserve every saved duration, scene action, image prompt and scene count exactly. Do not add events, change timing settings, or rewrite visual content.',
+    instruction: `Use the saved motion concept when planning movement and camera paths for the already locked visual plan. ${durationInstruction} Preserve every scene action, image prompt and scene count exactly. Do not add events, change timing settings, or rewrite visual content.`,
   }) : request;
 }
 
