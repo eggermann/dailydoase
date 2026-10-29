@@ -70,6 +70,11 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
       .sort((left, right) => left.localeCompare(right, 'en'));
     sceneIterations = await Promise.all(iterationFileNames.map(async (fileName) =>
       JSON.parse(await readFile(resolve(absoluteScenePath, fileName), 'utf8'))));
+  } else if (!Array.isArray(sceneIterations)
+    && typeof scene.name === 'string'
+    && scene.generationOverrides && typeof scene.generationOverrides === 'object'
+    && !Array.isArray(scene.generationOverrides)) {
+    sceneIterations = [scene];
   }
   if (!Array.isArray(sceneIterations) || sceneIterations.length === 0) {
     throw new Error(isSceneDirectory
