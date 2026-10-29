@@ -20,6 +20,7 @@
   "generation": {
     "autoMode": false,
     "storyModel": "gpt-4.1-mini",
+    "includeSourceCodeContext": true,
     "iterations": 4,
     "pauseMs": 0,
     "articleOrder": "linear",

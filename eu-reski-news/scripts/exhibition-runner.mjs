@@ -176,6 +176,7 @@ function defaultsFromExhibitionSettings(generation = defaultGeneration) {
   const { sceneCount, sceneLength, visualControls } = generation;
   const defaults = [
     `--story-model=${generation.storyModel}`,
+    generation.includeSourceCodeContext === false ? '--no-source-code-context' : '--include-source-code-context',
     `--scene-count-mode=${sceneCount.mode}`,
     ...(sceneCount.mode === 'fixed' && Number.isInteger(sceneCount.count) ? [`--scenes=${sceneCount.count}`] : []),
     `--scene-count-takt=${sceneCount.takt}`,
@@ -232,6 +233,7 @@ function mergeRunnerArguments(defaults, userArguments, stopAfterIterations = nul
   const merged = [];
   const oppositeFlags = new Map([
     ['--auto-mode', '--no-auto-mode'], ['--no-auto-mode', '--auto-mode'],
+    ['--include-source-code-context', '--no-source-code-context'], ['--no-source-code-context', '--include-source-code-context'],
     ['--symbolic', '--no-symbolic'], ['--no-symbolic', '--symbolic'],
     ['--room-deepness', '--no-room-deepness'], ['--no-room-deepness', '--room-deepness'],
     ['--scene-visual-controls', '--fixed-visual-controls'], ['--fixed-visual-controls', '--scene-visual-controls'],

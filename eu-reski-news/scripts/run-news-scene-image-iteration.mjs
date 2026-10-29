@@ -34,6 +34,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const optionDefinitions = {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
+  'include-source-code-context': { type: 'boolean', default: false }, 'no-source-code-context': { type: 'boolean', default: false },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   'scene-count-mode': { type: 'string', default: process.env.NEWS_SCENE_COUNT_MODE || 'taktmuster' },
@@ -123,6 +124,7 @@ if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
   options['fixed-visual-controls'] = true;
 }
 let storyModel = options['story-model'].trim();
+if (options['include-source-code-context'] && options['no-source-code-context']) throw new Error('Choose only one source code context flag');
 if (!storyModel) throw new Error('--story-model must not be empty');
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
@@ -392,6 +394,7 @@ function currentGenerationSettings() {
     imageProvider: options['image-provider'],
     imageModel: options['image-provider'] === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
     storyModel,
+    includeSourceCodeContext: !options['no-source-code-context'],
     articleImageReference: options['article-image-reference'],
     guernicaLocationReference: options['guernica-location-reference'],
     landscapePrompt: options['landscape-prompt'],
@@ -1540,7 +1543,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (usesGuernicaFigureReference()) {
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
       }
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null });
+      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, includeSourceCodeContext: record.generationSettings?.includeSourceCodeContext ?? true, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null });
       if (options['landscape-prompt']) {
         const landscapeInstruction = 'LANDSCAPE PROMPT: Use the wide frame deliberately; let each scene’s focal action and spatial relationships use the frame width naturally. Do not force a horizontal frieze, central cluster or repeated layout.';
         built.director += `\n\n${landscapeInstruction}`;

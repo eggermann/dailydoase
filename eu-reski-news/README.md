@@ -71,6 +71,8 @@ npm run news:exhibition:from-scene-json:with-time-interpolation -- --generation-
 
 `generationOverrides` ist jeweils ein Objekt, kein Array. Vollständiges Beispiel und Varianten: [`docs/scenes-example/`](docs/scenes-example/). Zum Auswählen eines anderen Ordners: `npm run news:exhibition -- --scene=/absoluter/pfad/zum/ordner`.
 
+`includeSourceCodeContext` steuert, ob der Planner seinen Quellcode und das Schema zusätzlich zum Regieprompt in den GPT-Aufruf einfügt. Standard: `true`. In einer Scene setzt `"includeSourceCodeContext": false` den Code-Kontext ab; per CLI überschreiben `--no-source-code-context` und `--include-source-code-context` den JSON-Wert. Der Regieprompt, die Eingabedaten und das strukturierte Antwortschema bleiben enthalten. Beim Fortsetzen einer gespeicherten Iteration gilt deren gespeicherte Einstellung; ältere Aufzeichnungen ohne diese Angabe verwenden `true`.
+
 Lauf setzt alphabetische Dateireihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Ordner und dieselben CLI-Overrides erneut angeben.
 
 Ein unterbrochener Lauf wird beim Neustart mit demselben Ausgabeordner fortgesetzt. Einen abgeschlossenen Lauf kann `--resume-run=PFAD --stop-after-iterations=10` bis insgesamt zehn Iterationen fortsetzen; dabei denselben Scene-Ordner und Ausgabeordner verwenden. Mit `--article-order=global` wird beim Fortsetzen die gespeicherte Artikelposition übernommen. Ohne gespeicherten globalen Zähler beginnt ein neuer globaler Lauf beim ersten Artikel. Der Laufbericht zeigt den Zähler und die nächste Listenposition.
