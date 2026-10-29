@@ -121,6 +121,9 @@ async function findRunsForScene(sceneName) {
       status: run.status ?? 'unbekannt',
       iterations: run.iterations?.length ?? 0,
       storyModel: run.generationSettings?.storyModel ?? run.runOptions?.['story-model'] ?? 'unbekannt',
+      autoMode: run.generationSettings?.autoMode,
+      imageProvider: run.generationSettings?.imageProvider,
+      videoModel: run.generationSettings?.videoModel,
       expectedStoryModel: null,
       filmUrl,
       reportUrl: `${relativeRunPath}/index.html`,
@@ -131,26 +134,40 @@ async function findRunsForScene(sceneName) {
   return matchingRuns.sort((left, right) => right.name.localeCompare(left.name, 'en'));
 }
 
-function renderComparisonFilms(scene, matchingRuns, effectiveGeneration) {
+async function readOriginalProfileName(reference) {
+  if (reference?.profileName) return reference.profileName;
+  if (!reference?.iteratorPlan?.startsWith('file://')) return null;
+  try {
+    const plan = JSON.parse(await readFile(new URL(reference.iteratorPlan), 'utf8'));
+    return plan.iterators?.map((iterator) => iterator.name).filter(Boolean).join(', ') || null;
+  } catch {
+    return null;
+  }
+}
+
+function renderComparisonFilms(scene, matchingRuns, effectiveGeneration, originalProfileName) {
   const reference = scene.reference ?? {};
   const originalFilm = reference.film
-    ? `<li class="film-reference"><b>Originalfilm:</b> <a href="${escapeHtml(reference.film)}">Film öffnen</a>${reference.profileName ? ` · Profil <code>${escapeHtml(reference.profileName)}</code>` : ''}${reference.settingsMatch === true ? ' · laut Run-Log mit diesem Profil erzeugt' : ''}${reference.notes ? `<p>${escapeHtml(reference.notes)}</p>` : ''}</li>`
+    ? `<li class="film-reference"><b>Originalfilm:</b> <a href="${escapeHtml(reference.film)}">Film ansehen</a>${originalProfileName ? ` · damals gestartetes Profil: <code>${escapeHtml(originalProfileName)}</code>` : ''}${reference.runManifest ? ` · <a href="${escapeHtml(reference.runManifest)}">Run-Protokoll</a>` : ''}${reference.notes ? `<p>${escapeHtml(reference.notes)}</p>` : ''}</li>`
     : '';
-  const relatedRuns = matchingRuns.map((run) => {
+  const filmRuns = matchingRuns.filter((run) => run.filmUrl).map((run) => {
     const modelDiffers = run.storyModel !== effectiveGeneration.storyModel;
-    const film = run.filmUrl
-      ? `<a href="${escapeHtml(run.filmUrl)}">Gesamtfilm ansehen</a>`
-      : run.hasReport ? `<a href="${escapeHtml(run.reportUrl)}">Run-Bericht öffnen</a>` : 'kein Filmbericht vorhanden';
     const settingsNote = modelDiffers
-      ? ` · älterer/abweichender Stand: Story-Modell ${escapeHtml(run.storyModel)}, Scene heute ${escapeHtml(effectiveGeneration.storyModel)}`
+      ? ` · älterer Stand: Story-Modell ${escapeHtml(run.storyModel)} (Scene jetzt: ${escapeHtml(effectiveGeneration.storyModel)})`
       : '';
-    return `<li><b>${escapeHtml(run.name)}</b> · ${escapeHtml(run.status)} · ${run.iterations} Iteration(en) · ${film}${settingsNote}</li>`;
+    const mode = run.autoMode === undefined ? '' : ` · Auto-Modus ${run.autoMode ? 'an' : 'aus'}`;
+    const models = [run.imageProvider, run.videoModel].filter(Boolean).join(' / ');
+    return `<li><b>${escapeHtml(run.name)}</b> · ${run.iterations} Iteration(en) · Story ${escapeHtml(run.storyModel)}${mode}${models ? ` · Bild/Video ${escapeHtml(models)}` : ''} · <a href="${escapeHtml(run.filmUrl)}">Film ansehen</a>${settingsNote}</li>`;
+  }).join('');
+  const runsWithoutFilm = matchingRuns.filter((run) => !run.filmUrl).map((run) => {
+    const report = run.hasReport ? ` · <a href="${escapeHtml(run.reportUrl)}">Run-Bericht</a>` : '';
+    return `<li><b>${escapeHtml(run.name)}</b> · ${escapeHtml(run.status)} · ${run.iterations} Iteration(en)${report}</li>`;
   }).join('');
 
-  if (!originalFilm && !relatedRuns) {
+  if (!originalFilm && !filmRuns && !runsWithoutFilm) {
     return `<section class="comparison"><h3>Vergleichsfilm</h3><p>Noch kein zugeordneter Originalfilm dokumentiert.</p></section>`;
   }
-  return `<section class="comparison"><h3>Welcher Film gehört zu dieser Scene?</h3><ul>${originalFilm}${relatedRuns}</ul></section>`;
+  return `<section class="comparison"><h3>Filme zum Vergleichen</h3><ul>${originalFilm}${filmRuns}</ul>${runsWithoutFilm ? `<details><summary>${matchingRuns.filter((run) => !run.filmUrl).length} weitere Starts ohne Gesamtfilm</summary><ul>${runsWithoutFilm}</ul></details>` : ''}<p>Die Run-Namen zeigen, welches Scene-Profil gestartet wurde. Ältere Filme können mit früheren Einstellungen entstanden sein.</p></section>`;
 }
 
 const sceneFiles = await findSceneFiles(sceneDirectory);
@@ -171,7 +188,8 @@ const cards = (await Promise.all(scenes.map(async ({ relativePath, data }) => {
   const facts = sceneFacts(data, defaultSettings.generation).map(([name, value]) => `<div class="fact"><dt>${escapeHtml(name)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('');
   const effectiveGeneration = mergeSettings(defaultSettings.generation, data.generationOverrides ?? {});
   const matchingRuns = await findRunsForScene(data.name);
-  const comparisonFilms = renderComparisonFilms(data, matchingRuns, effectiveGeneration);
+  const originalProfileName = await readOriginalProfileName(data.reference);
+  const comparisonFilms = renderComparisonFilms(data, matchingRuns, effectiveGeneration, originalProfileName);
   const runnerInputs = data.reconstructionInputs
     ? `<details><summary>Rekonstruktionshinweise</summary><pre>${escapeHtml(JSON.stringify(data.reconstructionInputs, null, 2))}</pre></details>`
     : '';
@@ -205,6 +223,12 @@ const html = `<!doctype html>
     .path { color: #aaa391; font: .85rem ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
     .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 8px; margin: 16px 0; }
     .fact { border: 1px solid #34352e; border-radius: 8px; padding: 9px 11px; min-width: 0; }
+    .comparison { margin: 16px 0; padding: 12px 15px; border-radius: 9px; background: #151611; border: 1px solid #46473a; }
+    .comparison h3 { margin: 0 0 4px; color: #d8ff49; }
+    .comparison p { margin: 4px 0 8px; color: #bbb5a7; font-size: .92rem; }
+    .comparison ul { margin: 8px 0 0; padding-left: 22px; }
+    .comparison li { margin: 7px 0; overflow-wrap: anywhere; }
+    .comparison a { color: #d8ff49; }
     dt { color: #aaa391; font-size: .82rem; }
     dd { margin: 2px 0 0; overflow-wrap: anywhere; }
     details { border-top: 1px solid #34352e; margin-top: 12px; padding-top: 10px; }
