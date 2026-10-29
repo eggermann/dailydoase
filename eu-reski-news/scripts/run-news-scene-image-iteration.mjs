@@ -44,6 +44,7 @@ import { advanceWorkerSchedule, createInitialWorkerSchedule, recoverWorkerSchedu
 import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
 import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../news-scene/global-article-reservations.mjs';
 import { applyStoryCodeContext } from '../news-scene/story-code-context.mjs';
+import { articleSimilaritySkipThreshold, scoreArticleSimilarity } from '../news-scene/article-similarity.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const optionDefinitions = {
@@ -90,6 +91,8 @@ const optionDefinitions = {
   'videos-after-each-iteration': { type: 'boolean', default: false },
   'generate-title-cards': { type: 'boolean', default: false },
   'no-generate-title-cards': { type: 'boolean', default: false },
+  'stop-omit-similar': { type: 'boolean', default: true },
+  'no-stop-omit-similar': { type: 'boolean', default: false },
   'video-model': { type: 'string', default: 'prunaai:p-video@2-pro' },
   'video-resolution': { type: 'string', default: '480p' },
   'video-settings-mode': { type: 'string', default: 'cost' },
@@ -98,8 +101,13 @@ const optionDefinitions = {
   layering: { type: 'string', default: '0' },
   'iterator-plan': { type: 'string' },
 };
-const parsedArguments = parseArgs({ options: optionDefinitions });
+const normalizedCommandLineArguments = process.argv.slice(2).map((argument) => argument.replace(
+  /^--(no-)?stop-ommit-similar(?==|$)/,
+  '--$1stop-omit-similar',
+));
+const parsedArguments = parseArgs({ args: normalizedCommandLineArguments, options: optionDefinitions });
 let options = parsedArguments.values;
+if (options['no-stop-omit-similar']) options['stop-omit-similar'] = false;
 options['auto-mode'] = resolveAutoModeSetting(false, process.argv.slice(2));
 if (options['generate-title-cards'] && options['no-generate-title-cards']) {
   throw new Error('Choose only one: --generate-title-cards or --no-generate-title-cards');
@@ -498,6 +506,7 @@ function currentGenerationSettings() {
   return {
     autoMode: options['auto-mode'],
     articleOrder: options['article-order'],
+    stopOmitSimilar: options['stop-omit-similar'],
     sceneTiming: {
       takt: Number(options['scene-length-takt']),
       type: options['scene-length-type'],
@@ -1217,6 +1226,7 @@ async function main() {
       ? await allocateRunDirectory(resolve(options['output-dir']))
       : resolve(options['output-dir']);
   const globalArticleProgressPath = join(resolve(options['output-dir']), 'global-article-progress.json');
+  const lastUsedArticlePath = join(resolve(options['output-dir']), 'last-used-article.json');
   const runStartedAtMs = Date.now();
   const runManifest = options['resume-run'] ? await json(join(iterationRoot, 'run.json')) : groupedRun ? {
     profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
@@ -1268,6 +1278,19 @@ async function main() {
       console.log(`Global news article counter resumes at ${articleProgress.nextDraw + 1} (${articleProgress.sourceAggregate})`);
     }
     if (!sharedArticleProgress && !articleProgress) console.log('Global news counter: no saved position; starting with the first article.');
+  }
+  if (!articleProgress?.lastArticle) {
+    const lastUsedArticle = await json(lastUsedArticlePath).catch((error) => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    });
+    if (lastUsedArticle?.article) {
+      articleProgress = {
+        ...(lastUsedArticle.articleProgress || {}),
+        ...(articleProgress || {}),
+        lastArticle: lastUsedArticle.article,
+      };
+    }
   }
   const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
     ? Date.parse(runManifest.sceneSchedule.startedAt)
@@ -1374,7 +1397,14 @@ async function main() {
   }
   const runBaseOptions = { ...options };
   const iteratorOptionValues = iteratorPlan
-    ? iteratorPlan.iterators.map(({ arguments: iteratorArguments }) => parseArgs({ args: iteratorArguments, options: optionDefinitions }).values)
+      ? iteratorPlan.iterators.map(({ arguments: iteratorArguments }) => {
+        const parsed = parseArgs({
+          args: iteratorArguments.map((argument) => argument.replace(/^--(no-)?stop-ommit-similar(?==|$)/, '--$1stop-omit-similar')),
+          options: optionDefinitions,
+        }).values;
+        if (parsed['no-stop-omit-similar']) parsed['stop-omit-similar'] = false;
+        return parsed;
+      })
     : null;
   const activateIterator = (index) => {
     if (!iteratorPlan) return;
@@ -1463,6 +1493,7 @@ async function main() {
         sourceAggregate: latestRecord.sourceAggregate,
         aggregateHash: latestRecord.aggregateHash || null,
         nextDraw: latestRecord.selection.draw + 1,
+        ...(latestRecord.article ? { lastArticle: latestRecord.article } : {}),
         ...(latestRecord.article ? { seenArticleKeys: [...new Set([
           ...(articleProgress?.seenArticleKeys || []), articleKey(latestRecord.article),
         ])] } : {}),
@@ -1552,6 +1583,7 @@ async function main() {
         sourceAggregate: completedRecord.sourceAggregate,
         aggregateHash: completedRecord.aggregateHash || null,
         nextDraw: completedRecord.selection.draw + 1,
+        ...(completedRecord.article ? { lastArticle: completedRecord.article } : {}),
         ...(completedRecord.article ? { seenArticleKeys: [...new Set([
           ...(articleProgress?.seenArticleKeys || []), articleKey(completedRecord.article),
         ])] } : {}),
@@ -1559,6 +1591,15 @@ async function main() {
       if (options['article-order'] === 'global') {
         console.log(`Global news counter: ${articleProgress.seenArticleKeys?.length || 0} used; next list position ${articleProgress.nextDraw + 1}.`);
       }
+    }
+    if (completedRecord.article) {
+      await save(lastUsedArticlePath, {
+        articleKey: articleKey(completedRecord.article),
+        article: completedRecord.article,
+        sourceAggregate: completedRecord.sourceAggregate,
+        articleProgress: articleProgress ? articleProgressSnapshot(articleProgress) : null,
+        completedAt: completedRecord.completedAt || new Date().toISOString(),
+      });
     }
     imageSeedOffset += completedRecord.sceneCount;
     completed += 1;
@@ -1694,6 +1735,11 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       let article;
       let aggregateIndex;
       let score;
+      let articleSimilarity = null;
+      const skippedSimilarArticles = [];
+      const stopOmitSimilar = options['stop-omit-similar'];
+      const similarityThreshold = articleSimilaritySkipThreshold();
+      const previousArticle = articleProgress?.lastArticle || null;
       if (order === 'global') {
         globalArticleReservationId = `${resolve(iterationRoot)}::iteration-${String(iterationIndex + 1).padStart(3, '0')}`;
         const reservation = await reserveGlobalArticle({
@@ -1703,9 +1749,13 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           reservationId: globalArticleReservationId,
           recordPath: join(directory, 'record.json'),
           hasUsableArticleImage,
+          stopOmitSimilar,
+          similarityThreshold,
         });
         articleProgress = reservation.articleProgress;
         ({ draw, article, aggregateIndex, score } = reservation);
+        articleSimilarity = reservation.articleSimilarity || null;
+        skippedSimilarArticles.push(...(reservation.skippedSimilarArticles || []));
       } else {
         const requestedDraw = options['article-id']
           ? candidates.findIndex(({ article: candidateArticle }) => String(candidateArticle.id) === options['article-id'])
@@ -1721,13 +1771,31 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           const candidateIndex = (requestedDraw + offset) % candidates.length;
           const candidate = candidates[candidateIndex];
           if (await hasUsableArticleImage(candidate.article.image)) {
+            const candidateSimilarity = stopOmitSimilar && previousArticle && !options['article-id']
+              ? await scoreArticleSimilarity(candidate.article, previousArticle)
+              : null;
+            if (candidateSimilarity?.score >= similarityThreshold) {
+              skippedSimilarArticles.push({
+                articleKey: articleKey(candidate.article),
+                title: candidate.article.title || '(untitled)',
+                similarityToLastArticle: candidateSimilarity.score,
+              });
+              console.warn(`Skip similar article (${candidateSimilarity.score.toFixed(3)} >= ${similarityThreshold.toFixed(3)}): ${candidate.article.title || '(untitled)'}`);
+              continue;
+            }
             draw = candidateIndex;
+            articleSimilarity = candidateSimilarity;
             break;
           }
           console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
           if (options['article-id']) break;
         }
-        if (draw < 0) throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+        if (draw < 0) {
+          if (skippedSimilarArticles.length) {
+            throw new Error(`No non-similar ranked article remains; skipped ${skippedSimilarArticles.length} candidates at threshold ${similarityThreshold.toFixed(3)}`);
+          }
+          throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+        }
         ({ article, aggregateIndex, score } = candidates[draw]);
       }
       console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
@@ -1749,6 +1817,13 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           euRelevance: Number.isFinite(score) ? score : null,
           relevancePath: rankedCollection.relevancePath,
           draw,
+          stopOmitSimilar,
+          similarityToLastArticle: articleSimilarity?.score ?? null,
+          isSimilarToLastArticle: articleSimilarity?.isSimilar ?? null,
+          similarityReferenceArticleKey: articleSimilarity?.referenceArticleKey
+            ?? (previousArticle ? articleKey(previousArticle) : null),
+          similarityThreshold,
+          skippedSimilarArticles,
           ...(globalArticleReservationId ? { reservationId: globalArticleReservationId } : {}),
           candidateCount: candidates.length,
           aggregateIndex,

@@ -97,6 +97,8 @@ The EU-RESKI shell starter writes under `eu-reski-news/GENERATIONS/news/iteratio
 
 Article order defaults to `linear`: each runner invocation starts with the first eligible article in the latest aggregate and advances one article per iteration, wrapping at the end. Use `--article-order=random` to draw randomly each iteration. Use `--article-order=global` to continue the saved article counter across runner invocations; its position is saved in `GENERATIONS/news/global-article-progress.json`. `--article-id=ID` pins one article.
 
+Before selecting an article, Jev compares it with the last completed article in the saved run history. Similarity is on by default (`stopOmitSimilar: true` in scene JSON, emitted as `--stop-omit-similar`; `--stop-ommit-similar` is accepted as a spelling alias). Use `--no-stop-omit-similar` to turn it off. The score is recorded from `0` to `1` in `record.json` as `selection.similarityToLastArticle`; candidates at or above `NEWS_ARTICLE_SIMILARITY_SKIP_THRESHOLD` are skipped and the next ranked article is checked. The threshold defaults to `0.85` and accepts values from `0` to `1`. `--article-id=ID` remains an explicit override. If every remaining candidate is too similar, the iteration stops instead of generating a duplicate. This comparison runs when each article is selected because the reference article changes after every completed iteration.
+
 Scene files in one directory run as one persistent schedule. Files ending in `.scene.json` are loaded in alphabetical order; their generators share one global article history, so completed stories are not selected again. Use the same command after restarting to resume its active run:
 
 ```sh

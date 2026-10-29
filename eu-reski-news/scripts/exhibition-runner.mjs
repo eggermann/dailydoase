@@ -268,6 +268,7 @@ function defaultsFromExhibitionSettings(generation = defaultGeneration) {
   defaults.push(generation.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
   defaults.push(generation.videosAfterEachIteration ? '--videos-after-each-iteration' : '--no-videos-after-each-iteration');
   defaults.push(generation['generate-title-cards'] ? '--generate-title-cards' : '--no-generate-title-cards');
+  defaults.push(generation.stopOmitSimilar === false ? '--no-stop-omit-similar' : '--stop-omit-similar');
 
   return {
     args: defaults,
