@@ -762,6 +762,7 @@ async function exhibitionMain() {
     console.log('Use --stop-after-iterations=N for a finite run; in parallel Scene mode N applies per worker.');
     console.log('In parallel mode, two workers with N=10 can generate up to 20 iterations total.');
     console.log('Use --new-run to start fresh after an existing campaign; previous Run directories are retained.');
+    console.log('Use --news-only to refresh stale news, finish Jev ranking, and exit before scene generation.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
     console.log('Flags: --auto-mode enables per-iteration artistic direction; --no-auto-mode disables it.');
     console.log('Environment: NEWS_ENV_FILE (in start script), NEWS_REFRESH_INTERVAL_MS.');
@@ -769,10 +770,18 @@ async function exhibitionMain() {
   }
   await withLock(async () => {
     const commandArguments = process.argv.slice(2);
+    const newsOnly = commandArguments.some((argument) => flagName(argument) === '--news-only');
     const startNewRun = commandArguments.some((argument) => flagName(argument) === '--new-run');
     const resumeRequested = commandArguments.some((argument) => flagName(argument) === '--resume-run');
     if (startNewRun && resumeRequested) throw new Error('Choose either --new-run or --resume-run, not both.');
     state = await readState();
+    if (newsOnly) {
+      log(`News-only mode: refresh ${newsDirectory} if stale, finish Jev ranking, then exit.`);
+      await refreshNewsIfNeeded();
+      if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
+      log('News refresh and Jev ranking complete; exiting before scene generation.');
+      return;
+    }
     let resumingParallelCampaign = false;
     if (startNewRun) {
       state.sceneWorkers = {};
@@ -950,7 +959,7 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run'].includes(flagName(argument))) {
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run', '--news-only'].includes(flagName(argument))) {
         if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }
@@ -1210,10 +1219,7 @@ async function exhibitionMain() {
       await saveState();
     }
 
-    if (!await rankedCollectionAvailable()) {
-      log('Noch kein Jev-Ranking vorhanden; initialer News-Refresh läuft vor der ersten Iteration.');
-      await refreshNewsIfNeeded();
-    }
+    await refreshNewsIfNeeded();
     if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
 
     if (parallelWorkers) {

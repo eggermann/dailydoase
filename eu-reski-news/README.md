@@ -105,6 +105,12 @@ Scene files in one directory run as one persistent schedule. Files ending in `.s
 npm run news:exhibition -- --scene=eu-reski-news/scenes --generation-interval=1h
 ```
 
+To refresh a stale news collection, finish its Jev ranking, and exit before scene generation, use:
+
+```sh
+npm run news:exhibition:from-scene-json -- --news-only
+```
+
 ```sh
 # Three articles in collection order
 npm run news:story -- --iterations=3
