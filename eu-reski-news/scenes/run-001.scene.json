@@ -10,6 +10,9 @@
   "generationOverrides": {
     "autoMode": true,
     "iterations": 10,
-    "preserveCubistVideoStyle": false
+    "preserveCubistVideoStyle": false,
+    "storyModel": "gpt-6-luna",
+    "includeSourceCodeContext": false,
+    "sourceCodeSummaryFile": "eu-reski-news/docs/scene-code-summary.md"
   }
 }

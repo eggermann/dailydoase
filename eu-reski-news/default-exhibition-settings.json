@@ -11,7 +11,13 @@
     "mergeCheckMs": 20000,
     "mergeRetryMs": 60000,
     "firstLastGlue": true,
-    "glueDurationPattern": [9, 5, 7, 5, 8],
+    "glueDurationPattern": [
+      9,
+      5,
+      7,
+      5,
+      8
+    ],
     "glueWaitPattern": "classic",
     "frameOffsetSeconds": 0.25,
     "fadeSeconds": 0.25,
@@ -67,6 +73,7 @@
       "symbolic": true,
       "roomDeepness": false,
       "layering": 3
-    }
+    },
+    "guernicaFigureReference": true
   }
 }

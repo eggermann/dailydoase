@@ -11,7 +11,7 @@ import { prepareImageReference } from '../news-scene/reference-images.mjs';
 import { generateFluxKleinImage } from '../news-scene/huggingface-flux-klein.mjs';
 import { buildTimingRequest, applySceneTiming, visualPlanSnapshot } from '../news-scene/scene-timing.mjs';
 import { createSemanticSource } from '../news-scene/semantic-source.mjs';
-import { createSceneCountStream, resolveSceneCountSettings } from '../news-scene/scene-count.mjs';
+import { createAutoSceneCountSelection, createSceneCountStream, replaySavedSceneCount, resolveAutoSceneCountLimits, resolveSceneCountSettings } from '../news-scene/scene-count.mjs';
 import { loadTaktmuster } from '../news-scene/taktmuster.mjs';
 import { buildVideoVisionRequest, validateVideoVisionResponse, videoVisionPromptVersion } from '../news-scene/video-vision.mjs';
 import { buildGrokVideoPrompt, buildVideoDirectionRequest, validateVideoDirectionResponse, videoDirectionInputHash, videoDirectorPromptVersion } from '../news-scene/video-director.mjs';
@@ -22,19 +22,35 @@ import { articleKey } from './news-eu-relevance.mjs';
 import { renderTitleCard } from '../news-scene/title-card.mjs';
 import {
   autoDirectorPromptVersion,
+  previousAutoDirectorPromptVersion,
   buildAutoDirectorRequest,
+  resolveAutoDecisionAction,
   resolveAutoModeSetting,
   resolveEffectiveAutoFlags,
   resolveSavedAutoDecision,
   validateAutoDirectorResponse,
 } from '../news-scene/auto-director.mjs';
+import {
+  addAutoConceptsToAudioRequest,
+  addAutoConceptsToStoryRequest,
+  addAutoConceptsToTimingRequest,
+  addAutoConceptsToVideoRequest,
+  autoConceptInputHash,
+  createAutoConceptSnapshot,
+} from '../news-scene/auto-concepts.mjs';
+import { addUsageIdempotently, buildAutoDirectorCorrectionRequest, recoverSavedAutoDirectorDecision } from '../news-scene/auto-director-recovery.mjs';
 import { getIteratorStartTime } from '../news-scene/scene-sequence.mjs';
+import { advanceWorkerSchedule, createInitialWorkerSchedule, recoverWorkerSchedule } from '../news-scene/parallel-schedule.mjs';
+import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
+import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../news-scene/global-article-reservations.mjs';
+import { applyStoryCodeContext } from '../news-scene/story-code-context.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const optionDefinitions = {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
   'include-source-code-context': { type: 'boolean', default: false }, 'no-source-code-context': { type: 'boolean', default: false },
+  'source-code-summary-file': { type: 'string' },
   iterations: { type: 'string', default: process.env.NEWS_MAX_ITERATIONS || '1' },
   'pause-ms': { type: 'string', default: process.env.NEWS_POLLING_TIME_MS || '5000' },
   'scene-count-mode': { type: 'string', default: process.env.NEWS_SCENE_COUNT_MODE || 'taktmuster' },
@@ -106,6 +122,7 @@ if (options['no-article-image-reference']) options['article-image-reference'] = 
 if (options['no-dialogue-narration'] && options['allow-dialogue-narration']) {
   throw new Error('Choose only one: --no-dialogue-narration or --allow-dialogue-narration');
 }
+if (options['include-source-code-context'] && options['no-source-code-context']) throw new Error('Choose only one source code context flag');
 if (options['allow-dialogue-narration']) options['no-dialogue-narration'] = false;
 if (options['landscape-prompt'] && options['no-landscape-prompt']) {
   throw new Error('Choose only one: --landscape-prompt or --no-landscape-prompt');
@@ -124,7 +141,6 @@ if (legacyGuernicaStyleReferencePromptEnabled && !options['auto-mode']) {
   options['fixed-visual-controls'] = true;
 }
 let storyModel = options['story-model'].trim();
-if (options['include-source-code-context'] && options['no-source-code-context']) throw new Error('Choose only one source code context flag');
 if (!storyModel) throw new Error('--story-model must not be empty');
 if (options.symbolic && options['no-symbolic']) throw new Error('Choose only one: --symbolic or --no-symbolic');
 if (options['room-deepness'] && options['no-room-deepness']) throw new Error('Choose only one: --room-deepness or --no-room-deepness');
@@ -190,6 +206,12 @@ function applyAutoDecisionToIteration(record, decision) {
   options['video-audio-direction'] = flags.videoAudioDirection;
   options['video-max-zoom'] = String(flags.videoMaxZoom);
   options['video-mode'] = 'image_to_video';
+  if (flags.guernicaFigureReference === false) {
+    options['no-guernica-figure-reference'] = true;
+  }
+  if (flags.guernicaStyleReference === false && !options['guernica-location-reference']) {
+    options['no-style-reference'] = true;
+  }
   legacyGuernicaStyleReferencePromptEnabled = flags.legacyGuernicaStyleReferencePrompt;
 
   record.articleImageReference = flags.articleImageReference;
@@ -198,11 +220,45 @@ function applyAutoDecisionToIteration(record, decision) {
   record.featureSettings = currentFeatureSettings();
   record.visualStyleOptions = { ...recordStyleOptions };
   record.autoMode = true;
+  if (typeof flags.guernicaStyleReference === 'boolean') {
+    record.generationSettings.guernicaStyleReference = flags.guernicaStyleReference;
+    record.featureSettings.guernicaStyleReference = flags.guernicaStyleReference;
+  }
+  if (typeof flags.guernicaFigureReference === 'boolean') {
+    record.guernicaFigureReference = flags.guernicaFigureReference;
+    record.generationSettings.guernicaFigureReference = flags.guernicaFigureReference;
+    record.featureSettings.guernicaFigureReference = flags.guernicaFigureReference;
+  }
+  if (typeof flags.sceneDurationMode === 'string') {
+    record.generationSettings.sceneDurationMode = flags.sceneDurationMode;
+    record.featureSettings.sceneDurationMode = flags.sceneDurationMode;
+  }
+  const hasSavedSceneCount = [autoDirectorPromptVersion, previousAutoDirectorPromptVersion].includes(decision.promptVersion);
   record.autoDecision = {
     promptVersion: decision.promptVersion,
     selectedFlags: decision.selectedFlags,
     effectiveFlags: decision.effectiveFlags,
+    ...(hasSavedSceneCount ? {
+      sceneCount: decision.sceneCount,
+      sceneCountReason: decision.sceneCountReason,
+      dramaturgicalConcept: decision.dramaturgicalConcept,
+      visualConcept: decision.visualConcept,
+      motionConcept: decision.motionConcept,
+      audioConcept: decision.audioConcept,
+      conceptSnapshotHash: createAutoConceptSnapshot(decision).snapshotHash,
+      sceneCountSelection: createAutoSceneCountSelection(decision, decision.iteration - 1, decision.constraints.sceneCount),
+    } : {
+      dramaturgicalConcept: decision.dramaturgicalConcept,
+      visualConcept: decision.visualConcept,
+      motionConcept: decision.motionConcept,
+      audioConcept: decision.audioConcept,
+    }),
   };
+  if (hasSavedSceneCount) {
+    record.sceneCount = decision.sceneCount;
+    record.sceneCountSelection = record.autoDecision.sceneCountSelection;
+    record.autoConceptSnapshot = createAutoConceptSnapshot(decision);
+  }
 }
 
 async function hasDependentIterationWork(record, directory) {
@@ -212,6 +268,7 @@ async function hasDependentIterationWork(record, directory) {
     'gpt-request.json', 'gpt-response.json', 'scene-plan.json', 'visual-plan.json',
     'timing-request.json', 'timing-response.json', 'video-vision.json',
     'video-direction.json', 'audio-direction.json', 'film-plan.json',
+    'auto-director-request.json', 'auto-director-revision-request.json',
   ].includes(name) || /^scene-\d+-(?:request|response)\.json$/.test(name))) return true;
   const mediaFiles = await readdir(join(directory, 'media')).catch((error) => {
     if (error.code === 'ENOENT') return [];
@@ -220,7 +277,7 @@ async function hasDependentIterationWork(record, directory) {
   return mediaFiles.some((name) => /^scene-\d+/.test(name));
 }
 
-async function ensureAutoDecision(record, directory, openAiKey, persist) {
+async function ensureAutoDecision(record, directory, openAiKey, persist, isResume = false) {
   if (!options['auto-mode']) return;
   const decisionPath = join(directory, 'auto-decisions.json');
   const articleId = String(record.article?.id ?? record.article?.url ?? record.article?.title ?? 'unknown');
@@ -228,10 +285,15 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     noDialogueNarration: options['no-dialogue-narration'],
     styleReferenceAvailable: !options['no-style-reference'],
     guernicaLocationReference: options['guernica-location-reference'] && !options['no-style-reference'],
+    guernicaFigureReferenceAvailable: usesGuernicaFigureReference(),
     articleImageAvailable: Boolean(record.articleImage),
     fixedVisualStyleOptions: { ...(record.visualStyleOptions || recordStyleOptions) },
-    sceneCount: record.sceneCount,
+    sceneCount: resolveAutoSceneCountLimits({
+      minimum: Number(options['min-scenes'] ?? 1),
+      maximum: Number(options['max-scenes'] ?? 12),
+    }),
     sceneTiming: record.generationSettings?.sceneTiming || null,
+    sceneDurationModeAvailable: true,
     imageProvider: record.generationSettings?.imageProvider || options['image-provider'],
     videoModel: record.generationSettings?.videoModel || options['video-model'],
     videoResolution: record.generationSettings?.videoResolution || options['video-resolution'],
@@ -239,8 +301,47 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     videosAfterEachIteration: record.generationSettings?.videosAfterEachIteration === true || options['videos-after-each-iteration'],
   };
 
-  if (await exists(decisionPath)) {
+  const request = buildAutoDirectorRequest({ article: record.article, model: record.storyModel, constraints });
+  const requestPath = join(directory, 'auto-director-request.json');
+  const recoveredDecision = await recoverSavedAutoDirectorDecision({
+    directory,
+    expectedRequest: request,
+    articleId,
+    iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
+    model: record.storyModel,
+    constraints,
+    record,
+    applyDecision: applyAutoDecisionToIteration,
+    persist,
+  });
+  if (recoveredDecision) {
+    console.log('Recovered Auto Director decision from saved response; no provider request sent.');
+    return;
+  }
+
+  const savedDecisionExists = await exists(decisionPath);
+  const decisionAction = resolveAutoDecisionAction({
+    autoMode: true,
+    savedDecisionExists,
+    hasDependentWork: savedDecisionExists ? false : await hasDependentIterationWork(record, directory),
+    isResume,
+    savedAutoMode: record.featureSettings?.autoMode,
+  });
+  if (decisionAction === 'reuse') {
     const saved = await json(decisionPath);
+    const hasSavedSceneCount = [autoDirectorPromptVersion, previousAutoDirectorPromptVersion].includes(saved.promptVersion);
+    if (hasSavedSceneCount
+      && ((Number.isInteger(record.sceneCount) && record.sceneCount !== saved.sceneCount)
+        || (record.plan && record.plan.scenes?.length !== saved.sceneCount))) {
+      throw new Error('Saved scene count differs between Auto decision, iteration record, and existing story plan');
+    }
+    if (hasSavedSceneCount) {
+      const savedConceptSnapshot = createAutoConceptSnapshot(saved);
+      if ((record.autoDecision?.conceptSnapshotHash && record.autoDecision.conceptSnapshotHash !== savedConceptSnapshot.snapshotHash)
+        || (record.autoConceptSnapshot?.snapshotHash && record.autoConceptSnapshot.snapshotHash !== savedConceptSnapshot.snapshotHash)) {
+        throw new Error('Iteration record conflicts with the saved Auto Director concept snapshot');
+      }
+    }
     resolveSavedAutoDecision(saved, {
       iteration: Number(basename(directory).match(/iteration-(\d+)/)?.[1]),
       articleId, model: record.storyModel, promptVersion: autoDirectorPromptVersion,
@@ -252,29 +353,40 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     }
     applyAutoDecisionToIteration(record, saved);
     if (record.featureSettings.autoMode !== true) throw new Error('Saved auto decision lost its autoMode setting');
-    record.autoDecision = { promptVersion: saved.promptVersion, selectedFlags: saved.selectedFlags, effectiveFlags: saved.effectiveFlags };
+    if (hasSavedSceneCount) {
+      record.autoDecision = {
+        promptVersion: saved.promptVersion,
+        selectedFlags: saved.selectedFlags,
+        effectiveFlags: saved.effectiveFlags,
+        sceneCount: saved.sceneCount,
+        sceneCountReason: saved.sceneCountReason,
+        dramaturgicalConcept: saved.dramaturgicalConcept,
+        visualConcept: saved.visualConcept,
+        motionConcept: saved.motionConcept,
+        audioConcept: saved.audioConcept,
+        conceptSnapshotHash: saved.conceptSnapshotHash,
+      };
+      record.autoDecision.sceneCountSelection = createAutoSceneCountSelection(saved, saved.iteration - 1, saved.constraints.sceneCount);
+      record.autoConceptSnapshot = createAutoConceptSnapshot(saved);
+      if (saved.conceptSnapshotHash !== record.autoConceptSnapshot.snapshotHash) {
+        throw new Error('Saved Auto Director concept snapshot hash is invalid; refusing to resume changed concepts');
+      }
+    } else {
+      record.autoDecision = { promptVersion: saved.promptVersion, selectedFlags: saved.selectedFlags, effectiveFlags: saved.effectiveFlags };
+    }
     return;
   }
 
-  const hasDependentWork = await hasDependentIterationWork(record, directory);
-  if (hasDependentWork) throw new Error('Auto decision is missing after dependent iteration work began; refusing to choose new settings on resume');
-
-  const request = buildAutoDirectorRequest({ article: record.article, model: record.storyModel, constraints });
-  await save(join(directory, 'auto-director-request.json'), request);
+  await save(requestPath, request);
   let raw = await paidRequest(directory, 'auto-director', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   let answer;
   try {
-    answer = validateAutoDirectorResponse(raw);
+    answer = validateAutoDirectorResponse(raw, { sceneCount: constraints.sceneCount });
   } catch (firstError) {
-    const correctionRequest = {
-      ...request,
-      messages: [...request.messages, { role: 'assistant', content: raw.choices?.[0]?.message?.content || '' }, {
-        role: 'user', content: `Correct your decision once. Validation error: ${firstError.message}. Return all required fields and obey videoVision=on only with videoDirection=on.`,
-      }],
-    };
+    const correctionRequest = buildAutoDirectorCorrectionRequest(request, raw, firstError.message);
     await save(join(directory, 'auto-director-revision-request.json'), correctionRequest);
     raw = await paidRequest(directory, 'auto-director-revision', 'https://api.openai.com/v1/chat/completions', openAiKey, correctionRequest);
-    answer = validateAutoDirectorResponse(raw);
+    answer = validateAutoDirectorResponse(raw, { sceneCount: constraints.sceneCount });
   }
 
   const resolved = resolveEffectiveAutoFlags(answer.flags, constraints);
@@ -289,6 +401,8 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     visualConcept: answer.visualConcept,
     motionConcept: answer.motionConcept,
     audioConcept: answer.audioConcept,
+    sceneCount: answer.sceneCount,
+    sceneCountReason: answer.sceneCountReason,
     selectedFlags: answer.flags,
     effectiveFlags: resolved.effectiveFlags,
     constraints,
@@ -296,6 +410,7 @@ async function ensureAutoDecision(record, directory, openAiKey, persist) {
     constraintsApplied: resolved.constraintsApplied,
     usage: raw.usage || null,
   };
+  decision.conceptSnapshotHash = createAutoConceptSnapshot(decision).snapshotHash;
   applyAutoDecisionToIteration(record, decision);
   await save(decisionPath, decision);
   addUsage(record, 'autoDirectorUsage', raw.usage);
@@ -395,6 +510,7 @@ function currentGenerationSettings() {
     imageModel: options['image-provider'] === 'hf-flux-klein' ? 'FLUX 3 Image Klein · ZeroGPU' : imageModel,
     storyModel,
     includeSourceCodeContext: !options['no-source-code-context'],
+    sourceCodeSummaryFile: options['source-code-summary-file'] || null,
     articleImageReference: options['article-image-reference'],
     guernicaLocationReference: options['guernica-location-reference'],
     landscapePrompt: options['landscape-prompt'],
@@ -411,6 +527,29 @@ function currentGenerationSettings() {
     videoResolution: options['video-resolution'],
     videoSettingsMode: options['video-settings-mode'],
   };
+}
+
+function autoSelectedDramaticDurations(record) {
+  return record?.autoDecision?.promptVersion === autoDirectorPromptVersion
+    && record.autoDecision.effectiveFlags?.sceneDurationMode === 'dramatic';
+}
+
+function dramaticSceneDurationSettings() {
+  return {
+    provider: 'GPT dramatic pacing',
+    takt: -1,
+    minimum: Number(options['min-scene-seconds']),
+    maximum: Number(options['max-scene-seconds']),
+    type: 'dramatic-arc',
+    scaler: 'GPT chooses scene duration from story tension and dramatic progression',
+  };
+}
+
+function prepareAutoSelectedDramaticDurations(record) {
+  if (!autoSelectedDramaticDurations(record) || Array.isArray(record.sceneDurations)) return false;
+  record.sceneDurations = null;
+  record.sceneDurationSettings = dramaticSceneDurationSettings();
+  return true;
 }
 
 function restoreFeatureSettings(settings) {
@@ -702,10 +841,7 @@ function lockedVisualPlanHash(record) {
 }
 
 function addUsage(record, field, usage) {
-  record[field] = usage || null;
-  if (!usage) return;
-  const totals = ['prompt_tokens', 'completion_tokens', 'total_tokens'];
-  record.usage = Object.fromEntries(totals.map((key) => [key, (record.usage?.[key] || 0) + (usage[key] || 0)]));
+  addUsageIdempotently(record, field, usage);
 }
 
 async function videoVisionSources(record, directory) {
@@ -809,7 +945,9 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   const mode = record.featureSettings?.videoMode || 'auto';
   const audioDirection = 'off';
   const maxZoom = record.featureSettings?.videoMaxZoom ?? 0.08;
-  const inputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
+  const autoConceptSnapshot = record.autoConceptSnapshot || null;
+  const baseInputHash = videoDirectionInputHash({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
+  const inputHash = autoConceptInputHash(baseInputHash, autoConceptSnapshot);
   const outputPath = join(directory, 'video-direction.json');
   if (await exists(outputPath)) {
     const saved = await json(outputPath);
@@ -823,7 +961,7 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
   const requestPath = join(directory, 'video-direction-request.json');
   const request = await exists(requestPath)
     ? await json(requestPath)
-    : buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
+    : addAutoConceptsToVideoRequest(buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom }), autoConceptSnapshot);
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'video-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Video direction GPT error: ${raw.error.message}`);
@@ -858,7 +996,9 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
 async function createVideoAudioDirection(record, directory, openAiKey, persist) {
   const model = process.env.NEWS_VIDEO_DIRECTOR_MODEL || record.storyModel;
   const noDialogueNarration = record.featureSettings?.noDialogueNarration === true;
-  const inputHash = audioDirectionInputHash({ record, model, noDialogueNarration });
+  const autoConceptSnapshot = record.autoConceptSnapshot || null;
+  const baseInputHash = audioDirectionInputHash({ record, model, noDialogueNarration });
+  const inputHash = autoConceptInputHash(baseInputHash, autoConceptSnapshot);
   const outputPath = join(directory, 'audio-direction.json');
   if (await exists(outputPath)) {
     const saved = await json(outputPath);
@@ -870,7 +1010,7 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
   const requestPath = join(directory, 'audio-direction-request.json');
   const request = await exists(requestPath)
     ? await json(requestPath)
-    : buildAudioDirectionRequest({ record, model, noDialogueNarration });
+    : addAutoConceptsToAudioRequest(buildAudioDirectionRequest({ record, model, noDialogueNarration }), autoConceptSnapshot);
   if (!await exists(requestPath)) await save(requestPath, request);
   const raw = await paidRequest(directory, 'audio-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
   if (raw.error) throw new Error(`Audio direction GPT error: ${raw.error.message}`);
@@ -920,17 +1060,75 @@ async function pendingVideoScenes(iterationRoot, entry) {
 }
 
 async function pollIterationVideos(iterationRoot, entry, videoOptions) {
+  const configuredPollScript = process.env.NODE_ENV === 'test' ? process.env.NEWS_TEST_VIDEO_POLL_SCRIPT : null;
   const videoArguments = [
-    join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
+    configuredPollScript || join(root, 'eu-reski-news', 'scripts', 'generate-news-scene-videos.mjs'),
     `--run=${iterationRoot}`,
     `--iteration=${entry.directory}`,
     `--model=${videoOptions.model}`,
     `--resolution=${videoOptions.resolution}`,
     `--settings-mode=${videoOptions.settingsMode}`,
-    '--poll-timeout-seconds=60',
+    '--poll-timeout-seconds=300',
   ];
   if (videoOptions.generateTitleCards) videoArguments.push('--generate-title-cards');
-  execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
+  try {
+    execFileSync(process.execPath, videoArguments, { cwd: root, stdio: 'inherit' });
+    return { completed: true };
+  } catch (error) {
+    const output = `${error.stdout?.toString() || ''}\n${error.stderr?.toString() || ''}`;
+    if (/still processing|poll outcome is uncertain|remains pending after retries/i.test(output)) {
+      console.warn(`Saved video tasks for ${entry.directory} are still pending; the same task IDs will be polled on resume.`);
+      return { pending: true };
+    }
+    throw error;
+  }
+}
+
+async function pollIterationVideosWithLiveProgress(iterationRoot, entry, videoOptions) {
+  const directory = join(iterationRoot, entry.directory);
+  const record = await json(join(directory, 'record.json'));
+  const scenePlan = record.filmPlan?.scenePlan || record.plan?.scenes || [];
+  const pending = await pendingVideoScenes(iterationRoot, entry);
+  const iterationNumber = Number(basename(directory).match(/iteration-(\d+)/)?.[1]) || null;
+  const marker = {
+    status: 'running',
+    processId: process.pid,
+    iteration: iterationNumber,
+    directory: basename(directory),
+    startedAt: new Date().toISOString(),
+    stage: 'video_generation',
+    articleTitle: record.article?.title || null,
+    sceneCount: scenePlan.length || record.sceneCount || 0,
+    videoReadyCount: Math.max(0, (scenePlan.length || record.sceneCount || 0) - pending.length),
+    videoPendingCount: pending.length,
+  };
+  await writeIterationLiveMarker(directory, marker);
+
+  try {
+    const result = await pollIterationVideos(iterationRoot, entry, videoOptions);
+    const pendingAfterPoll = await pendingVideoScenes(iterationRoot, entry);
+    if (pendingAfterPoll.length) {
+      await writeIterationLiveMarker(directory, {
+        ...marker,
+        status: 'pending_media',
+        processId: null,
+        endedAt: new Date().toISOString(),
+        videoReadyCount: Math.max(0, marker.sceneCount - pendingAfterPoll.length),
+        videoPendingCount: pendingAfterPoll.length,
+      });
+    } else {
+      await clearIterationLiveMarker(directory);
+    }
+    return result;
+  } catch (error) {
+    await writeIterationLiveMarker(directory, {
+      ...marker,
+      status: 'interrupted',
+      endedAt: new Date().toISOString(),
+      error: redact(error.message),
+    }).catch((markerError) => console.error(`Could not update video live marker: ${markerError.message}`));
+    throw error;
+  }
 }
 
 async function summarizePendingMedia(iterationRoot, runManifest) {
@@ -1017,9 +1215,10 @@ async function main() {
       ? await allocateRunDirectory(resolve(options['output-dir']))
       : resolve(options['output-dir']);
   const globalArticleProgressPath = join(resolve(options['output-dir']), 'global-article-progress.json');
+  const runStartedAtMs = Date.now();
   const runManifest = options['resume-run'] ? await json(join(iterationRoot, 'run.json')) : groupedRun ? {
     profile: process.env.NEWS_PROFILE || 'EU-RESKI Ausstellung',
-    startedAt: new Date().toISOString(),
+    startedAt: new Date(runStartedAtMs).toISOString(),
     ...(iteratorPlan ? {
       iteratorPlanFingerprint,
       sceneSchedule: {
@@ -1028,19 +1227,24 @@ async function main() {
         generationInterval: iteratorPlan.generationInterval,
         intervalMs: iteratorPlan.intervalMs,
         biasMode: iteratorPlan.biasMode,
-        startedAt: new Date().toISOString(),
+        startedAt: new Date(runStartedAtMs).toISOString(),
+        ...(iteratorPlan.scheduleEnabled !== false
+          ? createInitialWorkerSchedule(runStartedAtMs, iteratorPlan.intervalMs, iteratorPlan.biasMode)
+          : {}),
       },
       iteratorNames: iteratorPlan.iterators.map(({ name }) => name),
     } : {}),
     iterationLimit: endless ? 'endless' : iterationLimit,
     pauseMilliseconds,
     status: 'running',
+    autoDirectorSceneCount: options['auto-mode'] === true,
     runOptions: Object.fromEntries(Object.entries(options).filter(([key]) => !['resume', 'resume-run', 'iterations', 'output-dir', 'help'].includes(key))),
     featureSettings: currentFeatureSettings(),
     generationSettings: currentGenerationSettings(),
     articleProgress: null,
     iterations: [],
   } : null;
+  if (runManifest && options['auto-mode']) runManifest.autoDirectorSceneCount = true;
   let articleProgress = runManifest?.articleProgress || null;
   if (options['article-order'] === 'global') {
     const sharedArticleProgress = await json(globalArticleProgressPath).catch((error) => {
@@ -1065,6 +1269,27 @@ async function main() {
   const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
     ? Date.parse(runManifest.sceneSchedule.startedAt)
     : Date.now();
+  if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
+    runManifest.sceneSchedule ||= {
+      scenePath: iteratorPlan.scenePath,
+      enabled: true,
+      generationInterval: iteratorPlan.generationInterval,
+      intervalMs: iteratorPlan.intervalMs,
+      biasMode: iteratorPlan.biasMode,
+      startedAt: new Date(sceneScheduleStartedAt).toISOString(),
+      ...createInitialWorkerSchedule(sceneScheduleStartedAt, iteratorPlan.intervalMs, iteratorPlan.biasMode),
+    };
+    const previousNextStartAtMs = runManifest.sceneSchedule.nextStartAtMs;
+    runManifest.sceneSchedule = options['resume-run']
+      ? recoverWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs)
+      : Number.isSafeInteger(previousNextStartAtMs)
+        ? { ...runManifest.sceneSchedule }
+        : createInitialWorkerSchedule(sceneScheduleStartedAt, iteratorPlan.intervalMs, iteratorPlan.biasMode);
+    if (options['resume-run'] && runManifest.sceneSchedule.nextStartAtMs !== previousNextStartAtMs) {
+      console.log(`Worker ${iteratorPlan.workerKey} resumed after its scheduled slot; next start delayed by ${iteratorPlan.intervalMs} ms to prevent catch-up bursts.`);
+    }
+    await save(join(iterationRoot, 'run.json'), runManifest);
+  }
   let pendingIterationDirectory = null;
   if (options['resume-run'] && Array.isArray(runManifest.iterations)) {
     const registered = new Set(runManifest.iterations.map((entry) => entry.directory));
@@ -1208,16 +1433,17 @@ async function main() {
     const previous = await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'record.json'));
     const count = previous.sceneCount ?? previous.plan?.scenes?.length ?? Number(options.scenes);
     if (!Number.isInteger(count) || count < 1 || count > 12) throw new Error('Saved iteration has an invalid scene count');
-    const selection = sceneCountStreams[iteratorIndex]?.next();
-    if (iteratorSceneCountSettings[iteratorIndex].mode === 'taktmuster' && selection.count !== count) throw new Error('Saved scene-count rhythm differs; refusing to continue a changed sequence');
+    replaySavedSceneCount(previous, sceneCountStreams[iteratorIndex], { validateFixed: true });
     if (semanticSource && !semanticSource.resumedFromCheckpoint) {
       const savedSemantic = previous.semantic || await json(join(iterationRoot, runManifest.iterations[iteration].directory, 'semantic-stream.json')).catch(() => null);
       await replayLegacySemanticSnapshot(semanticSource, savedSemantic, runManifest.iterations[iteration].directory);
     }
-    const replayedDurations = await sceneDurationStreams[iteratorIndex].generate(count);
-    if (Array.isArray(previous.sceneDurations)
-      && JSON.stringify(replayedDurations) !== JSON.stringify(previous.sceneDurations)) {
-      throw new Error(`Saved scene-duration rhythm differs in ${runManifest.iterations[iteration].directory}; refusing to continue a changed Taktmuster sequence`);
+    if (previous.sceneDurationSettings?.provider !== 'GPT dramatic pacing') {
+      const replayedDurations = await sceneDurationStreams[iteratorIndex].generate(count);
+      if (Array.isArray(previous.sceneDurations)
+        && JSON.stringify(replayedDurations) !== JSON.stringify(previous.sceneDurations)) {
+        throw new Error(`Saved scene-duration rhythm differs in ${runManifest.iterations[iteration].directory}; refusing to continue a changed Taktmuster sequence`);
+      }
     }
     imageSeedOffset += count;
   }
@@ -1227,7 +1453,7 @@ async function main() {
     const latestRecord = await json(join(iterationRoot, latestDirectory, 'record.json'));
     if (['linear', 'global'].includes(latestRecord.selection?.method) && latestRecord.selection.ranking === 'jev-eu-relevance') {
       runManifest.articleProgress = {
-        ...(articleProgress || {}),
+        ...articleProgressSnapshot(articleProgress),
         sourceAggregate: latestRecord.sourceAggregate,
         aggregateHash: latestRecord.aggregateHash || null,
         nextDraw: latestRecord.selection.draw + 1,
@@ -1236,7 +1462,6 @@ async function main() {
         ])] } : {}),
       };
       articleProgress = runManifest.articleProgress;
-      if (runBaseOptions['article-order'] === 'global') await save(globalArticleProgressPath, articleProgress);
       await save(join(iterationRoot, 'run.json'), runManifest);
     }
   }
@@ -1245,10 +1470,17 @@ async function main() {
       && !iteratorOptions['no-videos-after-each-iteration'])
     : options['videos-after-each-iteration'];
   if (options['resume-run'] && anyIteratorGeneratesVideos) {
+    const mediaBeforeResume = await summarizePendingMedia(iterationRoot, runManifest);
+    if (mediaBeforeResume.length) {
+      runManifest.status = 'pending_media';
+      runManifest.pendingMedia = mediaBeforeResume;
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      console.log(`Resuming ${mediaBeforeResume.length} pending media iteration(s) in ${iterationRoot}; no new article will be selected until their saved tasks finish.`);
+    }
     for (const [index, entry] of runManifest.iterations.entries()) {
       activateIterator(index);
       if ((await pendingVideoScenes(iterationRoot, entry)).length) {
-        await pollIterationVideos(iterationRoot, entry, {
+        await pollIterationVideosWithLiveProgress(iterationRoot, entry, {
           model: options['video-model'],
           resolution: options['video-resolution'],
           settingsMode: options['video-settings-mode'],
@@ -1256,11 +1488,33 @@ async function main() {
         });
       }
     }
+    const mediaAfterResume = await summarizePendingMedia(iterationRoot, runManifest);
+    if (mediaAfterResume.length) {
+      runManifest.status = 'pending_media';
+      runManifest.pendingMedia = mediaAfterResume;
+      runManifest.finishedAt = new Date().toISOString();
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      console.log(`Run remains pending_media (${mediaAfterResume.length} iteration(s)); same saved provider tasks will be retried after restart.`);
+      return;
+    }
+    if (mediaBeforeResume.length) {
+      runManifest.status = 'running';
+      delete runManifest.pendingMedia;
+      delete runManifest.finishedAt;
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      console.log(`Pending media finished for ${iterationRoot}; continuing the saved Run.`);
+    }
   }
   while (endless || completed < iterationLimit) {
     const iteratorIndex = completed % iteratorCount;
     activateIterator(iteratorIndex);
-    if (iteratorPlan?.scheduleEnabled) {
+    if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
+      const scheduled = advanceWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs);
+      runManifest.sceneSchedule = scheduled.schedule;
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      const waitMilliseconds = scheduled.startAtMs - Date.now();
+      if (waitMilliseconds > 0) await new Promise((resolveDelay) => setTimeout(resolveDelay, waitMilliseconds));
+    } else if (iteratorPlan?.scheduleEnabled) {
       const targetStart = getIteratorStartTime(
         sceneScheduleStartedAt,
         completed,
@@ -1282,12 +1536,13 @@ async function main() {
       runImageSeedBase,
       pendingIterationDirectory,
       articleProgress,
+      globalArticleProgressPath,
     );
     pendingIterationDirectory = null;
     const completedRecord = await json(join(iterationDirectory, 'record.json'));
     if (['linear', 'global'].includes(completedRecord.selection?.method) && completedRecord.selection.ranking === 'jev-eu-relevance') {
       articleProgress = {
-        ...(articleProgress || {}),
+        ...articleProgressSnapshot(articleProgress),
         sourceAggregate: completedRecord.sourceAggregate,
         aggregateHash: completedRecord.aggregateHash || null,
         nextDraw: completedRecord.selection.draw + 1,
@@ -1296,14 +1551,13 @@ async function main() {
         ])] } : {}),
       };
       if (options['article-order'] === 'global') {
-        await save(globalArticleProgressPath, articleProgress);
         console.log(`Global news counter: ${articleProgress.seenArticleKeys?.length || 0} used; next list position ${articleProgress.nextDraw + 1}.`);
       }
     }
     imageSeedOffset += completedRecord.sceneCount;
     completed += 1;
     if (runManifest) {
-      if (articleProgress) runManifest.articleProgress = articleProgress;
+      if (articleProgress) runManifest.articleProgress = articleProgressSnapshot(articleProgress);
       const relativeDirectory = iterationDirectory.slice(iterationRoot.length + 1);
       runManifest.iterations.push({ index: completed, directory: relativeDirectory, report: `${relativeDirectory}/index.html` });
       await save(join(iterationRoot, 'run.json'), runManifest);
@@ -1314,12 +1568,17 @@ async function main() {
       await writeFile(join(iterationRoot, 'index.html'), renderRunReport(runManifest, reports));
       console.log(`Cumulative HTML: ${join(iterationRoot, 'index.html')}`);
       if (options['videos-after-each-iteration']) {
-        await pollIterationVideos(iterationRoot, { directory: relativeDirectory }, {
+        await pollIterationVideosWithLiveProgress(iterationRoot, { directory: relativeDirectory }, {
           model: options['video-model'],
           resolution: options['video-resolution'],
           settingsMode: options['video-settings-mode'],
           generateTitleCards: options['generate-title-cards'],
         });
+        if (endless && iteratorPlan?.workerKey
+          && (await pendingVideoScenes(iterationRoot, { directory: relativeDirectory })).length) {
+          console.log(`Iteration ${relativeDirectory} has pending video tasks; pausing this worker until they are recovered.`);
+          break;
+        }
       }
     }
     if (!endless && completed >= iterationLimit) break;
@@ -1345,7 +1604,7 @@ async function main() {
   }
 }
 
-async function runIteration(semanticSource, sceneDurationStream, sceneCountStream, iterationRoot, iterationIndex, imageSeedOffset, runImageSeedBase, pendingDirectory, articleProgress) {
+async function runIteration(semanticSource, sceneDurationStream, sceneCountStream, iterationRoot, iterationIndex, imageSeedOffset, runImageSeedBase, pendingDirectory, articleProgress, globalArticleProgressPath) {
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   const imageProvider = options['image-provider'];
@@ -1353,8 +1612,27 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
   if (!options['prompt-only'] && imageProvider === 'hf-flux-klein' && !(process.env.HF_TOKEN || process.env.HF_API_TOKEN || process.env.HUGGINGFACEHUB_API_TOKEN)) throw new Error('Set OPENAI_API_KEY and HF_TOKEN (or HF_API_TOKEN) in your environment');
   const resumeDirectory = options.resume || pendingDirectory;
   const directory = resumeDirectory ? resolve(resumeDirectory) : await allocateIteration(iterationRoot);
+  const liveMarker = {
+    status: 'running',
+    processId: process.pid,
+    iteration: iterationIndex + 1,
+    directory: basename(directory),
+    startedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    stage: 'starting',
+    resumed: Boolean(resumeDirectory),
+  };
+  const updateLiveStage = async (stage, details = {}) => {
+    Object.assign(liveMarker, details, { stage, updatedAt: new Date().toISOString() });
+    await writeIterationLiveMarker(directory, liveMarker);
+  };
+  let liveMarkerWritten = false;
+  let globalArticleReservationId = null;
   let record;
   try {
+    await writeIterationLiveMarker(directory, liveMarker);
+    liveMarkerWritten = true;
+    await updateLiveStage('article_selection');
     if (resumeDirectory) {
       const saved = await json(join(directory, 'record.json'));
       if (saved.generator !== 'semantic-news-v1') throw new Error('Resume requires an iteration created by this generator');
@@ -1373,13 +1651,13 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       restoreFeatureSettings(record.featureSettings || currentFeatureSettings());
       record.featureSettings ||= currentFeatureSettings();
       if (pendingDirectory) {
-        const choice = sceneCountStream.next();
-        if (choice.count !== record.sceneCount) throw new Error('Interrupted iteration differs from saved scene-count rhythm');
+        const choice = replaySavedSceneCount(record, sceneCountStream, { validateFixed: true });
         record.sceneCountSelection ||= choice;
         if (record.semantic && semanticSource && !semanticSource.resumedFromCheckpoint) {
           await replayLegacySemanticSnapshot(semanticSource, record.semantic, directory);
         }
-        if (Object.hasOwn(record, 'sceneDurations')) {
+        if (Object.hasOwn(record, 'sceneDurations')
+          && record.sceneDurationSettings?.provider !== 'GPT dramatic pacing') {
           const replayedDurations = await sceneDurationStream.generate(record.sceneCount);
           if (Array.isArray(record.sceneDurations)
             && JSON.stringify(replayedDurations) !== JSON.stringify(record.sceneDurations)) {
@@ -1405,48 +1683,51 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         && options['article-order'] !== 'global') {
         throw new Error(`Cannot seamlessly resume article order: saved news aggregate changed: ${articleProgress.sourceAggregate}`);
       }
-      const { aggregate, aggregatePath: sourceAggregate, aggregateHash, candidates } = selectedCollection;
-      const seenArticleKeys = new Set(order === 'global' ? articleProgress?.seenArticleKeys || [] : []);
-      if (order === 'global' && !articleProgress?.seenArticleKeys?.length
-        && articleProgress?.sourceAggregate === selectedCollection.aggregatePath) {
-        for (let index = 0; index < Math.min(articleProgress.nextDraw || 0, candidates.length); index += 1) {
-          seenArticleKeys.add(articleKey(candidates[index].article));
+      const { aggregatePath: sourceAggregate, aggregateHash, candidates } = selectedCollection;
+      let draw;
+      let article;
+      let aggregateIndex;
+      let score;
+      if (order === 'global') {
+        globalArticleReservationId = `${resolve(iterationRoot)}::iteration-${String(iterationIndex + 1).padStart(3, '0')}`;
+        const reservation = await reserveGlobalArticle({
+          progressPath: globalArticleProgressPath,
+          articleProgress,
+          collection: selectedCollection,
+          reservationId: globalArticleReservationId,
+          recordPath: join(directory, 'record.json'),
+          hasUsableArticleImage,
+        });
+        articleProgress = reservation.articleProgress;
+        ({ draw, article, aggregateIndex, score } = reservation);
+      } else {
+        const requestedDraw = options['article-id']
+          ? candidates.findIndex(({ article: candidateArticle }) => String(candidateArticle.id) === options['article-id'])
+          : order === 'random'
+            ? randomInt(candidates.length)
+            : articleProgress?.sourceAggregate === selectedCollection.aggregatePath
+              ? articleProgress.nextDraw % candidates.length
+              : 0;
+        if (requestedDraw < 0) throw new Error('Requested article is missing or has no usable text and image');
+        draw = -1;
+        const searchCount = options['article-id'] ? 1 : candidates.length;
+        for (let offset = 0; offset < searchCount; offset += 1) {
+          const candidateIndex = (requestedDraw + offset) % candidates.length;
+          const candidate = candidates[candidateIndex];
+          if (await hasUsableArticleImage(candidate.article.image)) {
+            draw = candidateIndex;
+            break;
+          }
+          console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
+          if (options['article-id']) break;
         }
+        if (draw < 0) throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
+        ({ article, aggregateIndex, score } = candidates[draw]);
       }
-      if (order === 'global' && articleProgress) articleProgress.seenArticleKeys = [...seenArticleKeys];
-      const requestedDraw = options['article-id']
-        ? candidates.findIndex(({ article }) => String(article.id) === options['article-id'])
-        : order === 'random'
-          ? randomInt(candidates.length)
-          : articleProgress?.sourceAggregate === selectedCollection.aggregatePath
-            ? articleProgress.nextDraw % candidates.length
-            : 0;
-      if (requestedDraw < 0) throw new Error('Requested article is missing or has no usable text and image');
-      let draw = -1;
-      const searchCount = options['article-id'] ? 1 : candidates.length;
-      for (let offset = 0; offset < searchCount; offset += 1) {
-        const candidateIndex = (requestedDraw + offset) % candidates.length;
-        const candidate = candidates[candidateIndex];
-        if (seenArticleKeys.has(articleKey(candidate.article))) continue;
-        if (await hasUsableArticleImage(candidate.article.image)) {
-          draw = candidateIndex;
-          break;
-        }
-        console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
-        if (options['article-id']) break;
-      }
-      if (draw < 0) {
-        const unseenCandidateCount = candidates.filter(({ article }) => !seenArticleKeys.has(articleKey(article))).length;
-        if (order === 'global' && unseenCandidateCount === 0) {
-          throw new Error(`Global article queue exhausted: all ${candidates.length} eligible stories in ${selectedCollection.aggregateFile} were already used`);
-        }
-        throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
-      }
-      const { article, aggregateIndex, score } = candidates[draw];
       console.log(`Article ${draw + 1}/${candidates.length} by Jev EU score ${Number.isFinite(score) ? score.toFixed(3) : 'unscored'}: ${article.title || '(untitled)'}`);
-      const sceneCountSelection = sceneCountStream.next();
-      const sceneCount = sceneCountSelection.count;
-      console.log(`Scene count: ${sceneCount} (${sceneCountSelection.settings.mode}${sceneCountSelection.rawValue === undefined ? '' : `; raw ${sceneCountSelection.rawValue}, bias ${sceneCountSelection.settings.bias}`})`);
+      const sceneCountSelection = options['auto-mode'] ? null : sceneCountStream.next();
+      const sceneCount = sceneCountSelection?.count ?? null;
+      if (sceneCountSelection) console.log(`Scene count: ${sceneCount} (${sceneCountSelection.settings.mode}${sceneCountSelection.rawValue === undefined ? '' : `; raw ${sceneCountSelection.rawValue}, bias ${sceneCountSelection.settings.bias}`})`);
       record = {
         generator: 'semantic-news-v1', planningVersion: 2, createdAt: new Date().toISOString(), status: 'preparing',
         sourceVersion: {
@@ -1462,6 +1743,7 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
           euRelevance: Number.isFinite(score) ? score : null,
           relevancePath: rankedCollection.relevancePath,
           draw,
+          ...(globalArticleReservationId ? { reservationId: globalArticleReservationId } : {}),
           candidateCount: candidates.length,
           aggregateIndex,
         },
@@ -1474,13 +1756,22 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         imageSeed: runImageSeedBase === null ? null : (runImageSeedBase + imageSeedOffset) % 2_147_483_647,
       };
     }
+    await updateLiveStage(resumeDirectory
+      ? record.plan ? 'image_generation' : 'story_planning'
+      : options['auto-mode'] ? 'auto_director' : 'story_planning', {
+      articleTitle: record.article?.title || null,
+      sceneCount: record.sceneCount || null,
+    });
     await mkdir(join(directory, 'media'), { recursive: true });
     // Old saved requests retain their original combined planning path on resume.
     if (!record.planningVersion && !record.plan && !await exists(join(directory, 'gpt-request.json'))) record.planningVersion = 2;
-    if (!Object.hasOwn(record, 'sceneDurations')) {
-      record.sceneDurations = record.plan?.scenes?.map((scene) => scene.durationSeconds)
-        || await sceneDurationStream.generate(record.sceneCount);
-      record.sceneDurationSettings = sceneDurationStream.settings;
+    const deferAutoSceneDurations = options['auto-mode'] && !Number.isInteger(record.sceneCount);
+    if (!Object.hasOwn(record, 'sceneDurations') && !deferAutoSceneDurations) {
+      if (!prepareAutoSelectedDramaticDurations(record)) {
+        record.sceneDurations = record.plan?.scenes?.map((scene) => scene.durationSeconds)
+          || await sceneDurationStream.generate(record.sceneCount);
+        record.sceneDurationSettings = sceneDurationStream.settings;
+      }
       await save(join(directory, 'record.json'), record);
     }
     const persist = async () => {
@@ -1489,6 +1780,16 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
     };
     delete record.error;
     await persist();
+    if (record.selection?.method === 'global' && record.selection.reservationId) {
+      articleProgress = await commitGlobalArticleReservation({
+        progressPath: globalArticleProgressPath,
+        articleProgress,
+        reservationId: record.selection.reservationId,
+        article: record.article,
+        selection: { sourceAggregate: record.sourceAggregate, aggregateHash: record.aggregateHash, draw: record.selection.draw },
+      });
+      await persist();
+    }
     if (options['generate-title-cards']) {
       const iterationNumber = Number(basename(directory).match(/iteration-(\d+)/)?.[1]);
       record.titleCard = await renderTitleCard({
@@ -1510,7 +1811,22 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       record.articleImage = await download(record.article.image, directory, 'article');
       await persist();
     }
-    await ensureAutoDecision(record, directory, openAiKey, persist);
+    await updateLiveStage(options['auto-mode'] ? 'auto_director' : 'story_planning', {
+      articleTitle: record.article?.title || null,
+      sceneCount: record.sceneCount || null,
+    });
+    await ensureAutoDecision(record, directory, openAiKey, persist, Boolean(resumeDirectory));
+    if (!Number.isInteger(record.sceneCount) || record.sceneCount < 1 || record.sceneCount > 12) {
+      throw new Error('Scene count must be selected and saved before story generation');
+    }
+    if (!Object.hasOwn(record, 'sceneDurations')) {
+      if (!prepareAutoSelectedDramaticDurations(record)) {
+        record.sceneDurations = await sceneDurationStream.generate(record.sceneCount);
+        record.sceneDurationSettings = sceneDurationStream.settings;
+      }
+      await save(join(directory, 'record.json'), record);
+      await persist();
+    }
     if (!record.styleReference && !options['no-style-reference']) {
       const sourcePath = resolve(options['style-reference']);
       const extension = extname(sourcePath).toLocaleLowerCase();
@@ -1543,7 +1859,22 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (usesGuernicaFigureReference()) {
         for (const entry of record.catalog) images.push(await imageInput(directory, entry, `Masked Guernica figure candidate ${entry.id}: ${entry.name}. Character reference candidate only; not a story instruction.`, 'catalog'));
       }
-      const built = await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, includeSourceCodeContext: record.generationSettings?.includeSourceCodeContext ?? true, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null });
+      const logPath = join(directory, 'gpt-request.json');
+      let sourceCodeSummary = null;
+      const summaryPath = record.generationSettings?.sourceCodeSummaryFile;
+      if (summaryPath && !await exists(logPath)) {
+        const snapshotPath = join(directory, 'source-code-summary.txt');
+        sourceCodeSummary = await readFile(await exists(snapshotPath) ? snapshotPath : resolve(summaryPath), 'utf8');
+        if (!sourceCodeSummary.trim()) throw new Error('Source code summary must not be empty');
+        if (!await exists(snapshotPath)) await writeFile(snapshotPath, sourceCodeSummary, { flag: 'wx' });
+        record.sourceCodeSummary = { path: 'source-code-summary.txt', source: resolve(summaryPath), sha256: hash(sourceCodeSummary) };
+        await persist();
+      }
+      const built = addAutoConceptsToStoryRequest(await buildPlanRequest({ article: record.article, semantic: record.semantic, catalog: record.catalog, sceneCount: record.sceneCount, visualStyleOptions: record.visualStyleOptions || recordStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, legacyGuernicaStyleReferencePrompt: legacyGuernicaStyleReferencePromptEnabled, includeSourceCodeContext: record.generationSettings?.includeSourceCodeContext ?? true, sourceCodeSummary, storyClou: record.featureSettings?.storyClou === 'on', images, model: record.storyModel, styleReferenceProvided: !options['no-style-reference'] && !options['guernica-location-reference'], locationReferenceProvided: options['guernica-location-reference'] && !options['no-style-reference'], articleImageReferenceProvided: record.articleImageReference, figureReferenceProvided: usesGuernicaFigureReference(), continuationPlan: record.continuationPlan || null }), record.autoConceptSnapshot || null);
+      for (const payload of [built.request, built.log]) applyStoryCodeContext(payload, {
+        includeSourceCodeContext: record.generationSettings?.includeSourceCodeContext ?? true,
+        sourceCodeSummary,
+      });
       if (options['landscape-prompt']) {
         const landscapeInstruction = 'LANDSCAPE PROMPT: Use the wide frame deliberately; let each scene’s focal action and spatial relationships use the frame width naturally. Do not force a horizontal frieze, central cluster or repeated layout.';
         built.director += `\n\n${landscapeInstruction}`;
@@ -1552,7 +1883,6 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         built.log.messages[0].content += `\n\n${landscapeInstruction}`;
       }
       // Once dispatched, preserve the exact saved request on resume even if source code changed.
-      const logPath = join(directory, 'gpt-request.json');
       if (!await exists(logPath)) {
         record.directorHash = built.directorHash;
         await writeFile(join(directory, 'director.md'), built.director);
@@ -1657,12 +1987,13 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       if (!record.sceneTiming) {
         const timingPath = join(directory, 'timing-request.json');
         if (!await exists(timingPath)) {
-          await save(timingPath, buildTimingRequest({
+          await save(timingPath, addAutoConceptsToTimingRequest(buildTimingRequest({
             plan: record.plan, sceneDurations: record.sceneDurations,
             sceneDurationSettings: record.sceneDurationSettings,
             visualStyleOptions: record.visualStyleOptions, sceneVisualControls: record.sceneVisualControls ?? false, model: record.storyModel,
-          }));
+          }), record.autoConceptSnapshot || null));
         }
+        await updateLiveStage('scene_timing', { sceneCount: record.plan.scenes.length });
         console.log('Visual plan locked; generating scene durations and video prompts separately.');
         const timingResponse = await paidRequest(directory, 'timing', 'https://api.openai.com/v1/chat/completions', openAiKey, await json(timingPath));
         if (timingResponse.error) throw new Error(`GPT timing error: ${timingResponse.error.message}`);
@@ -1701,6 +2032,11 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
         : null;
       const styleInput = options['no-style-reference'] || options['guernica-location-reference'] ? null : await prepareImageReference(directory, await imageInput(directory, record.styleReference, 'Full-painting style reference only; no depicted content may be used', 'style'));
       for (const [index, scene] of record.plan.scenes.entries()) {
+        await updateLiveStage('image_generation', {
+          articleTitle: record.article?.title || null,
+          sceneIndex: scene.index,
+          sceneCount: record.plan.scenes.length,
+        });
         if (record.results[index]?.path && await exists(join(directory, record.results[index].path))) continue;
         const figure = usesGuernicaFigureReference() ? record.catalog.find((item) => item.id === scene.guernicaId) : null;
         if (usesGuernicaFigureReference() && !figure) throw new Error(`No Guernica figure ${scene.guernicaId} for scene ${scene.index}`);
@@ -1752,21 +2088,27 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
     }
     let videoVision = null;
     if (record.featureSettings?.videoVision === 'on') {
+      await updateLiveStage('video_vision', { sceneCount: record.plan?.scenes?.length || record.sceneCount || null });
       videoVision = await createVideoVision(record, directory, openAiKey, persist);
     }
     if (record.featureSettings?.videoDirection === 'on') {
+      await updateLiveStage('video_direction', { sceneCount: record.plan?.scenes?.length || record.sceneCount || null });
       const beforeDirectionHash = hash(JSON.stringify(visualPlanSnapshot(record.plan)));
       await createVideoDirection(record, directory, openAiKey, persist, videoVision);
       if (hash(JSON.stringify(visualPlanSnapshot(record.plan))) !== beforeDirectionHash) throw new Error('Video direction changed the locked visual plan');
     }
     if (record.featureSettings?.videoAudioDirection === 'on') {
+      await updateLiveStage('audio_direction', { sceneCount: record.plan?.scenes?.length || record.sceneCount || null });
       await createVideoAudioDirection(record, directory, openAiKey, persist);
     }
+    await updateLiveStage('finalizing', { sceneCount: record.plan?.scenes?.length || record.sceneCount || null });
     record.status = options['prompt-only'] ? 'Prompts erstellt' : 'Abgeschlossen';
     record.filmPlan = buildFilmPlan(record, directory);
     await save(join(directory, 'film-plan.json'), record.filmPlan);
     record.finishedAt = new Date().toISOString();
     await persist();
+    await clearIterationLiveMarker(directory);
+    liveMarkerWritten = false;
     console.log(`HTML: ${join(directory, 'index.html')}`);
     console.log(`Image cost USD: ${record.results.reduce((sum, item) => sum + (item?.cost || 0), 0)}; GPT tokens: ${record.usage?.total_tokens}`);
     return directory;
@@ -1775,6 +2117,14 @@ async function runIteration(semanticSource, sceneDurationStream, sceneCountStrea
       record.status = 'Unterbrochen'; record.error = redact(error.message);
       await save(join(directory, 'record.json'), record);
       await writeFile(join(directory, 'index.html'), renderReport(record));
+    }
+    if (liveMarkerWritten) {
+      await writeIterationLiveMarker(directory, {
+        ...liveMarker,
+        status: 'interrupted',
+        endedAt: new Date().toISOString(),
+        error: redact(error.message),
+      }).catch((markerError) => console.error(`Could not update iteration live marker: ${markerError.message}`));
     }
     console.error(`Resume after resolving error: --resume=${directory}`);
     throw error;

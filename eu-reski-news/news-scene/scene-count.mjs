@@ -1,4 +1,7 @@
 import { loadTaktmuster } from './taktmuster.mjs';
+import { autoDirectorPromptVersion, previousAutoDirectorPromptVersion } from './auto-director.mjs';
+
+const autoDirectorSceneCountVersions = [autoDirectorPromptVersion, previousAutoDirectorPromptVersion];
 
 export function resolveSceneCountSettings(options) {
   const mode = options['scene-count-mode'] || 'fixed';
@@ -60,4 +63,52 @@ export function createSceneCountStream(settings, TaktmusterClass) {
       };
     },
   };
+}
+
+export function resolveAutoSceneCountLimits(settings) {
+  const minimum = settings.minimum ?? 1;
+  const maximum = settings.maximum ?? 12;
+  if (!Number.isInteger(minimum) || !Number.isInteger(maximum) || minimum < 1 || maximum > 12 || maximum < minimum) {
+    throw new Error('Auto scene-count limits must satisfy 1 <= minimum <= maximum <= 12');
+  }
+  return { minimum, maximum };
+}
+
+export function createAutoSceneCountSelection(decision, iteration, limits) {
+  const bounds = resolveAutoSceneCountLimits(limits);
+  if (!autoDirectorSceneCountVersions.includes(decision?.promptVersion) || !Number.isInteger(decision.sceneCount)
+    || decision.sceneCount < bounds.minimum || decision.sceneCount > bounds.maximum
+    || typeof decision.sceneCountReason !== 'string' || !decision.sceneCountReason.trim()) {
+    throw new Error(`Auto Director scene count must be an integer from ${bounds.minimum} through ${bounds.maximum} with a saved reason`);
+  }
+  return {
+    iteration,
+    count: decision.sceneCount,
+    reason: decision.sceneCountReason,
+    settings: { mode: 'auto-director', ...bounds },
+  };
+}
+
+export function isNewAutoSingleScene(record) {
+  return record?.autoMode === true
+    && autoDirectorSceneCountVersions.includes(record?.autoDecision?.promptVersion)
+    && record.sceneCount === 1
+    && record.plan?.scenes?.length === 1;
+}
+
+export function replaySavedSceneCount(record, stream, { validateFixed = false } = {}) {
+  const savedDecision = record?.autoDecision;
+  if (autoDirectorSceneCountVersions.includes(savedDecision?.promptVersion)) {
+    const count = savedDecision.sceneCount ?? record.sceneCount;
+    if (!Number.isInteger(count) || count !== record.sceneCount) {
+      throw new Error('Saved Auto Director scene count differs from its iteration record');
+    }
+    return { iteration: null, count, settings: { mode: 'auto-director' }, replayed: false };
+  }
+  if (!stream) throw new Error('A scene-count stream is required to replay this historical iteration');
+  const selection = stream.next();
+  if ((selection.settings.mode === 'taktmuster' || validateFixed) && selection.count !== record.sceneCount) {
+    throw new Error('Saved scene-count rhythm differs; refusing to continue a changed sequence');
+  }
+  return { ...selection, replayed: true };
 }

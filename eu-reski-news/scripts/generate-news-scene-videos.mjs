@@ -18,7 +18,7 @@ const { values } = parseArgs({ options: {
   'video-concurrency': { type: 'string', default: process.env.NEWS_VIDEO_CONCURRENCY || '4' },
   'audio-edge-fade-seconds': { type: 'string', default: process.env.NEWS_VIDEO_AUDIO_EDGE_FADE_SECONDS || '0.03' },
   'generate-title-cards': { type: 'boolean', default: false },
-  'poll-timeout-seconds': { type: 'string', default: process.env.NEWS_VIDEO_POLL_TIMEOUT_SECONDS || '60' },
+  'poll-timeout-seconds': { type: 'string', default: process.env.NEWS_VIDEO_POLL_TIMEOUT_SECONDS || '300' },
   help: { type: 'boolean', default: false },
 } });
 
@@ -39,7 +39,7 @@ if (!apiKey) throw new Error('Set RUNWARE_API_KEY in the environment');
 if (usesPVideo2Pro && !['cost', 'speed', 'quality'].includes(settingsMode)) throw new Error('--settings-mode must be cost, speed, or quality for P-Video-2-Pro');
 if (!usesPVideo2Pro && settingsMode) throw new Error('--settings-mode is supported here only for P-Video-2-Pro');
 if (!usesPVideo2Pro && (!Number.isInteger(outputQuality) || outputQuality < 20 || outputQuality > 99)) throw new Error('--output-quality must be an integer from 20 to 99');
-if (!Number.isInteger(pollTimeoutSeconds) || pollTimeoutSeconds < 10 || pollTimeoutSeconds > 600) throw new Error('--poll-timeout-seconds must be an integer from 10 to 600');
+if (!Number.isInteger(pollTimeoutSeconds) || pollTimeoutSeconds < 10 || pollTimeoutSeconds > 1800) throw new Error('--poll-timeout-seconds must be an integer from 10 to 1800');
 if (!Number.isInteger(videoConcurrency) || videoConcurrency < 1 || videoConcurrency > 12) throw new Error('--video-concurrency must be an integer from 1 to 12');
 if (!Number.isFinite(audioEdgeFadeSeconds) || audioEdgeFadeSeconds < 0 || audioEdgeFadeSeconds > 0.5) throw new Error('--audio-edge-fade-seconds must be from 0 to 0.5');
 if (values.resolution !== '480p') throw new Error('This low-quality test starter only allows --resolution=480p');
@@ -52,6 +52,15 @@ const safeSave = async (path, value) => {
 };
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
 const exists = async (path) => { try { await stat(path); return true; } catch (error) { if (error.code === 'ENOENT') return false; throw error; } };
+const hasVideoResult = (response) => Boolean(response?.videoURL || response?.data?.some((item) => item.videoURL));
+const responseErrors = (response) => {
+  const errors = response?.errors;
+  return Array.isArray(errors) ? errors : errors ? [errors] : [];
+};
+const hasTerminalVideoError = (response) => Boolean(response?.error
+  || responseErrors(response).some((item) => item.status === 'error'
+    || ['providerError', 'timeoutProvider', 'conflictTaskUUID'].includes(item.code || item.errorCode))
+  || response?.data?.some((item) => item.status === 'error'));
 const dataUrl = async (path) => {
   const extension = path.split('.').at(-1).toLowerCase();
   const mime = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[extension];
@@ -84,10 +93,14 @@ async function getResult(taskUUID, submission) {
   const immediate = submission.data?.find((item) => item.taskUUID === taskUUID);
   if (immediate?.videoURL) return immediate;
   const startedAt = Date.now();
+  let pollAttempt = 0;
+  let lastProgress = null;
   while (Date.now() - startedAt < pollTimeoutMs) {
-    await new Promise((resolvePromise) => setTimeout(resolvePromise, 2000));
+    const delay = Math.min(60_000, 2_000 * (2 ** Math.min(pollAttempt, 5)));
+    await new Promise((resolvePromise) => setTimeout(resolvePromise, Math.min(delay, pollTimeoutMs - (Date.now() - startedAt))));
     const remainingMs = pollTimeoutMs - (Date.now() - startedAt);
     if (remainingMs <= 0) break;
+    pollAttempt += 1;
     let response;
     try {
       response = await retryTransient(() => request([{ taskType: 'getResponse', taskUUID }], remainingMs), {
@@ -97,35 +110,68 @@ async function getResult(taskUUID, submission) {
       });
     } catch (error) {
       if (error.name === 'TimeoutError' || error.name === 'AbortError') break;
+      if (isRetryableNetworkError(error) || isRetryableHttpStatus(error.status)) {
+        console.warn(`Video task poll remains uncertain; retain task ${taskUUID} and retry after backoff: ${error.message}`);
+        continue;
+      }
       throw error;
     }
     const result = response.data?.find((item) => item.taskUUID === taskUUID);
-    if (result?.status === 'processing' || !result) continue;
+    if (result?.status === 'processing') {
+      const progress = Number.isFinite(result.progress) ? `${result.progress}%` : 'processing';
+      if (progress !== lastProgress) console.log(`VIDEO_PROGRESS ${taskUUID} · ${progress}`);
+      lastProgress = progress;
+      continue;
+    }
     if (result.videoURL) return result;
+    const terminalError = response.errors?.find((item) => item.taskUUID === taskUUID || !item.taskUUID);
+    if (terminalError || result?.status === 'error') {
+      const historicalResponse = await getTaskDetails(taskUUID).catch((error) => {
+        console.warn(`Could not confirm terminal video response from task details: ${error.message}`);
+        return null;
+      });
+      const recovered = historicalResponse?.data?.find((item) => item.taskUUID === taskUUID && item.videoURL);
+      if (recovered) return recovered;
+      const error = new Error(`Video task ${taskUUID} failed: ${JSON.stringify(terminalError || result).slice(0, 1200)}`);
+      error.payload = historicalResponse || response;
+      error.code = 'VIDEO_PROVIDER_TERMINAL_ERROR';
+      throw error;
+    }
+    if (!result) continue;
     const error = new Error(`Video task ${taskUUID} returned no video: ${JSON.stringify(response).slice(0, 1200)}`);
     error.payload = response;
     throw error;
   }
-  const error = new Error(`Video task ${taskUUID} is still processing after ${pollTimeoutSeconds}s; rerun the same command to resume polling without resubmitting`);
+  const error = new Error(`Video task ${taskUUID} is still processing or poll outcome is uncertain after ${pollTimeoutSeconds}s; same task ID remains saved for resume without resubmitting`);
   error.code = 'VIDEO_STILL_PROCESSING';
   throw error;
 }
 
 async function getTaskDetails(taskUUID) {
-  const response = await retryTransient(() => fetch('https://api.runware.ai/v1', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify([{ taskType: 'getTaskDetails', taskUUID }]),
-    signal: AbortSignal.timeout(60000),
-  }), {
+  const body = await retryTransient(async () => {
+    const response = await fetch('https://api.runware.ai/v1', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify([{ taskType: 'getTaskDetails', taskUUID }]),
+      signal: AbortSignal.timeout(60000),
+    });
+    const responseBody = await response.json().catch(() => ({}));
+    if (responseBody.errors?.some((item) => item.code === 'taskNotFound')) return responseBody;
+    if (!response.ok) {
+      const error = new Error(`Runware video task lookup HTTP ${response.status}: ${JSON.stringify(responseBody).slice(0, 1000)}`);
+      error.status = response.status;
+      throw error;
+    }
+    return responseBody;
+  }, {
     attempts: 5,
+    shouldRetry: (error) => isRetryableNetworkError(error) || isRetryableHttpStatus(error.status),
     onRetry: ({ nextAttempt, delay }) => console.warn(`Video task lookup retry ${nextAttempt}/5 in ${delay}ms`),
   });
-  const body = await response.json();
-  const task = body.data?.find((item) => item.taskUUID === taskUUID);
-  if (task) return task.response || null;
   if (body.errors?.some((error) => error.code === 'taskNotFound')) return null;
-  if (!response.ok || body.errors?.length) throw new Error(`Runware video task lookup failed: ${JSON.stringify(body.errors || body).slice(0, 1000)}`);
+  const task = body.data?.find((item) => item.taskUUID === taskUUID);
+  if (task) return task.response?.response || task.response || null;
+  if (body.errors?.length) throw new Error(`Runware video task lookup failed: ${JSON.stringify(body.errors || body).slice(0, 1000)}`);
   return null;
 }
 
@@ -182,14 +228,11 @@ async function generateScene(directory, record, scene, index) {
   if (!Number.isInteger(plannedDuration) || plannedDuration < minimumDuration || plannedDuration > maximumPlannedDuration) throw new Error(`Scene ${scene.index} duration ${scene.durationSeconds} is outside ${minimumDuration}–${maximumPlannedDuration} seconds`);
 
   const name = `scene-${scene.index}-video`;
-  const requestPath = join(directory, `${name}-request.json`);
-  const submissionPath = join(directory, `${name}-submission.json`);
-  const responsePath = join(directory, `${name}-response.json`);
-  const pendingPath = join(directory, `${name}-pending.json`);
-  const taskUUID = await exists(requestPath) ? (await json(requestPath)).taskUUID : randomUUID();
-  const savedRequest = await exists(requestPath) ? await json(requestPath) : null;
-  const renderStartedAt = savedRequest?.renderStartedAt || new Date().toISOString();
-  const task = {
+  const originalRequestPath = join(directory, `${name}-request.json`);
+  const originalRequest = await exists(originalRequestPath) ? await json(originalRequestPath) : null;
+  let taskUUID = originalRequest?.taskUUID || randomUUID();
+  let renderStartedAt = originalRequest?.renderStartedAt || new Date().toISOString();
+  let task = {
     taskType: 'videoInference', taskUUID, model: values.model,
     positivePrompt: scene.videoPrompt,
     inputs: { frameImages: [{ image: await dataUrl(join(directory, imagePath)), frame: 'first' }] },
@@ -198,12 +241,16 @@ async function generateScene(directory, record, scene, index) {
   };
   if (usesPVideo2Pro) task.settings = { mode: settingsMode };
   else task.outputQuality = outputQuality;
-  if (!await exists(requestPath)) await safeSave(requestPath, {
+  if (!originalRequest) await safeSave(originalRequestPath, {
     ...task,
     renderStartedAt,
     inputs: { frameImages: [{ image: imagePath, frame: 'first' }] },
   });
 
+  let requestPath = originalRequestPath;
+  let submissionPath = join(directory, `${name}-submission.json`);
+  let responsePath = join(directory, `${name}-response.json`);
+  let pendingPath = join(directory, `${name}-pending.json`);
   let submission;
   if (await exists(responsePath)) {
     const savedResponse = await json(responsePath);
@@ -222,6 +269,71 @@ async function generateScene(directory, record, scene, index) {
       submission = await json(submissionPath);
     } else {
       submission = await submitOrRecover(task, requestPath, submissionPath, pendingPath, taskUUID, renderStartedAt);
+    }
+  }
+  if (hasTerminalVideoError(submission) && !hasVideoResult(submission)) {
+    const confirmedResponse = await getTaskDetails(taskUUID);
+    if (hasVideoResult(confirmedResponse)) {
+      submission = confirmedResponse;
+    } else if (!hasTerminalVideoError(confirmedResponse)
+      && !(confirmedResponse === null && hasTerminalVideoError(submission))) {
+      throw new Error(`Runware has not confirmed terminal failure for ${taskUUID}; saved task remains untouched and no replacement submitted.`);
+    } else {
+      let retryNumber = 1;
+      while (retryNumber <= 2) {
+        const retrySuffix = `retry-${String(retryNumber).padStart(3, '0')}`;
+        const retryRequestPath = join(directory, `${name}-${retrySuffix}-request.json`);
+        const retrySubmissionPath = join(directory, `${name}-${retrySuffix}-submission.json`);
+        const retryResponsePath = join(directory, `${name}-${retrySuffix}-response.json`);
+        const retryPendingPath = join(directory, `${name}-${retrySuffix}-pending.json`);
+        requestPath = retryRequestPath;
+        submissionPath = retrySubmissionPath;
+        responsePath = retryResponsePath;
+        pendingPath = retryPendingPath;
+
+        if (await exists(requestPath)) {
+          const retryRequest = await json(requestPath);
+          taskUUID = retryRequest.taskUUID;
+          renderStartedAt = retryRequest.renderStartedAt || renderStartedAt;
+          if (await exists(responsePath)) {
+            submission = await json(responsePath);
+            if (hasVideoResult(submission)) break;
+            if (hasTerminalVideoError(submission)) {
+              const retryDetails = await getTaskDetails(taskUUID);
+              if (hasVideoResult(retryDetails)) {
+                submission = retryDetails;
+                break;
+              }
+              const wasUuidConflict = responseErrors(submission).some((item) => (item.code || item.errorCode) === 'conflictTaskUUID');
+              if (wasUuidConflict && retryNumber === 1) {
+                console.warn(`Runware rejected retry task UUID ${taskUUID} as already used; keeping its response and trying one fresh UUID.`);
+                retryNumber += 1;
+                continue;
+              }
+              throw new Error(`Automatic video retry ${retryNumber} for ${name} failed terminally; task ${taskUUID} remains saved for review.`);
+            }
+          } else if (await exists(submissionPath)) {
+            submission = await json(submissionPath);
+          } else {
+            task = { ...task, taskUUID };
+            submission = await submitOrRecover(task, requestPath, submissionPath, pendingPath, taskUUID, renderStartedAt);
+          }
+          break;
+        }
+
+        taskUUID = randomUUID();
+        renderStartedAt = new Date().toISOString();
+        task = { ...task, taskUUID };
+        await safeSave(requestPath, {
+          ...task,
+          renderStartedAt,
+          retryOfTaskUUID: originalRequest.taskUUID,
+          inputs: { frameImages: [{ image: imagePath, frame: 'first' }] },
+        });
+        console.warn(`VIDEO_TERMINAL_RETRY ${directory} · scene ${scene.index} · original task ${originalRequest.taskUUID} confirmed failed; submitting replacement ${retryNumber} ${taskUUID}`);
+        submission = await submitOrRecover(task, requestPath, submissionPath, pendingPath, taskUUID, renderStartedAt);
+        break;
+      }
     }
   }
   if (submission.errors?.length || submission.error) {
@@ -510,14 +622,15 @@ if (values['generate-title-cards']) {
         const previousResult = record.videoResults?.[index] || {};
         const { path: ignoredPath, ...savedResult } = previousResult;
         const requestPath = join(directory, `scene-${scene.index}-video-request.json`);
-        const savedRequest = await json(requestPath).catch(() => null);
+        const retryRequestPath = join(directory, `scene-${scene.index}-video-retry-001-request.json`);
+        const savedRequest = await json(retryRequestPath).catch(() => json(requestPath).catch(() => null));
         record.videoResults ||= [];
         record.videoResults[index] = {
           ...savedResult,
           provider: 'Runware',
           model: values.model,
           status: previousResult.status || 'failed',
-          taskUUID: previousResult.taskUUID || savedRequest?.taskUUID || null,
+          taskUUID: savedRequest?.taskUUID || previousResult.taskUUID || null,
           error: error.message || String(error),
           lastAttemptFailedAt: new Date().toISOString(),
         };

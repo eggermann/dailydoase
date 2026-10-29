@@ -22,7 +22,19 @@
 </head>
 <body><main>
   <h1>EU-RESKI · Parameter-Merkliste</h1>
-  <p class="muted">Stand: 28.10.2026 · Scene-JSON, Iterations-Overrides und CLI-Parameter</p>
+  <p class="muted">Stand: 29.10.2026 · Scene-JSON, Iterations-Overrides und CLI-Parameter</p>
+  <section>
+    <h2>GPT: Quellcode und Code-Zusammenfassung</h2>
+    <p><strong>Verfügbarkeit:</strong> Quellcode-Kontext und Code-Zusammenfassung sind im zusammengeführten Branch <code>eu-reski/eu-reski</code> verfügbar.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Scene-JSON</th><th>CLI</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><code>includeSourceCodeContext: false</code></td><td><code>--no-source-code-context</code></td><td>Sendet Planner-Quellcode nicht als zusätzlichen Code-Kontext an GPT. Regieprompt und Antwortschema bleiben erhalten.</td></tr>
+        <tr><td><code>sourceCodeSummaryFile: "eu-reski-news/docs/scene-code-summary.md"</code></td><td><code>--source-code-summary-file=eu-reski-news/docs/scene-code-summary.md</code></td><td>Sendet die angegebene Zusammenfassung zusätzlich zur Storyplanung. Verwendete Fassung wird in Iteration gespeichert.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Beide Einstellungen sind kombinierbar: Code-Kontext aus, Zusammenfassung an. Bereits gespeicherte GPT-Anfragen behalten ursprünglichen Inhalt.</p>
+  </section>
   <p class="flow"><strong>Iteration = eine Nachricht → mehrere Szenen → ein Startbild pro Szene.</strong></p>
 
   <section>

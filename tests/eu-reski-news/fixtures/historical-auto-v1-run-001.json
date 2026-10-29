@@ -1,0 +1,189 @@
+{
+  "source": "Saved EU-RESKI exhibition run-001 / iteration-001; compact regression snapshot",
+  "autoDecision": {
+    "autoMode": true,
+    "iteration": 1,
+    "articleId": "476662076",
+    "model": "gpt-4.1-mini",
+    "promptVersion": "eu-reski-auto-director-v1",
+    "createdAt": "2026-10-27T15:08:57.982Z",
+    "dramaturgicalConcept": "A contemplative, cyclical exploration of the strengthening of EU external borders through Frontex, reflecting tension and resolve in a fragmented geopolitical landscape.",
+    "visualConcept": "Cubist-inspired fragmented spatial composition with symbolic, overlapping geometric shapes representing borders, control, and movement, invoking Guernica's emotional intensity without direct replication.",
+    "motionConcept": "Slow, deliberate, cyclical camera movements with subtle zooms and pans to emphasize fragmentation and layers, creating a visual rhythm that mirrors the ongoing border management and return processes.",
+    "audioConcept": "Minimalist, ambient soundscape with low, resonant tones and sparse percussive elements to evoke tension and persistence, avoiding any dialogue to maintain contemplative mood.",
+    "selectedFlags": {
+      "storyClou": "on",
+      "legacyGuernicaStyleReferencePrompt": false,
+      "preserveCubistVideoStyle": true,
+      "sceneVisualControls": "scene-specific",
+      "articleImageReference": true,
+      "landscapePrompt": true,
+      "videoDirection": "on",
+      "videoVision": "on",
+      "videoAudioDirection": "on",
+      "videoMaxZoom": 0.15
+    },
+    "effectiveFlags": {
+      "storyClou": "on",
+      "legacyGuernicaStyleReferencePrompt": false,
+      "preserveCubistVideoStyle": true,
+      "sceneVisualControls": "scene-specific",
+      "articleImageReference": true,
+      "landscapePrompt": true,
+      "videoDirection": "on",
+      "videoVision": "on",
+      "videoAudioDirection": "on",
+      "videoMaxZoom": 0.15,
+      "videoMode": "image_to_video"
+    },
+    "constraints": {
+      "noDialogueNarration": false,
+      "styleReferenceAvailable": true,
+      "guernicaLocationReference": false,
+      "articleImageAvailable": true,
+      "fixedVisualStyleOptions": {
+        "symbolic": true,
+        "roomDeepness": false,
+        "layering": 3
+      },
+      "sceneCount": 5,
+      "sceneTiming": {
+        "takt": 4,
+        "type": "balanced",
+        "multiplier": 1.15,
+        "bias": 4.2,
+        "minimum": 5,
+        "maximum": 8
+      },
+      "imageProvider": "hf-flux-klein",
+      "videoModel": "prunaai:p-video@2-pro",
+      "videoResolution": "480p",
+      "videoSettingsMode": "cost",
+      "videosAfterEachIteration": true
+    },
+    "reason": "The article deals with complex geopolitical issues around EU border management and Frontex's role, suited to a quiet, fragmentary, and cyclical dramaturgy reflecting ongoing tensions and processes. Cubist visual style with symbolic fragmentation aligns with EU-RESKI identity and references Guernica's emotional depth without direct legacy style use. Slow, deliberate motion and a minimalist soundscape support thematic depth and visual continuity without overwhelming the viewer, respecting the no-dialogue setting and emphasizing mood over narrative exposition.",
+    "constraintsApplied": [
+      "Scene video mode is fixed to image_to_video because first_last_frame is not executable in the current renderer.",
+      "noDialogueNarration remains user-controlled (disabled)."
+    ],
+    "usage": {
+      "prompt_tokens": 1614,
+      "completion_tokens": 314,
+      "total_tokens": 1928,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    }
+  },
+  "record": {
+    "autoMode": true,
+    "sceneCount": 5,
+    "sceneDurations": [
+      8,
+      5,
+      7,
+      5,
+      8
+    ],
+    "generationSettings": {
+      "autoMode": true,
+      "articleOrder": "linear",
+      "sceneTiming": {
+        "takt": 4,
+        "type": "balanced",
+        "multiplier": 1.15,
+        "bias": 4.2,
+        "minimum": 5,
+        "maximum": 8
+      },
+      "imageProvider": "hf-flux-klein",
+      "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+      "storyModel": "gpt-4.1-mini",
+      "articleImageReference": true,
+      "guernicaLocationReference": false,
+      "landscapePrompt": true,
+      "legacyGuernicaStyleReferencePromptRequested": false,
+      "legacyGuernicaStyleReferencePrompt": false,
+      "guernicaFigureReference": true,
+      "styleReferencePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+      "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+      "sceneVisualControls": true,
+      "visualStyleOptions": {
+        "symbolic": true,
+        "roomDeepness": false,
+        "layering": 3
+      },
+      "videosAfterEachIteration": true,
+      "generateTitleCards": true,
+      "videoModel": "prunaai:p-video@2-pro",
+      "videoResolution": "480p",
+      "videoSettingsMode": "cost"
+    },
+    "featureSettings": {
+      "autoMode": true,
+      "storyClou": "on",
+      "videoDirection": "on",
+      "videoMode": "image_to_video",
+      "videoVision": "on",
+      "videoAudioDirection": "on",
+      "noDialogueNarration": false,
+      "videoMaxZoom": 0.15,
+      "preserveCubistVideoStyle": true,
+      "landscapePrompt": true
+    },
+    "sceneCountSelection": {
+      "iteration": 0,
+      "rawValue": 4,
+      "biasedValue": 5,
+      "count": 5,
+      "settings": {
+        "mode": "taktmuster",
+        "takt": 2,
+        "numerator": 4,
+        "denominator": 4,
+        "type": "balanced",
+        "bias": 1,
+        "minimum": 1,
+        "maximum": 12
+      }
+    },
+    "videoTaskIds": [
+      "be2b51cc-c457-4f46-b481-329ba4dc94a0",
+      "5730ecbe-a34c-433e-aba4-c13dedd5a81e",
+      "98e48fe0-efe1-479e-86af-7d4583f6d769",
+      "daccae5f-3254-4b16-b98a-a7984a70960d",
+      "ae92b1f9-2d3d-4ae5-ad60-583a38cc4341"
+    ]
+  },
+  "requestHashes": {
+    "gpt-request.json": "898241721e8e0e6eb3fb3c3548cbf8dd8e4b03a3f21995fb180a146f60192c9b",
+    "timing-request.json": "0ef8bde7b551361324931dcf07446af02face4ae2aaedb1ddc335bf52d238057",
+    "video-direction-request.json": "27dafb97235acd46cb27075072b3f6fc473637fdb54212b49ad26674f464b2eb",
+    "audio-direction-request.json": "15cff4abef913f7b47b699d1369e9fce6256e1a261a13b9f1ddcd3a36b7ea300",
+    "film-plan.json": "ae3901dcd7893a95e6976466fb68123498286487760305fd26cf256719c04d70"
+  },
+  "promptChecks": {
+    "gpt-request.json": {
+      "hasAutoConceptHandoff": false
+    },
+    "timing-request.json": {
+      "hasAutoConceptHandoff": false
+    },
+    "video-direction-request.json": {
+      "hasAutoConceptHandoff": false
+    },
+    "audio-direction-request.json": {
+      "hasAutoConceptHandoff": false
+    },
+    "film-plan.json": {
+      "hasAutoConceptHandoff": false
+    }
+  }
+}

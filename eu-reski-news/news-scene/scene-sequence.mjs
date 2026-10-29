@@ -28,6 +28,24 @@ export function parseGenerationInterval(value) {
   return milliseconds;
 }
 
+export function resolveParallelSceneSchedule({
+  requestedInterval,
+  configuredInterval,
+  configuredBiasMode,
+} = {}) {
+  const selectedInterval = requestedInterval ?? (configuredInterval === undefined ? '1h' : String(configuredInterval));
+  if (selectedInterval === '-1') {
+    return { scheduleEnabled: false, generationInterval: '-1', intervalMs: null, biasMode: null };
+  }
+  const duration = /^\d+(?:\.\d+)?$/.test(String(selectedInterval))
+    ? `${selectedInterval}m`
+    : String(selectedInterval);
+  const intervalMs = parseGenerationInterval(duration);
+  const biasMode = configuredBiasMode ?? 'off';
+  if (!['on', 'off'].includes(biasMode)) throw new Error('Parallel scene biasMode must be "on" or "off"');
+  return { scheduleEnabled: true, generationInterval: duration, intervalMs, biasMode };
+}
+
 export async function loadSceneSequence(scenePath, defaultGeneration, {
   scheduleEnabled = true,
   generationInterval = undefined,
@@ -52,6 +70,11 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
       .sort((left, right) => left.localeCompare(right, 'en'));
     sceneIterations = await Promise.all(iterationFileNames.map(async (fileName) =>
       JSON.parse(await readFile(resolve(absoluteScenePath, fileName), 'utf8'))));
+  } else if (!Array.isArray(sceneIterations)
+    && typeof scene.name === 'string'
+    && scene.generationOverrides && typeof scene.generationOverrides === 'object'
+    && !Array.isArray(scene.generationOverrides)) {
+    sceneIterations = [scene];
   }
   if (!Array.isArray(sceneIterations) || sceneIterations.length === 0) {
     throw new Error(isSceneDirectory
@@ -92,6 +115,8 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
 
   return {
     path: absoluteScenePath,
+    configuredGenerationInterval: minutes === undefined ? undefined : String(minutes),
+    configuredBiasMode: scene.biasMode,
     scheduleEnabled: activeSchedule,
     generationInterval: activeSchedule ? selectedInterval : null,
     intervalMs,
@@ -107,4 +132,3 @@ export function getIteratorStartTime(startedAt, index, intervalMs, iteratorCount
   const slot = index % iteratorCount;
   return startedAt + (cycle * intervalMs) + biasMs + (slot * slotMs);
 }
-

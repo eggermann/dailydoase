@@ -5,6 +5,7 @@ import { dirname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
 import { createTransitionWaitScheduler, parseTransitionWaitPattern } from '../news-scene/transition-wait-pattern.mjs';
+import { isNewAutoSingleScene } from '../news-scene/scene-count.mjs';
 
 const { values: options } = parseArgs({ options: {
   run: { type: 'string' }, iterations: { type: 'string', default: '5' },
@@ -317,14 +318,23 @@ async function processJob(job) {
 
 const iterations = await getIterations();
 const jobs = [];
-const transitionWaitScheduler = createTransitionWaitScheduler(transitionWaitPattern);
+const iterationRecords = [];
 for (const iterationDirectory of iterations) {
   const iterationRecord = await json(join(runDirectory, iterationDirectory, 'record.json'));
   const scenes = iterationRecord.plan?.scenes || [];
-  if (scenes.length < 2) throw new Error(`${iterationDirectory} has fewer than two planned scenes`);
-  const scheduledBoundaries = transitionWaitPattern !== null
+  if (scenes.length < 2 && !isNewAutoSingleScene(iterationRecord)) {
+    throw new Error(`${iterationDirectory} has fewer than two planned scenes`);
+  }
+  iterationRecords.push({ iterationDirectory, iterationRecord, scenes });
+}
+const hasTransitionCandidates = iterationRecords.some(({ scenes }) => scenes.length > 1);
+const transitionWaitScheduler = transitionWaitPattern !== null && hasTransitionCandidates
+  ? createTransitionWaitScheduler(transitionWaitPattern)
+  : null;
+for (const { iterationDirectory, scenes, iterationRecord } of iterationRecords) {
+  const scheduledBoundaries = transitionWaitPattern !== null && scenes.length > 1
     ? transitionWaitScheduler.scheduleForIteration(scenes)
-    : null;
+    : transitionWaitPattern !== null ? new Set() : null;
   for (let index = 0; index < scenes.length - 1; index += 1) {
     const boundaryKey = `${scenes[index].index}->${scenes[index + 1].index}`;
     if (scheduledBoundaries && !scheduledBoundaries.has(boundaryKey)) continue;
