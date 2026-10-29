@@ -23,6 +23,18 @@
 <body><main>
   <h1>EU-RESKI · Parameter-Merkliste</h1>
   <p class="muted">Stand: 23.10.2026 · Branch <code>eu-reski/default</code> · Worktree <code>/Users/eggermann/.codex/worktrees/e3e1/dailydoase</code></p>
+  <section>
+    <h2>GPT: Quellcode und Code-Zusammenfassung</h2>
+    <p><strong>Verfügbarkeit:</strong> Diese Einstellungen sind im Worktree <code>ca13</code> auf <code>player-system</code> vorhanden. Die Zusammenfassung und ihre Einbindung sind dort noch nicht committet; im Branch <code>auto-director-fresh</code> fehlen beide Einstellungen derzeit.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Scene-JSON</th><th>CLI</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><code>includeSourceCodeContext: false</code></td><td><code>--no-source-code-context</code></td><td>Sendet den Planner-Quellcode nicht im zusätzlichen Code-Kontext an GPT. Regieprompt und Antwortschema bleiben erhalten. Mit <code>true</code> bzw. <code>--include-source-code-context</code> wird der Code-Kontext gesendet.</td></tr>
+        <tr><td><code>sourceCodeSummaryFile: "eu-reski-news/docs/scene-code-summary.md"</code></td><td><code>--source-code-summary-file=eu-reski-news/docs/scene-code-summary.md</code></td><td>Sendet den Inhalt der angegebenen Zusammenfassung zusätzlich zur Storyplanung. Die verwendete Fassung wird in der Iteration gespeichert.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Beide Einstellungen können kombiniert werden: Code-Kontext aus, Zusammenfassung an. Bereits gespeicherte GPT-Anfragen behalten ihre ursprünglichen Inhalte.</p>
+  </section>
   <p class="flow"><strong>Iteration = eine Nachricht → mehrere Szenen → ein Startbild pro Szene.</strong></p>
 
   <section>

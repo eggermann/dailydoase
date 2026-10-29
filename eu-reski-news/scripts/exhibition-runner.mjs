@@ -782,6 +782,14 @@ async function exhibitionMain() {
       log('Starting an explicit new exhibition Run; previous Run directories are retained.');
     } else {
       resumingParallelCampaign = await inspectSavedSceneWorkers(state.sceneWorkers);
+      if (resumingParallelCampaign) {
+        for (const worker of Object.values(state.sceneWorkers || {})) {
+          if (worker.runDirectory && !worker.iteratorPlanFingerprint) {
+            const savedRun = await readJson(join(worker.runDirectory, 'run.json')).catch(() => null);
+            if (savedRun?.iteratorPlanFingerprint) worker.iteratorPlanFingerprint = savedRun.iteratorPlanFingerprint;
+          }
+        }
+      }
     }
     const resumeArgument = commandArguments.find((argument) => flagName(argument) === '--resume-run');
     const resumePath = resumeArgument ? argumentValue(commandArguments, '--resume-run', '') : '';

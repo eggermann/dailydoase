@@ -2,6 +2,6 @@
   "name": "run-001-exhibition",
   "generationOverrides": {
     "autoMode": true,
-    "iterations": 1
+    "iterations": 8
   }
 }

@@ -1568,6 +1568,11 @@ async function main() {
           settingsMode: options['video-settings-mode'],
           generateTitleCards: options['generate-title-cards'],
         });
+        if (endless && iteratorPlan?.workerKey
+          && (await pendingVideoScenes(iterationRoot, { directory: relativeDirectory })).length) {
+          console.log(`Iteration ${relativeDirectory} has pending video tasks; pausing this worker until they are recovered.`);
+          break;
+        }
       }
     }
     if (!endless && completed >= iterationLimit) break;
