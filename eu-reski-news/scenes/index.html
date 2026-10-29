@@ -17,6 +17,12 @@
     .path { color: #aaa391; font: .85rem ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
     .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 8px; margin: 16px 0; }
     .fact { border: 1px solid #34352e; border-radius: 8px; padding: 9px 11px; min-width: 0; }
+    .comparison { margin: 16px 0; padding: 12px 15px; border-radius: 9px; background: #151611; border: 1px solid #46473a; }
+    .comparison h3 { margin: 0 0 4px; color: #d8ff49; }
+    .comparison p { margin: 4px 0 8px; color: #bbb5a7; font-size: .92rem; }
+    .comparison ul { margin: 8px 0 0; padding-left: 22px; }
+    .comparison li { margin: 7px 0; overflow-wrap: anywhere; }
+    .comparison a { color: #d8ff49; }
     dt { color: #aaa391; font-size: .82rem; }
     dd { margin: 2px 0 0; overflow-wrap: anywhere; }
     details { border-top: 1px solid #34352e; margin-top: 12px; padding-top: 10px; }
@@ -30,8 +36,9 @@
   <p class="intro">3 Scene-Datei(en) unter <code>eu-reski-news/scenes/</code>, einschließlich Unterordner. Werte zeigen effektive Einstellungen nach Merge mit Defaults v11; aufklappbare Blöcke zeigen Scene-Overrides und dokumentierte Runner-Eingaben. Ordner-Zeitplan: 60 min · Bias off. Scene-spezifische Zeitpläne überschreiben diese Werte.</p>
   <article class="scene-card">
     <header><span class="path">scenes/reproductions/source-context-off.scene.json</span><h2>source-context-off-reproduction</h2>
-      <p>Scene-Parameter aus dem Runner-Log von source-context-comparison/next-article/off/run-001. Einzelstart ohne Interpolation.</p></header>
-    <dl class="facts"><div class="fact"><dt>Eigener Zeitplan</dt><dd>aus</dd></div><div class="fact"><dt>Bias</dt><dd>off</dd></div><div class="fact"><dt>Modus</dt><dd>Manuell</dd></div><div class="fact"><dt>Story-Modell</dt><dd>gpt-4o-mini</dd></div><div class="fact"><dt>Source-Code-Kontext</dt><dd>aus</dd></div><div class="fact"><dt>Code-Zusammenfassung</dt><dd>keine</dd></div><div class="fact"><dt>Iterationen</dt><dd>1</dd></div><div class="fact"><dt>Artikelreihenfolge</dt><dd>linear</dd></div><div class="fact"><dt>Szenenzahl</dt><dd>taktmuster · Takt 2 · 3/4 · Bias 2 · 1–12</dd></div><div class="fact"><dt>Szenendauer</dt><dd>Takt 4 · balanced · ×1.15 · Bias 4.2 · 5–8 s</dd></div><div class="fact"><dt>Bildprovider</dt><dd>hf-flux-klein</dd></div><div class="fact"><dt>Guernica-Stilreferenz</dt><dd>true</dd></div><div class="fact"><dt>Guernica-Figurenreferenz</dt><dd>true</dd></div><div class="fact"><dt>Artikelbildreferenz</dt><dd>false</dd></div><div class="fact"><dt>Legacy-Guernica-Regie</dt><dd>false</dd></div><div class="fact"><dt>Cubist-Video-Stil fixiert</dt><dd>false</dd></div><div class="fact"><dt>Visual Controls</dt><dd>scene-specific · Symbolik an · Raumtiefe aus · Layering 3</dd></div><div class="fact"><dt>Videomodell</dt><dd>prunaai:p-video@2-pro</dd></div><div class="fact"><dt>Videoauflösung / Modus</dt><dd>480p · image_to_video · cost</dd></div><div class="fact"><dt>Video-Regie</dt><dd>off · off · off</dd></div><div class="fact"><dt>Dialog</dt><dd>erlaubt</dd></div><div class="fact"><dt>Titeltafeln</dt><dd>an</dd></div><div class="fact"><dt>Videos je Iteration</dt><dd>an</dd></div></dl>
+      <p>Kompaktes Profil mit den Generator-Overrides aus source-context-comparison/next-article/off/run-001.</p></header>
+    <dl class="facts"><div class="fact"><dt>Eigener Zeitplan</dt><dd>aus</dd></div><div class="fact"><dt>Bias</dt><dd>Ordnerkonfiguration</dd></div><div class="fact"><dt>Modus</dt><dd>Manuell</dd></div><div class="fact"><dt>Story-Modell</dt><dd>gpt-4o-mini</dd></div><div class="fact"><dt>Source-Code-Kontext</dt><dd>aus</dd></div><div class="fact"><dt>Code-Zusammenfassung</dt><dd>keine</dd></div><div class="fact"><dt>Iterationen</dt><dd>1</dd></div><div class="fact"><dt>Artikelreihenfolge</dt><dd>linear</dd></div><div class="fact"><dt>Szenenzahl</dt><dd>taktmuster · Takt 2 · 3/4 · Bias 2 · 1–12</dd></div><div class="fact"><dt>Szenendauer</dt><dd>Takt 4 · balanced · ×1.15 · Bias 4.2 · 5–8 s</dd></div><div class="fact"><dt>Bildprovider</dt><dd>hf-flux-klein</dd></div><div class="fact"><dt>Guernica-Stilreferenz</dt><dd>true</dd></div><div class="fact"><dt>Guernica-Figurenreferenz</dt><dd>true</dd></div><div class="fact"><dt>Artikelbildreferenz</dt><dd>false</dd></div><div class="fact"><dt>Legacy-Guernica-Regie</dt><dd>false</dd></div><div class="fact"><dt>Cubist-Video-Stil fixiert</dt><dd>false</dd></div><div class="fact"><dt>Visual Controls</dt><dd>scene-specific · Symbolik an · Raumtiefe aus · Layering 3</dd></div><div class="fact"><dt>Videomodell</dt><dd>prunaai:p-video@2-pro</dd></div><div class="fact"><dt>Videoauflösung / Modus</dt><dd>480p · image_to_video · cost</dd></div><div class="fact"><dt>Video-Regie</dt><dd>off · off · off</dd></div><div class="fact"><dt>Dialog</dt><dd>erlaubt</dd></div><div class="fact"><dt>Titeltafeln</dt><dd>an</dd></div><div class="fact"><dt>Videos je Iteration</dt><dd>an</dd></div></dl>
+    <section class="comparison"><h3>Filme zum Vergleichen</h3><ul><li class="film-reference"><b>Originalfilm:</b> <a href="file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/merged/iteration-001-with-title-card-audio-normalized.mp4">Film ansehen</a> · damals gestartetes Profil: <code>source-context-off</code> · <a href="file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/run.json">Run-Protokoll</a><p>Vergleichsverweise; Filmdatei wird nicht als Generierungseingabe verwendet.</p></li></ul><p>Die Run-Namen zeigen, welches Scene-Profil gestartet wurde. Ältere Filme können mit früheren Einstellungen entstanden sein.</p></section>
     <details><summary>Effektive Generationseinstellungen</summary><pre>{
   &quot;autoMode&quot;: false,
   &quot;storyModel&quot;: &quot;gpt-4o-mini&quot;,
@@ -83,104 +90,28 @@
     &quot;roomDeepness&quot;: false,
     &quot;layering&quot;: 3
   },
-  &quot;includeSourceCodeContext&quot;: false,
-  &quot;sourceCodeSummaryFile&quot;: null
+  &quot;includeSourceCodeContext&quot;: false
 }</pre></details>
     <details><summary>Nur Scene-Overrides</summary><pre>{
-  &quot;autoMode&quot;: false,
   &quot;storyModel&quot;: &quot;gpt-4o-mini&quot;,
   &quot;includeSourceCodeContext&quot;: false,
-  &quot;sourceCodeSummaryFile&quot;: null,
   &quot;iterations&quot;: 1,
-  &quot;pauseMs&quot;: 0,
-  &quot;articleOrder&quot;: &quot;linear&quot;,
   &quot;sceneCount&quot;: {
-    &quot;mode&quot;: &quot;taktmuster&quot;,
-    &quot;takt&quot;: 2,
     &quot;numerator&quot;: 3,
-    &quot;denominator&quot;: 4,
-    &quot;type&quot;: &quot;balanced&quot;,
-    &quot;bias&quot;: 2,
-    &quot;minimum&quot;: 1,
-    &quot;maximum&quot;: 12
+    &quot;bias&quot;: 2
   },
-  &quot;sceneLength&quot;: {
-    &quot;takt&quot;: 4,
-    &quot;type&quot;: &quot;balanced&quot;,
-    &quot;multiplier&quot;: 1.15,
-    &quot;bias&quot;: 4.2,
-    &quot;minimum&quot;: 5,
-    &quot;maximum&quot;: 8
-  },
-  &quot;imageProvider&quot;: &quot;hf-flux-klein&quot;,
-  &quot;styleReference&quot;: true,
   &quot;legacyGuernicaStyleReferencePrompt&quot;: false,
-  &quot;guernicaFigureReference&quot;: true,
   &quot;articleImageReference&quot;: false,
-  &quot;guernicaLocationReference&quot;: false,
-  &quot;landscapePrompt&quot;: false,
   &quot;preserveCubistVideoStyle&quot;: false,
-  &quot;visualControls&quot;: {
-    &quot;mode&quot;: &quot;scene-specific&quot;,
-    &quot;symbolic&quot;: true,
-    &quot;roomDeepness&quot;: false,
-    &quot;layering&quot;: 3
-  },
-  &quot;videoModel&quot;: &quot;prunaai:p-video@2-pro&quot;,
-  &quot;videoResolution&quot;: &quot;480p&quot;,
-  &quot;videoSettingsMode&quot;: &quot;cost&quot;,
-  &quot;videoMode&quot;: &quot;image_to_video&quot;,
-  &quot;videoDirection&quot;: &quot;off&quot;,
-  &quot;storyClou&quot;: &quot;off&quot;,
-  &quot;videoVision&quot;: &quot;off&quot;,
-  &quot;videoAudioDirection&quot;: &quot;off&quot;,
-  &quot;noDialogueNarration&quot;: false,
-  &quot;videoMaxZoom&quot;: 0.08,
-  &quot;videosAfterEachIteration&quot;: true,
-  &quot;generate-title-cards&quot;: true
+  &quot;videoAudioDirection&quot;: &quot;off&quot;
 }</pre></details>
-    <details><summary>Rekonstruktionshinweise</summary><pre>{
-  &quot;documentationOnly&quot;: true,
-  &quot;articleId&quot;: &quot;475855312&quot;,
-  &quot;articleTitle&quot;: &quot;EÚ chystá dôležitý summit: Lídri budú rokovať o budúcnosti západného Balkánu&quot;,
-  &quot;newsDirectory&quot;: &quot;eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/news&quot;,
-  &quot;semanticStreamFile&quot;: &quot;eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/semantic.json&quot;,
-  &quot;imageSeed&quot;: 42001,
-  &quot;observedSceneCount&quot;: 5,
-  &quot;observedSceneDurationsSeconds&quot;: [
-    8,
-    5,
-    7,
-    5,
-    8
-  ],
-  &quot;defaults&quot;: {
-    &quot;settingsVersion&quot;: 7,
-    &quot;settingsFingerprint&quot;: &quot;5b45802f662c1be3bab8f388434716bafd535924e0eeb84fee8f4a413a66ad59&quot;,
-    &quot;glueEnabled&quot;: false,
-    &quot;gluePattern&quot;: &quot;9,5,7,5,8&quot;,
-    &quot;glueWaitPattern&quot;: &quot;classic&quot;,
-    &quot;glueFrameOffset&quot;: &quot;0.25&quot;,
-    &quot;fadeSeconds&quot;: &quot;0.25&quot;,
-    &quot;randomThreshold&quot;: 0.7
-  },
-  &quot;promptProvenance&quot;: {
-    &quot;sourceCommit&quot;: &quot;78f40a2fc946b1a39fe4063e6ef27429f893157d&quot;,
-    &quot;sourceWorkingTreeClean&quot;: false,
-    &quot;directorVersion&quot;: 19,
-    &quot;directorSha256&quot;: &quot;e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9&quot;,
-    &quot;storyTemperature&quot;: 0.65,
-    &quot;storyMaxCompletionTokens&quot;: 14000,
-    &quot;timingTemperature&quot;: 0.3,
-    &quot;timingMaxCompletionTokens&quot;: 7000
-  },
-  &quot;note&quot;: &quot;Dokumentation der ursprünglichen Runner-Eingaben. Artikel-ID, Semantic-Stream-Datei und Seed sind CLI-Eingaben, keine generationOverrides. Keine generierten Bild-, Video-, Audio- oder Filmdateien werden als Eingabe verwendet. Gleich neu erzeugte Prompttexte sind wegen Modell-Nichtdeterminismus nicht garantiert.&quot;
-}</pre></details>
+    
   </article>
 <article class="scene-card">
     <header><span class="path">scenes/run-001.scene.json</span><h2>run-001-exhibition</h2>
       </header>
     <dl class="facts"><div class="fact"><dt>Eigener Zeitplan</dt><dd>Ordnerkonfiguration</dd></div><div class="fact"><dt>Bias</dt><dd>Ordnerkonfiguration</dd></div><div class="fact"><dt>Modus</dt><dd>Auto</dd></div><div class="fact"><dt>Story-Modell</dt><dd>gpt-6-luna</dd></div><div class="fact"><dt>Source-Code-Kontext</dt><dd>aus</dd></div><div class="fact"><dt>Code-Zusammenfassung</dt><dd>eu-reski-news/docs/scene-code-summary.md</dd></div><div class="fact"><dt>Iterationen</dt><dd>8</dd></div><div class="fact"><dt>Artikelreihenfolge</dt><dd>linear</dd></div><div class="fact"><dt>Szenenzahl</dt><dd>taktmuster · Takt 2 · 4/4 · Bias 1 · 1–12</dd></div><div class="fact"><dt>Szenendauer</dt><dd>Takt 4 · balanced · ×1.15 · Bias 4.2 · 5–8 s</dd></div><div class="fact"><dt>Bildprovider</dt><dd>hf-flux-klein</dd></div><div class="fact"><dt>Guernica-Stilreferenz</dt><dd>true</dd></div><div class="fact"><dt>Guernica-Figurenreferenz</dt><dd>true</dd></div><div class="fact"><dt>Artikelbildreferenz</dt><dd>true</dd></div><div class="fact"><dt>Legacy-Guernica-Regie</dt><dd>true</dd></div><div class="fact"><dt>Cubist-Video-Stil fixiert</dt><dd>true</dd></div><div class="fact"><dt>Visual Controls</dt><dd>scene-specific · Symbolik an · Raumtiefe aus · Layering 3</dd></div><div class="fact"><dt>Videomodell</dt><dd>prunaai:p-video@2-pro</dd></div><div class="fact"><dt>Videoauflösung / Modus</dt><dd>480p · image_to_video · cost</dd></div><div class="fact"><dt>Video-Regie</dt><dd>off · off · on</dd></div><div class="fact"><dt>Dialog</dt><dd>erlaubt</dd></div><div class="fact"><dt>Titeltafeln</dt><dd>an</dd></div><div class="fact"><dt>Videos je Iteration</dt><dd>an</dd></div></dl>
+    <section class="comparison"><h3>Filme zum Vergleichen</h3><ul><li><b>run-014</b> · 3 Iteration(en) · Story gpt-4.1-mini · Auto-Modus an · Bild/Video hf-flux-klein / prunaai:p-video@2-pro · <a href="../GENERATIONS/news/exhibition/run-014/glue-vids/eu-reski-live-full.mp4">Film ansehen</a> · älterer Stand: Story-Modell gpt-4.1-mini (Scene jetzt: gpt-6-luna)</li><li><b>run-006</b> · 1 Iteration(en) · Story gpt-4.1-mini · Auto-Modus an · Bild/Video hf-flux-klein / prunaai:p-video@2-pro · <a href="../GENERATIONS/news/exhibition/run-006/glue-vids/eu-reski-live-full.mp4">Film ansehen</a> · älterer Stand: Story-Modell gpt-4.1-mini (Scene jetzt: gpt-6-luna)</li><li><b>run-005</b> · 1 Iteration(en) · Story gpt-4.1-mini · Auto-Modus an · Bild/Video hf-flux-klein / prunaai:p-video@2-pro · <a href="../GENERATIONS/news/exhibition/run-005/merged/eu-reski-gesamtfilm.mp4">Film ansehen</a> · älterer Stand: Story-Modell gpt-4.1-mini (Scene jetzt: gpt-6-luna)</li><li><b>run-002</b> · 12 Iteration(en) · Story gpt-4.1-mini · Auto-Modus an · Bild/Video hf-flux-klein / prunaai:p-video@2-pro · <a href="../GENERATIONS/news/exhibition/run-002/glue-vids/eu-reski-live-full.mp4">Film ansehen</a> · älterer Stand: Story-Modell gpt-4.1-mini (Scene jetzt: gpt-6-luna)</li></ul><details><summary>5 weitere Starts ohne Gesamtfilm</summary><ul><li><b>run-018</b> · failed · 0 Iteration(en)</li><li><b>run-016</b> · interrupted · 0 Iteration(en)</li><li><b>run-012</b> · failed · 0 Iteration(en)</li><li><b>run-010</b> · interrupted · 0 Iteration(en)</li><li><b>run-008</b> · running · 3 Iteration(en) · <a href="../GENERATIONS/news/exhibition/run-008/index.html">Run-Bericht</a></li></ul></details><p>Die Run-Namen zeigen, welches Scene-Profil gestartet wurde. Ältere Filme können mit früheren Einstellungen entstanden sein.</p></section>
     <details><summary>Effektive Generationseinstellungen</summary><pre>{
   &quot;autoMode&quot;: true,
   &quot;storyModel&quot;: &quot;gpt-6-luna&quot;,
@@ -248,6 +179,7 @@
     <header><span class="path">scenes/run-005.scene.json</span><h2>run-005-prompt-path</h2>
       </header>
     <dl class="facts"><div class="fact"><dt>Eigener Zeitplan</dt><dd>Ordnerkonfiguration</dd></div><div class="fact"><dt>Bias</dt><dd>Ordnerkonfiguration</dd></div><div class="fact"><dt>Modus</dt><dd>Manuell</dd></div><div class="fact"><dt>Story-Modell</dt><dd>gpt-6-luna</dd></div><div class="fact"><dt>Source-Code-Kontext</dt><dd>an</dd></div><div class="fact"><dt>Code-Zusammenfassung</dt><dd>keine</dd></div><div class="fact"><dt>Iterationen</dt><dd>1</dd></div><div class="fact"><dt>Artikelreihenfolge</dt><dd>linear</dd></div><div class="fact"><dt>Szenenzahl</dt><dd>taktmuster · Takt 2 · 4/4 · Bias 1 · 1–12</dd></div><div class="fact"><dt>Szenendauer</dt><dd>Takt 4 · balanced · ×1.15 · Bias 4.2 · 5–8 s</dd></div><div class="fact"><dt>Bildprovider</dt><dd>hf-flux-klein</dd></div><div class="fact"><dt>Guernica-Stilreferenz</dt><dd>false</dd></div><div class="fact"><dt>Guernica-Figurenreferenz</dt><dd>true</dd></div><div class="fact"><dt>Artikelbildreferenz</dt><dd>true</dd></div><div class="fact"><dt>Legacy-Guernica-Regie</dt><dd>false</dd></div><div class="fact"><dt>Cubist-Video-Stil fixiert</dt><dd>true</dd></div><div class="fact"><dt>Visual Controls</dt><dd>scene-specific · Symbolik an · Raumtiefe aus · Layering 3</dd></div><div class="fact"><dt>Videomodell</dt><dd>prunaai:p-video@2-pro</dd></div><div class="fact"><dt>Videoauflösung / Modus</dt><dd>480p · image_to_video · cost</dd></div><div class="fact"><dt>Video-Regie</dt><dd>off · off · on</dd></div><div class="fact"><dt>Dialog</dt><dd>erlaubt</dd></div><div class="fact"><dt>Titeltafeln</dt><dd>an</dd></div><div class="fact"><dt>Videos je Iteration</dt><dd>an</dd></div></dl>
+    <section class="comparison"><h3>Filme zum Vergleichen</h3><ul></ul><details><summary>8 weitere Starts ohne Gesamtfilm</summary><ul><li><b>run-019</b> · interrupted · 0 Iteration(en)</li><li><b>run-017</b> · interrupted · 0 Iteration(en)</li><li><b>run-015</b> · interrupted · 1 Iteration(en) · <a href="../GENERATIONS/news/exhibition/run-015/index.html">Run-Bericht</a></li><li><b>run-013</b> · interrupted · 1 Iteration(en) · <a href="../GENERATIONS/news/exhibition/run-013/index.html">Run-Bericht</a></li><li><b>run-011</b> · interrupted · 0 Iteration(en)</li><li><b>run-009</b> · interrupted · 0 Iteration(en)</li><li><b>run-007</b> · running · 1 Iteration(en) · <a href="../GENERATIONS/news/exhibition/run-007/index.html">Run-Bericht</a></li><li><b>run-001</b> · interrupted · 6 Iteration(en) · <a href="../GENERATIONS/news/exhibition/run-001/index.html">Run-Bericht</a></li></ul></details><p>Die Run-Namen zeigen, welches Scene-Profil gestartet wurde. Ältere Filme können mit früheren Einstellungen entstanden sein.</p></section>
     <details><summary>Effektive Generationseinstellungen</summary><pre>{
   &quot;autoMode&quot;: false,
   &quot;storyModel&quot;: &quot;gpt-6-luna&quot;,
@@ -301,56 +233,10 @@
   }
 }</pre></details>
     <details><summary>Nur Scene-Overrides</summary><pre>{
-  &quot;autoMode&quot;: false,
   &quot;storyModel&quot;: &quot;gpt-6-luna&quot;,
   &quot;iterations&quot;: 1,
-  &quot;pauseMs&quot;: 0,
-  &quot;articleOrder&quot;: &quot;linear&quot;,
   &quot;styleReference&quot;: false,
-  &quot;legacyGuernicaStyleReferencePrompt&quot;: false,
-  &quot;guernicaFigureReference&quot;: true,
-  &quot;articleImageReference&quot;: true,
-  &quot;guernicaLocationReference&quot;: false,
-  &quot;landscapePrompt&quot;: false,
-  &quot;preserveCubistVideoStyle&quot;: true,
-  &quot;videosAfterEachIteration&quot;: true,
-  &quot;generate-title-cards&quot;: true,
-  &quot;sceneCount&quot;: {
-    &quot;mode&quot;: &quot;taktmuster&quot;,
-    &quot;count&quot;: 5,
-    &quot;takt&quot;: 2,
-    &quot;numerator&quot;: 4,
-    &quot;denominator&quot;: 4,
-    &quot;type&quot;: &quot;balanced&quot;,
-    &quot;bias&quot;: 1,
-    &quot;minimum&quot;: 1,
-    &quot;maximum&quot;: 12
-  },
-  &quot;sceneLength&quot;: {
-    &quot;takt&quot;: 4,
-    &quot;type&quot;: &quot;balanced&quot;,
-    &quot;multiplier&quot;: 1.15,
-    &quot;bias&quot;: 4.2,
-    &quot;minimum&quot;: 5,
-    &quot;maximum&quot;: 8
-  },
-  &quot;imageProvider&quot;: &quot;hf-flux-klein&quot;,
-  &quot;videoModel&quot;: &quot;prunaai:p-video@2-pro&quot;,
-  &quot;videoResolution&quot;: &quot;480p&quot;,
-  &quot;videoSettingsMode&quot;: &quot;cost&quot;,
-  &quot;videoMode&quot;: &quot;image_to_video&quot;,
-  &quot;videoDirection&quot;: &quot;off&quot;,
-  &quot;storyClou&quot;: &quot;off&quot;,
-  &quot;videoVision&quot;: &quot;off&quot;,
-  &quot;videoAudioDirection&quot;: &quot;on&quot;,
-  &quot;noDialogueNarration&quot;: false,
-  &quot;videoMaxZoom&quot;: 0.08,
-  &quot;visualControls&quot;: {
-    &quot;mode&quot;: &quot;scene-specific&quot;,
-    &quot;symbolic&quot;: true,
-    &quot;roomDeepness&quot;: false,
-    &quot;layering&quot;: 3
-  }
+  &quot;legacyGuernicaStyleReferencePrompt&quot;: false
 }</pre></details>
     
   </article>

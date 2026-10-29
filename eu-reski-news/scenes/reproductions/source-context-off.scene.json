@@ -1,107 +1,25 @@
 {
   "name": "source-context-off-reproduction",
-  "description": "Scene-Parameter aus dem Runner-Log von source-context-comparison/next-article/off/run-001. Einzelstart ohne Interpolation.",
+  "description": "Kompaktes Profil mit den Generator-Overrides aus source-context-comparison/next-article/off/run-001.",
   "reference": {
     "film": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/merged/iteration-001-with-title-card-audio-normalized.mp4",
     "profileName": "source-context-off",
-    "settingsMatch": true,
-    "report": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/index.html",
     "runManifest": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/run.json",
-    "runnerState": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/exhibition-state.json",
     "iteratorPlan": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/.exhibition-iterator-plan.json",
-    "iterationRecord": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/iteration-001/record.json",
-    "scenePlan": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/iteration-001/scene-plan.json",
-    "timingRequest": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/iteration-001/timing-request.json",
-    "timingResponse": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/iteration-001/timing-response.json",
-    "sourceCommit": "78f40a2fc946b1a39fe4063e6ef27429f893157d",
-    "sourceWorkingTreeClean": false,
-    "directorSha256": "e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9",
-    "notes": "Dieser Originalrun wurde mit dem Profil source-context-off gestartet. Die Werte stammen aus seinem Iterator-Plan; diese Scene-Datei ist eine nachträgliche Kopie zum erneuten Vergleichen."
+    "notes": "Vergleichsverweise; Filmdatei wird nicht als Generierungseingabe verwendet."
   },
   "generationIntervalInMinutes": "-1",
-  "biasMode": "off",
   "generationOverrides": {
-    "autoMode": false,
     "storyModel": "gpt-4o-mini",
     "includeSourceCodeContext": false,
-    "sourceCodeSummaryFile": null,
     "iterations": 1,
-    "pauseMs": 0,
-    "articleOrder": "linear",
     "sceneCount": {
-      "mode": "taktmuster",
-      "takt": 2,
       "numerator": 3,
-      "denominator": 4,
-      "type": "balanced",
-      "bias": 2,
-      "minimum": 1,
-      "maximum": 12
+      "bias": 2
     },
-    "sceneLength": {
-      "takt": 4,
-      "type": "balanced",
-      "multiplier": 1.15,
-      "bias": 4.2,
-      "minimum": 5,
-      "maximum": 8
-    },
-    "imageProvider": "hf-flux-klein",
-    "styleReference": true,
     "legacyGuernicaStyleReferencePrompt": false,
-    "guernicaFigureReference": true,
     "articleImageReference": false,
-    "guernicaLocationReference": false,
-    "landscapePrompt": false,
     "preserveCubistVideoStyle": false,
-    "visualControls": {
-      "mode": "scene-specific",
-      "symbolic": true,
-      "roomDeepness": false,
-      "layering": 3
-    },
-    "videoModel": "prunaai:p-video@2-pro",
-    "videoResolution": "480p",
-    "videoSettingsMode": "cost",
-    "videoMode": "image_to_video",
-    "videoDirection": "off",
-    "storyClou": "off",
-    "videoVision": "off",
-    "videoAudioDirection": "off",
-    "noDialogueNarration": false,
-    "videoMaxZoom": 0.08,
-    "videosAfterEachIteration": true,
-    "generate-title-cards": true
-  },
-  "reconstructionInputs": {
-    "documentationOnly": true,
-    "articleId": "475855312",
-    "articleTitle": "EÚ chystá dôležitý summit: Lídri budú rokovať o budúcnosti západného Balkánu",
-    "newsDirectory": "eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/news",
-    "semanticStreamFile": "eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/semantic.json",
-    "imageSeed": 42001,
-    "observedSceneCount": 5,
-    "observedSceneDurationsSeconds": [8, 5, 7, 5, 8],
-    "defaults": {
-      "settingsVersion": 7,
-      "settingsFingerprint": "5b45802f662c1be3bab8f388434716bafd535924e0eeb84fee8f4a413a66ad59",
-      "glueEnabled": false,
-      "gluePattern": "9,5,7,5,8",
-      "glueWaitPattern": "classic",
-      "glueFrameOffset": "0.25",
-      "fadeSeconds": "0.25",
-      "randomThreshold": 0.7
-    },
-    "promptProvenance": {
-      "sourceCommit": "78f40a2fc946b1a39fe4063e6ef27429f893157d",
-      "sourceWorkingTreeClean": false,
-      "directorVersion": 19,
-      "directorSha256": "e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9",
-      "storyTemperature": 0.65,
-      "storyMaxCompletionTokens": 14000,
-      "timingTemperature": 0.3,
-      "timingMaxCompletionTokens": 7000
-    },
-    "note": "Dokumentation der ursprünglichen Runner-Eingaben. Artikel-ID, Semantic-Stream-Datei und Seed sind CLI-Eingaben, keine generationOverrides. Keine generierten Bild-, Video-, Audio- oder Filmdateien werden als Eingabe verwendet. Gleich neu erzeugte Prompttexte sind wegen Modell-Nichtdeterminismus nicht garantiert."
+    "videoAudioDirection": "off"
   }
 }
