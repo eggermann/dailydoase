@@ -1434,6 +1434,7 @@ async function main() {
       runImageSeedBase,
       pendingIterationDirectory,
       articleProgress,
+      globalArticleProgressPath,
     );
     pendingIterationDirectory = null;
     const completedRecord = await json(join(iterationDirectory, 'record.json'));
@@ -1496,7 +1497,7 @@ async function main() {
   }
 }
 
-async function runIteration(semanticSource, sceneDurationStream, sceneCountStream, iterationRoot, iterationIndex, imageSeedOffset, runImageSeedBase, pendingDirectory, articleProgress) {
+async function runIteration(semanticSource, sceneDurationStream, sceneCountStream, iterationRoot, iterationIndex, imageSeedOffset, runImageSeedBase, pendingDirectory, articleProgress, globalArticleProgressPath) {
   const openAiKey = process.env.OPENAI_API_KEY;
   const runwareKey = process.env.RUNWARE_API_KEY || process.env.RUNWARE_KEY;
   const imageProvider = options['image-provider'];
