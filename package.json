@@ -98,6 +98,7 @@
     "news:scene:write-code-summary": "sh eu-reski-news/scripts/summarize-scene-code.start.sh",
     "news:exhibition:from-scene-json": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh --scene=${NEWS_SCENE_PATH:-eu-reski-news/scenes}",
     "news:exhibition:from-scene-json:with-time-interpolation": "sh eu-reski-news/scripts/EU-reski-mix-arg-and-camera-moovs.start.sh --generation-interval=1h --scene=eu-reski-news/scenes",
+    "news:scenes:overview": "node eu-reski-news/scripts/build-scene-overview.mjs",
     "news:auto-10": "npm run news:exhibition -- --auto-mode --iterations=10",
     "news:html": "node eu-reski-news/scripts/build-news-html.mjs",
     "news:assemble-film": "node eu-reski-news/scripts/assemble-news-film.mjs",
