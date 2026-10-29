@@ -1,0 +1,63 @@
+{
+  "name": "reference-5-like-run-003",
+  "reference": {
+    "report": "file:///Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/index.html",
+    "runManifest": "file:///Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/run.json",
+    "sourceCommit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "sourceWorkingTreeClean": false,
+    "directorSha256": "e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9",
+    "styleReference": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "styleReferenceSha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264"
+  },
+  "generationOverrides": {
+    "autoMode": false,
+    "storyModel": "gpt-4.1-mini",
+    "iterations": 5,
+    "pauseMs": 0,
+    "articleOrder": "linear",
+    "styleReference": true,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "preserveCubistVideoStyle": false,
+    "videosAfterEachIteration": true,
+    "generate-title-cards": true,
+    "sceneCount": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    },
+    "sceneLength": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "videoMode": "image_to_video",
+    "videoDirection": "off",
+    "storyClou": "off",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  }
+}

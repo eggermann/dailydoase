@@ -1,5 +1,12 @@
 {
   "name": "run-001-exhibition",
+  "description": "Geplante Dauerlauf-Konfiguration: zehn Iterationen, automatische Artikelwahl. Nutzt die Default-Parameter; nur die unten genannten Werte werden überschrieben.",
+  "provenance": {
+    "kind": "scheduler-and-resume-example",
+    "sourceCommit": "604e4f712c13ac2bb67a4ebf5b1856b5fc14e046",
+    "source": "Diese Szene wurde mit der Einführung des globalen Artikelzählers und der fortsetzbaren Szenenläufe angelegt. Sie bildet keinen einzelnen historischen Film-Lauf nach.",
+    "comparison": "Vergleich mit run-005.scene.json: run-001 übernimmt die jeweils aktuellen Defaults und setzt autoMode=true sowie iterations=10."
+  },
   "generationOverrides": {
     "autoMode": true,
     "iterations": 10,

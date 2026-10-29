@@ -1,5 +1,24 @@
 {
   "name": "run-005-prompt-path",
+  "description": "Fünf-Iterationen-Nachbau des historischen Run 005, mit dessen Bild- und Videoeinstellungen und erlaubtem Dialog.",
+  "provenance": {
+    "kind": "derived-reproduction-scene",
+    "source": "file:///Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-005/run.json",
+    "sourceFilm": "file:///Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-005/merged/eu-reski-gesamtfilm.mp4",
+    "sourceRun": "Historischer Run 005 · vier Iterationen · Manifest und Iterations-Records im angegebenen Laufordner",
+    "sourceVersions": {
+      "iterations001And002": "1fd0547ba8539cae64f6fb7b4c0e0d57d7001f52",
+      "iterations003And004": "043316f8711b15915c9984ec19dbf5ffa3897ad9"
+    },
+    "sceneAddedInCommit": "604e4f712c13ac2bb67a4ebf5b1856b5fc14e046",
+    "changesForComparison": [
+      "Iterationszahl von vier auf fünf erhöht.",
+      "Die gespeicherten Run-005-Einstellungen für Bildreferenz, Szenenlänge, Video und visuelle Steuerung werden nachgebildet.",
+      "noDialogueNarration=false: Dialog ist für die neue Tonfassung erlaubt; die ursprünglichen Audio-Pläne verbieten gesprochenen Dialog.",
+      "Run 005 nutzte Audio-Direktor v1; die aktuelle Implementierung kann andere Audio-Pläne erzeugen."
+    ],
+    "comparison": "Das Manifest belegt die hier übernommenen Generierungseinstellungen; es garantiert keine identischen Ergebnisse. Nicht gesetzte Parameter kommen aus default-exhibition-settings.json. Bei mehreren aktiven Szenen erzwingt der Runner globale statt linearer Artikelreihenfolge. sceneCount.count wird im Taktmuster-Modus nicht verwendet."
+  },
   "generationOverrides": {
     "autoMode": false,
     "storyModel": "gpt-4o-mini",
