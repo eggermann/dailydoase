@@ -113,6 +113,9 @@
         <tr><td><code>--guernica-dir=PFAD</code></td><td>Maskierte Figuren samt Katalog.</td></tr>
         <tr><td><code>--style-reference=PFAD</code></td><td>Vollständiges Gemälde als zusätzliche Stilreferenz.</td></tr>
         <tr><td><code>--no-style-reference</code></td><td>Vollständiges Gemälde weglassen; gewählte Figurenreferenz bleibt.</td></tr>
+        <tr><td><code>generation.legacyGuernicaStyleReferencePrompt</code><br><code>--legacy-guernica-style-reference-prompt</code></td><td>JSON-Standard <code>false</code>; CLI schaltet den archivierten Guernica-Regieprompt ein. Wirksam nur, wenn das vollständige Guernica-Bild als Stilreferenzbild an die Bildgenerierung gesendet wird. Bei <code>generation.styleReference: false</code>, <code>--no-style-reference</code>, <code>--guernica-location-reference</code> oder <code>--article-image-only-reference</code> bleibt das Flag inaktiv. Der effektive Wert steht pro Iteration in <code>record.json</code> unter <code>generationSettings.legacyGuernicaStyleReferencePrompt</code>.</td></tr>
+        <tr><td><code>--guernica-location-reference</code></td><td>Sendet vollständiges Guernica als Orts-/Raumreferenz statt als Stilreferenz; der Legacy-Stilreferenz-Regieprompt bleibt dadurch inaktiv.</td></tr>
+        <tr><td><code>--article-image-only-reference</code></td><td>Sendet nur das Nachrichtenfoto als Bildreferenz und deaktiviert vollständiges Guernica sowie Figuren-Crops; der Legacy-Stilreferenz-Regieprompt bleibt inaktiv.</td></tr>
         <tr><td><code>--article-image-reference</code></td><td>Nachrichtenfoto zusätzlich an die Bild-API senden. Zusammen mit <code>--no-style-reference</code>.</td></tr>
         <tr><td><code>--image-provider=hf-flux-klein|runware</code></td><td>Bildanbieter. Code-Standard: Runware; letzter Lauf: HF-FLUX.</td></tr>
         <tr><td><code>--image-seed=ZAHL</code></td><td>Basis-Seed; für jede Szene weitergezählt. Bereich 0–2147483646.</td></tr>

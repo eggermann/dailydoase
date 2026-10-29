@@ -15,7 +15,8 @@ THUMBNAILS = ROOT / 'eu-reski-film-thumbnails'
 
 
 def slug(value):
-    value = unicodedata.normalize('NFD', value).encode('ascii', 'ignore').decode()
+    value = unicodedata.normalize('NFD', value)
+    value = ''.join(character for character in value if not unicodedata.combining(character))
     return re.sub(r'-+', '-', re.sub(r'[^a-z0-9]+', '-', value.lower())).strip('-')
 
 
@@ -36,6 +37,14 @@ def boolean_value(row, key):
     return value == 'true'
 
 
+def iteration_file_value(row, iteration):
+    found = re.search(r'"iterationFiles":\{([^}]*)\}', row)
+    if not found:
+        return iteration
+    number = re.search(rf'"{iteration}"\s*:\s*(\d+)', found.group(1))
+    return int(number.group(1)) if number else iteration
+
+
 def listed_outputs():
     html = OVERVIEW.read_text(encoding='utf-8')
     runs_block = re.search(r'const runs = \[(.*?)\n  \];', html, re.S)
@@ -53,16 +62,20 @@ def listed_outputs():
         whole = quoted_value(row, 'whole')
         if whole:
             first_iteration = min(list_value(row, 'iterations'), default=0)
-            number = f'{first_iteration:03}'
+            source_iteration = iteration_file_value(row, first_iteration) if first_iteration else 0
+            number = f'{source_iteration:03}'
             no_title_card = f'iteration-{number}.mp4' if first_iteration else whole
             output_sources.append((whole, no_title_card))
         title_iterations = set(list_value(row, 'withTitle'))
+        normalized_without_title = set(list_value(row, 'normalizedNoTitleCard'))
         normalized_title_cards = boolean_value(row, 'normalizedTitleCards')
         for iteration in list_value(row, 'iterations'):
-            number = f'{iteration:03}'
+            number = f'{iteration_file_value(row, iteration):03}'
             if iteration in title_iterations:
                 suffix = '-with-title-card-audio-normalized' if normalized_title_cards else '-with-title-card'
                 output_filename = f'iteration-{number}{suffix}.mp4'
+            elif iteration in normalized_without_title:
+                output_filename = f'iteration-{number}-audio-normalized.mp4'
             else:
                 output_filename = f'iteration-{number}.mp4'
             output_sources.append((output_filename, f'iteration-{number}.mp4'))
