@@ -1,0 +1,21 @@
+{
+  "iterations": [
+    {
+      "name": "run-003-style-overrides",
+      "generationOverrides": {
+        "iterations": 5,
+        "legacyGuernicaStyleReferencePrompt": false,
+        "guernicaFigureReference": true,
+        "articleImageReference": false,
+        "preserveCubistVideoStyle": false,
+        "sceneCount": {
+          "numerator": 3,
+          "bias": 2
+        },
+        "videoAudioDirection": "off"
+      }
+    }
+  ],
+  "generationInterval": "1h",
+  "biasMode": "on"
+}

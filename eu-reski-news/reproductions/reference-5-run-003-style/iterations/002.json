@@ -1,0 +1,896 @@
+{
+  "generator": "semantic-news-v1",
+  "planningVersion": 2,
+  "createdAt": "2026-10-28T08:57:23.668Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "branch": "codex/eu-reski-artistic-auto-mode",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/all-2026-10-27T15-04-50-359Z.json",
+  "aggregateHash": "f1ed42ecd7112f65036119191c3bbe820254677dee076e4a1706a6472b65af35",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "ranking": "jev-eu-relevance",
+    "euRelevance": 0.99,
+    "relevancePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/eu-relevance-2026-10-27T15-04-50-359Z.json",
+    "draw": 1,
+    "candidateCount": 2322,
+    "aggregateIndex": 1770
+  },
+  "article": {
+    "id": 476648112,
+    "title": "Komissio ehdottaa Frontexin vahvistamista: vahvistetaan rajavalvontaa ja palautuksia ja tehostetaan kriisinhallintaa",
+    "text": "Euroopan komissio ehdottaa Euroopan raja- ja merivartiosto Frontexin vahvistamista lisäämällä sen valmiuksia suojella ulkorajoja ja tekemällä siitä EU:n keskeisen toimijan palautuksissa.\n\nEU on saavuttanut edistystä muuttoliikkeen alalla: laittomat rajanylitykset ovat yli puolittuneet kahden viime vuoden aikana, ja laittomien maahantulijoiden palautusaste on nyt noussut yli 30 prosenttiin. Yhteiset ulkorajamme joutuvat kuitenkin koetukselle muuttuneessa geopoliittisessa ja turvallisuusympäristössä.\n\nUusilla säännöillä vahvistetaan virastoa, mahdollistetaan nopeampi ja tehokkaampi toiminta sekä helpotetaan jäsenvaltioiden mahdollisuuksia hyödyntää Frontexin välineitä ja palveluja täysimääräisesti. Keskeisiä uudistuksia ovat muun muassa vahvistetut pysyvät joukot, mukaan lukien uusi eurooppalainen raja- ja palauttamisreservi, nopean toiminnan joukot kriisitilanteisiin ja uusi verkkoseurantakeskus rajoihimme kohdistuvien mahdollisten uhkien varhaista havaitsemista varten. Frontexille ehdotetaan erityistä palautusten koordinointikeskusta, joka voi auttaa kolmansista maista tapahtuvien palautusten toteuttamisessa.\n\nPalautuksia koskevien EU:n uusien sääntöjen käytännön toteuttamiseksi komissio ehdottaa tänään myös asetusta palautusten, takaisinoton ja uudelleenkotouttamisen digitalisoimiseksi. Näin yksinkertaistetaan ja nopeutetaan palautusten hallinnointia kaikkialla EU:ssa, vähennetään hallinnollista taakkaa ja tarjotaan yksi digitaalinen rajapinta koko palautusprosessille.\n\nUusi Frontex-asetus\n\nJäsenvaltiot ovat ensisijaisesti vastuussa rajavalvonnasta ja ilman oleskelulupaa olevien henkilöiden palautuksista. Tämänpäiväisellä ehdotuksella varmistetaan, että Frontex voi auttaa jäsenmaita ennakoimaan nopeammin ja tarjoamaan niille tarvittaessa tukea. Asetuksen painopisteet:\n\nYhdistetyt resurssit ja operatiiviset valmiudet: Frontex kokoaa yhteen resursseja, asiantuntemusta ja operatiivisia valmiuksia, joita yksikään jäsenvaltio ei voisi ylläpitää yksin. Komissio ehdottaa Frontexin pysyvien joukkojen kasvattamista asteittain 30 000 virkahenkilöön perustamalla uusi Euroopan raja- ja palauttamisreservi, johon kuuluu 17 000 virkahenkilöä, jotka pysyvät jäsenvaltioiden käytettävissä ja joita voidaan tarvittaessa lähettää.\nVahvempi vastuu palautusten osalta: Frontexilla on ennakoivampi ja strategisempi rooli EU:n laajuisten palautusoperaatioiden ohjaamisessa, mikä kasvattaa merkittävästi Frontexin vaikuttavuutta ja kustannustehokkuutta.\nTehokas kriisinhallinta: Frontex voi auttaa havaitsemaan vaaralliset kehityskulut varhaisessa vaiheessa ja puuttumaan nopeasti hätätilanteisiin tai kriiseihin. Tämä on myös opittu tämän vuoden kriisistä Ceutassa.\n\nPalautusten digitalisointi\n\nFrontex-asetusta koskevan ehdotuksen ohella ja uuden palautusasetuksen astuttua voimaan 16. lokakuuta, komissio ehdottaa uutta asetusta palautus-, takaisinotto- ja uudelleenkotouttamismenettelyjen digitalisoimiseksi kaikkialla EU:ssa. Tavoitteena on nykyaikaistaa palautustapausten käsittelyä, yksinkertaistaa ja nopeuttaa hallinnollisia menettelyjä digitalisoinnin avulla, vähentää hallinnollista taakkaa ja parantaa tiedonkeruuta ja jakamista.\n\nEuroopan raja- ja merivartiovirasto (Frontex) on hajautettu virasto, joka on vuodesta 2005 lähtien tukenut EU:n jäsenvaltioita ja Schengenin säännöstöön osallistuvia maita EU:n ulkorajojen valvonnassa ja rajat ylittävän rikollisuuden torjunnassa sekä sellaisten EU:n ulkopuolisten maiden kansalaisten palauttamisessa, joilla ei ole oikeutta oleskella EU:ssa. Frontexilla on myös keskeinen rooli etsintä- ja pelastusoperaatioissa, sillä se tukee jäsenvaltioita ihmishenkien pelastamisessa merellä.\n\nTehokas Euroopan yhdennetty rajaturvallisuus ja tehokas palauttamispolitiikka ovat toisiaan vahvistavia ja keskeisiä Schengen-alueen kannalta.\n\n\"EU:n turvallisuus riippuu kyvystämme toimia yhdessä, suojella ulkorajojamme ja investoida valmiuksiin, joita tarvitsemme vastataksemme nopeasti muuttuviin uhkiin. Vahvempi Frontex, jolla on oikeat välineet ja vankka hallinto, auttaa tekemään Euroopan unionista turvallisemman, selviytymiskykyisemmän ja paremmin valmistautuneen tulevaisuuden haasteisiin.\", toteaa Henna Virkkunen, teknologisesta omavaraisuudesta, turvallisuudesta ja demokratiasta vastaava johtava varapuheenjohtaja.\n\nLisätietoa laajemmassa tiedotteessa: https://ec.europa.eu/commission/presscorner/detail/en/ip_26_2260",
+    "summary": "",
+    "url": "https://www.sttinfo.fi/tiedote/72449597/komissio-ehdottaa-frontexin-vahvistamista-vahvistetaan-rajavalvontaa-ja-palautuksia-ja-tehostetaan-kriisinhallintaa?lang=fi",
+    "image": "https://www.sttinfo.fi/data/images/public/66001268/72449597/40588101-76be-47ad-8997-1cf2fa7bdc3f.jpg/social",
+    "video": null,
+    "publish_date": "2026-10-27 13:37:24",
+    "author": null,
+    "language": "fi",
+    "source_country": "fi"
+  },
+  "sceneCount": 3,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": false,
+  "guernicaFigureReference": true,
+  "guernicaLocationReference": false,
+  "visualStyleOptions": {
+    "symbolic": true,
+    "roomDeepness": false,
+    "layering": 3
+  },
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "generationSettings": {
+    "autoMode": false,
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4.1-mini",
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "legacyGuernicaStyleReferencePromptRequested": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "featureSettings": {
+    "autoMode": false,
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": false,
+    "landscapePrompt": false
+  },
+  "sceneVisualControls": true,
+  "sceneCountSelection": {
+    "iteration": 1,
+    "rawValue": 1,
+    "biasedValue": 3,
+    "count": 3,
+    "settings": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    }
+  },
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "280499a09dfc6d1a0c025e010f1bcceb21aea7a58a3652dfedd9885f64abf4fc",
+      "bytes": 3187558,
+      "provider": "hf-flux-klein",
+      "taskUUID": "ee81075b7c784fbe8b01a5d48d4cfe05",
+      "seed": 1070412402,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "c7a2e92cfb019aa533e35b249071f2dcfd1a2e877c77612776abe540a26720e3",
+      "referencePaths": [
+        "media/03_auge_gluehbirne-api.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 3,
+          "name": "Auge / Glühbirne",
+          "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+          "eu_bezug": [
+            "Aufklärung",
+            "Beobachtung",
+            "Ambivalenz moderner Technik"
+          ],
+          "path": "media/03_auge_gluehbirne-api.png",
+          "mimeType": "image/png",
+          "sha256": "342dd3b00429e6b0d76cbfa7bd6035570be44d97c9216697dae6c2c4487c9d8f",
+          "label": "Protagonist character reference: Auge / Glühbirne; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/03_auge_gluehbirne.png",
+          "sourceSha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723",
+          "bytes": 41810,
+          "width": 277,
+          "height": 128
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "d9fa6eb11ba671da9a5090394532aa5d7b171313e8d27735067ad54aec0541b4",
+      "bytes": 3099449,
+      "provider": "hf-flux-klein",
+      "taskUUID": "29aac201c303498589e88cddd1ea7f6d",
+      "seed": 387173772,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "059e9431bd9b017dd7a734984b879d7ace833bd9faf513f596854fb21e1f1e86",
+      "referencePaths": [
+        "media/02_stier-api.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 2,
+          "name": "Stier",
+          "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+          "eu_bezug": [
+            "Gewalt und Krieg als historische Erfahrung"
+          ],
+          "path": "media/02_stier-api.png",
+          "mimeType": "image/png",
+          "sha256": "abe991af20a0ef4a1834837ed8f42523ca658ec6c975f253f73d96eaea9ad25a",
+          "label": "Protagonist character reference: Stier; redraw, do not paste",
+          "role": "catalog",
+          "sourcePath": "media/02_stier.png",
+          "sourceSha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21",
+          "bytes": 28716,
+          "width": 128,
+          "height": 161
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "113a0d48d462662629747c7097d5878d115acbc37b8b97223c9151bf5bb75e7b",
+      "bytes": 2987285,
+      "provider": "hf-flux-klein",
+      "taskUUID": "6ed7e8f24003455bb9ee45da66182407",
+      "seed": 1116359968,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "e2004a49a12e244222377e32088dcef8f45847ba3d792a306dbe1068aa19c5d6",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    }
+  ],
+  "imageSeed": null,
+  "sceneDurations": [
+    5,
+    7,
+    5
+  ],
+  "sceneDurationSettings": {
+    "provider": "Selfomat Taktmuster scene-length generator",
+    "takt": 4,
+    "meter": "4/4",
+    "type": "balanced",
+    "scaler": "quality floor → multiplier → bias → duration clamp",
+    "multiplier": 1.15,
+    "bias": 4.2,
+    "minimum": 5,
+    "maximum": 8
+  },
+  "titleCard": {
+    "articleTitle": "Komissio ehdottaa Frontexin vahvistamista: vahvistetaan rajavalvontaa ja palautuksia ja tehostetaan kriisinhallintaa",
+    "imagePath": "../merged/title-cards/title-002.png",
+    "imageRunPath": "merged/title-cards/title-002.png",
+    "videoPath": "../merged/title-cards/title-002.mp4",
+    "videoRunPath": "merged/title-cards/title-002.mp4",
+    "durationSeconds": 4,
+    "createdAt": "2026-10-28T08:58:56.757Z"
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-28T08:57:23.999Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.6,
+          "urlLink": "Irland",
+          "title": "Irland",
+          "text": "Irland",
+          "sentences": {
+            "prev": [
+              "umfasst sie auch zahlreiche Inseln; die größten unter ihnen",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              ", ",
+              "Europäische Union, kurz EU, ist ein Staatenverbund aus 27",
+              "(6,7).Mit der gemeinsamen Kulturpolitik will die EU",
+              "Union, kurz EU, ist ein Staatenverbund aus 27"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 1.3,
+          "urlLink": "ISSN_(identifier)",
+          "title": "ISSN (identifier)",
+          "text": "ISSN",
+          "sentences": {
+            "prev": [
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": []
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.5,
+          "urlLink": "%D0%90%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA",
+          "title": "Английский язык",
+          "text": "Английский",
+          "sentences": {
+            "prev": [
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом",
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом",
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом"
+            ],
+            "next": [
+              "решения, рекомендации и заключения (англ. opinions).",
+              "право ЕС, налоговое право ЕС и др. С учётом"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.png",
+    "mimeType": "image/png",
+    "sha256": "3f49748b0e42107b4cf2c200d509953ce11cca57d5c54f6dfc194cec2c3363f1",
+    "bytes": 50738
+  },
+  "styleReference": {
+    "path": "media/guernica-style-reference.jpg",
+    "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+    "bytes": 55860
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "Das Artikelbild zeigt das Logo der Europäischen Kommission, ein abstraktes, modernes Gebäude mit dem EU-Flaggenmotiv. Es handelt sich um ein symbolisches Bild, das keine Personen oder reale Situationen zeigt. Die Komposition ist frontal, mit klaren Linien und einem kühlen, sachlichen Eindruck. Es handelt sich um eine Illustration, die als visuelle Metapher für die institutionelle Autorität der EU dient.",
+    "articleFacts": [
+      "Die Europäische Kommission schlägt vor, die EU-Grenz- und Küstenwache Frontex zu stärken.",
+      "Frontex soll mit mehr Personal und neuen Einheiten wie dem europäischen Grenz- und Rückkehrreservat ausgestattet werden.",
+      "Es gibt einen Fokus auf bessere und schnellere Grenzüberwachung sowie auf die Koordination von Rückführungen.",
+      "Die EU hat die Zahl illegaler Grenzübertritte in den letzten zwei Jahren halbiert.",
+      "Die Rückführungsquote illegaler Migranten liegt jetzt über 30 Prozent.",
+      "Frontex soll in der Krisenbewältigung unterstützt werden, zum Beispiel durch schnelle Eingreiftruppen und ein neues Online-Überwachungszentrum.",
+      "Es wird eine Digitalisierungsinitiative für Rückführungen vorgeschlagen, um Verwaltung zu vereinfachen und zu beschleunigen.",
+      "Die Verantwortung für Grenzschutz und Rückführungen liegt primär bei den Mitgliedstaaten, Frontex unterstützt und koordiniert."
+    ],
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      }
+    },
+    "storyPremise": "In einer Zeit sich wandelnder geopolitischer Herausforderungen stärkt die Europäische Union die Agentur Frontex, um ihre Außengrenzen besser zu schützen, Rückführungen effizienter zu organisieren und Krisen schneller zu bewältigen. Die Geschichte folgt der fiktiven Leiterin einer neuen Frontex-Einheit, die zwischen den Anforderungen der Sicherheit, der Koordination komplexer Operationen und der Verantwortung gegenüber Menschenrechten navigiert.",
+    "fictionBoundary": "Die erzählte Geschichte ist eine fiktive Interpretation der im Artikel dargestellten EU-Politik und basiert auf den berichteten Fakten. Die visuelle Umsetzung abstrahiert reale Vorgänge stark und verwendet symbolische Gesten und Formen. Es werden keine real existierenden Personen oder Ereignisse dargestellt, sondern eine künstlerisch interpretierte Szene, die die Themen Grenzschutz, Rückführungen und Krisenmanagement thematisiert.",
+    "protagonist": {
+      "name": "Elina Saarinen",
+      "role": "Leiterin der neuen Frontex-Einheit für Grenzschutz und Rückführungen",
+      "visualIdentity": "Elina trägt eine abstrakte, maskenhafte Gesichtsmaske mit kantigen, verzerrten Gesichtszügen, die Entschlossenheit und Kontrolle ausstrahlt. Sie ist in eine uniformähnliche, geometrisch geschnittene Kleidung gehüllt, die ihre Rolle als Führungspersönlichkeit symbolisiert.",
+      "guernicaId": 3
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Vorbereitung und Stärkung der Frontex-Einheit",
+        "storyBeat": "Elina Saarinen bereitet ihre neue Frontex-Einheit auf die erweiterte Mission vor. Die Szene zeigt die Zusammenführung von Ressourcen, die Planung und das Erwachen einer neuen, stärkeren Kraft im EU-Grenzschutz.",
+        "protagonistAction": "Elina steht zentral und bestimmt, während sie mit ihren Händen kraftvoll eine abstrakte Karte der EU-Grenzen überblickt und symbolisch Ressourcen bündelt.",
+        "composition": "wide_establishing",
+        "guernicaId": 3,
+        "selectionReason": "Das Auge / Glühbirne Symbol passt zur Rolle von Elina als Beobachterin und Koordinatorin, die neue Technik und Überwachung einsetzt.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of standing centrally and commanding, a secondary figure or abstract form symbolizing gathered resources reacting by converging towards her, and the setting changing as a large abstract map of EU borders emerges behind her. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolik ist an dieser Stelle wichtig, um die Rolle der Überwachung und Koordination zu verdeutlichen. Raumtiefe erlaubt eine dynamische Komposition mit Vordergrund, Mitteldistanz und Hintergrund. Die Layering-Stufe 3 schafft differenzierte räumliche Ebenen für Figuren, Karte und abstrakte Ressourcen.",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene begins with Elina Saarinen standing firmly at the center of the composition, her abstract mask and geometric uniform commanding attention. Slowly, her hands move with deliberate strength over the large, emerging abstract map of EU borders behind her, as if gathering and pulling together unseen resources symbolized by rounded, swelling forms converging towards her. These forms flow and press inward, merging dynamically with the map's contours, creating a sense of consolidation and awakening power. The camera holds a steady wide establishing shot, emphasizing the layered spatial planes: Elina in the foreground, the converging resource forms in the middle distance, and the receding map in the background. The motion settles as the forms lock into place, the map fully materialized, and Elina’s posture remains resolute, embodying the birth of a stronger Frontex unit."
+      },
+      {
+        "index": 2,
+        "title": "Einsatz der schnellen Eingreiftruppen",
+        "storyBeat": "Elina leitet den Einsatz der neuen schnellen Frontex-Truppen bei einer Grenzkrise. Die Szene zeigt die Dynamik und Dringlichkeit, mit der die Einheiten mobilisiert und aktiviert werden, um Gefahren früh zu erkennen und zu reagieren.",
+        "protagonistAction": "Elina ruft energisch den Einsatz der schnellen Eingreiftruppen aus, während im Hintergrund stilisierte Truppen in Bewegung gesetzt werden.",
+        "composition": "oblique_diagonal",
+        "guernicaId": 2,
+        "selectionReason": "Der Stier symbolisiert Kraft und Dynamik, passend zur Aktion der schnellen Eingreiftruppen und der Durchsetzungskraft der Protagonistin.",
+        "crocodileAppearance": {
+          "present": true,
+          "role": "symbolic observer of the crisis",
+          "placement": "foreground bottom right"
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of commanding fiercely with an outstretched arm, a secondary figure representing the mobilized rapid intervention troops reacting by charging forward dynamically, and the setting changing as abstract tension and movement flow diagonally across the canvas. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Include a stylized cubist crocodile in the foreground bottom right as a symbolic observer of the crisis, blending into the scene's rough texture and forms. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 4: use 4 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 4
+        },
+        "visualControlReason": "Symbolism is essential here to convey the force and urgency of the intervention. Room depth creates a sense of spatial movement and layering. Layering 4 allows clear separation of protagonist, troops, and dynamic environment.",
+        "durationSeconds": 7,
+        "videoPrompt": "Starting with Elina Saarinen in a fierce commanding pose, her arm outstretched diagonally across the frame, the scene animates as the stylized rapid intervention troops in the background surge forward with dynamic, charging motion. The large, rounded masses representing the troops flow energetically from the middle distance toward the foreground, their movement creating a diagonal tension across the canvas. The stylized cubist crocodile in the bottom right foreground subtly shifts its gaze, symbolically observing the crisis unfold. The camera gently tracks diagonally alongside the troop movement, enhancing the sense of urgency and force, before settling as the troops press forward and Elina’s commanding gesture remains dominant and clear."
+      },
+      {
+        "index": 3,
+        "title": "Digitalisierung und Koordination der Rückführungen",
+        "storyBeat": "Elina überwacht die digitale Koordination der Rückführungen. Die Szene zeigt die Verbindung von Technik, Verwaltung und menschlicher Verantwortung in der komplexen Rückführungsarbeit.",
+        "protagonistAction": "Elina interagiert konzentriert mit einem abstrakten, digitalen Interface, das die Rückführungsprozesse visualisiert, während im Hintergrund symbolisch verwobene Netzwerke und Datenströme pulsieren.",
+        "composition": "intimate_close_up",
+        "guernicaId": 5,
+        "selectionReason": "Die Frau mit Lampe symbolisiert Hoffnung, Orientierung und die Suche nach Wahrheit, passend zur digitalen Modernisierung und menschlichen Komponente der Rückführungen.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of interacting intently with a glowing abstract digital interface, a secondary figure or form representing the pulsating data streams reacting dynamically, and the setting changing as woven network lines and digital motifs flow around them. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism highlights the hope and clarity brought by digital modernization. Room depth is off for a compressed, intimate mural focusing on protagonist and interface. Layering 2 separates protagonist and digital motifs clearly.",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with a close-up of Elina Saarinen interacting intently with an abstract glowing digital interface in front of her. Her hands move slowly and deliberately, manipulating the interface as pulsating data streams and woven network lines ripple and flow around her in the background. The forms undulate gently, responding to her touch, symbolizing the complex coordination of return processes. The camera remains fixed in an intimate close-up, focusing on Elina’s concentrated expression and the glowing interface, while the digital motifs subtly pulse and weave in the shallow, compressed mural space. The motion settles as the data streams stabilize and Elina’s interaction concludes with a poised, controlled gesture."
+      }
+    ]
+  },
+  "visualPlanHash": "e13cae2915d34ffe6ac0bcd185686cd94e1239f97d2b3d15b8247df1a9c34ab1",
+  "usage": {
+    "prompt_tokens": 17641,
+    "completion_tokens": 3246,
+    "total_tokens": 20887
+  },
+  "planHash": "7cbb2a0c1b0a72ea034ba00f57e1eed89bf9b01624b725479e2ba1fc9fa19ded",
+  "sceneTiming": {
+    "scenes": [
+      {
+        "index": 1,
+        "durationSeconds": 5,
+        "videoPrompt": "The scene begins with Elina Saarinen standing firmly at the center of the composition, her abstract mask and geometric uniform commanding attention. Slowly, her hands move with deliberate strength over the large, emerging abstract map of EU borders behind her, as if gathering and pulling together unseen resources symbolized by rounded, swelling forms converging towards her. These forms flow and press inward, merging dynamically with the map's contours, creating a sense of consolidation and awakening power. The camera holds a steady wide establishing shot, emphasizing the layered spatial planes: Elina in the foreground, the converging resource forms in the middle distance, and the receding map in the background. The motion settles as the forms lock into place, the map fully materialized, and Elina’s posture remains resolute, embodying the birth of a stronger Frontex unit.",
+        "reason": "Fünf Sekunden sind angemessen, um die symbolische Zusammenführung von Ressourcen und die Entstehung der neuen Kraft darzustellen, ohne die Komposition zu überladen. Die ruhige Kameraführung unterstützt die Klarheit der drei Ebenen."
+      },
+      {
+        "index": 2,
+        "durationSeconds": 7,
+        "videoPrompt": "Starting with Elina Saarinen in a fierce commanding pose, her arm outstretched diagonally across the frame, the scene animates as the stylized rapid intervention troops in the background surge forward with dynamic, charging motion. The large, rounded masses representing the troops flow energetically from the middle distance toward the foreground, their movement creating a diagonal tension across the canvas. The stylized cubist crocodile in the bottom right foreground subtly shifts its gaze, symbolically observing the crisis unfold. The camera gently tracks diagonally alongside the troop movement, enhancing the sense of urgency and force, before settling as the troops press forward and Elina’s commanding gesture remains dominant and clear.",
+        "reason": "Sieben Sekunden erlauben eine ausgedehnte, kraftvolle Bewegung der Truppen und eine spürbare Dringlichkeit. Die diagonale Kamerafahrt unterstützt die Dynamik und die räumliche Tiefe der Szene."
+      },
+      {
+        "index": 3,
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with a close-up of Elina Saarinen interacting intently with an abstract glowing digital interface in front of her. Her hands move slowly and deliberately, manipulating the interface as pulsating data streams and woven network lines ripple and flow around her in the background. The forms undulate gently, responding to her touch, symbolizing the complex coordination of return processes. The camera remains fixed in an intimate close-up, focusing on Elina’s concentrated expression and the glowing interface, while the digital motifs subtly pulse and weave in the shallow, compressed mural space. The motion settles as the data streams stabilize and Elina’s interaction concludes with a poised, controlled gesture.",
+        "reason": "Fünf Sekunden sind passend, um die konzentrierte Interaktion mit der digitalen Oberfläche und die pulsierenden Datenströme klar und fokussiert darzustellen, ohne die Kompression des Raums zu stören."
+      }
+    ]
+  },
+  "storyUsage": {
+    "prompt_tokens": 14357,
+    "completion_tokens": 2619,
+    "total_tokens": 16976,
+    "prompt_tokens_details": {
+      "cached_tokens": 3840,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "timingUsage": {
+    "prompt_tokens": 3284,
+    "completion_tokens": 627,
+    "total_tokens": 3911,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002",
+    "sourceCommit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "article": {
+      "title": "Komissio ehdottaa Frontexin vahvistamista: vahvistetaan rajavalvontaa ja palautuksia ja tehostetaan kriisinhallintaa",
+      "url": "https://www.sttinfo.fi/tiedote/72449597/komissio-ehdottaa-frontexin-vahvistamista-vahvistetaan-rajavalvontaa-ja-palautuksia-ja-tehostetaan-kriisinhallintaa?lang=fi",
+      "publish_date": "2026-10-27 13:37:24"
+    },
+    "status": "Videos per API erzeugt",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. Use each scene’s videoMode as selected by GPT. image_to_video uses startImagePath. first_last_frame requires both start and separately supplied final image; never downgrade it to image-to-video.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Vorbereitung und Stärkung der Frontex-Einheit",
+        "beat": "Elina Saarinen bereitet ihre neue Frontex-Einheit auf die erweiterte Mission vor. Die Szene zeigt die Zusammenführung von Ressourcen, die Planung und das Erwachen einer neuen, stärkeren Kraft im EU-Grenzschutz.",
+        "storyBeat": "Elina Saarinen bereitet ihre neue Frontex-Einheit auf die erweiterte Mission vor. Die Szene zeigt die Zusammenführung von Ressourcen, die Planung und das Erwachen einer neuen, stärkeren Kraft im EU-Grenzschutz.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolik ist an dieser Stelle wichtig, um die Rolle der Überwachung und Koordination zu verdeutlichen. Raumtiefe erlaubt eine dynamische Komposition mit Vordergrund, Mitteldistanz und Hintergrund. Die Layering-Stufe 3 schafft differenzierte räumliche Ebenen für Figuren, Karte und abstrakte Ressourcen.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of standing centrally and commanding, a secondary figure or abstract form symbolizing gathered resources reacting by converging towards her, and the setting changing as a large abstract map of EU borders emerges behind her. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "videoPrompt": "The scene begins with Elina Saarinen standing firmly at the center of the composition, her abstract mask and geometric uniform commanding attention. Slowly, her hands move with deliberate strength over the large, emerging abstract map of EU borders behind her, as if gathering and pulling together unseen resources symbolized by rounded, swelling forms converging towards her. These forms flow and press inward, merging dynamically with the map's contours, creating a sense of consolidation and awakening power. The camera holds a steady wide establishing shot, emphasizing the layered spatial planes: Elina in the foreground, the converging resource forms in the middle distance, and the receding map in the background. The motion settles as the forms lock into place, the map fully materialized, and Elina’s posture remains resolute, embodying the birth of a stronger Frontex unit.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of standing centrally and commanding, a secondary figure or abstract form symbolizing gathered resources reacting by converging towards her, and the setting changing as a large abstract map of EU borders emerges behind her. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002/media/scene-1-video.mp4",
+        "videoTaskUUID": "05385e60-8909-41fe-b171-41c696abf0ed"
+      },
+      {
+        "index": 2,
+        "title": "Einsatz der schnellen Eingreiftruppen",
+        "beat": "Elina leitet den Einsatz der neuen schnellen Frontex-Truppen bei einer Grenzkrise. Die Szene zeigt die Dynamik und Dringlichkeit, mit der die Einheiten mobilisiert und aktiviert werden, um Gefahren früh zu erkennen und zu reagieren.",
+        "storyBeat": "Elina leitet den Einsatz der neuen schnellen Frontex-Truppen bei einer Grenzkrise. Die Szene zeigt die Dynamik und Dringlichkeit, mit der die Einheiten mobilisiert und aktiviert werden, um Gefahren früh zu erkennen und zu reagieren.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 4
+        },
+        "visualControlReason": "Symbolism is essential here to convey the force and urgency of the intervention. Room depth creates a sense of spatial movement and layering. Layering 4 allows clear separation of protagonist, troops, and dynamic environment.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of commanding fiercely with an outstretched arm, a secondary figure representing the mobilized rapid intervention troops reacting by charging forward dynamically, and the setting changing as abstract tension and movement flow diagonally across the canvas. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Include a stylized cubist crocodile in the foreground bottom right as a symbolic observer of the crisis, blending into the scene's rough texture and forms. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 4: use 4 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "videoPrompt": "Starting with Elina Saarinen in a fierce commanding pose, her arm outstretched diagonally across the frame, the scene animates as the stylized rapid intervention troops in the background surge forward with dynamic, charging motion. The large, rounded masses representing the troops flow energetically from the middle distance toward the foreground, their movement creating a diagonal tension across the canvas. The stylized cubist crocodile in the bottom right foreground subtly shifts its gaze, symbolically observing the crisis unfold. The camera gently tracks diagonally alongside the troop movement, enhancing the sense of urgency and force, before settling as the troops press forward and Elina’s commanding gesture remains dominant and clear.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of commanding fiercely with an outstretched arm, a secondary figure representing the mobilized rapid intervention troops reacting by charging forward dynamically, and the setting changing as abstract tension and movement flow diagonally across the canvas. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Include a stylized cubist crocodile in the foreground bottom right as a symbolic observer of the crisis, blending into the scene's rough texture and forms. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 4: use 4 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002/media/scene-2-video.mp4",
+        "videoTaskUUID": "d8c4d29b-1aae-426e-9e29-ba7be75aaf14"
+      },
+      {
+        "index": 3,
+        "title": "Digitalisierung und Koordination der Rückführungen",
+        "beat": "Elina überwacht die digitale Koordination der Rückführungen. Die Szene zeigt die Verbindung von Technik, Verwaltung und menschlicher Verantwortung in der komplexen Rückführungsarbeit.",
+        "storyBeat": "Elina überwacht die digitale Koordination der Rückführungen. Die Szene zeigt die Verbindung von Technik, Verwaltung und menschlicher Verantwortung in der komplexen Rückführungsarbeit.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism highlights the hope and clarity brought by digital modernization. Room depth is off for a compressed, intimate mural focusing on protagonist and interface. Layering 2 separates protagonist and digital motifs clearly.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of interacting intently with a glowing abstract digital interface, a secondary figure or form representing the pulsating data streams reacting dynamically, and the setting changing as woven network lines and digital motifs flow around them. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "videoPrompt": "The scene opens with a close-up of Elina Saarinen interacting intently with an abstract glowing digital interface in front of her. Her hands move slowly and deliberately, manipulating the interface as pulsating data streams and woven network lines ripple and flow around her in the background. The forms undulate gently, responding to her touch, symbolizing the complex coordination of return processes. The camera remains fixed in an intimate close-up, focusing on Elina’s concentrated expression and the glowing interface, while the digital motifs subtly pulse and weave in the shallow, compressed mural space. The motion settles as the data streams stabilize and Elina’s interaction concludes with a poised, controlled gesture.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elina Saarinen's decisive physical action of interacting intently with a glowing abstract digital interface, a secondary figure or form representing the pulsating data streams reacting dynamically, and the setting changing as woven network lines and digital motifs flow around them. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elina large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style.  Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-002/media/scene-3-video.mp4",
+        "videoTaskUUID": "5b1d0418-4e2a-4e19-ba1d-709bd300fcd2"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-28T08:58:56.715Z",
+  "videoResults": [
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-1-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T08:58:56.759Z",
+      "renderedAt": "2026-10-28T08:59:19.237Z",
+      "savedAt": "2026-10-28T08:59:20.964Z",
+      "renderSeconds": 22.5,
+      "downloadSeconds": 1.7,
+      "totalSeconds": 24.2,
+      "cost": 0.0517,
+      "seed": 330482419,
+      "taskUUID": "05385e60-8909-41fe-b171-41c696abf0ed",
+      "sourceUrl": "https://vm.runware.ai/video/os/a09dlim3/ws/5/vi/c9bc20e2-5deb-4e9e-af06-ffb038dc45b6.mp4",
+      "bytes": 2002247,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-2-video.mp4",
+      "durationSeconds": 7.292,
+      "requestedDurationSeconds": 7,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T08:58:56.759Z",
+      "renderedAt": "2026-10-28T08:59:31.728Z",
+      "savedAt": "2026-10-28T08:59:32.559Z",
+      "renderSeconds": 35,
+      "downloadSeconds": 0.8,
+      "totalSeconds": 35.8,
+      "cost": 0.0729,
+      "seed": 1483499921,
+      "taskUUID": "d8c4d29b-1aae-426e-9e29-ba7be75aaf14",
+      "sourceUrl": "https://vm.runware.ai/video/os/a09dlim3/ws/5/vi/0f0fac19-e36d-4ba1-91cd-18a7fb62be0c.mp4",
+      "bytes": 3142609,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 7.292
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-3-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T08:58:56.759Z",
+      "renderedAt": "2026-10-28T08:59:23.326Z",
+      "savedAt": "2026-10-28T08:59:24.325Z",
+      "renderSeconds": 26.6,
+      "downloadSeconds": 1,
+      "totalSeconds": 27.6,
+      "cost": 0.0517,
+      "seed": 929367692,
+      "taskUUID": "5b1d0418-4e2a-4e19-ba1d-709bd300fcd2",
+      "sourceUrl": "https://vm.runware.ai/video/os/a09dlim3/ws/5/vi/4f797188-48bf-4623-bf0b-f70a32d32714.mp4",
+      "bytes": 1926995,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    }
+  ],
+  "videoGeneration": {
+    "provider": "Runware",
+    "model": "prunaai:p-video@2-pro",
+    "resolution": "480p",
+    "settings": {
+      "mode": "cost"
+    },
+    "completedAt": "2026-10-28T08:59:32.610Z",
+    "concurrency": 4,
+    "audioEdgeFadeSeconds": 0.03
+  },
+  "concatenatedVideo": {
+    "path": "../merged/iteration-002.mp4",
+    "runPath": "merged/iteration-002.mp4",
+    "scenes": 3,
+    "generatedVideos": 3,
+    "gaps": [],
+    "durationSeconds": 17.625,
+    "requestedDurationSeconds": 17,
+    "sourceTasks": [
+      "05385e60-8909-41fe-b171-41c696abf0ed",
+      "d8c4d29b-1aae-426e-9e29-ba7be75aaf14",
+      "5b1d0418-4e2a-4e19-ba1d-709bd300fcd2"
+    ],
+    "method": "Selfomat ffmpeg concat · 0.03s audio fades at scene edges · moderation gaps shown as black video",
+    "audioEdgeFadeSeconds": 0.03,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 17.625
+    },
+    "createdAt": "2026-10-28T08:59:32.985Z"
+  },
+  "titleCardFilm": {
+    "path": "../merged/iteration-002-with-title-card-audio-normalized.mp4",
+    "runPath": "merged/iteration-002-with-title-card-audio-normalized.mp4",
+    "durationSeconds": 21.4,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 96000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 21.4
+    },
+    "fadeSeconds": 0.25,
+    "method": "FFmpeg assembler · title card from record.json → article.title",
+    "createdAt": "2026-10-28T08:59:33.604Z",
+    "sourcePath": "../merged/iteration-002-with-title-card.mp4",
+    "sourceRunPath": "merged/iteration-002-with-title-card.mp4",
+    "audioNormalization": {
+      "method": "FFmpeg loudnorm after iteration film assembly",
+      "targetIntegratedLufs": -16,
+      "maximumTruePeakDbtp": -1.5,
+      "targetLoudnessRangeLu": 11,
+      "outputPath": "merged/iteration-002-with-title-card-audio-normalized.mp4",
+      "completedAt": "2026-10-28T08:59:34.427Z"
+    }
+  }
+}

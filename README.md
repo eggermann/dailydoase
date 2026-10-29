@@ -17,7 +17,7 @@ In a second terminal:
 
 ```sh
 cd /Users/dominikeggermann/Projekte/dailydoase
-node lib/server/continuous-player.cjs
+npm run player
 ```
 
 Then open:

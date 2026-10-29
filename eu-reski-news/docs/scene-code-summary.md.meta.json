@@ -1,0 +1,34 @@
+{
+  "model": "gpt-4o-mini",
+  "sourceHash": "9e0ed3a147d1df828ba2c156860eb27771b0ad3be31e65907e408ac94077ce0a",
+  "sources": [
+    "eu-reski-news/default-exhibition-settings.json",
+    "eu-reski-news/news-scene/planner.mjs",
+    "eu-reski-news/news-scene/auto-director.mjs",
+    "eu-reski-news/news-scene/director.md",
+    "eu-reski-news/news-scene/scene-count.mjs",
+    "eu-reski-news/news-scene/scene-timing.mjs",
+    "eu-reski-news/news-scene/video-director.mjs",
+    "eu-reski-news/news-scene/audio-director.mjs",
+    "eu-reski-news/scripts/exhibition-runner.mjs",
+    "eu-reski-news/scripts/run-news-scene-image-iteration.mjs"
+  ],
+  "generatedAt": "2026-10-29T12:45:18.680Z",
+  "usage": {
+    "prompt_tokens": 59614,
+    "completion_tokens": 1019,
+    "total_tokens": 60633,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "manualReview": "Corrected timing, video-style guarantee, code-context scope, precedence and prerequisite descriptions against local code.",
+  "summarySha256": "e2a3ee7d4452b4df2c1397ea59a56256e7b2239662cfdd8996093057e19d1867"
+}

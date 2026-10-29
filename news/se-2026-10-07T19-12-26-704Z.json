@@ -1,0 +1,10 @@
+{
+  "country": {
+    "code": "se",
+    "name": "Sweden"
+  },
+  "fetchedAt": "2026-10-07T19:12:31.644Z",
+  "requestDate": "2026-10-07",
+  "error": "World News API antwortet mit HTTP 402",
+  "news": []
+}

@@ -1,0 +1,1018 @@
+{
+  "generator": "semantic-news-v1",
+  "planningVersion": 2,
+  "createdAt": "2026-10-28T09:01:46.765Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "branch": "codex/eu-reski-artistic-auto-mode",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/all-2026-10-27T15-04-50-359Z.json",
+  "aggregateHash": "f1ed42ecd7112f65036119191c3bbe820254677dee076e4a1706a6472b65af35",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "ranking": "jev-eu-relevance",
+    "euRelevance": 0.98,
+    "relevancePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/eu-relevance-2026-10-27T15-04-50-359Z.json",
+    "draw": 3,
+    "candidateCount": 2322,
+    "aggregateIndex": 18
+  },
+  "article": {
+    "id": 476661842,
+    "title": "Decesele rutiere în UE au scăzut în 2025; Bulgaria și România au în continuare cele mai periculoase drumuri din UE - AGERPRES",
+    "text": "Comisia Europeană a publicat, marți, cifrele finale privind decesele rutiere în 2025, raportând 19.350 de decese cauzate de accidente rutiere, o scădere de 3% față de 2024 și un declin de 15% față de 2019, ceea ce înseamnă cu 580 mai puține decese pe drumurile europene în comparație cu 2024 și cu 3.400 mai puține în comparație cu 2019, informează Executivul comunitar.\nÎn pofida progreselor înregistrate după 2019, Bulgaria (71 de decese la un milion) și România (68 de decese la un milion), alături de Croația (65 de decese la un milion), continuă să raporteze cele mai ridicate rate ale mortalității din UE. La polul opus, Suedia (19 decese la un milion) și Danemarca (24 decese la un milion) au cele mai sigure drumuri din UE.\nDatele provizorii pentru 2026 arată o tendință pozitivă, un număr mai mare de țări raportând o reducere a deceselor cu peste 5% în prima jumătate a anului 2026, comparativ cu aceeași perioadă din 2025, decât cele care raportează creșteri ale deceselor rutiere. Comisia va continua să monitorizeze îndeaproape aceste tendințe și să sprijine statele membre în abordarea preocupărilor emergente.\n''Siguranța rutieră înseamnă mai mult decât norme și reglementări. Este vorba despre protejarea vieților și prevenirea tragediilor care afectează familiile și comunitățile din întreaga Europă. În Uniunea Europeană, fiecare viață pierdută pe drumurile noastre este una prea mare. Scopul nostru este clar: să ne asigurăm că fiecare cetățean, oriunde ar călători și indiferent de modul său de transport, poate ajunge la destinație. Aceasta înseamnă să ne facem drumurile mai sigure, să consolidăm prevenirea și să ne asigurăm că fiecare călătorie se încheie în siguranță'', a declarat comisarul pentru transport durabil și turism, Apostolos Tzitzikostas.\nÎn data de 23 noiembrie, va avea loc la Bruxelles Conferința UE privind siguranța rutieră din 2026. Evenimentul va marca punctul de mijloc al strategiei pe 10 ani a Europei de a reduce la jumătate decesele și vătămările grave cauzate de accidente rutiere până în 2030. Câștigătorii Premiilor de excelență în siguranța rutieră 2026, care sărbătoresc cele mai inspirate și de impact inițiative de siguranță rutieră ale continentului, vor fi anunțați în cadrul evenimentului. AGERPRES/(AS-redactor: Constantin Balaban, editor: Andreea Marinescu, editor online: Gabriela Badea)",
+    "url": "https://agerpres.ro/economic-extern/2026/10/27/decesele-rutiere-in-ue-au-scazut-in-2025-bulgaria-si-romania-au-in-continuare-cele-mai-periculoase-d--1607308",
+    "image": "https://agerpres.ro/data/202610/20261027153642_369109.jpeg",
+    "video": null,
+    "publish_date": "2026-10-27 16:33:00",
+    "author": null,
+    "language": "ro",
+    "category": "politics",
+    "source_country": "ro"
+  },
+  "sceneCount": 4,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": false,
+  "guernicaFigureReference": true,
+  "guernicaLocationReference": false,
+  "visualStyleOptions": {
+    "symbolic": true,
+    "roomDeepness": false,
+    "layering": 3
+  },
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "generationSettings": {
+    "autoMode": false,
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4.1-mini",
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "legacyGuernicaStyleReferencePromptRequested": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "featureSettings": {
+    "autoMode": false,
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": false,
+    "landscapePrompt": false
+  },
+  "sceneVisualControls": true,
+  "sceneCountSelection": {
+    "iteration": 3,
+    "rawValue": 2,
+    "biasedValue": 4,
+    "count": 4,
+    "settings": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    }
+  },
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "7e847a45b8dc301514fe1e855a85588deff00fde79e0431b9366e91bd20c2f75",
+      "bytes": 3113989,
+      "provider": "hf-flux-klein",
+      "taskUUID": "1dd24d2c44e14c3ba92c5488333d8695",
+      "seed": 1127265325,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "de29ba29a4b06e125fb4c1e43367046897f7025b284da993220b9fa5e01e5865",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "2ac3de602824d92398f67cb5136290e76fc6b2771ea77522ed8716c2a981a2ee",
+      "bytes": 2862327,
+      "provider": "hf-flux-klein",
+      "taskUUID": "62fad44162e34251b9f4541da54136dc",
+      "seed": 645133928,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "671097efe474b8d706f28192a1868c711a0c249b90654a19defc7993ce392a24",
+      "referencePaths": [
+        "media/04_pferd.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 4,
+          "name": "Pferd",
+          "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+          "eu_bezug": [
+            "Menschenwürde",
+            "Schutz des Lebens",
+            "Menschenrechte"
+          ],
+          "path": "media/04_pferd.png",
+          "mimeType": "image/png",
+          "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671",
+          "label": "Protagonist character reference: Pferd; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "6c3c868d470595fad13fb5a9253e909bbc654a3f46f245f12c7ee88e8add9e39",
+      "bytes": 3095401,
+      "provider": "hf-flux-klein",
+      "taskUUID": "614f31c1a77e4701a8f586cde562c379",
+      "seed": 1318443750,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "026955a8891cfa5faf687cda49ed08e6c60ec2dc564597a53d036aa3d1ea448f",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-4-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "607ab90b50607adcc88d0d88781a3282308e1abd321525b4c3c80fc619778ece",
+      "bytes": 2968252,
+      "provider": "hf-flux-klein",
+      "taskUUID": "3c4cebcf7ddb46c3a42c05581ad34376",
+      "seed": 458359013,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "afbe9722bd6abfb2ae1b76cf4d7d99a010bdf1bb8c1fb089d9f71e605b8bc832",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    }
+  ],
+  "imageSeed": null,
+  "sceneDurations": [
+    5,
+    8,
+    5,
+    7
+  ],
+  "sceneDurationSettings": {
+    "provider": "Selfomat Taktmuster scene-length generator",
+    "takt": 4,
+    "meter": "4/4",
+    "type": "balanced",
+    "scaler": "quality floor → multiplier → bias → duration clamp",
+    "multiplier": 1.15,
+    "bias": 4.2,
+    "minimum": 5,
+    "maximum": 8
+  },
+  "titleCard": {
+    "articleTitle": "Decesele rutiere în UE au scăzut în 2025; Bulgaria și România au în continuare cele mai periculoase drumuri din UE - AGERPRES",
+    "imagePath": "../merged/title-cards/title-004.png",
+    "imageRunPath": "merged/title-cards/title-004.png",
+    "videoPath": "../merged/title-cards/title-004.mp4",
+    "videoRunPath": "merged/title-cards/title-004.mp4",
+    "durationSeconds": 4,
+    "createdAt": "2026-10-28T09:03:47.848Z"
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-28T09:01:47.099Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.6,
+          "urlLink": "Spanien",
+          "title": "Spanien",
+          "text": "Spanien",
+          "sentences": {
+            "prev": [
+              "Geburten pro Tausend Einwohnern und Jahr. Schlusslichter waren",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der"
+            ],
+            "next": [
+              "(6,9) und Italien (6,7).Mit der gemeinsamen Kulturpolitik will",
+              "mit 4,7 % am geringsten. Die emotionale Bindung zur EU stieg",
+              "Europäische Union, kurz EU, ist ein Staatenverbund aus 27",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 1.2,
+          "urlLink": "Eurozone",
+          "title": "Eurozone",
+          "text": "eurozone",
+          "sentences": {
+            "prev": [
+              "The",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on",
+              "Union at the Internet Archive European Union on"
+            ],
+            "next": [
+              "is a group composed of the 21 EU member states that have fully",
+              "as is Mayotte, north of Madagascar.The gross domestic product",
+              "and the area of freedom, security and justice (AFSJ); Ireland",
+              "Union operates through a hybrid system of",
+              "continent. The EU's highest peak is Mont Blanc in the"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.1,
+          "urlLink": "%D0%98%D1%80%D0%BB%D0%B0%D0%BD%D0%B4%D0%B8%D1%8F",
+          "title": "Ирландия",
+          "text": "Ирландия",
+          "sentences": {
+            "prev": [
+              "и обзоры ЕС. Как работает Евросоюз. 12 пунктов о самом"
+            ],
+            "next": [
+              "(с 2021) остаётся частично привязанной к общему рынку после"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "d5c94e352c0d9b20f1fa65de4cf3f67a908882d262e7858cc533f3dc3b40e18a",
+    "bytes": 45497
+  },
+  "styleReference": {
+    "path": "media/guernica-style-reference.jpg",
+    "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+    "bytes": 55860
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "Das Foto zeigt eine nächtliche Straßenszene mit einem Unfallfahrzeug, das auf einem Abschleppwagen transportiert wird. Eine Polizeiperson steht auf der Straße, überwacht die Szenerie. Die Umgebung ist urban mit Bäumen und Gebäuden, die Beleuchtung stammt von Straßenlaternen und Fahrzeuglichtern. Das Bild wirkt dokumentarisch und zeigt die Folgen von Verkehrsunfällen, jedoch ohne Personen im Fokus. Die Szene ist ruhig, trotz des Unfallgeschehens, und vermittelt eine Atmosphäre von Nachwirkungen und Kontrolle.",
+    "articleFacts": [
+      "Im Jahr 2025 gab es in der EU 19.350 Verkehrstote, ein Rückgang von 3% gegenüber 2024 und 15% gegenüber 2019.",
+      "Bulgaria, Rumänien und Kroatien haben weiterhin die höchsten Verkehrstodesraten in der EU.",
+      "Schweden und Dänemark haben die sichersten Straßen in der EU mit den niedrigsten Todesraten.",
+      "Die EU verfolgt eine Strategie, die Verkehrstoten bis 2030 halbieren will.",
+      "Im November 2026 findet in Brüssel eine Konferenz zur Verkehrssicherheit statt, bei der Auszeichnungen für herausragende Sicherheitsinitiativen vergeben werden."
+    ],
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      },
+      "stream-2": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      }
+    },
+    "storyPremise": "Die Geschichte folgt Elena, einer engagierten Verkehrssicherheitsbeauftragten in der EU, die sich für die Reduktion von Verkehrstoten einsetzt. Sie erlebt den aktuellen Stand der Verkehrssicherheit, die Herausforderungen in Ländern mit hohen Unfallraten und die Hoffnung auf eine sichere Zukunft durch neue Initiativen und EU-weite Zusammenarbeit.",
+    "fictionBoundary": "Die dargestellte Figur Elena ist eine fiktive Person, die als Symbol für die Bemühungen um Verkehrssicherheit in der EU steht. Die Szenen sind abstrahierte Darstellungen, basierend auf den Fakten des Artikels, jedoch ohne reale Personen oder tatsächliche Ereignisse direkt abzubilden.",
+    "protagonist": {
+      "name": "Elena",
+      "role": "EU Verkehrssicherheitsbeauftragte",
+      "visualIdentity": "Eine abstrakt maskierte Frau mit einem dynamischen, entschlossenen Gestus, gekleidet in einem stilisierten Mantel mit klaren Linien, die Präsenz und Zielstrebigkeit ausstrahlt.",
+      "guernicaId": 5
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Bilanz der Verkehrssicherheit 2025",
+        "storyBeat": "Elena analysiert die aktuellen Statistiken der Verkehrstoten in der EU und reflektiert den Fortschritt und die Herausforderungen.",
+        "protagonistAction": "Elena steht vor einer abstrakten, zerbrochenen Darstellung einer Straßenkarte Europas mit markanten Symbolen für Unfallorte und Sicherheitsraten.",
+        "composition": "wide_establishing",
+        "guernicaId": 5,
+        "selectionReason": "Die Figur 'Frau mit Lampe' symbolisiert Suche, Aufklärung und Hoffnung, passend zu Elenas Rolle bei der Analyse und Orientierung.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of examining an abstract fractured map of Europe with marked accident and safety symbols, a secondary figure represented as a shadowy, distorted form reacting with concern, and the setting changes as the fragmented map pulses with coded light patterns, reflecting data analysis. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolism ON to emphasize data and hope; room depth ON for map spatial recession; layering 3 for protagonist, secondary figure, and map layers.",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Elena standing prominently in the foreground, her abstract form decisively examining the fractured map of Europe. The map, composed of overlapping rounded and crescent-shaped masses, begins to pulse with coded light patterns that ripple gently across the surface, symbolizing the flow of data and analysis. Simultaneously, the shadowy secondary figure reacts subtly with a concerned lean, their distorted form shifting slightly as if absorbing the implications of the data. The camera performs a slow, subtle zoom-in to emphasize Elena’s focused gesture and the glowing map, then gently settles as the light pulses fade into a steady glow, unifying the composition’s three planes into a cohesive, symbolic tableau."
+      },
+      {
+        "index": 2,
+        "title": "Gefährliche Straßen in Osteuropa",
+        "storyBeat": "Elena besucht eine abstrakte Darstellung der gefährlichen Straßen in Bulgarien und Rumänien, wo die Unfallzahlen am höchsten sind.",
+        "protagonistAction": "Elena bewegt sich entschlossen durch eine fragmentierte Landschaft aus geometrischen Formen, die Straßen und Gefahrenzonen symbolisieren.",
+        "composition": "oblique_diagonal",
+        "guernicaId": 4,
+        "selectionReason": "Das 'Pferd' steht für unschuldige Opfer und Leiden, was Elenas Konfrontation mit der Verkehrssicherheit in gefährlichen Regionen unterstreicht.",
+        "crocodileAppearance": {
+          "present": true,
+          "role": "Symbol für die ständige Gefahr auf den Straßen",
+          "placement": "am unteren Bildrand, nahe Elena"
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of navigating through a fractured, jagged landscape symbolizing dangerous roads in Bulgaria and Romania, a secondary figure abstractly representing victims reacting in fragmented pain, and the setting changes as a geometric crocodile lurks ominously near Elena, symbolizing persistent danger. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism ON to depict danger and suffering; room depth OFF to compress the hazardous landscape; layering 2 for protagonist and victim forms.",
+        "durationSeconds": 8,
+        "videoPrompt": "Elena moves with determined steps through the fragmented, jagged landscape composed of geometric shapes representing dangerous roads. The camera tracks her obliquely from a slightly elevated angle, following her diagonal path across the compressed shallow space. Near her feet, the abstract geometric crocodile lurks ominously, its form subtly shifting and pulsing to symbolize persistent danger. The secondary figure, representing victims, reacts with fragmented, trembling motions that ripple through the overlapping masses. Elena’s movement is steady and resolute, pressing forward despite the threatening environment. The camera gradually slows and settles as Elena reaches a stable position, the crocodile’s motion calming but still present, emphasizing ongoing risk."
+      },
+      {
+        "index": 3,
+        "title": "Hoffnung und Fortschritt in der EU",
+        "storyBeat": "Elena beobachtet neue Initiativen und Erfolge bei der Verkehrssicherheit, symbolisiert durch Licht und Bewegung.",
+        "protagonistAction": "Elena hebt eine stilisierte Lampe, die Licht in die Dunkelheit bringt, während abstrakte Formen von Fahrzeugen und Straßen sich harmonisieren und beruhigen.",
+        "composition": "intimate_close_up",
+        "guernicaId": 5,
+        "selectionReason": "Die 'Frau mit Lampe' passt zur Hoffnung und dem Streben nach Aufklärung und Sicherheit, passend zu Elenas Rolle bei positiven Veränderungen.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of raising a stylized lamp symbolizing hope and enlightenment, a secondary figure abstractly representing a calming flow of vehicles and roads reacting harmoniously, and the setting changes as soft light pulses through the space, symbolizing progress in road safety. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolism ON for hope and enlightenment; room depth ON to create spatial depth for light; layering 3 for protagonist, secondary figure and light effects.",
+        "durationSeconds": 5,
+        "videoPrompt": "In a close intimate framing, Elena raises her stylized lamp upward, the light softly pulsing and expanding through the layered spatial planes. The abstract forms of vehicles and roads around her respond by harmonizing their shapes, flowing gently into smoother, calmer contours. The camera slowly dollies in closer to Elena’s face and lamp, emphasizing the symbolic gesture of hope and enlightenment. As the lamp’s light reaches its peak glow, the surrounding forms settle into a balanced, tranquil composition, radiating a sense of progress and positive change. The motion is fluid and continuous, with no abrupt cuts or shifts, ending on a serene note."
+      },
+      {
+        "index": 4,
+        "title": "Konferenz zur Verkehrssicherheit 2026",
+        "storyBeat": "Elena bereitet sich auf die EU-Konferenz vor, reflektiert die Bedeutung der Zusammenarbeit und den Wunsch, Verkehrstote weiter zu reduzieren.",
+        "protagonistAction": "Elena steht vor einem abstrakten Podium, umgeben von fragmentierten Symbolen der EU und Verkehrssicherheit, bereit, ihre Botschaft zu verkünden.",
+        "composition": "profile_silhouette",
+        "guernicaId": 5,
+        "selectionReason": "Erneut die 'Frau mit Lampe', da sie Elenas Rolle als Hoffnungsträgerin und Sprecherin für Verkehrssicherheit symbolisiert.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of standing in profile silhouette before an abstract podium symbolizing the EU conference and road safety collaboration, a secondary figure abstractly representing attentive listeners reacting with fragmented focus, and the setting changes as fractured light beams symbolize communication and shared commitment. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism ON to highlight collaboration; room depth OFF for focus on figure and setting; layering 2 for protagonist and audience.",
+        "durationSeconds": 7,
+        "videoPrompt": "Elena stands in profile silhouette before the abstract podium, her form steady and resolute. The camera slowly pans horizontally across the shallow compressed space, revealing fragmented symbols of the EU and road safety surrounding her. Fractured light beams begin to emanate from the podium and ripple gently through the scene, symbolizing communication and shared commitment. The secondary figure, representing attentive listeners, subtly shifts with fragmented focus, their forms overlapping with the light beams. Elena’s posture remains firm as the light beams pulse rhythmically, the camera settling on her silhouette as the scene fades to a calm, unified composition."
+      }
+    ]
+  },
+  "visualPlanHash": "265a0b395f6af828ee735f70975e907de16650b105b24d671c7d4909fb017f78",
+  "usage": {
+    "prompt_tokens": 17788,
+    "completion_tokens": 3682,
+    "total_tokens": 21470
+  },
+  "planHash": "ffb830cafaa71c2657aa9057a52898186e3e4101579d48af3de85574b683e741",
+  "sceneTiming": {
+    "scenes": [
+      {
+        "index": 1,
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Elena standing prominently in the foreground, her abstract form decisively examining the fractured map of Europe. The map, composed of overlapping rounded and crescent-shaped masses, begins to pulse with coded light patterns that ripple gently across the surface, symbolizing the flow of data and analysis. Simultaneously, the shadowy secondary figure reacts subtly with a concerned lean, their distorted form shifting slightly as if absorbing the implications of the data. The camera performs a slow, subtle zoom-in to emphasize Elena’s focused gesture and the glowing map, then gently settles as the light pulses fade into a steady glow, unifying the composition’s three planes into a cohesive, symbolic tableau.",
+        "reason": "Fünf Sekunden reichen, um Elenas Analyse und die pulsierende Karte symbolisch darzustellen, mit ruhiger, fokussierter Kamerabewegung passend zur ernsten Thematik."
+      },
+      {
+        "index": 2,
+        "durationSeconds": 8,
+        "videoPrompt": "Elena moves with determined steps through the fragmented, jagged landscape composed of geometric shapes representing dangerous roads. The camera tracks her obliquely from a slightly elevated angle, following her diagonal path across the compressed shallow space. Near her feet, the abstract geometric crocodile lurks ominously, its form subtly shifting and pulsing to symbolize persistent danger. The secondary figure, representing victims, reacts with fragmented, trembling motions that ripple through the overlapping masses. Elena’s movement is steady and resolute, pressing forward despite the threatening environment. The camera gradually slows and settles as Elena reaches a stable position, the crocodile’s motion calming but still present, emphasizing ongoing risk.",
+        "reason": "Acht Sekunden geben Raum für Elenas entschlossene Bewegung durch die gefährliche Landschaft und die bedrohliche Präsenz des Krokodils, mit passender Kameraführung im flachen Raum."
+      },
+      {
+        "index": 3,
+        "durationSeconds": 5,
+        "videoPrompt": "In a close intimate framing, Elena raises her stylized lamp upward, the light softly pulsing and expanding through the layered spatial planes. The abstract forms of vehicles and roads around her respond by harmonizing their shapes, flowing gently into smoother, calmer contours. The camera slowly dollies in closer to Elena’s face and lamp, emphasizing the symbolic gesture of hope and enlightenment. As the lamp’s light reaches its peak glow, the surrounding forms settle into a balanced, tranquil composition, radiating a sense of progress and positive change. The motion is fluid and continuous, with no abrupt cuts or shifts, ending on a serene note.",
+        "reason": "Fünf Sekunden genügen, um die aufsteigende Lampe und die beruhigende Wirkung auf die Umgebung zu zeigen, mit sanfter Kamerafahrt für Intimität und Hoffnung."
+      },
+      {
+        "index": 4,
+        "durationSeconds": 7,
+        "videoPrompt": "Elena stands in profile silhouette before the abstract podium, her form steady and resolute. The camera slowly pans horizontally across the shallow compressed space, revealing fragmented symbols of the EU and road safety surrounding her. Fractured light beams begin to emanate from the podium and ripple gently through the scene, symbolizing communication and shared commitment. The secondary figure, representing attentive listeners, subtly shifts with fragmented focus, their forms overlapping with the light beams. Elena’s posture remains firm as the light beams pulse rhythmically, the camera settling on her silhouette as the scene fades to a calm, unified composition.",
+        "reason": "Sieben Sekunden erlauben eine ruhige, fokussierte Kamerafahrt, die Elenas Rolle und die symbolische Lichtkommunikation betont, passend zur Konferenzatmosphäre."
+      }
+    ]
+  },
+  "storyUsage": {
+    "prompt_tokens": 14073,
+    "completion_tokens": 2948,
+    "total_tokens": 17021,
+    "prompt_tokens_details": {
+      "cached_tokens": 3840,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "timingUsage": {
+    "prompt_tokens": 3715,
+    "completion_tokens": 734,
+    "total_tokens": 4449,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004",
+    "sourceCommit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "article": {
+      "title": "Decesele rutiere în UE au scăzut în 2025; Bulgaria și România au în continuare cele mai periculoase drumuri din UE - AGERPRES",
+      "url": "https://agerpres.ro/economic-extern/2026/10/27/decesele-rutiere-in-ue-au-scazut-in-2025-bulgaria-si-romania-au-in-continuare-cele-mai-periculoase-d--1607308",
+      "publish_date": "2026-10-27 16:33:00"
+    },
+    "status": "Videos per API erzeugt",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. Use each scene’s videoMode as selected by GPT. image_to_video uses startImagePath. first_last_frame requires both start and separately supplied final image; never downgrade it to image-to-video.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Bilanz der Verkehrssicherheit 2025",
+        "beat": "Elena analysiert die aktuellen Statistiken der Verkehrstoten in der EU und reflektiert den Fortschritt und die Herausforderungen.",
+        "storyBeat": "Elena analysiert die aktuellen Statistiken der Verkehrstoten in der EU und reflektiert den Fortschritt und die Herausforderungen.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolism ON to emphasize data and hope; room depth ON for map spatial recession; layering 3 for protagonist, secondary figure, and map layers.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of examining an abstract fractured map of Europe with marked accident and safety symbols, a secondary figure represented as a shadowy, distorted form reacting with concern, and the setting changes as the fragmented map pulses with coded light patterns, reflecting data analysis. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "videoPrompt": "The scene opens with Elena standing prominently in the foreground, her abstract form decisively examining the fractured map of Europe. The map, composed of overlapping rounded and crescent-shaped masses, begins to pulse with coded light patterns that ripple gently across the surface, symbolizing the flow of data and analysis. Simultaneously, the shadowy secondary figure reacts subtly with a concerned lean, their distorted form shifting slightly as if absorbing the implications of the data. The camera performs a slow, subtle zoom-in to emphasize Elena’s focused gesture and the glowing map, then gently settles as the light pulses fade into a steady glow, unifying the composition’s three planes into a cohesive, symbolic tableau.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of examining an abstract fractured map of Europe with marked accident and safety symbols, a secondary figure represented as a shadowy, distorted form reacting with concern, and the setting changes as the fragmented map pulses with coded light patterns, reflecting data analysis. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-1-video.mp4",
+        "videoTaskUUID": "ac4c398b-5b26-4fb4-b8d8-c7f17f6c0164"
+      },
+      {
+        "index": 2,
+        "title": "Gefährliche Straßen in Osteuropa",
+        "beat": "Elena besucht eine abstrakte Darstellung der gefährlichen Straßen in Bulgarien und Rumänien, wo die Unfallzahlen am höchsten sind.",
+        "storyBeat": "Elena besucht eine abstrakte Darstellung der gefährlichen Straßen in Bulgarien und Rumänien, wo die Unfallzahlen am höchsten sind.",
+        "durationSeconds": 8,
+        "requestedDurationSeconds": 8,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism ON to depict danger and suffering; room depth OFF to compress the hazardous landscape; layering 2 for protagonist and victim forms.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of navigating through a fractured, jagged landscape symbolizing dangerous roads in Bulgaria and Romania, a secondary figure abstractly representing victims reacting in fragmented pain, and the setting changes as a geometric crocodile lurks ominously near Elena, symbolizing persistent danger. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "videoPrompt": "Elena moves with determined steps through the fragmented, jagged landscape composed of geometric shapes representing dangerous roads. The camera tracks her obliquely from a slightly elevated angle, following her diagonal path across the compressed shallow space. Near her feet, the abstract geometric crocodile lurks ominously, its form subtly shifting and pulsing to symbolize persistent danger. The secondary figure, representing victims, reacts with fragmented, trembling motions that ripple through the overlapping masses. Elena’s movement is steady and resolute, pressing forward despite the threatening environment. The camera gradually slows and settles as Elena reaches a stable position, the crocodile’s motion calming but still present, emphasizing ongoing risk.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of navigating through a fractured, jagged landscape symbolizing dangerous roads in Bulgaria and Romania, a secondary figure abstractly representing victims reacting in fragmented pain, and the setting changes as a geometric crocodile lurks ominously near Elena, symbolizing persistent danger. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-2-video.mp4",
+        "videoTaskUUID": "12873d70-ade2-4e6e-a444-7e03e904b834"
+      },
+      {
+        "index": 3,
+        "title": "Hoffnung und Fortschritt in der EU",
+        "beat": "Elena beobachtet neue Initiativen und Erfolge bei der Verkehrssicherheit, symbolisiert durch Licht und Bewegung.",
+        "storyBeat": "Elena beobachtet neue Initiativen und Erfolge bei der Verkehrssicherheit, symbolisiert durch Licht und Bewegung.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolism ON for hope and enlightenment; room depth ON to create spatial depth for light; layering 3 for protagonist, secondary figure and light effects.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of raising a stylized lamp symbolizing hope and enlightenment, a secondary figure abstractly representing a calming flow of vehicles and roads reacting harmoniously, and the setting changes as soft light pulses through the space, symbolizing progress in road safety. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "videoPrompt": "In a close intimate framing, Elena raises her stylized lamp upward, the light softly pulsing and expanding through the layered spatial planes. The abstract forms of vehicles and roads around her respond by harmonizing their shapes, flowing gently into smoother, calmer contours. The camera slowly dollies in closer to Elena’s face and lamp, emphasizing the symbolic gesture of hope and enlightenment. As the lamp’s light reaches its peak glow, the surrounding forms settle into a balanced, tranquil composition, radiating a sense of progress and positive change. The motion is fluid and continuous, with no abrupt cuts or shifts, ending on a serene note.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of raising a stylized lamp symbolizing hope and enlightenment, a secondary figure abstractly representing a calming flow of vehicles and roads reacting harmoniously, and the setting changes as soft light pulses through the space, symbolizing progress in road safety. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-3-video.mp4",
+        "videoTaskUUID": "c1fb0343-f797-4d76-b920-7919228d5d01"
+      },
+      {
+        "index": 4,
+        "title": "Konferenz zur Verkehrssicherheit 2026",
+        "beat": "Elena bereitet sich auf die EU-Konferenz vor, reflektiert die Bedeutung der Zusammenarbeit und den Wunsch, Verkehrstote weiter zu reduzieren.",
+        "storyBeat": "Elena bereitet sich auf die EU-Konferenz vor, reflektiert die Bedeutung der Zusammenarbeit und den Wunsch, Verkehrstote weiter zu reduzieren.",
+        "durationSeconds": 7,
+        "requestedDurationSeconds": 7,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism ON to highlight collaboration; room depth OFF for focus on figure and setting; layering 2 for protagonist and audience.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-4-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of standing in profile silhouette before an abstract podium symbolizing the EU conference and road safety collaboration, a secondary figure abstractly representing attentive listeners reacting with fragmented focus, and the setting changes as fractured light beams symbolize communication and shared commitment. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "videoPrompt": "Elena stands in profile silhouette before the abstract podium, her form steady and resolute. The camera slowly pans horizontally across the shallow compressed space, revealing fragmented symbols of the EU and road safety surrounding her. Fractured light beams begin to emanate from the podium and ripple gently through the scene, symbolizing communication and shared commitment. The secondary figure, representing attentive listeners, subtly shifts with fragmented focus, their forms overlapping with the light beams. Elena’s posture remains firm as the light beams pulse rhythmically, the camera settling on her silhouette as the scene fades to a calm, unified composition.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction selected for this scene, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no red, blue, yellow, ochre, brown, beige, sepia or any other color. Build the image from several large, rounded, swelling and crescent-shaped masses that overlap and interlock across the selected spatial planes; let broad curved contours and irregular organic silhouettes dominate. Use bent arcs and sweeping bands alongside sharp breaks. Show three connected actions in the same instant: the fictional protagonist Elena's decisive physical action of standing in profile silhouette before an abstract podium symbolizing the EU conference and road safety collaboration, a secondary figure abstractly representing attentive listeners reacting with fragmented focus, and the setting changes as fractured light beams symbolize communication and shared commitment. Make the forms collide, lean, press, pull or flow into one another so the whole canvas carries the event. Fracture faces into displaced masks and mismatched features; distort bodies into broad overlapping forms. Keep Elena and main action large and unmistakable, with supporting action legible but secondary. Use raw charcoal, broken brush marks, scraped pigment, worn plaster and layered tonal transitions across black, white and gray. The article-photo reference supplies subject matter only: discard its color, realism, lighting, exact framing, poses and real faces; redraw the underlying event as an invented mural. No flags, maps, emblems or readable text. The image API receives reference image 1: the selected masked character crop, used only for Elena's abstract appearance and gesture. Reference image 2 is the complete painting, used only for painterly style. Do not import story content from the character or painting references. Keep figures and setting fused into one unstable painted surface. Absolutely no photorealism, lifelike skin, naturalistic anatomy, camera effects, glossy finish, copied symbols or copied layout.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-004/media/scene-4-video.mp4",
+        "videoTaskUUID": "303c3817-55fa-45d9-a779-311f5add2a0b"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-28T09:03:47.801Z",
+  "videoResults": [
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-1-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:03:47.851Z",
+      "renderedAt": "2026-10-28T09:04:10.750Z",
+      "savedAt": "2026-10-28T09:04:12.704Z",
+      "renderSeconds": 22.9,
+      "downloadSeconds": 2,
+      "totalSeconds": 24.9,
+      "cost": 0.0517,
+      "seed": 149140601,
+      "taskUUID": "ac4c398b-5b26-4fb4-b8d8-c7f17f6c0164",
+      "sourceUrl": "https://vm.runware.ai/video/os/a01d21/ws/5/vi/3cddd90f-b756-49f0-a540-a4b64c937d1a.mp4",
+      "bytes": 3112005,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-2-video.mp4",
+      "durationSeconds": 8,
+      "requestedDurationSeconds": 8,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:03:47.851Z",
+      "renderedAt": "2026-10-28T09:04:18.756Z",
+      "savedAt": "2026-10-28T09:04:21.709Z",
+      "renderSeconds": 30.9,
+      "downloadSeconds": 3,
+      "totalSeconds": 33.9,
+      "cost": 0.08,
+      "seed": 756674928,
+      "taskUUID": "12873d70-ade2-4e6e-a444-7e03e904b834",
+      "sourceUrl": "https://vm.runware.ai/video/os/a01d21/ws/5/vi/33d738e6-e427-4ef0-801e-4e3ba820485a.mp4",
+      "bytes": 5912696,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 8
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-3-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:03:47.851Z",
+      "renderedAt": "2026-10-28T09:04:16.607Z",
+      "savedAt": "2026-10-28T09:04:19.148Z",
+      "renderSeconds": 28.8,
+      "downloadSeconds": 2.5,
+      "totalSeconds": 31.3,
+      "cost": 0.0517,
+      "seed": 1093600579,
+      "taskUUID": "c1fb0343-f797-4d76-b920-7919228d5d01",
+      "sourceUrl": "https://vm.runware.ai/video/os/a01d21/ws/5/vi/a3df4819-7182-41bc-a96d-0b5e31f73772.mp4",
+      "bytes": 3847294,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-4-video.mp4",
+      "durationSeconds": 7.292,
+      "requestedDurationSeconds": 7,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:03:47.851Z",
+      "renderedAt": "2026-10-28T09:04:23.306Z",
+      "savedAt": "2026-10-28T09:04:24.817Z",
+      "renderSeconds": 35.5,
+      "downloadSeconds": 1.5,
+      "totalSeconds": 37,
+      "cost": 0.0729,
+      "seed": 326952880,
+      "taskUUID": "303c3817-55fa-45d9-a779-311f5add2a0b",
+      "sourceUrl": "https://vm.runware.ai/video/os/a01d21/ws/5/vi/69b81e59-a6ba-455e-b902-bc7dbf877658.mp4",
+      "bytes": 3454359,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 7.292
+      }
+    }
+  ],
+  "videoGeneration": {
+    "provider": "Runware",
+    "model": "prunaai:p-video@2-pro",
+    "resolution": "480p",
+    "settings": {
+      "mode": "cost"
+    },
+    "completedAt": "2026-10-28T09:04:24.865Z",
+    "concurrency": 4,
+    "audioEdgeFadeSeconds": 0.03
+  },
+  "concatenatedVideo": {
+    "path": "../merged/iteration-004.mp4",
+    "runPath": "merged/iteration-004.mp4",
+    "scenes": 4,
+    "generatedVideos": 4,
+    "gaps": [],
+    "durationSeconds": 25.625,
+    "requestedDurationSeconds": 25,
+    "sourceTasks": [
+      "ac4c398b-5b26-4fb4-b8d8-c7f17f6c0164",
+      "12873d70-ade2-4e6e-a444-7e03e904b834",
+      "c1fb0343-f797-4d76-b920-7919228d5d01",
+      "303c3817-55fa-45d9-a779-311f5add2a0b"
+    ],
+    "method": "Selfomat ffmpeg concat · 0.03s audio fades at scene edges · moderation gaps shown as black video",
+    "audioEdgeFadeSeconds": 0.03,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 25.625
+    },
+    "createdAt": "2026-10-28T09:04:25.457Z"
+  },
+  "titleCardFilm": {
+    "path": "../merged/iteration-004-with-title-card-audio-normalized.mp4",
+    "runPath": "merged/iteration-004-with-title-card-audio-normalized.mp4",
+    "durationSeconds": 29.4,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 96000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 29.4
+    },
+    "fadeSeconds": 0.25,
+    "method": "FFmpeg assembler · title card from record.json → article.title",
+    "createdAt": "2026-10-28T09:04:26.526Z",
+    "sourcePath": "../merged/iteration-004-with-title-card.mp4",
+    "sourceRunPath": "merged/iteration-004-with-title-card.mp4",
+    "audioNormalization": {
+      "method": "FFmpeg loudnorm after iteration film assembly",
+      "targetIntegratedLufs": -16,
+      "maximumTruePeakDbtp": -1.5,
+      "targetLoudnessRangeLu": 11,
+      "outputPath": "merged/iteration-004-with-title-card-audio-normalized.mp4",
+      "completedAt": "2026-10-28T09:04:27.698Z"
+    }
+  }
+}

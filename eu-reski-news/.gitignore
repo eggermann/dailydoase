@@ -1,0 +1,10 @@
+# News API collections and generated article browser.
+/news-capitals/*.json
+/news-capitals/articles.html
+/news/A/
+
+# New generated reports stay local. Previously tracked runs remain tracked.
+/GENERATIONS/news/
+
+# Local filesystem metadata.
+.DS_Store

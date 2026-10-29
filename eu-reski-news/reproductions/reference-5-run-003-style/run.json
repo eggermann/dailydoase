@@ -1,0 +1,104 @@
+{
+  "profile": "EU-RESKI exhibition mix",
+  "startedAt": "2026-10-28T08:54:16.997Z",
+  "iterationLimit": 5,
+  "pauseMilliseconds": 0,
+  "status": "completed",
+  "featureSettings": {
+    "autoMode": false,
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": false,
+    "landscapePrompt": false
+  },
+  "generationSettings": {
+    "autoMode": false,
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4.1-mini",
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "legacyGuernicaStyleReferencePromptRequested": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "articleProgress": {
+    "sourceAggregate": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/all-2026-10-27T15-04-50-359Z.json",
+    "nextDraw": 5
+  },
+  "iterations": [
+    {
+      "index": 1,
+      "directory": "iteration-001",
+      "report": "iteration-001/index.html"
+    },
+    {
+      "index": 2,
+      "directory": "iteration-002",
+      "report": "iteration-002/index.html"
+    },
+    {
+      "index": 3,
+      "directory": "iteration-003",
+      "report": "iteration-003/index.html"
+    },
+    {
+      "index": 4,
+      "directory": "iteration-004",
+      "report": "iteration-004/index.html"
+    },
+    {
+      "index": 5,
+      "directory": "iteration-005",
+      "report": "iteration-005/index.html"
+    }
+  ],
+  "sceneCountSettings": {
+    "mode": "taktmuster",
+    "takt": 2,
+    "numerator": 3,
+    "denominator": 4,
+    "type": "balanced",
+    "bias": 2,
+    "minimum": 1,
+    "maximum": 12
+  },
+  "visualControls": {
+    "sceneSpecific": true,
+    "defaults": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  },
+  "imageSeedBase": null,
+  "finishedAt": "2026-10-28T09:06:38.649Z"
+}

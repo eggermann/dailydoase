@@ -1,0 +1,27 @@
+{
+  "runDirectory": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001",
+  "outputDirectory": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/glue-vids",
+  "model": "prunaai:p-video@2-pro",
+  "resolution": "480p",
+  "settingsMode": "cost",
+  "requestedDurationSeconds": null,
+  "durationPatternSeconds": [
+    9,
+    5,
+    7,
+    5,
+    8
+  ],
+  "durationPatternType": "long cyclic getNext sequence",
+  "durationPatternStepsConsumed": 4,
+  "transitionWaitPattern": "Taktmuster 2/4/4 classic",
+  "transitionWaitPatternType": "Taktmuster.getNext().patternValue; persistent across iterations",
+  "transitionWaitPatternStepsConsumed": 6,
+  "frameOffsetSeconds": 0.25,
+  "iterationCount": 4,
+  "transitionCount": 4,
+  "transitionsPerIteration": 1,
+  "completedAt": "2026-10-28T09:04:51.459Z",
+  "actualVideoCostUsd": 0.2705,
+  "failures": []
+}

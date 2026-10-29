@@ -1,0 +1,26 @@
+{
+  "name": "expression-off",
+  "generationOverrides": {
+    "iterations": 5,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "articleImageReference": false,
+    "storyClou": "off",
+    "sceneCount": {
+      "mode": "fixed",
+      "count": 5,
+      "numerator": 3,
+      "bias": 2
+    },
+    "visualControls": {
+      "mode": "fixed",
+      "symbolic": false,
+      "roomDeepness": false,
+      "layering": 0
+    },
+    "preserveCubistVideoStyle": false,
+    "videoDirection": "off",
+    "videoVision": "off",
+    "videoAudioDirection": "off"
+  }
+}

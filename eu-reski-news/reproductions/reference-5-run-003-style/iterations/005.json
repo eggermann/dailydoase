@@ -1,0 +1,908 @@
+{
+  "generator": "semantic-news-v1",
+  "planningVersion": 2,
+  "createdAt": "2026-10-28T09:04:31.872Z",
+  "status": "Abgeschlossen",
+  "sourceVersion": {
+    "commit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "branch": "codex/eu-reski-artistic-auto-mode",
+    "clean": false
+  },
+  "sourceAggregate": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/all-2026-10-27T15-04-50-359Z.json",
+  "aggregateHash": "f1ed42ecd7112f65036119191c3bbe820254677dee076e4a1706a6472b65af35",
+  "selection": {
+    "method": "linear",
+    "order": "linear",
+    "ranking": "jev-eu-relevance",
+    "euRelevance": 0.98,
+    "relevancePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/news/A/eu-relevance-2026-10-27T15-04-50-359Z.json",
+    "draw": 4,
+    "candidateCount": 2322,
+    "aggregateIndex": 28
+  },
+  "article": {
+    "id": 476661782,
+    "title": "UE vrea să întărească Frontex și să-i extindă atribuțiile de expulzare a migranților - AGERPRES",
+    "text": "Bruxellesul a propus marți o amplă reformă a Frontex, Agenția europeană responsabilă cu supravegherea frontierelor, care prevede între altele creșterea numărului de agenți și extinderea atribuțiilor în materie de expulzare a migranților, relatează France Presse.\nAceastă propunere se înscrie pe linia înăspririi politicii privind migrația operată de UE în ultimii ani.\n'Este datoria Europei să decidă cine intră în Uniunea noastră și în ce circumstanțe. Acesta este motivul pentru care propunem întărirea Frontex', a explicat șefa executivului european, Ursula von der Leyen, într-un comunicat.\nCreată în 2004, această agenție a fost gândită pentru a ajuta țările UE și spațiul Schengen să își protejeze frontierele externe.\nPentru prima oară, competențele sale au fost extinse semnificativ după criza migratorie din 2015, o reformă vizând o creștere a efectivelor sale până la 10.000 de grăniceri și agenți ai Gărzii de coastă către orizontul anului 2027.\nAgenția este periodic criticată de către organizațiile neguvernamentale, care o acuză de practici ilegale de respingere a imigranților.\nReforma propusă marți ar urma să-i extindă și mai mult prerogativele.\nUE de acum dorește ca:\n- acest corp european să ajungă în următorii 15 ani la 30.000 de polițiști de frontieră, între care o rezervă de 17.000 de agenți la dispoziția statelor membre.\n- agenția să devină mai agilă și să-și poată desfășura agenții mult mai rapid în caz de criză. Bruxellesul are în minte criza migranților intervenită la sfârșitul lunii iulie 2026 la Ceuta, când mii de migranți au forțat trecerea într-o exclavă spaniolă din Africa de Nord, iar agenția s-a mobilizat cu întârziere.\n- să aibă un rol central în expulzarea migranților. UE deschide, în special, porțile pentru ca Frontex să fie implicată în viitoarele centre pentru migranții expulzați din Europa, care ar urma să fie înființate în următoarele luni.\nAceste 'hub-uri de returnare' au fost gândite în comun cu Comisia Europeană în urmă cu un și jumătate pentru a crește semnificativ numărul de returnări în afara teritoriului european al migranților aflați într-o situație neregulamentară.\nPrimul dintre aceste centre se așteaptă să fie deschis în Rwanda în lunile următoare, au indicat surse concordante pentru AFP.\nÎn virtutea unui acord așteptat în următoarele săptămâni, solicitanții cărora le-au fost respinse cererile de azil în cinci țări europene - Germania, Danemarca, Grecia, Țările de Jos și Austria - ar urma să fie trimiși cât mai rapid într-un 'hub' din această țară din Africa de Est.\nPotrivit proiectului de reformă Frontex, agenția va putea între altele să se ocupe de transferul migranților dintr-o țară în alta, în afara UE.\nAceastă propunere trebuie de acum să fie validată de către statele membre, multe votând pentru ea, și de către Parlamentul European. Inițiativa a fost virulent criticată de stânga și de către organizațiile neguvernamentale.\n'În fața tragediilor umane care se înmulțesc, răspunsul este întotdeauna același: tot mai multă represiune, dezumanizarea tot mai mare a persoanelor exilate, tot mai mult mimetism al discursurilor extremei drepte', a denunțat eurodeputata ecologistă Melissa Camara. AGERPRES/(AS-editor: Lilia Traci, editor online: Simona Aruştei)",
+    "url": "https://agerpres.ro/politic-extern/2026/10/27/ue-vrea-sa-intareasca-frontex-si-sa-i-extinda-atributiile-de-expulzare-a-migrantilor--1607298",
+    "image": "https://agerpres.ro/data/202610/20261027152525_693970.jpg",
+    "video": null,
+    "publish_date": "2026-10-27 16:19:00",
+    "author": null,
+    "language": "ro",
+    "category": "politics",
+    "source_country": "ro"
+  },
+  "sceneCount": 3,
+  "imageProvider": "hf-flux-klein",
+  "articleImageReference": false,
+  "guernicaFigureReference": true,
+  "guernicaLocationReference": false,
+  "visualStyleOptions": {
+    "symbolic": true,
+    "roomDeepness": false,
+    "layering": 3
+  },
+  "storyModel": "gpt-4.1-mini",
+  "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+  "generationSettings": {
+    "autoMode": false,
+    "articleOrder": "linear",
+    "sceneTiming": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "imageModel": "FLUX 3 Image Klein · ZeroGPU",
+    "storyModel": "gpt-4.1-mini",
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "legacyGuernicaStyleReferencePromptRequested": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "styleReferencePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+    "sceneVisualControls": true,
+    "visualStyleOptions": {
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    },
+    "videosAfterEachIteration": true,
+    "generateTitleCards": true,
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost"
+  },
+  "featureSettings": {
+    "autoMode": false,
+    "storyClou": "off",
+    "videoDirection": "off",
+    "videoMode": "image_to_video",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "preserveCubistVideoStyle": false,
+    "landscapePrompt": false
+  },
+  "sceneVisualControls": true,
+  "sceneCountSelection": {
+    "iteration": 4,
+    "rawValue": 1,
+    "biasedValue": 3,
+    "count": 3,
+    "settings": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    }
+  },
+  "guernicaDirectory": "/Users/eggermann/Projekte/EU-RESKI/guernica_elemente_maskiert",
+  "results": [
+    {
+      "path": "media/scene-1-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "6beb4850e59ce5f94c4235601422e49e9b7288a48a01410e0945509f86778bd4",
+      "bytes": 3023840,
+      "provider": "hf-flux-klein",
+      "taskUUID": "6c33d1326be14b10a156ffb269483664",
+      "seed": 1518259132,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "485ed1221eef2be6018825c1a6e0760103c0fb9eb4fe86fb0735f5fc12a7b755",
+      "referencePaths": [
+        "media/05_frau_mit_lampe.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 5,
+          "name": "Frau mit Lampe",
+          "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+          "eu_bezug": [
+            "Hoffnung",
+            "Aufklärung",
+            "Demokratische Werte"
+          ],
+          "path": "media/05_frau_mit_lampe.png",
+          "mimeType": "image/png",
+          "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42",
+          "label": "Protagonist character reference: Frau mit Lampe; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-2-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "f87db7bd67fd92a8192344b9d47cf33153d389535061fb93398109e9f3a63d10",
+      "bytes": 3071320,
+      "provider": "hf-flux-klein",
+      "taskUUID": "634e884770c9428f963705c724795f48",
+      "seed": 825493909,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "4c9aacff0f2bafb55a4049735f659e5989f33c0bb873f43d7ed4a5efe34d5cfd",
+      "referencePaths": [
+        "media/06_frau_im_brennenden_haus.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 6,
+          "name": "Frau mit erhobenen Armen",
+          "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+          "eu_bezug": [
+            "Schutz vor Gewalt",
+            "Frieden"
+          ],
+          "path": "media/06_frau_im_brennenden_haus.png",
+          "mimeType": "image/png",
+          "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff",
+          "label": "Protagonist character reference: Frau mit erhobenen Armen; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    },
+    {
+      "path": "media/scene-3-first-frame.png",
+      "mimeType": "image/png",
+      "sha256": "0062006464526904f79593404e5f0f3398ba82cdeb14f0eb270d4d73a045c7d1",
+      "bytes": 3051297,
+      "provider": "hf-flux-klein",
+      "taskUUID": "3c05e53e7b2549f1ac79678f4cbe0e48",
+      "seed": 1998821692,
+      "cost": null,
+      "billing": "ZeroGPU quota/credits; exact GPU seconds not reported by Space",
+      "promptHash": "f5ee18f98ee4e848d359883da6d70c9d459b00acaf5e8b33ff8aaf61d9ec7a96",
+      "referencePaths": [
+        "media/09_fliehende_frau_rechts.png",
+        "media/guernica-style-reference.jpg"
+      ],
+      "referenceMetadata": [
+        {
+          "id": 9,
+          "name": "Fliehende Frau rechts",
+          "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+          "eu_bezug": [
+            "Sicherheit",
+            "Schutz vor Verfolgung und Gewalt",
+            "Frieden"
+          ],
+          "path": "media/09_fliehende_frau_rechts.png",
+          "mimeType": "image/png",
+          "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e",
+          "label": "Protagonist character reference: Fliehende Frau rechts; redraw, do not paste",
+          "role": "catalog"
+        },
+        {
+          "path": "media/guernica-style-reference.jpg",
+          "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+          "mimeType": "image/jpeg",
+          "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+          "bytes": 55860,
+          "label": "Full-painting style reference only; no depicted content may be used",
+          "role": "style"
+        }
+      ]
+    }
+  ],
+  "imageSeed": null,
+  "sceneDurations": [
+    5,
+    8,
+    5
+  ],
+  "sceneDurationSettings": {
+    "provider": "Selfomat Taktmuster scene-length generator",
+    "takt": 4,
+    "meter": "4/4",
+    "type": "balanced",
+    "scaler": "quality floor → multiplier → bias → duration clamp",
+    "multiplier": 1.15,
+    "bias": 4.2,
+    "minimum": 5,
+    "maximum": 8
+  },
+  "titleCard": {
+    "articleTitle": "UE vrea să întărească Frontex și să-i extindă atribuțiile de expulzare a migranților - AGERPRES",
+    "imagePath": "../merged/title-cards/title-005.png",
+    "imageRunPath": "merged/title-cards/title-005.png",
+    "videoPath": "../merged/title-cards/title-005.mp4",
+    "videoRunPath": "merged/title-cards/title-005.mp4",
+    "durationSeconds": 4,
+    "createdAt": "2026-10-28T09:05:56.539Z"
+  },
+  "semantic": {
+    "provider": "semantic-stream",
+    "capturedAt": "2026-10-28T09:04:32.185Z",
+    "words": [
+      [
+        "EU",
+        "de"
+      ],
+      [
+        "EU",
+        "en"
+      ],
+      [
+        "EU",
+        "ru"
+      ]
+    ],
+    "entries": [
+      {
+        "id": "stream-1",
+        "seed": [
+          "EU",
+          "de"
+        ],
+        "item": {
+          "cnt": 1.5,
+          "urlLink": "Ursula_von_der_Leyen",
+          "title": "Deutschland",
+          "text": "",
+          "sentences": {
+            "prev": [
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Europäische Union in den Historischen Pressearchiven der",
+              " ",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "u",
+              "o",
+              "o",
+              "ä",
+              "ä",
+              "Europäische Union in den Historischen Pressearchiven der",
+              "Welt. Der Mitgliedstaat mit den meisten Bewohnern ist",
+              "c",
+              "ch",
+              "e"
+            ],
+            "next": [
+              "Europäische Union, kurz EU, ist ein Staatenverbund aus 27",
+              "Europäische Union, kurz EU, ist ein Staatenverbund aus 27",
+              " ",
+              "Union, kurz EU, ist ein Staatenverbund aus 27",
+              "u",
+              "Union, kurz EU, ist ein Staatenverbund aus 27",
+              "o",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "ä",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten,",
+              "c",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten, davon",
+              "e",
+              "Union, kurz EU, ist ein Staatenverbund aus 27 Staaten, davon"
+            ]
+          }
+        }
+      },
+      {
+        "id": "stream-2",
+        "seed": [
+          "EU",
+          "en"
+        ],
+        "item": {
+          "cnt": 1,
+          "urlLink": "European_Parliament",
+          "title": "European Parliament",
+          "text": "Parliament",
+          "sentences": {
+            "prev": [],
+            "next": []
+          }
+        }
+      },
+      {
+        "id": "stream-3",
+        "seed": [
+          "EU",
+          "ru"
+        ],
+        "item": {
+          "cnt": 1.1,
+          "urlLink": "%D0%95%D0%B2%D1%80%D0%BE%D0%BF%D0%B5%D0%B9%D1%81%D0%BA%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BC%D0%B8%D1%81%D1%81%D0%B8%D1%8F",
+          "title": "Европейская комиссия",
+          "text": "Европейскую комиссию",
+          "sentences": {
+            "prev": [
+              ", "
+            ],
+            "next": [
+              "(правительство),"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "articleImage": {
+    "path": "media/article.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "63823289e5e1df7a597a7a7025e3e42d18b5d4118a8dc38789277327f5f81c7d",
+    "bytes": 55021
+  },
+  "styleReference": {
+    "path": "media/guernica-style-reference.jpg",
+    "sourcePath": "/Users/eggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg",
+    "mimeType": "image/jpeg",
+    "sha256": "e5f56535ad87e09caa2b0f8286ed69b7d77bb350aebc1b1f44fc52ebc12c6264",
+    "bytes": 55860
+  },
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Mutter mit totem Kind",
+      "interpretation": "Leid der Zivilbevölkerung, Unschuld der Opfer, Trauer und Wunsch nach Frieden.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Schutz der Zivilbevölkerung"
+      ],
+      "path": "media/01_mutter_mit_kind.png",
+      "mimeType": "image/png",
+      "sha256": "0675a8e25a31ca37ed284ebc41bf6ae46c54ece87b72318bbf636278d8d898a2"
+    },
+    {
+      "id": 2,
+      "name": "Stier",
+      "interpretation": "Häufig als Symbol für Brutalität, Gewalt, Widerstand oder Spanien interpretiert; Picasso legte keine eindeutige Bedeutung fest.",
+      "eu_bezug": [
+        "Gewalt und Krieg als historische Erfahrung"
+      ],
+      "path": "media/02_stier.png",
+      "mimeType": "image/png",
+      "sha256": "a225abe8725ce772ea1fda6a1fed25936310f49017d02b41ab8837465e282d21"
+    },
+    {
+      "id": 3,
+      "name": "Auge / Glühbirne",
+      "interpretation": "Kann als künstliches Licht, Beobachtung, technische Moderne oder ein alles sehendes Auge gelesen werden; die Deutung ist offen.",
+      "eu_bezug": [
+        "Aufklärung",
+        "Beobachtung",
+        "Ambivalenz moderner Technik"
+      ],
+      "path": "media/03_auge_gluehbirne.png",
+      "mimeType": "image/png",
+      "sha256": "eb459be77ef278bb08121763827749888d3e52426fc93a521db3f39fa2f83723"
+    },
+    {
+      "id": 4,
+      "name": "Pferd",
+      "interpretation": "Das verletzte, schreiende Pferd steht häufig für leidende und unschuldige Opfer des Krieges.",
+      "eu_bezug": [
+        "Menschenwürde",
+        "Schutz des Lebens",
+        "Menschenrechte"
+      ],
+      "path": "media/04_pferd.png",
+      "mimeType": "image/png",
+      "sha256": "1714a29a0b4dec1ad3f1f68efa88b6b743033ac2e27530e0e2cea6039bbec671"
+    },
+    {
+      "id": 5,
+      "name": "Frau mit Lampe",
+      "interpretation": "Die Frau und ihre Handlampe können als Suche nach Wahrheit, Hoffnung und Orientierung inmitten der Zerstörung interpretiert werden.",
+      "eu_bezug": [
+        "Hoffnung",
+        "Aufklärung",
+        "Demokratische Werte"
+      ],
+      "path": "media/05_frau_mit_lampe.png",
+      "mimeType": "image/png",
+      "sha256": "e78fbb6a755377a997a56644578c55f35202e1d7a4e19b78ef934b1da33a3c42"
+    },
+    {
+      "id": 6,
+      "name": "Frau mit erhobenen Armen",
+      "interpretation": "Die erhobenen Arme und der geöffnete Mund vermitteln Entsetzen, Hilflosigkeit und das Leid durch Zerstörung.",
+      "eu_bezug": [
+        "Schutz vor Gewalt",
+        "Frieden"
+      ],
+      "path": "media/06_frau_im_brennenden_haus.png",
+      "mimeType": "image/png",
+      "sha256": "22917b21fc2b25eef84bbb850abcb10fb2fbc1a44090a5b7d7e37bf9126b7eff"
+    },
+    {
+      "id": 7,
+      "name": "Gefallener Soldat",
+      "interpretation": "Der zerstückelte Körper steht für Tod, Niederlage und die Zerstörung menschlichen Lebens durch Krieg.",
+      "eu_bezug": [
+        "Frieden",
+        "Menschenwürde",
+        "Ablehnung von Krieg"
+      ],
+      "path": "media/07_gefallener_soldat.png",
+      "mimeType": "image/png",
+      "sha256": "11a7214009246616b5c04ca133b923a2fe8bf25c1b5715fd23a492ac20a6e572"
+    },
+    {
+      "id": 8,
+      "name": "Schreiende / fliehende Frau",
+      "interpretation": "Die nach oben gerichtete, verzweifelte Figur vermittelt Angst, Schmerz und die Suche nach einem Ausweg.",
+      "eu_bezug": [
+        "Schutz von Zivilisten",
+        "Sicherheit",
+        "Frieden"
+      ],
+      "path": "media/08_schreiende_frau.png",
+      "mimeType": "image/png",
+      "sha256": "f6341f07f66cc46d27ed32d81ed39f05cadb2deee247fc5ae2bcad31af35cf13"
+    },
+    {
+      "id": 9,
+      "name": "Fliehende Frau rechts",
+      "interpretation": "Die gestreckte Bewegung der Figur kann Flucht, Verletzlichkeit und die Suche nach Sicherheit ausdrücken.",
+      "eu_bezug": [
+        "Sicherheit",
+        "Schutz vor Verfolgung und Gewalt",
+        "Frieden"
+      ],
+      "path": "media/09_fliehende_frau_rechts.png",
+      "mimeType": "image/png",
+      "sha256": "d9d4b13a401b735a0ee207f2fd4a9adab7d8329f18cc3e609f5e45b90603685e"
+    }
+  ],
+  "directorHash": "e35f0bd8f6bafdb4c24f958835972af3a1de2f20abc12899fed7ba7578d7f4b9",
+  "semanticIndexCorrections": [],
+  "plan": {
+    "visionAnalysis": "Das Artikelbild zeigt drei wehende Flaggen der Europäischen Union vor einem modernen Bürogebäude mit gewölbter Glasfassade. Die Szene ist von unten in den Himmel fotografiert, die Flaggen wehen dynamisch. Es handelt sich um eine symbolische Aufnahme, ohne Personen oder konkrete Handlung, die das Thema EU und ihre Institutionen vermittelt.",
+    "articleFacts": [
+      "Die EU plant eine Reform von Frontex zur Verstärkung der Grenzüberwachung und Erweiterung der Befugnisse zur Abschiebung von Migranten.",
+      "Die Agentur soll bis 2027 auf 10.000 Grenzschützer und Küstenwächter wachsen, langfristig auf 30.000.",
+      "Frontex soll schneller und agiler bei Krisen reagieren können, wie bei der Migrantenkrise in Ceuta 2026.",
+      "Die EU will Frontex eine zentrale Rolle bei Abschiebungen zuweisen, inklusive der Einrichtung von Rückführungszentren außerhalb Europas, z.B. in Ruanda.",
+      "Die Reform stößt auf Kritik von NGOs und linken Politikern wegen der zunehmenden Repression und Menschenrechtsbedenken."
+    ],
+    "semanticUse": {
+      "stream-1": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          1,
+          2
+        ],
+        "visualMotif": "The EU as a powerful institutional body shaping borders and migration policy, represented through abstract forms of organization and control.",
+        "visibleConsequence": "The protagonist acts as a figure of authority within the EU framework, embodying the centralized power and decision-making."
+      },
+      "stream-2": {
+        "relevance": "relevant",
+        "relatedSceneIndices": [
+          2,
+          3
+        ],
+        "visualMotif": "The European Parliament as a place of debate, conflict and decision-making, with tension between control and humanitarian concerns.",
+        "visibleConsequence": "The protagonist faces opposition and the contested nature of migration policy, reflected in fractured, tense forms."
+      },
+      "stream-3": {
+        "relevance": "not_relevant",
+        "relatedSceneIndices": [],
+        "visualMotif": "",
+        "visibleConsequence": ""
+      }
+    },
+    "storyPremise": "Eine fiktive EU-Beamtin namens Elena führt die Reform von Frontex an, um die Grenzschutzagentur zu stärken und ihre Befugnisse auszuweiten. Dabei steht sie im Spannungsfeld zwischen der Durchsetzung strenger Migrationskontrollen und der Kritik an den Menschenrechtsverletzungen, die durch diese Politik entstehen. Die drei Szenen zeigen den Verlauf ihrer Arbeit: Planung und Machtaufbau, Konfrontation mit Kritik und die Umsetzung der umstrittenen Maßnahmen.",
+    "fictionBoundary": "Die Figur Elena und ihre Handlung sind frei erfunden. Die dargestellten Aktionen basieren auf den im Artikel beschriebenen Fakten, werden jedoch fiktionalisiert und symbolisch umgesetzt. Es gibt keine realen Personenabbildungen oder exakte Ereignisse, sondern eine künstlerische Interpretation der Thematik.",
+    "protagonist": {
+      "name": "Elena",
+      "role": "EU-Beamtin für Grenzschutzreform",
+      "visualIdentity": "Eine abstrakt kubistisch verzerrte weibliche Figur mit entschlossener Haltung, gekennzeichnet durch ein fragmentiertes Gesicht und eine markante, schützende Kleidung in Schwarz-Weiß-Tönen.",
+      "guernicaId": 5
+    },
+    "scenes": [
+      {
+        "index": 1,
+        "title": "Die Macht der Reform",
+        "storyBeat": "Elena präsentiert den Plan zur Stärkung von Frontex als zentrale EU-Agentur mit erweiterten Befugnissen und großem Personalaufbau.",
+        "protagonistAction": "Elena steht im Zentrum eines abstrakten, organisierten Raums, sie zeigt mit einer entschlossenen Geste auf schematische Formen, die Ausbau und Kontrolle symbolisieren.",
+        "composition": "wide_establishing",
+        "guernicaId": 5,
+        "selectionReason": "Die Figur 'Frau mit Lampe' symbolisiert Hoffnung und Orientierung, passend zur Rolle von Elena als Initiatorin einer weitreichenden Reform, die Licht ins Dunkel bringt.",
+        "crocodileAppearance": {
+          "present": false,
+          "role": "",
+          "placement": ""
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction set to wide establishing, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. The scene shows Elena, an abstract female figure with a fragmented mask-like face and protective garment, standing centrally with a commanding gesture pointing towards large, rounded, overlapping crescent-shaped forms that represent structures of power and expansion. Around her, secondary figures meld into the setting, reacting with tension and movement that suggest the growth and control of a border agency. The background layers swell and interlock, conveying an organized but unstable institutional space. Faces are split, with mismatched eyes and flattened planes, torsos and limbs broken into broad, overlapping shapes. Raw charcoal strokes, broken brush marks, scraped pigment and worn plaster texture dominate. The forms collide and flow into one another, the whole canvas bearing an intense energy of authority and transformation. The article-photo reference supplies subject matter only: no realism, no color, no recognizable faces. No flags, logos or text. The image API receives reference image 1: the selected masked character crop 'Frau mit Lampe' used for protagonist's abstract appearance and gesture. Reference image 2 is the complete painting used only for painterly style. Figures and setting fuse into one unstable painted surface. Absolutely no photorealism or copied symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolism ON to visually represent institutional power and reform as abstract forms; room depth ON to create foreground, middle and background layering reflecting complexity; layering 3 to separate protagonist, secondary figures and architectural power forms.",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Elena standing centrally in the abstract institutional space, her fragmented mask-like face and protective garment sharply defined in monochrome. She raises her arm in a commanding gesture, pointing deliberately toward the large, overlapping crescent-shaped forms that symbolize the expanding power structures of Frontex. As her hand moves forward, the surrounding secondary figures subtly shift in response, their fragmented forms reacting with tension and movement that ripple outward, suggesting the dynamic growth and control of the border agency. The camera slowly dollies in slightly from a wide establishing perspective, emphasizing the layered depth of foreground, middle distance, and background planes, while the charcoal strokes and scraped textures remain visible, reinforcing the intense energy of authority and transformation. By the end of the five seconds, Elena's gesture settles firmly on the power forms, the surrounding figures frozen in their reactive poses, conveying a moment of decisive institutional assertion."
+      },
+      {
+        "index": 2,
+        "title": "Konfrontation und Kritik",
+        "storyBeat": "Elena steht einer kritischen Debatte im Parlament gegenüber, die die humanitären Probleme und Widerstände gegen die Frontex-Erweiterung thematisiert.",
+        "protagonistAction": "Elena steht angespannt, ihr Gesicht zeigt eine verzerrte Maske aus Entschlossenheit und innerem Konflikt, während um sie herum abstrakte Figuren mit erhobenen Armen und verzweifelten Gesten die Kritik und den Protest symbolisieren.",
+        "composition": "oblique_diagonal",
+        "guernicaId": 6,
+        "selectionReason": "Die Figur 'Frau mit erhobenen Armen' passt zur Darstellung von Entsetzen und Protest, was die kontroverse Debatte um die Menschenrechtsfragen widerspiegelt.",
+        "crocodileAppearance": {
+          "present": true,
+          "role": "symbolic observer of tension",
+          "placement": "foreground left, near protagonist"
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with oblique diagonal spatial construction, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. Elena appears as a large, fragmented female figure with a mask-like face showing tension and conflict. She stands amid a chaotic scene of overlapping crescent and rounded shapes, where secondary figures with raised arms and anguished expressions surround her, symbolizing protest and human suffering. The forms are fractured and displaced, with broad, broken limbs and mismatched eyes. A stylized, jagged cubist crocodile in charcoal-black and ash-gray lurks in the foreground left, watching silently as a metaphor for looming threat and tension in the political arena. The background compresses multiple spatial planes into a dynamic, unstable environment of debate and crisis. Textural elements include broken brush marks, scraped pigment, and worn plaster. The scene fuses protagonist, opposition, and symbolic tension into a single unstable painted surface. The image API receives reference image 1: 'Frau mit erhobenen Armen' for Elena's abstract identity and gesture. Reference image 2 is the complete painting used for style only. No photorealism or symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 4: use 4 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 4
+        },
+        "visualControlReason": "Symbolism ON to emphasize protest and political tension; room depth ON to create layered spatial complexity of debate; layering 4 to separate protagonist, protest figures, symbolic crocodile, and environment.",
+        "durationSeconds": 8,
+        "videoPrompt": "The scene begins with Elena standing tensely amid the chaotic, oblique diagonal composition. Her fragmented mask-like face reveals inner conflict and determination as she faces the surrounding abstract figures with raised arms and anguished gestures symbolizing protest and human suffering. The jagged cubist crocodile in the foreground left remains motionless but ominously present, heightening the tension. Slowly, Elena's posture shifts subtly forward, her fragmented limbs and flattened planes expressing a restrained but firm resolve. Simultaneously, the protesting figures undulate gently in a wave-like motion, their broken limbs and displaced faces conveying rising dissent. The camera pans slowly from left to right, following Elena's subtle movement and the spatial layering of foreground crocodile, midground figures, and receding background, emphasizing the unstable environment of debate and crisis. The raw brush marks and scraped pigment textures remain vivid throughout. By the end of the eight seconds, the motion settles with Elena standing firm amid the restless crowd, the crocodile silently observing, encapsulating the charged political atmosphere."
+      },
+      {
+        "index": 3,
+        "title": "Durchsetzung der neuen Grenzpolitik",
+        "storyBeat": "Elena leitet die Implementierung der neuen Frontex-Befugnisse, um Migranten im Rahmen der umstrittenen Rückführungszentren abzuschieben.",
+        "protagonistAction": "Elena bewegt sich energisch durch eine abstrakte Szenerie, die Kontroll- und Abschiebeprozesse symbolisiert, umgeben von fragmentierten Figuren, die Flucht und Widerstand darstellen.",
+        "composition": "intimate_close_up",
+        "guernicaId": 9,
+        "selectionReason": "Die Figur 'Fliehende Frau rechts' symbolisiert Flucht und Verletzlichkeit, passend zu den Migranten, die von der neuen Politik betroffen sind, während Elena als treibende Kraft sichtbar bleibt.",
+        "crocodileAppearance": {
+          "present": true,
+          "role": "metaphoric threat",
+          "placement": "midground right, intertwined with fleeing figures"
+        },
+        "stillPrompt": "An original, severely abstract dark cubist mural with intimate close-up spatial construction, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. Elena appears as a dominant, fragmented female figure with a mask-like face and strong posture, moving decisively through a tumultuous scene of overlapping crescent-shaped and rounded forms. Surrounding her are smaller, distorted figures representing fleeing migrants, their elongated limbs and fractured faces conveying vulnerability and desperation. A jagged cubist crocodile figure weaves among the fleeing forms on the midground right, symbolizing threat and danger inherent in the forced expulsions. The background layers condense into a tense, compressed space of control and chaos. Brush marks are raw and broken, pigment scraped to reveal worn plaster textures. Faces are displaced masks, torsos and limbs distorted and overlapping. The entire canvas conveys an intense, conflicted moment of enforcement and resistance. The image API receives reference image 1: 'Fliehende Frau rechts' for Elena's abstract identity and gesture. Reference image 2 is the complete painting used only for painterly style. No photorealism or copied symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism ON to represent enforcement and human vulnerability; room depth OFF for compressed, tense close-up scene; layering 2 to separate protagonist and fleeing figures with symbolic crocodile integrated.",
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Elena as a dominant, fragmented figure moving decisively through the compressed, intimate close-up space. Her mask-like face and strong posture lead the motion as she strides forward, her overlapping crescent and rounded forms cutting through the tumultuous scene. Surrounding her, the smaller fleeing figures shift and recoil subtly, their elongated limbs and fractured faces expressing vulnerability and desperation. The jagged cubist crocodile weaves slowly among these figures on the midground right, its angular form moving with a restrained, threatening presence. The camera holds a steady close-up framing, with a slight tracking movement following Elena's forward motion, emphasizing the compressed, tense environment of control and chaos. The raw brush strokes and scraped plaster textures remain prominent, underscoring the conflicted moment of enforcement and resistance. By the end of the five seconds, Elena's movement slows and the fleeing figures and crocodile settle into a frozen tableau, capturing the fraught dynamic of the new border policy's implementation."
+      }
+    ]
+  },
+  "visualPlanHash": "0721fdcd70a14237a376f86f22e4bacf650ca587bb3335205a425750eab7c3c3",
+  "usage": {
+    "prompt_tokens": 17192,
+    "completion_tokens": 2889,
+    "total_tokens": 20081
+  },
+  "planHash": "b34ec61732908e125aaa7df187f215f6baf3dc9f1406a3536c6262ec5746b82f",
+  "sceneTiming": {
+    "scenes": [
+      {
+        "index": 1,
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Elena standing centrally in the abstract institutional space, her fragmented mask-like face and protective garment sharply defined in monochrome. She raises her arm in a commanding gesture, pointing deliberately toward the large, overlapping crescent-shaped forms that symbolize the expanding power structures of Frontex. As her hand moves forward, the surrounding secondary figures subtly shift in response, their fragmented forms reacting with tension and movement that ripple outward, suggesting the dynamic growth and control of the border agency. The camera slowly dollies in slightly from a wide establishing perspective, emphasizing the layered depth of foreground, middle distance, and background planes, while the charcoal strokes and scraped textures remain visible, reinforcing the intense energy of authority and transformation. By the end of the five seconds, Elena's gesture settles firmly on the power forms, the surrounding figures frozen in their reactive poses, conveying a moment of decisive institutional assertion.",
+        "reason": "Fünf Sekunden sind angemessen, um Elena's entschlossene Geste und die Reaktion der umgebenden Figuren im abstrakten Raum klar zu zeigen, ohne die straffe, autoritäre Atmosphäre zu verlieren."
+      },
+      {
+        "index": 2,
+        "durationSeconds": 8,
+        "videoPrompt": "The scene begins with Elena standing tensely amid the chaotic, oblique diagonal composition. Her fragmented mask-like face reveals inner conflict and determination as she faces the surrounding abstract figures with raised arms and anguished gestures symbolizing protest and human suffering. The jagged cubist crocodile in the foreground left remains motionless but ominously present, heightening the tension. Slowly, Elena's posture shifts subtly forward, her fragmented limbs and flattened planes expressing a restrained but firm resolve. Simultaneously, the protesting figures undulate gently in a wave-like motion, their broken limbs and displaced faces conveying rising dissent. The camera pans slowly from left to right, following Elena's subtle movement and the spatial layering of foreground crocodile, midground figures, and receding background, emphasizing the unstable environment of debate and crisis. The raw brush marks and scraped pigment textures remain vivid throughout. By the end of the eight seconds, the motion settles with Elena standing firm amid the restless crowd, the crocodile silently observing, encapsulating the charged political atmosphere.",
+        "reason": "Acht Sekunden geben ausreichend Zeit, um die komplexe Spannung zwischen Elena, den Protestierenden und dem symbolischen Krokodil in der vielschichtigen Komposition zu entfalten."
+      },
+      {
+        "index": 3,
+        "durationSeconds": 5,
+        "videoPrompt": "The scene opens with Elena as a dominant, fragmented figure moving decisively through the compressed, intimate close-up space. Her mask-like face and strong posture lead the motion as she strides forward, her overlapping crescent and rounded forms cutting through the tumultuous scene. Surrounding her, the smaller fleeing figures shift and recoil subtly, their elongated limbs and fractured faces expressing vulnerability and desperation. The jagged cubist crocodile weaves slowly among these figures on the midground right, its angular form moving with a restrained, threatening presence. The camera holds a steady close-up framing, with a slight tracking movement following Elena's forward motion, emphasizing the compressed, tense environment of control and chaos. The raw brush strokes and scraped plaster textures remain prominent, underscoring the conflicted moment of enforcement and resistance. By the end of the five seconds, Elena's movement slows and the fleeing figures and crocodile settle into a frozen tableau, capturing the fraught dynamic of the new border policy's implementation.",
+        "reason": "Fünf Sekunden genügen, um Elena's energische Bewegung und die Reaktionen der umgebenden Figuren in der engen, komprimierten Szene prägnant darzustellen."
+      }
+    ]
+  },
+  "storyUsage": {
+    "prompt_tokens": 14386,
+    "completion_tokens": 2141,
+    "total_tokens": 16527,
+    "prompt_tokens_details": {
+      "cached_tokens": 3840,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "timingUsage": {
+    "prompt_tokens": 2806,
+    "completion_tokens": 748,
+    "total_tokens": 3554,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "filmPlan": {
+    "formatVersion": 1,
+    "sourceIteration": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005",
+    "sourceCommit": "663d4c28df176dd53ac103dea11008a4c0e42e47",
+    "article": {
+      "title": "UE vrea să întărească Frontex și să-i extindă atribuțiile de expulzare a migranților - AGERPRES",
+      "url": "https://agerpres.ro/politic-extern/2026/10/27/ue-vrea-sa-intareasca-frontex-si-sa-i-extinda-atributiile-de-expulzare-a-migrantilor--1607298",
+      "publish_date": "2026-10-27 16:19:00"
+    },
+    "status": "Videos per API erzeugt",
+    "promptOrigin": "GPT-generated from article, semantic stream, story beat and still plan",
+    "instructions": "Pass scenePlan to the film generator. Use each scene’s videoMode as selected by GPT. image_to_video uses startImagePath. first_last_frame requires both start and separately supplied final image; never downgrade it to image-to-video.",
+    "scenePlan": [
+      {
+        "index": 1,
+        "title": "Die Macht der Reform",
+        "beat": "Elena präsentiert den Plan zur Stärkung von Frontex als zentrale EU-Agentur mit erweiterten Befugnissen und großem Personalaufbau.",
+        "storyBeat": "Elena präsentiert den Plan zur Stärkung von Frontex als zentrale EU-Agentur mit erweiterten Befugnissen und großem Personalaufbau.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 3
+        },
+        "visualControlReason": "Symbolism ON to visually represent institutional power and reform as abstract forms; room depth ON to create foreground, middle and background layering reflecting complexity; layering 3 to separate protagonist, secondary figures and architectural power forms.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005/media/scene-1-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with the spatial construction set to wide establishing, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. The scene shows Elena, an abstract female figure with a fragmented mask-like face and protective garment, standing centrally with a commanding gesture pointing towards large, rounded, overlapping crescent-shaped forms that represent structures of power and expansion. Around her, secondary figures meld into the setting, reacting with tension and movement that suggest the growth and control of a border agency. The background layers swell and interlock, conveying an organized but unstable institutional space. Faces are split, with mismatched eyes and flattened planes, torsos and limbs broken into broad, overlapping shapes. Raw charcoal strokes, broken brush marks, scraped pigment and worn plaster texture dominate. The forms collide and flow into one another, the whole canvas bearing an intense energy of authority and transformation. The article-photo reference supplies subject matter only: no realism, no color, no recognizable faces. No flags, logos or text. The image API receives reference image 1: the selected masked character crop 'Frau mit Lampe' used for protagonist's abstract appearance and gesture. Reference image 2 is the complete painting used only for painterly style. Figures and setting fuse into one unstable painted surface. Absolutely no photorealism or copied symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "videoPrompt": "The scene opens with Elena standing centrally in the abstract institutional space, her fragmented mask-like face and protective garment sharply defined in monochrome. She raises her arm in a commanding gesture, pointing deliberately toward the large, overlapping crescent-shaped forms that symbolize the expanding power structures of Frontex. As her hand moves forward, the surrounding secondary figures subtly shift in response, their fragmented forms reacting with tension and movement that ripple outward, suggesting the dynamic growth and control of the border agency. The camera slowly dollies in slightly from a wide establishing perspective, emphasizing the layered depth of foreground, middle distance, and background planes, while the charcoal strokes and scraped textures remain visible, reinforcing the intense energy of authority and transformation. By the end of the five seconds, Elena's gesture settles firmly on the power forms, the surrounding figures frozen in their reactive poses, conveying a moment of decisive institutional assertion.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with the spatial construction set to wide establishing, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. The scene shows Elena, an abstract female figure with a fragmented mask-like face and protective garment, standing centrally with a commanding gesture pointing towards large, rounded, overlapping crescent-shaped forms that represent structures of power and expansion. Around her, secondary figures meld into the setting, reacting with tension and movement that suggest the growth and control of a border agency. The background layers swell and interlock, conveying an organized but unstable institutional space. Faces are split, with mismatched eyes and flattened planes, torsos and limbs broken into broad, overlapping shapes. Raw charcoal strokes, broken brush marks, scraped pigment and worn plaster texture dominate. The forms collide and flow into one another, the whole canvas bearing an intense energy of authority and transformation. The article-photo reference supplies subject matter only: no realism, no color, no recognizable faces. No flags, logos or text. The image API receives reference image 1: the selected masked character crop 'Frau mit Lampe' used for protagonist's abstract appearance and gesture. Reference image 2 is the complete painting used only for painterly style. Figures and setting fuse into one unstable painted surface. Absolutely no photorealism or copied symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 3: use 3 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005/media/scene-1-video.mp4",
+        "videoTaskUUID": "6eb1f540-a2f5-4934-a538-e70a30bf62e7"
+      },
+      {
+        "index": 2,
+        "title": "Konfrontation und Kritik",
+        "beat": "Elena steht einer kritischen Debatte im Parlament gegenüber, die die humanitären Probleme und Widerstände gegen die Frontex-Erweiterung thematisiert.",
+        "storyBeat": "Elena steht einer kritischen Debatte im Parlament gegenüber, die die humanitären Probleme und Widerstände gegen die Frontex-Erweiterung thematisiert.",
+        "durationSeconds": 8,
+        "requestedDurationSeconds": 8,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": true,
+          "layering": 4
+        },
+        "visualControlReason": "Symbolism ON to emphasize protest and political tension; room depth ON to create layered spatial complexity of debate; layering 4 to separate protagonist, protest figures, symbolic crocodile, and environment.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005/media/scene-2-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with oblique diagonal spatial construction, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. Elena appears as a large, fragmented female figure with a mask-like face showing tension and conflict. She stands amid a chaotic scene of overlapping crescent and rounded shapes, where secondary figures with raised arms and anguished expressions surround her, symbolizing protest and human suffering. The forms are fractured and displaced, with broad, broken limbs and mismatched eyes. A stylized, jagged cubist crocodile in charcoal-black and ash-gray lurks in the foreground left, watching silently as a metaphor for looming threat and tension in the political arena. The background compresses multiple spatial planes into a dynamic, unstable environment of debate and crisis. Textural elements include broken brush marks, scraped pigment, and worn plaster. The scene fuses protagonist, opposition, and symbolic tension into a single unstable painted surface. The image API receives reference image 1: 'Frau mit erhobenen Armen' for Elena's abstract identity and gesture. Reference image 2 is the complete painting used for style only. No photorealism or symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 4: use 4 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "videoPrompt": "The scene begins with Elena standing tensely amid the chaotic, oblique diagonal composition. Her fragmented mask-like face reveals inner conflict and determination as she faces the surrounding abstract figures with raised arms and anguished gestures symbolizing protest and human suffering. The jagged cubist crocodile in the foreground left remains motionless but ominously present, heightening the tension. Slowly, Elena's posture shifts subtly forward, her fragmented limbs and flattened planes expressing a restrained but firm resolve. Simultaneously, the protesting figures undulate gently in a wave-like motion, their broken limbs and displaced faces conveying rising dissent. The camera pans slowly from left to right, following Elena's subtle movement and the spatial layering of foreground crocodile, midground figures, and receding background, emphasizing the unstable environment of debate and crisis. The raw brush marks and scraped pigment textures remain vivid throughout. By the end of the eight seconds, the motion settles with Elena standing firm amid the restless crowd, the crocodile silently observing, encapsulating the charged political atmosphere.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with oblique diagonal spatial construction, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. Elena appears as a large, fragmented female figure with a mask-like face showing tension and conflict. She stands amid a chaotic scene of overlapping crescent and rounded shapes, where secondary figures with raised arms and anguished expressions surround her, symbolizing protest and human suffering. The forms are fractured and displaced, with broad, broken limbs and mismatched eyes. A stylized, jagged cubist crocodile in charcoal-black and ash-gray lurks in the foreground left, watching silently as a metaphor for looming threat and tension in the political arena. The background compresses multiple spatial planes into a dynamic, unstable environment of debate and crisis. Textural elements include broken brush marks, scraped pigment, and worn plaster. The scene fuses protagonist, opposition, and symbolic tension into a single unstable painted surface. The image API receives reference image 1: 'Frau mit erhobenen Armen' for Elena's abstract identity and gesture. Reference image 2 is the complete painting used for style only. No photorealism or symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 4: use 4 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS ON: use a hand-painted foreground, active middle distance and receding far plane.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005/media/scene-2-video.mp4",
+        "videoTaskUUID": "379224f4-f284-4564-8569-695ce85bd4eb"
+      },
+      {
+        "index": 3,
+        "title": "Durchsetzung der neuen Grenzpolitik",
+        "beat": "Elena leitet die Implementierung der neuen Frontex-Befugnisse, um Migranten im Rahmen der umstrittenen Rückführungszentren abzuschieben.",
+        "storyBeat": "Elena leitet die Implementierung der neuen Frontex-Befugnisse, um Migranten im Rahmen der umstrittenen Rückführungszentren abzuschieben.",
+        "durationSeconds": 5,
+        "requestedDurationSeconds": 5,
+        "visualStyleOptions": {
+          "symbolic": true,
+          "roomDeepness": false,
+          "layering": 2
+        },
+        "visualControlReason": "Symbolism ON to represent enforcement and human vulnerability; room depth OFF for compressed, tense close-up scene; layering 2 to separate protagonist and fleeing figures with symbolic crocodile integrated.",
+        "videoMode": "singleImage",
+        "frameSource": "providedStartImage",
+        "startImagePath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005/media/scene-3-first-frame.png",
+        "stillPrompt": "An original, severely abstract dark cubist mural with intimate close-up spatial construction, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. Elena appears as a dominant, fragmented female figure with a mask-like face and strong posture, moving decisively through a tumultuous scene of overlapping crescent-shaped and rounded forms. Surrounding her are smaller, distorted figures representing fleeing migrants, their elongated limbs and fractured faces conveying vulnerability and desperation. A jagged cubist crocodile figure weaves among the fleeing forms on the midground right, symbolizing threat and danger inherent in the forced expulsions. The background layers condense into a tense, compressed space of control and chaos. Brush marks are raw and broken, pigment scraped to reveal worn plaster textures. Faces are displaced masks, torsos and limbs distorted and overlapping. The entire canvas conveys an intense, conflicted moment of enforcement and resistance. The image API receives reference image 1: 'Fliehende Frau rechts' for Elena's abstract identity and gesture. Reference image 2 is the complete painting used only for painterly style. No photorealism or copied symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "videoPrompt": "The scene opens with Elena as a dominant, fragmented figure moving decisively through the compressed, intimate close-up space. Her mask-like face and strong posture lead the motion as she strides forward, her overlapping crescent and rounded forms cutting through the tumultuous scene. Surrounding her, the smaller fleeing figures shift and recoil subtly, their elongated limbs and fractured faces expressing vulnerability and desperation. The jagged cubist crocodile weaves slowly among these figures on the midground right, its angular form moving with a restrained, threatening presence. The camera holds a steady close-up framing, with a slight tracking movement following Elena's forward motion, emphasizing the compressed, tense environment of control and chaos. The raw brush strokes and scraped plaster textures remain prominent, underscoring the conflicted moment of enforcement and resistance. By the end of the five seconds, Elena's movement slows and the fleeing figures and crocodile settle into a frozen tableau, capturing the fraught dynamic of the new border policy's implementation.",
+        "singleImagePrompt": "An original, severely abstract dark cubist mural with intimate close-up spatial construction, painted as one rough surface using only charcoal-black, white, chalk and ash-gray. Strictly monochrome: no color accents. Elena appears as a dominant, fragmented female figure with a mask-like face and strong posture, moving decisively through a tumultuous scene of overlapping crescent-shaped and rounded forms. Surrounding her are smaller, distorted figures representing fleeing migrants, their elongated limbs and fractured faces conveying vulnerability and desperation. A jagged cubist crocodile figure weaves among the fleeing forms on the midground right, symbolizing threat and danger inherent in the forced expulsions. The background layers condense into a tense, compressed space of control and chaos. Brush marks are raw and broken, pigment scraped to reveal worn plaster textures. Faces are displaced masks, torsos and limbs distorted and overlapping. The entire canvas conveys an intense, conflicted moment of enforcement and resistance. The image API receives reference image 1: 'Fliehende Frau rechts' for Elena's abstract identity and gesture. Reference image 2 is the complete painting used only for painterly style. No photorealism or copied symbols.\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear. Redraw the masked figure reference in the scene’s own pose; do not paste it.  LAYERING 2: use 2 distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks. SYMBOLISM ON: weave concrete article-grounded metaphors into action and spatial relationships. ROOM DEEPNESS OFF: keep shallow compressed mural space; avoid deep realistic interiors.",
+        "generatedVideoPath": "/Users/eggermann/.codex/worktrees/6736/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/reference-5-like-run-003/run-001/iteration-005/media/scene-3-video.mp4",
+        "videoTaskUUID": "eec7042d-8d03-4001-b2ef-4dc430241909"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-28T09:05:56.487Z",
+  "videoResults": [
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-1-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:05:56.541Z",
+      "renderedAt": "2026-10-28T09:06:25.694Z",
+      "savedAt": "2026-10-28T09:06:26.646Z",
+      "renderSeconds": 29.2,
+      "downloadSeconds": 0.9,
+      "totalSeconds": 30.1,
+      "cost": 0.0517,
+      "seed": 383563792,
+      "taskUUID": "6eb1f540-a2f5-4934-a538-e70a30bf62e7",
+      "sourceUrl": "https://vm.runware.ai/video/os/a06dlim3/ws/5/vi/8d5455ff-4a8c-4d03-a0e0-9836fee5c853.mp4",
+      "bytes": 3624961,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-2-video.mp4",
+      "durationSeconds": 8,
+      "requestedDurationSeconds": 8,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:05:56.541Z",
+      "renderedAt": "2026-10-28T09:06:22.694Z",
+      "savedAt": "2026-10-28T09:06:24.676Z",
+      "renderSeconds": 26.2,
+      "downloadSeconds": 2,
+      "totalSeconds": 28.1,
+      "cost": 0.08,
+      "seed": 1323990127,
+      "taskUUID": "379224f4-f284-4564-8569-695ce85bd4eb",
+      "sourceUrl": "https://vm.runware.ai/video/os/a06dlim3/ws/5/vi/d2fe4a12-8c3e-401b-af10-6831ba885991.mp4",
+      "bytes": 6408421,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 8
+      }
+    },
+    {
+      "provider": "Runware",
+      "model": "prunaai:p-video@2-pro",
+      "path": "media/scene-3-video.mp4",
+      "durationSeconds": 5.167,
+      "requestedDurationSeconds": 5,
+      "resolution": "480p",
+      "settings": {
+        "mode": "cost"
+      },
+      "renderStartedAt": "2026-10-28T09:05:56.541Z",
+      "renderedAt": "2026-10-28T09:06:31.856Z",
+      "savedAt": "2026-10-28T09:06:32.598Z",
+      "renderSeconds": 35.3,
+      "downloadSeconds": 0.7,
+      "totalSeconds": 36.1,
+      "cost": 0.0517,
+      "seed": 99925847,
+      "taskUUID": "eec7042d-8d03-4001-b2ef-4dc430241909",
+      "sourceUrl": "https://vm.runware.ai/video/os/a06dlim3/ws/5/vi/6dd15ebd-ff44-4bec-a671-89f06be500cd.mp4",
+      "bytes": 2711437,
+      "audioStream": {
+        "codecName": "aac",
+        "sampleRate": 32000,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "durationSeconds": 5.167
+      }
+    }
+  ],
+  "videoGeneration": {
+    "provider": "Runware",
+    "model": "prunaai:p-video@2-pro",
+    "resolution": "480p",
+    "settings": {
+      "mode": "cost"
+    },
+    "completedAt": "2026-10-28T09:06:32.656Z",
+    "concurrency": 4,
+    "audioEdgeFadeSeconds": 0.03
+  },
+  "concatenatedVideo": {
+    "path": "../merged/iteration-005.mp4",
+    "runPath": "merged/iteration-005.mp4",
+    "scenes": 3,
+    "generatedVideos": 3,
+    "gaps": [],
+    "durationSeconds": 18.333333,
+    "requestedDurationSeconds": 18,
+    "sourceTasks": [
+      "6eb1f540-a2f5-4934-a538-e70a30bf62e7",
+      "379224f4-f284-4564-8569-695ce85bd4eb",
+      "eec7042d-8d03-4001-b2ef-4dc430241909"
+    ],
+    "method": "Selfomat ffmpeg concat · 0.03s audio fades at scene edges · moderation gaps shown as black video",
+    "audioEdgeFadeSeconds": 0.03,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 18.333333
+    },
+    "createdAt": "2026-10-28T09:06:33.078Z"
+  },
+  "titleCardFilm": {
+    "path": "../merged/iteration-005-with-title-card-audio-normalized.mp4",
+    "runPath": "merged/iteration-005-with-title-card-audio-normalized.mp4",
+    "durationSeconds": 22.1,
+    "audioStream": {
+      "codecName": "aac",
+      "sampleRate": 96000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "durationSeconds": 22.1
+    },
+    "fadeSeconds": 0.25,
+    "method": "FFmpeg assembler · title card from record.json → article.title",
+    "createdAt": "2026-10-28T09:06:33.792Z",
+    "sourcePath": "../merged/iteration-005-with-title-card.mp4",
+    "sourceRunPath": "merged/iteration-005-with-title-card.mp4",
+    "audioNormalization": {
+      "method": "FFmpeg loudnorm after iteration film assembly",
+      "targetIntegratedLufs": -16,
+      "maximumTruePeakDbtp": -1.5,
+      "targetLoudnessRangeLu": 11,
+      "outputPath": "merged/iteration-005-with-title-card-audio-normalized.mp4",
+      "completedAt": "2026-10-28T09:06:34.481Z"
+    }
+  }
+}
