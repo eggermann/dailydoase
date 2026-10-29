@@ -104,10 +104,10 @@
     "news:normalize-iteration-audio": "node eu-reski-news/scripts/normalize-iteration-audio.mjs",
     "news:glue-scenes": "node --env-file=${DAILYDOASE_ENV_FILE:-.env} eu-reski-news/scripts/generate-scene-glue-videos.mjs",
     "demo:mirelo:v2v": "node lib/generator/mireloAI/demo-video-to-video.js",
-    "start": "cross-env APP_ENV=development npm-run-all -p server webpack:watch",
+    "start": "cross-env APP_ENV=development npm-run-all -p player webpack:watch",
     "webpack:build": "webpack --config webpack.config.cjs",
     "webpack:watch": "npm run webpack:build && webpack --config webpack.config.cjs --watch",
-    "server": "node --watch lib/server/continuous-player.cjs",
+    "player": "node --watch lib/server/continuous-player.cjs",
     "deploy": "cross-env APP_ENV=production npm-run-all -s webpack:build deploy:upload",
     "deploy:upload": "node ./deploy/SSH-upload.cjs"
   },

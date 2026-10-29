@@ -11,7 +11,8 @@
 - Webpack config: `webpack.config.cjs`. App entry: `start.js`.
 
 ## Build, Test, and Development Commands
-- `npm start` — Run dev server (`lib/server/test.cjs`) and watch/build assets.
+- `npm run player` — Run the continuous video player server (`lib/server/continuous-player.cjs`).
+- `npm start` — Run the player and watch/build web assets.
 - `npm run webpack:build` — Build web assets into `lib/web/dist/`.
 - `npm run webpack:watch` — One build, then watch for changes.
 - `npm test` — Run Jest tests in Node (`NODE_OPTIONS=--experimental-vm-modules`).

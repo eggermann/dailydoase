@@ -1149,8 +1149,10 @@ async function main() {
   if (iteratorPlan && (!Array.isArray(iteratorPlan.iterators) || iteratorPlan.iterators.length === 0
     || (iteratorPlan.scheduleEnabled !== false
       && (!Number.isSafeInteger(iteratorPlan.intervalMs) || iteratorPlan.intervalMs < 1
+        || (iteratorPlan.scheduleIterationCount !== undefined
+          && (!Number.isSafeInteger(iteratorPlan.scheduleIterationCount) || iteratorPlan.scheduleIterationCount < 1))
         || !['on', 'off'].includes(iteratorPlan.biasMode))))) {
-    throw new Error('Scheduled iterator plan must contain paths, a positive interval, and biasMode "on" or "off"');
+    throw new Error('Scheduled iterator plan must contain paths, a positive interval, a positive iteration count, and biasMode "on" or "off"');
   }
   const iteratorPlanFingerprint = iteratorPlan
     ? createHash('sha256').update(JSON.stringify(iteratorPlan)).digest('hex')
@@ -1227,6 +1229,7 @@ async function main() {
         generationInterval: iteratorPlan.generationInterval,
         intervalMs: iteratorPlan.intervalMs,
         biasMode: iteratorPlan.biasMode,
+        scheduleIterationCount: iteratorPlan.scheduleIterationCount,
         startedAt: new Date(runStartedAtMs).toISOString(),
         ...(iteratorPlan.scheduleEnabled !== false
           ? createInitialWorkerSchedule(runStartedAtMs, iteratorPlan.intervalMs, iteratorPlan.biasMode)
@@ -1340,8 +1343,10 @@ async function main() {
         generationInterval: iteratorPlan.generationInterval,
         intervalMs: iteratorPlan.intervalMs,
         biasMode: iteratorPlan.biasMode,
+        scheduleIterationCount: iteratorPlan.scheduleIterationCount,
         startedAt: new Date(sceneScheduleStartedAt).toISOString(),
       };
+      runManifest.sceneSchedule.scheduleIterationCount ||= iteratorPlan.scheduleIterationCount;
       runManifest.iteratorNames = iteratorPlan.iterators.map(({ name }) => name);
     }
     if (!runManifest.visualControls && options['resume-run'] && previouslyCompleted > 0) {
@@ -1406,6 +1411,7 @@ async function main() {
     }
   };
   const iteratorCount = iteratorPlan?.iterators.length || 1;
+  const scheduleIterationCount = iteratorPlan?.scheduleIterationCount || iteratorCount;
   const iteratorSceneCountSettings = [];
   const sceneCountStreams = [];
   const sceneDurationStreams = [];
@@ -1519,7 +1525,7 @@ async function main() {
         sceneScheduleStartedAt,
         completed,
         iteratorPlan.intervalMs,
-        iteratorCount,
+        scheduleIterationCount,
         iteratorPlan.biasMode,
       );
       const waitMilliseconds = targetStart - Date.now();

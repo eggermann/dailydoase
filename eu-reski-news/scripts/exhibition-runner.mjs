@@ -1017,6 +1017,7 @@ async function exhibitionMain() {
         generationInterval: sceneSequence.generationInterval,
         intervalMs: sceneSequence.intervalMs,
         biasMode: sceneSequence.biasMode,
+        scheduleIterationCount: stopAfterIterations || sceneSequence.iterators.length,
         iterators: iteratorPlans,
       };
       if (parallelSceneMode) {
@@ -1119,13 +1120,16 @@ async function exhibitionMain() {
       } else {
         if (priorRunIsIncomplete && state.runDirectory && priorRun?.iteratorPlanFingerprint) {
           const savedPlan = await readJson(iteratorPlanPath);
-          const comparable = (plan) => ({
-            ...plan,
-            iterators: plan.iterators.map((iterator) => ({
-              ...iterator,
-              arguments: iterator.arguments.filter((argument) => !['--iterations', '--article-order'].includes(flagName(argument))),
-            })),
-          });
+          const comparable = (plan) => {
+            const { scheduleIterationCount, ...stablePlan } = plan;
+            return {
+              ...stablePlan,
+              iterators: plan.iterators.map((iterator) => ({
+                ...iterator,
+                arguments: iterator.arguments.filter((argument) => !['--iterations', '--article-order'].includes(flagName(argument))),
+              })),
+            };
+          };
           if (JSON.stringify(comparable(savedPlan)) !== JSON.stringify(comparable(iteratorPlan))) {
             throw new Error('Scene settings changed; resume requires the original scene plan.');
           }

@@ -125,10 +125,10 @@ export async function loadSceneSequence(scenePath, defaultGeneration, {
   };
 }
 
-export function getIteratorStartTime(startedAt, index, intervalMs, iteratorCount, biasMode) {
-  const slotMs = intervalMs / iteratorCount;
+export function getIteratorStartTime(startedAt, index, intervalMs, scheduleIterationCount, biasMode) {
+  const slotMs = intervalMs / scheduleIterationCount;
   const biasMs = biasMode === 'on' ? slotMs / 2 : 0;
-  const cycle = Math.floor(index / iteratorCount);
-  const slot = index % iteratorCount;
+  const cycle = Math.floor(index / scheduleIterationCount);
+  const slot = index % scheduleIterationCount;
   return startedAt + (cycle * intervalMs) + biasMs + (slot * slotMs);
 }

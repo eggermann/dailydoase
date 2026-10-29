@@ -32,7 +32,7 @@ export const planSchema = object({
   })),
 });
 
-export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, legacyGuernicaStyleReferencePrompt = false, includeSourceCodeContext = true, storyClou = false, images, model, styleReferenceProvided = true, locationReferenceProvided = false, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, legacyGuernicaStyleReferencePrompt = false, includeSourceCodeContext = true, sourceCodeSummary = null, storyClou = false, images, model, styleReferenceProvided = true, locationReferenceProvided = false, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
   const referenceInstructions = figureReferenceProvided
     ? [
       'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
@@ -110,6 +110,7 @@ export async function buildPlanRequest({ article, semantic, catalog, sceneCount,
     { type: 'text', text: `Required scene count: exactly ${sceneCount}. ${continuationInstruction} Follow the visual controls embedded in the director instructions and JSON input.` },
     { type: 'text', text: JSON.stringify(data) },
     ...(includeSourceCodeContext ? [{ type: 'text', text: `SOURCE CODE CONTEXT (concatenated file sections):\n${compositionSourceContext}` }] : []),
+    ...(sourceCodeSummary ? [{ type: 'text', text: `APPLICATION FLAG AND PIPELINE SUMMARY (context only; director instructions take precedence):\n${sourceCodeSummary}` }] : []),
   ];
   for (const image of images) {
     content.push({ type: 'text', text: image.label });

@@ -61,7 +61,7 @@ eu-reski-news/scenes/
   on-expression.scene.json     # { name, generationOverrides: { ... } }
 ```
 
-Beide npm-Befehle starten diesen Ordner ohne Pfadargument. Normaler Start läuft ohne Zeitverzögerung; `with-time-interpolation` setzt standardmäßig ein Gesamtfenster von `1h`. In `scene.json` gibt `generationIntervalInMinutes` die Minuten an; `"-1"` schaltet die zeitliche Planung aus. Das CLI-Flag `--generation-interval` akzeptiert `ms`, `s`, `m`, `h` oder `-1` und überschreibt den JSON-Wert. Bei zwei Dateien und `1h` beträgt jeder Slot 30 Minuten; `biasMode: "on"` startet nach 15 Minuten pro Slot, `"off"` am Slotanfang. Späte Iterationen überlappen nicht; nächste startet nach Abschluss der vorherigen.
+Beide npm-Befehle starten diesen Ordner ohne Pfadargument. Normaler Start läuft ohne Zeitverzögerung; `with-time-interpolation` setzt standardmäßig ein Gesamtfenster von `1h`. In `scene.json` gibt `generationIntervalInMinutes` die Minuten an; `"-1"` schaltet die zeitliche Planung aus. Das CLI-Flag `--generation-interval` akzeptiert `ms`, `s`, `m`, `h` oder `-1` und überschreibt den JSON-Wert. Das Gesamtfenster wird durch das Iterationslimit geteilt: Bei 10 Iterationen und `1h` liegt zwischen geplanten Starts jeweils `6min`, bei 4 Iterationen `15min`. `biasMode: "on"` verschiebt Starts in die Mitte ihres Slots; `"off"` setzt sie an den Slotanfang. Späte Iterationen überlappen nicht: Wenn eine länger dauert als ihr Slot, startet die nächste direkt nach ihrem Abschluss. Startzeit und Plan bleiben beim Lauf gespeichert; nach einem Absturz wird der nächste Start anhand desselben Zeitplans berechnet.
 
 ```sh
 npm run news:exhibition:from-scene-json
@@ -72,6 +72,10 @@ npm run news:exhibition:from-scene-json:with-time-interpolation -- --generation-
 `generationOverrides` ist jeweils ein Objekt, kein Array. Vollständiges Beispiel und Varianten: [`docs/scenes-example/`](docs/scenes-example/). Zum Auswählen eines anderen Ordners: `npm run news:exhibition -- --scene=/absoluter/pfad/zum/ordner`.
 
 `includeSourceCodeContext` steuert, ob der Planner seinen Quellcode und das Schema zusätzlich zum Regieprompt in den GPT-Aufruf einfügt. Standard: `true`. In einer Scene setzt `"includeSourceCodeContext": false` den Code-Kontext ab; per CLI überschreiben `--no-source-code-context` und `--include-source-code-context` den JSON-Wert. Der Regieprompt, die Eingabedaten und das strukturierte Antwortschema bleiben enthalten. Beim Fortsetzen einer gespeicherten Iteration gilt deren gespeicherte Einstellung; ältere Aufzeichnungen ohne diese Angabe verwenden `true`.
+
+Eine gespeicherte Code-Zusammenfassung kann zusätzlich als Kontext benutzt werden. `npm run news:scene:write-code-summary -- --output=PFAD` erzeugt sie mit GPT aus dem aktuellen Code und legt daneben Metadaten mit Quellenhash und Modell ab; vorhandene Dateien werden nicht überschrieben. In einer Scene wählt `"sourceCodeSummaryFile": "PFAD"` die Datei, alternativ `--source-code-summary-file=PFAD`. Zum Vergleich mit einer Zusammenfassung statt Rohcode zugleich `"includeSourceCodeContext": false` setzen. Die Iteration speichert eine Kopie und deren Hash; ein bereits gespeicherter GPT-Aufruf bleibt beim Fortsetzen unverändert. Der explizit angegebene Pfad muss existieren. Die Zusammenfassung kann veralten und sollte bei Codeänderungen neu erstellt und geprüft werden.
+
+Eine geprüfte Beispielzusammenfassung liegt unter [`docs/scene-code-summary.md`](docs/scene-code-summary.md). Scene-Override für diese Variante: `"includeSourceCodeContext": false, "sourceCodeSummaryFile": "eu-reski-news/docs/scene-code-summary.md"`.
 
 Lauf setzt alphabetische Dateireihenfolge zyklisch fort und speichert Scene-Plan im Run-Manifest. Bei Wiederaufnahme denselben Scene-Ordner und dieselben CLI-Overrides erneut angeben.
 
