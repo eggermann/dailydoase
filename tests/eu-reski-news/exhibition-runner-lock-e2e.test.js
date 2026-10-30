@@ -57,7 +57,7 @@ test('a duplicate runner fails immediately; scene workers resume after stop', as
     await writeFile(semantic, JSON.stringify({ provider: 'offline', capturedAt: '2026-10-28T12:00:00.000Z', words: [['EU', 'en']], entries: [{ id: 'eu', seed: ['EU', 'en'], item: { title: 'Europe' } }] }));
     await writeFile(blocker, "globalThis.fetch = async () => { throw new Error('Unexpected network access'); };\n");
     const args = ['--new-run', `--scene=${scenes}`, '--stop-after-iterations=2', '--prompt-only', '--no-first-last-glue', `--stream-file=${semantic}`];
-    const env = offlineTestEnvironment({ NEWS_NEWS_DIR: news, NEWS_OUTPUT_DIR: output, NEWS_REFRESH_CHECK_MS: '100000', OPENAI_API_KEY: 'offline-test', NODE_OPTIONS: `--require=${blocker}` });
+    const env = offlineTestEnvironment({ NEWS_NEWS_DIR: news, NEWS_OUTPUT_DIR: output, NEWS_REFRESH_CHECK_MS: '100000', NEWS_CAMPAIGN_START_SPACING_MS: '100', OPENAI_API_KEY: 'offline-test', NODE_OPTIONS: `--require=${blocker}` });
     first = launch(args, env);
     await waitFor(() => (first.output().match(/^Run folder: /gm) || []).length === 2, `first workers: ${first.output()}`);
     const lock = join(output, '.exhibition-runner.lock');

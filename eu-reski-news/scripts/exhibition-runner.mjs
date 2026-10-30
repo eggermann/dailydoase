@@ -750,7 +750,7 @@ async function withLock(task) {
   }, { failFast: true });
 }
 
-function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = null) {
+function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = null, workerCount = 0) {
   let resolveClosed;
   let rejectClosed;
   const closed = new Promise((resolveRunner, rejectRunner) => {
@@ -768,7 +768,7 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
     if (runDirectory && !args.some((argument) => flagName(argument) === '--resume-run')) args.push(`--resume-run=${runDirectory}`);
     const child = spawn(process.execPath, args, {
       cwd: repositoryRoot,
-      env: { ...process.env, EXHIBITION_COOPERATIVE_RESTART: codexRepairIsEnabled() ? '1' : '0' },
+      env: { ...process.env, EXHIBITION_COOPERATIVE_RESTART: codexRepairIsEnabled() ? '1' : '0', NEWS_CAMPAIGN_WORKER_COUNT: String(workerCount) },
       stdio: ['inherit', 'pipe', 'pipe', 'ipc'],
     });
     runnerChild = child;
@@ -925,7 +925,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         state.sceneWorkers[worker.key].status = 'running';
         state.sceneWorkers[worker.key].iteratorPlanFingerprint = createHash('sha256').update(JSON.stringify(worker.plan)).digest('hex');
         startMergeLoop(worker);
-      }, worker.key);
+      }, worker.key, workers.length);
       const verification = savedRunDirectory ? watchRepairVerification(savedRunDirectory, worker.name) : null;
       const result = await running.closed;
       verification?.finish();

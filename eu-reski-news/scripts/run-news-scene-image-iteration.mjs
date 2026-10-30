@@ -40,7 +40,7 @@ import {
 } from '../news-scene/auto-concepts.mjs';
 import { addUsageIdempotently, buildAutoDirectorCorrectionRequest, recoverSavedAutoDirectorDecision } from '../news-scene/auto-director-recovery.mjs';
 import { getIteratorStartTime } from '../news-scene/scene-sequence.mjs';
-import { advanceWorkerSchedule, createInitialWorkerSchedule, recoverWorkerSchedule } from '../news-scene/parallel-schedule.mjs';
+import { advanceWorkerSchedule, claimCampaignStart, createInitialWorkerSchedule, pacedWorkerSchedule, recoverWorkerSchedule } from '../news-scene/parallel-schedule.mjs';
 import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
 import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../news-scene/global-article-reservations.mjs';
 import { applyStoryCodeContext } from '../news-scene/story-code-context.mjs';
@@ -1339,6 +1339,15 @@ async function main() {
   const sceneScheduleStartedAt = runManifest?.sceneSchedule?.startedAt
     ? Date.parse(runManifest.sceneSchedule.startedAt)
     : Date.now();
+  const campaignSpacing = Number(process.env.NEWS_CAMPAIGN_START_SPACING_MS || 0);
+  const campaignWorkerCount = Number(process.env.NEWS_CAMPAIGN_WORKER_COUNT || 0);
+  if (process.env.NEWS_CAMPAIGN_START_SPACING_MS && (!Number.isSafeInteger(campaignSpacing) || campaignSpacing < 1
+    || !Number.isSafeInteger(campaignWorkerCount) || campaignWorkerCount < 1
+    || !Number.isSafeInteger(campaignSpacing * campaignWorkerCount))) {
+    throw new Error('Campaign spacing requires a positive interval and worker count');
+  }
+  const pacedCampaign = Boolean(campaignSpacing && iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled);
+  const campaignWorkerInterval = campaignSpacing * campaignWorkerCount;
   if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
     runManifest.sceneSchedule ||= {
       scenePath: iteratorPlan.scenePath,
@@ -1350,7 +1359,9 @@ async function main() {
       ...createInitialWorkerSchedule(sceneScheduleStartedAt, iteratorPlan.intervalMs, iteratorPlan.biasMode),
     };
     const previousNextStartAtMs = runManifest.sceneSchedule.nextStartAtMs;
-    runManifest.sceneSchedule = options['resume-run']
+    runManifest.sceneSchedule = pacedCampaign
+      ? pacedWorkerSchedule(runManifest.sceneSchedule, Date.now(), campaignWorkerInterval)
+      : options['resume-run']
       ? recoverWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs)
       : Number.isSafeInteger(previousNextStartAtMs)
         ? { ...runManifest.sceneSchedule }
@@ -1597,7 +1608,26 @@ async function main() {
     if (cooperativeRestart.requested) break;
     const iteratorIndex = completed % iteratorCount;
     activateIterator(iteratorIndex);
-    if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
+    if (pacedCampaign) {
+      const workerWait = Math.max(0, runManifest.sceneSchedule.nextStartAtMs - Date.now());
+      if (workerWait) await cooperativeRestart.wait(workerWait);
+      if (cooperativeRestart.requested) break;
+      const campaignClock = join(resolve(options['output-dir']), '.campaign-start-clock.json');
+      while (!cooperativeRestart.requested) {
+        const claim = await claimCampaignStart(campaignClock, campaignSpacing);
+        if (claim.claimed) {
+          runManifest.sceneSchedule = {
+            ...runManifest.sceneSchedule,
+            intervalMs: campaignWorkerInterval,
+            lastStartAtMs: claim.startAtMs,
+            nextStartAtMs: claim.startAtMs + campaignWorkerInterval,
+          };
+          await save(join(iterationRoot, 'run.json'), runManifest);
+          break;
+        }
+        await cooperativeRestart.wait(claim.waitMs);
+      }
+    } else if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
       const previousSchedule = runManifest.sceneSchedule;
       const scheduled = advanceWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs);
       runManifest.sceneSchedule = scheduled.schedule;
