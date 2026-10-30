@@ -39,6 +39,30 @@ afterEach(async () => {
 });
 
 describe('cross-process directory locks', () => {
+  test('rejects a second start without queueing it behind a live owner', async () => {
+    temporaryRoot = await mkdtemp(join(tmpdir(), 'eu-reski-lock-fail-fast-'));
+    const lockPath = join(temporaryRoot, 'runner.lock');
+    const readyPath = join(temporaryRoot, 'ready');
+    const first = startLockProcess(lockPath, `
+      const { withDirectoryLock } = await import(process.env.LOCK_MODULE);
+      const { writeFile } = await import('node:fs/promises');
+      await withDirectoryLock(process.env.LOCK_PATH, async () => {
+        await writeFile(process.env.READY_PATH, 'ready');
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      });
+    `, { READY_PATH: readyPath });
+    const firstDone = childResult(first);
+    await waitForFile(readyPath, first);
+    const second = startLockProcess(lockPath, `
+      const { withDirectoryLock } = await import(process.env.LOCK_MODULE);
+      await withDirectoryLock(process.env.LOCK_PATH, async () => {}, { failFast: true });
+    `);
+    const result = await childResult(second);
+    expect(result.code).not.toBe(0);
+    expect(result.output).toContain('already active');
+    expect((await firstDone).code).toBe(0);
+  });
+
   test('serializes competing processes even while the first owner initializes slowly', async () => {
     temporaryRoot = await mkdtemp(join(tmpdir(), 'eu-reski-lock-init-'));
     const lockPath = join(temporaryRoot, 'article-progress.lock');

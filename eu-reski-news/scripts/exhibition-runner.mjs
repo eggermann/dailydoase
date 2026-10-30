@@ -1,10 +1,11 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createInterface } from 'node:readline';
+import { homedir } from 'node:os';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
@@ -735,7 +736,18 @@ process.once('SIGTERM', () => requestStop('SIGTERM'));
 
 async function withLock(task) {
   await mkdir(outputDirectory, { recursive: true });
-  return withDirectoryLock(lockPath, task);
+  const machineLock = join(homedir(), '.dailydoase', 'exhibition-runner.lock');
+  return withDirectoryLock(machineLock, async () => {
+    const processes = execFileSync('ps', ['-axww', '-o', 'pid=,command='], { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+    const otherGenerator = processes.split('\n').some((line) => {
+      const match = line.trim().match(/^(\d+)\s+(\S*node)\s+(.+)$/);
+      return match && Number(match[1]) !== process.pid
+        && !(Number(match[1]) === process.ppid && process.env.EXHIBITION_RESTART_PARENT_PID === String(process.ppid))
+        && /\/eu-reski-news\/scripts\/(?:exhibition-runner|run-news-scene-image-iteration)\.mjs(?:\s|$)/.test(match[3]);
+    });
+    if (otherGenerator) throw new Error('A news generator is already active.');
+    return withDirectoryLock(lockPath, task, { failFast: true });
+  }, { failFast: true });
 }
 
 function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = null) {
@@ -1345,10 +1357,12 @@ async function exhibitionMain() {
           workerArguments.push('--article-order=global', `--iterations=${stopAfterIterations ?? 0}`, `--iterator-plan=${planPath}`);
           const savedWorker = state.sceneWorkers?.[key];
           const savedRunDirectory = resumingParallelCampaign && savedWorker?.runDirectory
-            && ['running', 'pending_media', 'interrupted'].includes(savedWorker.status)
+            && (['running', 'pending_media', 'interrupted'].includes(savedWorker.status)
+              || (savedWorker.status === 'completed' && stopAfterIterations === null))
             ? savedWorker.runDirectory
             : null;
           const completedRunDirectory = resumingParallelCampaign && savedWorker?.status === 'completed'
+            && stopAfterIterations !== null
             ? savedWorker.runDirectory
             : null;
           if (resumingParallelCampaign && !savedWorker) {
@@ -1581,7 +1595,7 @@ async function restartSupervisor() {
   log('All workers have stopped without interruption; starting a fresh supervisor to resume their saved Runs.');
   const child = spawn(process.execPath, [...process.execArgv, process.argv[1], ...argumentsList], {
     cwd: repositoryRoot,
-    env: process.env,
+    env: { ...process.env, EXHIBITION_RESTART_PARENT_PID: String(process.pid) },
     stdio: 'inherit',
   });
   children.add(child);

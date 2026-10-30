@@ -105,6 +105,26 @@ describe('parallel worker pending media resume', () => {
       expect(await readFile(join(mediaDirectory, 'scene-1-video.mp4'), 'utf8')).toBe('offline-video');
       await expect(readFile(join(outputDirectory, 'global-article-progress.json'), 'utf8')).rejects.toMatchObject({ code: 'ENOENT' });
       await expect(readFile(join(iterationDirectory, 'auto-director-request.json'), 'utf8')).rejects.toMatchObject({ code: 'ENOENT' });
+
+      await rm(join(mediaDirectory, 'scene-1-video.mp4'));
+      await writeFile(pollScript, [
+        "import { readFile, writeFile } from 'node:fs/promises';",
+        "import { join } from 'node:path';",
+        'const value = (prefix) => process.argv.find((argument) => argument.startsWith(prefix)).slice(prefix.length);',
+        'const path = join(value("--run="), value("--iteration="), "record.json");',
+        'const record = JSON.parse(await readFile(path, "utf8"));',
+        'record.videoResults[0].errorCode = "VIDEO_PROVIDER_TERMINAL_ERROR";',
+        'await writeFile(path, JSON.stringify(record));',
+      ].join('\n'));
+      const blocker = join(root, 'block-network.cjs');
+      await writeFile(blocker, "globalThis.fetch = async () => { throw new Error('Unexpected network access'); };\n");
+      const terminal = spawnSync(process.execPath, [runnerPath, `--resume-run=${runDirectory}`, `--output-dir=${outputDirectory}`, `--news-dir=${root}`, '--iterations=0'], {
+        encoding: 'utf8', timeout: 15000,
+        env: offlineTestEnvironment({ OPENAI_API_KEY: 'offline-test-key', NEWS_TEST_VIDEO_POLL_SCRIPT: pollScript, NODE_OPTIONS: `--require=${blocker}` }),
+      });
+      expect(terminal.stdout).toContain('permanently failed; keeping its files and continuing');
+      expect(JSON.parse(await readFile(join(iterationDirectory, 'record.json'), 'utf8')).exhibitionAbandoned)
+        .toMatchObject({ status: 'aborted', taskUUID: taskId });
     } finally {
       await rm(root, { recursive: true, force: true });
     }

@@ -99,7 +99,12 @@ function runFfmpeg(args) {
 
 async function getIterations() {
   const runManifest = await json(join(runDirectory, 'run.json'));
-  const iterations = runManifest.iterations?.map((entry) => entry.directory).filter(Boolean) || [];
+  const iterations = [];
+  for (const entry of runManifest.iterations || []) {
+    if (!entry.directory) continue;
+    const record = await json(join(runDirectory, entry.directory, 'record.json'));
+    if (record.exhibitionAbandoned?.status !== 'aborted') iterations.push(entry.directory);
+  }
   if (iterations.length < iterationLimit) throw new Error(`Run has ${iterations.length} completed iterations; requested ${iterationLimit}`);
   return iterations.slice(0, iterationLimit);
 }

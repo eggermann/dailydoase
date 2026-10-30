@@ -42,9 +42,9 @@ async function stop(processInfo) {
   } finally { clearTimeout(timeout); }
 }
 
-test('two real exhibition runners serialize on the shared output lock and restart cleanly', async () => {
+test('a duplicate runner fails immediately; scene workers resume after stop', async () => {
   const temp = await mkdtemp(join(tmpdir(), 'reski-runner-lock-e2e-'));
-  let first; let second;
+  let first; let second; let third;
   try {
     const news = join(temp, 'news');
     const output = join(temp, 'output');
@@ -63,18 +63,30 @@ test('two real exhibition runners serialize on the shared output lock and restar
     const lock = join(output, '.exhibition-runner.lock');
     await access(lock);
     second = launch(args, env);
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    expect(second.child.exitCode).toBeNull();
+    const rejected = await second.closed;
+    expect(rejected.code).not.toBe(0);
+    expect(second.output()).toContain('already active');
     expect(second.output()).not.toContain('Starting 2 independent scene workers');
     await stop(first);
-    await waitFor(() => (second.output().match(/^Run folder: /gm) || []).length === 2, `second workers: ${second.output()}`);
     const state = JSON.parse(await readFile(join(output, 'exhibition-state.json'), 'utf8'));
-    expect(Object.keys(state.sceneWorkers)).toHaveLength(2);
-    await stop(second);
+    const previousRuns = Object.values(state.sceneWorkers).map((worker) => worker.runDirectory).sort();
+    const completedWorker = Object.values(state.sceneWorkers)[0];
+    completedWorker.status = 'completed';
+    const completedManifestPath = join(completedWorker.runDirectory, 'run.json');
+    const completedManifest = JSON.parse(await readFile(completedManifestPath, 'utf8'));
+    completedManifest.status = 'completed';
+    await writeFile(completedManifestPath, JSON.stringify(completedManifest));
+    await writeFile(join(output, 'exhibition-state.json'), JSON.stringify(state));
+    third = launch(args.filter((arg) => arg !== '--new-run' && arg !== '--stop-after-iterations=2'), env);
+    await waitFor(() => (third.output().match(/^Run folder: /gm) || []).length === 2, `resumed workers: ${third.output()}`);
+    const resumedRuns = [...third.output().matchAll(/^Run folder: (.+)$/gm)].map((match) => match[1].trim()).sort();
+    expect(resumedRuns).toEqual(previousRuns);
+    await stop(third);
     await expect(access(lock)).rejects.toMatchObject({ code: 'ENOENT' });
   } finally {
     await stop(first);
     await stop(second);
+    await stop(third);
     await rm(temp, { recursive: true, force: true });
   }
 }, 20000);

@@ -32,6 +32,8 @@ cat > /Users/dominikeggermann/Library/LaunchAgents/com.dailydoase.eu-reski-exhib
   <string>com.dailydoase.eu-reski-exhibition-campaign</string>
   <key>ProgramArguments</key>
   <array><string>$ROOT/deploy/start-exhibition-campaign.sh</string></array>
+  <key>EnvironmentVariables</key>
+  <dict><key>CAMPAIGN_CONTINUOUS</key><string>1</string></dict>
   <key>RunAtLoad</key><true/>
   <key>KeepAlive</key><false/>
   <key>StandardOutPath</key>

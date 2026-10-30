@@ -13,10 +13,15 @@ describe('Mac mini exhibition campaign launcher', () => {
     expect(source).toContain('EXHIBITION_CODEX_REPAIR="${EXHIBITION_CODEX_REPAIR:-1}"');
     expect(source).toContain('EXHIBITION_COOPERATIVE_RESTART="${EXHIBITION_COOPERATIVE_RESTART:-1}"');
   });
-  test('does not cap workers at the retracted three-iteration limit', async () => {
+  test('caps each campaign worker at three iterations', async () => {
     const source = await readFile(launcher, 'utf8');
-    expect(source).not.toContain('--stop-after-iterations=3');
+    expect(source).toContain('--stop-after-iterations=3');
     expect(source).toContain('Saved workers finished below their configured iteration counts');
+  });
+  test('button mode invokes the ordinary exhibition command', async () => {
+    const source = await readFile(launcher, 'utf8');
+    expect(source).toContain('exec npm run news:exhibition:from-scene-json\n');
+    expect(source).toContain('export NEWS_REFRESH_INTERVAL_MS=86400000');
   });
   test('rejects a three-iteration run when its Scene requires five', async () => {
     const temp = await mkdtemp(join(tmpdir(), 'eu-reski-campaign-complete-'));
@@ -34,6 +39,7 @@ describe('Mac mini exhibition campaign launcher', () => {
       await writeFile(runPath, JSON.stringify({ status: 'completed', iterationLimit: 3, iterations: [{}, {}, {}] }));
       const check = () => spawnSync('python3', [verifier, temp, output], { encoding: 'utf8' });
       expect(check().status).toBe(1);
+      expect(spawnSync('python3', [verifier, temp, output, '3'], { encoding: 'utf8' }).status).toBe(0);
       await writeFile(runPath, JSON.stringify({ status: 'completed', iterationLimit: 5, iterations: [{}, {}, {}, {}, {}] }));
       expect(check().status).toBe(0);
     } finally { await rm(temp, { recursive: true, force: true }); }

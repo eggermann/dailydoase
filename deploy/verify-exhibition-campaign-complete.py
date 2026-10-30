@@ -9,11 +9,14 @@ def read_json(path):
         return json.load(source)
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4):
         return 2
     repository_root = Path(sys.argv[1]).resolve()
     output_directory = Path(sys.argv[2]).resolve()
     try:
+        iteration_limit = int(sys.argv[3]) if len(sys.argv) == 4 else None
+        if iteration_limit is not None and iteration_limit < 1:
+            return 2
         settings = read_json(repository_root / "eu-reski-news/default-exhibition-settings.json")
         default_iterations = settings["generation"]["iterations"]
         scene_directory = (repository_root / "eu-reski-news/scenes/campaign-10h").resolve()
@@ -26,7 +29,7 @@ def main():
             count = scene.get("generationOverrides", {}).get("iterations", default_iterations)
             if not isinstance(count, int) or count < 1 or name in expected:
                 raise ValueError(f"Invalid or duplicate Scene profile: {scene_path.name}")
-            expected[name] = count
+            expected[name] = iteration_limit if iteration_limit is not None else count
         state = read_json(output_directory / "exhibition-state.json")
         workers = state.get("sceneWorkers", {})
         if not expected or len(workers) != len(expected):

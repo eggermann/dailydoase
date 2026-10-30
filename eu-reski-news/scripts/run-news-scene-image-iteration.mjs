@@ -46,6 +46,7 @@ import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalA
 import { applyStoryCodeContext } from '../news-scene/story-code-context.mjs';
 import { installCooperativeRestart } from '../news-scene/cooperative-restart.mjs';
 import { articleSimilaritySkipThreshold, scoreArticleSimilarity } from '../news-scene/article-similarity.mjs';
+import { terminalVideoFailure } from '../news-scene/abandoned-iteration.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const cooperativeRestart = installCooperativeRestart();
@@ -1080,6 +1081,7 @@ async function createVideoAudioDirection(record, directory, openAiKey, persist) 
 async function pendingVideoScenes(iterationRoot, entry) {
   const directory = join(iterationRoot, entry.directory);
   const record = await json(join(directory, 'record.json'));
+  if (record.exhibitionAbandoned?.status === 'aborted') return [];
   const pending = [];
   for (const [index, scene] of (record.filmPlan?.scenePlan || []).entries()) {
     const result = record.videoResults?.[index];
@@ -1140,6 +1142,20 @@ async function pollIterationVideosWithLiveProgress(iterationRoot, entry, videoOp
 
   try {
     const result = await pollIterationVideos(iterationRoot, entry, videoOptions);
+    const updatedRecord = await json(join(directory, 'record.json'));
+    const terminalFailure = terminalVideoFailure(updatedRecord);
+    if ((Number(options.iterations) === 0 || Number(options.iterations) === -1) && terminalFailure) {
+      updatedRecord.exhibitionAbandoned = {
+        status: 'aborted',
+        reason: 'VIDEO_PROVIDER_TERMINAL_ERROR',
+        taskUUID: terminalFailure.taskUUID || null,
+        abortedAt: new Date().toISOString(),
+      };
+      await save(join(directory, 'record.json'), updatedRecord);
+      await writeIterationLiveMarker(directory, { ...marker, status: 'interrupted', processId: null, endedAt: new Date().toISOString(), error: 'Video task permanently failed; iteration skipped.' });
+      console.log(`Iteration ${entry.directory} permanently failed; keeping its files and continuing with the next iteration.`);
+      return { abandoned: true };
+    }
     const pendingAfterPoll = await pendingVideoScenes(iterationRoot, entry);
     if (pendingAfterPoll.length) {
       await writeIterationLiveMarker(directory, {
@@ -1282,6 +1298,9 @@ async function main() {
     articleProgress: null,
     iterations: [],
   } : null;
+  if (runManifest && options['resume-run'] && endless) {
+    runManifest.iterationLimit = 'endless';
+  }
   if (runManifest && options['auto-mode']) runManifest.autoDirectorSceneCount = true;
   let articleProgress = runManifest?.articleProgress || null;
   if (options['article-order'] === 'global') {

@@ -22,19 +22,24 @@ while ! /sbin/mount | /usr/bin/grep -F " on $VOLUME " >/dev/null; do
   /bin/sleep 30
 done
 mkdir -p "$OUTPUT"
-if [ -f "$OUTPUT/.campaign-complete" ]; then
-  if python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT"; then
+if [ "${CAMPAIGN_CONTINUOUS:-0}" != 1 ] && [ "${CAMPAIGN_NEW_RUN:-0}" != 1 ] && [ -f "$OUTPUT/.campaign-complete" ]; then
+  if python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT" 3; then
     echo 'The exhibition campaign has already completed.'
     exit 0
   fi
   rm -f "$OUTPUT/.campaign-complete"
 fi
-while /usr/bin/pgrep -f '/eu-reski-news/scripts/exhibition-runner.mjs' >/dev/null; do
-  echo 'Waiting for the current exhibition run to finish.'
-  /bin/sleep 30
-done
+if /usr/bin/pgrep -f '/eu-reski-news/scripts/exhibition-runner.mjs' >/dev/null; then
+  echo 'An exhibition run is already active; refusing a duplicate start.' >&2
+  exit 1
+fi
 
-if python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT"; then
+if [ "${CAMPAIGN_CONTINUOUS:-0}" = 1 ]; then
+  export NEWS_REFRESH_INTERVAL_MS=86400000
+  exec npm run news:exhibition:from-scene-json
+fi
+
+if [ "${CAMPAIGN_NEW_RUN:-0}" != 1 ] && python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT" 3; then
   touch "$OUTPUT/.campaign-complete"
   echo 'The exhibition campaign has already completed.'
   exit 0
@@ -56,11 +61,12 @@ then
 fi
 
 if [ "${CAMPAIGN_NEW_RUN:-0}" = 1 ]; then
-  npm run news:exhibition:from-scene-json -- --new-run --generation-interval=10h
+  rm -f "$OUTPUT/.campaign-complete"
+  npm run news:exhibition:from-scene-json -- --new-run --generation-interval=10h --stop-after-iterations=3
 else
-  npm run news:exhibition:from-scene-json -- --generation-interval=10h
+  npm run news:exhibition:from-scene-json -- --generation-interval=10h --stop-after-iterations=3
 fi
-python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT" || {
+python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT" 3 || {
   echo 'Campaign still has unfinished or under-counted Scene workers; completion marker withheld.' >&2
   exit 1
 }

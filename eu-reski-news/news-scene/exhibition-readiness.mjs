@@ -14,6 +14,7 @@ export async function getReadyIterations(runDirectory) {
   for (const entry of manifest.iterations || []) {
     const iterationDirectory = join(runDirectory, entry.directory);
     const record = await readJson(join(iterationDirectory, 'record.json'));
+    if (record.exhibitionAbandoned?.status === 'aborted') continue;
     const scenes = record.plan?.scenes || [];
     const videos = await Promise.all(scenes.map(async (scene) => {
       try { await stat(join(iterationDirectory, 'media', `scene-${scene.index}-video.mp4`)); return true; }

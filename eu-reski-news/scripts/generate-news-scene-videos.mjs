@@ -395,7 +395,9 @@ async function generateSceneAttempt(directory, record, scene, index) {
                 retryNumber += 1;
                 continue;
               }
-              throw new Error(`Automatic video retry ${retryNumber} for ${name} failed terminally; task ${taskUUID} remains saved for review.`);
+              const error = new Error(`Automatic video retry ${retryNumber} for ${name} failed terminally; task ${taskUUID} remains saved for review.`);
+              error.code = 'VIDEO_PROVIDER_TERMINAL_ERROR';
+              throw error;
             }
           } else if (await exists(submissionPath)) {
             submission = await json(submissionPath);
@@ -622,6 +624,7 @@ async function assembleAllIterations(run, runDirectory) {
   const sourceIterations = [];
   for (const entry of entries) {
     const record = await json(join(runDirectory, entry.directory, 'record.json'));
+    if (record.exhibitionAbandoned?.status === 'aborted') continue;
     const film = record.concatenatedVideo;
     if (!film?.path) {
       console.log(`ALL_ITERATIONS_FILM_WAITING · ${entry.directory} has no completed scene film yet`);
@@ -640,6 +643,7 @@ async function assembleAllIterations(run, runDirectory) {
     });
   }
 
+  if (!sourceIterations.length) return;
   const mergedDirectory = join(runDirectory, 'merged');
   const outputPath = join(mergedDirectory, 'eu-reski-gesamtfilm.mp4');
   const sourceSignature = JSON.stringify(sourceIterations);
@@ -735,6 +739,7 @@ if (values['generate-title-cards']) {
           model: values.model,
           status: previousResult.status || 'failed',
           taskUUID: savedRequest?.taskUUID || previousResult.taskUUID || null,
+          errorCode: error.code || null,
           error: error.message || String(error),
           lastAttemptFailedAt: new Date().toISOString(),
         };

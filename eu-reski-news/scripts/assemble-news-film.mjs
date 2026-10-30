@@ -140,7 +140,12 @@ async function getIterations() {
   const manifestPath = join(runDirectory, 'run.json');
   try {
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-    const iterations = manifest.iterations?.map((entry) => entry.directory).filter(Boolean);
+    const iterations = [];
+    for (const entry of manifest.iterations || []) {
+      if (!entry.directory) continue;
+      const record = JSON.parse(await readFile(join(runDirectory, entry.directory, 'record.json'), 'utf8'));
+      if (record.exhibitionAbandoned?.status !== 'aborted') iterations.push(entry.directory);
+    }
     if (iterations?.length) return selectIterations(iterations);
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;

@@ -131,6 +131,7 @@ export async function withDirectoryLock(lockPath, task, {
   retryMs = 50,
   initializationTimeoutMs = 60_000,
   beforeOwnerWrite = async () => {},
+  failFast = false,
 } = {}) {
   await mkdir(dirname(lockPath), { recursive: true });
   let ownerFileName;
@@ -173,7 +174,10 @@ export async function withDirectoryLock(lockPath, task, {
     } catch (error) {
       if (error.code !== 'EEXIST') throw error;
       const legacyHandled = await waitForLegacyFile(lockPath, retryMs);
-      if (legacyHandled) continue;
+      if (legacyHandled) {
+        if (failFast) throw new Error('An exhibition run is already active.');
+        continue;
+      }
       const entries = await readdir(lockPath).catch((readError) => {
         if (readError.code === 'ENOENT') return null;
         if (readError.code === 'ENOTDIR') return null;
@@ -183,6 +187,7 @@ export async function withDirectoryLock(lockPath, task, {
       const ownerFiles = entries.filter((name) => name.startsWith(ownerPrefix) && name.endsWith(ownerSuffix));
       if (ownerFiles.length !== 1) {
         const cleaned = await cleanupStaleDirectory(lockPath, null, null, initializationTimeoutMs);
+        if (!cleaned && failFast) throw new Error('An exhibition run is already active.');
         if (!cleaned) await delay(retryMs);
         continue;
       }
@@ -191,10 +196,12 @@ export async function withDirectoryLock(lockPath, task, {
         .then((contents) => JSON.parse(contents))
         .catch(() => null);
       if (!owner) {
+        if (failFast) throw new Error('An exhibition run is already active.');
         await delay(retryMs);
         continue;
       }
       const cleaned = await cleanupStaleDirectory(lockPath, currentOwnerFile, owner, initializationTimeoutMs);
+      if (!cleaned && failFast) throw new Error('An exhibition run is already active.');
       if (!cleaned) await delay(retryMs);
     }
   }
