@@ -1,10 +1,19 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, open, readdir, readFile, rename, rmdir, stat, unlink } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { homedir } from 'node:os';
 
 const ownerPrefix = '.owner-';
 const ownerSuffix = '.json';
+
+export function localDirectoryLockPath(
+  resourcePath,
+  lockDirectory = process.env.EXHIBITION_LOCK_DIRECTORY || join(homedir(), '.dailydoase', 'locks'),
+) {
+  const resourceKey = createHash('sha256').update(resolve(resourcePath)).digest('hex');
+  return join(lockDirectory, `${resourceKey}.lock`);
+}
 
 export function processStartToken(processId = process.pid) {
   try {

@@ -12,7 +12,7 @@ import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
 import { loadSceneSequence, preserveEquivalentSchedule, resolveParallelSceneSchedule } from '../news-scene/scene-sequence.mjs';
 import { mergeRunnerArguments } from '../news-scene/runner-arguments.mjs';
 import { getReadyIterations } from '../news-scene/exhibition-readiness.mjs';
-import { withDirectoryLock } from '../news-scene/directory-lock.mjs';
+import { localDirectoryLockPath, withDirectoryLock } from '../news-scene/directory-lock.mjs';
 import { retryVolumeAccess } from '../news-scene/volume-access-retry.mjs';
 import {
   buildCodexRepairPrompt,
@@ -38,6 +38,7 @@ const defaultGeneration = defaultSettings.generation;
 const newsDirectory = resolve(repositoryRoot, process.env.NEWS_NEWS_DIR || defaultSettings.paths.newsDirectory);
 const outputDirectory = resolve(repositoryRoot, process.env.NEWS_OUTPUT_DIR || defaultSettings.paths.outputDirectory);
 const statePath = join(outputDirectory, 'exhibition-state.json');
+// Keep this lock on the mini's internal disk; outputDirectory may be removable media.
 const lockPath = join(outputDirectory, '.exhibition-runner.lock');
 const refreshIntervalMs = positiveInteger(process.env.NEWS_REFRESH_INTERVAL_MS, defaultExhibition.newsRefreshIntervalMs);
 const refreshCheckMs = positiveInteger(process.env.NEWS_REFRESH_CHECK_MS, defaultExhibition.newsRefreshCheckMs);
@@ -754,18 +755,7 @@ async function withLock(task) {
     };
     await retryVolumeAccess(() => mkdir(outputDirectory, { recursive: true }), retryOptions);
     if (stopping) return;
-    return retryVolumeAccess(async () => {
-      let taskStarted = false;
-      try {
-        return await withDirectoryLock(lockPath, () => {
-          taskStarted = true;
-          return task();
-        }, { failFast: true });
-      } catch (error) {
-        if (taskStarted) throw Object.assign(error, { volumeRetryForbidden: true });
-        throw error;
-      }
-    }, retryOptions);
+    return withDirectoryLock(localDirectoryLockPath(lockPath), task, { failFast: true });
   }, { failFast: true });
 }
 

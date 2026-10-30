@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { articleKey as createArticleKey } from '../scripts/news-eu-relevance.mjs';
-import { isProcessOwnerAlive, processStartToken, withDirectoryLock } from './directory-lock.mjs';
+import { isProcessOwnerAlive, localDirectoryLockPath, processStartToken, withDirectoryLock } from './directory-lock.mjs';
 import { scoreArticleSimilarity } from './article-similarity.mjs';
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
@@ -69,7 +69,7 @@ export async function reserveGlobalArticle({
   stopOmitSimilar = true,
   similarityThreshold,
 }) {
-  return withDirectoryLock(reservationLockPath(progressPath), async () => {
+  return withDirectoryLock(localDirectoryLockPath(reservationLockPath(progressPath)), async () => {
     const progress = await readProgress(progressPath, articleProgress);
     progress.reservations ||= {};
     await reconcileOrphanedReservations(progress, reservationId);
@@ -186,7 +186,7 @@ export async function reserveGlobalArticle({
 }
 
 export async function commitGlobalArticleReservation({ progressPath, articleProgress, reservationId, article, selection }) {
-  return withDirectoryLock(reservationLockPath(progressPath), async () => {
+  return withDirectoryLock(localDirectoryLockPath(reservationLockPath(progressPath)), async () => {
     const progress = await readProgress(progressPath, articleProgress);
     progress.reservations ||= {};
     const selectedKey = createArticleKey(article);
