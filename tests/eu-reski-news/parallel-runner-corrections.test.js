@@ -42,7 +42,7 @@ describe('parallel runner corrections', () => {
   });
 
   function workerContext(startRunner, readJson, delayOrStop) {
-    const context = { stopping: false, state: { sceneWorkers: {} }, children: new Set(), glueEnabled: false, process: { env: {} }, positiveInteger: (v, f) => Number(v || f), runRefreshLoop: async () => {}, saveState: async () => {}, readJson, join, startRunner, delayOrStop, wakeForStop: () => {}, log: () => {}, console, createHash: () => ({ update: () => ({ digest: () => 'hash' }) }), saveJson: async () => { throw new Error('unexpected failure write'); }, refreshCheckMs: 1 };
+    const context = { stopping: false, restartPending: false, state: { sceneWorkers: {} }, children: new Set(), glueEnabled: false, process: { env: {} }, positiveInteger: (v, f) => Number(v || f), runRefreshLoop: async () => {}, saveState: async () => {}, readJson, join, startRunner, watchRepairVerification: () => ({ finish: () => {}, task: Promise.resolve() }), delayOrStop, wakeForStop: () => {}, log: () => {}, console, createHash: () => ({ update: () => ({ digest: () => 'hash' }) }), saveJson: async () => { throw new Error('unexpected failure write'); }, refreshCheckMs: 1 };
     vm.createContext(context);
     vm.runInContext(`${extract('async function runParallelSceneWorkers(', '\nasync function exhibitionMain(')}\nthis.run = runParallelSceneWorkers;`, context);
     return context;

@@ -44,9 +44,11 @@ import { advanceWorkerSchedule, createInitialWorkerSchedule, recoverWorkerSchedu
 import { clearIterationLiveMarker, writeIterationLiveMarker } from '../news-scene/iteration-live-marker.mjs';
 import { articleProgressSnapshot, commitGlobalArticleReservation, reserveGlobalArticle } from '../news-scene/global-article-reservations.mjs';
 import { applyStoryCodeContext } from '../news-scene/story-code-context.mjs';
+import { installCooperativeRestart } from '../news-scene/cooperative-restart.mjs';
 import { articleSimilaritySkipThreshold, scoreArticleSimilarity } from '../news-scene/article-similarity.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const cooperativeRestart = installCooperativeRestart();
 const optionDefinitions = {
   resume: { type: 'string' }, 'resume-run': { type: 'string' }, 'article-id': { type: 'string' }, 'article-order': { type: 'string', default: process.env.NEWS_ARTICLE_ORDER || 'linear' }, scenes: { type: 'string', default: '3' },
   'story-model': { type: 'string', default: process.env.NEWS_STORY_MODEL || 'gpt-6-luna' },
@@ -1547,6 +1549,7 @@ async function main() {
           generateTitleCards: options['generate-title-cards'],
         });
       }
+      if (cooperativeRestart.requested) break;
     }
     const mediaAfterResume = await summarizePendingMedia(iterationRoot, runManifest);
     if (mediaAfterResume.length) {
@@ -1564,16 +1567,28 @@ async function main() {
       await save(join(iterationRoot, 'run.json'), runManifest);
       console.log(`Pending media finished for ${iterationRoot}; continuing the saved Run.`);
     }
+    if (cooperativeRestart.requested) {
+      runManifest.status = 'interrupted';
+      runManifest.interruptedAt = new Date().toISOString();
+      await save(join(iterationRoot, 'run.json'), runManifest);
+      return;
+    }
   }
   while (endless || completed < iterationLimit) {
+    if (cooperativeRestart.requested) break;
     const iteratorIndex = completed % iteratorCount;
     activateIterator(iteratorIndex);
     if (iteratorPlan?.workerKey && iteratorPlan.scheduleEnabled) {
+      const previousSchedule = runManifest.sceneSchedule;
       const scheduled = advanceWorkerSchedule(runManifest.sceneSchedule, Date.now(), iteratorPlan.intervalMs);
       runManifest.sceneSchedule = scheduled.schedule;
       await save(join(iterationRoot, 'run.json'), runManifest);
       const waitMilliseconds = scheduled.startAtMs - Date.now();
-      if (waitMilliseconds > 0) await new Promise((resolveDelay) => setTimeout(resolveDelay, waitMilliseconds));
+      if (waitMilliseconds > 0) await cooperativeRestart.wait(waitMilliseconds);
+      if (cooperativeRestart.requested) {
+        runManifest.sceneSchedule = previousSchedule;
+        await save(join(iterationRoot, 'run.json'), runManifest);
+      }
     } else if (iteratorPlan?.scheduleEnabled) {
       const targetStart = getIteratorStartTime(
         sceneScheduleStartedAt,
@@ -1583,8 +1598,9 @@ async function main() {
         iteratorPlan.biasMode,
       );
       const waitMilliseconds = targetStart - Date.now();
-      if (waitMilliseconds > 0) await new Promise((resolveDelay) => setTimeout(resolveDelay, waitMilliseconds));
+      if (waitMilliseconds > 0) await cooperativeRestart.wait(waitMilliseconds);
     }
+    if (cooperativeRestart.requested) break;
     console.log(`Starting news run ${completed + 1}${endless ? ' (endless)' : ` of ${iterationLimit}`}`);
     const iterationDirectory = await runIteration(
       semanticSource,
@@ -1651,19 +1667,26 @@ async function main() {
         }
       }
     }
+    if (cooperativeRestart.requested) break;
     if (!endless && completed >= iterationLimit) break;
     if (iteratorPlan) continue;
     console.log(`Next article and semantic fragments in ${pauseMilliseconds} ms; streams remain open.`);
-    await new Promise((resolveDelay) => setTimeout(resolveDelay, pauseMilliseconds));
+    await cooperativeRestart.wait(pauseMilliseconds);
   }
   if (runManifest) {
     const pendingMedia = anyIteratorGeneratesVideos
       ? await summarizePendingMedia(iterationRoot, runManifest)
       : [];
-    runManifest.status = pendingMedia.length ? 'pending_media' : 'completed';
+    runManifest.status = pendingMedia.length ? 'pending_media'
+      : cooperativeRestart.requested && (endless || completed < iterationLimit) ? 'interrupted' : 'completed';
     if (pendingMedia.length) runManifest.pendingMedia = pendingMedia;
     else delete runManifest.pendingMedia;
-    runManifest.finishedAt = new Date().toISOString();
+    if (runManifest.status === 'interrupted') {
+      runManifest.interruptedAt = new Date().toISOString();
+      delete runManifest.finishedAt;
+    } else {
+      runManifest.finishedAt = new Date().toISOString();
+    }
     if (pendingMedia.length) console.log(`Run pending media: ${pendingMedia.map(({ iteration, scenes }) => `${iteration} scene(s) ${scenes.map(({ sceneIndex, taskUUID }) => `#${sceneIndex}${taskUUID ? ` (${taskUUID})` : ''}`).join(', ')}`).join('; ')}. Resume same run to poll saved task IDs.`);
     await save(join(iterationRoot, 'run.json'), runManifest);
     const reports = await Promise.all(runManifest.iterations.map(async (iteration) => ({

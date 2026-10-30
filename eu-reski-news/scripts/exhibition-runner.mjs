@@ -16,6 +16,9 @@ import {
   buildCodexRepairPrompt,
   classifyRepairFailure,
   codexRepairIsEnabled,
+  inspectRepairedIteration,
+  repairNeedsSupervisorRestart,
+  sanitizeRepairDiagnostics,
   updateRepairFailureHistory,
   runCodexRepairInIsolatedWorktree,
 } from '../news-scene/codex-repair-handoff.mjs';
@@ -114,7 +117,7 @@ async function latestInterruptedIteration(runDirectory) {
   return null;
 }
 
-async function escalateRepeatedCodeFailure(worker, runDirectory) {
+async function escalateRepeatedCodeFailure(worker, runDirectory, diagnosticLines = []) {
   const failure = await latestInterruptedIteration(runDirectory);
   if (!failure || classifyRepairFailure(failure) !== 'code_defect_candidate') return { action: 'retry' };
 
@@ -141,13 +144,15 @@ async function escalateRepeatedCodeFailure(worker, runDirectory) {
     child.once('close', (code) => resolveCommit(code === 0 ? output.trim() : null));
     child.once('error', () => resolveCommit(null));
   });
+  const diagnosticLog = sanitizeRepairDiagnostics(diagnosticLines);
   const prompt = buildCodexRepairPrompt({
     runDirectory: '(run artifacts are intentionally not exposed to Codex)',
     workerName: worker.name,
     iteration: failure.iteration,
     stage: failure.stage,
-    error: failure.error,
+    error: sanitizeRepairDiagnostics([`Error: ${failure.error}`]),
     sourceCommit,
+    diagnosticLog,
   });
   const casePath = join(runDirectory, 'codex-repair-case.json');
   const repairAttempted = saved.attemptedFingerprint === history.fingerprint;
@@ -157,10 +162,11 @@ async function escalateRepeatedCodeFailure(worker, runDirectory) {
     worker: worker.name,
     iteration: failure.iteration,
     stage: failure.stage,
-    error: failure.error,
+    error: sanitizeRepairDiagnostics([`Error: ${failure.error}`]),
     errorClass: history.errorClass,
     fingerprint: history.fingerprint,
     repeatCount: history.count,
+    diagnosticLog,
     prompt,
   };
   await saveJson(casePath, handoff);
@@ -176,9 +182,20 @@ async function escalateRepeatedCodeFailure(worker, runDirectory) {
       repairState.attemptedAt = new Date().toISOString();
       repairState.resolvedCommit = result.repairCommit;
       repairState.resolvedAt = new Date().toISOString();
+      repairState.verification = {
+        iteration: failure.iteration,
+        status: 'awaiting_completion',
+        repairCommit: result.repairCommit,
+        expectVideos: worker.arguments.includes('--videos-after-each-iteration')
+          && !worker.arguments.includes('--no-videos-after-each-iteration'),
+        expectTitleCard: worker.arguments.includes('--generate-title-cards')
+          && !worker.arguments.includes('--no-generate-title-cards'),
+        updatedAt: new Date().toISOString(),
+      };
       await saveJson(statePath, repairState);
-      log(`${worker.name}: Codex repair ${result.repairCommit} passed regression tests and was committed; resume same Run.`);
-      return { action: 'resume', result };
+      const restartNeeded = repairNeedsSupervisorRestart(result.changedPaths);
+      log(`${worker.name}: Codex repair ${result.repairCommit} passed regression tests; completion of ${failure.iteration} will be checked${restartNeeded ? ' after supervisor restart' : ''}.`);
+      return { action: restartNeeded ? 'restart' : 'resume', result, iteration: failure.iteration };
     }
     handoff.repairResult = result;
     const canRetryAfterSetup = [
@@ -669,13 +686,27 @@ async function runMergeLoop(runDirectory, videoSettings, generateTitleCards, wor
 }
 
 let stopping = false;
+let restartPending = false;
+let externalStopRequested = false;
+let repairQueue = Promise.resolve();
 let runnerChild = null;
 let mergeRunning = false;
 let state = {};
 const children = new Set();
+const generatorChildren = new Set();
+
+function signalCooperativeRestart(child) {
+  if (process.platform === 'win32' || !child.cooperativeRestartReady || child.cooperativeRestartSignalled || child.exitCode !== null || child.signalCode !== null) return;
+  child.cooperativeRestartSignalled = true;
+  try { child.kill('SIGUSR2'); } catch (error) {
+    if (error.code !== 'ESRCH') console.error(`[exhibition] Could not request a safe worker stop: ${error.message}`);
+  }
+}
 
 function requestStop(signal) {
-  if (stopping) return;
+  if (externalStopRequested) return;
+  externalStopRequested = true;
+  restartPending = false;
   stopping = true;
   wakeForStop();
   log(`${signal} received; stopping child processes.`);
@@ -700,13 +731,29 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
   });
   try {
     let globalArticleQueueExhausted = false;
+    const diagnosticLines = [];
+    const rememberDiagnostic = (line) => {
+      diagnosticLines.push(line);
+      if (diagnosticLines.length > 50) diagnosticLines.shift();
+    };
     const args = [runnerScript, ...argumentsList];
     if (runDirectory && !args.some((argument) => flagName(argument) === '--resume-run')) args.push(`--resume-run=${runDirectory}`);
-    const child = spawn(process.execPath, args, { cwd: repositoryRoot, env: process.env, stdio: ['inherit', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, args, {
+      cwd: repositoryRoot,
+      env: { ...process.env, EXHIBITION_COOPERATIVE_RESTART: codexRepairIsEnabled() ? '1' : '0' },
+      stdio: ['inherit', 'pipe', 'pipe', 'ipc'],
+    });
     runnerChild = child;
     children.add(child);
+    generatorChildren.add(child);
+    child.on('message', (message) => {
+      if (message?.type !== 'cooperative-restart-ready') return;
+      child.cooperativeRestartReady = true;
+      if (restartPending) signalCooperativeRestart(child);
+    });
     const onLine = (line) => {
       console.log(line);
+      if (/(?:error|exception|failed|warning|retry|timeout|pending|truncat)/i.test(line)) rememberDiagnostic(line);
       const match = /^Run folder: (.+)$/.exec(line);
       if (!match) return;
       if (workerKey) {
@@ -724,17 +771,20 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
     stdoutLines.on('line', onLine);
     stderrLines.on('line', (line) => {
       console.error(line);
+      rememberDiagnostic(line);
       if (line.includes('Global article queue exhausted:')) globalArticleQueueExhausted = true;
     });
     child.once('error', (error) => {
       children.delete(child);
+      generatorChildren.delete(child);
       runnerChild = null;
       rejectClosed(error);
     });
     child.once('close', (code, signal) => {
       children.delete(child);
+      generatorChildren.delete(child);
       runnerChild = null;
-      resolveClosed({ code, signal, globalArticleQueueExhausted });
+      resolveClosed({ code, signal, globalArticleQueueExhausted, diagnosticLines });
     });
     return { child, closed };
   } catch (error) {
@@ -743,12 +793,63 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
   }
 }
 
+function watchRepairVerification(runDirectory, workerName) {
+  let finish;
+  let finished = false;
+  const stopped = new Promise((resolveStop) => { finish = () => { finished = true; resolveStop(); }; });
+  const task = (async () => {
+    const repairPath = join(runDirectory, 'codex-repair-state.json');
+    while (true) {
+      try {
+        const saved = await readJson(repairPath).catch((error) => {
+          if (error.code === 'ENOENT') return null;
+          throw error;
+        });
+        const verification = saved?.verification;
+        if (!verification || verification.status === 'completed') return;
+        const observed = await inspectRepairedIteration(runDirectory, verification.iteration, verification.expectVideos, verification.expectTitleCard);
+        const status = observed.status === 'waiting' ? (finished ? 'not_completed' : verification.status) : observed.status;
+        if (status !== verification.status) {
+          saved.verification = { ...verification, status, updatedAt: new Date().toISOString() };
+          if (status === 'completed') saved.verification.completedAt = new Date().toISOString();
+          await saveJson(repairPath, saved);
+          log(`${workerName}: repair verification for ${verification.iteration}: ${status}.`);
+        }
+        if (status === 'completed' || finished) return;
+      } catch (error) {
+        console.error(`[exhibition] Could not check repair completion for ${workerName}: ${error.message}`);
+        if (finished) return;
+      }
+      let timeout;
+      await Promise.race([new Promise((resolveDelay) => { timeout = setTimeout(resolveDelay, 5000); }), stopped]);
+      clearTimeout(timeout);
+    }
+  })();
+  return { finish, task };
+}
+
+function queueRepair(worker, runDirectory, diagnosticLines) {
+  const attempt = repairQueue.then(async () => {
+    if (restartPending || stopping) return { action: 'deferred' };
+    const result = await escalateRepeatedCodeFailure(worker, runDirectory, diagnosticLines);
+    if (stopping || externalStopRequested) return { action: 'deferred' };
+    if (result.action === 'restart') {
+      restartPending = true;
+      for (const child of generatorChildren) signalCooperativeRestart(child);
+    }
+    return result;
+  });
+  repairQueue = attempt.then(() => undefined, () => undefined);
+  return attempt;
+}
+
 async function runParallelSceneWorkers(workers, finiteIterationLimit) {
   const refreshTask = runRefreshLoop();
   const mergeTasks = new Map();
   const retryAttempts = new Map();
   const pendingMediaAttempts = new Map();
   const maxWorkerRetries = positiveInteger(process.env.EXHIBITION_WORKER_MAX_RETRIES, 5);
+  const workerRetryBaseMs = positiveInteger(process.env.EXHIBITION_WORKER_RETRY_BASE_MS, 30_000);
   const startMergeLoop = (worker) => {
     if (!glueEnabled || mergeTasks.has(worker.key)) return;
     const runDirectory = worker.completedRunDirectory
@@ -758,10 +859,11 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
     mergeTasks.set(worker.key, runMergeLoop(runDirectory, worker.videoSettings, worker.generateTitleCards, worker.key));
   };
   const workerTasks = workers.map(async (worker) => {
+    if (restartPending) return;
     if (worker.completedRunDirectory) {
       startMergeLoop(worker);
       if (glueEnabled) {
-        while (!stopping) {
+        while (!stopping && !restartPending) {
           const savedState = await readState();
           if (savedState.sceneWorkers?.[worker.key]?.runDirectory === worker.completedRunDirectory
             && Number(savedState.sceneWorkers[worker.key].gluedThroughIteration || 0)
@@ -782,7 +884,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
       return;
     }
     if (state.sceneWorkers?.[worker.key]?.runDirectory) startMergeLoop(worker);
-    while (!stopping) {
+    while (!stopping && !restartPending) {
       const savedRunDirectory = worker.savedRunDirectory || state.sceneWorkers?.[worker.key]?.runDirectory || null;
       state.sceneWorkers ||= {};
       state.sceneWorkers[worker.key] ||= {};
@@ -796,7 +898,10 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         state.sceneWorkers[worker.key].iteratorPlanFingerprint = createHash('sha256').update(JSON.stringify(worker.plan)).digest('hex');
         startMergeLoop(worker);
       }, worker.key);
+      const verification = savedRunDirectory ? watchRepairVerification(savedRunDirectory, worker.name) : null;
       const result = await running.closed;
+      verification?.finish();
+      if (verification) await verification.task;
       const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory || savedRunDirectory;
       const runManifest = runDirectory ? await readJson(join(runDirectory, 'run.json')).catch(() => null) : null;
       if (stopping) {
@@ -806,6 +911,12 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
           await saveJson(join(runDirectory, 'run.json'), runManifest);
           state.sceneWorkers[worker.key].status = 'interrupted';
         }
+        await saveState();
+        return;
+      }
+
+      if (restartPending) {
+        if (runManifest?.status) state.sceneWorkers[worker.key].status = runManifest.status;
         await saveState();
         return;
       }
@@ -829,7 +940,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
           throw new Error(`${worker.name} ended a continuous Run unexpectedly; it will not be restarted as a completed Run.`);
         }
         if (glueEnabled) {
-          while (!stopping) {
+          while (!stopping && !restartPending) {
             const savedState = await readState();
             if (savedState.sceneWorkers?.[worker.key]?.runDirectory === runDirectory
               && Number(savedState.sceneWorkers[worker.key].gluedThroughIteration || 0) >= finiteIterationLimit) break;
@@ -851,8 +962,15 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         log(`${worker.name}: global article queue exhausted; wait ${refreshCheckMs} ms for news refresh.`);
         await delayOrStop(refreshCheckMs);
       } else {
-        const repair = await escalateRepeatedCodeFailure(worker, runDirectory);
+        const repair = await queueRepair(worker, runDirectory, result.diagnosticLines);
+        if (repair.action === 'deferred') return;
         if (repair.action === 'pause') return;
+        if (repair.action === 'restart') {
+          state.repairRestart = { status: 'pending', worker: worker.key, iteration: repair.iteration, repairCommit: repair.result.repairCommit, requestedAt: new Date().toISOString() };
+          await saveState();
+          log(`${worker.name}: supervisor restart pending; wait until other workers finish their current processes without interrupting provider tasks.`);
+          return;
+        }
         if (repair.action === 'resume') retryAttempts.set(worker.key, 0);
         const attempt = (retryAttempts.get(worker.key) || 0) + 1;
         retryAttempts.set(worker.key, attempt);
@@ -867,7 +985,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         }
         state.sceneWorkers[worker.key].status = 'interrupted';
         await saveState();
-        const retryDelay = Math.min(30_000 * (2 ** (attempt - 1)), 300_000);
+        const retryDelay = Math.min(workerRetryBaseMs * (2 ** (attempt - 1)), 300_000);
         log(`${worker.name}: runner ended (${result.signal || `code ${result.code}`}) with Run state ${runManifest.status}; retry ${attempt}/${maxWorkerRetries} on same Run in ${retryDelay / 1000}s.`);
         await delayOrStop(retryDelay);
       }
@@ -884,7 +1002,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
       stopping = true;
       wakeForStop();
     }
-    for (const child of children) child.kill('SIGTERM');
+    if (!restartPending) for (const child of children) child.kill('SIGTERM');
     await Promise.allSettled([...workerTasks, refreshTask, ...mergeTasks.values()]);
   }
 }
@@ -910,6 +1028,10 @@ async function exhibitionMain() {
     const resumeRequested = commandArguments.some((argument) => flagName(argument) === '--resume-run');
     if (startNewRun && resumeRequested) throw new Error('Choose either --new-run or --resume-run, not both.');
     state = await readState();
+    if (!startNewRun && state.repairRestart?.status === 'pending') {
+      state.repairRestart = { ...state.repairRestart, status: 'restarted', restartedAt: new Date().toISOString() };
+      await saveState();
+    }
     if (commandArguments.some((argument) => flagName(argument) === '--resume-after-repair')) {
       for (const worker of Object.values(state.sceneWorkers || {})) delete worker.repairRequired;
       await saveState();
@@ -1422,7 +1544,26 @@ async function exhibitionMain() {
   });
 }
 
-exhibitionMain().catch((error) => {
+async function restartSupervisor() {
+  const argumentsList = process.argv.slice(2).filter((argument) => !['--new-run', '--resume-after-repair'].includes(flagName(argument)));
+  log('All workers have stopped without interruption; starting a fresh supervisor to resume their saved Runs.');
+  const child = spawn(process.execPath, [...process.execArgv, process.argv[1], ...argumentsList], {
+    cwd: repositoryRoot,
+    env: process.env,
+    stdio: 'inherit',
+  });
+  children.add(child);
+  const result = await new Promise((resolveChild, rejectChild) => {
+    child.once('error', rejectChild);
+    child.once('close', (code, signal) => resolveChild({ code, signal }));
+  });
+  children.delete(child);
+  if (result.code !== 0 && !externalStopRequested) process.exitCode = result.code || 1;
+}
+
+exhibitionMain().then(async () => {
+  if (restartPending && !externalStopRequested) await restartSupervisor();
+}).catch((error) => {
   console.error(`[exhibition] ${error.stack || error.message}`);
   process.exitCode = 1;
 });

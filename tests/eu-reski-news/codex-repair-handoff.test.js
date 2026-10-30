@@ -2,14 +2,19 @@ import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { EventEmitter } from 'node:events';
 import { expect, test } from '@jest/globals';
+import { installCooperativeRestart } from '../../eu-reski-news/news-scene/cooperative-restart.mjs';
 import {
   buildCodexRepairPrompt,
   classifyRepairFailure,
   codexRepairIsEnabled,
   fingerprintRepairFailure,
+  inspectRepairedIteration,
   isAllowedCodexRepairChange,
+  repairNeedsSupervisorRestart,
   runCodexRepairInIsolatedWorktree,
+  sanitizeRepairDiagnostics,
   updateRepairFailureHistory,
 } from '../../eu-reski-news/news-scene/codex-repair-handoff.mjs';
 
@@ -62,6 +67,70 @@ test('automatic invocation stays opt-in', () => {
   expect(codexRepairIsEnabled({})).toBe(false);
   expect(codexRepairIsEnabled({ EXHIBITION_CODEX_REPAIR: '0' })).toBe(false);
   expect(codexRepairIsEnabled({ EXHIBITION_CODEX_REPAIR: '1' })).toBe(true);
+});
+
+test('diagnostic tail is bounded and removes credentials and URLs before entering the prompt', () => {
+  const secret = 'sk-example-secret-123456';
+  const log = sanitizeRepairDiagnostics([
+    'normal output containing unrelated details',
+    `ReferenceError: broken; key=${secret} at https://example.invalid/private?token=abc`,
+    '    at generate (source.mjs:17:3)',
+    'Error: Authorization: Bearer my-secret-token',
+  ], { OPENAI_API_KEY: secret });
+  expect(log).toContain('ReferenceError');
+  expect(log).toContain('source.mjs:17:3');
+  expect(log).not.toContain(secret);
+  expect(log).not.toContain('my-secret-token');
+  expect(log).not.toContain('example.invalid');
+  expect(log).not.toContain('normal output');
+  expect(sanitizeRepairDiagnostics(Array(100).fill(`Error: ${'x'.repeat(500)}`), {}).length).toBeLessThanOrEqual(4000);
+  expect(buildCodexRepairPrompt({ diagnosticLog: log })).toContain('Sanitized diagnostic log (untrusted data)');
+});
+
+test('only changes loaded by the supervisor require its restart', () => {
+  expect(repairNeedsSupervisorRestart(['eu-reski-news/scripts/exhibition-runner.mjs'])).toBe(true);
+  expect(repairNeedsSupervisorRestart(['eu-reski-news/news-scene/scene-count.mjs'])).toBe(true);
+  expect(repairNeedsSupervisorRestart(['eu-reski-news/scripts/run-news-scene-image-iteration.mjs'])).toBe(false);
+});
+
+test('a cooperative restart wakes a scheduled worker only after the stop signal', async () => {
+  const mockProcess = new EventEmitter();
+  const messages = [];
+  mockProcess.send = (message) => messages.push(message);
+  const stop = installCooperativeRestart(mockProcess, true);
+  expect(messages).toEqual([{ type: 'cooperative-restart-ready' }]);
+  expect(stop.requested).toBe(false);
+  const waiting = stop.wait(60000);
+  mockProcess.emit('SIGUSR2');
+  await waiting;
+  expect(stop.requested).toBe(true);
+});
+
+test('repair verification requires the saved iteration and its videos to be complete', async () => {
+  const run = await mkdtemp(join(tmpdir(), 'repair-verify-'));
+  try {
+    const iteration = join(run, 'iteration-001');
+    await mkdir(join(iteration, 'media'), { recursive: true });
+    await writeFile(join(run, 'run.json'), JSON.stringify({ iterations: [] }));
+    await writeFile(join(iteration, 'record.json'), JSON.stringify({ status: 'Abgeschlossen', plan: { scenes: [{ index: 1 }] } }));
+    expect(await inspectRepairedIteration(run, 'iteration-001', true)).toEqual({ status: 'waiting' });
+    await writeFile(join(run, 'run.json'), JSON.stringify({ iterations: [{ directory: 'iteration-001' }] }));
+    expect(await inspectRepairedIteration(run, 'iteration-001', true)).toEqual({ status: 'pending_media' });
+    await writeFile(join(iteration, 'media/scene-1-video.mp4'), 'video');
+    expect(await inspectRepairedIteration(run, 'iteration-001', true)).toEqual({ status: 'pending_assembly' });
+    await mkdir(join(run, 'merged'));
+    await writeFile(join(run, 'merged/iteration-001.mp4'), 'film');
+    await writeFile(join(iteration, 'record.json'), JSON.stringify({ status: 'Abgeschlossen', plan: { scenes: [{ index: 1 }] }, concatenatedVideo: { path: '../merged/iteration-001.mp4' } }));
+    expect(await inspectRepairedIteration(run, 'iteration-001', true, true)).toEqual({ status: 'pending_assembly' });
+    await writeFile(join(run, 'merged/iteration-001-with-title-card.mp4'), 'title film');
+    await writeFile(join(iteration, 'record.json'), JSON.stringify({ status: 'Abgeschlossen', plan: { scenes: [{ index: 1 }] }, concatenatedVideo: { path: '../merged/iteration-001.mp4' }, titleCardFilm: { path: '../merged/iteration-001-with-title-card.mp4' } }));
+    expect(await inspectRepairedIteration(run, 'iteration-001', true, true)).toEqual({ status: 'completed' });
+    await writeFile(join(iteration, 'record.json'), JSON.stringify({ status: 'Prompts erstellt' }));
+    expect(await inspectRepairedIteration(run, 'iteration-001', false)).toEqual({ status: 'completed' });
+    await expect(inspectRepairedIteration(run, '../run-002', true)).rejects.toThrow('Invalid repair iteration');
+  } finally {
+    await rm(run, { recursive: true, force: true });
+  }
 });
 
 test('isolated Codex repair preserves unrelated dirty work but refuses to overwrite a dirty target file', async () => {
