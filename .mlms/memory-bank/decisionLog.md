@@ -21,3 +21,15 @@ Status: Accepted
 Context: User clarified that each scene needs a starting image, with no videos, and then specified API only.
 Decision: Generate each missing still through Runware API; do not use Playground UI or alternate image providers for the remaining scenes.
 Consequences: Iteration remains incomplete until scenes 2 and 3 are generated with a Runware key linked to the funded wallet.
+
+### D-0005: Preserve old provider tasks
+Status: Accepted
+Context: The exhibition has interrupted runs and costly external tasks.
+Decision: Resume existing tasks and avoid duplicate submissions while diagnosing the first new film.
+Consequences: Some workers may wait until provider status is resolved.
+
+### D-0006: Preserve equivalent saved schedule representation
+Status: Proposed
+Context: A saved 10h schedule and configured 600m have the same duration but failed a string-based resume fingerprint check.
+Decision: Locally preserve the saved representation only when duration and bias match; retain validation for real changes.
+Consequences: Existing plans stay unchanged and can resume; deployment requires explicit skill approval.

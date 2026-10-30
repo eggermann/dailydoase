@@ -83,3 +83,102 @@
 - Check provider wallet/quota before launching paid video.
 ### Process Decision
 - Complete this first still-image iteration and wait for the user's next direction.
+
+## Loop 1 Review
+### What Changed
+- Diagnosed failed autostart and relieved Firefox process exhaustion.
+### Acceptance Criteria Result
+- [x] Mini reachable and screen sharing opened.
+- [ ] Fresh generated film visible and playing.
+### Verification Result
+- Launch agent exited with EPERM; player status recovered after Firefox exited.
+### Issues / Gaps
+- Generator still needs a successful start and output verification.
+### User Demo Notes
+- Screen sharing shows the exhibition player.
+## Loop 1 Retrospective
+### What Worked
+- SSH and process inspection located the startup failure and resource exhaustion.
+### What Was Confusing
+- Volume access may depend on process launch context.
+### What To Improve Next Loop
+- Test the existing player start path and inspect its actual result.
+### Process Decision
+- Continue.
+
+## Loop 2 Review
+### What Changed
+- Resumed the saved campaign with the equivalent original `10h` spelling; kept the configured 3-minute pacing.
+- Player now reports 11 active runs and a new iteration in run-015.
+### Acceptance Criteria Result
+- [x] Existing workers resume without changing stored scene settings.
+- [ ] New iteration completed and confirmed playing.
+### Verification Result
+- Player status reports the generator running; run-015 iteration-004 has selected a news article and started planning.
+- Video provider requests encounter temporary credit reservation errors.
+### Issues / Gaps
+- Player start and reboot autostart currently fail without specifying `10h`; saved `10h` and configured `600m` compare unequal.
+- No fresh film verified yet.
+### User Demo Notes
+- Player is visible through screen sharing.
+## Loop 2 Retrospective
+### What Worked
+- Explicit equivalent duration restored the saved run without modifying it.
+### What Was Confusing
+- Matching compares duration spelling instead of equivalent duration.
+### What To Improve Next Loop
+- Monitor the current iteration and provider status; preserve paid task IDs.
+### Process Decision
+- Continue.
+
+## Loop 3 Review
+### What Changed
+- Prepared a local resume compatibility fix for equivalent interval spellings and a real offline resume test.
+### Acceptance Criteria Result
+- [x] Same duration preserves saved plan; different duration and bias remain rejected.
+- [x] Focused startup, resume, and sequence tests pass.
+- [ ] New generated film visible and playing.
+### Verification Result
+- Eight tests passed; diff reviewed and whitespace check clean.
+- Five scene images generated in run-015 iteration-004; video work has not completed.
+### Issues / Gaps
+- Local compatibility fix has not been committed or deployed; permission is needed under skill rules.
+- Runware video credit reservation retries continue for old work.
+### User Demo Notes
+- Kiosk player reports 11 running worker paths.
+## Loop 3 Retrospective
+### What Worked
+- A low-risk equivalent-duration fix preserves saved fingerprints.
+### What Was Confusing
+- Stored and current duration strings represented the same value.
+### What To Improve Next Loop
+- Verify actual film and user-visible playback before proposing deployment.
+### Process Decision
+- Continue.
+
+## Loop 4 Review
+### What Changed
+- The first new iteration was generated and selected in the player.
+### Acceptance Criteria Result
+- [x] Fresh film exists with five generated scene videos and title card.
+- [x] Player automatically listed the film and played it after selection.
+- [x] Existing generator is running; no duplicate supervisor started.
+### Verification Result
+- run-015/iteration-004: 5 scene videos, assembled film and audio-normalized title version.
+- Player video element showed the run-015 iteration-004 URL, paused=false, currentTime > 0.
+- Eight focused offline tests and diff check passed for the prepared restart fix.
+### Issues / Gaps
+- Saved 10h vs configured 600m prevents a normal start without an explicit 10h argument; local fix is tested but not deployed.
+- Video provider has previously rejected old work due to credit reservations.
+### User Demo Notes
+- Player entry 20: iteration-004-with-title-card-audio-normalized.mp4; article Die drei Perlen der Ostsee.
+## Loop 4 Retrospective
+### What Worked
+- Restoring the saved schedule spelling preserved the worker state and produced a new film.
+- Patient provider polling avoided duplicating uncertain tasks.
+### What Was Confusing
+- The display briefly showed stale media counts while normalization ran.
+### What To Improve Next Loop
+- Apply the prepared equivalent-duration fix after authorization so ordinary restart works.
+### Process Decision
+- Goal complete; proposed restart fix awaits approval.

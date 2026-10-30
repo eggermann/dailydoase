@@ -1,11 +1,11 @@
 # Product Context
 ## Purpose
-Turn a current EU news story into a traceable visual story seed.
+Show newly generated EU news films continuously in the Mac mini exhibition player.
 ## Users
-Dominik, reviewing AI-generated story images and prompts.
+Dominik and exhibition viewers.
 ## Core Value
-See the source story, image analysis, story plan, generated first-scene image, and exact prompt trail together.
+Fresh films join existing playback automatically.
 ## Current Scope
-One random article, one GPT multimodal story-planning call, one first-scene still generation, and one HTML review page.
+Recover one newly generated film through the current campaign and verify playback.
 ## Non-Goals
-Video generation, automatic repeated iterations, production UI, or modifying existing camera/story pipelines.
+Deleting old runs or reworking unrelated systems.
