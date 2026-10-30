@@ -62,6 +62,22 @@ function positiveInteger(value, fallback) {
   return number;
 }
 
+function comparableWorkerPlan(plan) {
+  const { scheduleIterationCount, ...stablePlan } = plan;
+  return {
+    ...stablePlan,
+    iterators: plan.iterators.map((iterator) => ({
+      ...iterator,
+      arguments: iterator.arguments.filter((argument) =>
+        !['--iterations', '--article-order'].includes(flagName(argument))),
+    })),
+  };
+}
+
+function workerPlansMatch(left, right) {
+  return JSON.stringify(comparableWorkerPlan(left)) === JSON.stringify(comparableWorkerPlan(right));
+}
+
 function log(message) {
   console.log(`[exhibition ${new Date().toISOString()}] ${message}`);
 }
@@ -1315,7 +1331,7 @@ async function exhibitionMain() {
           }
           const key = `${String(index + 1).padStart(2, '0')}-${iterator.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
           const planPath = join(outputDirectory, `.exhibition-iterator-plan-${key}.json`);
-          const workerPlan = {
+          let workerPlan = {
             workerKey: key,
             scenePath: sceneSequence.path,
             scheduleEnabled: sceneSequence.scheduleEnabled,
@@ -1335,13 +1351,29 @@ async function exhibitionMain() {
           const completedRunDirectory = resumingParallelCampaign && savedWorker?.status === 'completed'
             ? savedWorker.runDirectory
             : null;
-          const expectedRunFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
           if (resumingParallelCampaign && !savedWorker) {
             throw new Error(`Active parallel exhibition is missing worker ${key}; refusing to create a replacement worker during resume.`);
           }
-          if ((savedRunDirectory || completedRunDirectory)
-            && savedWorker.iteratorPlanFingerprint !== expectedRunFingerprint) {
-            throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+          if (savedRunDirectory || completedRunDirectory) {
+            let savedWorkerPlan = null;
+            try {
+              savedWorkerPlan = JSON.parse(readFileSync(savedWorker.planPath || planPath, 'utf8'));
+            } catch {}
+            if (savedWorkerPlan) {
+              if (!workerPlansMatch(savedWorkerPlan, workerPlan)) {
+                throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+              }
+              workerPlan = savedWorkerPlan;
+            } else {
+              const expectedFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
+              if (savedWorker.iteratorPlanFingerprint !== expectedFingerprint) {
+                throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+              }
+            }
+            const savedPlanFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
+            if (savedWorker.iteratorPlanFingerprint && savedWorker.iteratorPlanFingerprint !== savedPlanFingerprint) {
+              throw new Error(`Worker ${key} saved iterator plan fingerprint is inconsistent with its Run; refusing resume.`);
+            }
           }
           const videoSettings = {
             model: argumentValue(iterator.arguments, '--video-model', defaultGeneration.videoModel),
