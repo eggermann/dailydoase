@@ -12,6 +12,13 @@ import { loadSceneSequence, resolveParallelSceneSchedule } from '../news-scene/s
 import { mergeRunnerArguments } from '../news-scene/runner-arguments.mjs';
 import { getReadyIterations } from '../news-scene/exhibition-readiness.mjs';
 import { withDirectoryLock } from '../news-scene/directory-lock.mjs';
+import {
+  buildCodexRepairPrompt,
+  classifyRepairFailure,
+  codexRepairIsEnabled,
+  updateRepairFailureHistory,
+  runCodexRepairInIsolatedWorktree,
+} from '../news-scene/codex-repair-handoff.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -93,6 +100,114 @@ async function inspectSavedSceneWorkers(savedWorkers = {}) {
   }
   return hasResumableWorker;
 }
+
+async function latestInterruptedIteration(runDirectory) {
+  const names = await readdir(runDirectory);
+  const candidates = names
+    .map((name) => ({ name, iteration: Number(/^iteration-(\d+)$/.exec(name)?.[1]) }))
+    .filter(({ iteration }) => Number.isInteger(iteration))
+    .sort((left, right) => right.iteration - left.iteration);
+  for (const candidate of candidates) {
+    const marker = await readJson(join(runDirectory, candidate.name, 'live.json')).catch(() => null);
+    if (marker?.status === 'interrupted' && marker.error) return { ...marker, iteration: candidate.name };
+  }
+  return null;
+}
+
+async function escalateRepeatedCodeFailure(worker, runDirectory) {
+  const failure = await latestInterruptedIteration(runDirectory);
+  if (!failure || classifyRepairFailure(failure) !== 'code_defect_candidate') return { action: 'retry' };
+
+  const statePath = join(runDirectory, 'codex-repair-state.json');
+  let saved = {};
+  try {
+    saved = await readJson(statePath);
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  const history = updateRepairFailureHistory(saved.history, failure);
+  const minimumRepeats = positiveInteger(process.env.EXHIBITION_CODEX_REPAIR_AFTER, 3);
+  const repairState = { ...saved, history, updatedAt: new Date().toISOString() };
+  await saveJson(statePath, repairState);
+  if (history.count < minimumRepeats) {
+    log(`${worker.name}: repeated code-error candidate ${history.count}/${minimumRepeats}; preserve Run and retry same iteration.`);
+    return { action: 'retry' };
+  }
+
+  const sourceCommit = await new Promise((resolveCommit) => {
+    const child = spawn('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot, stdio: ['ignore', 'pipe', 'ignore'] });
+    let output = '';
+    child.stdout.setEncoding('utf8').on('data', (chunk) => { output += chunk; });
+    child.once('close', (code) => resolveCommit(code === 0 ? output.trim() : null));
+    child.once('error', () => resolveCommit(null));
+  });
+  const prompt = buildCodexRepairPrompt({
+    runDirectory: '(run artifacts are intentionally not exposed to Codex)',
+    workerName: worker.name,
+    iteration: failure.iteration,
+    stage: failure.stage,
+    error: failure.error,
+    sourceCommit,
+  });
+  const casePath = join(runDirectory, 'codex-repair-case.json');
+  const repairAttempted = saved.attemptedFingerprint === history.fingerprint;
+  const handoff = {
+    createdAt: new Date().toISOString(),
+    sourceCommit,
+    worker: worker.name,
+    iteration: failure.iteration,
+    stage: failure.stage,
+    error: failure.error,
+    errorClass: history.errorClass,
+    fingerprint: history.fingerprint,
+    repeatCount: history.count,
+    prompt,
+  };
+  await saveJson(casePath, handoff);
+
+  if (codexRepairIsEnabled() && !repairAttempted) {
+    const result = await runCodexRepairInIsolatedWorktree({
+      repositoryRoot,
+      prompt,
+      failureFingerprint: history.fingerprint,
+    });
+    if (result.status === 'repaired_and_committed') {
+      repairState.attemptedFingerprint = history.fingerprint;
+      repairState.attemptedAt = new Date().toISOString();
+      repairState.resolvedCommit = result.repairCommit;
+      repairState.resolvedAt = new Date().toISOString();
+      await saveJson(statePath, repairState);
+      log(`${worker.name}: Codex repair ${result.repairCommit} passed regression tests and was committed; resume same Run.`);
+      return { action: 'resume', result };
+    }
+    handoff.repairResult = result;
+    const canRetryAfterSetup = ['blocked_dirty_worktree', 'codex_unavailable'].includes(result.status);
+    if (!canRetryAfterSetup) {
+      repairState.attemptedFingerprint = history.fingerprint;
+      repairState.attemptedAt = new Date().toISOString();
+      await saveJson(statePath, repairState);
+    }
+    handoff.status = canRetryAfterSetup ? 'repair_environment_not_ready' : 'repair_required';
+  } else {
+    handoff.status = repairAttempted ? 'repair_required' : 'repair_cli_not_enabled';
+    handoff.reason = repairAttempted
+      ? 'Codex was already invoked for this repeated error fingerprint.'
+      : 'Set EXHIBITION_CODEX_REPAIR=1 after provisioning an authenticated Codex CLI to allow one isolated repair attempt.';
+  }
+
+  await saveJson(casePath, handoff);
+  state.sceneWorkers[worker.key].status = 'repair_required';
+  state.sceneWorkers[worker.key].repairRequired = {
+    fingerprint: history.fingerprint,
+    sourceCommit,
+    casePath,
+    status: handoff.status,
+  };
+  await saveState();
+  log(`${worker.name}: paused safely for Codex repair. Evidence: ${casePath}. Resume with --resume-after-repair after the source fix is committed.`);
+  return { action: 'pause', handoff };
+}
+
 
 async function saveJson(path, value) {
   const temporaryPath = `${path}.${randomUUID()}.tmp`;
@@ -651,6 +766,16 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
       }
       return;
     }
+    const savedRepairHold = state.sceneWorkers?.[worker.key]?.repairRequired;
+    if (['repair_cli_not_enabled', 'repair_environment_not_ready'].includes(savedRepairHold?.status)
+      && codexRepairIsEnabled()) {
+      delete state.sceneWorkers[worker.key].repairRequired;
+      await saveState();
+      log(`${worker.name}: Codex repair is now enabled; retrying the saved failure through the isolated repair flow.`);
+    } else if (savedRepairHold) {
+      log(`${worker.name}: waiting for source repair; saved Run remains untouched. Use --resume-after-repair after committing a reviewed fix.`);
+      return;
+    }
     if (state.sceneWorkers?.[worker.key]?.runDirectory) startMergeLoop(worker);
     while (!stopping) {
       const savedRunDirectory = worker.savedRunDirectory || state.sceneWorkers?.[worker.key]?.runDirectory || null;
@@ -721,6 +846,9 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         log(`${worker.name}: global article queue exhausted; wait ${refreshCheckMs} ms for news refresh.`);
         await delayOrStop(refreshCheckMs);
       } else {
+        const repair = await escalateRepeatedCodeFailure(worker, runDirectory);
+        if (repair.action === 'pause') return;
+        if (repair.action === 'resume') retryAttempts.set(worker.key, 0);
         const attempt = (retryAttempts.get(worker.key) || 0) + 1;
         retryAttempts.set(worker.key, attempt);
         if (attempt >= maxWorkerRetries) {
@@ -762,6 +890,8 @@ async function exhibitionMain() {
     console.log('Use --stop-after-iterations=N for a finite run; in parallel Scene mode N applies per worker.');
     console.log('In parallel mode, two workers with N=10 can generate up to 20 iterations total.');
     console.log('Use --new-run to start fresh after an existing campaign; previous Run directories are retained.');
+    console.log('After a source fix, --resume-after-repair clears the repair hold and resumes the saved Run.');
+    console.log('Codex repair is opt-in: set EXHIBITION_CODEX_REPAIR=1; only repeated runtime-code errors qualify.');
     console.log('Use --news-only to refresh stale news, finish Jev ranking, and exit before scene generation.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
     console.log('Flags: --auto-mode enables per-iteration artistic direction; --no-auto-mode disables it.');
@@ -775,6 +905,11 @@ async function exhibitionMain() {
     const resumeRequested = commandArguments.some((argument) => flagName(argument) === '--resume-run');
     if (startNewRun && resumeRequested) throw new Error('Choose either --new-run or --resume-run, not both.');
     state = await readState();
+    if (commandArguments.some((argument) => flagName(argument) === '--resume-after-repair')) {
+      for (const worker of Object.values(state.sceneWorkers || {})) delete worker.repairRequired;
+      await saveState();
+      log('Cleared repair holds after explicit source repair; resuming saved Run directories.');
+    }
     if (newsOnly) {
       log(`News-only mode: refresh ${newsDirectory} if stale, finish Jev ranking, then exit.`);
       await refreshNewsIfNeeded();
@@ -959,7 +1094,7 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run', '--news-only'].includes(flagName(argument))) {
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run', '--news-only', '--resume-after-repair'].includes(flagName(argument))) {
         if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }

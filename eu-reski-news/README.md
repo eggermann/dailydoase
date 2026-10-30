@@ -436,3 +436,16 @@ Der Starthelfer lädt standardmäßig `.env` aus dem Haupt-Repository; alternati
 #### Live-Referenzlauf und Resume
 
 Der ausgeführte Referenzfilm liegt lokal unter `eu-reski-news/GENERATIONS/news/exhibition/run-001/glue-vids/eu-reski-live-full.mp4`. `run-001/run.json` und `run-001/glue-vids/glue-run.json` enthalten Laufparameter, Provider-Task-IDs und Glue-Fortschritt. Der Glue-Film ist aktuell bis Iteration 7 gebaut; Iteration 8 und 9 haben vier offene Videotasks. Auf derselben Installation setzt `npm run news:auto-10` diesen Lauf über den gespeicherten Runner-Zustand fort, pollt offene IDs und ergänzt Glue nach jeder vollständig fertigen Iteration. Generierte Medien und Provider-Logs liegen im gitignored `GENERATIONS/`-Ordner und sind nicht Teil des Commits.
+
+
+### Sichere Fehler-Recovery mit Codex CLI
+
+Der Supervisor zählt identische Runtime-Codefehler pro Run. Nach drei Wiederholungen speichert er `codex-repair-case.json` und pausiert den betroffenen Worker, ohne `run.json`, Medien oder gespeicherte Provider-Task-IDs zu löschen. GPT-Trunkierung, HTTP-/Netzwerkfehler und `pending_media` lösen keine Code-Reparatur aus.
+
+Codex-Reparatur ist standardmäßig aus. Nach Installation und Anmeldung der Codex CLI kann sie explizit aktiviert werden:
+
+```sh
+EXHIBITION_CODEX_REPAIR=1 npm run news:exhibition:from-scene-json
+```
+
+Der CLI-Aufruf arbeitet in einem isolierten Git-Worktree. Nur Änderungen an EU-RESKI-Quellcode und fokussierten Tests sind zulässig. Regressionstests und `git diff --check` müssen bestehen; danach wird der Fix committed und in den sauberen Runner-Checkout übernommen. Bei einem nicht verfügbaren CLI, fehlender Anmeldung, schmutzigem Quell-Checkout oder fehlgeschlagenen Tests bleibt der Run sicher angehalten. Nach einem manuell geprüften und committeten Fix setzt `--resume-after-repair` denselben gespeicherten Run fort.
