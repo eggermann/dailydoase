@@ -38,7 +38,7 @@ fi
 
 if [ "${CAMPAIGN_CONTINUOUS:-0}" = 1 ]; then
   export NEWS_REFRESH_INTERVAL_MS=86400000
-  export NEWS_CAMPAIGN_START_SPACING_MS=180000
+  export NEWS_CAMPAIGN_START_SPACING_MS=515000
   exec npm run news:exhibition:from-scene-json
 fi
 
