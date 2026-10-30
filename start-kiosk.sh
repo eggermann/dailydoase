@@ -15,7 +15,8 @@ done
 /bin/sleep 20
 
 exec "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-    --start-fullscreen \
+    --kiosk \
+    --disable-session-crashed-bubble \
     --no-first-run \
     --no-default-browser-check \
     --autoplay-policy=no-user-gesture-required \
