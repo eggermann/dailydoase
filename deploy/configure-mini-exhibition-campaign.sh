@@ -31,9 +31,11 @@ cat > /Users/dominikeggermann/Library/LaunchAgents/com.dailydoase.eu-reski-exhib
   <key>Label</key>
   <string>com.dailydoase.eu-reski-exhibition-campaign</string>
   <key>ProgramArguments</key>
-  <array><string>$ROOT/deploy/start-exhibition-campaign.sh</string></array>
-  <key>EnvironmentVariables</key>
-  <dict><key>CAMPAIGN_CONTINUOUS</key><string>1</string></dict>
+  <array>
+    <string>/Users/dominikeggermann/.local/node-v22.23.2-darwin-x64/bin/node</string>
+    <string>--env-file=/Users/dominikeggermann/Projekte/dailydoase/.env</string>
+    <string>$ROOT/deploy/start-exhibition-campaign.mjs</string>
+  </array>
   <key>RunAtLoad</key><true/>
   <key>KeepAlive</key><false/>
   <key>StandardOutPath</key>
