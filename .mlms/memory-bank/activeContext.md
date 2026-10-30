@@ -1,27 +1,25 @@
 # Active Context
-
 ## Current Goal
-Save and commit a reproducible five-iteration exhibition run matching run-003.
-
+Complete iteration-001 HTML with one API-generated starting image for every planned scene, using the existing random EU news article. Do not generate video.
 ## Current Loop
-Loop: 2 · Phase: Complete; final review and commit
-
+Loop: 3
+Phase: Complete
 ## Shared Loop Budget
 Root Context: .mlms
-Used: 2
+Used: 3
 Maximum: 5
-
 ## Current Focus
-Five iterations completed with Guernica figure and full-painting references, article references off, and incremental First/Last-Frame glue. Film, run records, reference inputs, settings snapshot, and reconstruction recipe are staged for commit.
-
+Review and deliver iteration-002 generated with FLUX.2 Klein 9B.
 ## Assumptions
-- User explicitly authorized live generation and commit after the earlier no-generation scope.
-- Reference run-003 used masked Guernica figure crops and the full-painting style reference; article-photo references were off.
-- Provider outputs can vary across time, so records and final MP4 are retained alongside the reconstruction recipe.
-
+- Use the newest `news-capitals/all-*.json` aggregate and randomly select from rows with article images.
+- Semantic anchors mean `EU`, `Europa`, `Europe`, `Европа`.
+- The crocodile is a fictional recurring protagonist whose silhouette draws from the Guernica bull mask.
+- Generate one starting still image per scene through an image API; no video API calls.
+- Runware API only; do not use the Runware web UI or alternate image-generation tools.
 ## Risks / Unknowns
-- The worktree has no `.env`; the main repository `.env` is resolved by the start script. Its contents were not read or copied.
-- Full per-scene working outputs are large and remain local; committed snapshot contains final films, run records, and source reference assets.
-
+- Iteration 001 used FLUX.2 Flex for $0.66 total; user requested a lower-cost rerun.
+- Iteration 002 used FLUX.2 Klein 9B via API for $0.00234 total across three stills.
+- H3 video/audio was not generated; prompts are ready for the next step.
+- The isolated worktree has no local `node_modules`; focused syntax/manual checks passed.
 ## Next Action
-Review staged file list, commit requested reproduction snapshot and relevant runner/config changes; do not push.
+Review `news-capitals/generations/iteration-002/index.html` in the EU-capital-news worktree.

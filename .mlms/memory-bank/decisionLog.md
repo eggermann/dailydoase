@@ -1,23 +1,5 @@
 # Decision Log
 ## Decisions
-### D-0007: Commit a self-contained run-003-style reproduction snapshot
-Status: Accepted by user
-Context: User requested five new iterations matching exhibition run-003 and asked to save and commit enough to reconstruct the run.
-Decision: Retain final merged and glue films, exact settings and per-iteration records, hashes, and the Guernica reference inputs in `eu-reski-news/reproductions/reference-5-run-003-style/`; commit relevant generator/config changes and this snapshot. Leave the earlier no-Guernica partial run separate.
-Consequences: Reproduction recipe is reviewable from the repository. Future provider generations can differ; saved output film and task/seed records preserve this run.
-
-### D-0006: Iteration-local artistic auto-mode
-Status: Accepted
-Context: The exhibition needs article-specific creative settings while preserving the existing manual pipeline and resume behavior.
-Decision: Add a default-off `generation.autoMode` and CLI switch. Use one structured Story-model director decision per new iteration, persist selected and effective flags before Story planning, reuse saved decisions on resume, and keep technical/media controls manual. Constrain scene video mode to executable `image_to_video`.
-Consequences: Auto mode adds one bounded GPT planning call per new iteration (with one correction attempt only after invalid output). Manual mode makes no additional calls and leaves Story prompts/schemas untouched. No live run is part of implementation.
-
-### D-0005: P-Video-2-Pro cost recipe for ten new iterations
-Status: Complete
-Context: User requested ten linear EU-RESKI news iterations with five images and matching videos per iteration.
-Decision: Use `prunaai:p-video@2-pro`, 480p, `settings.mode=cost`, first-frame image-to-video, and GPT-timed scene durations clamped to 5–6 seconds. Generate each iteration's videos and FFmpeg merge before selecting the next article/stream fragments.
-Consequences: 50 videos cost $2.9375 from Runware; 50 images cost $0.963. GPT billed separately. Artifacts are stored in a fresh date-stamped run folder.
-
 ### D-0001: One image-focused iteration before video
 Status: Accepted
 Context: The user wants to focus first on scene-image generation and inspect the first scene in HTML.

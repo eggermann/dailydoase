@@ -1,27 +1,18 @@
 # Progress
-
 ## Done
-- Confirmed clean detached worktree at analysis snapshot `32e27bbc`.
-- Created `codex/eu-reski-artistic-auto-mode`.
-- Read supplied specification, analysis artifacts, repository instructions, and prior memory. Preserved prior project brief at `projectBrief.previous.md`.
-- Confirmed auto-mode insertion point after article selection and before Story planning.
-- Confirmed no `.env` in this worktree; the exhibition start script resolves credentials via `NEWS_ENV_FILE` or the main repository `.env`.
-- Added default-off config and CLI switches, structured director decision validation, effective-flag constraints, saved per-iteration decisions, and resume validation.
-- Added `news:auto-10` and documented `npm run news:auto-10`; user later authorized and ran ten live iterations.
-- Added six mock-based unit tests for activation, schema validation, legacy effects, iteration independence, executable mode, and resume behavior.
-- Live run created ten iterations and auto decisions. Seven iterations have First/Last-Frame glue built; video tasks remain in iterations 8 and 9.
-- Added 60-second video poll windows, `pending_media` status and task summaries, same-ID polling on resume, and Hugging Face fail-closed handling for unknown submission outcomes.
-- Focused Jest suite passed (6/6 earlier; 8/8 after recovery changes); syntax checks and `git diff --check` passed.
-
+- Read the user-provided MiniMax H3 Max Turbo guide.
+- Read the existing H3 adapter and test; confirmed it supports 5–15 seconds and defaults to 480p.
+- Verified the newest EU-capitals aggregate contains 2,462 records with 2,420 article images.
+- Confirmed OpenAI and Runware keys exist without displaying their values.
+- Preserved the completed EU-capitals project context in `.mlms/history/eu-capital-news-20261009/`.
+- Randomly selected article 651/2,418 image-bearing records: an Estonian-language article about US sanctions on the ICC.
+- GPT vision described the press-conference photo as illustrative, then produced a three-scene crocodile story with each scene at 5 seconds and H3-ready audio prompts.
+- Initially generated a reference first-frame image with Codex image_gen; after the user provided the funded Runware API key, generated all three accepted scene stills using Runware imageInference API.
+- Built `news-capitals/generations/iteration-001/index.html` with article photo, generated image, vision notes, story plan, audio decisions, and detailed prompts/logs.
+- Verified three Runware still files, three HTML scene image references, one image per scene, no video API calls, no missing-image notices, and no API secret in saved records. Runware reported total cost $0.66.
+- Created iteration-002 with FLUX.2 Klein 9B via Runware API. Generated all three 832×480 stills for $0.00078 each ($0.00234 total), with the article and Guernica references only on scene 1 and previous-frame continuity references on scenes 2–3.
+- Saved per-scene request/response logs and a dedicated HTML page; visually inspected all three images.
 ## In Progress
-- None. User redirected follow-on work to a new five-iteration set matching run-003.
-
+- None.
 ## Next
-- Review and commit the run-003-style reproduction snapshot and relevant config/runner changes; do not push.
-
-## Run-003-style five-iteration reproduction
-- Completed five iterations using HF FLUX Klein, masked Guernica figure references, the full-painting style reference, article-photo references off, and P-Video 2 Pro at 480p.
-- First/Last-Frame glue was generated as iterations completed; merged film duration is 133.416688 seconds.
-- Added a tracked reproduction snapshot with both films, run records, settings, hashes, and copied Guernica reference assets.
-- Earlier no-Guernica partial run remains separate and untouched.
-- Validation: all five records show figure refs on, article refs off, and catalog + style roles; ffprobe reports 133.416688 seconds; git diff check passes.
+- User reviews iteration-001 HTML and decides next direction.

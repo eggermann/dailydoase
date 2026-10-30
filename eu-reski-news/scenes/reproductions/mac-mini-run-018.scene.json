@@ -1,0 +1,70 @@
+{
+  "name": "mac-mini-run-018-tea-article-reproduction",
+  "reference": {
+    "iterationPath": "/Volumes/DAILYDOASE_MEDIA/dailydoase-generations/eu-reski/GENERATIONS/news/exhibition/mac-mini/scene-campaign-10h/run-018/iteration-001",
+    "branch": "eu-reski/eu-reski",
+    "commit": "d48db711294775eb4aba596be58be1fafc8d95b2",
+    "articleId": 474727616,
+    "articleTitle": "Uzmanīgi ar tēju! Uz robežas aptur preci no Armēnijas, kurā atklāts aizliegtu pesticīdu \"kokteilis\"",
+    "sourceAggregate": "/Users/dominikeggermann/Projekte/dailydoase-eu-reski/eu-reski-news/news/A/all-2026-10-18T10-06-21-802Z.json",
+    "aggregateHash": "3d74b4cce2f2079ac0f36085abee0ad466d7053a77a3ec1ee2725543eefa0ad9",
+    "notes": [
+      "Reference values come from iteration-001/record.json and its saved requests; campaign run.json has conflicting inherited values.",
+      "Auto Director can still choose articleImageReference and sceneDurationMode; current schema has no fixed override for either while autoMode is enabled."
+    ]
+  },
+  "generationOverrides": {
+    "autoMode": true,
+    "stopOmitSimilar": true,
+    "storyModel": "gpt-6-luna",
+    "includeSourceCodeContext": false,
+    "iterations": 1,
+    "pauseMs": 0,
+    "articleOrder": "global",
+    "styleReference": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": false,
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": true,
+    "preserveCubistVideoStyle": true,
+    "videosAfterEachIteration": true,
+    "generate-title-cards": true,
+    "sceneCount": {
+      "mode": "taktmuster",
+      "count": 5,
+      "takt": 2,
+      "numerator": 4,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 1,
+      "minimum": 5,
+      "maximum": 5
+    },
+    "sceneLength": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "videoMode": "image_to_video",
+    "videoDirection": "on",
+    "storyClou": "on",
+    "videoVision": "on",
+    "videoAudioDirection": "on",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  }
+}
