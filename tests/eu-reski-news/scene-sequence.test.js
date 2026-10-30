@@ -31,7 +31,7 @@ describe('EU-RESKI scene sequence', () => {
     }
     const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '../..');
     const defaults = JSON.parse(await readFile(join(repoRoot, 'eu-reski-news/default-exhibition-settings.json'), 'utf8')).generation;
-    const sequence = await loadSceneSequence(join(repoRoot, 'eu-reski-news/scenes'), defaults, { scheduleEnabled: false });
+    const sequence = await loadSceneSequence(join(dirname(fileURLToPath(import.meta.url)), 'fixtures', 'exhibition-scene-sequence'), defaults, { scheduleEnabled: false });
     const [autoScene, manualScene] = sequence.iterators;
     const createStream = (generation) => createSceneCountStream(resolveSceneCountSettings({
       'scene-count-mode': generation.sceneCount.mode,

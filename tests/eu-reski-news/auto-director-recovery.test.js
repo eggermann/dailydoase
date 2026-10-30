@@ -23,6 +23,8 @@ const request = buildAutoDirectorRequest({ article, model: 'gpt-4.1-mini', const
 const flags = {
   storyClou: 'on',
   legacyGuernicaStyleReferencePrompt: false,
+  guernicaStyleReference: true,
+  guernicaFigureReference: true,
   preserveCubistVideoStyle: true,
   sceneVisualControls: 'scene-specific',
   articleImageReference: true,
@@ -31,6 +33,7 @@ const flags = {
   videoVision: 'on',
   videoAudioDirection: 'on',
   videoMaxZoom: 0.12,
+  sceneDurationMode: 'taktmuster',
 };
 const response = {
   choices: [{

@@ -1,0 +1,63 @@
+{
+  "name": "gpt-4o-mini-6iter-reference-draft",
+  "reference": {
+    "report": "file:///Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter/run-001/index.html",
+    "runManifest": "file:///Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/gpt-4o-mini-6iter/run-001/run.json",
+    "sourceCommit": "4122628221cae355eddfaac7e4869eb7e623d4dc",
+    "sourceWorkingTreeClean": false,
+    "directorSha256": "1ea931dfb5d8da85e3e0c8ae862ef596ff7102e681758bd4e715f2f5f7187464",
+    "notes": "Entwurf: heutiger Regieprompt hat einen anderen Hash; Code- und Promptgleichheit nicht belegt. preserveCubistVideoStyle und legacyGuernicaStyleReferencePrompt sind im historischen Manifest nicht aufgezeichnet. Diese Datei bleibt durch .Xscene.json deaktiviert."
+  },
+  "generationOverrides": {
+    "autoMode": false,
+    "storyModel": "gpt-4o-mini",
+    "iterations": 5,
+    "pauseMs": 0,
+    "articleOrder": "linear",
+    "styleReference": true,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "guernicaFigureReference": true,
+    "articleImageReference": false,
+    "guernicaLocationReference": false,
+    "landscapePrompt": false,
+    "preserveCubistVideoStyle": false,
+    "videosAfterEachIteration": true,
+    "generate-title-cards": true,
+    "sceneCount": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    },
+    "sceneLength": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "videoMode": "image_to_video",
+    "videoDirection": "off",
+    "storyClou": "off",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  },
+  "description": "Inaktiver Vergleichsentwurf: gespeicherte Einstellungen von gpt-4o-mini-6iter/run-001; historischer Regieprompt noch nicht reproduziert."
+}

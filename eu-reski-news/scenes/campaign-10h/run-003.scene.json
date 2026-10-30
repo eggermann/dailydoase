@@ -1,0 +1,25 @@
+{
+  "name": "run-003-reproduction",
+  "generationIntervalInMinutes": "-1",
+  "reference": {
+    "film": "file:///Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-003/merged/eu-reski-gesamtfilm.mp4",
+    "runManifest": "file:///Users/eggermann/.codex/worktrees/story-composition-prompt-test/dailydoase/eu-reski-news/GENERATIONS/news/exhibition/run-003/run.json",
+    "notes": "Originalfilm zum Vergleich; das Scene-Profil bildet die Einstellungen nach."
+  },
+  "generationOverrides": {
+    "storyModel": "gpt-4o-mini",
+    "includeSourceCodeContext": false,
+    "sceneCount": {
+      "numerator": 3
+    },
+    "sceneLength": {
+      "takt": -1,
+      "type": "dramatic-arc"
+    },
+    "styleReference": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "videoDirection": "on",
+    "noDialogueNarration": true,
+    "iterations": 5
+  }
+}

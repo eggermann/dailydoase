@@ -12,6 +12,16 @@ import { loadSceneSequence, resolveParallelSceneSchedule } from '../news-scene/s
 import { mergeRunnerArguments } from '../news-scene/runner-arguments.mjs';
 import { getReadyIterations } from '../news-scene/exhibition-readiness.mjs';
 import { withDirectoryLock } from '../news-scene/directory-lock.mjs';
+import {
+  buildCodexRepairPrompt,
+  classifyRepairFailure,
+  codexRepairIsEnabled,
+  inspectRepairedIteration,
+  repairNeedsSupervisorRestart,
+  sanitizeRepairDiagnostics,
+  updateRepairFailureHistory,
+  runCodexRepairInIsolatedWorktree,
+} from '../news-scene/codex-repair-handoff.mjs';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -50,6 +60,22 @@ function positiveInteger(value, fallback) {
   const number = Number(value ?? fallback);
   if (!Number.isSafeInteger(number) || number < 1) throw new Error(`Expected positive integer, got ${value}`);
   return number;
+}
+
+function comparableWorkerPlan(plan) {
+  const { scheduleIterationCount, ...stablePlan } = plan;
+  return {
+    ...stablePlan,
+    iterators: plan.iterators.map((iterator) => ({
+      ...iterator,
+      arguments: iterator.arguments.filter((argument) =>
+        !['--iterations', '--article-order'].includes(flagName(argument))),
+    })),
+  };
+}
+
+function workerPlansMatch(left, right) {
+  return JSON.stringify(comparableWorkerPlan(left)) === JSON.stringify(comparableWorkerPlan(right));
 }
 
 function log(message) {
@@ -93,6 +119,133 @@ async function inspectSavedSceneWorkers(savedWorkers = {}) {
   }
   return hasResumableWorker;
 }
+
+async function latestInterruptedIteration(runDirectory) {
+  const names = await readdir(runDirectory);
+  const candidates = names
+    .map((name) => ({ name, iteration: Number(/^iteration-(\d+)$/.exec(name)?.[1]) }))
+    .filter(({ iteration }) => Number.isInteger(iteration))
+    .sort((left, right) => right.iteration - left.iteration);
+  for (const candidate of candidates) {
+    const marker = await readJson(join(runDirectory, candidate.name, 'live.json')).catch(() => null);
+    if (marker?.status === 'interrupted' && marker.error) return { ...marker, iteration: candidate.name };
+  }
+  return null;
+}
+
+async function escalateRepeatedCodeFailure(worker, runDirectory, diagnosticLines = []) {
+  const failure = await latestInterruptedIteration(runDirectory);
+  if (!failure || classifyRepairFailure(failure) !== 'code_defect_candidate') return { action: 'retry' };
+
+  const statePath = join(runDirectory, 'codex-repair-state.json');
+  let saved = {};
+  try {
+    saved = await readJson(statePath);
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  const history = updateRepairFailureHistory(saved.history, failure);
+  const minimumRepeats = positiveInteger(process.env.EXHIBITION_CODEX_REPAIR_AFTER, 3);
+  const repairState = { ...saved, history, updatedAt: new Date().toISOString() };
+  await saveJson(statePath, repairState);
+  if (history.count < minimumRepeats) {
+    log(`${worker.name}: repeated code-error candidate ${history.count}/${minimumRepeats}; preserve Run and retry same iteration.`);
+    return { action: 'retry' };
+  }
+
+  const sourceCommit = await new Promise((resolveCommit) => {
+    const child = spawn('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot, stdio: ['ignore', 'pipe', 'ignore'] });
+    let output = '';
+    child.stdout.setEncoding('utf8').on('data', (chunk) => { output += chunk; });
+    child.once('close', (code) => resolveCommit(code === 0 ? output.trim() : null));
+    child.once('error', () => resolveCommit(null));
+  });
+  const diagnosticLog = sanitizeRepairDiagnostics(diagnosticLines);
+  const prompt = buildCodexRepairPrompt({
+    runDirectory: '(run artifacts are intentionally not exposed to Codex)',
+    workerName: worker.name,
+    iteration: failure.iteration,
+    stage: failure.stage,
+    error: sanitizeRepairDiagnostics([`Error: ${failure.error}`]),
+    sourceCommit,
+    diagnosticLog,
+  });
+  const casePath = join(runDirectory, 'codex-repair-case.json');
+  const repairAttempted = saved.attemptedFingerprint === history.fingerprint;
+  const handoff = {
+    createdAt: new Date().toISOString(),
+    sourceCommit,
+    worker: worker.name,
+    iteration: failure.iteration,
+    stage: failure.stage,
+    error: sanitizeRepairDiagnostics([`Error: ${failure.error}`]),
+    errorClass: history.errorClass,
+    fingerprint: history.fingerprint,
+    repeatCount: history.count,
+    diagnosticLog,
+    prompt,
+  };
+  await saveJson(casePath, handoff);
+
+  if (codexRepairIsEnabled() && !repairAttempted) {
+    const result = await runCodexRepairInIsolatedWorktree({
+      repositoryRoot,
+      prompt,
+      failureFingerprint: history.fingerprint,
+    });
+    if (result.status === 'repaired_and_committed') {
+      repairState.attemptedFingerprint = history.fingerprint;
+      repairState.attemptedAt = new Date().toISOString();
+      repairState.resolvedCommit = result.repairCommit;
+      repairState.resolvedAt = new Date().toISOString();
+      repairState.verification = {
+        iteration: failure.iteration,
+        status: 'awaiting_completion',
+        repairCommit: result.repairCommit,
+        expectVideos: worker.arguments.includes('--videos-after-each-iteration')
+          && !worker.arguments.includes('--no-videos-after-each-iteration'),
+        expectTitleCard: worker.arguments.includes('--generate-title-cards')
+          && !worker.arguments.includes('--no-generate-title-cards'),
+        updatedAt: new Date().toISOString(),
+      };
+      await saveJson(statePath, repairState);
+      const restartNeeded = repairNeedsSupervisorRestart(result.changedPaths);
+      log(`${worker.name}: Codex repair ${result.repairCommit} passed regression tests; completion of ${failure.iteration} will be checked${restartNeeded ? ' after supervisor restart' : ''}.`);
+      return { action: restartNeeded ? 'restart' : 'resume', result, iteration: failure.iteration };
+    }
+    handoff.repairResult = result;
+    const canRetryAfterSetup = [
+      'blocked_dirty_worktree',
+      'destination_paths_dirty',
+      'destination_changed_during_repair',
+      'codex_unavailable',
+    ].includes(result.status);
+    if (!canRetryAfterSetup) {
+      repairState.attemptedFingerprint = history.fingerprint;
+      repairState.attemptedAt = new Date().toISOString();
+      await saveJson(statePath, repairState);
+    }
+    handoff.status = canRetryAfterSetup ? 'repair_environment_not_ready' : 'repair_required';
+  } else {
+    handoff.status = repairAttempted ? 'repair_required' : 'repair_cli_not_enabled';
+    handoff.reason = repairAttempted
+      ? 'Codex was already invoked for this repeated error fingerprint.'
+      : 'Set EXHIBITION_CODEX_REPAIR=1 after provisioning an authenticated Codex CLI to allow one isolated repair attempt.';
+  }
+
+  await saveJson(casePath, handoff);
+  state.sceneWorkers[worker.key].status = 'repair_required';
+  state.sceneWorkers[worker.key].repairRequired = {
+    fingerprint: history.fingerprint,
+    sourceCommit,
+    casePath,
+    status: handoff.status,
+  };
+  await saveState();
+  log(`${worker.name}: paused safely for Codex repair. Evidence: ${casePath}. Resume with --resume-after-repair after the source fix is committed.`);
+  return { action: 'pause', handoff };
+}
+
 
 async function saveJson(path, value) {
   const temporaryPath = `${path}.${randomUUID()}.tmp`;
@@ -268,6 +421,7 @@ function defaultsFromExhibitionSettings(generation = defaultGeneration) {
   defaults.push(generation.preserveCubistVideoStyle ? '--preserve-cubist-video-style' : '--no-preserve-cubist-video-style');
   defaults.push(generation.videosAfterEachIteration ? '--videos-after-each-iteration' : '--no-videos-after-each-iteration');
   defaults.push(generation['generate-title-cards'] ? '--generate-title-cards' : '--no-generate-title-cards');
+  defaults.push(generation.stopOmitSimilar === false ? '--no-stop-omit-similar' : '--stop-omit-similar');
 
   return {
     args: defaults,
@@ -548,13 +702,27 @@ async function runMergeLoop(runDirectory, videoSettings, generateTitleCards, wor
 }
 
 let stopping = false;
+let restartPending = false;
+let externalStopRequested = false;
+let repairQueue = Promise.resolve();
 let runnerChild = null;
 let mergeRunning = false;
 let state = {};
 const children = new Set();
+const generatorChildren = new Set();
+
+function signalCooperativeRestart(child) {
+  if (process.platform === 'win32' || !child.cooperativeRestartReady || child.cooperativeRestartSignalled || child.exitCode !== null || child.signalCode !== null) return;
+  child.cooperativeRestartSignalled = true;
+  try { child.kill('SIGUSR2'); } catch (error) {
+    if (error.code !== 'ESRCH') console.error(`[exhibition] Could not request a safe worker stop: ${error.message}`);
+  }
+}
 
 function requestStop(signal) {
-  if (stopping) return;
+  if (externalStopRequested) return;
+  externalStopRequested = true;
+  restartPending = false;
   stopping = true;
   wakeForStop();
   log(`${signal} received; stopping child processes.`);
@@ -579,13 +747,29 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
   });
   try {
     let globalArticleQueueExhausted = false;
+    const diagnosticLines = [];
+    const rememberDiagnostic = (line) => {
+      diagnosticLines.push(line);
+      if (diagnosticLines.length > 50) diagnosticLines.shift();
+    };
     const args = [runnerScript, ...argumentsList];
     if (runDirectory && !args.some((argument) => flagName(argument) === '--resume-run')) args.push(`--resume-run=${runDirectory}`);
-    const child = spawn(process.execPath, args, { cwd: repositoryRoot, env: process.env, stdio: ['inherit', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, args, {
+      cwd: repositoryRoot,
+      env: { ...process.env, EXHIBITION_COOPERATIVE_RESTART: codexRepairIsEnabled() ? '1' : '0' },
+      stdio: ['inherit', 'pipe', 'pipe', 'ipc'],
+    });
     runnerChild = child;
     children.add(child);
+    generatorChildren.add(child);
+    child.on('message', (message) => {
+      if (message?.type !== 'cooperative-restart-ready') return;
+      child.cooperativeRestartReady = true;
+      if (restartPending) signalCooperativeRestart(child);
+    });
     const onLine = (line) => {
       console.log(line);
+      if (/(?:error|exception|failed|warning|retry|timeout|pending|truncat)/i.test(line)) rememberDiagnostic(line);
       const match = /^Run folder: (.+)$/.exec(line);
       if (!match) return;
       if (workerKey) {
@@ -603,17 +787,20 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
     stdoutLines.on('line', onLine);
     stderrLines.on('line', (line) => {
       console.error(line);
+      rememberDiagnostic(line);
       if (line.includes('Global article queue exhausted:')) globalArticleQueueExhausted = true;
     });
     child.once('error', (error) => {
       children.delete(child);
+      generatorChildren.delete(child);
       runnerChild = null;
       rejectClosed(error);
     });
     child.once('close', (code, signal) => {
       children.delete(child);
+      generatorChildren.delete(child);
       runnerChild = null;
-      resolveClosed({ code, signal, globalArticleQueueExhausted });
+      resolveClosed({ code, signal, globalArticleQueueExhausted, diagnosticLines });
     });
     return { child, closed };
   } catch (error) {
@@ -622,12 +809,63 @@ function startRunner(argumentsList, runDirectory, onRunDirectory, workerKey = nu
   }
 }
 
+function watchRepairVerification(runDirectory, workerName) {
+  let finish;
+  let finished = false;
+  const stopped = new Promise((resolveStop) => { finish = () => { finished = true; resolveStop(); }; });
+  const task = (async () => {
+    const repairPath = join(runDirectory, 'codex-repair-state.json');
+    while (true) {
+      try {
+        const saved = await readJson(repairPath).catch((error) => {
+          if (error.code === 'ENOENT') return null;
+          throw error;
+        });
+        const verification = saved?.verification;
+        if (!verification || verification.status === 'completed') return;
+        const observed = await inspectRepairedIteration(runDirectory, verification.iteration, verification.expectVideos, verification.expectTitleCard);
+        const status = observed.status === 'waiting' ? (finished ? 'not_completed' : verification.status) : observed.status;
+        if (status !== verification.status) {
+          saved.verification = { ...verification, status, updatedAt: new Date().toISOString() };
+          if (status === 'completed') saved.verification.completedAt = new Date().toISOString();
+          await saveJson(repairPath, saved);
+          log(`${workerName}: repair verification for ${verification.iteration}: ${status}.`);
+        }
+        if (status === 'completed' || finished) return;
+      } catch (error) {
+        console.error(`[exhibition] Could not check repair completion for ${workerName}: ${error.message}`);
+        if (finished) return;
+      }
+      let timeout;
+      await Promise.race([new Promise((resolveDelay) => { timeout = setTimeout(resolveDelay, 5000); }), stopped]);
+      clearTimeout(timeout);
+    }
+  })();
+  return { finish, task };
+}
+
+function queueRepair(worker, runDirectory, diagnosticLines) {
+  const attempt = repairQueue.then(async () => {
+    if (restartPending || stopping) return { action: 'deferred' };
+    const result = await escalateRepeatedCodeFailure(worker, runDirectory, diagnosticLines);
+    if (stopping || externalStopRequested) return { action: 'deferred' };
+    if (result.action === 'restart') {
+      restartPending = true;
+      for (const child of generatorChildren) signalCooperativeRestart(child);
+    }
+    return result;
+  });
+  repairQueue = attempt.then(() => undefined, () => undefined);
+  return attempt;
+}
+
 async function runParallelSceneWorkers(workers, finiteIterationLimit) {
   const refreshTask = runRefreshLoop();
   const mergeTasks = new Map();
   const retryAttempts = new Map();
   const pendingMediaAttempts = new Map();
   const maxWorkerRetries = positiveInteger(process.env.EXHIBITION_WORKER_MAX_RETRIES, 5);
+  const workerRetryBaseMs = positiveInteger(process.env.EXHIBITION_WORKER_RETRY_BASE_MS, 30_000);
   const startMergeLoop = (worker) => {
     if (!glueEnabled || mergeTasks.has(worker.key)) return;
     const runDirectory = worker.completedRunDirectory
@@ -637,10 +875,11 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
     mergeTasks.set(worker.key, runMergeLoop(runDirectory, worker.videoSettings, worker.generateTitleCards, worker.key));
   };
   const workerTasks = workers.map(async (worker) => {
+    if (restartPending) return;
     if (worker.completedRunDirectory) {
       startMergeLoop(worker);
       if (glueEnabled) {
-        while (!stopping) {
+        while (!stopping && !restartPending) {
           const savedState = await readState();
           if (savedState.sceneWorkers?.[worker.key]?.runDirectory === worker.completedRunDirectory
             && Number(savedState.sceneWorkers[worker.key].gluedThroughIteration || 0)
@@ -650,8 +889,18 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
       }
       return;
     }
+    const savedRepairHold = state.sceneWorkers?.[worker.key]?.repairRequired;
+    if (['repair_cli_not_enabled', 'repair_environment_not_ready'].includes(savedRepairHold?.status)
+      && codexRepairIsEnabled()) {
+      delete state.sceneWorkers[worker.key].repairRequired;
+      await saveState();
+      log(`${worker.name}: Codex repair is now enabled; retrying the saved failure through the isolated repair flow.`);
+    } else if (savedRepairHold) {
+      log(`${worker.name}: waiting for source repair; saved Run remains untouched. Use --resume-after-repair after committing a reviewed fix.`);
+      return;
+    }
     if (state.sceneWorkers?.[worker.key]?.runDirectory) startMergeLoop(worker);
-    while (!stopping) {
+    while (!stopping && !restartPending) {
       const savedRunDirectory = worker.savedRunDirectory || state.sceneWorkers?.[worker.key]?.runDirectory || null;
       state.sceneWorkers ||= {};
       state.sceneWorkers[worker.key] ||= {};
@@ -665,7 +914,10 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         state.sceneWorkers[worker.key].iteratorPlanFingerprint = createHash('sha256').update(JSON.stringify(worker.plan)).digest('hex');
         startMergeLoop(worker);
       }, worker.key);
+      const verification = savedRunDirectory ? watchRepairVerification(savedRunDirectory, worker.name) : null;
       const result = await running.closed;
+      verification?.finish();
+      if (verification) await verification.task;
       const runDirectory = state.sceneWorkers?.[worker.key]?.runDirectory || savedRunDirectory;
       const runManifest = runDirectory ? await readJson(join(runDirectory, 'run.json')).catch(() => null) : null;
       if (stopping) {
@@ -675,6 +927,12 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
           await saveJson(join(runDirectory, 'run.json'), runManifest);
           state.sceneWorkers[worker.key].status = 'interrupted';
         }
+        await saveState();
+        return;
+      }
+
+      if (restartPending) {
+        if (runManifest?.status) state.sceneWorkers[worker.key].status = runManifest.status;
         await saveState();
         return;
       }
@@ -698,7 +956,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
           throw new Error(`${worker.name} ended a continuous Run unexpectedly; it will not be restarted as a completed Run.`);
         }
         if (glueEnabled) {
-          while (!stopping) {
+          while (!stopping && !restartPending) {
             const savedState = await readState();
             if (savedState.sceneWorkers?.[worker.key]?.runDirectory === runDirectory
               && Number(savedState.sceneWorkers[worker.key].gluedThroughIteration || 0) >= finiteIterationLimit) break;
@@ -720,6 +978,16 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         log(`${worker.name}: global article queue exhausted; wait ${refreshCheckMs} ms for news refresh.`);
         await delayOrStop(refreshCheckMs);
       } else {
+        const repair = await queueRepair(worker, runDirectory, result.diagnosticLines);
+        if (repair.action === 'deferred') return;
+        if (repair.action === 'pause') return;
+        if (repair.action === 'restart') {
+          state.repairRestart = { status: 'pending', worker: worker.key, iteration: repair.iteration, repairCommit: repair.result.repairCommit, requestedAt: new Date().toISOString() };
+          await saveState();
+          log(`${worker.name}: supervisor restart pending; wait until other workers finish their current processes without interrupting provider tasks.`);
+          return;
+        }
+        if (repair.action === 'resume') retryAttempts.set(worker.key, 0);
         const attempt = (retryAttempts.get(worker.key) || 0) + 1;
         retryAttempts.set(worker.key, attempt);
         if (attempt >= maxWorkerRetries) {
@@ -733,7 +1001,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
         }
         state.sceneWorkers[worker.key].status = 'interrupted';
         await saveState();
-        const retryDelay = Math.min(30_000 * (2 ** (attempt - 1)), 300_000);
+        const retryDelay = Math.min(workerRetryBaseMs * (2 ** (attempt - 1)), 300_000);
         log(`${worker.name}: runner ended (${result.signal || `code ${result.code}`}) with Run state ${runManifest.status}; retry ${attempt}/${maxWorkerRetries} on same Run in ${retryDelay / 1000}s.`);
         await delayOrStop(retryDelay);
       }
@@ -750,7 +1018,7 @@ async function runParallelSceneWorkers(workers, finiteIterationLimit) {
       stopping = true;
       wakeForStop();
     }
-    for (const child of children) child.kill('SIGTERM');
+    if (!restartPending) for (const child of children) child.kill('SIGTERM');
     await Promise.allSettled([...workerTasks, refreshTask, ...mergeTasks.values()]);
   }
 }
@@ -761,6 +1029,9 @@ async function exhibitionMain() {
     console.log('Use --stop-after-iterations=N for a finite run; in parallel Scene mode N applies per worker.');
     console.log('In parallel mode, two workers with N=10 can generate up to 20 iterations total.');
     console.log('Use --new-run to start fresh after an existing campaign; previous Run directories are retained.');
+    console.log('After a source fix, --resume-after-repair clears the repair hold and resumes the saved Run.');
+    console.log('Codex repair is opt-in: set EXHIBITION_CODEX_REPAIR=1; only repeated runtime-code errors qualify.');
+    console.log('Use --news-only to refresh stale news, finish Jev ranking, and exit before scene generation.');
     console.log('Flags: --no-first-last-glue disables generated bridges; bridges are on by default.');
     console.log('Flags: --auto-mode enables per-iteration artistic direction; --no-auto-mode disables it.');
     console.log('Environment: NEWS_ENV_FILE (in start script), NEWS_REFRESH_INTERVAL_MS.');
@@ -768,10 +1039,27 @@ async function exhibitionMain() {
   }
   await withLock(async () => {
     const commandArguments = process.argv.slice(2);
+    const newsOnly = commandArguments.some((argument) => flagName(argument) === '--news-only');
     const startNewRun = commandArguments.some((argument) => flagName(argument) === '--new-run');
     const resumeRequested = commandArguments.some((argument) => flagName(argument) === '--resume-run');
     if (startNewRun && resumeRequested) throw new Error('Choose either --new-run or --resume-run, not both.');
     state = await readState();
+    if (!startNewRun && state.repairRestart?.status === 'pending') {
+      state.repairRestart = { ...state.repairRestart, status: 'restarted', restartedAt: new Date().toISOString() };
+      await saveState();
+    }
+    if (commandArguments.some((argument) => flagName(argument) === '--resume-after-repair')) {
+      for (const worker of Object.values(state.sceneWorkers || {})) delete worker.repairRequired;
+      await saveState();
+      log('Cleared repair holds after explicit source repair; resuming saved Run directories.');
+    }
+    if (newsOnly) {
+      log(`News-only mode: refresh ${newsDirectory} if stale, finish Jev ranking, then exit.`);
+      await refreshNewsIfNeeded();
+      if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
+      log('News refresh and Jev ranking complete; exiting before scene generation.');
+      return;
+    }
     let resumingParallelCampaign = false;
     if (startNewRun) {
       state.sceneWorkers = {};
@@ -949,7 +1237,7 @@ async function exhibitionMain() {
     const userArguments = [];
     for (let index = 0; index < exhibitionArguments.length; index += 1) {
       const argument = exhibitionArguments[index];
-      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run'].includes(flagName(argument))) {
+      if (['--first-last-glue', '--no-first-last-glue', '--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run', '--new-run', '--news-only', '--resume-after-repair'].includes(flagName(argument))) {
         if (['--stop-after-iterations', '--transition-wait-pattern', '--scene', '--generation-interval', '--resume-run'].includes(flagName(argument)) && !argument.includes('=')) index += 1;
         continue;
       }
@@ -1043,7 +1331,7 @@ async function exhibitionMain() {
           }
           const key = `${String(index + 1).padStart(2, '0')}-${iterator.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
           const planPath = join(outputDirectory, `.exhibition-iterator-plan-${key}.json`);
-          const workerPlan = {
+          let workerPlan = {
             workerKey: key,
             scenePath: sceneSequence.path,
             scheduleEnabled: sceneSequence.scheduleEnabled,
@@ -1063,13 +1351,29 @@ async function exhibitionMain() {
           const completedRunDirectory = resumingParallelCampaign && savedWorker?.status === 'completed'
             ? savedWorker.runDirectory
             : null;
-          const expectedRunFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
           if (resumingParallelCampaign && !savedWorker) {
             throw new Error(`Active parallel exhibition is missing worker ${key}; refusing to create a replacement worker during resume.`);
           }
-          if ((savedRunDirectory || completedRunDirectory)
-            && savedWorker.iteratorPlanFingerprint !== expectedRunFingerprint) {
-            throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+          if (savedRunDirectory || completedRunDirectory) {
+            let savedWorkerPlan = null;
+            try {
+              savedWorkerPlan = JSON.parse(readFileSync(savedWorker.planPath || planPath, 'utf8'));
+            } catch {}
+            if (savedWorkerPlan) {
+              if (!workerPlansMatch(savedWorkerPlan, workerPlan)) {
+                throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+              }
+              workerPlan = savedWorkerPlan;
+            } else {
+              const expectedFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
+              if (savedWorker.iteratorPlanFingerprint !== expectedFingerprint) {
+                throw new Error(`Worker ${key} settings changed since its saved Run; resume requires its original Scene configuration.`);
+              }
+            }
+            const savedPlanFingerprint = createHash('sha256').update(JSON.stringify(workerPlan)).digest('hex');
+            if (savedWorker.iteratorPlanFingerprint && savedWorker.iteratorPlanFingerprint !== savedPlanFingerprint) {
+              throw new Error(`Worker ${key} saved iterator plan fingerprint is inconsistent with its Run; refusing resume.`);
+            }
           }
           const videoSettings = {
             model: argumentValue(iterator.arguments, '--video-model', defaultGeneration.videoModel),
@@ -1209,10 +1513,7 @@ async function exhibitionMain() {
       await saveState();
     }
 
-    if (!await rankedCollectionAvailable()) {
-      log('Noch kein Jev-Ranking vorhanden; initialer News-Refresh läuft vor der ersten Iteration.');
-      await refreshNewsIfNeeded();
-    }
+    await refreshNewsIfNeeded();
     if (!await rankedCollectionAvailable()) throw new Error(`No Jev-ranked collection in ${newsDirectory}`);
 
     if (parallelWorkers) {
@@ -1275,7 +1576,26 @@ async function exhibitionMain() {
   });
 }
 
-exhibitionMain().catch((error) => {
+async function restartSupervisor() {
+  const argumentsList = process.argv.slice(2).filter((argument) => !['--new-run', '--resume-after-repair'].includes(flagName(argument)));
+  log('All workers have stopped without interruption; starting a fresh supervisor to resume their saved Runs.');
+  const child = spawn(process.execPath, [...process.execArgv, process.argv[1], ...argumentsList], {
+    cwd: repositoryRoot,
+    env: process.env,
+    stdio: 'inherit',
+  });
+  children.add(child);
+  const result = await new Promise((resolveChild, rejectChild) => {
+    child.once('error', rejectChild);
+    child.once('close', (code, signal) => resolveChild({ code, signal }));
+  });
+  children.delete(child);
+  if (result.code !== 0 && !externalStopRequested) process.exitCode = result.code || 1;
+}
+
+exhibitionMain().then(async () => {
+  if (restartPending && !externalStopRequested) await restartSupervisor();
+}).catch((error) => {
   console.error(`[exhibition] ${error.stack || error.message}`);
   process.exitCode = 1;
 });

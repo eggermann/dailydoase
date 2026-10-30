@@ -104,7 +104,9 @@ export function buildVideoDirectionRequest({ record, vision, model, videoMode = 
   } : {};
   const request = {
     model,
-    temperature: 0.45,
+    ...(/^gpt-6(?:\.1-sol|-luna)(?:-|$)/.test(model)
+      ? { reasoning_effort: model.startsWith('gpt-6-luna') ? 'medium' : 'high' }
+      : { temperature: 0.45 }),
     max_completion_tokens: Math.max(8000, scenes.length * 1600),
     messages: [
       { role: 'system', content: [

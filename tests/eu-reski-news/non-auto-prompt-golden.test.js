@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 import { describe, expect, test } from '@jest/globals';
 import { buildAudioDirectionRequest, buildAudioPrompt } from '../../eu-reski-news/news-scene/audio-director.mjs';
 import { buildImageTask, buildPlanRequest } from '../../eu-reski-news/news-scene/planner.mjs';
@@ -46,8 +47,8 @@ const record = {
   visualStyleOptions,
 };
 
-async function plannerHash(options = {}) {
-  const built = await buildPlanRequest({
+async function planRequest(options = {}) {
+  return (await buildPlanRequest({
     article,
     semantic,
     catalog,
@@ -56,20 +57,47 @@ async function plannerHash(options = {}) {
     images,
     model: 'gpt-4.1-mini',
     ...options,
-  });
-  return sha256(built.request);
+  })).request;
+}
+
+async function plannerHash(options = {}, useHistoricalSource = false) {
+  const request = await planRequest(options);
+  if (useHistoricalSource) {
+    const current = await readFile(new URL('../../eu-reski-news/news-scene/planner.mjs', import.meta.url), 'utf8');
+    const historical = (await readFile(new URL('./fixtures/historical-planner-source-context.txt', import.meta.url), 'utf8')).trim();
+    const implementation = current.slice(current.indexOf('export async function buildPlanRequest'), current.indexOf('export function validatePlan')).trim();
+    const source = request.messages[1].content.find((part) => part.text?.startsWith('SOURCE CODE CONTEXT'));
+    if (!source?.text.includes(implementation)) throw new Error('Current planner source context is missing');
+    source.text = source.text.replace(implementation, historical);
+  }
+  return sha256(request);
 }
 
 describe('non-auto prompt golden masters', () => {
   test('preserves manual story planning requests and all Guernica reference variants', async () => {
-    await expect(plannerHash({ styleReferenceProvided: true, articleImageReferenceProvided: false, figureReferenceProvided: true }))
+    await expect(plannerHash({ styleReferenceProvided: true, articleImageReferenceProvided: false, figureReferenceProvided: true }, true))
       .resolves.toBe('5adfc3d6b2f9e0a6aed3686906baa1a99c895554acd434d1019e4817fa629ca0');
-    await expect(plannerHash({ sceneVisualControls: true, styleReferenceProvided: true, articleImageReferenceProvided: true, figureReferenceProvided: true }))
+    await expect(plannerHash({ sceneVisualControls: true, styleReferenceProvided: true, articleImageReferenceProvided: true, figureReferenceProvided: true }, true))
       .resolves.toBe('8338e48b6ba4da040ac9c826849efa216b1a9563417f05ae2cc91e83bedef403');
-    await expect(plannerHash({ legacyGuernicaStyleReferencePrompt: true, styleReferenceProvided: true, figureReferenceProvided: true }))
+    await expect(plannerHash({ legacyGuernicaStyleReferencePrompt: true, styleReferenceProvided: true, figureReferenceProvided: true }, true))
       .resolves.toBe('12805a3bb14ba71b0a30055387493d7f7a40ad1d9964c00bdd09241a40565c66');
-    await expect(plannerHash({ styleReferenceProvided: false, articleImageReferenceProvided: true, figureReferenceProvided: false }))
+    await expect(plannerHash({ styleReferenceProvided: false, articleImageReferenceProvided: true, figureReferenceProvided: false }, true))
       .resolves.toBe('637c4c39389bae80a94ddf9dfd970153ac824dc1274d5ecc35c223d7b20ab71c');
+  });
+
+
+  test('records the current optional source-context requests independently of the historical baseline', async () => {
+    const variants = [
+      [{ styleReferenceProvided: true, articleImageReferenceProvided: false, figureReferenceProvided: true }, '0283abbc6cce3e0923be7e72c792344dce547715f1962486454af8994beed9ff'],
+      [{ sceneVisualControls: true, styleReferenceProvided: true, articleImageReferenceProvided: true, figureReferenceProvided: true }, '17897edfb2a9201cfb544cc254b86a414096f5ffc45191d66715044e00de01a2'],
+      [{ legacyGuernicaStyleReferencePrompt: true, styleReferenceProvided: true, figureReferenceProvided: true }, '3ba4ec3dd72f83845557dce5e961d2fb2208282bf3d872d6ec087193a8d0aee0'],
+      [{ styleReferenceProvided: false, articleImageReferenceProvided: true, figureReferenceProvided: false }, 'f8240aea1f1ade464b1be8086e0e2dd2e5caf49530fc38d591433c4230d1c9d9'],
+    ];
+    for (const [options, expected] of variants) await expect(plannerHash(options)).resolves.toBe(expected);
+    const request = await planRequest({ includeSourceCodeContext: false, sourceCodeSummary: 'offline summary' });
+    const text = request.messages[1].content.map((part) => part.text || '').join('\n');
+    expect(text).not.toContain('SOURCE CODE CONTEXT (concatenated file sections)');
+    expect(text).toContain('offline summary');
   });
 
   test('preserves manual timing, video direction, and audio direction requests', () => {

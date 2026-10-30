@@ -14,6 +14,22 @@ const source = await readFile(runner, 'utf8');
 function extract(start, end) { return source.slice(source.indexOf(start), source.indexOf(end, source.indexOf(start))); }
 
 describe('parallel runner corrections', () => {
+  test('parallel resumes allow only iteration-count and article-order changes while preserving the saved plan', () => {
+    const context = { flagName: (argument) => String(argument).split('=')[0] };
+    vm.createContext(context);
+    vm.runInContext(`${extract('function comparableWorkerPlan(', '\nfunction workerPlansMatch(')}\n${extract('function workerPlansMatch(', '\nfunction log(')}\nthis.matches = workerPlansMatch;`, context);
+    const saved = {
+      workerKey: 'worker-a', generationInterval: '10h/5', intervalMs: 7200000,
+      iterators: [{ name: 'scene-a', arguments: ['--iterations=3', '--article-order=global', '--video-direction=on'] }],
+    };
+    const resumed = structuredClone(saved);
+    resumed.iterators[0].arguments[0] = '--iterations=0';
+    resumed.iterators[0].arguments[1] = '--article-order=random';
+    expect(context.matches(saved, resumed)).toBe(true);
+    resumed.iterators[0].arguments[2] = '--video-direction=off';
+    expect(context.matches(saved, resumed)).toBe(false);
+  });
+
   test('disabled schedule starts the real generator without constructing a timed schedule', async () => {
     const dir = await mkdtemp(join(tmpdir(), 'reski-off-'));
     try {
@@ -42,7 +58,7 @@ describe('parallel runner corrections', () => {
   });
 
   function workerContext(startRunner, readJson, delayOrStop) {
-    const context = { stopping: false, state: { sceneWorkers: {} }, children: new Set(), glueEnabled: false, process: { env: {} }, positiveInteger: (v, f) => Number(v || f), runRefreshLoop: async () => {}, saveState: async () => {}, readJson, join, startRunner, delayOrStop, wakeForStop: () => {}, log: () => {}, console, createHash: () => ({ update: () => ({ digest: () => 'hash' }) }), saveJson: async () => { throw new Error('unexpected failure write'); }, refreshCheckMs: 1 };
+    const context = { stopping: false, restartPending: false, state: { sceneWorkers: {} }, children: new Set(), glueEnabled: false, process: { env: {} }, positiveInteger: (v, f) => Number(v || f), runRefreshLoop: async () => {}, saveState: async () => {}, readJson, join, startRunner, watchRepairVerification: () => ({ finish: () => {}, task: Promise.resolve() }), delayOrStop, wakeForStop: () => {}, log: () => {}, console, createHash: () => ({ update: () => ({ digest: () => 'hash' }) }), saveJson: async () => { throw new Error('unexpected failure write'); }, refreshCheckMs: 1 };
     vm.createContext(context);
     vm.runInContext(`${extract('async function runParallelSceneWorkers(', '\nasync function exhibitionMain(')}\nthis.run = runParallelSceneWorkers;`, context);
     return context;

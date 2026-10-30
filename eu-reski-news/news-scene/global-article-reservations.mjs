@@ -3,6 +3,7 @@ import { readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/prom
 import { join } from 'node:path';
 import { articleKey as createArticleKey } from '../scripts/news-eu-relevance.mjs';
 import { isProcessOwnerAlive, processStartToken, withDirectoryLock } from './directory-lock.mjs';
+import { scoreArticleSimilarity } from './article-similarity.mjs';
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
 
@@ -31,6 +32,7 @@ function reservationLockPath(progressPath) {
 
 async function commitReservedArticle(progress, reservationId, reservation) {
   progress.seenArticleKeys = [...new Set([...(progress.seenArticleKeys || []), reservation.articleKey])];
+  if (reservation.article) progress.lastArticle = reservation.article;
   progress.sourceAggregate = reservation.sourceAggregate;
   progress.aggregateHash = reservation.aggregateHash;
   progress.nextDraw = Math.max(Number(progress.nextDraw || 0), Number(reservation.draw || 0) + 1);
@@ -64,6 +66,8 @@ export async function reserveGlobalArticle({
   reservationId,
   recordPath,
   hasUsableArticleImage,
+  stopOmitSimilar = true,
+  similarityThreshold,
 }) {
   return withDirectoryLock(reservationLockPath(progressPath), async () => {
     const progress = await readProgress(progressPath, articleProgress);
@@ -89,6 +93,8 @@ export async function reserveGlobalArticle({
         draw: existing.draw,
         aggregateIndex: existing.aggregateIndex,
         score: existing.score,
+        articleSimilarity: existing.articleSimilarity ?? null,
+        skippedSimilarArticles: existing.skippedSimilarArticles || [],
         articleProgress: progress,
         reservationId,
         resumedReservation: true,
@@ -107,14 +113,34 @@ export async function reserveGlobalArticle({
     const startDraw = progress.sourceAggregate === collection.aggregatePath
       ? Number(progress.nextDraw || 0) % collection.candidates.length
       : 0;
+    const latestReservation = Object.values(progress.reservations)
+      .filter(({ status, article }) => status === 'reserved' && article)
+      .sort((left, right) => String(left.reservedAt).localeCompare(String(right.reservedAt)))
+      .at(-1);
+    const previousArticle = latestReservation?.article || progress.lastArticle || articleProgress?.lastArticle || null;
+    const skippedSimilarArticles = [];
     let draw = -1;
+    let articleSimilarity = null;
     for (let offset = 0; offset < collection.candidates.length; offset += 1) {
       const candidateIndex = (startDraw + offset) % collection.candidates.length;
       const candidate = collection.candidates[candidateIndex];
       const key = createArticleKey(candidate.article);
       if (seenArticleKeys.has(key) || reservedKeys.has(key)) continue;
       if (await hasUsableArticleImage(candidate.article.image)) {
+        const similarity = stopOmitSimilar && previousArticle
+          ? await scoreArticleSimilarity(candidate.article, previousArticle)
+          : null;
+        if (similarity && similarity.score >= similarityThreshold) {
+          skippedSimilarArticles.push({
+            articleKey: key,
+            title: candidate.article.title || '(untitled)',
+            similarityToLastArticle: similarity.score,
+          });
+          console.warn(`Skip similar article (${similarity.score.toFixed(3)} >= ${similarityThreshold.toFixed(3)}): ${candidate.article.title || '(untitled)'}`);
+          continue;
+        }
         draw = candidateIndex;
+        articleSimilarity = similarity;
         break;
       }
       console.warn(`Skip article with missing or broken image: ${candidate.article.title || '(untitled)'}`);
@@ -126,6 +152,9 @@ export async function reserveGlobalArticle({
       }).length;
       if (!unseen) {
         throw new Error(`Global article queue exhausted: all ${collection.candidates.length} eligible stories in ${collection.aggregateFile} were already used or reserved`);
+      }
+      if (skippedSimilarArticles.length) {
+        throw new Error(`No non-similar global article remains; skipped ${skippedSimilarArticles.length} candidates at threshold ${similarityThreshold.toFixed(3)}`);
       }
       throw new Error('No ranked article has a reachable JPEG, PNG or WebP image');
     }
@@ -141,6 +170,8 @@ export async function reserveGlobalArticle({
       draw,
       aggregateIndex: selected.aggregateIndex,
       score: selected.score,
+      articleSimilarity,
+      skippedSimilarArticles,
       recordPath,
       owner: { processId: process.pid, processStart: processStartToken(process.pid) },
       reservedAt: new Date().toISOString(),
@@ -150,7 +181,7 @@ export async function reserveGlobalArticle({
     progress.aggregateHash = collection.aggregateHash;
     progress.nextDraw = draw + 1;
     await saveJson(progressPath, progress);
-    return { ...selected, draw, articleProgress: progress, reservationId, resumedReservation: false };
+    return { ...selected, draw, articleSimilarity, skippedSimilarArticles, articleProgress: progress, reservationId, resumedReservation: false };
   });
 }
 

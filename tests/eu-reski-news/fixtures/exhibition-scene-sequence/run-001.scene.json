@@ -1,0 +1,9 @@
+{
+  "name": "run-001-exhibition",
+  "generationOverrides": {
+    "autoMode": true,
+    "iterations": 10,
+    "storyModel": "gpt-4.1-mini",
+    "preserveCubistVideoStyle": false
+  }
+}

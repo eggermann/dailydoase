@@ -22,6 +22,7 @@
   "generationOverrides": {
     "storyModel": "gpt-4o-mini",
     "iterations": 5,
+    "stopOmitSimilar": true,
     "styleReference": false,
     "legacyGuernicaStyleReferencePrompt": false
   }

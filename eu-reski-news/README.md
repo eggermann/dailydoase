@@ -97,10 +97,18 @@ The EU-RESKI shell starter writes under `eu-reski-news/GENERATIONS/news/iteratio
 
 Article order defaults to `linear`: each runner invocation starts with the first eligible article in the latest aggregate and advances one article per iteration, wrapping at the end. Use `--article-order=random` to draw randomly each iteration. Use `--article-order=global` to continue the saved article counter across runner invocations; its position is saved in `GENERATIONS/news/global-article-progress.json`. `--article-id=ID` pins one article.
 
+Before selecting an article, Jev compares it with the last completed article in the saved run history. Similarity is on by default (`stopOmitSimilar: true` in scene JSON, emitted as `--stop-omit-similar`; `--stop-ommit-similar` is accepted as a spelling alias). Use `--no-stop-omit-similar` to turn it off. The score is recorded from `0` to `1` in `record.json` as `selection.similarityToLastArticle`; candidates at or above `NEWS_ARTICLE_SIMILARITY_SKIP_THRESHOLD` are skipped and the next ranked article is checked. The threshold defaults to `0.85` and accepts values from `0` to `1`. `--article-id=ID` remains an explicit override. If every remaining candidate is too similar, the iteration stops instead of generating a duplicate. This comparison runs when each article is selected because the reference article changes after every completed iteration.
+
 Scene files in one directory run as one persistent schedule. Files ending in `.scene.json` are loaded in alphabetical order; their generators share one global article history, so completed stories are not selected again. Use the same command after restarting to resume its active run:
 
 ```sh
 npm run news:exhibition -- --scene=eu-reski-news/scenes --generation-interval=1h
+```
+
+To refresh a stale news collection, finish its Jev ranking, and exit before scene generation, use:
+
+```sh
+npm run news:exhibition:from-scene-json -- --news-only
 ```
 
 ```sh
@@ -428,3 +436,18 @@ Der Starthelfer lädt standardmäßig `.env` aus dem Haupt-Repository; alternati
 #### Live-Referenzlauf und Resume
 
 Der ausgeführte Referenzfilm liegt lokal unter `eu-reski-news/GENERATIONS/news/exhibition/run-001/glue-vids/eu-reski-live-full.mp4`. `run-001/run.json` und `run-001/glue-vids/glue-run.json` enthalten Laufparameter, Provider-Task-IDs und Glue-Fortschritt. Der Glue-Film ist aktuell bis Iteration 7 gebaut; Iteration 8 und 9 haben vier offene Videotasks. Auf derselben Installation setzt `npm run news:auto-10` diesen Lauf über den gespeicherten Runner-Zustand fort, pollt offene IDs und ergänzt Glue nach jeder vollständig fertigen Iteration. Generierte Medien und Provider-Logs liegen im gitignored `GENERATIONS/`-Ordner und sind nicht Teil des Commits.
+
+
+### Sichere Fehler-Recovery mit Codex CLI
+
+Der Supervisor zählt identische Runtime-Codefehler pro Run. Nach drei Wiederholungen speichert er `codex-repair-case.json` und pausiert den betroffenen Worker, ohne `run.json`, Medien oder gespeicherte Provider-Task-IDs zu löschen. GPT-Trunkierung, HTTP-/Netzwerkfehler und `pending_media` lösen keine Code-Reparatur aus.
+
+Codex-Reparatur ist standardmäßig aus. Nach Installation und Anmeldung der Codex CLI kann sie explizit aktiviert werden:
+
+```sh
+EXHIBITION_CODEX_REPAIR=1 npm run news:exhibition:from-scene-json
+```
+
+Der CLI-Aufruf arbeitet in einem isolierten Git-Worktree. Nur Änderungen an EU-RESKI-Quellcode und fokussierten Tests sind zulässig. Regressionstests und `git diff --check` müssen bestehen; danach wird der Fix committed und in den Runner-Checkout übernommen. Vorhandene Änderungen an anderen Dateien bleiben erhalten. Sind genau die Dateien des Fixes lokal verändert oder ändert sich der Checkout während der Reparatur, wird der Fix nicht übernommen und der Run sicher angehalten. Nach einem manuell geprüften und committeten Fix setzt `--resume-after-repair` denselben gespeicherten Run fort.
+
+Der Reparaturauftrag erhält einen begrenzten, bereinigten Ausschnitt der Fehlermeldungen. Nach einem Fix verfolgt `codex-repair-state.json` die betroffene Iteration: `awaiting_completion`, `pending_media`, `pending_assembly`, `not_completed` oder `completed`. Bei Videoerzeugung gilt sie erst mit Szenenvideos und Iterationsfilm als abgeschlossen; eine angeforderte Titeltafel wird ebenfalls geprüft. Wenn der Fix den Supervisor betrifft, beendet jeder kooperierende Worker zuerst seine laufende Iteration oder Provider-Abfrage und speichert seinen Zustand. Danach startet der Supervisor mit denselben Run-Verzeichnissen neu. Worker ohne sichere Stop-Bereitschaft werden nicht unterbrochen; der Neustart wartet auf deren reguläres Ende.

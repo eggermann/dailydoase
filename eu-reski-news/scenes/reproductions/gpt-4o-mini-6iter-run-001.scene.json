@@ -1,0 +1,17 @@
+{
+  "name": "gpt-4o-mini-6iter-run-001",
+  "generationIntervalInMinutes": "-1",
+  "generationOverrides": {
+    "storyModel": "gpt-4o-mini",
+    "iterations": 6,
+    "includeSourceCodeContext": false,
+    "sceneCount": {
+      "numerator": 3,
+      "bias": 2
+    },
+    "legacyGuernicaStyleReferencePrompt": false,
+    "articleImageReference": false,
+    "preserveCubistVideoStyle": false,
+    "videoAudioDirection": "off"
+  }
+}

@@ -36,6 +36,7 @@ function startReservationProcess({ progressPath, reservationId, recordPath, cand
       reservationId: process.env.RESERVATION_ID,
       recordPath: process.env.RECORD_PATH,
       hasUsableArticleImage: async () => true,
+      stopOmitSimilar: false,
     });
     if (process.env.HOLD_AFTER_RESERVE === '1') {
       await writeFile(process.env.READY_PATH, 'reserved');
@@ -137,6 +138,7 @@ describe('global article reservations', () => {
       reservationId: 'run-b::iteration-001',
       recordPath: join(temporaryRoot, 'b', 'record.json'),
       hasUsableArticleImage: async () => true,
+      stopOmitSimilar: false,
     });
     expect(second.article.id).toBe('article-2');
     await commit(second, 'run-b::iteration-001', join(temporaryRoot, 'b', 'record.json'));
@@ -147,6 +149,7 @@ describe('global article reservations', () => {
       reservationId: 'run-c::iteration-001',
       recordPath: join(temporaryRoot, 'c', 'record.json'),
       hasUsableArticleImage: async () => true,
+      stopOmitSimilar: false,
     });
     expect(third.article.id).toBe('article-3');
     await commit(third, 'run-c::iteration-001', join(temporaryRoot, 'c', 'record.json'));
@@ -157,6 +160,7 @@ describe('global article reservations', () => {
       reservationId: 'run-d::iteration-001',
       recordPath: join(temporaryRoot, 'd', 'record.json'),
       hasUsableArticleImage: async () => true,
+      stopOmitSimilar: false,
     });
     expect(fourth.article.id).toBe('article-1');
     expect(articleProgressSnapshot(fourth.articleProgress).seenArticleKeys).toHaveLength(2);
@@ -189,6 +193,7 @@ describe('global article reservations', () => {
     const next = await reserveGlobalArticle({
       progressPath, collection, reservationId: 'next::iteration-001', recordPath: join(temporaryRoot, 'next.json'),
       hasUsableArticleImage: async () => true,
+      stopOmitSimilar: false,
     });
     expect(next.article.id).toBe('article-2');
     expect(next.articleProgress.seenArticleKeys).toHaveLength(1);

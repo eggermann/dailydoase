@@ -29,9 +29,11 @@ const response = (sceneCount, sceneCountReason) => ({ choices: [{ finish_reason:
   dramaturgicalConcept: 'A causal arc.', visualConcept: 'An evolving mural.', motionConcept: 'A restrained crossing.', audioConcept: 'Wind and silence.',
   sceneCount, sceneCountReason,
   flags: {
-    storyClou: 'off', legacyGuernicaStyleReferencePrompt: false, preserveCubistVideoStyle: false,
+    storyClou: 'off', legacyGuernicaStyleReferencePrompt: false,
+    guernicaStyleReference: false, guernicaFigureReference: false, preserveCubistVideoStyle: false,
     sceneVisualControls: 'fixed', articleImageReference: false, landscapePrompt: false,
     videoDirection: 'off', videoVision: 'off', videoAudioDirection: 'off', videoMaxZoom: 0,
+    sceneDurationMode: 'taktmuster',
   },
   reason: 'The choices fit the supplied article.',
 }) } }] });

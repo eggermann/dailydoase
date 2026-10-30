@@ -9,7 +9,7 @@ import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const runner = join(root, 'eu-reski-news/scripts/exhibition-runner.mjs');
-const scenes = join(root, 'eu-reski-news/scenes');
+const scenes = join(root, 'tests/eu-reski-news/fixtures/exhibition-scene-sequence');
 
 async function waitFor(predicate, label, timeout = 8000) {
   const deadline = Date.now() + timeout;

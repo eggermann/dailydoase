@@ -1,0 +1,47 @@
+export async function buildPlanRequest({ article, semantic, catalog, sceneCount, visualStyleOptions = { symbolic: true, roomDeepness: false, layering: 0 }, sceneVisualControls = false, legacyGuernicaStyleReferencePrompt = false, storyClou = false, images, model, styleReferenceProvided = true, locationReferenceProvided = false, articleImageReferenceProvided = false, figureReferenceProvided = true, continuationPlan = null }) {
+  const referenceInstructions = figureReferenceProvided
+    ? [
+      'The image API receives reference image 1: the selected masked character crop, used only for the fictional protagonist’s abstract appearance and gesture.',
+      styleReferenceProvided
+        ? 'Reference image 2 is the complete painting, used only for painterly style.'
+        : locationReferenceProvided
+          ? 'Reference image 2 is the complete Guernica painting, supplied only as a subordinate setting and spatial-atmosphere reference; the article and scene action must lead. Do not use the painting as the scene composition or copy its figures, pose, motifs or color balance.'
+          : 'No complete painting reference is supplied; follow the written style description.',
+      locationReferenceProvided
+        ? 'GPT also receives the complete Guernica painting during planning. Extract subtle setting and spatial-atmosphere ideas into the written scene prompts. The image API receives the painting only as a secondary location reference, never as the dominant subject or composition. Do not reproduce its figures, pose, composition, motifs or color balance.'
+        : '',
+      'Do not import story content from the character or painting references.',
+    ].join(' ')
+    : articleImageReferenceProvided
+      ? 'The image API receives only the original article photograph as reference image 1 for broad subject orientation. No Guernica painting or figure crop is supplied. Never copy identifiable people, exact composition, logos, or readable text.'
+      : 'The image API receives no reference images. No Guernica painting, figure crop, or article photograph is supplied; derive the invented protagonist and composition from the written scene plan.';
+  const articleImageReferenceInstructions = figureReferenceProvided && articleImageReferenceProvided
+    ? `The image API also receives the original article photograph as reference image ${styleReferenceProvided || locationReferenceProvided ? 3 : 2} for broad visual orientation only. Never copy its identifiable people, exact composition, logos, or readable text.`
+    : figureReferenceProvided
+      ? 'The article photo is for GPT visual analysis only and is never sent to the image API.'
+      : articleImageReferenceProvided
+        ? 'The article photo is the only image reference sent to the image API.'
+        : 'No article photograph is sent to the image API.';
+  const directorFile = legacyGuernicaStyleReferencePrompt
+    ? './director-legacy-guernica-style-reference-prompt.md'
+    : sceneVisualControls ? './director.md' : './director-fixed-controls.md';
+  let baseDirector = (await readFile(new URL(directorFile, import.meta.url), 'utf8'))
+    .replaceAll('{{IMAGE_REFERENCE_INSTRUCTIONS}}', referenceInstructions)
+    .replaceAll('{{ARTICLE_IMAGE_REFERENCE_INSTRUCTIONS}}', articleImageReferenceInstructions)
+    .replaceAll('{{VISUAL_STYLE_CONTROLS}}', sceneVisualControls
+      ? `Each scene chooses its own visual controls. Select symbolism, room depth and layering independently for that scene based on its concrete action, setting and story beat; do not copy one scene's settings to the others. Choose symbolism ON only when a specific metaphor makes the article-grounded action clearer; otherwise choose OFF. Choose room depth ON when the scene needs a meaningful foreground-to-background journey; choose OFF for a compressed mural plane. Choose an integer layering value from 0 to 7 based on how many distinct spatial planes this scene needs; use 0 when explicit planes add nothing. Explain each choice briefly in scene.visualControlReason. Put the exact chosen values in scene.visualStyleOptions and make the stillPrompt implement them. Choose freely from the scene rather than applying a run-wide default.`
+      : `Visual controls for this run: symbolism=${visualStyleOptions.symbolic ? 'ON' : 'OFF'}; room depth=${visualStyleOptions.roomDeepness ? 'ON' : 'OFF'}; layering=${visualStyleOptions.layering ?? 0} (integer 0–7). Follow each control in every scene and stillPrompt. Symbolism ON means use concrete article-grounded metaphors that visibly change action or spatial relationships; symbolism OFF means depict reported situation and semantic motifs directly without allegorical overlays. Room depth ON means build painterly foreground, middle distance and receding far plane; room depth OFF means compressed shallow mural space without vanishing-point interiors. Layering N above zero means build exactly N distinct, article-grounded spatial planes with different spatial roles, then unify them with one final merge-paint layer of shared marks, pigment and contours; zero means no deliberate stacked planes. These controls work independently.`);
+  if (!figureReferenceProvided) {
+    baseDirector = baseDirector
+      .replace('GPT receives article text, article photo and masked Guernica character catalog to plan the story, choose a stable protagonist identity and assign suitable scene-specific figure references. The image API receives only the selected masked figure for each scene, not the full catalog.', 'GPT receives article text and article photo only. No Guernica painting, figure crop or character catalog is supplied. Invent and keep a stable fictional protagonist identity from the story action; do not assign external figure references.')
+      .replace('The selected masked figure reference defines identity cues and painted treatment only. Never copy its arm pose, body pose, silhouette, scale or placement. Use a different suitable figure reference when the scene\'s action calls for another gesture. Choose camera distance, viewing angle, body silhouette and protagonist gesture from the current scene’s action and semantic associations. They may recur when narratively justified. Never impose a stock centered figure with raised arms on unrelated actions.', 'Invent the protagonist’s identity and gesture from the current scene’s action and semantic associations. Keep that identity stable across scenes. Choose camera distance, viewing angle, body silhouette and gesture from the action; never impose a stock centered figure with raised arms on unrelated actions.')
+      .replace('When supplied, use only painterly qualities from the full Guernica reference: energetic charcoal contours, fractured brushwork, oil-painted texture, scraped surface, dark tonal range, broad curved silhouettes and organic rounded masses mixed with sharp fractures.', 'Use the written painterly qualities only: energetic charcoal contours, fractured brushwork, oil-painted texture, scraped surface, dark tonal range, broad curved silhouettes and organic rounded masses mixed with sharp fractures. No Guernica image reference is supplied.')
+      .replace('The selected masked figure crop may guide only the protagonist\'s abstract visual identity and gesture. Do not transfer any reference\'s original story, relationships, props, symbols, layout or arrangement.', articleImageReferenceProvided
+        ? 'Use the article photograph only for broad subject orientation. Do not transfer its real people, exact framing, pose, props, symbols, layout or arrangement.'
+        : 'Invent the protagonist from the written scene plan. No visual reference images are supplied.')
+      .replace('Redraw either reference', articleImageReferenceProvided ? 'Redraw the article photograph' : 'Follow the written scene plan without a reference image');
+  }
+  const plannerSource = await readFile(new URL(import.meta.url), 'utf8');
+  const compositionImplementation = plannerSource.slice(
+    plannerSource.indexOf('export async function buildPlanRequest'),
+    plannerSource.indexOf('

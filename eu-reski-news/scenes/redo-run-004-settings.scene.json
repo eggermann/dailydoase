@@ -1,6 +1,6 @@
 {
   "name": "redo-run-004-recorded-settings",
-  "description": "Inaktive Referenz: übernimmt die im Run-004-Manifest gespeicherten Generierungsparameter zur Wiederholung oder zum Vergleich.",
+  "description": "Referenz: übernimmt die im Run-004-Manifest gespeicherten Generierungsparameter zur Wiederholung oder zum Vergleich.",
   "provenance": {
     "kind": "recorded-run-settings",
     "source": "../GENERATIONS/news/exhibition/run-004/run.json",

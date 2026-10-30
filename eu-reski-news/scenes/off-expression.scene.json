@@ -1,0 +1,26 @@
+{
+  "name": "expression-off",
+  "description": "Vergleichsvariante mit ausgeschalteter Story-Clou-, Video-Regie- und Video-Vision-Expression.",
+  "provenance": {
+    "kind": "parameter-comparison-example",
+    "source": "../docs/scenes-example/off-expression.scene.json",
+    "comparison": "Expression aus: sceneCount fest auf fünf, keine Symbolik oder Raumtiefe, null Ebenen. Gegenstück: on-expression.Xscene.json. Kein aufgezeichneter Lauf als Herkunft behauptet."
+  },
+  "generationOverrides": {
+    "storyClou": "off",
+    "sceneCount": {
+      "mode": "fixed",
+      "count": 5,
+      "numerator": 3,
+      "bias": 2
+    },
+    "visualControls": {
+      "mode": "fixed",
+      "symbolic": false,
+      "roomDeepness": false,
+      "layering": 0
+    },
+    "videoDirection": "off",
+    "videoVision": "off"
+  }
+}
