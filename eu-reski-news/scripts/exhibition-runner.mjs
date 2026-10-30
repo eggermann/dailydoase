@@ -9,10 +9,11 @@ import { homedir } from 'node:os';
 import { findRankedNewsCollections } from '../news-scene/news-ranking.mjs';
 import { renderRunReport } from '../news-scene/report.mjs';
 import { resolveAutoModeSetting } from '../news-scene/auto-director.mjs';
-import { loadSceneSequence, resolveParallelSceneSchedule } from '../news-scene/scene-sequence.mjs';
+import { loadSceneSequence, preserveEquivalentSchedule, resolveParallelSceneSchedule } from '../news-scene/scene-sequence.mjs';
 import { mergeRunnerArguments } from '../news-scene/runner-arguments.mjs';
 import { getReadyIterations } from '../news-scene/exhibition-readiness.mjs';
 import { withDirectoryLock } from '../news-scene/directory-lock.mjs';
+import { retryVolumeAccess } from '../news-scene/volume-access-retry.mjs';
 import {
   buildCodexRepairPrompt,
   classifyRepairFailure,
@@ -735,7 +736,6 @@ process.once('SIGINT', () => requestStop('SIGINT'));
 process.once('SIGTERM', () => requestStop('SIGTERM'));
 
 async function withLock(task) {
-  await mkdir(outputDirectory, { recursive: true });
   const machineLock = join(homedir(), '.dailydoase', 'exhibition-runner.lock');
   return withDirectoryLock(machineLock, async () => {
     const processes = execFileSync('ps', ['-axww', '-o', 'pid=,command='], { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
@@ -746,7 +746,26 @@ async function withLock(task) {
         && /\/eu-reski-news\/scripts\/(?:exhibition-runner|run-news-scene-image-iteration)\.mjs(?:\s|$)/.test(match[3]);
     });
     if (otherGenerator) throw new Error('A news generator is already active.');
-    return withDirectoryLock(lockPath, task, { failFast: true });
+    const retryOptions = {
+      volumePath: outputDirectory,
+      isStopping: () => stopping,
+      wait: () => delayOrStop(30_000),
+      report: (error) => log(`Output volume not ready (${error.code}: ${error.path}); retrying in 30 seconds.`),
+    };
+    await retryVolumeAccess(() => mkdir(outputDirectory, { recursive: true }), retryOptions);
+    if (stopping) return;
+    return retryVolumeAccess(async () => {
+      let taskStarted = false;
+      try {
+        return await withDirectoryLock(lockPath, () => {
+          taskStarted = true;
+          return task();
+        }, { failFast: true });
+      } catch (error) {
+        if (taskStarted) throw Object.assign(error, { volumeRetryForbidden: true });
+        throw error;
+      }
+    }, retryOptions);
   }, { failFast: true });
 }
 
@@ -1200,7 +1219,12 @@ async function exhibitionMain() {
       if (schedules.some((schedule) => JSON.stringify(schedule) !== JSON.stringify(schedules[0]))) {
         throw new Error('Parallel Scene files must use the same generation interval and bias mode.');
       }
-      Object.assign(sceneSequence, schedules[0]);
+      const savedPlan = resumingParallelCampaign
+        ? await readJson(join(outputDirectory, '.exhibition-iterator-plan.json')).catch((error) => {
+          if (error.code === 'ENOENT') return null;
+          throw error;
+        }) : null;
+      Object.assign(sceneSequence, preserveEquivalentSchedule(schedules[0], savedPlan));
     }
     if (parallelSceneMode && state.runDirectory && priorRunIsIncomplete) {
       throw new Error('An active sequential scene run cannot be resumed as parallel workers; preserve it and start parallel workers in a new output directory.');

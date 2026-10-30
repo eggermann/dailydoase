@@ -17,11 +17,13 @@ export NEWS_STYLE_REFERENCE="${NEWS_STYLE_REFERENCE:-/Users/dominikeggermann/Pro
 export GUERNICA_DIRECTORY="${GUERNICA_DIRECTORY:-/Users/dominikeggermann/Projekte/EU-RESKI/guernica_elemente_maskiert}"
 cd "$ROOT"
 
-while ! /sbin/mount | /usr/bin/grep -F " on $VOLUME " >/dev/null; do
-  echo 'Waiting for DAILYDOASE_MEDIA volume.'
+while :; do
+  if /sbin/mount | /usr/bin/grep -F " on $VOLUME " >/dev/null && mkdir -p "$OUTPUT"; then
+    break
+  fi
+  echo 'Output volume is unavailable or not writable yet; retrying in 30 seconds.' >&2
   /bin/sleep 30
 done
-mkdir -p "$OUTPUT"
 if [ "${CAMPAIGN_CONTINUOUS:-0}" != 1 ] && [ "${CAMPAIGN_NEW_RUN:-0}" != 1 ] && [ -f "$OUTPUT/.campaign-complete" ]; then
   if python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT" 3; then
     echo 'The exhibition campaign has already completed.'

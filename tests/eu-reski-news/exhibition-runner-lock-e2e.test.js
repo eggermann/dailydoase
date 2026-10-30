@@ -56,7 +56,7 @@ test('a duplicate runner fails immediately; scene workers resume after stop', as
     await writeFile(join(news, 'eu-relevance-test.json'), JSON.stringify({ sourceFile: 'all-test.json', articleCount: 1, completedCount: 1, failedCount: 0, unresolvedCount: 0, entries: { [articleKey(article)]: { euRelevance: 0.99 } } }));
     await writeFile(semantic, JSON.stringify({ provider: 'offline', capturedAt: '2026-10-28T12:00:00.000Z', words: [['EU', 'en']], entries: [{ id: 'eu', seed: ['EU', 'en'], item: { title: 'Europe' } }] }));
     await writeFile(blocker, "globalThis.fetch = async () => { throw new Error('Unexpected network access'); };\n");
-    const args = ['--new-run', `--scene=${scenes}`, '--stop-after-iterations=2', '--prompt-only', '--no-first-last-glue', `--stream-file=${semantic}`];
+    const args = ['--new-run', `--scene=${scenes}`, '--generation-interval=1h', '--stop-after-iterations=2', '--prompt-only', '--no-first-last-glue', `--stream-file=${semantic}`];
     const env = offlineTestEnvironment({ NEWS_NEWS_DIR: news, NEWS_OUTPUT_DIR: output, NEWS_REFRESH_CHECK_MS: '100000', NEWS_CAMPAIGN_START_SPACING_MS: '100', OPENAI_API_KEY: 'offline-test', NODE_OPTIONS: `--require=${blocker}` });
     first = launch(args, env);
     await waitFor(() => (first.output().match(/^Run folder: /gm) || []).length === 2, `first workers: ${first.output()}`);
@@ -77,7 +77,7 @@ test('a duplicate runner fails immediately; scene workers resume after stop', as
     completedManifest.status = 'completed';
     await writeFile(completedManifestPath, JSON.stringify(completedManifest));
     await writeFile(join(output, 'exhibition-state.json'), JSON.stringify(state));
-    third = launch(args.filter((arg) => arg !== '--new-run' && arg !== '--stop-after-iterations=2'), env);
+    third = launch(args.filter((arg) => arg !== '--new-run' && arg !== '--stop-after-iterations=2' && arg !== '--generation-interval=1h'), env);
     await waitFor(() => (third.output().match(/^Run folder: /gm) || []).length === 2, `resumed workers: ${third.output()}`);
     const resumedRuns = [...third.output().matchAll(/^Run folder: (.+)$/gm)].map((match) => match[1].trim()).sort();
     expect(resumedRuns).toEqual(previousRuns);

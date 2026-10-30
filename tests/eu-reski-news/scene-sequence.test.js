@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, test } from '@jest/globals';
-import { getIteratorStartTime, loadSceneSequence, parseGenerationInterval, resolveParallelSceneSchedule } from '../../eu-reski-news/news-scene/scene-sequence.mjs';
+import { getIteratorStartTime, loadSceneSequence, parseGenerationInterval, preserveEquivalentSchedule, resolveParallelSceneSchedule } from '../../eu-reski-news/news-scene/scene-sequence.mjs';
 import { createSceneCountStream, replaySavedSceneCount, resolveSceneCountSettings } from '../../eu-reski-news/news-scene/scene-count.mjs';
 import { autoDirectorPromptVersion } from '../../eu-reski-news/news-scene/auto-director.mjs';
 
@@ -119,5 +119,13 @@ describe('EU-RESKI scene sequence', () => {
     expect(resolveParallelSceneSchedule({ configuredInterval: '-1' })).toMatchObject({ scheduleEnabled: false, intervalMs: null });
     expect(() => resolveParallelSceneSchedule({ requestedInterval: 'nonsense' })).toThrow(/generationInterval/);
     expect(() => resolveParallelSceneSchedule({ configuredBiasMode: 'unknown' })).toThrow(/biasMode/);
+  });
+
+  test('preserves an equivalent saved duration spelling on resume', () => {
+    const current = resolveParallelSceneSchedule({ configuredInterval: '600' });
+    const saved = { scheduleEnabled: true, generationInterval: '10h', biasMode: 'off' };
+    expect(preserveEquivalentSchedule(current, saved).generationInterval).toBe('10h');
+    expect(preserveEquivalentSchedule(current, { ...saved, generationInterval: '9h' })).toEqual(current);
+    expect(preserveEquivalentSchedule(current, { ...saved, biasMode: 'on' })).toEqual(current);
   });
 });

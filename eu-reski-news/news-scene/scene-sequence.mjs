@@ -28,6 +28,18 @@ export function parseGenerationInterval(value) {
   return milliseconds;
 }
 
+export function preserveEquivalentSchedule(schedule, savedPlan) {
+  if (!schedule.scheduleEnabled || !savedPlan?.scheduleEnabled || schedule.biasMode !== savedPlan.biasMode) return schedule;
+  try {
+    if (parseGenerationInterval(savedPlan.generationInterval) === schedule.intervalMs) {
+      return { ...schedule, generationInterval: savedPlan.generationInterval };
+    }
+  } catch {
+    // Invalid saved settings are rejected by the existing resume validation.
+  }
+  return schedule;
+}
+
 export function resolveParallelSceneSchedule({
   requestedInterval,
   configuredInterval,
