@@ -23,17 +23,7 @@ while ! /sbin/mount | /usr/bin/grep -F " on $VOLUME " >/dev/null; do
 done
 mkdir -p "$OUTPUT"
 if [ -f "$OUTPUT/.campaign-complete" ]; then
-  if python3 - "$OUTPUT/exhibition-state.json" <<'PY'
-import json, sys
-try:
-    state = json.load(open(sys.argv[1]))
-    workers = state.get('sceneWorkers', {})
-    complete = len(workers) == 11 and all(worker.get('status') == 'completed' for worker in workers.values())
-except Exception:
-    complete = False
-raise SystemExit(0 if complete else 1)
-PY
-  then
+  if python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT"; then
     echo 'The exhibition campaign has already completed.'
     exit 0
   fi
@@ -49,11 +39,8 @@ if [ "${CAMPAIGN_NEW_RUN:-0}" = 1 ]; then
 else
   npm run news:exhibition:from-scene-json -- --generation-interval=10h
 fi
-python3 - "$OUTPUT/exhibition-state.json" <<'PY'
-import json, sys
-state = json.load(open(sys.argv[1]))
-workers = state.get('sceneWorkers', {})
-if len(workers) != 11 or any(worker.get('status') != 'completed' for worker in workers.values()):
-    raise SystemExit('Campaign has unfinished Scene workers; completion marker withheld.')
-PY
+python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT" || {
+  echo 'Campaign still has unfinished or under-counted Scene workers; completion marker withheld.' >&2
+  exit 1
+}
 touch "$OUTPUT/.campaign-complete"
