@@ -181,7 +181,12 @@ async function escalateRepeatedCodeFailure(worker, runDirectory) {
       return { action: 'resume', result };
     }
     handoff.repairResult = result;
-    const canRetryAfterSetup = ['blocked_dirty_worktree', 'codex_unavailable'].includes(result.status);
+    const canRetryAfterSetup = [
+      'blocked_dirty_worktree',
+      'destination_paths_dirty',
+      'destination_changed_during_repair',
+      'codex_unavailable',
+    ].includes(result.status);
     if (!canRetryAfterSetup) {
       repairState.attemptedFingerprint = history.fingerprint;
       repairState.attemptedAt = new Date().toISOString();

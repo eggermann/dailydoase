@@ -113,8 +113,6 @@ export async function runCodexRepairInIsolatedWorktree({
   environment = process.env,
 }) {
   const originalStatus = await git(repositoryRoot, 'status', '--porcelain=v1', '--untracked-files=all');
-  if (originalStatus) return { status: 'blocked_dirty_worktree' };
-
   const sourceCommit = await git(repositoryRoot, 'rev-parse', 'HEAD');
   const branchName = `codex/repair-${failureFingerprint.slice(0, 10)}-${randomUUID().slice(0, 8)}`;
   const repairRoot = join(tmpdir(), `eu-reski-codex-repair-${randomUUID()}`);
@@ -165,8 +163,12 @@ export async function runCodexRepairInIsolatedWorktree({
     const repairCommit = await git(repairRoot, 'rev-parse', 'HEAD');
     const destinationHead = await git(repositoryRoot, 'rev-parse', 'HEAD');
     const destinationStatus = await git(repositoryRoot, 'status', '--porcelain=v1', '--untracked-files=all');
-    if (destinationHead !== sourceCommit || destinationStatus) {
+    if (destinationHead !== sourceCommit || destinationStatus !== originalStatus) {
       return { status: 'destination_changed_during_repair', branchName, repairRoot, sourceCommit, repairCommit };
+    }
+    const changedDestinationPaths = await git(repositoryRoot, 'status', '--porcelain=v1', '--untracked-files=all', '--', ...changedPaths);
+    if (changedDestinationPaths) {
+      return { status: 'destination_paths_dirty', branchName, repairRoot, sourceCommit, repairCommit, changedPaths };
     }
     await git(repositoryRoot, 'cherry-pick', repairCommit);
     await git(repositoryRoot, 'worktree', 'remove', repairRoot);

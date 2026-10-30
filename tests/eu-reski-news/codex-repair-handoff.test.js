@@ -64,28 +64,56 @@ test('automatic invocation stays opt-in', () => {
   expect(codexRepairIsEnabled({ EXHIBITION_CODEX_REPAIR: '1' })).toBe(true);
 });
 
-test('isolated Codex repair refuses a dirty production checkout before creating a worktree', async () => {
+test('isolated Codex repair preserves unrelated dirty work but refuses to overwrite a dirty target file', async () => {
   const repositoryRoot = await mkdtemp(join(tmpdir(), 'codex-repair-dirty-repo-'));
+  const fakeCodexRoot = await mkdtemp(join(tmpdir(), 'codex-repair-dirty-cli-'));
+  let repairResult;
   try {
     execFileSync('git', ['init', '-b', 'main'], { cwd: repositoryRoot, stdio: 'ignore' });
     execFileSync('git', ['config', 'user.email', 'repair-test@example.invalid'], { cwd: repositoryRoot });
     execFileSync('git', ['config', 'user.name', 'Repair Test'], { cwd: repositoryRoot });
-    await writeFile(join(repositoryRoot, 'tracked.txt'), 'baseline\n');
-    execFileSync('git', ['add', 'tracked.txt'], { cwd: repositoryRoot });
+    await mkdir(join(repositoryRoot, 'eu-reski-news/scripts'), { recursive: true });
+    await mkdir(join(repositoryRoot, 'tests/eu-reski-news'), { recursive: true });
+    await writeFile(join(repositoryRoot, 'package.json'), JSON.stringify({
+      type: 'module',
+      scripts: { test: 'node tests/eu-reski-news/fix.test.js' },
+    }));
+    const targetPath = join(repositoryRoot, 'eu-reski-news/scripts/fix.mjs');
+    await writeFile(targetPath, 'export const fixed = false;\n');
+    execFileSync('git', ['add', '.'], { cwd: repositoryRoot });
     execFileSync('git', ['commit', '-m', 'test baseline'], { cwd: repositoryRoot, stdio: 'ignore' });
-    await writeFile(join(repositoryRoot, 'tracked.txt'), 'uncommitted user work\n');
+    await writeFile(join(repositoryRoot, 'user-notes.txt'), 'unrelated user work\n');
+    await writeFile(targetPath, 'export const fixed = "user edit";\n');
 
-    const result = await runCodexRepairInIsolatedWorktree({
+    const fakeCodex = join(fakeCodexRoot, 'fake-codex.mjs');
+    await writeFile(fakeCodex, [
+      '#!/usr/bin/env node',
+      'import { mkdir, writeFile } from "node:fs/promises";',
+      'import { join } from "node:path";',
+      'await mkdir(join(process.cwd(), "eu-reski-news/scripts"), { recursive: true });',
+      'await mkdir(join(process.cwd(), "tests/eu-reski-news"), { recursive: true });',
+      'await writeFile(join(process.cwd(), "eu-reski-news/scripts/fix.mjs"), "export const fixed = true;\\n");',
+      'await writeFile(join(process.cwd(), "tests/eu-reski-news/fix.test.js"), "process.exit(0);\\n");',
+    ].join('\n'));
+    await chmod(fakeCodex, 0o755);
+
+    repairResult = await runCodexRepairInIsolatedWorktree({
       repositoryRoot,
       prompt: 'repair test',
       failureFingerprint: '0123456789abcdef',
+      environment: { ...process.env, EXHIBITION_CODEX_COMMAND: fakeCodex },
     });
 
-    expect(result.status).toBe('blocked_dirty_worktree');
-    expect(execFileSync('git', ['worktree', 'list', '--porcelain'], { cwd: repositoryRoot, encoding: 'utf8' }))
-      .not.toContain('eu-reski-codex-repair-');
+    expect(repairResult.status).toBe('destination_paths_dirty');
+    expect(await readFile(targetPath, 'utf8')).toContain('user edit');
+    expect(await readFile(join(repositoryRoot, 'user-notes.txt'), 'utf8')).toContain('unrelated user work');
   } finally {
+    if (repairResult?.repairRoot) {
+      execFileSync('git', ['worktree', 'remove', '--force', repairResult.repairRoot], { cwd: repositoryRoot, stdio: 'ignore' });
+      execFileSync('git', ['branch', '-D', repairResult.branchName], { cwd: repositoryRoot, stdio: 'ignore' });
+    }
     await rm(repositoryRoot, { recursive: true, force: true });
+    await rm(fakeCodexRoot, { recursive: true, force: true });
   }
 });
 
@@ -105,6 +133,7 @@ test('isolated Codex repair tests, commits, and cherry-picks a source-only fix w
     await writeFile(join(repositoryRoot, 'eu-reski-news/scripts/baseline.mjs'), 'export const baseline = true;\n');
     execFileSync('git', ['add', '.'], { cwd: repositoryRoot });
     execFileSync('git', ['commit', '-m', 'test baseline'], { cwd: repositoryRoot, stdio: 'ignore' });
+    await writeFile(join(repositoryRoot, 'user-notes.txt'), 'preserve this unrelated work\n');
 
     const fakeCodex = join(fakeCodexRoot, 'fake-codex.mjs');
     await writeFile(fakeCodex, [
@@ -132,7 +161,9 @@ test('isolated Codex repair tests, commits, and cherry-picks a source-only fix w
     ]);
     expect(await readFile(join(repositoryRoot, 'eu-reski-news/scripts/fix.mjs'), 'utf8'))
       .toContain('fixed = true');
-    expect(execFileSync('git', ['status', '--porcelain'], { cwd: repositoryRoot, encoding: 'utf8' })).toBe('');
+    expect(await readFile(join(repositoryRoot, 'user-notes.txt'), 'utf8')).toContain('preserve this unrelated work');
+    expect(execFileSync('git', ['status', '--porcelain'], { cwd: repositoryRoot, encoding: 'utf8' }))
+      .toContain('?? user-notes.txt');
   } finally {
     await rm(repositoryRoot, { recursive: true, force: true });
     await rm(fakeCodexRoot, { recursive: true, force: true });
