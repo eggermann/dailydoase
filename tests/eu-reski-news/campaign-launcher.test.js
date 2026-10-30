@@ -16,6 +16,7 @@ describe('Mac mini exhibition campaign launcher', () => {
   test('does not cap workers at the retracted three-iteration limit', async () => {
     const source = await readFile(launcher, 'utf8');
     expect(source).not.toContain('--stop-after-iterations=3');
+    expect(source).toContain('Saved workers finished below their configured iteration counts');
   });
   test('rejects a three-iteration run when its Scene requires five', async () => {
     const temp = await mkdtemp(join(tmpdir(), 'eu-reski-campaign-complete-'));

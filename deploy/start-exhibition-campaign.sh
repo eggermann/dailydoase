@@ -34,6 +34,27 @@ while /usr/bin/pgrep -f '/eu-reski-news/scripts/exhibition-runner.mjs' >/dev/nul
   /bin/sleep 30
 done
 
+if python3 "$ROOT/deploy/verify-exhibition-campaign-complete.py" "$ROOT" "$OUTPUT"; then
+  touch "$OUTPUT/.campaign-complete"
+  echo 'The exhibition campaign has already completed.'
+  exit 0
+fi
+if python3 - "$OUTPUT/exhibition-state.json" <<'PY'
+import json, sys
+try:
+    workers = json.load(open(sys.argv[1])).get('sceneWorkers', {})
+    finished = bool(workers) and all(worker.get('status') == 'completed' for worker in workers.values())
+except Exception:
+    finished = False
+raise SystemExit(0 if finished else 1)
+PY
+then
+  if [ "${CAMPAIGN_NEW_RUN:-0}" != 1 ]; then
+    echo 'Saved workers finished below their configured iteration counts; starting a new Run and retaining prior Run directories.'
+    CAMPAIGN_NEW_RUN=1
+  fi
+fi
+
 if [ "${CAMPAIGN_NEW_RUN:-0}" = 1 ]; then
   npm run news:exhibition:from-scene-json -- --new-run --generation-interval=10h
 else
