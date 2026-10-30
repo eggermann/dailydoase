@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { mkdir, readFile, writeFile, rename, stat, unlink } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, stat, unlink, rm } from 'node:fs/promises';
 import { basename, dirname, join, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -8,6 +8,7 @@ import { renderReport, renderRunReport } from '../news-scene/report.mjs';
 import { renderTitleCard } from '../news-scene/title-card.mjs';
 import { concatMp4Lossless, createBlackMp4, probeAudioStream, probeVideoStream } from '../../lib/generator/ffmpeg-helpers.js';
 import { isRetryableHttpStatus, isRetryableNetworkError, retryDelayMs, retryTransient } from '../news-scene/provider-resilience.mjs';
+import { isProcessOwnerAlive, processStartToken, withDirectoryLock } from '../news-scene/directory-lock.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values } = parseArgs({ options: {
@@ -45,6 +46,14 @@ if (!Number.isFinite(audioEdgeFadeSeconds) || audioEdgeFadeSeconds < 0 || audioE
 if (values.resolution !== '480p') throw new Error('This low-quality test starter only allows --resolution=480p');
 
 const runDirectory = resolve(values.run);
+const globalVideoConcurrency = Number(process.env.NEWS_VIDEO_GLOBAL_CONCURRENCY || '3');
+if (!Number.isInteger(globalVideoConcurrency) || globalVideoConcurrency < 1 || globalVideoConcurrency > 3) {
+  throw new Error('NEWS_VIDEO_GLOBAL_CONCURRENCY must be an integer from 1 to 3');
+}
+const globalVideoSlotsDirectory = resolve(
+  process.env.NEWS_VIDEO_GLOBAL_LOCK_DIR || join(dirname(runDirectory), '.video-generation-slots'),
+);
+let nextGlobalVideoSlotIndex = 0;
 const safeSave = async (path, value) => {
   const temporary = `${path}.${randomUUID()}.tmp`;
   await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`);
@@ -52,11 +61,14 @@ const safeSave = async (path, value) => {
 };
 const json = async (path) => JSON.parse(await readFile(path, 'utf8'));
 const exists = async (path) => { try { await stat(path); return true; } catch (error) { if (error.code === 'ENOENT') return false; throw error; } };
+const delay = (milliseconds) => new Promise((resolveDelay) => setTimeout(resolveDelay, milliseconds));
 const hasVideoResult = (response) => Boolean(response?.videoURL || response?.data?.some((item) => item.videoURL));
 const responseErrors = (response) => {
   const errors = response?.errors;
   return Array.isArray(errors) ? errors : errors ? [errors] : [];
 };
+const hasCreditReservationRejection = (response) => responseErrors(response)
+  .some((error) => error.code === 'concurrentRequestLimitExceeded');
 const hasTerminalVideoError = (response) => Boolean(response?.error
   || responseErrors(response).some((item) => item.status === 'error'
     || ['providerError', 'timeoutProvider', 'conflictTaskUUID'].includes(item.code || item.errorCode))
@@ -71,6 +83,74 @@ const saveHtml = async (directory, record) => {
   await safeSave(join(directory, 'record.json'), record);
   await writeFile(join(directory, 'index.html'), renderReport(record));
 };
+
+async function tryAcquireGlobalVideoSlot(slotIndex) {
+  const slotPath = join(globalVideoSlotsDirectory, `slot-${slotIndex}`);
+  const guardPath = `${slotPath}.guard`;
+  return withDirectoryLock(guardPath, async () => {
+    const slotStatus = await stat(slotPath).catch((error) => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    });
+    if (slotStatus) {
+      const ownerPath = join(slotPath, 'owner.json');
+      const owner = await readFile(ownerPath, 'utf8')
+        .then((contents) => JSON.parse(contents))
+        .catch(() => null);
+      if (owner && await isProcessOwnerAlive(owner) !== false) return null;
+      if (!owner && Date.now() - slotStatus.mtimeMs < 60_000) return null;
+      await rm(slotPath, { recursive: true, force: true });
+    }
+
+    await mkdir(slotPath);
+    const owner = {
+      token: randomUUID(),
+      processId: process.pid,
+      processStart: processStartToken(process.pid),
+      acquiredAt: new Date().toISOString(),
+    };
+    try {
+      await writeFile(join(slotPath, 'owner.json'), `${JSON.stringify(owner)}\n`, { flag: 'wx' });
+    } catch (error) {
+      await rm(slotPath, { recursive: true, force: true });
+      throw error;
+    }
+    return owner.token;
+  }, { retryMs: 25 });
+}
+
+async function releaseGlobalVideoSlot(slotIndex, token) {
+  const slotPath = join(globalVideoSlotsDirectory, `slot-${slotIndex}`);
+  await withDirectoryLock(`${slotPath}.guard`, async () => {
+    const owner = await readFile(join(slotPath, 'owner.json'), 'utf8')
+      .then((contents) => JSON.parse(contents))
+      .catch(() => null);
+    if (owner?.token === token) await rm(slotPath, { recursive: true, force: true });
+  }, { retryMs: 25 });
+}
+
+async function withGlobalVideoSlot(task) {
+  let slotIndex;
+  let token;
+  while (!token) {
+    for (let offset = 0; offset < globalVideoConcurrency; offset += 1) {
+      const candidate = (nextGlobalVideoSlotIndex + offset) % globalVideoConcurrency;
+      const candidateToken = await tryAcquireGlobalVideoSlot(candidate);
+      if (!candidateToken) continue;
+      slotIndex = candidate;
+      token = candidateToken;
+      nextGlobalVideoSlotIndex = (candidate + 1) % globalVideoConcurrency;
+      break;
+    }
+    if (!token) await delay(150 + Math.floor(Math.random() * 150));
+  }
+
+  try {
+    return await task();
+  } finally {
+    await releaseGlobalVideoSlot(slotIndex, token);
+  }
+}
 
 async function request(body, timeoutMs = 240_000) {
   const response = await fetch('https://api.runware.ai/v1', {
@@ -207,7 +287,7 @@ async function submitOrRecover(task, requestPath, submissionPath, pendingPath, t
   throw new Error(`Video task ${taskUUID} remains pending after retries: ${lastError?.message || 'unknown provider outcome'}`);
 }
 
-async function generateScene(directory, record, scene, index) {
+async function generateSceneAttempt(directory, record, scene, index) {
   if (record.videoResults?.[index]?.path && await exists(join(directory, record.videoResults[index].path))) return;
   if (scene.videoMode === 'first_last_frame') {
     record.videoResults ||= [];
@@ -270,6 +350,11 @@ async function generateScene(directory, record, scene, index) {
     } else {
       submission = await submitOrRecover(task, requestPath, submissionPath, pendingPath, taskUUID, renderStartedAt);
     }
+  }
+  if (hasCreditReservationRejection(submission)) {
+    const rejection = new Error(`Runware rejected video task ${taskUUID} because concurrent requests reserve too many credits.`);
+    rejection.code = 'VIDEO_CREDIT_RESERVATION';
+    throw rejection;
   }
   if (hasTerminalVideoError(submission) && !hasVideoResult(submission)) {
     const confirmedResponse = await getTaskDetails(taskUUID);
@@ -407,6 +492,25 @@ async function generateScene(directory, record, scene, index) {
   record.filmPlan.scenePlan[index].videoTaskUUID = taskUUID;
   await unlink(pendingPath).catch(() => {});
   console.log(`VIDEO_READY ${resolve(directory, localPath)} · ${duration}s P-Video${plannedDuration !== duration ? ` (plan ${plannedDuration}s)` : ''} · ${values.resolution} · cost=${result.cost ?? 'n/a'}`);
+}
+
+async function generateScene(directory, record, scene, index) {
+  const retryDelaysMs = [30_000, 60_000, 120_000];
+  for (let attempt = 0; ; attempt += 1) {
+    try {
+      await withGlobalVideoSlot(() => generateSceneAttempt(directory, record, scene, index));
+      return;
+    } catch (error) {
+      if (error.code !== 'VIDEO_CREDIT_RESERVATION') throw error;
+      if (attempt >= retryDelaysMs.length) {
+        throw new Error(`Video task remains pending after retries: ${error.message}`);
+      }
+
+      const waitMs = retryDelaysMs[attempt] + Math.floor(Math.random() * 5000);
+      console.warn(`VIDEO_CREDIT_RETRY ${directory} · scene ${scene.index} · retry ${attempt + 1}/${retryDelaysMs.length} in ${Math.round(waitMs / 1000)}s`);
+      await delay(waitMs);
+    }
+  }
 }
 
 async function concatenateIteration(directory, record) {
@@ -608,7 +712,7 @@ if (values['generate-title-cards']) {
   const filmPlanPath = join(directory, 'film-plan.json');
   record.filmPlan = await json(filmPlanPath);
   const scenes = record.filmPlan.scenePlan;
-  console.log(`Generating ${scenes.length} scene videos with concurrency ${videoConcurrency}; audio edge fade ${audioEdgeFadeSeconds}s.`);
+  console.log(`Generating ${scenes.length} scene videos with local concurrency ${videoConcurrency}, shared concurrency ${globalVideoConcurrency}; audio edge fade ${audioEdgeFadeSeconds}s.`);
   let nextSceneIndex = 0;
   const sceneErrors = [];
   const workers = Array.from({ length: Math.min(videoConcurrency, scenes.length) }, async () => {
