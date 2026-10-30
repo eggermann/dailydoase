@@ -9,6 +9,8 @@ export MAGICK_BIN=/Applications/MAMP/Library/bin/convert
 export FC_MATCH_BIN="$ROOT/deploy/mini-font-match.sh"
 export FFMPEG_BIN=/usr/local/bin/ffmpeg
 export NEWS_OUTPUT_DIR="$OUTPUT"
+export EXHIBITION_CODEX_REPAIR="${EXHIBITION_CODEX_REPAIR:-1}"
+export EXHIBITION_COOPERATIVE_RESTART="${EXHIBITION_COOPERATIVE_RESTART:-1}"
 export NEWS_SCENE_PATH=eu-reski-news/scenes/campaign-10h
 export NEWS_ENV_FILE="${NEWS_ENV_FILE:-/Users/dominikeggermann/Projekte/dailydoase/.env}"
 export NEWS_STYLE_REFERENCE="${NEWS_STYLE_REFERENCE:-/Users/dominikeggermann/Projekte/EU-RESKI/guernica-by-pablo-picasso.jpg!Large.jpg}"
@@ -32,7 +34,7 @@ except Exception:
 raise SystemExit(0 if complete else 1)
 PY
   then
-    echo 'The five-iteration campaign has already completed.'
+    echo 'The exhibition campaign has already completed.'
     exit 0
   fi
   rm -f "$OUTPUT/.campaign-complete"
@@ -43,9 +45,9 @@ while /usr/bin/pgrep -f '/eu-reski-news/scripts/exhibition-runner.mjs' >/dev/nul
 done
 
 if [ "${CAMPAIGN_NEW_RUN:-0}" = 1 ]; then
-  npm run news:exhibition:from-scene-json -- --new-run --generation-interval=10h --stop-after-iterations=3
+  npm run news:exhibition:from-scene-json -- --new-run --generation-interval=10h
 else
-  npm run news:exhibition:from-scene-json -- --generation-interval=10h --stop-after-iterations=3
+  npm run news:exhibition:from-scene-json -- --generation-interval=10h
 fi
 python3 - "$OUTPUT/exhibition-state.json" <<'PY'
 import json, sys
