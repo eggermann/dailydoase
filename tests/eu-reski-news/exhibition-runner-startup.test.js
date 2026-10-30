@@ -9,7 +9,7 @@ import { offlineTestEnvironment } from './offline-test-environment.js';
 
 const repoRoot = fileURLToPath(new URL('../..', import.meta.url));
 const runnerPath = join(repoRoot, 'eu-reski-news/scripts/exhibition-runner.mjs');
-const sceneDirectory = join(repoRoot, 'eu-reski-news/scenes');
+const sceneDirectory = join(repoRoot, 'tests/eu-reski-news/fixtures/exhibition-scene-sequence');
 
 async function waitForSettingsSnapshot(child, getOutput, timeoutMs = 10000) {
   const startedAt = Date.now();

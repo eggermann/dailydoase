@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, test } from '@jest/globals';
 import {
   autoDirectorPromptVersion,
@@ -10,9 +11,12 @@ import {
   validateAutoDirectorResponse,
 } from '../../eu-reski-news/news-scene/auto-director.mjs';
 
+const historicalRun001 = JSON.parse(readFileSync(new URL('./fixtures/historical-auto-v1-run-001.json', import.meta.url), 'utf8'));
 const flags = (overrides = {}) => ({
   storyClou: 'off',
   legacyGuernicaStyleReferencePrompt: false,
+  guernicaStyleReference: false,
+  guernicaFigureReference: false,
   preserveCubistVideoStyle: true,
   sceneVisualControls: 'scene-specific',
   articleImageReference: true,
@@ -21,6 +25,7 @@ const flags = (overrides = {}) => ({
   videoVision: 'off',
   videoAudioDirection: 'off',
   videoMaxZoom: 0.08,
+  sceneDurationMode: 'taktmuster',
   ...overrides,
 });
 
@@ -88,7 +93,7 @@ describe('EU RESKI auto director', () => {
   });
 
   test('records selected and effective legacy behavior separately', () => {
-    const selected = flags({ legacyGuernicaStyleReferencePrompt: true });
+    const selected = flags({ legacyGuernicaStyleReferencePrompt: true, guernicaStyleReference: true });
     const { effectiveFlags, constraintsApplied } = resolveEffectiveAutoFlags(selected, { styleReferenceAvailable: true });
     expect(selected.preserveCubistVideoStyle).toBe(true);
     expect(selected.sceneVisualControls).toBe('scene-specific');
@@ -148,27 +153,10 @@ describe('EU RESKI auto director', () => {
     })).toThrow(/technical constraints changed/);
   });
 
-  test('reuses historical V1 decisions without upgrading or reinterpreting them', () => {
-    const selected = flags();
-    const resolved = resolveEffectiveAutoFlags(selected, {});
-    const saved = {
-      autoMode: true,
-      iteration: 1,
-      articleId: 'article-1',
-      model: 'gpt-4.1-mini',
-      promptVersion: 'eu-reski-auto-director-v1',
-      dramaturgicalConcept: 'The saved V1 dramaturgy.',
-      visualConcept: 'The saved V1 image idea.',
-      motionConcept: 'The saved V1 motion.',
-      audioConcept: 'The saved V1 sound.',
-      selectedFlags: selected,
-      effectiveFlags: resolved.effectiveFlags,
-      constraints: { noDialogueNarration: false, styleReferenceAvailable: false, guernicaLocationReference: false, articleImageAvailable: false },
-      constraintsApplied: resolved.constraintsApplied,
-      reason: 'Saved historical decision.',
-    };
+  test('reuses the actual historical V1 run-001 decision without upgrading or reinterpreting it', () => {
+    const saved = structuredClone(historicalRun001.autoDecision);
     expect(resolveSavedAutoDecision(saved, {
-      iteration: 1, articleId: 'article-1', model: 'gpt-4.1-mini',
+      iteration: saved.iteration, articleId: saved.articleId, model: saved.model,
       promptVersion: autoDirectorPromptVersion, hasDependentWork: true, constraints: saved.constraints,
     })).toBe(saved);
   });

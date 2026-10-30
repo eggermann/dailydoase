@@ -64,10 +64,10 @@ describe('new Auto Mode iteration startup', () => {
         '          sceneCount: 2,',
         '          sceneCountReason: "Two scenes express the decision and its immediate consequence.",',
         '          flags: {',
-        '            storyClou: "off", legacyGuernicaStyleReferencePrompt: false,',
+        '            storyClou: "off", legacyGuernicaStyleReferencePrompt: false, guernicaStyleReference: false, guernicaFigureReference: false,',
         '            preserveCubistVideoStyle: false, sceneVisualControls: "scene-specific",',
         '            articleImageReference: false, landscapePrompt: false,',
-        '            videoDirection: "off", videoVision: "off", videoAudioDirection: "off", videoMaxZoom: 0.08,',
+        '            videoDirection: "off", videoVision: "off", videoAudioDirection: "off", videoMaxZoom: 0.08, sceneDurationMode: "taktmuster",',
         '          },',
         '          reason: "A compact form fits this test article.",',
         '        }) } }],',
@@ -105,7 +105,8 @@ describe('new Auto Mode iteration startup', () => {
       });
 
       expect(result.status).not.toBe(0);
-      expect(result.stderr).toContain('gpt: HTTP 400');
+      expect(result.stderr).toContain('gpt: network outcome remains uncertain');
+      expect(result.stderr).toContain('Cause: gpt: HTTP 400.');
       const calls = JSON.parse(await readFile(callsPath, 'utf8'));
       expect(calls).toHaveLength(2);
       const savedRequest = JSON.parse(await readFile(join(iterationDirectory, 'auto-director-request.json'), 'utf8'));

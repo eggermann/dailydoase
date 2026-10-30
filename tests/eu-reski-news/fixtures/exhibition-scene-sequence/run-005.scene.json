@@ -1,0 +1,9 @@
+{
+  "name": "run-005-prompt-path",
+  "generationOverrides": {
+    "storyModel": "gpt-4o-mini",
+    "iterations": 5,
+    "styleReference": false,
+    "legacyGuernicaStyleReferencePrompt": false
+  }
+}
