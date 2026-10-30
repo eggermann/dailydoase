@@ -1,0 +1,25 @@
+{
+  "name": "source-context-off-reproduction",
+  "description": "Kompaktes Profil mit den Generator-Overrides aus source-context-comparison/next-article/off/run-001.",
+  "reference": {
+    "film": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/merged/iteration-001-with-title-card-audio-normalized.mp4",
+    "profileName": "source-context-off",
+    "runManifest": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/run-001/run.json",
+    "iteratorPlan": "file:///Users/eggermann/.codex/worktrees/ca13/dailydoase/eu-reski-news/GENERATIONS/news/source-context-comparison/next-article/off/output/.exhibition-iterator-plan.json",
+    "notes": "Vergleichsverweise; Filmdatei wird nicht als Generierungseingabe verwendet."
+  },
+  "generationIntervalInMinutes": "-1",
+  "generationOverrides": {
+    "storyModel": "gpt-4o-mini",
+    "includeSourceCodeContext": false,
+    "iterations": 5,
+    "sceneCount": {
+      "numerator": 3,
+      "bias": 2
+    },
+    "legacyGuernicaStyleReferencePrompt": false,
+    "articleImageReference": false,
+    "preserveCubistVideoStyle": false,
+    "videoAudioDirection": "off"
+  }
+}

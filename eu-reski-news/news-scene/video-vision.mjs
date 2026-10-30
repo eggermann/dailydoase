@@ -34,9 +34,12 @@ export function buildVideoVisionRequest({ record, images, model }) {
     content.push({ type: 'text', text: `Actual generated start image for scene ${image.sceneIndex}. Observe this image, not an imagined version of its prompt.` });
     content.push({ type: 'image_url', image_url: { url: image.dataUrl, detail: 'high' } });
   }
+  const reasoningModel = /^gpt-6(?:\.1-sol|-luna)(?:-|$)/.test(model);
   return {
     model,
-    temperature: 0.2,
+    ...(reasoningModel
+      ? { reasoning_effort: model.startsWith('gpt-6-luna') ? 'medium' : 'high' }
+      : { temperature: 0.2 }),
     max_completion_tokens: Math.max(5000, images.length * 1200),
     messages: [
       { role: 'system', content: [

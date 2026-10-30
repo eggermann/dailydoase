@@ -1,0 +1,27 @@
+{
+  "name": "expression-on",
+  "description": "Vergleichsvariante mit aktivierter Story-Clou-, Video-Regie- und Video-Vision-Expression.",
+  "provenance": {
+    "kind": "parameter-comparison-example",
+    "source": "../docs/scenes-example/on-expression.scene.json",
+    "comparison": "Expression an: sceneCount fest auf fünf, symbolisch und räumlich tief, fünf Ebenen. Gegenstück: off-expression.Xscene.json. Kein aufgezeichneter Lauf als Herkunft behauptet."
+  },
+  "generationOverrides": {
+    "storyClou": "on",
+    "sceneCount": {
+      "mode": "fixed",
+      "count": 5,
+      "numerator": 3,
+      "bias": 2
+    },
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": true,
+      "layering": 5
+    },
+    "videoDirection": "on",
+    "videoVision": "on",
+    "iterations": 5
+  }
+}

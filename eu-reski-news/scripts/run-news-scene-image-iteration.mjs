@@ -600,7 +600,7 @@ async function replayLegacySemanticSnapshot(semanticSource, expectedSemantic, de
 function applySceneVisualControls(scenes, defaultVisualStyleOptions) {
   return scenes.map((scene) => {
     const visualStyleOptions = scene.visualStyleOptions || defaultVisualStyleOptions;
-    const basePrompt = scene.stillPrompt.split('\n\nPreserve the scene-specific action, framing and semantic motifs described above.')[0];
+    const basePrompt = scene.stillPrompt.split('\n\nKeep this scene’s planned action, framing, semantic motifs and protagonist clear.')[0];
     const layeringInstruction = visualStyleOptions.layering > 0
       ? `LAYERING ${visualStyleOptions.layering}: use ${visualStyleOptions.layering} distinct, article-grounded planes; separate through overlap, scale and occlusion, then unify with shared paint marks.`
       : 'LAYERING 0: no deliberate stacked planes; keep one unified mural surface.';
@@ -972,7 +972,30 @@ async function createVideoDirection(record, directory, openAiKey, persist, visio
     ? await json(requestPath)
     : addAutoConceptsToVideoRequest(buildVideoDirectionRequest({ record, vision: record.featureSettings?.videoVision === 'on' ? vision : null, model, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom }), autoConceptSnapshot);
   if (!await exists(requestPath)) await save(requestPath, request);
-  const raw = await paidRequest(directory, 'video-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
+  let raw = await paidRequest(directory, 'video-direction', 'https://api.openai.com/v1/chat/completions', openAiKey, request);
+  const attemptUsage = raw.usage ? [raw.usage] : [];
+  for (let retry = 1; retry <= 2 && raw.choices?.[0]?.finish_reason === 'length'; retry += 1) {
+    const retryName = `video-direction-retry-${retry}`;
+    const retryRequestPath = join(directory, `${retryName}-request.json`);
+    let retryRequest;
+    if (await exists(retryRequestPath)) {
+      retryRequest = await json(retryRequestPath);
+    } else {
+      retryRequest = {
+        ...request,
+        ...(Object.hasOwn(request, 'reasoning_effort') ? { reasoning_effort: 'low' } : {}),
+        max_completion_tokens: Math.max(request.max_completion_tokens || 8000, 8000) * (2 ** retry),
+      };
+      await save(retryRequestPath, retryRequest);
+    }
+    console.warn(`Video direction response was truncated; retrying with ${retryRequest.reasoning_effort || 'the model default'} reasoning and ${retryRequest.max_completion_tokens} completion tokens (recovery ${retry}/2).`);
+    raw = await paidRequest(directory, retryName, 'https://api.openai.com/v1/chat/completions', openAiKey, retryRequest);
+    if (raw.usage) attemptUsage.push(raw.usage);
+  }
+  if (raw.choices?.[0]?.finish_reason === 'length') {
+    const completionTokens = raw.usage?.completion_tokens;
+    throw new Error(`Video direction remained truncated after two recovery attempts${completionTokens ? ` (${completionTokens} completion tokens)` : ''}; saved requests and responses are preserved`);
+  }
   if (raw.error) throw new Error(`Video direction GPT error: ${raw.error.message}`);
   const direction = validateVideoDirectionResponse(raw, { record, videoMode: mode, audioDirection, noDialogueNarration: record.featureSettings?.noDialogueNarration === true, maxZoom });
   if (hash(JSON.stringify(visualPlanSnapshot(record.plan))) !== beforeHash) throw new Error('Video direction changed the locked visual plan');

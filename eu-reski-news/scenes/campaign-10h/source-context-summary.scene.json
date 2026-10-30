@@ -1,0 +1,68 @@
+{
+  "name": "source-context-summary-reproduction",
+  "description": "Nachbau der Einstellungen von Iteration 001 aus source-context-comparison/summary vom 29.10.2026. Neue Inhalte werden generiert.",
+  "reference": {
+    "film": "eu-reski-news/GENERATIONS/news/source-context-comparison/summary/output/run-001/merged/iteration-001-with-title-card-audio-normalized.mp4",
+    "player": "/continuous-player?folder=eu-reski-news%2FGENERATIONS%2Fnews%2Fsource-context-comparison%2Fsummary%2Foutput%2Frun-001",
+    "runManifest": "eu-reski-news/GENERATIONS/news/source-context-comparison/summary/output/run-001/run.json",
+    "articleId": 475862726,
+    "sourceCommit": "78f40a2fc946b1a39fe4063e6ef27429f893157d",
+    "sourceWorktreeClean": false,
+    "notes": "Der Originalfilm ist eine Referenz; Artikel, Seed und semantischer Stream werden durch dieses Profil nicht festgelegt."
+  },
+  "generationIntervalInMinutes": "-1",
+  "generationOverrides": {
+    "autoMode": false,
+    "stopOmitSimilar": true,
+    "iterations": 5,
+    "pauseMs": 0,
+    "articleOrder": "linear",
+    "storyModel": "gpt-4o-mini",
+    "includeSourceCodeContext": false,
+    "sourceCodeSummaryFile": "eu-reski-news/scenes/reproductions/source-context-summary-original.md",
+    "styleReference": true,
+    "guernicaFigureReference": true,
+    "guernicaLocationReference": false,
+    "articleImageReference": false,
+    "legacyGuernicaStyleReferencePrompt": false,
+    "landscapePrompt": false,
+    "preserveCubistVideoStyle": false,
+    "sceneCount": {
+      "mode": "taktmuster",
+      "takt": 2,
+      "numerator": 3,
+      "denominator": 4,
+      "type": "balanced",
+      "bias": 2,
+      "minimum": 1,
+      "maximum": 12
+    },
+    "sceneLength": {
+      "takt": 4,
+      "type": "balanced",
+      "multiplier": 1.15,
+      "bias": 4.2,
+      "minimum": 5,
+      "maximum": 8
+    },
+    "imageProvider": "hf-flux-klein",
+    "videoModel": "prunaai:p-video@2-pro",
+    "videoResolution": "480p",
+    "videoSettingsMode": "cost",
+    "videoMode": "image_to_video",
+    "videoDirection": "off",
+    "storyClou": "off",
+    "videoVision": "off",
+    "videoAudioDirection": "off",
+    "noDialogueNarration": false,
+    "videoMaxZoom": 0.08,
+    "videosAfterEachIteration": true,
+    "generate-title-cards": true,
+    "visualControls": {
+      "mode": "scene-specific",
+      "symbolic": true,
+      "roomDeepness": false,
+      "layering": 3
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "run-001-exhibition",
-  "description": "Geplante Dauerlauf-Konfiguration: zehn Iterationen, automatische Artikelwahl. Nutzt die Default-Parameter; nur die unten genannten Werte werden überschrieben.",
+  "description": "Auto-Director-Dauerlauf mit automatischer Artikelwahl. Mit 1h-Zeitinterpolation: 10 Iterationen pro Stunde (ca. 6 Minuten Startabstand). Ohne Zeitinterpolation ist das Ratenlimit deaktiviert.",
   "provenance": {
     "kind": "scheduler-and-resume-example",
     "sourceCommit": "604e4f712c13ac2bb67a4ebf5b1856b5fc14e046",
@@ -10,7 +10,6 @@
   "generationOverrides": {
     "autoMode": true,
     "iterations": 10,
-    "preserveCubistVideoStyle": false,
     "storyModel": "gpt-6-luna",
     "includeSourceCodeContext": false,
     "sourceCodeSummaryFile": "eu-reski-news/docs/scene-code-summary.md"

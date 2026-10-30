@@ -41,7 +41,7 @@ async function uploadImage(imagePath, token) {
 }
 
 async function poll(eventId, token) {
-  const response = await fetch(`${SPACE_URL}/gradio_api/call/v2/generate/${encodeURIComponent(eventId)}`, {
+  const response = await fetch(`${SPACE_URL}/gradio_api/call/generate/${encodeURIComponent(eventId)}`, {
     headers: { Authorization: `Bearer ${token}` },
     signal: AbortSignal.timeout(240_000),
   });
